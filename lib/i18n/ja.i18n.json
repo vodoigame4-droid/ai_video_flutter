@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "すべて見る",
+    "stay": "留まる",
+    "leave": "退出",
+    "camera": "カメラ",
+    "gallery": "ギャラリー",
+    "generate": "生成する"
+  },
+  "home": {
+    "title": "ビデオAI",
+    "trending": "トレンド",
+    "new_section": "新規",
+    "toy_box": "トイフィギュアボックス",
+    "epic_morph": "エピックモーフ",
+    "anime": "アニメ",
+    "discover": "発見"
+  },
+  "create": {
+    "selfie_aquaman": "セルフィーアクアマン",
+    "tap_upload": "タップして写真をアップロードします。",
+    "select_upload_title": "写真をアップロードする方法を選択",
+    "upload_image": "画像をアップロード",
+    "custom_prompt": "カスタムプロンプト",
+    "prompt_placeholder": "リアルな女性の肖像画、クローズアップ、カメラを見る、自然な瞬き、青いスタジオ照明、シネマティック、超詳細",
+    "inspire_me": "ひらめきを得る",
+    "video_settings": "ビデオ設定",
+    "quality": "画質",
+    "quality_desc": "ビデオの画質を選択",
+    "hd": "HD",
+    "full_hd": "フルHD",
+    "duration": "再生時間",
+    "duration_desc": "ビデオの長さを選択",
+    "sec_4s": "4秒",
+    "sec_8s": "8秒",
+    "sec_5s": "5秒",
+    "sec_10s": "10秒",
+    "sec_15s": "15秒"
+  },
+  "leave_dialog": {
+    "title": "保存せずに終了しますか？",
+    "desc": "編集を続けますか、それとも今終了しますか？"
+  }
+}

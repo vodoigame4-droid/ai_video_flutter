@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "모두 보기",
+    "stay": "머무르기",
+    "leave": "나가기",
+    "camera": "카메라",
+    "gallery": "갤러리",
+    "generate": "생성하기"
+  },
+  "home": {
+    "title": "비디오 AI",
+    "trending": "트렌딩",
+    "new_section": "새로운",
+    "toy_box": "장난감 피규어 박스",
+    "epic_morph": "에픽 모프",
+    "anime": "애니메이션",
+    "discover": "발견"
+  },
+  "create": {
+    "selfie_aquaman": "셀피 아쿠아맨",
+    "tap_upload": "여기를 눌러 사진을 업로드하세요.",
+    "select_upload_title": "사진 업로드 방식 선택",
+    "upload_image": "이미지 업로드",
+    "custom_prompt": "커스텀 프롬프트",
+    "prompt_placeholder": "사실적인 여성 초상화, 클로즈업, 카메라 응시, 자연스러운 깜빡임, 블루 스튜디오 조명, 시네마틱, 초고화질",
+    "inspire_me": "아이디어 얻기",
+    "video_settings": "비디오 설정",
+    "quality": "화질",
+    "quality_desc": "비디오 화질 선택",
+    "hd": "HD",
+    "full_hd": "풀 HD",
+    "duration": "길이",
+    "duration_desc": "비디오 재생 시간 선택",
+    "sec_4s": "4초",
+    "sec_8s": "8초",
+    "sec_5s": "5초",
+    "sec_10s": "10초",
+    "sec_15s": "15초"
+  },
+  "leave_dialog": {
+    "title": "저장하지 않고 나갈까요?",
+    "desc": "편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?"
+  }
+}

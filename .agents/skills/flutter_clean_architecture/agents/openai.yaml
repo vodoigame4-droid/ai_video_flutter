@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Clean Architecture"
+  short_description: "Dream Girl Flutter architecture rules"
+  default_prompt: "Use $flutter_clean_architecture to implement or review Flutter code in this repository."

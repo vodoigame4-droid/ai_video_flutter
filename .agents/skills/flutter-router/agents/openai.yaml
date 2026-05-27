@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Router"
+  short_description: "GoRouter structure and transition rules"
+  default_prompt: "Use $flutter-router to create or review GoRouter structure and navigation flow in this repository."

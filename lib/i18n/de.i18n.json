@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "Alle anzeigen",
+    "stay": "Bleiben",
+    "leave": "Verlassen",
+    "camera": "Kamera",
+    "gallery": "Galerie",
+    "generate": "Generieren"
+  },
+  "home": {
+    "title": "Video KI",
+    "trending": "Angesagt",
+    "new_section": "Neu",
+    "toy_box": "Spielzeugfiguren-Box",
+    "epic_morph": "Epic Morph",
+    "anime": "Anime",
+    "discover": "Entdecken"
+  },
+  "create": {
+    "selfie_aquaman": "Selfie Aquaman",
+    "tap_upload": "Hier tippen, um Foto hochzuladen.",
+    "select_upload_title": "Auswählen, um Foto hochzuladen",
+    "upload_image": "Bild hochladen",
+    "custom_prompt": "Benutzerdefinierter Prompt",
+    "prompt_placeholder": "Realistisches Frauenporträt, Nahaufnahme, Blick in die Kamera, natürliches Blinken, blaue Studiobeleuchtung, cineastisch, extrem detailliert",
+    "inspire_me": "Inspiriere mich",
+    "video_settings": "Video-Einstellungen",
+    "quality": "Qualität",
+    "quality_desc": "Videoqualität auswählen",
+    "hd": "HD",
+    "full_hd": "Full HD",
+    "duration": "Dauer",
+    "duration_desc": "Videolänge auswählen",
+    "sec_4s": "4s",
+    "sec_8s": "8s",
+    "sec_5s": "5s",
+    "sec_10s": "10s",
+    "sec_15s": "15s"
+  },
+  "leave_dialog": {
+    "title": "Verlassen ohne zu speichern?",
+    "desc": "Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?"
+  }
+}

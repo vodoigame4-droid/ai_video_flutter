@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Testing"
+  short_description: "Testing rules for Bloc and features"
+  default_prompt: "Use $flutter-testing to create or review tests for Flutter features in this repository."

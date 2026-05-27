@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Feature Structure"
+  short_description: "Feature-first clean architecture structure"
+  default_prompt: "Use $flutter-feature-structure to create or review Flutter feature folder structure in this repository."

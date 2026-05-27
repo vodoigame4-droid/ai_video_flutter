@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "Ver tudo",
+    "stay": "Ficar",
+    "leave": "Sair",
+    "camera": "Câmera",
+    "gallery": "Galeria",
+    "generate": "Gerar"
+  },
+  "home": {
+    "title": "Vídeo IA",
+    "trending": "Tendências",
+    "new_section": "Novo",
+    "toy_box": "Caixa de figuras de brinquedo",
+    "epic_morph": "Metamorfose épica",
+    "anime": "Anime",
+    "discover": "Descobrir"
+  },
+  "create": {
+    "selfie_aquaman": "Selfie do Aquaman",
+    "tap_upload": "Toque aqui para carregar sua foto.",
+    "select_upload_title": "Selecione para carregar sua foto",
+    "upload_image": "Carregar imagem",
+    "custom_prompt": "Prompt personalizado",
+    "prompt_placeholder": "Retrato feminino realista, close-up, olhando para a câmera, piscando naturalmente, iluminação de estúdio azul, cinematográfico, ultra detalhado",
+    "inspire_me": "Inspirar-me",
+    "video_settings": "Configurações do vídeo",
+    "quality": "Qualidade",
+    "quality_desc": "Escolha a qualidade do vídeo",
+    "hd": "HD",
+    "full_hd": "Full HD",
+    "duration": "Duração",
+    "duration_desc": "Escolha a duração do vídeo",
+    "sec_4s": "4s",
+    "sec_8s": "8s",
+    "sec_5s": "5s",
+    "sec_10s": "10s",
+    "sec_15s": "15s"
+  },
+  "leave_dialog": {
+    "title": "Sair sem salvar?",
+    "desc": "Deseja continuar editando ou sair agora?"
+  }
+}

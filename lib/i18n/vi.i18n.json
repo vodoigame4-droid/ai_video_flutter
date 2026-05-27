@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "Xem tất cả",
+    "stay": "Ở lại",
+    "leave": "Rời đi",
+    "camera": "Máy ảnh",
+    "gallery": "Thư viện",
+    "generate": "Tạo video"
+  },
+  "home": {
+    "title": "Video AI",
+    "trending": "Xu hướng",
+    "new_section": "Mới",
+    "toy_box": "Hộp đồ chơi",
+    "epic_morph": "Biến hình đỉnh cao",
+    "anime": "Hoạt hình",
+    "discover": "Khám phá"
+  },
+  "create": {
+    "selfie_aquaman": "Ảnh tự sướng Aquaman",
+    "tap_upload": "Chạm vào đây để tải ảnh lên.",
+    "select_upload_title": "Chọn phương thức tải ảnh",
+    "upload_image": "Tải ảnh lên",
+    "custom_prompt": "Mô tả tùy chỉnh",
+    "prompt_placeholder": "Chân dung nữ chân thực, cận cảnh, nhìn vào máy ảnh, nháy mắt tự nhiên, ánh sáng studio xanh, điện ảnh, siêu chi tiết",
+    "inspire_me": "Gợi ý cho tôi",
+    "video_settings": "Cài đặt video",
+    "quality": "Chất lượng",
+    "quality_desc": "Chọn chất lượng video",
+    "hd": "HD",
+    "full_hd": "Full HD",
+    "duration": "Thời lượng",
+    "duration_desc": "Chọn độ dài video",
+    "sec_4s": "4s",
+    "sec_8s": "8s",
+    "sec_5s": "5s",
+    "sec_10s": "10s",
+    "sec_15s": "15s"
+  },
+  "leave_dialog": {
+    "title": "Rời đi không lưu?",
+    "desc": "Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?"
+  }
+}

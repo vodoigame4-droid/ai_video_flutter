@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "专业版",
+    "see_all": "查看全部",
+    "stay": "留在页面",
+    "leave": "离开",
+    "camera": "相机",
+    "gallery": "相册",
+    "generate": "生成"
+  },
+  "home": {
+    "title": "视频 AI",
+    "trending": "热门",
+    "new_section": "最新",
+    "toy_box": "玩具手办盒",
+    "epic_morph": "史诗变身",
+    "anime": "动漫",
+    "discover": "发现"
+  },
+  "create": {
+    "selfie_aquaman": "海王自拍",
+    "tap_upload": "点击此处上传您的照片。",
+    "select_upload_title": "选择上传照片的方式",
+    "upload_image": "上传图片",
+    "custom_prompt": "自定义提示词",
+    "prompt_placeholder": "写实的女性肖像，特写，看着镜头，自然眨眼，蓝色摄影棚灯光，电影质感，超清细节",
+    "inspire_me": "灵感推荐",
+    "video_settings": "视频设置",
+    "quality": "画质",
+    "quality_desc": "选择视频画质",
+    "hd": "高清",
+    "full_hd": "超清",
+    "duration": "时长",
+    "duration_desc": "选择视频时长",
+    "sec_4s": "4秒",
+    "sec_8s": "8秒",
+    "sec_5s": "5秒",
+    "sec_10s": "10秒",
+    "sec_15s": "15秒"
+  },
+  "leave_dialog": {
+    "title": "不保存直接离开？",
+    "desc": "您要继续编辑还是现在离开？"
+  }
+}

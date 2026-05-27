@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "Lihat semua",
+    "stay": "Tetap",
+    "leave": "Keluar",
+    "camera": "Kamera",
+    "gallery": "Galeri",
+    "generate": "Hasilkan"
+  },
+  "home": {
+    "title": "Video AI",
+    "trending": "Tren",
+    "new_section": "Baru",
+    "toy_box": "Kotak Figur Mainan",
+    "epic_morph": "Morfosis Epik",
+    "anime": "Anime",
+    "discover": "Jelajahi"
+  },
+  "create": {
+    "selfie_aquaman": "Selfie Aquaman",
+    "tap_upload": "Ketuk di sini untuk mengunggah foto Anda.",
+    "select_upload_title": "Pilih untuk Mengunggah Foto Anda",
+    "upload_image": "Unggah Gambar",
+    "custom_prompt": "Perintah Kustom",
+    "prompt_placeholder": "Potret wanita realistis, jarak dekat, menghadap kamera, berkedip alami, pencahayaan studio biru, sinematik, sangat detail",
+    "inspire_me": "Inspirasi Saya",
+    "video_settings": "Pengaturan Video",
+    "quality": "Kualitas",
+    "quality_desc": "Pilih kualitas video",
+    "hd": "HD",
+    "full_hd": "Full HD",
+    "duration": "Durasi",
+    "duration_desc": "Pilih durasi video",
+    "sec_4s": "4d",
+    "sec_8s": "8d",
+    "sec_5s": "5d",
+    "sec_10s": "10d",
+    "sec_15s": "15d"
+  },
+  "leave_dialog": {
+    "title": "Keluar tanpa menyimpan?",
+    "desc": "Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?"
+  }
+}

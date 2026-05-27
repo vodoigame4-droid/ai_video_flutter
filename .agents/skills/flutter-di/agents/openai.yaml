@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter DI"
+  short_description: "GetIt dependency injection rules"
+  default_prompt: "Use $flutter-di to create or review dependency injection structure in this repository."

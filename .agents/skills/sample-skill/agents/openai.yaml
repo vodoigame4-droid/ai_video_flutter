@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sample Skill"
+  short_description: "Mau skill Codex co cau truc chuan"
+  default_prompt: "Use $sample-skill to scaffold or adapt a basic Codex skill."

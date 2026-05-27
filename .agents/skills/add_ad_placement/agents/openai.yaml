@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Ad Placement"
+  short_description: "Add and wire a new ad placement"
+  default_prompt: "Use $add_ad_placement to add a new ad placement in this Flutter project."

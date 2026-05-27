@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "See all",
+    "stay": "Stay",
+    "leave": "Leave",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "generate": "Generate"
+  },
+  "home": {
+    "title": "Video AI",
+    "trending": "Trending",
+    "new_section": "New",
+    "toy_box": "Toy Figura Box",
+    "epic_morph": "Epic Morph",
+    "anime": "Anime",
+    "discover": "Discover"
+  },
+  "create": {
+    "selfie_aquaman": "Selfie Aquaman",
+    "tap_upload": "Tap here to upload your photo.",
+    "select_upload_title": "Select to Upload Your Photo",
+    "upload_image": "Upload Image",
+    "custom_prompt": "Custom Prompt",
+    "prompt_placeholder": "Realistic female portrait, close-up, looking at camera, blinking naturally, blue studio lighting, cinematic, ultra detailed",
+    "inspire_me": "Inspire me",
+    "video_settings": "Video Settings",
+    "quality": "Quality",
+    "quality_desc": "Choose video quality",
+    "hd": "HD",
+    "full_hd": "Full HD",
+    "duration": "Duration",
+    "duration_desc": "Choose video length",
+    "sec_4s": "4s",
+    "sec_8s": "8s",
+    "sec_5s": "5s",
+    "sec_10s": "10s",
+    "sec_15s": "15s"
+  },
+  "leave_dialog": {
+    "title": "Leave without saving?",
+    "desc": "Do you want to continue editing or leave now?"
+  }
+}

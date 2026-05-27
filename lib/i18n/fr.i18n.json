@@ -1,0 +1,45 @@
+{
+  "common": {
+    "pro": "PRO",
+    "see_all": "Voir tout",
+    "stay": "Rester",
+    "leave": "Quitter",
+    "camera": "Appareil photo",
+    "gallery": "Galerie",
+    "generate": "Générer"
+  },
+  "home": {
+    "title": "Vidéo IA",
+    "trending": "Tendances",
+    "new_section": "Nouveau",
+    "toy_box": "Boîte de figurines",
+    "epic_morph": "Morphing épique",
+    "anime": "Animé",
+    "discover": "Découvrir"
+  },
+  "create": {
+    "selfie_aquaman": "Selfie Aquaman",
+    "tap_upload": "Appuyez ici pour télécharger votre photo.",
+    "select_upload_title": "Sélectionnez pour télécharger votre photo",
+    "upload_image": "Télécharger l'image",
+    "custom_prompt": "Invite personnalisée",
+    "prompt_placeholder": "Portrait de femme réaliste, gros plan, regardant la caméra, clignant des yeux naturellement, éclairage de studio bleu, cinématographique, ultra détaillé",
+    "inspire_me": "Inspirez-moi",
+    "video_settings": "Paramètres vidéo",
+    "quality": "Qualité",
+    "quality_desc": "Choisissez la qualité vidéo",
+    "hd": "HD",
+    "full_hd": "Full HD",
+    "duration": "Durée",
+    "duration_desc": "Choisissez la longueur de la vidéo",
+    "sec_4s": "4s",
+    "sec_8s": "8s",
+    "sec_5s": "5s",
+    "sec_10s": "10s",
+    "sec_15s": "15s"
+  },
+  "leave_dialog": {
+    "title": "Quitter sans sauvegarder ?",
+    "desc": "Voulez-vous continuer l'édition ou partir maintenant ?"
+  }
+}
