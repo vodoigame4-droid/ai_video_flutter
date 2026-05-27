@@ -111,6 +111,19 @@ class _Translations$create$vi extends Translations$create$en {
 	@override String get sec_5s => '5s';
 	@override String get sec_10s => '10s';
 	@override String get sec_15s => '15s';
+	@override String get generate_title => 'Tạo video';
+	@override String get upload_first_photo => 'Tải lên ảnh đầu tiên.';
+	@override String get upload_last_photo => 'Tải lên ảnh cuối cùng.';
+	@override String get upload_video_slot => 'Tải lên Video.';
+	@override String get upload_photo_slot => 'Tải lên ảnh.';
+	@override String photo_slot_num({required Object num}) => 'Ảnh ${num}';
+	@override String get required_label => 'Bắt buộc';
+	@override String get optional_label => 'Tùy chọn';
+	@override String inspire_me_count({required Object count}) => 'Gợi ý prompt (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'Đang tạo video của bạn...';
+	@override String get select_mock_media => 'Chọn file mẫu';
+	@override String get select_media_desc => 'Chọn một file mẫu để mô phỏng tải lên';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsVi {
 			'create.sec_5s' => '5s',
 			'create.sec_10s' => '10s',
 			'create.sec_15s' => '15s',
+			'create.generate_title' => 'Tạo video',
+			'create.upload_first_photo' => 'Tải lên ảnh đầu tiên.',
+			'create.upload_last_photo' => 'Tải lên ảnh cuối cùng.',
+			'create.upload_video_slot' => 'Tải lên Video.',
+			'create.upload_photo_slot' => 'Tải lên ảnh.',
+			'create.photo_slot_num' => ({required Object num}) => 'Ảnh ${num}',
+			'create.required_label' => 'Bắt buộc',
+			'create.optional_label' => 'Tùy chọn',
+			'create.inspire_me_count' => ({required Object count}) => 'Gợi ý prompt (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'Đang tạo video của bạn...',
+			'create.select_mock_media' => 'Chọn file mẫu',
+			'create.select_media_desc' => 'Chọn một file mẫu để mô phỏng tải lên',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
 			'splash.appName' => 'Video AI',

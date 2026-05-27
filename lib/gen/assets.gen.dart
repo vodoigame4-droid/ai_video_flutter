@@ -66,6 +66,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/home_banner.png
   AssetGenImage get homeBanner => const AssetGenImage('assets/images/home_banner.png');
 
+  /// File path: assets/images/ic_radio_active.svg
+  String get icRadioActive => 'assets/images/ic_radio_active.svg';
+
+  /// File path: assets/images/ic_radio_inactive.svg
+  String get icRadioInactive => 'assets/images/ic_radio_inactive.svg';
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -108,6 +114,8 @@ class $AssetsImagesGen {
     ellipse,
     emptyHistory,
     homeBanner,
+    icRadioActive,
+    icRadioInactive,
     logo,
     navHome,
     navUser,

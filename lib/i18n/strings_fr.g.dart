@@ -111,6 +111,19 @@ class _Translations$create$fr extends Translations$create$en {
 	@override String get sec_5s => '5s';
 	@override String get sec_10s => '10s';
 	@override String get sec_15s => '15s';
+	@override String get generate_title => 'Générer';
+	@override String get upload_first_photo => 'Télécharger la première photo.';
+	@override String get upload_last_photo => 'Télécharger la dernière photo.';
+	@override String get upload_video_slot => 'Télécharger la vidéo.';
+	@override String get upload_photo_slot => 'Télécharger la photo.';
+	@override String photo_slot_num({required Object num}) => 'Photo ${num}';
+	@override String get required_label => 'Obligatoire';
+	@override String get optional_label => 'Optionnel';
+	@override String inspire_me_count({required Object count}) => 'Inspirez-moi (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'Génération de votre vidéo...';
+	@override String get select_mock_media => 'Sélectionner un média fictif';
+	@override String get select_media_desc => 'Sélectionnez un fichier fictif pour simuler le téléchargement';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsFr {
 			'create.sec_5s' => '5s',
 			'create.sec_10s' => '10s',
 			'create.sec_15s' => '15s',
+			'create.generate_title' => 'Générer',
+			'create.upload_first_photo' => 'Télécharger la première photo.',
+			'create.upload_last_photo' => 'Télécharger la dernière photo.',
+			'create.upload_video_slot' => 'Télécharger la vidéo.',
+			'create.upload_photo_slot' => 'Télécharger la photo.',
+			'create.photo_slot_num' => ({required Object num}) => 'Photo ${num}',
+			'create.required_label' => 'Obligatoire',
+			'create.optional_label' => 'Optionnel',
+			'create.inspire_me_count' => ({required Object count}) => 'Inspirez-moi (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'Génération de votre vidéo...',
+			'create.select_mock_media' => 'Sélectionner un média fictif',
+			'create.select_media_desc' => 'Sélectionnez un fichier fictif pour simuler le téléchargement',
 			'leave_dialog.title' => 'Quitter sans sauvegarder ?',
 			'leave_dialog.desc' => 'Voulez-vous continuer l\'édition ou partir maintenant ?',
 			'splash.appName' => 'Video AI',

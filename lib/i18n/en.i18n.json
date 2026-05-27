@@ -36,7 +36,20 @@
     "sec_8s": "8s",
     "sec_5s": "5s",
     "sec_10s": "10s",
-    "sec_15s": "15s"
+    "sec_15s": "15s",
+    "generate_title": "Generate",
+    "upload_first_photo": "Upload first photo.",
+    "upload_last_photo": "Upload last photo.",
+    "upload_video_slot": "Upload Video.",
+    "upload_photo_slot": "Upload photo.",
+    "photo_slot_num": "Photo {num}",
+    "required_label": "Required",
+    "optional_label": "Optional",
+    "inspire_me_count": "Inspire me ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "Generating your video...",
+    "select_mock_media": "Select Mock Media",
+    "select_media_desc": "Select a mock file to simulate upload"
   },
   "leave_dialog": {
     "title": "Leave without saving?",

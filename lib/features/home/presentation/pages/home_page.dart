@@ -8,12 +8,12 @@ import '../../../../../core/theme/app_theme.dart';
 import '../../../../../core/resources/resource.dart';
 import '../../../../../i18n/strings.g.dart';
 import '../../../templates/presentation/pages/templates_page.dart';
+import '../../../create_video/presentation/pages/create_video_page.dart';
 import '../blocs/home_bloc.dart';
 import '../blocs/home_event.dart';
 import '../blocs/home_state.dart';
 import '../widgets/category_selector.dart';
 import '../../../../core/widgets/video_card.dart';
-import '../widgets/video_settings_sheet.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';
@@ -151,7 +151,12 @@ class HomeView extends StatelessWidget {
                                   context,
                                   icon: Icons.movie_creation_outlined,
                                   label: t.home_new.imageToVideo,
-                                  onTap: () => _showSettingsSheet(context),
+                                  onTap: () {
+                                    context.pushNamed(
+                                      CreateVideoPage.name,
+                                      queryParameters: {'tab': '0'},
+                                    );
+                                  },
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -160,7 +165,12 @@ class HomeView extends StatelessWidget {
                                   context,
                                   icon: Icons.auto_awesome_motion_outlined,
                                   label: t.home_new.transitionVideo,
-                                  onTap: () => _showSettingsSheet(context),
+                                  onTap: () {
+                                    context.pushNamed(
+                                      CreateVideoPage.name,
+                                      queryParameters: {'tab': '1'},
+                                    );
+                                  },
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -169,7 +179,12 @@ class HomeView extends StatelessWidget {
                                   context,
                                   icon: Icons.directions_run_outlined,
                                   label: t.home_new.imageToDance,
-                                  onTap: () => _showSettingsSheet(context),
+                                  onTap: () {
+                                    context.pushNamed(
+                                      CreateVideoPage.name,
+                                      queryParameters: {'tab': '2'},
+                                    );
+                                  },
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -178,7 +193,12 @@ class HomeView extends StatelessWidget {
                                   context,
                                   icon: Icons.grid_view_outlined,
                                   label: t.home_new.unifiedVideo,
-                                  onTap: () => _showSettingsSheet(context),
+                                  onTap: () {
+                                    context.pushNamed(
+                                      CreateVideoPage.name,
+                                      queryParameters: {'tab': '3'},
+                                    );
+                                  },
                                 ),
                               ),
                             ],
@@ -393,14 +413,6 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void _showSettingsSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => const VideoSettingsSheet(),
     );
   }
 }

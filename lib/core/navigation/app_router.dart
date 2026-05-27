@@ -6,6 +6,7 @@ import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/templates/presentation/pages/templates_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/settings/presentation/pages/language_page.dart';
+import '../../features/create_video/presentation/pages/create_video_page.dart';
 
 abstract class AppRoutePage {
   const AppRoutePage._();
@@ -76,6 +77,18 @@ final GoRouter appRouter = GoRouter(
         state: state,
         child: const LanguagePage(),
       ),
+    ),
+    GoRoute(
+      path: CreateVideoPage.path,
+      name: CreateVideoPage.name,
+      pageBuilder: (context, state) {
+        final tabStr = state.uri.queryParameters['tab'] ?? '0';
+        final initialTab = int.tryParse(tabStr) ?? 0;
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: CreateVideoPage(initialTab: initialTab),
+        );
+      },
     ),
   ],
 );

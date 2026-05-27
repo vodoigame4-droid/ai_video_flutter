@@ -36,7 +36,20 @@
     "sec_8s": "8s",
     "sec_5s": "5s",
     "sec_10s": "10s",
-    "sec_15s": "15s"
+    "sec_15s": "15s",
+    "generate_title": "Generar",
+    "upload_first_photo": "Subir primera foto.",
+    "upload_last_photo": "Subir última foto.",
+    "upload_video_slot": "Subir video.",
+    "upload_photo_slot": "Subir foto.",
+    "photo_slot_num": "Foto {num}",
+    "required_label": "Requerido",
+    "optional_label": "Opcional",
+    "inspire_me_count": "Inspirarme ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "Generando tu video...",
+    "select_mock_media": "Seleccionar medio simulado",
+    "select_media_desc": "Seleccione un archivo simulado para simular la carga"
   },
   "leave_dialog": {
     "title": "¿Salir sin guardar?",

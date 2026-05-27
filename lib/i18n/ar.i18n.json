@@ -36,7 +36,20 @@
     "sec_8s": "٨ ثواني",
     "sec_5s": "٥ ثواني",
     "sec_10s": "١٠ ثواني",
-    "sec_15s": "١٥ ثانية"
+    "sec_15s": "١٥ ثانية",
+    "generate_title": "إنشاء",
+    "upload_first_photo": "تحميل الصورة الأولى.",
+    "upload_last_photo": "تحميل الصورة الأخيرة.",
+    "upload_video_slot": "تحميل الفيديو.",
+    "upload_photo_slot": "تحميل الصورة.",
+    "photo_slot_num": "صورة {num}",
+    "required_label": "مطلوب",
+    "optional_label": "اختياري",
+    "inspire_me_count": "ألهمني ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "جاري إنشاء الفيديو الخاص بك...",
+    "select_mock_media": "حدد وسائط وهمية",
+    "select_media_desc": "حدد ملفًا وهميًا لمحاكاة التحميل"
   },
   "leave_dialog": {
     "title": "هل تريد المغادرة دون حفظ؟",

@@ -111,6 +111,19 @@ class _Translations$create$id extends Translations$create$en {
 	@override String get sec_5s => '5d';
 	@override String get sec_10s => '10d';
 	@override String get sec_15s => '15d';
+	@override String get generate_title => 'Hasilkan';
+	@override String get upload_first_photo => 'Unggah foto pertama.';
+	@override String get upload_last_photo => 'Unggah foto terakhir.';
+	@override String get upload_video_slot => 'Unggah Video.';
+	@override String get upload_photo_slot => 'Unggah foto.';
+	@override String photo_slot_num({required Object num}) => 'Foto ${num}';
+	@override String get required_label => 'Wajib';
+	@override String get optional_label => 'Opsional';
+	@override String inspire_me_count({required Object count}) => 'Inspirasi saya (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'Sedang menghasilkan video Anda...';
+	@override String get select_mock_media => 'Pilih Media Simulasi';
+	@override String get select_media_desc => 'Pilih file simulasi untuk mensimulasikan unggahan';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsId {
 			'create.sec_5s' => '5d',
 			'create.sec_10s' => '10d',
 			'create.sec_15s' => '15d',
+			'create.generate_title' => 'Hasilkan',
+			'create.upload_first_photo' => 'Unggah foto pertama.',
+			'create.upload_last_photo' => 'Unggah foto terakhir.',
+			'create.upload_video_slot' => 'Unggah Video.',
+			'create.upload_photo_slot' => 'Unggah foto.',
+			'create.photo_slot_num' => ({required Object num}) => 'Foto ${num}',
+			'create.required_label' => 'Wajib',
+			'create.optional_label' => 'Opsional',
+			'create.inspire_me_count' => ({required Object count}) => 'Inspirasi saya (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'Sedang menghasilkan video Anda...',
+			'create.select_mock_media' => 'Pilih Media Simulasi',
+			'create.select_media_desc' => 'Pilih file simulasi untuk mensimulasikan unggahan',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Video AI',

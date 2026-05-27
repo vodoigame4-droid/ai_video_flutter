@@ -111,6 +111,19 @@ class _Translations$create$ar extends Translations$create$en {
 	@override String get sec_5s => '٥ ثواني';
 	@override String get sec_10s => '١٠ ثواني';
 	@override String get sec_15s => '١٥ ثانية';
+	@override String get generate_title => 'إنشاء';
+	@override String get upload_first_photo => 'تحميل الصورة الأولى.';
+	@override String get upload_last_photo => 'تحميل الصورة الأخيرة.';
+	@override String get upload_video_slot => 'تحميل الفيديو.';
+	@override String get upload_photo_slot => 'تحميل الصورة.';
+	@override String photo_slot_num({required Object num}) => 'صورة ${num}';
+	@override String get required_label => 'مطلوب';
+	@override String get optional_label => 'اختياري';
+	@override String inspire_me_count({required Object count}) => 'ألهمني (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'جاري إنشاء الفيديو الخاص بك...';
+	@override String get select_mock_media => 'حدد وسائط وهمية';
+	@override String get select_media_desc => 'حدد ملفًا وهميًا لمحاكاة التحميل';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsAr {
 			'create.sec_5s' => '٥ ثواني',
 			'create.sec_10s' => '١٠ ثواني',
 			'create.sec_15s' => '١٥ ثانية',
+			'create.generate_title' => 'إنشاء',
+			'create.upload_first_photo' => 'تحميل الصورة الأولى.',
+			'create.upload_last_photo' => 'تحميل الصورة الأخيرة.',
+			'create.upload_video_slot' => 'تحميل الفيديو.',
+			'create.upload_photo_slot' => 'تحميل الصورة.',
+			'create.photo_slot_num' => ({required Object num}) => 'صورة ${num}',
+			'create.required_label' => 'مطلوب',
+			'create.optional_label' => 'اختياري',
+			'create.inspire_me_count' => ({required Object count}) => 'ألهمني (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'جاري إنشاء الفيديو الخاص بك...',
+			'create.select_mock_media' => 'حدد وسائط وهمية',
+			'create.select_media_desc' => 'حدد ملفًا وهميًا لمحاكاة التحميل',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
 			'splash.appName' => 'فيديو ذكاء اصطناعي',

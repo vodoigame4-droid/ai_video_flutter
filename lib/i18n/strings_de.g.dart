@@ -111,6 +111,19 @@ class _Translations$create$de extends Translations$create$en {
 	@override String get sec_5s => '5s';
 	@override String get sec_10s => '10s';
 	@override String get sec_15s => '15s';
+	@override String get generate_title => 'Generieren';
+	@override String get upload_first_photo => 'Erstes Foto hochladen.';
+	@override String get upload_last_photo => 'Letztes Foto hochladen.';
+	@override String get upload_video_slot => 'Video hochladen.';
+	@override String get upload_photo_slot => 'Foto hochladen.';
+	@override String photo_slot_num({required Object num}) => 'Foto ${num}';
+	@override String get required_label => 'Erforderlich';
+	@override String get optional_label => 'Optional';
+	@override String inspire_me_count({required Object count}) => 'Inspiriere mich (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'Video wird generiert...';
+	@override String get select_mock_media => 'Mock-Medien auswählen';
+	@override String get select_media_desc => 'Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsDe {
 			'create.sec_5s' => '5s',
 			'create.sec_10s' => '10s',
 			'create.sec_15s' => '15s',
+			'create.generate_title' => 'Generieren',
+			'create.upload_first_photo' => 'Erstes Foto hochladen.',
+			'create.upload_last_photo' => 'Letztes Foto hochladen.',
+			'create.upload_video_slot' => 'Video hochladen.',
+			'create.upload_photo_slot' => 'Foto hochladen.',
+			'create.photo_slot_num' => ({required Object num}) => 'Foto ${num}',
+			'create.required_label' => 'Erforderlich',
+			'create.optional_label' => 'Optional',
+			'create.inspire_me_count' => ({required Object count}) => 'Inspiriere mich (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'Video wird generiert...',
+			'create.select_mock_media' => 'Mock-Medien auswählen',
+			'create.select_media_desc' => 'Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren',
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
 			'splash.appName' => 'Video AI',

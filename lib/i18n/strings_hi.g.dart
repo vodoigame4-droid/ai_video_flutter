@@ -111,6 +111,19 @@ class _Translations$create$hi extends Translations$create$en {
 	@override String get sec_5s => '५ सेकंड';
 	@override String get sec_10s => '१० सेकंड';
 	@override String get sec_15s => '१५ सेकंड';
+	@override String get generate_title => 'बनाएं';
+	@override String get upload_first_photo => 'पहला फोटो अपलोड करें।';
+	@override String get upload_last_photo => 'अंतिम फोटो अपलोड करें।';
+	@override String get upload_video_slot => 'वीडियो अपलोड करें।';
+	@override String get upload_photo_slot => 'फोटो अपलोड करें।';
+	@override String photo_slot_num({required Object num}) => 'फोटो ${num}';
+	@override String get required_label => 'आवश्यक';
+	@override String get optional_label => 'वैकल्पिक';
+	@override String inspire_me_count({required Object count}) => 'मुझे प्रेरित करें (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'आपका वीडियो बनाया जा रहा है...';
+	@override String get select_mock_media => 'नकली मीडिया चुनें';
+	@override String get select_media_desc => 'अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsHi {
 			'create.sec_5s' => '५ सेकंड',
 			'create.sec_10s' => '१० सेकंड',
 			'create.sec_15s' => '१५ सेकंड',
+			'create.generate_title' => 'बनाएं',
+			'create.upload_first_photo' => 'पहला फोटो अपलोड करें।',
+			'create.upload_last_photo' => 'अंतिम फोटो अपलोड करें।',
+			'create.upload_video_slot' => 'वीडियो अपलोड करें।',
+			'create.upload_photo_slot' => 'फोटो अपलोड करें।',
+			'create.photo_slot_num' => ({required Object num}) => 'फोटो ${num}',
+			'create.required_label' => 'आवश्यक',
+			'create.optional_label' => 'वैकल्पिक',
+			'create.inspire_me_count' => ({required Object count}) => 'मुझे प्रेरित करें (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'आपका वीडियो बनाया जा रहा है...',
+			'create.select_mock_media' => 'नकली मीडिया चुनें',
+			'create.select_media_desc' => 'अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'वीडियो एआई',

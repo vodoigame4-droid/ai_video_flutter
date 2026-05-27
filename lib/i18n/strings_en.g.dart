@@ -178,6 +178,45 @@ class Translations$create$en {
 
 	/// en: '15s'
 	String get sec_15s => '15s';
+
+	/// en: 'Generate'
+	String get generate_title => 'Generate';
+
+	/// en: 'Upload first photo.'
+	String get upload_first_photo => 'Upload first photo.';
+
+	/// en: 'Upload last photo.'
+	String get upload_last_photo => 'Upload last photo.';
+
+	/// en: 'Upload Video.'
+	String get upload_video_slot => 'Upload Video.';
+
+	/// en: 'Upload photo.'
+	String get upload_photo_slot => 'Upload photo.';
+
+	/// en: 'Photo {num}'
+	String photo_slot_num({required Object num}) => 'Photo ${num}';
+
+	/// en: 'Required'
+	String get required_label => 'Required';
+
+	/// en: 'Optional'
+	String get optional_label => 'Optional';
+
+	/// en: 'Inspire me ({count})'
+	String inspire_me_count({required Object count}) => 'Inspire me (${count})';
+
+	/// en: '{current}/1000'
+	String character_count({required Object current}) => '${current}/1000';
+
+	/// en: 'Generating your video...'
+	String get generating_video => 'Generating your video...';
+
+	/// en: 'Select Mock Media'
+	String get select_mock_media => 'Select Mock Media';
+
+	/// en: 'Select a mock file to simulate upload'
+	String get select_media_desc => 'Select a mock file to simulate upload';
 }
 
 // Path: leave_dialog
@@ -553,6 +592,19 @@ extension on Translations {
 			'create.sec_5s' => '5s',
 			'create.sec_10s' => '10s',
 			'create.sec_15s' => '15s',
+			'create.generate_title' => 'Generate',
+			'create.upload_first_photo' => 'Upload first photo.',
+			'create.upload_last_photo' => 'Upload last photo.',
+			'create.upload_video_slot' => 'Upload Video.',
+			'create.upload_photo_slot' => 'Upload photo.',
+			'create.photo_slot_num' => ({required Object num}) => 'Photo ${num}',
+			'create.required_label' => 'Required',
+			'create.optional_label' => 'Optional',
+			'create.inspire_me_count' => ({required Object count}) => 'Inspire me (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'Generating your video...',
+			'create.select_mock_media' => 'Select Mock Media',
+			'create.select_media_desc' => 'Select a mock file to simulate upload',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Video AI',

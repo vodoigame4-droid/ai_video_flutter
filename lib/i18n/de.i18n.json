@@ -36,7 +36,20 @@
     "sec_8s": "8s",
     "sec_5s": "5s",
     "sec_10s": "10s",
-    "sec_15s": "15s"
+    "sec_15s": "15s",
+    "generate_title": "Generieren",
+    "upload_first_photo": "Erstes Foto hochladen.",
+    "upload_last_photo": "Letztes Foto hochladen.",
+    "upload_video_slot": "Video hochladen.",
+    "upload_photo_slot": "Foto hochladen.",
+    "photo_slot_num": "Foto {num}",
+    "required_label": "Erforderlich",
+    "optional_label": "Optional",
+    "inspire_me_count": "Inspiriere mich ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "Video wird generiert...",
+    "select_mock_media": "Mock-Medien auswählen",
+    "select_media_desc": "Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren"
   },
   "leave_dialog": {
     "title": "Verlassen ohne zu speichern?",

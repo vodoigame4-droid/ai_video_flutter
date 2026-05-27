@@ -36,7 +36,20 @@
     "sec_8s": "8s",
     "sec_5s": "5s",
     "sec_10s": "10s",
-    "sec_15s": "15s"
+    "sec_15s": "15s",
+    "generate_title": "Tạo video",
+    "upload_first_photo": "Tải lên ảnh đầu tiên.",
+    "upload_last_photo": "Tải lên ảnh cuối cùng.",
+    "upload_video_slot": "Tải lên Video.",
+    "upload_photo_slot": "Tải lên ảnh.",
+    "photo_slot_num": "Ảnh {num}",
+    "required_label": "Bắt buộc",
+    "optional_label": "Tùy chọn",
+    "inspire_me_count": "Gợi ý prompt ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "Đang tạo video của bạn...",
+    "select_mock_media": "Chọn file mẫu",
+    "select_media_desc": "Chọn một file mẫu để mô phỏng tải lên"
   },
   "leave_dialog": {
     "title": "Rời đi không lưu?",

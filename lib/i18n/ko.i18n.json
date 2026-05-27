@@ -36,7 +36,20 @@
     "sec_8s": "8초",
     "sec_5s": "5초",
     "sec_10s": "10초",
-    "sec_15s": "15초"
+    "sec_15s": "15초",
+    "generate_title": "생성하기",
+    "upload_first_photo": "첫 번째 사진 업로드.",
+    "upload_last_photo": "마지막 사진 업로드.",
+    "upload_video_slot": "동영상 업로드.",
+    "upload_photo_slot": "사진 업로드.",
+    "photo_slot_num": "사진 {num}",
+    "required_label": "필수",
+    "optional_label": "선택",
+    "inspire_me_count": "영감 주기 ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "동영상 생성 중...",
+    "select_mock_media": "모크 미디어 선택",
+    "select_media_desc": "업로드를 시뮬레이션할 모크 파일 선택"
   },
   "leave_dialog": {
     "title": "저장하지 않고 나갈까요?",

@@ -6,3 +6,4 @@ input_file_pattern: .i18n.json
 output_directory: lib/i18n
 output_file_name: strings.g.dart
 output_format: single_file
+string_interpolation: braces

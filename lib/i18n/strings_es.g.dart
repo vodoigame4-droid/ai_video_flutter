@@ -111,6 +111,19 @@ class _Translations$create$es extends Translations$create$en {
 	@override String get sec_5s => '5s';
 	@override String get sec_10s => '10s';
 	@override String get sec_15s => '15s';
+	@override String get generate_title => 'Generar';
+	@override String get upload_first_photo => 'Subir primera foto.';
+	@override String get upload_last_photo => 'Subir última foto.';
+	@override String get upload_video_slot => 'Subir video.';
+	@override String get upload_photo_slot => 'Subir foto.';
+	@override String photo_slot_num({required Object num}) => 'Foto ${num}';
+	@override String get required_label => 'Requerido';
+	@override String get optional_label => 'Opcional';
+	@override String inspire_me_count({required Object count}) => 'Inspirarme (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => 'Generando tu video...';
+	@override String get select_mock_media => 'Seleccionar medio simulado';
+	@override String get select_media_desc => 'Seleccione un archivo simulado para simular la carga';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsEs {
 			'create.sec_5s' => '5s',
 			'create.sec_10s' => '10s',
 			'create.sec_15s' => '15s',
+			'create.generate_title' => 'Generar',
+			'create.upload_first_photo' => 'Subir primera foto.',
+			'create.upload_last_photo' => 'Subir última foto.',
+			'create.upload_video_slot' => 'Subir video.',
+			'create.upload_photo_slot' => 'Subir foto.',
+			'create.photo_slot_num' => ({required Object num}) => 'Foto ${num}',
+			'create.required_label' => 'Requerido',
+			'create.optional_label' => 'Opcional',
+			'create.inspire_me_count' => ({required Object count}) => 'Inspirarme (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => 'Generando tu video...',
+			'create.select_mock_media' => 'Seleccionar medio simulado',
+			'create.select_media_desc' => 'Seleccione un archivo simulado para simular la carga',
 			'leave_dialog.title' => '¿Salir sin guardar?',
 			'leave_dialog.desc' => '¿Desea continuar editando o salir ahora?',
 			'splash.appName' => 'Video AI',

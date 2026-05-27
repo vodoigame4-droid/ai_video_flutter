@@ -17,6 +17,7 @@ import '../../features/templates/data/repositories/templates_repository_impl.dar
 import '../../features/templates/domain/repositories/templates_repository.dart';
 import '../../features/templates/domain/usecases/get_templates_use_case.dart';
 import '../../features/templates/presentation/bloc/templates_bloc.dart';
+import '../../features/create_video/presentation/bloc/create_video_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -58,6 +59,9 @@ Future<void> initDependencies() async {
   );
   sl.registerFactory(() => GetTemplatesUseCase(sl()));
   sl.registerFactory(() => TemplatesBloc(getTemplatesUseCase: sl()));
+
+  // Features - Create Video
+  sl.registerFactory(() => CreateVideoBloc());
 
   // Shared Preferences
   final sharedPrefs = await SharedPreferences.getInstance();

@@ -111,6 +111,19 @@ class _Translations$create$zh extends Translations$create$en {
 	@override String get sec_5s => '5秒';
 	@override String get sec_10s => '10秒';
 	@override String get sec_15s => '15秒';
+	@override String get generate_title => '生成';
+	@override String get upload_first_photo => '上传第一张照片。';
+	@override String get upload_last_photo => '上传最后一张照片。';
+	@override String get upload_video_slot => '上传视频。';
+	@override String get upload_photo_slot => '上传照片。';
+	@override String photo_slot_num({required Object num}) => '照片 ${num}';
+	@override String get required_label => '必填';
+	@override String get optional_label => '选填';
+	@override String inspire_me_count({required Object count}) => '灵感推荐 (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => '正在生成您的视频...';
+	@override String get select_mock_media => '选择模拟媒体';
+	@override String get select_media_desc => '选择一个模拟文件以模拟上传';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsZh {
 			'create.sec_5s' => '5秒',
 			'create.sec_10s' => '10秒',
 			'create.sec_15s' => '15秒',
+			'create.generate_title' => '生成',
+			'create.upload_first_photo' => '上传第一张照片。',
+			'create.upload_last_photo' => '上传最后一张照片。',
+			'create.upload_video_slot' => '上传视频。',
+			'create.upload_photo_slot' => '上传照片。',
+			'create.photo_slot_num' => ({required Object num}) => '照片 ${num}',
+			'create.required_label' => '必填',
+			'create.optional_label' => '选填',
+			'create.inspire_me_count' => ({required Object count}) => '灵感推荐 (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => '正在生成您的视频...',
+			'create.select_mock_media' => '选择模拟媒体',
+			'create.select_media_desc' => '选择一个模拟文件以模拟上传',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
 			'splash.appName' => '视频AI',

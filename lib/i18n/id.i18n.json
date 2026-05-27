@@ -36,7 +36,20 @@
     "sec_8s": "8d",
     "sec_5s": "5d",
     "sec_10s": "10d",
-    "sec_15s": "15d"
+    "sec_15s": "15d",
+    "generate_title": "Hasilkan",
+    "upload_first_photo": "Unggah foto pertama.",
+    "upload_last_photo": "Unggah foto terakhir.",
+    "upload_video_slot": "Unggah Video.",
+    "upload_photo_slot": "Unggah foto.",
+    "photo_slot_num": "Foto {num}",
+    "required_label": "Wajib",
+    "optional_label": "Opsional",
+    "inspire_me_count": "Inspirasi saya ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "Sedang menghasilkan video Anda...",
+    "select_mock_media": "Pilih Media Simulasi",
+    "select_media_desc": "Pilih file simulasi untuk mensimulasikan unggahan"
   },
   "leave_dialog": {
     "title": "Keluar tanpa menyimpan?",

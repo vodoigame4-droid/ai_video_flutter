@@ -36,7 +36,20 @@
     "sec_8s": "8秒",
     "sec_5s": "5秒",
     "sec_10s": "10秒",
-    "sec_15s": "15秒"
+    "sec_15s": "15秒",
+    "generate_title": "生成",
+    "upload_first_photo": "上传第一张照片。",
+    "upload_last_photo": "上传最后一张照片。",
+    "upload_video_slot": "上传视频。",
+    "upload_photo_slot": "上传照片。",
+    "photo_slot_num": "照片 {num}",
+    "required_label": "必填",
+    "optional_label": "选填",
+    "inspire_me_count": "灵感推荐 ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "正在生成您的视频...",
+    "select_mock_media": "选择模拟媒体",
+    "select_media_desc": "选择一个模拟文件以模拟上传"
   },
   "leave_dialog": {
     "title": "不保存直接离开？",

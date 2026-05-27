@@ -36,7 +36,20 @@
     "sec_8s": "८ सेकंड",
     "sec_5s": "५ सेकंड",
     "sec_10s": "१० सेकंड",
-    "sec_15s": "१५ सेकंड"
+    "sec_15s": "१५ सेकंड",
+    "generate_title": "बनाएं",
+    "upload_first_photo": "पहला फोटो अपलोड करें।",
+    "upload_last_photo": "अंतिम फोटो अपलोड करें।",
+    "upload_video_slot": "वीडियो अपलोड करें।",
+    "upload_photo_slot": "फोटो अपलोड करें।",
+    "photo_slot_num": "फोटो {num}",
+    "required_label": "आवश्यक",
+    "optional_label": "वैकल्पिक",
+    "inspire_me_count": "मुझे प्रेरित करें ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "आपका वीडियो बनाया जा रहा है...",
+    "select_mock_media": "नकली मीडिया चुनें",
+    "select_media_desc": "अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें"
   },
   "leave_dialog": {
     "title": "बिना सहेजे छोड़ें?",

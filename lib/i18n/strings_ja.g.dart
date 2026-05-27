@@ -111,6 +111,19 @@ class _Translations$create$ja extends Translations$create$en {
 	@override String get sec_5s => '5秒';
 	@override String get sec_10s => '10秒';
 	@override String get sec_15s => '15秒';
+	@override String get generate_title => '生成する';
+	@override String get upload_first_photo => '最初の写真をアップロード。';
+	@override String get upload_last_photo => '最後の写真をアップロード。';
+	@override String get upload_video_slot => '動画をアップロード。';
+	@override String get upload_photo_slot => '写真をアップロード。';
+	@override String photo_slot_num({required Object num}) => '写真 ${num}';
+	@override String get required_label => '必須';
+	@override String get optional_label => '任意';
+	@override String inspire_me_count({required Object count}) => 'インスピレーションを得る (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => '動画を生成中...';
+	@override String get select_mock_media => 'モックメディアを選択';
+	@override String get select_media_desc => 'アップロードをシミュレートするモックファイルを選択';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsJa {
 			'create.sec_5s' => '5秒',
 			'create.sec_10s' => '10秒',
 			'create.sec_15s' => '15秒',
+			'create.generate_title' => '生成する',
+			'create.upload_first_photo' => '最初の写真をアップロード。',
+			'create.upload_last_photo' => '最後の写真をアップロード。',
+			'create.upload_video_slot' => '動画をアップロード。',
+			'create.upload_photo_slot' => '写真をアップロード。',
+			'create.photo_slot_num' => ({required Object num}) => '写真 ${num}',
+			'create.required_label' => '必須',
+			'create.optional_label' => '任意',
+			'create.inspire_me_count' => ({required Object count}) => 'インスピレーションを得る (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => '動画を生成中...',
+			'create.select_mock_media' => 'モックメディアを選択',
+			'create.select_media_desc' => 'アップロードをシミュレートするモックファイルを選択',
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
 			'splash.appName' => 'ビデオAI',

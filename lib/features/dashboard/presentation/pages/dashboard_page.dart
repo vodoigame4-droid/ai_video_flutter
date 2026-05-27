@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../home/presentation/pages/home_page.dart';
-import '../../../home/presentation/widgets/video_settings_sheet.dart';
 import '../../../profile/presentation/pages/profile_page.dart';
+import '../../../create_video/presentation/pages/create_video_page.dart';
 import '../bloc/dashboard_bloc.dart';
 import '../bloc/dashboard_event.dart';
 import '../bloc/dashboard_state.dart';
@@ -64,7 +64,12 @@ class DashboardView extends StatelessWidget {
                     onTabSelected: (index) {
                       context.read<DashboardBloc>().add(DashboardEvent.changeTab(index));
                     },
-                    onCreatePressed: () => _showSettingsSheet(context),
+                    onCreatePressed: () {
+                      context.pushNamed(
+                        CreateVideoPage.name,
+                        queryParameters: {'tab': '0'},
+                      );
+                    },
                   ),
                 ),
               ),
@@ -72,14 +77,6 @@ class DashboardView extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-
-  void _showSettingsSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => const VideoSettingsSheet(),
     );
   }
 }

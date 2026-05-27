@@ -111,6 +111,19 @@ class _Translations$create$ko extends Translations$create$en {
 	@override String get sec_5s => '5초';
 	@override String get sec_10s => '10초';
 	@override String get sec_15s => '15초';
+	@override String get generate_title => '생성하기';
+	@override String get upload_first_photo => '첫 번째 사진 업로드.';
+	@override String get upload_last_photo => '마지막 사진 업로드.';
+	@override String get upload_video_slot => '동영상 업로드.';
+	@override String get upload_photo_slot => '사진 업로드.';
+	@override String photo_slot_num({required Object num}) => '사진 ${num}';
+	@override String get required_label => '필수';
+	@override String get optional_label => '선택';
+	@override String inspire_me_count({required Object count}) => '영감 주기 (${count})';
+	@override String character_count({required Object current}) => '${current}/1000';
+	@override String get generating_video => '동영상 생성 중...';
+	@override String get select_mock_media => '모크 미디어 선택';
+	@override String get select_media_desc => '업로드를 시뮬레이션할 모크 파일 선택';
 }
 
 // Path: leave_dialog
@@ -352,6 +365,19 @@ extension on TranslationsKo {
 			'create.sec_5s' => '5초',
 			'create.sec_10s' => '10초',
 			'create.sec_15s' => '15초',
+			'create.generate_title' => '생성하기',
+			'create.upload_first_photo' => '첫 번째 사진 업로드.',
+			'create.upload_last_photo' => '마지막 사진 업로드.',
+			'create.upload_video_slot' => '동영상 업로드.',
+			'create.upload_photo_slot' => '사진 업로드.',
+			'create.photo_slot_num' => ({required Object num}) => '사진 ${num}',
+			'create.required_label' => '필수',
+			'create.optional_label' => '선택',
+			'create.inspire_me_count' => ({required Object count}) => '영감 주기 (${count})',
+			'create.character_count' => ({required Object current}) => '${current}/1000',
+			'create.generating_video' => '동영상 생성 중...',
+			'create.select_mock_media' => '모크 미디어 선택',
+			'create.select_media_desc' => '업로드를 시뮬레이션할 모크 파일 선택',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => '비디오 AI',

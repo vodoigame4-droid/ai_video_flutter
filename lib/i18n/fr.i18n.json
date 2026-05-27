@@ -36,7 +36,20 @@
     "sec_8s": "8s",
     "sec_5s": "5s",
     "sec_10s": "10s",
-    "sec_15s": "15s"
+    "sec_15s": "15s",
+    "generate_title": "Générer",
+    "upload_first_photo": "Télécharger la première photo.",
+    "upload_last_photo": "Télécharger la dernière photo.",
+    "upload_video_slot": "Télécharger la vidéo.",
+    "upload_photo_slot": "Télécharger la photo.",
+    "photo_slot_num": "Photo {num}",
+    "required_label": "Obligatoire",
+    "optional_label": "Optionnel",
+    "inspire_me_count": "Inspirez-moi ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "Génération de votre vidéo...",
+    "select_mock_media": "Sélectionner un média fictif",
+    "select_media_desc": "Sélectionnez un fichier fictif pour simuler le téléchargement"
   },
   "leave_dialog": {
     "title": "Quitter sans sauvegarder ?",

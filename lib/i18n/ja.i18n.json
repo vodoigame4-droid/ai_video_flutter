@@ -36,7 +36,20 @@
     "sec_8s": "8秒",
     "sec_5s": "5秒",
     "sec_10s": "10秒",
-    "sec_15s": "15秒"
+    "sec_15s": "15秒",
+    "generate_title": "生成する",
+    "upload_first_photo": "最初の写真をアップロード。",
+    "upload_last_photo": "最後の写真をアップロード。",
+    "upload_video_slot": "動画をアップロード。",
+    "upload_photo_slot": "写真をアップロード。",
+    "photo_slot_num": "写真 {num}",
+    "required_label": "必須",
+    "optional_label": "任意",
+    "inspire_me_count": "インスピレーションを得る ({count})",
+    "character_count": "{current}/1000",
+    "generating_video": "動画を生成中...",
+    "select_mock_media": "モックメディアを選択",
+    "select_media_desc": "アップロードをシミュレートするモックファイルを選択"
   },
   "leave_dialog": {
     "title": "保存せずに終了しますか？",
