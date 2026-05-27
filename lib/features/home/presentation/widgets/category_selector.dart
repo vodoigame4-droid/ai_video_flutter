@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/app_text_styles.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 class CategorySelector extends StatelessWidget {
   final List<String> categories;
@@ -35,11 +34,11 @@ class CategorySelector extends StatelessWidget {
               child: Ink(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  gradient: isSelected ? AppColors.primaryGradient : null,
-                  color: isSelected ? null : AppColors.surface,
+                  gradient: isSelected ? context.appTheme.primaryGradient : null,
+                  color: isSelected ? null : context.colorScheme.surface,
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   border: Border.all(
-                    color: isSelected ? Colors.transparent : AppColors.border,
+                    color: isSelected ? Colors.transparent : context.appTheme.borderColor,
                     width: 1,
                   ),
                 ),
@@ -47,8 +46,8 @@ class CategorySelector extends StatelessWidget {
                   child: Text(
                     category,
                     style: isSelected
-                        ? AppTextStyles.categoryActiveText.copyWith(color: AppColors.white)
-                        : AppTextStyles.categoryInactiveText,
+                        ? context.appTheme.categoryActiveStyleSelected
+                        : context.appTheme.categoryInactiveStyle,
                   ),
                 ),
               ),

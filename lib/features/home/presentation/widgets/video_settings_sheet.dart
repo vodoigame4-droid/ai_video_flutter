@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/app_text_styles.dart';
+import '../../../../../core/theme/app_theme.dart';
 import '../../../../../i18n/strings.g.dart';
 
 class VideoSettingsSheet extends StatefulWidget {
@@ -20,9 +19,9 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
 
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      decoration: BoxDecoration(
+        color: context.theme.bottomSheetTheme.backgroundColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,9 +32,9 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
             child: Container(
               width: 40,
               height: 4,
-              decoration: const BoxDecoration(
-                color: AppColors.subText,
-                borderRadius: BorderRadius.all(Radius.circular(2)),
+              decoration: BoxDecoration(
+                color: context.colorScheme.onSurface.withValues(alpha: 0.3),
+                borderRadius: const BorderRadius.all(Radius.circular(2)),
               ),
             ),
           ),
@@ -44,7 +43,7 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
           // Header
           Text(
             t.create.video_settings,
-            style: AppTextStyles.sectionTitle,
+            style: context.textTheme.titleMedium,
           ),
           const SizedBox(height: 24),
 
@@ -57,12 +56,12 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
                 children: [
                   Text(
                     t.create.quality,
-                    style: AppTextStyles.settingsHeader,
+                    style: context.textTheme.titleSmall,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     t.create.quality_desc,
-                    style: AppTextStyles.bodySubText,
+                    style: context.textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -92,12 +91,12 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
                 children: [
                   Text(
                     t.create.duration,
-                    style: AppTextStyles.settingsHeader,
+                    style: context.textTheme.titleSmall,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     t.create.duration_desc,
-                    style: AppTextStyles.bodySubText,
+                    style: context.textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -127,16 +126,15 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('${t.common.generate}...'),
-                  backgroundColor: AppColors.primary,
                 ),
               );
             },
             borderRadius: const BorderRadius.all(Radius.circular(16)),
             child: Ink(
               height: 56,
-              decoration: const BoxDecoration(
-                gradient: AppColors.primaryGradient,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+              decoration: BoxDecoration(
+                gradient: context.appTheme.primaryGradient,
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
               ),
               child: Center(
                 child: Row(
@@ -144,12 +142,12 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
                   children: [
                     const Icon(
                       Icons.star_rounded,
-                      color: AppColors.white,
+                      color: Colors.white,
                     ),
                     const SizedBox(width: 8),
                     Text(
                       t.common.generate,
-                      style: AppTextStyles.buttonTextEnabled,
+                      style: context.textTheme.labelLarge,
                     ),
                   ],
                 ),
@@ -168,16 +166,16 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
       child: Ink(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : AppColors.surface,
+          color: isSelected ? context.colorScheme.primary.withValues(alpha: 0.1) : context.colorScheme.surface,
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.border,
+            color: isSelected ? context.colorScheme.primary : context.appTheme.borderColor,
             width: 1,
           ),
         ),
         child: Text(
           label,
-          style: isSelected ? AppTextStyles.qualityLabelActive : AppTextStyles.qualityLabelInactive,
+          style: isSelected ? context.appTheme.qualityLabelActiveStyle : context.appTheme.qualityLabelInactiveStyle,
         ),
       ),
     );

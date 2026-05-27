@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/app_text_styles.dart';
+import '../../../../../core/theme/app_theme.dart';
+import '../../../../../core/resources/resource.dart';
 import '../../../../../i18n/strings.g.dart';
 import '../blocs/home_bloc.dart';
 import '../blocs/home_event.dart';
@@ -36,18 +36,18 @@ class HomeView extends StatelessWidget {
           builder: (context, state) {
             return state.when(
               initial: () => const Center(
-                child: CircularProgressIndicator(color: AppColors.primary),
+                child: CircularProgressIndicator(),
               ),
               loading: () => const Center(
-                child: CircularProgressIndicator(color: AppColors.primary),
+                child: CircularProgressIndicator(),
               ),
               error: (message) => Center(
                 child: Text(
                   message,
-                  style: AppTextStyles.bodyNormal.copyWith(color: AppColors.heart),
+                  style: context.appTheme.errorTextStyle,
                 ),
               ),
-              loaded: (categories, selectedCategory, trendingVideos, newVideos, currentLocale) {
+              ready: (categoriesState, selectedCategory, trendingVideosState, newVideosState, currentLocale) {
                 return SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,18 +64,18 @@ class HomeView extends StatelessWidget {
                               children: [
                                 Text(
                                   t.home.title,
-                                  style: AppTextStyles.appName,
+                                  style: context.textTheme.displayMedium,
                                 ),
                                 const SizedBox(width: 8),
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  decoration: const BoxDecoration(
-                                    gradient: AppColors.primaryGradient,
-                                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                                  decoration: BoxDecoration(
+                                    gradient: context.appTheme.primaryGradient,
+                                    borderRadius: const BorderRadius.all(Radius.circular(6)),
                                   ),
                                   child: Text(
                                     t.common.pro,
-                                    style: AppTextStyles.proBadgeText,
+                                    style: context.textTheme.labelSmall,
                                   ),
                                 ),
                               ],
@@ -87,12 +87,26 @@ class HomeView extends StatelessWidget {
                       const SizedBox(height: 24),
 
                       // Category list
-                      CategorySelector(
-                        categories: categories,
-                        selectedCategory: selectedCategory,
-                        onSelected: (category) {
-                          context.read<HomeBloc>().add(HomeEvent.selectCategory(category));
-                        },
+                      categoriesState.when(
+                        initial: () => const SizedBox.shrink(),
+                        loading: () => const SizedBox(
+                          height: 37,
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                        success: (categories) => CategorySelector(
+                          categories: categories,
+                          selectedCategory: selectedCategory,
+                          onSelected: (category) {
+                            context.read<HomeBloc>().add(HomeEvent.selectCategory(category));
+                          },
+                        ),
+                        empty: () => const SizedBox.shrink(),
+                        error: (message) => Center(
+                          child: Text(
+                            message,
+                            style: context.appTheme.errorTextStyle,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 24),
 
@@ -131,15 +145,15 @@ class HomeView extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.bolt_rounded,
-                                  color: AppColors.primary,
+                                  color: context.colorScheme.primary,
                                   size: 20,
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
                                   t.home.trending,
-                                  style: AppTextStyles.sectionTitle,
+                                  style: context.textTheme.titleMedium,
                                 ),
                               ],
                             ),
@@ -147,23 +161,36 @@ class HomeView extends StatelessWidget {
                               onPressed: () {},
                               child: Text(
                                 t.common.see_all,
-                                style: AppTextStyles.seeAllText,
                               ),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 12),
-                      SizedBox(
-                        height: 236,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: trendingVideos.length,
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          separatorBuilder: (context, index) => const SizedBox(width: 12),
-                          itemBuilder: (context, index) {
-                            return VideoCard(title: trendingVideos[index]);
-                          },
+                      trendingVideosState.when(
+                        initial: () => const SizedBox.shrink(),
+                        loading: () => const SizedBox(
+                          height: 236,
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                        success: (trendingVideos) => SizedBox(
+                          height: 236,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: trendingVideos.length,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            separatorBuilder: (context, index) => const SizedBox(width: 12),
+                            itemBuilder: (context, index) {
+                              return VideoCard(title: trendingVideos[index]);
+                            },
+                          ),
+                        ),
+                        empty: () => const SizedBox.shrink(),
+                        error: (message) => Center(
+                          child: Text(
+                            message,
+                            style: context.appTheme.errorTextStyle,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 28),
@@ -176,15 +203,15 @@ class HomeView extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.fiber_new_rounded,
-                                  color: AppColors.secondary,
+                                  color: context.colorScheme.secondary,
                                   size: 20,
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
                                   t.home.new_section,
-                                  style: AppTextStyles.sectionTitle,
+                                  style: context.textTheme.titleMedium,
                                 ),
                               ],
                             ),
@@ -192,23 +219,36 @@ class HomeView extends StatelessWidget {
                               onPressed: () {},
                               child: Text(
                                 t.common.see_all,
-                                style: AppTextStyles.seeAllText,
                               ),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 12),
-                      SizedBox(
-                        height: 236,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: newVideos.length,
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          separatorBuilder: (context, index) => const SizedBox(width: 12),
-                          itemBuilder: (context, index) {
-                            return VideoCard(title: newVideos[index]);
-                          },
+                      newVideosState.when(
+                        initial: () => const SizedBox.shrink(),
+                        loading: () => const SizedBox(
+                          height: 236,
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                        success: (newVideos) => SizedBox(
+                          height: 236,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: newVideos.length,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            separatorBuilder: (context, index) => const SizedBox(width: 12),
+                            itemBuilder: (context, index) {
+                              return VideoCard(title: newVideos[index]);
+                            },
+                          ),
+                        ),
+                        empty: () => const SizedBox.shrink(),
+                        error: (message) => Center(
+                          child: Text(
+                            message,
+                            style: context.appTheme.errorTextStyle,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 32),
@@ -231,9 +271,9 @@ class HomeView extends StatelessWidget {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        border: Border.all(color: AppColors.border, width: 1),
+        border: Border.all(color: context.appTheme.borderColor, width: 1),
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(16)),
@@ -243,12 +283,12 @@ class HomeView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Icon(icon, color: AppColors.primary),
+                Icon(icon, color: context.colorScheme.primary),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     title,
-                    style: AppTextStyles.bodyNormal.copyWith(fontWeight: FontWeight.bold),
+                    style: context.appTheme.bodyNormalBold,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -279,21 +319,21 @@ class HomeView extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: currentLocale,
-          dropdownColor: AppColors.surface,
+          dropdownColor: context.colorScheme.surface,
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           items: flagMap.entries.map((e) {
             return DropdownMenuItem<String>(
               value: e.key,
               child: Text(
                 '${e.value}  ${e.key.toUpperCase()}',
-                style: AppTextStyles.bodyNormal,
+                style: context.textTheme.bodyMedium,
               ),
             );
           }).toList(),
@@ -313,7 +353,6 @@ class HomeView extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
       builder: (context) => const VideoSettingsSheet(),
     );
   }

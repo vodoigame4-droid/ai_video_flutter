@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/theme/app_text_styles.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 class VideoCard extends StatelessWidget {
   final String title;
@@ -16,9 +15,9 @@ class VideoCard extends StatelessWidget {
       width: 158,
       height: 236,
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colorScheme.surface,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        border: Border.all(color: AppColors.border, width: 1),
+        border: Border.all(color: context.appTheme.borderColor, width: 1),
         gradient: const LinearGradient(
           colors: [
             Color(0xFF1E1E1E),
@@ -43,12 +42,12 @@ class VideoCard extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.15),
+                color: context.colorScheme.primary.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.play_arrow_rounded,
-                color: AppColors.primary,
+                color: context.colorScheme.primary,
                 size: 28,
               ),
             ),
@@ -74,7 +73,7 @@ class VideoCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyles.bodyNormal,
+                    style: context.textTheme.bodyMedium,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -84,21 +83,21 @@ class VideoCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.favorite_rounded,
-                            color: AppColors.heart,
+                            color: context.appTheme.heartColor,
                             size: 14,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '12.4k',
-                            style: AppTextStyles.seeAllText,
+                            style: context.appTheme.seeAllTextStyle,
                           ),
                         ],
                       ),
                       const Icon(
                         Icons.volume_up_rounded,
-                        color: AppColors.white,
+                        color: Colors.white,
                         size: 14,
                       ),
                     ],

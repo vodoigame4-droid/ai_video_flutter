@@ -145,4 +145,22 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.normal,
     color: AppColors.subText,
   );
+
+  static final TextStyle bodyNormalBold = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+    color: AppColors.white,
+  );
+
+  static final TextStyle errorText = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.normal,
+    color: AppColors.heart,
+  );
+
+  static final TextStyle categoryActiveTextSelected = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+    color: AppColors.white,
+  );
 }

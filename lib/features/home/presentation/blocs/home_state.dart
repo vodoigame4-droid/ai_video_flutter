@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../../core/resources/resource.dart';
 
 part 'home_state.freezed.dart';
 
@@ -6,12 +7,12 @@ part 'home_state.freezed.dart';
 abstract class HomeState with _$HomeState {
   const factory HomeState.initial() = _Initial;
   const factory HomeState.loading() = _Loading;
-  const factory HomeState.loaded({
-    required List<String> categories,
+  const factory HomeState.ready({
+    required Resource<List<String>> categoriesState,
     required String selectedCategory,
-    required List<String> trendingVideos,
-    required List<String> newVideos,
+    required Resource<List<String>> trendingVideosState,
+    required Resource<List<String>> newVideosState,
     required String currentLocale,
-  }) = _Loaded;
+  }) = _Ready;
   const factory HomeState.error({required String message}) = _Error;
 }

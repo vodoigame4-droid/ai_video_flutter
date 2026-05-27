@@ -43,18 +43,87 @@ trigger: always_on
   - load asset/video/background nếu UI phụ thuộc vào trạng thái đó
 - Page chỉ render theo state đã emit ra, không tự điều khiển flow đó.
 
-## 4. Quy tắc cho Bloc/Cubit
+## 4. Quy tắc định nghĩa State cho Bloc/Cubit (Bắt buộc dùng Freezed Union)
 
 - Bloc/Cubit phải nhận dependency qua constructor.
 - Không gọi `GetIt` trong `Bloc/Cubit`.
-- State phải rõ ràng, đọc được, và mô tả đúng UI:
-  - `initial`
-  - `loading`
-  - `ready`
-  - `success`
-  - `empty`
-  - `error`
-- Event/state mới ưu tiên `freezed`.
+- Mọi `State` của `Bloc` hoặc `Cubit` bắt buộc phải sử dụng `@freezed` làm `abstract class` để định nghĩa và phải chia thành các **State con (Union Cases)** rõ ràng để mô tả chính xác trạng thái UI:
+  - `initial`: Trạng thái ban đầu khi chưa thực hiện bất kỳ tác vụ nào.
+  - `loading`: Trạng thái đang tải dữ liệu hoặc đang xử lý tác vụ bất đồng bộ.
+  - `ready`: Trạng thái dữ liệu hoặc tài nguyên đã sẵn sàng (ví dụ: video player đã khởi tạo xong, cấu hình đã load xong).
+  - `success`: Trạng thái xử lý tác vụ thành công (ví dụ: tạo video thành công, gửi biểu mẫu thành công).
+  - `empty`: Trạng thái dữ liệu trống (không có dữ liệu hiển thị).
+  - `error`: Trạng thái xảy ra lỗi (chứa thông báo lỗi `String message` hoặc failure object).
+
+### Ví dụ chuẩn hóa định nghĩa State bằng Freezed:
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'my_feature_state.freezed.dart';
+
+@freezed
+abstract class MyFeatureState with _$MyFeatureState {
+  const factory MyFeatureState.initial() = _Initial;
+  const factory MyFeatureState.loading() = _Loading;
+  const factory MyFeatureState.ready({
+    required List<String> categories,
+    required String selectedCategory,
+  }) = _Ready;
+  const factory MyFeatureState.success({
+    required String resultUrl,
+  }) = _Success;
+  const factory MyFeatureState.empty() = _Empty;
+  const factory MyFeatureState.error({
+    required String message,
+  }) = _Error;
+}
+```
+
+### Quy tắc sử dụng State tại UI:
+Tại widget build của màn hình, **BẮT BUỘC** sử dụng pattern matching `.when` hoặc `.maybeWhen` để render giao diện tương ứng với từng trạng thái con:
+```dart
+state.when(
+  initial: () => const SizedBox.shrink(),
+  loading: () => const Center(child: CircularProgressIndicator()),
+  ready: (categories, selectedCategory) => MyReadyWidget(categories, selectedCategory),
+  success: (resultUrl) => MySuccessWidget(resultUrl),
+  empty: () => const MyEmptyView(),
+  error: (message) => MyErrorView(message: message),
+);
+```
+
+### 4.1. Quy tắc bọc trạng thái tài nguyên con (Resource Sub-States)
+Khi một màn hình chứa nhiều phần độc lập (như danh sách danh mục, danh sách video, dữ liệu cấu hình...) mà mỗi phần cần có trạng thái tải (loading, success, empty, error) riêng biệt mà không làm ảnh hưởng đến trạng thái chung của cả màn hình (ví dụ: không làm cả màn hình bị vẽ lại loading xoay vòng khi chỉ đang load danh sách danh mục), ta **BẮT BUỘC** phải bọc các thuộc tính bất đồng bộ đó bằng generic class **`Resource<T>`** (`lib/core/resources/resource.dart`).
+
+Ví dụ định nghĩa các thuộc tính bất đồng bộ độc lập trong một State duy nhất:
+```dart
+@freezed
+abstract class HomeState with _$HomeState {
+  const factory HomeState.initial() = _Initial;
+  const factory HomeState.loading() = _Loading;
+  
+  // Trạng thái màn hình đã sẵn sàng, nhưng từng cụm dữ liệu bên trong có trạng thái riêng
+  const factory HomeState.ready({
+    required Resource<List<String>> categoriesState,
+    required Resource<List<String>> trendingVideosState,
+    required Resource<List<String>> newVideosState,
+    required String currentLocale,
+  }) = _Ready;
+  
+  const factory HomeState.error({required String message}) = _Error;
+}
+```
+
+Cách vẽ UI độc lập tại các widget tương ứng sử dụng `.when` của `Resource`:
+```dart
+categoriesState.when(
+  initial: () => const SizedBox.shrink(),
+  loading: () => const CategoryLoadingSkeleton(),
+  success: (categories) => CategoryListWidget(categories),
+  empty: () => const EmptyText(),
+  error: (message) => ErrorRetryButton(message: message),
+);
+```
 
 ## 5. Wiring rõ ràng
 
