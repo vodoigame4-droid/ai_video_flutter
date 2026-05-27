@@ -38,14 +38,13 @@ CC: @tktommy678
 Project: DreamGirl 3
 Tasks:
 • [Task 1 Name] – [X]h
-  - [Accomplishment detail A]
-  - [Accomplishment detail B]
+  - [Single-line concise accomplishment detail]
 • [Task 2 Name] – [Y]h
-  - [Accomplishment detail C]
+  - [Single-line concise accomplishment detail]
 ```
 
 ## Rules
 
-- **Be Concise and Brief**: Keep descriptions of accomplishments short, direct, and high-level. Do NOT include individual file names, directories, or low-level implementation details. Aim for 1-2 brief bullet points per task.
+- **Be Extremely Concise (Single Line)**: Write exactly 1 short, high-level line of accomplishment per task. Do NOT write multiple bullets or multi-line details. Do NOT list file paths, commit messages, or low-level technical changes.
 - **Do Not Hardcode Date**: Extract the date dynamically from the commits/current context or the argument passed.
 - **Project Scope**: Default project name to `DreamGirl 3` and CC to `@tktommy678` unless the user specifies otherwise.
