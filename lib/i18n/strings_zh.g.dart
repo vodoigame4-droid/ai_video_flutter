@@ -43,6 +43,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$zh home = _Translations$home$zh._(_root);
 	@override late final _Translations$create$zh create = _Translations$create$zh._(_root);
 	@override late final _Translations$leave_dialog$zh leave_dialog = _Translations$leave_dialog$zh._(_root);
+	@override late final _Translations$splash$zh splash = _Translations$splash$zh._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$zh extends Translations$leave_dialog$en {
 	@override String get desc => '您要继续编辑还是现在离开？';
 }
 
+// Path: splash
+class _Translations$splash$zh extends Translations$splash$en {
+	_Translations$splash$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => '视频AI';
+}
+
 /// The flat map containing all translations for locale <zh>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsZh {
 			'create.sec_15s' => '15秒',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
+			'splash.appName' => '视频AI',
 			_ => null,
 		};
 	}

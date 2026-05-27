@@ -41,5 +41,8 @@
   "leave_dialog": {
     "title": "Verlassen ohne zu speichern?",
     "desc": "Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?"
+  },
+  "splash": {
+    "appName": "Video AI"
   }
 }

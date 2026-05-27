@@ -43,6 +43,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$ar home = _Translations$home$ar._(_root);
 	@override late final _Translations$create$ar create = _Translations$create$ar._(_root);
 	@override late final _Translations$leave_dialog$ar leave_dialog = _Translations$leave_dialog$ar._(_root);
+	@override late final _Translations$splash$ar splash = _Translations$splash$ar._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$ar extends Translations$leave_dialog$en {
 	@override String get desc => 'هل تريد متابعة التحرير أم المغادرة الآن؟';
 }
 
+// Path: splash
+class _Translations$splash$ar extends Translations$splash$en {
+	_Translations$splash$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'فيديو ذكاء اصطناعي';
+}
+
 /// The flat map containing all translations for locale <ar>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsAr {
 			'create.sec_15s' => '١٥ ثانية',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
+			'splash.appName' => 'فيديو ذكاء اصطناعي',
 			_ => null,
 		};
 	}

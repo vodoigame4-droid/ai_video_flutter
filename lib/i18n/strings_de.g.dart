@@ -43,6 +43,7 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$de home = _Translations$home$de._(_root);
 	@override late final _Translations$create$de create = _Translations$create$de._(_root);
 	@override late final _Translations$leave_dialog$de leave_dialog = _Translations$leave_dialog$de._(_root);
+	@override late final _Translations$splash$de splash = _Translations$splash$de._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$de extends Translations$leave_dialog$en {
 	@override String get desc => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?';
 }
 
+// Path: splash
+class _Translations$splash$de extends Translations$splash$en {
+	_Translations$splash$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'Video AI';
+}
+
 /// The flat map containing all translations for locale <de>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsDe {
 			'create.sec_15s' => '15s',
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
+			'splash.appName' => 'Video AI',
 			_ => null,
 		};
 	}

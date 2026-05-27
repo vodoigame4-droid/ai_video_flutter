@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'core/injection/injection_container.dart';
+import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
-import 'features/home/presentation/pages/home_page.dart';
 import 'i18n/strings.g.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initDependencies();
   runApp(const MyApp());
 }
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
     return TranslationProvider(
       child: Builder(
         builder: (context) {
-          return MaterialApp(
+          return MaterialApp.router(
             title: 'Video AI',
             theme: AppTheme.darkTheme,
             themeMode: ThemeMode.dark,
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
-            home: const HomePage(),
+            routerConfig: appRouter,
           );
         },
       ),

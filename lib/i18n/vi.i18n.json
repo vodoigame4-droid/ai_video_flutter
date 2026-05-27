@@ -41,5 +41,8 @@
   "leave_dialog": {
     "title": "Rời đi không lưu?",
     "desc": "Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?"
+  },
+  "splash": {
+    "appName": "Video AI"
   }
 }

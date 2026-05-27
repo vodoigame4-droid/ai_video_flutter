@@ -41,5 +41,8 @@
   "leave_dialog": {
     "title": "Keluar tanpa menyimpan?",
     "desc": "Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?"
+  },
+  "splash": {
+    "appName": "Video AI"
   }
 }

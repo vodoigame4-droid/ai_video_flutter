@@ -41,5 +41,8 @@
   "leave_dialog": {
     "title": "Sair sem salvar?",
     "desc": "Deseja continuar editando ou sair agora?"
+  },
+  "splash": {
+    "appName": "Video AI"
   }
 }

@@ -43,6 +43,7 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$pt home = _Translations$home$pt._(_root);
 	@override late final _Translations$create$pt create = _Translations$create$pt._(_root);
 	@override late final _Translations$leave_dialog$pt leave_dialog = _Translations$leave_dialog$pt._(_root);
+	@override late final _Translations$splash$pt splash = _Translations$splash$pt._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$pt extends Translations$leave_dialog$en {
 	@override String get desc => 'Deseja continuar editando ou sair agora?';
 }
 
+// Path: splash
+class _Translations$splash$pt extends Translations$splash$en {
+	_Translations$splash$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'Video AI';
+}
+
 /// The flat map containing all translations for locale <pt>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsPt {
 			'create.sec_15s' => '15s',
 			'leave_dialog.title' => 'Sair sem salvar?',
 			'leave_dialog.desc' => 'Deseja continuar editando ou sair agora?',
+			'splash.appName' => 'Video AI',
 			_ => null,
 		};
 	}

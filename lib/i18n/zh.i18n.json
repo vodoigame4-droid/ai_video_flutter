@@ -41,5 +41,8 @@
   "leave_dialog": {
     "title": "不保存直接离开？",
     "desc": "您要继续编辑还是现在离开？"
+  },
+  "splash": {
+    "appName": "视频AI"
   }
 }

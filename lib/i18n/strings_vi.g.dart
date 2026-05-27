@@ -43,6 +43,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$vi home = _Translations$home$vi._(_root);
 	@override late final _Translations$create$vi create = _Translations$create$vi._(_root);
 	@override late final _Translations$leave_dialog$vi leave_dialog = _Translations$leave_dialog$vi._(_root);
+	@override late final _Translations$splash$vi splash = _Translations$splash$vi._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$vi extends Translations$leave_dialog$en {
 	@override String get desc => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?';
 }
 
+// Path: splash
+class _Translations$splash$vi extends Translations$splash$en {
+	_Translations$splash$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'Video AI';
+}
+
 /// The flat map containing all translations for locale <vi>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsVi {
 			'create.sec_15s' => '15s',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
+			'splash.appName' => 'Video AI',
 			_ => null,
 		};
 	}

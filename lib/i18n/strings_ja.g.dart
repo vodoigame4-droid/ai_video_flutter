@@ -43,6 +43,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$ja home = _Translations$home$ja._(_root);
 	@override late final _Translations$create$ja create = _Translations$create$ja._(_root);
 	@override late final _Translations$leave_dialog$ja leave_dialog = _Translations$leave_dialog$ja._(_root);
+	@override late final _Translations$splash$ja splash = _Translations$splash$ja._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$ja extends Translations$leave_dialog$en {
 	@override String get desc => '編集を続けますか、それとも今終了しますか？';
 }
 
+// Path: splash
+class _Translations$splash$ja extends Translations$splash$en {
+	_Translations$splash$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'ビデオAI';
+}
+
 /// The flat map containing all translations for locale <ja>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsJa {
 			'create.sec_15s' => '15秒',
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
+			'splash.appName' => 'ビデオAI',
 			_ => null,
 		};
 	}

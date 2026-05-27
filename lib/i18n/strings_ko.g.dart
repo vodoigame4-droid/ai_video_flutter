@@ -43,6 +43,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$ko home = _Translations$home$ko._(_root);
 	@override late final _Translations$create$ko create = _Translations$create$ko._(_root);
 	@override late final _Translations$leave_dialog$ko leave_dialog = _Translations$leave_dialog$ko._(_root);
+	@override late final _Translations$splash$ko splash = _Translations$splash$ko._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$ko extends Translations$leave_dialog$en {
 	@override String get desc => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?';
 }
 
+// Path: splash
+class _Translations$splash$ko extends Translations$splash$en {
+	_Translations$splash$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => '비디오 AI';
+}
+
 /// The flat map containing all translations for locale <ko>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsKo {
 			'create.sec_15s' => '15초',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
+			'splash.appName' => '비디오 AI',
 			_ => null,
 		};
 	}

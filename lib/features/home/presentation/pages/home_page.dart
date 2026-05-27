@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/injection/injection_container.dart';
 import '../../../../../core/theme/app_theme.dart';
 import '../../../../../core/resources/resource.dart';
 import '../../../../../i18n/strings.g.dart';
@@ -12,12 +14,17 @@ import '../widgets/video_card.dart';
 import '../widgets/video_settings_sheet.dart';
 
 class HomePage extends StatelessWidget {
+  static const String path = '/home';
+  static const String name = 'home';
+
+  static void go(BuildContext context) => context.goNamed(name);
+
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc()..add(const HomeEvent.init()),
+      create: (context) => sl<HomeBloc>()..add(const HomeEvent.init()),
       child: const HomeView(),
     );
   }

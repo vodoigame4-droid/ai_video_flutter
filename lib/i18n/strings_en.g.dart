@@ -44,6 +44,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$home$en home = Translations$home$en.internal(_root);
 	late final Translations$create$en create = Translations$create$en.internal(_root);
 	late final Translations$leave_dialog$en leave_dialog = Translations$leave_dialog$en.internal(_root);
+	late final Translations$splash$en splash = Translations$splash$en.internal(_root);
 }
 
 // Path: common
@@ -187,6 +188,18 @@ class Translations$leave_dialog$en {
 	String get desc => 'Do you want to continue editing or leave now?';
 }
 
+// Path: splash
+class Translations$splash$en {
+	Translations$splash$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Video AI'
+	String get appName => 'Video AI';
+}
+
 /// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -230,6 +243,7 @@ extension on Translations {
 			'create.sec_15s' => '15s',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
+			'splash.appName' => 'Video AI',
 			_ => null,
 		};
 	}

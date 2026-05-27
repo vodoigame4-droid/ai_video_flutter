@@ -1,0 +1,42 @@
+import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/splash/presentation/pages/splash_page.dart';
+
+abstract class AppRoutePage {
+  const AppRoutePage._();
+
+  static Page<T> cupertino<T>({
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CupertinoPage<T>(
+      key: state.pageKey,
+      name: state.name ?? state.matchedLocation,
+      arguments: state.extra,
+      child: child,
+    );
+  }
+}
+
+final GoRouter appRouter = GoRouter(
+  initialLocation: SplashPage.path,
+  routes: [
+    GoRoute(
+      path: SplashPage.path,
+      name: SplashPage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const SplashPage(),
+      ),
+    ),
+    GoRoute(
+      path: HomePage.path,
+      name: HomePage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const HomePage(),
+      ),
+    ),
+  ],
+);

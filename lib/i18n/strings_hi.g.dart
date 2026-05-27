@@ -43,6 +43,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$home$hi home = _Translations$home$hi._(_root);
 	@override late final _Translations$create$hi create = _Translations$create$hi._(_root);
 	@override late final _Translations$leave_dialog$hi leave_dialog = _Translations$leave_dialog$hi._(_root);
+	@override late final _Translations$splash$hi splash = _Translations$splash$hi._(_root);
 }
 
 // Path: common
@@ -116,6 +117,16 @@ class _Translations$leave_dialog$hi extends Translations$leave_dialog$en {
 	@override String get desc => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?';
 }
 
+// Path: splash
+class _Translations$splash$hi extends Translations$splash$en {
+	_Translations$splash$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get appName => 'वीडियो एआई';
+}
+
 /// The flat map containing all translations for locale <hi>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -159,6 +170,7 @@ extension on TranslationsHi {
 			'create.sec_15s' => '१५ सेकंड',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
+			'splash.appName' => 'वीडियो एआई',
 			_ => null,
 		};
 	}
