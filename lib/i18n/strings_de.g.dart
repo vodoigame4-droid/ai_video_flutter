@@ -44,6 +44,7 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$de create = _Translations$create$de._(_root);
 	@override late final _Translations$leave_dialog$de leave_dialog = _Translations$leave_dialog$de._(_root);
 	@override late final _Translations$splash$de splash = _Translations$splash$de._(_root);
+	@override late final _Translations$onboarding$de onboarding = _Translations$onboarding$de._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$de extends Translations$splash$en {
 	@override String get appName => 'Video AI';
 }
 
+// Path: onboarding
+class _Translations$onboarding$de extends Translations$onboarding$en {
+	_Translations$onboarding$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$de page1 = _Translations$onboarding$page1$de._(_root);
+	@override late final _Translations$onboarding$page2$de page2 = _Translations$onboarding$page2$de._(_root);
+	@override late final _Translations$onboarding$page3$de page3 = _Translations$onboarding$page3$de._(_root);
+	@override late final _Translations$onboarding$page4$de page4 = _Translations$onboarding$page4$de._(_root);
+	@override late final _Translations$onboarding$page5$de page5 = _Translations$onboarding$page5$de._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Willkommen bei Video AI';
+	@override String get subtitle => 'Deine kreative Reise beginnt hier...';
+	@override String get button => 'Loslegen';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$de extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Bild zu Video';
+	@override String get subtitle => 'Bild hochladen, Prompt schreiben';
+	@override String get button => 'Weiter';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$de extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '2 Bilder zu Video';
+	@override String get subtitle => '2 Bilder hochladen, Prompt schreiben';
+	@override String get button => 'Weiter';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$de extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Bildtanz';
+	@override String get subtitle => '1 Video, 1 Foto hochladen';
+	@override String get button => 'Weiter';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$de extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Video-Fusion';
+	@override String get subtitle => 'Deine Fotos hochladen';
+	@override String get button => 'Weiter';
+}
+
 /// The flat map containing all translations for locale <de>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsDe {
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
 			'splash.appName' => 'Video AI',
+			'onboarding.page1.title' => 'Willkommen bei Video AI',
+			'onboarding.page1.subtitle' => 'Deine kreative Reise beginnt hier...',
+			'onboarding.page1.button' => 'Loslegen',
+			'onboarding.page2.title' => 'Bild zu Video',
+			'onboarding.page2.subtitle' => 'Bild hochladen, Prompt schreiben',
+			'onboarding.page2.button' => 'Weiter',
+			'onboarding.page3.title' => '2 Bilder zu Video',
+			'onboarding.page3.subtitle' => '2 Bilder hochladen, Prompt schreiben',
+			'onboarding.page3.button' => 'Weiter',
+			'onboarding.page4.title' => 'Bildtanz',
+			'onboarding.page4.subtitle' => '1 Video, 1 Foto hochladen',
+			'onboarding.page4.button' => 'Weiter',
+			'onboarding.page5.title' => 'Video-Fusion',
+			'onboarding.page5.subtitle' => 'Deine Fotos hochladen',
+			'onboarding.page5.button' => 'Weiter',
 			_ => null,
 		};
 	}

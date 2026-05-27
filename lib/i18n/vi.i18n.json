@@ -44,5 +44,32 @@
   },
   "splash": {
     "appName": "Video AI"
+  },
+  "onboarding": {
+    "page1": {
+      "title": "Chào mừng đến với Video AI",
+      "subtitle": "Hành trình sáng tạo của bạn bắt đầu tại đây...",
+      "button": "Bắt đầu"
+    },
+    "page2": {
+      "title": "Hình ảnh sang Video",
+      "subtitle": "Tải ảnh lên, viết mô tả",
+      "button": "Tiếp tục"
+    },
+    "page3": {
+      "title": "2 Hình ảnh sang Video",
+      "subtitle": "Tải 2 ảnh lên, viết mô tả",
+      "button": "Tiếp tục"
+    },
+    "page4": {
+      "title": "Hình ảnh Khiêu vũ",
+      "subtitle": "Tải lên 1 Video, 1 Ảnh",
+      "button": "Tiếp tục"
+    },
+    "page5": {
+      "title": "Video Hợp nhất",
+      "subtitle": "Tải ảnh của bạn lên",
+      "button": "Tiếp tục"
+    }
   }
 }

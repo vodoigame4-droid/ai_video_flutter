@@ -44,5 +44,32 @@
   },
   "splash": {
     "appName": "Video AI"
+  },
+  "onboarding": {
+    "page1": {
+      "title": "Selamat Datang di Video AI",
+      "subtitle": "Perjalanan Kreatif Anda Dimulai Di Sini...",
+      "button": "Mulai"
+    },
+    "page2": {
+      "title": "Gambar ke Video",
+      "subtitle": "Unggah Gambar, Tulis Prompt",
+      "button": "Lanjutkan"
+    },
+    "page3": {
+      "title": "2 Gambar ke Video",
+      "subtitle": "Unggah 2 Gambar, Tulis Prompt",
+      "button": "Lanjutkan"
+    },
+    "page4": {
+      "title": "Tarian Gambar",
+      "subtitle": "Unggah 1 Video, 1 Foto",
+      "button": "Lanjutkan"
+    },
+    "page5": {
+      "title": "Fusi Video",
+      "subtitle": "Unggah Foto Anda",
+      "button": "Lanjutkan"
+    }
   }
 }

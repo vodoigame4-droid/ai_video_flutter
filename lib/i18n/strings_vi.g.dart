@@ -44,6 +44,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$vi create = _Translations$create$vi._(_root);
 	@override late final _Translations$leave_dialog$vi leave_dialog = _Translations$leave_dialog$vi._(_root);
 	@override late final _Translations$splash$vi splash = _Translations$splash$vi._(_root);
+	@override late final _Translations$onboarding$vi onboarding = _Translations$onboarding$vi._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$vi extends Translations$splash$en {
 	@override String get appName => 'Video AI';
 }
 
+// Path: onboarding
+class _Translations$onboarding$vi extends Translations$onboarding$en {
+	_Translations$onboarding$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$vi page1 = _Translations$onboarding$page1$vi._(_root);
+	@override late final _Translations$onboarding$page2$vi page2 = _Translations$onboarding$page2$vi._(_root);
+	@override late final _Translations$onboarding$page3$vi page3 = _Translations$onboarding$page3$vi._(_root);
+	@override late final _Translations$onboarding$page4$vi page4 = _Translations$onboarding$page4$vi._(_root);
+	@override late final _Translations$onboarding$page5$vi page5 = _Translations$onboarding$page5$vi._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Chào mừng đến với Video AI';
+	@override String get subtitle => 'Hành trình sáng tạo của bạn bắt đầu tại đây...';
+	@override String get button => 'Bắt đầu';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$vi extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hình ảnh sang Video';
+	@override String get subtitle => 'Tải ảnh lên, viết mô tả';
+	@override String get button => 'Tiếp tục';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$vi extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '2 Hình ảnh sang Video';
+	@override String get subtitle => 'Tải 2 ảnh lên, viết mô tả';
+	@override String get button => 'Tiếp tục';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$vi extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hình ảnh Khiêu vũ';
+	@override String get subtitle => 'Tải lên 1 Video, 1 Ảnh';
+	@override String get button => 'Tiếp tục';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$vi extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Video Hợp nhất';
+	@override String get subtitle => 'Tải ảnh của bạn lên';
+	@override String get button => 'Tiếp tục';
+}
+
 /// The flat map containing all translations for locale <vi>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsVi {
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
 			'splash.appName' => 'Video AI',
+			'onboarding.page1.title' => 'Chào mừng đến với Video AI',
+			'onboarding.page1.subtitle' => 'Hành trình sáng tạo của bạn bắt đầu tại đây...',
+			'onboarding.page1.button' => 'Bắt đầu',
+			'onboarding.page2.title' => 'Hình ảnh sang Video',
+			'onboarding.page2.subtitle' => 'Tải ảnh lên, viết mô tả',
+			'onboarding.page2.button' => 'Tiếp tục',
+			'onboarding.page3.title' => '2 Hình ảnh sang Video',
+			'onboarding.page3.subtitle' => 'Tải 2 ảnh lên, viết mô tả',
+			'onboarding.page3.button' => 'Tiếp tục',
+			'onboarding.page4.title' => 'Hình ảnh Khiêu vũ',
+			'onboarding.page4.subtitle' => 'Tải lên 1 Video, 1 Ảnh',
+			'onboarding.page4.button' => 'Tiếp tục',
+			'onboarding.page5.title' => 'Video Hợp nhất',
+			'onboarding.page5.subtitle' => 'Tải ảnh của bạn lên',
+			'onboarding.page5.button' => 'Tiếp tục',
 			_ => null,
 		};
 	}

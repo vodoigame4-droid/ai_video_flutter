@@ -45,6 +45,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$create$en create = Translations$create$en.internal(_root);
 	late final Translations$leave_dialog$en leave_dialog = Translations$leave_dialog$en.internal(_root);
 	late final Translations$splash$en splash = Translations$splash$en.internal(_root);
+	late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
 }
 
 // Path: common
@@ -200,6 +201,110 @@ class Translations$splash$en {
 	String get appName => 'Video AI';
 }
 
+// Path: onboarding
+class Translations$onboarding$en {
+	Translations$onboarding$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final Translations$onboarding$page1$en page1 = Translations$onboarding$page1$en.internal(_root);
+	late final Translations$onboarding$page2$en page2 = Translations$onboarding$page2$en.internal(_root);
+	late final Translations$onboarding$page3$en page3 = Translations$onboarding$page3$en.internal(_root);
+	late final Translations$onboarding$page4$en page4 = Translations$onboarding$page4$en.internal(_root);
+	late final Translations$onboarding$page5$en page5 = Translations$onboarding$page5$en.internal(_root);
+}
+
+// Path: onboarding.page1
+class Translations$onboarding$page1$en {
+	Translations$onboarding$page1$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Welcome To Video AI'
+	String get title => 'Welcome To Video AI';
+
+	/// en: 'Your Creative Journey Starts Here...'
+	String get subtitle => 'Your Creative Journey Starts Here...';
+
+	/// en: 'Get Started'
+	String get button => 'Get Started';
+}
+
+// Path: onboarding.page2
+class Translations$onboarding$page2$en {
+	Translations$onboarding$page2$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Image To Video'
+	String get title => 'Image To Video';
+
+	/// en: 'Upload Image, Write Prompt'
+	String get subtitle => 'Upload Image, Write Prompt';
+
+	/// en: 'Continue'
+	String get button => 'Continue';
+}
+
+// Path: onboarding.page3
+class Translations$onboarding$page3$en {
+	Translations$onboarding$page3$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: '2 Image To Video'
+	String get title => '2 Image To Video';
+
+	/// en: 'Upload 2 Image, Write Prompt'
+	String get subtitle => 'Upload 2 Image, Write Prompt';
+
+	/// en: 'Continue'
+	String get button => 'Continue';
+}
+
+// Path: onboarding.page4
+class Translations$onboarding$page4$en {
+	Translations$onboarding$page4$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Image Dance'
+	String get title => 'Image Dance';
+
+	/// en: 'Upload 1 Video, 1 Photo'
+	String get subtitle => 'Upload 1 Video, 1 Photo';
+
+	/// en: 'Continue'
+	String get button => 'Continue';
+}
+
+// Path: onboarding.page5
+class Translations$onboarding$page5$en {
+	Translations$onboarding$page5$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Fusion Video'
+	String get title => 'Fusion Video';
+
+	/// en: 'Upload Your Photos'
+	String get subtitle => 'Upload Your Photos';
+
+	/// en: 'Continue'
+	String get button => 'Continue';
+}
+
 /// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -244,6 +349,21 @@ extension on Translations {
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Video AI',
+			'onboarding.page1.title' => 'Welcome To Video AI',
+			'onboarding.page1.subtitle' => 'Your Creative Journey Starts Here...',
+			'onboarding.page1.button' => 'Get Started',
+			'onboarding.page2.title' => 'Image To Video',
+			'onboarding.page2.subtitle' => 'Upload Image, Write Prompt',
+			'onboarding.page2.button' => 'Continue',
+			'onboarding.page3.title' => '2 Image To Video',
+			'onboarding.page3.subtitle' => 'Upload 2 Image, Write Prompt',
+			'onboarding.page3.button' => 'Continue',
+			'onboarding.page4.title' => 'Image Dance',
+			'onboarding.page4.subtitle' => 'Upload 1 Video, 1 Photo',
+			'onboarding.page4.button' => 'Continue',
+			'onboarding.page5.title' => 'Fusion Video',
+			'onboarding.page5.subtitle' => 'Upload Your Photos',
+			'onboarding.page5.button' => 'Continue',
 			_ => null,
 		};
 	}

@@ -133,6 +133,9 @@ abstract class AppTheme {
           heartColor: AppColors.heart,
           borderColor: AppColors.border,
           lightBorderColor: AppColors.lightBorder,
+          onboardingTitleStyle: AppTextStyles.onboardingTitle,
+          onboardingSubtitleStyle: AppTextStyles.onboardingSubtitle,
+          onboardingButtonStyle: AppTextStyles.onboardingButton,
         ),
       ],
     );
@@ -153,6 +156,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final Color heartColor;
   final Color borderColor;
   final Color lightBorderColor;
+  final TextStyle onboardingTitleStyle;
+  final TextStyle onboardingSubtitleStyle;
+  final TextStyle onboardingButtonStyle;
 
   const AppThemeExtension({
     required this.primaryGradient,
@@ -167,6 +173,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     required this.heartColor,
     required this.borderColor,
     required this.lightBorderColor,
+    required this.onboardingTitleStyle,
+    required this.onboardingSubtitleStyle,
+    required this.onboardingButtonStyle,
   });
 
   @override
@@ -183,6 +192,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     Color? heartColor,
     Color? borderColor,
     Color? lightBorderColor,
+    TextStyle? onboardingTitleStyle,
+    TextStyle? onboardingSubtitleStyle,
+    TextStyle? onboardingButtonStyle,
   }) {
     return AppThemeExtension(
       primaryGradient: primaryGradient ?? this.primaryGradient,
@@ -197,6 +209,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       heartColor: heartColor ?? this.heartColor,
       borderColor: borderColor ?? this.borderColor,
       lightBorderColor: lightBorderColor ?? this.lightBorderColor,
+      onboardingTitleStyle: onboardingTitleStyle ?? this.onboardingTitleStyle,
+      onboardingSubtitleStyle: onboardingSubtitleStyle ?? this.onboardingSubtitleStyle,
+      onboardingButtonStyle: onboardingButtonStyle ?? this.onboardingButtonStyle,
     );
   }
 
@@ -216,6 +231,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       heartColor: Color.lerp(heartColor, other.heartColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       lightBorderColor: Color.lerp(lightBorderColor, other.lightBorderColor, t)!,
+      onboardingTitleStyle: TextStyle.lerp(onboardingTitleStyle, other.onboardingTitleStyle, t)!,
+      onboardingSubtitleStyle: TextStyle.lerp(onboardingSubtitleStyle, other.onboardingSubtitleStyle, t)!,
+      onboardingButtonStyle: TextStyle.lerp(onboardingButtonStyle, other.onboardingButtonStyle, t)!,
     );
   }
 }

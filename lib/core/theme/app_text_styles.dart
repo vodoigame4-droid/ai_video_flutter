@@ -23,6 +23,24 @@ abstract class AppTextStyles {
     color: AppColors.white,
   );
 
+  static final TextStyle onboardingTitle = GoogleFonts.plusJakartaSans(
+    fontSize: 26.0,
+    fontWeight: FontWeight.bold,
+    color: AppColors.white,
+  );
+
+  static final TextStyle onboardingSubtitle = GoogleFonts.inter(
+    fontSize: 16.0,
+    fontWeight: FontWeight.normal,
+    color: AppColors.subText,
+  );
+
+  static final TextStyle onboardingButton = GoogleFonts.inter(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600, // Semi bold
+    color: AppColors.white,
+  );
+
   static final TextStyle sectionTitle = GoogleFonts.plusJakartaSans(
     fontSize: 18.0,
     fontWeight: FontWeight.bold,

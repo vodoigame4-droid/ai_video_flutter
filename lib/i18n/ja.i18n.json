@@ -44,5 +44,32 @@
   },
   "splash": {
     "appName": "ビデオAI"
+  },
+  "onboarding": {
+    "page1": {
+      "title": "ビデオAIへようこそ",
+      "subtitle": "あなたのクリエイティブな旅がここから始まる...",
+      "button": "始める"
+    },
+    "page2": {
+      "title": "画像からビデオへ",
+      "subtitle": "画像をアップロードし、プロンプトを入力",
+      "button": "次へ"
+    },
+    "page3": {
+      "title": "2枚 of 画像からビデオへ",
+      "subtitle": "2枚 of 画像をアップロードし、プロンプトを入力",
+      "button": "次へ"
+    },
+    "page4": {
+      "title": "イメージダンス",
+      "subtitle": "動画1本、写真1枚をアップロード",
+      "button": "次へ"
+    },
+    "page5": {
+      "title": "ビデオの融合",
+      "subtitle": "写真をアップロードする",
+      "button": "次へ"
+    }
   }
 }

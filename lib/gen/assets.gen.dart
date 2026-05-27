@@ -14,14 +14,35 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/arrow_right.svg
+  String get arrowRight => 'assets/images/arrow_right.svg';
+
+  /// File path: assets/images/bg_splash.png
+  AssetGenImage get bgSplash => const AssetGenImage('assets/images/bg_splash.png');
+
   /// File path: assets/images/ellipse.svg
   String get ellipse => 'assets/images/ellipse.svg';
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/ob_1.png
+  AssetGenImage get ob1 => const AssetGenImage('assets/images/ob_1.png');
+
+  /// File path: assets/images/ob_2.png
+  AssetGenImage get ob2 => const AssetGenImage('assets/images/ob_2.png');
+
+  /// File path: assets/images/ob_3.png
+  AssetGenImage get ob3 => const AssetGenImage('assets/images/ob_3.png');
+
+  /// File path: assets/images/ob_4.png
+  AssetGenImage get ob4 => const AssetGenImage('assets/images/ob_4.png');
+
+  /// File path: assets/images/ob_5.png
+  AssetGenImage get ob5 => const AssetGenImage('assets/images/ob_5.png');
+
   /// List of all assets
-  List<dynamic> get values => [ellipse, logo];
+  List<dynamic> get values => [arrowRight, bgSplash, ellipse, logo, ob1, ob2, ob3, ob4, ob5];
 }
 
 class Assets {

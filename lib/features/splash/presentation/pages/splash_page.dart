@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/injection/injection_container.dart';
-import '../../../home/presentation/pages/home_page.dart';
+import '../../../onboarding/presentation/pages/onboarding_page.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
 import '../bloc/splash_state.dart';
@@ -35,32 +34,17 @@ class SplashView extends StatelessWidget {
         listener: (context, state) {
           state.mapOrNull(
             success: (_) {
-              HomePage.go(context);
+              OnboardingPage.go(context);
             },
           );
         },
         child: Stack(
           children: [
-            // Top-left ellipse background
-            Positioned(
-              left: -201,
-              top: -218,
-              width: 301,
-              height: 338,
-              child: SvgPicture.asset(
-                'assets/images/ellipse.svg',
-                fit: BoxFit.contain,
-              ),
-            ),
-            // Bottom-right ellipse background
-            Positioned(
-              right: -201,
-              bottom: -218,
-              width: 301,
-              height: 338,
-              child: SvgPicture.asset(
-                'assets/images/ellipse.svg',
-                fit: BoxFit.contain,
+            // Background Image
+            Positioned.fill(
+              child: Image.asset(
+                'assets/images/bg_splash.png',
+                fit: BoxFit.cover,
               ),
             ),
             // Center Logo & Title

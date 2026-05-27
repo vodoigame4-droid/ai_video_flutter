@@ -44,5 +44,32 @@
   },
   "splash": {
     "appName": "비디오 AI"
+  },
+  "onboarding": {
+    "page1": {
+      "title": "비디오 AI에 오신 것을 환영합니다",
+      "subtitle": "당신의 창의적인 여정이 여기서 시작됩니다...",
+      "button": "시작하기"
+    },
+    "page2": {
+      "title": "이미지를 비디오로",
+      "subtitle": "이미지 업로드, 프롬프트 작성",
+      "button": "계속"
+    },
+    "page3": {
+      "title": "2개 이미지를 비디오로",
+      "subtitle": "이미지 2개 업로드, 프롬프트 작성",
+      "button": "계속"
+    },
+    "page4": {
+      "title": "이미지 댄스",
+      "subtitle": "비디오 1개, 사진 1장 업로드",
+      "button": "계속"
+    },
+    "page5": {
+      "title": "비디오 융합",
+      "subtitle": "사진 업로드",
+      "button": "계속"
+    }
   }
 }

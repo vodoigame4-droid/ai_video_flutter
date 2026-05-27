@@ -44,6 +44,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$ko create = _Translations$create$ko._(_root);
 	@override late final _Translations$leave_dialog$ko leave_dialog = _Translations$leave_dialog$ko._(_root);
 	@override late final _Translations$splash$ko splash = _Translations$splash$ko._(_root);
+	@override late final _Translations$onboarding$ko onboarding = _Translations$onboarding$ko._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$ko extends Translations$splash$en {
 	@override String get appName => '비디오 AI';
 }
 
+// Path: onboarding
+class _Translations$onboarding$ko extends Translations$onboarding$en {
+	_Translations$onboarding$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$ko page1 = _Translations$onboarding$page1$ko._(_root);
+	@override late final _Translations$onboarding$page2$ko page2 = _Translations$onboarding$page2$ko._(_root);
+	@override late final _Translations$onboarding$page3$ko page3 = _Translations$onboarding$page3$ko._(_root);
+	@override late final _Translations$onboarding$page4$ko page4 = _Translations$onboarding$page4$ko._(_root);
+	@override late final _Translations$onboarding$page5$ko page5 = _Translations$onboarding$page5$ko._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '비디오 AI에 오신 것을 환영합니다';
+	@override String get subtitle => '당신의 창의적인 여정이 여기서 시작됩니다...';
+	@override String get button => '시작하기';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$ko extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '이미지를 비디오로';
+	@override String get subtitle => '이미지 업로드, 프롬프트 작성';
+	@override String get button => '계속';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$ko extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '2개 이미지를 비디오로';
+	@override String get subtitle => '이미지 2개 업로드, 프롬프트 작성';
+	@override String get button => '계속';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$ko extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '이미지 댄스';
+	@override String get subtitle => '비디오 1개, 사진 1장 업로드';
+	@override String get button => '계속';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$ko extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '비디오 융합';
+	@override String get subtitle => '사진 업로드';
+	@override String get button => '계속';
+}
+
 /// The flat map containing all translations for locale <ko>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsKo {
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => '비디오 AI',
+			'onboarding.page1.title' => '비디오 AI에 오신 것을 환영합니다',
+			'onboarding.page1.subtitle' => '당신의 창의적인 여정이 여기서 시작됩니다...',
+			'onboarding.page1.button' => '시작하기',
+			'onboarding.page2.title' => '이미지를 비디오로',
+			'onboarding.page2.subtitle' => '이미지 업로드, 프롬프트 작성',
+			'onboarding.page2.button' => '계속',
+			'onboarding.page3.title' => '2개 이미지를 비디오로',
+			'onboarding.page3.subtitle' => '이미지 2개 업로드, 프롬프트 작성',
+			'onboarding.page3.button' => '계속',
+			'onboarding.page4.title' => '이미지 댄스',
+			'onboarding.page4.subtitle' => '비디오 1개, 사진 1장 업로드',
+			'onboarding.page4.button' => '계속',
+			'onboarding.page5.title' => '비디오 융합',
+			'onboarding.page5.subtitle' => '사진 업로드',
+			'onboarding.page5.button' => '계속',
 			_ => null,
 		};
 	}

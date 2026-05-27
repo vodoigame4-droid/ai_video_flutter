@@ -44,6 +44,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$ar create = _Translations$create$ar._(_root);
 	@override late final _Translations$leave_dialog$ar leave_dialog = _Translations$leave_dialog$ar._(_root);
 	@override late final _Translations$splash$ar splash = _Translations$splash$ar._(_root);
+	@override late final _Translations$onboarding$ar onboarding = _Translations$onboarding$ar._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$ar extends Translations$splash$en {
 	@override String get appName => 'فيديو ذكاء اصطناعي';
 }
 
+// Path: onboarding
+class _Translations$onboarding$ar extends Translations$onboarding$en {
+	_Translations$onboarding$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$ar page1 = _Translations$onboarding$page1$ar._(_root);
+	@override late final _Translations$onboarding$page2$ar page2 = _Translations$onboarding$page2$ar._(_root);
+	@override late final _Translations$onboarding$page3$ar page3 = _Translations$onboarding$page3$ar._(_root);
+	@override late final _Translations$onboarding$page4$ar page4 = _Translations$onboarding$page4$ar._(_root);
+	@override late final _Translations$onboarding$page5$ar page5 = _Translations$onboarding$page5$ar._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'مرحبًا بك في فيديو ذكاء اصطناعي';
+	@override String get subtitle => 'رحلتك الإبداعية تبدأ من هنا...';
+	@override String get button => 'البدء';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$ar extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'صورة إلى فيديو';
+	@override String get subtitle => 'تحميل الصورة، كتابة المطالبة';
+	@override String get button => 'متابعة';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$ar extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'صورتين إلى فيديو';
+	@override String get subtitle => 'تحميل صورتين، كتابة المطالبة';
+	@override String get button => 'متابعة';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$ar extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'رقص الصورة';
+	@override String get subtitle => 'تحميل فيديو واحد وصورة واحدة';
+	@override String get button => 'متابعة';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$ar extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'دمج الفيديو';
+	@override String get subtitle => 'تحميل صورك';
+	@override String get button => 'متابعة';
+}
+
 /// The flat map containing all translations for locale <ar>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsAr {
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
 			'splash.appName' => 'فيديو ذكاء اصطناعي',
+			'onboarding.page1.title' => 'مرحبًا بك في فيديو ذكاء اصطناعي',
+			'onboarding.page1.subtitle' => 'رحلتك الإبداعية تبدأ من هنا...',
+			'onboarding.page1.button' => 'البدء',
+			'onboarding.page2.title' => 'صورة إلى فيديو',
+			'onboarding.page2.subtitle' => 'تحميل الصورة، كتابة المطالبة',
+			'onboarding.page2.button' => 'متابعة',
+			'onboarding.page3.title' => 'صورتين إلى فيديو',
+			'onboarding.page3.subtitle' => 'تحميل صورتين، كتابة المطالبة',
+			'onboarding.page3.button' => 'متابعة',
+			'onboarding.page4.title' => 'رقص الصورة',
+			'onboarding.page4.subtitle' => 'تحميل فيديو واحد وصورة واحدة',
+			'onboarding.page4.button' => 'متابعة',
+			'onboarding.page5.title' => 'دمج الفيديو',
+			'onboarding.page5.subtitle' => 'تحميل صورك',
+			'onboarding.page5.button' => 'متابعة',
 			_ => null,
 		};
 	}

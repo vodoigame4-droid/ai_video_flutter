@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
 abstract class AppRoutePage {
@@ -28,6 +29,14 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
         state: state,
         child: const SplashPage(),
+      ),
+    ),
+    GoRoute(
+      path: OnboardingPage.path,
+      name: OnboardingPage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const OnboardingPage(),
       ),
     ),
     GoRoute(

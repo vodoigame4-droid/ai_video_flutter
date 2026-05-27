@@ -44,5 +44,32 @@
   },
   "splash": {
     "appName": "视频AI"
+  },
+  "onboarding": {
+    "page1": {
+      "title": "欢迎使用视频AI",
+      "subtitle": "您的创意之旅从这里开始...",
+      "button": "开始体验"
+    },
+    "page2": {
+      "title": "图片转视频",
+      "subtitle": "上传图片，编写提示词",
+      "button": "继续"
+    },
+    "page3": {
+      "title": "双图转视频",
+      "subtitle": "上传两张图片，编写提示词",
+      "button": "继续"
+    },
+    "page4": {
+      "title": "图片舞蹈",
+      "subtitle": "上传1个视频和1张照片",
+      "button": "继续"
+    },
+    "page5": {
+      "title": "视频融合",
+      "subtitle": "上传您的照片",
+      "button": "继续"
+    }
   }
 }

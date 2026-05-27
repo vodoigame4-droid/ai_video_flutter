@@ -44,6 +44,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$zh create = _Translations$create$zh._(_root);
 	@override late final _Translations$leave_dialog$zh leave_dialog = _Translations$leave_dialog$zh._(_root);
 	@override late final _Translations$splash$zh splash = _Translations$splash$zh._(_root);
+	@override late final _Translations$onboarding$zh onboarding = _Translations$onboarding$zh._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$zh extends Translations$splash$en {
 	@override String get appName => '视频AI';
 }
 
+// Path: onboarding
+class _Translations$onboarding$zh extends Translations$onboarding$en {
+	_Translations$onboarding$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$zh page1 = _Translations$onboarding$page1$zh._(_root);
+	@override late final _Translations$onboarding$page2$zh page2 = _Translations$onboarding$page2$zh._(_root);
+	@override late final _Translations$onboarding$page3$zh page3 = _Translations$onboarding$page3$zh._(_root);
+	@override late final _Translations$onboarding$page4$zh page4 = _Translations$onboarding$page4$zh._(_root);
+	@override late final _Translations$onboarding$page5$zh page5 = _Translations$onboarding$page5$zh._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '欢迎使用视频AI';
+	@override String get subtitle => '您的创意之旅从这里开始...';
+	@override String get button => '开始体验';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$zh extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '图片转视频';
+	@override String get subtitle => '上传图片，编写提示词';
+	@override String get button => '继续';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$zh extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '双图转视频';
+	@override String get subtitle => '上传两张图片，编写提示词';
+	@override String get button => '继续';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$zh extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '图片舞蹈';
+	@override String get subtitle => '上传1个视频和1张照片';
+	@override String get button => '继续';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$zh extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '视频融合';
+	@override String get subtitle => '上传您的照片';
+	@override String get button => '继续';
+}
+
 /// The flat map containing all translations for locale <zh>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsZh {
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
 			'splash.appName' => '视频AI',
+			'onboarding.page1.title' => '欢迎使用视频AI',
+			'onboarding.page1.subtitle' => '您的创意之旅从这里开始...',
+			'onboarding.page1.button' => '开始体验',
+			'onboarding.page2.title' => '图片转视频',
+			'onboarding.page2.subtitle' => '上传图片，编写提示词',
+			'onboarding.page2.button' => '继续',
+			'onboarding.page3.title' => '双图转视频',
+			'onboarding.page3.subtitle' => '上传两张图片，编写提示词',
+			'onboarding.page3.button' => '继续',
+			'onboarding.page4.title' => '图片舞蹈',
+			'onboarding.page4.subtitle' => '上传1个视频和1张照片',
+			'onboarding.page4.button' => '继续',
+			'onboarding.page5.title' => '视频融合',
+			'onboarding.page5.subtitle' => '上传您的照片',
+			'onboarding.page5.button' => '继续',
 			_ => null,
 		};
 	}

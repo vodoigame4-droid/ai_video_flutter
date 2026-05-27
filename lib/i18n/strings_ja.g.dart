@@ -44,6 +44,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$ja create = _Translations$create$ja._(_root);
 	@override late final _Translations$leave_dialog$ja leave_dialog = _Translations$leave_dialog$ja._(_root);
 	@override late final _Translations$splash$ja splash = _Translations$splash$ja._(_root);
+	@override late final _Translations$onboarding$ja onboarding = _Translations$onboarding$ja._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$ja extends Translations$splash$en {
 	@override String get appName => 'ビデオAI';
 }
 
+// Path: onboarding
+class _Translations$onboarding$ja extends Translations$onboarding$en {
+	_Translations$onboarding$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$ja page1 = _Translations$onboarding$page1$ja._(_root);
+	@override late final _Translations$onboarding$page2$ja page2 = _Translations$onboarding$page2$ja._(_root);
+	@override late final _Translations$onboarding$page3$ja page3 = _Translations$onboarding$page3$ja._(_root);
+	@override late final _Translations$onboarding$page4$ja page4 = _Translations$onboarding$page4$ja._(_root);
+	@override late final _Translations$onboarding$page5$ja page5 = _Translations$onboarding$page5$ja._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'ビデオAIへようこそ';
+	@override String get subtitle => 'あなたのクリエイティブな旅がここから始まる...';
+	@override String get button => '始める';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$ja extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '画像からビデオへ';
+	@override String get subtitle => '画像をアップロードし、プロンプトを入力';
+	@override String get button => '次へ';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$ja extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '2枚 of 画像からビデオへ';
+	@override String get subtitle => '2枚 of 画像をアップロードし、プロンプトを入力';
+	@override String get button => '次へ';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$ja extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'イメージダンス';
+	@override String get subtitle => '動画1本、写真1枚をアップロード';
+	@override String get button => '次へ';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$ja extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'ビデオの融合';
+	@override String get subtitle => '写真をアップロードする';
+	@override String get button => '次へ';
+}
+
 /// The flat map containing all translations for locale <ja>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsJa {
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
 			'splash.appName' => 'ビデオAI',
+			'onboarding.page1.title' => 'ビデオAIへようこそ',
+			'onboarding.page1.subtitle' => 'あなたのクリエイティブな旅がここから始まる...',
+			'onboarding.page1.button' => '始める',
+			'onboarding.page2.title' => '画像からビデオへ',
+			'onboarding.page2.subtitle' => '画像をアップロードし、プロンプトを入力',
+			'onboarding.page2.button' => '次へ',
+			'onboarding.page3.title' => '2枚 of 画像からビデオへ',
+			'onboarding.page3.subtitle' => '2枚 of 画像をアップロードし、プロンプトを入力',
+			'onboarding.page3.button' => '次へ',
+			'onboarding.page4.title' => 'イメージダンス',
+			'onboarding.page4.subtitle' => '動画1本、写真1枚をアップロード',
+			'onboarding.page4.button' => '次へ',
+			'onboarding.page5.title' => 'ビデオの融合',
+			'onboarding.page5.subtitle' => '写真をアップロードする',
+			'onboarding.page5.button' => '次へ',
 			_ => null,
 		};
 	}

@@ -44,6 +44,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$hi create = _Translations$create$hi._(_root);
 	@override late final _Translations$leave_dialog$hi leave_dialog = _Translations$leave_dialog$hi._(_root);
 	@override late final _Translations$splash$hi splash = _Translations$splash$hi._(_root);
+	@override late final _Translations$onboarding$hi onboarding = _Translations$onboarding$hi._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$hi extends Translations$splash$en {
 	@override String get appName => 'वीडियो एआई';
 }
 
+// Path: onboarding
+class _Translations$onboarding$hi extends Translations$onboarding$en {
+	_Translations$onboarding$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$hi page1 = _Translations$onboarding$page1$hi._(_root);
+	@override late final _Translations$onboarding$page2$hi page2 = _Translations$onboarding$page2$hi._(_root);
+	@override late final _Translations$onboarding$page3$hi page3 = _Translations$onboarding$page3$hi._(_root);
+	@override late final _Translations$onboarding$page4$hi page4 = _Translations$onboarding$page4$hi._(_root);
+	@override late final _Translations$onboarding$page5$hi page5 = _Translations$onboarding$page5$hi._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'वीडियो एआई में आपका स्वागत है';
+	@override String get subtitle => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...';
+	@override String get button => 'शुरू करें';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$hi extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'छवि से वीडियो';
+	@override String get subtitle => 'छवि अपलोड करें, प्रॉम्प्ट लिखें';
+	@override String get button => 'जारी रखें';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$hi extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '2 छवि से वीडियो';
+	@override String get subtitle => '2 छवि अपलोड करें, प्रॉम्प्ट लिखें';
+	@override String get button => 'जारी रखें';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$hi extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'छवि नृत्य';
+	@override String get subtitle => '1 वीडियो, 1 फोटो अपलोड करें';
+	@override String get button => 'जारी रखें';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$hi extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'वीडियो संलयन';
+	@override String get subtitle => 'अपनी तस्वीरें अपलोड करें';
+	@override String get button => 'जारी रखें';
+}
+
 /// The flat map containing all translations for locale <hi>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsHi {
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'वीडियो एआई',
+			'onboarding.page1.title' => 'वीडियो एआई में आपका स्वागत है',
+			'onboarding.page1.subtitle' => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...',
+			'onboarding.page1.button' => 'शुरू करें',
+			'onboarding.page2.title' => 'छवि से वीडियो',
+			'onboarding.page2.subtitle' => 'छवि अपलोड करें, प्रॉम्प्ट लिखें',
+			'onboarding.page2.button' => 'जारी रखें',
+			'onboarding.page3.title' => '2 छवि से वीडियो',
+			'onboarding.page3.subtitle' => '2 छवि अपलोड करें, प्रॉम्प्ट लिखें',
+			'onboarding.page3.button' => 'जारी रखें',
+			'onboarding.page4.title' => 'छवि नृत्य',
+			'onboarding.page4.subtitle' => '1 वीडियो, 1 फोटो अपलोड करें',
+			'onboarding.page4.button' => 'जारी रखें',
+			'onboarding.page5.title' => 'वीडियो संलयन',
+			'onboarding.page5.subtitle' => 'अपनी तस्वीरें अपलोड करें',
+			'onboarding.page5.button' => 'जारी रखें',
 			_ => null,
 		};
 	}

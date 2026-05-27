@@ -44,6 +44,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$create$id create = _Translations$create$id._(_root);
 	@override late final _Translations$leave_dialog$id leave_dialog = _Translations$leave_dialog$id._(_root);
 	@override late final _Translations$splash$id splash = _Translations$splash$id._(_root);
+	@override late final _Translations$onboarding$id onboarding = _Translations$onboarding$id._(_root);
 }
 
 // Path: common
@@ -127,6 +128,80 @@ class _Translations$splash$id extends Translations$splash$en {
 	@override String get appName => 'Video AI';
 }
 
+// Path: onboarding
+class _Translations$onboarding$id extends Translations$onboarding$en {
+	_Translations$onboarding$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override late final _Translations$onboarding$page1$id page1 = _Translations$onboarding$page1$id._(_root);
+	@override late final _Translations$onboarding$page2$id page2 = _Translations$onboarding$page2$id._(_root);
+	@override late final _Translations$onboarding$page3$id page3 = _Translations$onboarding$page3$id._(_root);
+	@override late final _Translations$onboarding$page4$id page4 = _Translations$onboarding$page4$id._(_root);
+	@override late final _Translations$onboarding$page5$id page5 = _Translations$onboarding$page5$id._(_root);
+}
+
+// Path: onboarding.page1
+class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
+	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Selamat Datang di Video AI';
+	@override String get subtitle => 'Perjalanan Kreatif Anda Dimulai Di Sini...';
+	@override String get button => 'Mulai';
+}
+
+// Path: onboarding.page2
+class _Translations$onboarding$page2$id extends Translations$onboarding$page2$en {
+	_Translations$onboarding$page2$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Gambar ke Video';
+	@override String get subtitle => 'Unggah Gambar, Tulis Prompt';
+	@override String get button => 'Lanjutkan';
+}
+
+// Path: onboarding.page3
+class _Translations$onboarding$page3$id extends Translations$onboarding$page3$en {
+	_Translations$onboarding$page3$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '2 Gambar ke Video';
+	@override String get subtitle => 'Unggah 2 Gambar, Tulis Prompt';
+	@override String get button => 'Lanjutkan';
+}
+
+// Path: onboarding.page4
+class _Translations$onboarding$page4$id extends Translations$onboarding$page4$en {
+	_Translations$onboarding$page4$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Tarian Gambar';
+	@override String get subtitle => 'Unggah 1 Video, 1 Foto';
+	@override String get button => 'Lanjutkan';
+}
+
+// Path: onboarding.page5
+class _Translations$onboarding$page5$id extends Translations$onboarding$page5$en {
+	_Translations$onboarding$page5$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Fusi Video';
+	@override String get subtitle => 'Unggah Foto Anda';
+	@override String get button => 'Lanjutkan';
+}
+
 /// The flat map containing all translations for locale <id>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -171,6 +246,21 @@ extension on TranslationsId {
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Video AI',
+			'onboarding.page1.title' => 'Selamat Datang di Video AI',
+			'onboarding.page1.subtitle' => 'Perjalanan Kreatif Anda Dimulai Di Sini...',
+			'onboarding.page1.button' => 'Mulai',
+			'onboarding.page2.title' => 'Gambar ke Video',
+			'onboarding.page2.subtitle' => 'Unggah Gambar, Tulis Prompt',
+			'onboarding.page2.button' => 'Lanjutkan',
+			'onboarding.page3.title' => '2 Gambar ke Video',
+			'onboarding.page3.subtitle' => 'Unggah 2 Gambar, Tulis Prompt',
+			'onboarding.page3.button' => 'Lanjutkan',
+			'onboarding.page4.title' => 'Tarian Gambar',
+			'onboarding.page4.subtitle' => 'Unggah 1 Video, 1 Foto',
+			'onboarding.page4.button' => 'Lanjutkan',
+			'onboarding.page5.title' => 'Fusi Video',
+			'onboarding.page5.subtitle' => 'Unggah Foto Anda',
+			'onboarding.page5.button' => 'Lanjutkan',
 			_ => null,
 		};
 	}

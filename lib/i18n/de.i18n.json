@@ -44,5 +44,32 @@
   },
   "splash": {
     "appName": "Video AI"
+  },
+  "onboarding": {
+    "page1": {
+      "title": "Willkommen bei Video AI",
+      "subtitle": "Deine kreative Reise beginnt hier...",
+      "button": "Loslegen"
+    },
+    "page2": {
+      "title": "Bild zu Video",
+      "subtitle": "Bild hochladen, Prompt schreiben",
+      "button": "Weiter"
+    },
+    "page3": {
+      "title": "2 Bilder zu Video",
+      "subtitle": "2 Bilder hochladen, Prompt schreiben",
+      "button": "Weiter"
+    },
+    "page4": {
+      "title": "Bildtanz",
+      "subtitle": "1 Video, 1 Foto hochladen",
+      "button": "Weiter"
+    },
+    "page5": {
+      "title": "Video-Fusion",
+      "subtitle": "Deine Fotos hochladen",
+      "button": "Weiter"
+    }
   }
 }
