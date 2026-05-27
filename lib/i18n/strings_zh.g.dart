@@ -49,6 +49,8 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$zh profile = _Translations$profile$zh._(_root);
 	@override late final _Translations$home_new$zh home_new = _Translations$home_new$zh._(_root);
 	@override late final _Translations$templates$zh templates = _Translations$templates$zh._(_root);
+	@override late final _Translations$settings$zh settings = _Translations$settings$zh._(_root);
+	@override late final _Translations$language$zh language = _Translations$language$zh._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$zh extends Translations$profile$en {
 	@override String get liked => '点赞视频';
 	@override String get noVideos => '暂无视频';
 	@override String get noVideosDesc => '制作您的第一个AI视频，它将显示在这里。';
+	@override String get deleteTitle => '删除此视频？';
+	@override String get deleteDesc => '您确定要删除此视频吗？此操作无法撤销。';
+	@override String get cancel => '取消';
+	@override String get delete => '删除';
+	@override String get generating => '生成中...';
+	@override String get imageGeneration => '图像生成';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$zh extends Translations$templates$en {
 	@override String get title => '模板';
 	@override String get all => '全部';
 	@override String get pro => '专业版';
+}
+
+// Path: settings
+class _Translations$settings$zh extends Translations$settings$en {
+	_Translations$settings$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '设置';
+	@override String get language => '语言';
+	@override String get termsOfService => '服务条款';
+	@override String get privacyPolicy => '隐私政策';
+	@override String get contactUs => '联系我们';
+	@override String get version => '版本';
+	@override String get myCredits => '我的额度';
+	@override String get rateApp => '评分应用';
+	@override String get userCode => '用户代码';
+	@override String get copied => '已复制到剪贴板！';
+	@override String get termsOfUse => '使用条款';
+}
+
+// Path: language
+class _Translations$language$zh extends Translations$language$en {
+	_Translations$language$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '语言';
+	@override String get en => '英语';
+	@override String get ar => '阿拉伯语';
+	@override String get de => '德语';
+	@override String get es => '西班牙语';
+	@override String get fr => '法语';
+	@override String get hi => '印地语';
+	@override String get id => '印度尼西亚语';
+	@override String get ja => '日语';
+	@override String get ko => '韩语';
+	@override String get pt => '葡萄牙语';
+	@override String get vi => '越南语';
+	@override String get zh => '中文';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsZh {
 			'profile.liked' => '点赞视频',
 			'profile.noVideos' => '暂无视频',
 			'profile.noVideosDesc' => '制作您的第一个AI视频，它将显示在这里。',
+			'profile.deleteTitle' => '删除此视频？',
+			'profile.deleteDesc' => '您确定要删除此视频吗？此操作无法撤销。',
+			'profile.cancel' => '取消',
+			'profile.delete' => '删除',
+			'profile.generating' => '生成中...',
+			'profile.imageGeneration' => '图像生成',
 			'home_new.welcomeToAppName' => '欢迎使用视频AI',
 			'home_new.imageToVideo' => '图片转\n视频',
 			'home_new.transitionVideo' => '转场\n视频',
@@ -339,6 +395,30 @@ extension on TranslationsZh {
 			'templates.title' => '模板',
 			'templates.all' => '全部',
 			'templates.pro' => '专业版',
+			'settings.title' => '设置',
+			'settings.language' => '语言',
+			'settings.termsOfService' => '服务条款',
+			'settings.privacyPolicy' => '隐私政策',
+			'settings.contactUs' => '联系我们',
+			'settings.version' => '版本',
+			'settings.myCredits' => '我的额度',
+			'settings.rateApp' => '评分应用',
+			'settings.userCode' => '用户代码',
+			'settings.copied' => '已复制到剪贴板！',
+			'settings.termsOfUse' => '使用条款',
+			'language.title' => '语言',
+			'language.en' => '英语',
+			'language.ar' => '阿拉伯语',
+			'language.de' => '德语',
+			'language.es' => '西班牙语',
+			'language.fr' => '法语',
+			'language.hi' => '印地语',
+			'language.id' => '印度尼西亚语',
+			'language.ja' => '日语',
+			'language.ko' => '韩语',
+			'language.pt' => '葡萄牙语',
+			'language.vi' => '越南语',
+			'language.zh' => '中文',
 			_ => null,
 		};
 	}

@@ -85,7 +85,13 @@
     "myVideo": "我的视频",
     "liked": "点赞视频",
     "noVideos": "暂无视频",
-    "noVideosDesc": "制作您的第一个AI视频，它将显示在这里。"
+    "noVideosDesc": "制作您的第一个AI视频，它将显示在这里。",
+    "deleteTitle": "删除此视频？",
+    "deleteDesc": "您确定要删除此视频吗？此操作无法撤销。",
+    "cancel": "取消",
+    "delete": "删除",
+    "generating": "生成中...",
+    "imageGeneration": "图像生成"
   },
   "home_new": {
     "welcomeToAppName": "欢迎使用视频AI",
@@ -98,5 +104,33 @@
     "title": "模板",
     "all": "全部",
     "pro": "专业版"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "termsOfService": "服务条款",
+    "privacyPolicy": "隐私政策",
+    "contactUs": "联系我们",
+    "version": "版本",
+    "myCredits": "我的额度",
+    "rateApp": "评分应用",
+    "userCode": "用户代码",
+    "copied": "已复制到剪贴板！",
+    "termsOfUse": "使用条款"
+  },
+  "language": {
+    "title": "语言",
+    "en": "英语",
+    "ar": "阿拉伯语",
+    "de": "德语",
+    "es": "西班牙语",
+    "fr": "法语",
+    "hi": "印地语",
+    "id": "印度尼西亚语",
+    "ja": "日语",
+    "ko": "韩语",
+    "pt": "葡萄牙语",
+    "vi": "越南语",
+    "zh": "中文"
   }
 }

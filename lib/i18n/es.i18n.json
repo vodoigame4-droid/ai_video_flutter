@@ -85,7 +85,13 @@
     "myVideo": "Mi Video",
     "liked": "Me gusta",
     "noVideos": "Sin videos aún",
-    "noVideosDesc": "Crea tu primer video IA y aparecerá aquí."
+    "noVideosDesc": "Crea tu primer video IA y aparecerá aquí.",
+    "deleteTitle": "¿Eliminar este video?",
+    "deleteDesc": "¿Está seguro de que desea eliminar este video? Esta acción no se puede deshacer.",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "generating": "Generando...",
+    "imageGeneration": "Generación de imagen"
   },
   "home_new": {
     "welcomeToAppName": "Bienvenido a Video AI",
@@ -98,5 +104,33 @@
     "title": "Plantillas",
     "all": "Todo",
     "pro": "PRO"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "termsOfService": "Términos de servicio",
+    "privacyPolicy": "Política de privacidad",
+    "contactUs": "Contáctenos",
+    "version": "Versión",
+    "myCredits": "Mis Créditos",
+    "rateApp": "Calificar aplicación",
+    "userCode": "Código de usuario",
+    "copied": "¡Copiado al portapapeles!",
+    "termsOfUse": "Términos de uso"
+  },
+  "language": {
+    "title": "Idioma",
+    "en": "Inglés",
+    "ar": "Árabe",
+    "de": "Alemán",
+    "es": "Español",
+    "fr": "Francés",
+    "hi": "Hindi",
+    "id": "Indonesio",
+    "ja": "Japonés",
+    "ko": "Coreano",
+    "pt": "Portugués",
+    "vi": "Vietnamita",
+    "zh": "Chino"
   }
 }

@@ -49,6 +49,8 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$ko profile = _Translations$profile$ko._(_root);
 	@override late final _Translations$home_new$ko home_new = _Translations$home_new$ko._(_root);
 	@override late final _Translations$templates$ko templates = _Translations$templates$ko._(_root);
+	@override late final _Translations$settings$ko settings = _Translations$settings$ko._(_root);
+	@override late final _Translations$language$ko language = _Translations$language$ko._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$ko extends Translations$profile$en {
 	@override String get liked => '좋아요';
 	@override String get noVideos => '아직 동영상이 없습니다';
 	@override String get noVideosDesc => '첫 번째 AI 비디오를 만들면 여기에 표시됩니다.';
+	@override String get deleteTitle => '이 동영상을 삭제하시겠습니까?';
+	@override String get deleteDesc => '이 동영상을 정말로 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.';
+	@override String get cancel => '취소';
+	@override String get delete => '삭제';
+	@override String get generating => '생성 중...';
+	@override String get imageGeneration => '이미지 생성';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$ko extends Translations$templates$en {
 	@override String get title => '템플릿';
 	@override String get all => '전체';
 	@override String get pro => '프로';
+}
+
+// Path: settings
+class _Translations$settings$ko extends Translations$settings$en {
+	_Translations$settings$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '설정';
+	@override String get language => '언어';
+	@override String get termsOfService => '서비스 약관';
+	@override String get privacyPolicy => '개인정보 처리방침';
+	@override String get contactUs => '문의하기';
+	@override String get version => '버전';
+	@override String get myCredits => '내 크레딧';
+	@override String get rateApp => '앱 평가하기';
+	@override String get userCode => '사용자 코드';
+	@override String get copied => '클립보드에 복사되었습니다!';
+	@override String get termsOfUse => '이용 약관';
+}
+
+// Path: language
+class _Translations$language$ko extends Translations$language$en {
+	_Translations$language$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '언어';
+	@override String get en => '영어';
+	@override String get ar => '아랍어';
+	@override String get de => '독일어';
+	@override String get es => '스페인어';
+	@override String get fr => '프랑스어';
+	@override String get hi => '힌디어';
+	@override String get id => '인도네시아어';
+	@override String get ja => '일본어';
+	@override String get ko => '한국어';
+	@override String get pt => '포르투갈어';
+	@override String get vi => '베트남어';
+	@override String get zh => '중국어';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsKo {
 			'profile.liked' => '좋아요',
 			'profile.noVideos' => '아직 동영상이 없습니다',
 			'profile.noVideosDesc' => '첫 번째 AI 비디오를 만들면 여기에 표시됩니다.',
+			'profile.deleteTitle' => '이 동영상을 삭제하시겠습니까?',
+			'profile.deleteDesc' => '이 동영상을 정말로 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.',
+			'profile.cancel' => '취소',
+			'profile.delete' => '삭제',
+			'profile.generating' => '생성 중...',
+			'profile.imageGeneration' => '이미지 생성',
 			'home_new.welcomeToAppName' => '비디오 AI에 오신 것을 환영합니다',
 			'home_new.imageToVideo' => '이미지를\n비디오로',
 			'home_new.transitionVideo' => '트랜지션\n비디오',
@@ -339,6 +395,30 @@ extension on TranslationsKo {
 			'templates.title' => '템플릿',
 			'templates.all' => '전체',
 			'templates.pro' => '프로',
+			'settings.title' => '설정',
+			'settings.language' => '언어',
+			'settings.termsOfService' => '서비스 약관',
+			'settings.privacyPolicy' => '개인정보 처리방침',
+			'settings.contactUs' => '문의하기',
+			'settings.version' => '버전',
+			'settings.myCredits' => '내 크레딧',
+			'settings.rateApp' => '앱 평가하기',
+			'settings.userCode' => '사용자 코드',
+			'settings.copied' => '클립보드에 복사되었습니다!',
+			'settings.termsOfUse' => '이용 약관',
+			'language.title' => '언어',
+			'language.en' => '영어',
+			'language.ar' => '아랍어',
+			'language.de' => '독일어',
+			'language.es' => '스페인어',
+			'language.fr' => '프랑스어',
+			'language.hi' => '힌디어',
+			'language.id' => '인도네시아어',
+			'language.ja' => '일본어',
+			'language.ko' => '한국어',
+			'language.pt' => '포르투갈어',
+			'language.vi' => '베트남어',
+			'language.zh' => '중국어',
 			_ => null,
 		};
 	}

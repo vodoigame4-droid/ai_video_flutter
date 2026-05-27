@@ -49,6 +49,8 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$ar profile = _Translations$profile$ar._(_root);
 	@override late final _Translations$home_new$ar home_new = _Translations$home_new$ar._(_root);
 	@override late final _Translations$templates$ar templates = _Translations$templates$ar._(_root);
+	@override late final _Translations$settings$ar settings = _Translations$settings$ar._(_root);
+	@override late final _Translations$language$ar language = _Translations$language$ar._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$ar extends Translations$profile$en {
 	@override String get liked => 'أعجبني';
 	@override String get noVideos => 'لا توجد فيديوهات بعد';
 	@override String get noVideosDesc => 'أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا.';
+	@override String get deleteTitle => 'حذف هذا الفيديو؟';
+	@override String get deleteDesc => 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟ لا يمكن التراجع عن هذا الإجراء.';
+	@override String get cancel => 'إلغاء';
+	@override String get delete => 'حذف';
+	@override String get generating => 'جاري الإنشاء...';
+	@override String get imageGeneration => 'إنشاء الصور';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$ar extends Translations$templates$en {
 	@override String get title => 'القوالب';
 	@override String get all => 'الكل';
 	@override String get pro => 'برو';
+}
+
+// Path: settings
+class _Translations$settings$ar extends Translations$settings$en {
+	_Translations$settings$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'الإعدادات';
+	@override String get language => 'اللغة';
+	@override String get termsOfService => 'شروط الخدمة';
+	@override String get privacyPolicy => 'سياسة الخصوصية';
+	@override String get contactUs => 'اتصل بنا';
+	@override String get version => 'الإصدار';
+	@override String get myCredits => 'رصيدي';
+	@override String get rateApp => 'قيم التطبيق';
+	@override String get userCode => 'رمز المستخدم';
+	@override String get copied => 'تم النسخ إلى الحافظة!';
+	@override String get termsOfUse => 'شروط الاستخدام';
+}
+
+// Path: language
+class _Translations$language$ar extends Translations$language$en {
+	_Translations$language$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'اللغة';
+	@override String get en => 'الإنجليزية';
+	@override String get ar => 'العربية';
+	@override String get de => 'الألمانية';
+	@override String get es => 'الإسبانية';
+	@override String get fr => 'الفرنسية';
+	@override String get hi => 'الهندية';
+	@override String get id => 'الإندونيسية';
+	@override String get ja => 'اليابانية';
+	@override String get ko => 'الكورية';
+	@override String get pt => 'البرتغالية';
+	@override String get vi => 'الفيتنامية';
+	@override String get zh => 'الصينية';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsAr {
 			'profile.liked' => 'أعجبني',
 			'profile.noVideos' => 'لا توجد فيديوهات بعد',
 			'profile.noVideosDesc' => 'أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا.',
+			'profile.deleteTitle' => 'حذف هذا الفيديو؟',
+			'profile.deleteDesc' => 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟ لا يمكن التراجع عن هذا الإجراء.',
+			'profile.cancel' => 'إلغاء',
+			'profile.delete' => 'حذف',
+			'profile.generating' => 'جاري الإنشاء...',
+			'profile.imageGeneration' => 'إنشاء الصور',
 			'home_new.welcomeToAppName' => 'مرحبًا بك في فيديو ذكاء اصطناعي',
 			'home_new.imageToVideo' => 'صورة إلى\nفيديو',
 			'home_new.transitionVideo' => 'فيديو\nانتقالي',
@@ -339,6 +395,30 @@ extension on TranslationsAr {
 			'templates.title' => 'القوالب',
 			'templates.all' => 'الكل',
 			'templates.pro' => 'برو',
+			'settings.title' => 'الإعدادات',
+			'settings.language' => 'اللغة',
+			'settings.termsOfService' => 'شروط الخدمة',
+			'settings.privacyPolicy' => 'سياسة الخصوصية',
+			'settings.contactUs' => 'اتصل بنا',
+			'settings.version' => 'الإصدار',
+			'settings.myCredits' => 'رصيدي',
+			'settings.rateApp' => 'قيم التطبيق',
+			'settings.userCode' => 'رمز المستخدم',
+			'settings.copied' => 'تم النسخ إلى الحافظة!',
+			'settings.termsOfUse' => 'شروط الاستخدام',
+			'language.title' => 'اللغة',
+			'language.en' => 'الإنجليزية',
+			'language.ar' => 'العربية',
+			'language.de' => 'الألمانية',
+			'language.es' => 'الإسبانية',
+			'language.fr' => 'الفرنسية',
+			'language.hi' => 'الهندية',
+			'language.id' => 'الإندونيسية',
+			'language.ja' => 'اليابانية',
+			'language.ko' => 'الكورية',
+			'language.pt' => 'البرتغالية',
+			'language.vi' => 'الفيتنامية',
+			'language.zh' => 'الصينية',
 			_ => null,
 		};
 	}

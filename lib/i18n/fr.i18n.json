@@ -85,7 +85,13 @@
     "myVideo": "Ma Vidéo",
     "liked": "Aimé",
     "noVideos": "Pas encore de vidéos",
-    "noVideosDesc": "Créez votre première vidéo IA et elle apparaîtra ici."
+    "noVideosDesc": "Créez votre première vidéo IA et elle apparaîtra ici.",
+    "deleteTitle": "Supprimer cette vidéo ?",
+    "deleteDesc": "Voulez-vous vraiment supprimer cette vidéo ? Cette action est irréversible.",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "generating": "Génération...",
+    "imageGeneration": "Génération d'images"
   },
   "home_new": {
     "welcomeToAppName": "Bienvenue sur Video AI",
@@ -98,5 +104,33 @@
     "title": "Modèles",
     "all": "Tout",
     "pro": "PRO"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "termsOfService": "Conditions d'utilisation",
+    "privacyPolicy": "Politique de confidentialité",
+    "contactUs": "Contactez-nous",
+    "version": "Version",
+    "myCredits": "Mes Crédits",
+    "rateApp": "Évaluer l'application",
+    "userCode": "Code d'utilisateur",
+    "copied": "Copié dans le presse-papiers !",
+    "termsOfUse": "Conditions d'utilisation"
+  },
+  "language": {
+    "title": "Langue",
+    "en": "Anglais",
+    "ar": "Arabe",
+    "de": "Allemand",
+    "es": "Espagnol",
+    "fr": "Français",
+    "hi": "Hindi",
+    "id": "Indonésien",
+    "ja": "Japonais",
+    "ko": "Coréen",
+    "pt": "Portugais",
+    "vi": "Vietnamien",
+    "zh": "Chinois"
   }
 }

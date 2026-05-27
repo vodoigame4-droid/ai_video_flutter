@@ -8,10 +8,7 @@ import '../../../../i18n/strings.g.dart';
 class PremiumBannerWidget extends StatelessWidget {
   final VoidCallback onTap;
 
-  const PremiumBannerWidget({
-    super.key,
-    required this.onTap,
-  });
+  const PremiumBannerWidget({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +33,9 @@ class PremiumBannerWidget extends StatelessWidget {
         children: [
           // Black Overlay
           Positioned.fill(
-            child: Container(
-              color: Colors.black.withValues(alpha: 0.4),
-            ),
+            child: Container(color: Colors.black.withValues(alpha: 0.4)),
           ),
-          
+
           // Centered Column Content
           Center(
             child: Column(
@@ -49,7 +44,8 @@ class PremiumBannerWidget extends StatelessWidget {
                 // Title
                 Text(
                   t.profile.upgradeTitle,
-                  style: context.textTheme.titleMedium?.copyWith(
+                  style:
+                      context.textTheme.titleMedium?.copyWith(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -62,11 +58,12 @@ class PremiumBannerWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 4),
-                
+
                 // Subtitle
                 Text(
                   t.profile.upgradeSubtitle,
-                  style: context.textTheme.bodySmall?.copyWith(
+                  style:
+                      context.textTheme.bodySmall?.copyWith(
                         color: const Color(0xFFB1B1B1),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -79,7 +76,7 @@ class PremiumBannerWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                
+
                 // Go Premium Button with glassmorphism blur, gradient border, and flipped arrow svg
                 ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
@@ -87,7 +84,9 @@ class PremiumBannerWidget extends StatelessWidget {
                     filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
                     child: GradientBorderContainer(
                       width: 176,
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(100),
+                      ),
                       borderWidth: 1.0,
                       backgroundColor: Colors.white.withValues(alpha: 0.25),
                       child: Material(
@@ -95,18 +94,28 @@ class PremiumBannerWidget extends StatelessWidget {
                         child: InkWell(
                           onTap: onTap,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 16, right: 8, top: 6, bottom: 6),
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                              right: 8,
+                              top: 6,
+                              bottom: 6,
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  t.profile.goPremium,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                Expanded(
+                                  child: Text(
+                                    t.profile.goPremium,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
+                                const SizedBox(width: 8),
                                 Ink(
                                   width: 30,
                                   height: 30,
@@ -115,17 +124,13 @@ class PremiumBannerWidget extends StatelessWidget {
                                     shape: BoxShape.circle,
                                   ),
                                   child: Center(
-                                    child: Transform(
-                                      alignment: Alignment.center,
-                                      transform: Matrix4.rotationY(3.141592653589793), // Horizontal flip
-                                      child: SvgPicture.asset(
-                                        'assets/images/arrow_right.svg',
-                                        width: 16,
-                                        height: 16,
-                                        colorFilter: const ColorFilter.mode(
-                                          Colors.white,
-                                          BlendMode.srcIn,
-                                        ),
+                                    child: SvgPicture.asset(
+                                      'assets/icons/ic_arrow_right.svg',
+                                      width: 16,
+                                      height: 16,
+                                      colorFilter: const ColorFilter.mode(
+                                        Colors.white,
+                                        BlendMode.srcIn,
                                       ),
                                     ),
                                   ),

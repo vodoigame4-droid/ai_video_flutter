@@ -49,6 +49,8 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$id profile = _Translations$profile$id._(_root);
 	@override late final _Translations$home_new$id home_new = _Translations$home_new$id._(_root);
 	@override late final _Translations$templates$id templates = _Translations$templates$id._(_root);
+	@override late final _Translations$settings$id settings = _Translations$settings$id._(_root);
+	@override late final _Translations$language$id language = _Translations$language$id._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$id extends Translations$profile$en {
 	@override String get liked => 'Disukai';
 	@override String get noVideos => 'Belum ada video';
 	@override String get noVideosDesc => 'Buat video AI pertama Anda dan itu akan muncul di sini.';
+	@override String get deleteTitle => 'Hapus video ini?';
+	@override String get deleteDesc => 'Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.';
+	@override String get cancel => 'Batal';
+	@override String get delete => 'Hapus';
+	@override String get generating => 'Membuat...';
+	@override String get imageGeneration => 'Pembuatan Gambar';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$id extends Translations$templates$en {
 	@override String get title => 'Templat';
 	@override String get all => 'Semua';
 	@override String get pro => 'PRO';
+}
+
+// Path: settings
+class _Translations$settings$id extends Translations$settings$en {
+	_Translations$settings$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Pengaturan';
+	@override String get language => 'Bahasa';
+	@override String get termsOfService => 'Ketentuan Layanan';
+	@override String get privacyPolicy => 'Kebijakan Privasi';
+	@override String get contactUs => 'Hubungi Kami';
+	@override String get version => 'Versi';
+	@override String get myCredits => 'Kredit Saya';
+	@override String get rateApp => 'Nilai Aplikasi';
+	@override String get userCode => 'Kode Pengguna';
+	@override String get copied => 'Disalin ke papan klip!';
+	@override String get termsOfUse => 'Ketentuan Penggunaan';
+}
+
+// Path: language
+class _Translations$language$id extends Translations$language$en {
+	_Translations$language$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Bahasa';
+	@override String get en => 'Inggris';
+	@override String get ar => 'Arab';
+	@override String get de => 'Jerman';
+	@override String get es => 'Spanyol';
+	@override String get fr => 'Prancis';
+	@override String get hi => 'Hindi';
+	@override String get id => 'Bahasa Indonesia';
+	@override String get ja => 'Jepang';
+	@override String get ko => 'Korea';
+	@override String get pt => 'Portugis';
+	@override String get vi => 'Vietnam';
+	@override String get zh => 'Tionghoa';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsId {
 			'profile.liked' => 'Disukai',
 			'profile.noVideos' => 'Belum ada video',
 			'profile.noVideosDesc' => 'Buat video AI pertama Anda dan itu akan muncul di sini.',
+			'profile.deleteTitle' => 'Hapus video ini?',
+			'profile.deleteDesc' => 'Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.',
+			'profile.cancel' => 'Batal',
+			'profile.delete' => 'Hapus',
+			'profile.generating' => 'Membuat...',
+			'profile.imageGeneration' => 'Pembuatan Gambar',
 			'home_new.welcomeToAppName' => 'Selamat Datang di Video AI',
 			'home_new.imageToVideo' => 'Gambar ke\nVideo',
 			'home_new.transitionVideo' => 'Video\nTransisi',
@@ -339,6 +395,30 @@ extension on TranslationsId {
 			'templates.title' => 'Templat',
 			'templates.all' => 'Semua',
 			'templates.pro' => 'PRO',
+			'settings.title' => 'Pengaturan',
+			'settings.language' => 'Bahasa',
+			'settings.termsOfService' => 'Ketentuan Layanan',
+			'settings.privacyPolicy' => 'Kebijakan Privasi',
+			'settings.contactUs' => 'Hubungi Kami',
+			'settings.version' => 'Versi',
+			'settings.myCredits' => 'Kredit Saya',
+			'settings.rateApp' => 'Nilai Aplikasi',
+			'settings.userCode' => 'Kode Pengguna',
+			'settings.copied' => 'Disalin ke papan klip!',
+			'settings.termsOfUse' => 'Ketentuan Penggunaan',
+			'language.title' => 'Bahasa',
+			'language.en' => 'Inggris',
+			'language.ar' => 'Arab',
+			'language.de' => 'Jerman',
+			'language.es' => 'Spanyol',
+			'language.fr' => 'Prancis',
+			'language.hi' => 'Hindi',
+			'language.id' => 'Bahasa Indonesia',
+			'language.ja' => 'Jepang',
+			'language.ko' => 'Korea',
+			'language.pt' => 'Portugis',
+			'language.vi' => 'Vietnam',
+			'language.zh' => 'Tionghoa',
 			_ => null,
 		};
 	}

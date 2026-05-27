@@ -85,7 +85,13 @@
     "myVideo": "내 비디오",
     "liked": "좋아요",
     "noVideos": "아직 동영상이 없습니다",
-    "noVideosDesc": "첫 번째 AI 비디오를 만들면 여기에 표시됩니다."
+    "noVideosDesc": "첫 번째 AI 비디오를 만들면 여기에 표시됩니다.",
+    "deleteTitle": "이 동영상을 삭제하시겠습니까?",
+    "deleteDesc": "이 동영상을 정말로 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+    "cancel": "취소",
+    "delete": "삭제",
+    "generating": "생성 중...",
+    "imageGeneration": "이미지 생성"
   },
   "home_new": {
     "welcomeToAppName": "비디오 AI에 오신 것을 환영합니다",
@@ -98,5 +104,33 @@
     "title": "템플릿",
     "all": "전체",
     "pro": "프로"
+  },
+  "settings": {
+    "title": "설정",
+    "language": "언어",
+    "termsOfService": "서비스 약관",
+    "privacyPolicy": "개인정보 처리방침",
+    "contactUs": "문의하기",
+    "version": "버전",
+    "myCredits": "내 크레딧",
+    "rateApp": "앱 평가하기",
+    "userCode": "사용자 코드",
+    "copied": "클립보드에 복사되었습니다!",
+    "termsOfUse": "이용 약관"
+  },
+  "language": {
+    "title": "언어",
+    "en": "영어",
+    "ar": "아랍어",
+    "de": "독일어",
+    "es": "스페인어",
+    "fr": "프랑스어",
+    "hi": "힌디어",
+    "id": "인도네시아어",
+    "ja": "일본어",
+    "ko": "한국어",
+    "pt": "포르투갈어",
+    "vi": "베트남어",
+    "zh": "중국어"
   }
 }

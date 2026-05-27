@@ -6,4 +6,6 @@ part 'profile_event.freezed.dart';
 abstract class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.init() = _Init;
   const factory ProfileEvent.changeSubTab(int subTabIndex) = _ChangeSubTab;
+  const factory ProfileEvent.deleteVideo(String id) = _DeleteVideo;
+  const factory ProfileEvent.tickProgress() = _TickProgress;
 }

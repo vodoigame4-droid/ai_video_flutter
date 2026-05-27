@@ -49,6 +49,8 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$ja profile = _Translations$profile$ja._(_root);
 	@override late final _Translations$home_new$ja home_new = _Translations$home_new$ja._(_root);
 	@override late final _Translations$templates$ja templates = _Translations$templates$ja._(_root);
+	@override late final _Translations$settings$ja settings = _Translations$settings$ja._(_root);
+	@override late final _Translations$language$ja language = _Translations$language$ja._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$ja extends Translations$profile$en {
 	@override String get liked => 'いいね';
 	@override String get noVideos => '動画はまだありません';
 	@override String get noVideosDesc => '最初のAI動画を作成すると、ここに表示されます。';
+	@override String get deleteTitle => 'この動画を削除しますか？';
+	@override String get deleteDesc => 'この動画を削除してもよろしいですか？この操作は取り消せません。';
+	@override String get cancel => 'キャンセル';
+	@override String get delete => '削除';
+	@override String get generating => '生成中...';
+	@override String get imageGeneration => '画像生成';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$ja extends Translations$templates$en {
 	@override String get title => 'テンプレート';
 	@override String get all => 'すべて';
 	@override String get pro => 'プロ';
+}
+
+// Path: settings
+class _Translations$settings$ja extends Translations$settings$en {
+	_Translations$settings$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '設定';
+	@override String get language => '言語';
+	@override String get termsOfService => '利用規約';
+	@override String get privacyPolicy => 'プライバシーポリシー';
+	@override String get contactUs => 'お問い合わせ';
+	@override String get version => 'バージョン';
+	@override String get myCredits => '保有クレジット';
+	@override String get rateApp => 'アプリを評価';
+	@override String get userCode => 'ユーザーコード';
+	@override String get copied => 'クリップボードにコピーされました！';
+	@override String get termsOfUse => '利用規約';
+}
+
+// Path: language
+class _Translations$language$ja extends Translations$language$en {
+	_Translations$language$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '言語';
+	@override String get en => '英語';
+	@override String get ar => 'アラビア語';
+	@override String get de => 'ドイツ語';
+	@override String get es => 'スペイン語';
+	@override String get fr => 'フランス語';
+	@override String get hi => 'ヒンディー語';
+	@override String get id => 'インドネシア語';
+	@override String get ja => '日本語';
+	@override String get ko => '韓国語';
+	@override String get pt => 'ポルトガル語';
+	@override String get vi => 'ベトナム語';
+	@override String get zh => '中国語';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsJa {
 			'profile.liked' => 'いいね',
 			'profile.noVideos' => '動画はまだありません',
 			'profile.noVideosDesc' => '最初のAI動画を作成すると、ここに表示されます。',
+			'profile.deleteTitle' => 'この動画を削除しますか？',
+			'profile.deleteDesc' => 'この動画を削除してもよろしいですか？この操作は取り消せません。',
+			'profile.cancel' => 'キャンセル',
+			'profile.delete' => '削除',
+			'profile.generating' => '生成中...',
+			'profile.imageGeneration' => '画像生成',
 			'home_new.welcomeToAppName' => 'ビデオAIへようこそ',
 			'home_new.imageToVideo' => '画像から\nビデオ',
 			'home_new.transitionVideo' => 'トランジション\n動画',
@@ -339,6 +395,30 @@ extension on TranslationsJa {
 			'templates.title' => 'テンプレート',
 			'templates.all' => 'すべて',
 			'templates.pro' => 'プロ',
+			'settings.title' => '設定',
+			'settings.language' => '言語',
+			'settings.termsOfService' => '利用規約',
+			'settings.privacyPolicy' => 'プライバシーポリシー',
+			'settings.contactUs' => 'お問い合わせ',
+			'settings.version' => 'バージョン',
+			'settings.myCredits' => '保有クレジット',
+			'settings.rateApp' => 'アプリを評価',
+			'settings.userCode' => 'ユーザーコード',
+			'settings.copied' => 'クリップボードにコピーされました！',
+			'settings.termsOfUse' => '利用規約',
+			'language.title' => '言語',
+			'language.en' => '英語',
+			'language.ar' => 'アラビア語',
+			'language.de' => 'ドイツ語',
+			'language.es' => 'スペイン語',
+			'language.fr' => 'フランス語',
+			'language.hi' => 'ヒンディー語',
+			'language.id' => 'インドネシア語',
+			'language.ja' => '日本語',
+			'language.ko' => '韓国語',
+			'language.pt' => 'ポルトガル語',
+			'language.vi' => 'ベトナム語',
+			'language.zh' => '中国語',
 			_ => null,
 		};
 	}

@@ -50,6 +50,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$profile$en profile = Translations$profile$en.internal(_root);
 	late final Translations$home_new$en home_new = Translations$home_new$en.internal(_root);
 	late final Translations$templates$en templates = Translations$templates$en.internal(_root);
+	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
+	late final Translations$language$en language = Translations$language$en.internal(_root);
 }
 
 // Path: common
@@ -268,6 +270,24 @@ class Translations$profile$en {
 
 	/// en: 'Create your first AI video and it will appear here.'
 	String get noVideosDesc => 'Create your first AI video and it will appear here.';
+
+	/// en: 'Delete this video?'
+	String get deleteTitle => 'Delete this video?';
+
+	/// en: 'Are you sure you want to delete this video? This action cannot be undone.'
+	String get deleteDesc => 'Are you sure you want to delete this video? This action cannot be undone.';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+
+	/// en: 'Delete'
+	String get delete => 'Delete';
+
+	/// en: 'Generating...'
+	String get generating => 'Generating...';
+
+	/// en: 'Image Generation'
+	String get imageGeneration => 'Image Generation';
 }
 
 // Path: home_new
@@ -310,6 +330,96 @@ class Translations$templates$en {
 
 	/// en: 'PRO'
 	String get pro => 'PRO';
+}
+
+// Path: settings
+class Translations$settings$en {
+	Translations$settings$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Settings'
+	String get title => 'Settings';
+
+	/// en: 'Language'
+	String get language => 'Language';
+
+	/// en: 'Terms of Service'
+	String get termsOfService => 'Terms of Service';
+
+	/// en: 'Privacy Policy'
+	String get privacyPolicy => 'Privacy Policy';
+
+	/// en: 'Contact Us'
+	String get contactUs => 'Contact Us';
+
+	/// en: 'Version'
+	String get version => 'Version';
+
+	/// en: 'My Credits'
+	String get myCredits => 'My Credits';
+
+	/// en: 'Rate App'
+	String get rateApp => 'Rate App';
+
+	/// en: 'User Code'
+	String get userCode => 'User Code';
+
+	/// en: 'Copied to clipboard!'
+	String get copied => 'Copied to clipboard!';
+
+	/// en: 'Terms of Use'
+	String get termsOfUse => 'Terms of Use';
+}
+
+// Path: language
+class Translations$language$en {
+	Translations$language$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Language'
+	String get title => 'Language';
+
+	/// en: 'English'
+	String get en => 'English';
+
+	/// en: 'Arabic'
+	String get ar => 'Arabic';
+
+	/// en: 'German'
+	String get de => 'German';
+
+	/// en: 'Spanish'
+	String get es => 'Spanish';
+
+	/// en: 'French'
+	String get fr => 'French';
+
+	/// en: 'Hindi'
+	String get hi => 'Hindi';
+
+	/// en: 'Indonesian'
+	String get id => 'Indonesian';
+
+	/// en: 'Japanese'
+	String get ja => 'Japanese';
+
+	/// en: 'Korean'
+	String get ko => 'Korean';
+
+	/// en: 'Portuguese'
+	String get pt => 'Portuguese';
+
+	/// en: 'Vietnamese'
+	String get vi => 'Vietnamese';
+
+	/// en: 'Chinese'
+	String get zh => 'Chinese';
 }
 
 // Path: onboarding.page1
@@ -472,6 +582,12 @@ extension on Translations {
 			'profile.liked' => 'Liked',
 			'profile.noVideos' => 'No videos yet',
 			'profile.noVideosDesc' => 'Create your first AI video and it will appear here.',
+			'profile.deleteTitle' => 'Delete this video?',
+			'profile.deleteDesc' => 'Are you sure you want to delete this video? This action cannot be undone.',
+			'profile.cancel' => 'Cancel',
+			'profile.delete' => 'Delete',
+			'profile.generating' => 'Generating...',
+			'profile.imageGeneration' => 'Image Generation',
 			'home_new.welcomeToAppName' => 'Welcome To Video AI',
 			'home_new.imageToVideo' => 'Image to\nVideo',
 			'home_new.transitionVideo' => 'Transition\nVideo',
@@ -480,6 +596,30 @@ extension on Translations {
 			'templates.title' => 'Templates',
 			'templates.all' => 'All',
 			'templates.pro' => 'PRO',
+			'settings.title' => 'Settings',
+			'settings.language' => 'Language',
+			'settings.termsOfService' => 'Terms of Service',
+			'settings.privacyPolicy' => 'Privacy Policy',
+			'settings.contactUs' => 'Contact Us',
+			'settings.version' => 'Version',
+			'settings.myCredits' => 'My Credits',
+			'settings.rateApp' => 'Rate App',
+			'settings.userCode' => 'User Code',
+			'settings.copied' => 'Copied to clipboard!',
+			'settings.termsOfUse' => 'Terms of Use',
+			'language.title' => 'Language',
+			'language.en' => 'English',
+			'language.ar' => 'Arabic',
+			'language.de' => 'German',
+			'language.es' => 'Spanish',
+			'language.fr' => 'French',
+			'language.hi' => 'Hindi',
+			'language.id' => 'Indonesian',
+			'language.ja' => 'Japanese',
+			'language.ko' => 'Korean',
+			'language.pt' => 'Portuguese',
+			'language.vi' => 'Vietnamese',
+			'language.zh' => 'Chinese',
 			_ => null,
 		};
 	}

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ai_video_flutter/main.dart';
 import 'package:ai_video_flutter/core/injection/injection_container.dart';
 import 'package:ai_video_flutter/i18n/strings.g.dart';
@@ -9,6 +10,7 @@ void main() {
   GoogleFonts.config.allowRuntimeFetching = false;
 
   setUp(() async {
+    SharedPreferences.setMockInitialValues({});
     await sl.reset();
     await initDependencies();
   });

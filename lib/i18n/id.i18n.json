@@ -85,7 +85,13 @@
     "myVideo": "Video Saya",
     "liked": "Disukai",
     "noVideos": "Belum ada video",
-    "noVideosDesc": "Buat video AI pertama Anda dan itu akan muncul di sini."
+    "noVideosDesc": "Buat video AI pertama Anda dan itu akan muncul di sini.",
+    "deleteTitle": "Hapus video ini?",
+    "deleteDesc": "Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "generating": "Membuat...",
+    "imageGeneration": "Pembuatan Gambar"
   },
   "home_new": {
     "welcomeToAppName": "Selamat Datang di Video AI",
@@ -98,5 +104,33 @@
     "title": "Templat",
     "all": "Semua",
     "pro": "PRO"
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Bahasa",
+    "termsOfService": "Ketentuan Layanan",
+    "privacyPolicy": "Kebijakan Privasi",
+    "contactUs": "Hubungi Kami",
+    "version": "Versi",
+    "myCredits": "Kredit Saya",
+    "rateApp": "Nilai Aplikasi",
+    "userCode": "Kode Pengguna",
+    "copied": "Disalin ke papan klip!",
+    "termsOfUse": "Ketentuan Penggunaan"
+  },
+  "language": {
+    "title": "Bahasa",
+    "en": "Inggris",
+    "ar": "Arab",
+    "de": "Jerman",
+    "es": "Spanyol",
+    "fr": "Prancis",
+    "hi": "Hindi",
+    "id": "Bahasa Indonesia",
+    "ja": "Jepang",
+    "ko": "Korea",
+    "pt": "Portugis",
+    "vi": "Vietnam",
+    "zh": "Tionghoa"
   }
 }

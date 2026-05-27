@@ -14,14 +14,23 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_arrow_right.svg
+  String get icArrowRight => 'assets/icons/ic_arrow_right.svg';
+
+  /// File path: assets/icons/ic_credit_icon.png
+  AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
+
   /// File path: assets/icons/ic_home.svg
   String get icHome => 'assets/icons/ic_home.svg';
+
+  /// File path: assets/icons/ic_star_vip.png
+  AssetGenImage get icStarVip => const AssetGenImage('assets/icons/ic_star_vip.png');
 
   /// File path: assets/icons/profile.svg
   String get profile => 'assets/icons/profile.svg';
 
   /// List of all assets
-  List<String> get values => [icHome, profile];
+  List<dynamic> get values => [icArrowRight, icCreditIcon, icHome, icStarVip, profile];
 }
 
 class $AssetsImagesGen {

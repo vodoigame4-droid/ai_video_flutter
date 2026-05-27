@@ -49,6 +49,8 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$de profile = _Translations$profile$de._(_root);
 	@override late final _Translations$home_new$de home_new = _Translations$home_new$de._(_root);
 	@override late final _Translations$templates$de templates = _Translations$templates$de._(_root);
+	@override late final _Translations$settings$de settings = _Translations$settings$de._(_root);
+	@override late final _Translations$language$de language = _Translations$language$de._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$de extends Translations$profile$en {
 	@override String get liked => 'Gefällt mir';
 	@override String get noVideos => 'Noch keine Videos';
 	@override String get noVideosDesc => 'Erstelle dein erstes KI-Video, und es wird hier angezeigt.';
+	@override String get deleteTitle => 'Dieses Video löschen?';
+	@override String get deleteDesc => 'Sind Sie sicher, dass Sie dieses Video löschen möchten? Dies kann nicht rückgängig gemacht werden.';
+	@override String get cancel => 'Abbrechen';
+	@override String get delete => 'Löschen';
+	@override String get generating => 'Generieren...';
+	@override String get imageGeneration => 'Bildgenerierung';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$de extends Translations$templates$en {
 	@override String get title => 'Vorlagen';
 	@override String get all => 'Alle';
 	@override String get pro => 'PRO';
+}
+
+// Path: settings
+class _Translations$settings$de extends Translations$settings$en {
+	_Translations$settings$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Einstellungen';
+	@override String get language => 'Sprache';
+	@override String get termsOfService => 'Nutzungsbedingungen';
+	@override String get privacyPolicy => 'Datenschutzrichtlinie';
+	@override String get contactUs => 'Kontaktieren Sie uns';
+	@override String get version => 'Version';
+	@override String get myCredits => 'Meine Credits';
+	@override String get rateApp => 'App bewerten';
+	@override String get userCode => 'Benutzercode';
+	@override String get copied => 'In die Zwischenablage kopiert!';
+	@override String get termsOfUse => 'Nutzungsbedingungen';
+}
+
+// Path: language
+class _Translations$language$de extends Translations$language$en {
+	_Translations$language$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Sprache';
+	@override String get en => 'Englisch';
+	@override String get ar => 'Arabisch';
+	@override String get de => 'Deutsch';
+	@override String get es => 'Spanisch';
+	@override String get fr => 'Französisch';
+	@override String get hi => 'Hindi';
+	@override String get id => 'Indonesisch';
+	@override String get ja => 'Japanisch';
+	@override String get ko => 'Koreanisch';
+	@override String get pt => 'Portugiesisch';
+	@override String get vi => 'Vietnamesisch';
+	@override String get zh => 'Chinesisch';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsDe {
 			'profile.liked' => 'Gefällt mir',
 			'profile.noVideos' => 'Noch keine Videos',
 			'profile.noVideosDesc' => 'Erstelle dein erstes KI-Video, und es wird hier angezeigt.',
+			'profile.deleteTitle' => 'Dieses Video löschen?',
+			'profile.deleteDesc' => 'Sind Sie sicher, dass Sie dieses Video löschen möchten? Dies kann nicht rückgängig gemacht werden.',
+			'profile.cancel' => 'Abbrechen',
+			'profile.delete' => 'Löschen',
+			'profile.generating' => 'Generieren...',
+			'profile.imageGeneration' => 'Bildgenerierung',
 			'home_new.welcomeToAppName' => 'Willkommen bei Video AI',
 			'home_new.imageToVideo' => 'Bild zu\nVideo',
 			'home_new.transitionVideo' => 'Übergangs-\nvideo',
@@ -339,6 +395,30 @@ extension on TranslationsDe {
 			'templates.title' => 'Vorlagen',
 			'templates.all' => 'Alle',
 			'templates.pro' => 'PRO',
+			'settings.title' => 'Einstellungen',
+			'settings.language' => 'Sprache',
+			'settings.termsOfService' => 'Nutzungsbedingungen',
+			'settings.privacyPolicy' => 'Datenschutzrichtlinie',
+			'settings.contactUs' => 'Kontaktieren Sie uns',
+			'settings.version' => 'Version',
+			'settings.myCredits' => 'Meine Credits',
+			'settings.rateApp' => 'App bewerten',
+			'settings.userCode' => 'Benutzercode',
+			'settings.copied' => 'In die Zwischenablage kopiert!',
+			'settings.termsOfUse' => 'Nutzungsbedingungen',
+			'language.title' => 'Sprache',
+			'language.en' => 'Englisch',
+			'language.ar' => 'Arabisch',
+			'language.de' => 'Deutsch',
+			'language.es' => 'Spanisch',
+			'language.fr' => 'Französisch',
+			'language.hi' => 'Hindi',
+			'language.id' => 'Indonesisch',
+			'language.ja' => 'Japanisch',
+			'language.ko' => 'Koreanisch',
+			'language.pt' => 'Portugiesisch',
+			'language.vi' => 'Vietnamesisch',
+			'language.zh' => 'Chinesisch',
 			_ => null,
 		};
 	}

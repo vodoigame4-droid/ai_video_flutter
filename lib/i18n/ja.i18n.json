@@ -85,7 +85,13 @@
     "myVideo": "マイビデオ",
     "liked": "いいね",
     "noVideos": "動画はまだありません",
-    "noVideosDesc": "最初のAI動画を作成すると、ここに表示されます。"
+    "noVideosDesc": "最初のAI動画を作成すると、ここに表示されます。",
+    "deleteTitle": "この動画を削除しますか？",
+    "deleteDesc": "この動画を削除してもよろしいですか？この操作は取り消せません。",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "generating": "生成中...",
+    "imageGeneration": "画像生成"
   },
   "home_new": {
     "welcomeToAppName": "ビデオAIへようこそ",
@@ -98,5 +104,33 @@
     "title": "テンプレート",
     "all": "すべて",
     "pro": "プロ"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語",
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "contactUs": "お問い合わせ",
+    "version": "バージョン",
+    "myCredits": "保有クレジット",
+    "rateApp": "アプリを評価",
+    "userCode": "ユーザーコード",
+    "copied": "クリップボードにコピーされました！",
+    "termsOfUse": "利用規約"
+  },
+  "language": {
+    "title": "言語",
+    "en": "英語",
+    "ar": "アラビア語",
+    "de": "ドイツ語",
+    "es": "スペイン語",
+    "fr": "フランス語",
+    "hi": "ヒンディー語",
+    "id": "インドネシア語",
+    "ja": "日本語",
+    "ko": "韓国語",
+    "pt": "ポルトガル語",
+    "vi": "ベトナム語",
+    "zh": "中国語"
   }
 }

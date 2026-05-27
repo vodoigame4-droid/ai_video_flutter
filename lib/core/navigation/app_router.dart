@@ -4,6 +4,8 @@ import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/templates/presentation/pages/templates_page.dart';
+import '../../features/settings/presentation/pages/settings_page.dart';
+import '../../features/settings/presentation/pages/language_page.dart';
 
 abstract class AppRoutePage {
   const AppRoutePage._();
@@ -58,6 +60,22 @@ final GoRouter appRouter = GoRouter(
           child: TemplatesPage(initialCategory: category),
         );
       },
+    ),
+    GoRoute(
+      path: SettingsPage.path,
+      name: SettingsPage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const SettingsPage(),
+      ),
+    ),
+    GoRoute(
+      path: LanguagePage.path,
+      name: LanguagePage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const LanguagePage(),
+      ),
     ),
   ],
 );

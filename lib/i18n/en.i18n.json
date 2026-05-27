@@ -85,7 +85,13 @@
     "myVideo": "My Video",
     "liked": "Liked",
     "noVideos": "No videos yet",
-    "noVideosDesc": "Create your first AI video and it will appear here."
+    "noVideosDesc": "Create your first AI video and it will appear here.",
+    "deleteTitle": "Delete this video?",
+    "deleteDesc": "Are you sure you want to delete this video? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "generating": "Generating...",
+    "imageGeneration": "Image Generation"
   },
   "home_new": {
     "welcomeToAppName": "Welcome To Video AI",
@@ -98,5 +104,33 @@
     "title": "Templates",
     "all": "All",
     "pro": "PRO"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "contactUs": "Contact Us",
+    "version": "Version",
+    "myCredits": "My Credits",
+    "rateApp": "Rate App",
+    "userCode": "User Code",
+    "copied": "Copied to clipboard!",
+    "termsOfUse": "Terms of Use"
+  },
+  "language": {
+    "title": "Language",
+    "en": "English",
+    "ar": "Arabic",
+    "de": "German",
+    "es": "Spanish",
+    "fr": "French",
+    "hi": "Hindi",
+    "id": "Indonesian",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "pt": "Portuguese",
+    "vi": "Vietnamese",
+    "zh": "Chinese"
   }
 }

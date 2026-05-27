@@ -49,6 +49,8 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$vi profile = _Translations$profile$vi._(_root);
 	@override late final _Translations$home_new$vi home_new = _Translations$home_new$vi._(_root);
 	@override late final _Translations$templates$vi templates = _Translations$templates$vi._(_root);
+	@override late final _Translations$settings$vi settings = _Translations$settings$vi._(_root);
+	@override late final _Translations$language$vi language = _Translations$language$vi._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$vi extends Translations$profile$en {
 	@override String get liked => 'Đã thích';
 	@override String get noVideos => 'Chưa có video';
 	@override String get noVideosDesc => 'Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.';
+	@override String get deleteTitle => 'Xóa video này?';
+	@override String get deleteDesc => 'Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.';
+	@override String get cancel => 'Hủy';
+	@override String get delete => 'Xóa';
+	@override String get generating => 'Đang tạo...';
+	@override String get imageGeneration => 'Tạo hình ảnh';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$vi extends Translations$templates$en {
 	@override String get title => 'Mẫu';
 	@override String get all => 'Tất cả';
 	@override String get pro => 'PRO';
+}
+
+// Path: settings
+class _Translations$settings$vi extends Translations$settings$en {
+	_Translations$settings$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Cài đặt';
+	@override String get language => 'Ngôn ngữ';
+	@override String get termsOfService => 'Điều khoản dịch vụ';
+	@override String get privacyPolicy => 'Chính sách bảo mật';
+	@override String get contactUs => 'Liên hệ với chúng tôi';
+	@override String get version => 'Phiên bản';
+	@override String get myCredits => 'Điểm tín dụng';
+	@override String get rateApp => 'Đánh giá ứng dụng';
+	@override String get userCode => 'Mã người dùng';
+	@override String get copied => 'Đã sao chép vào bộ nhớ tạm!';
+	@override String get termsOfUse => 'Điều khoản sử dụng';
+}
+
+// Path: language
+class _Translations$language$vi extends Translations$language$en {
+	_Translations$language$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Ngôn ngữ';
+	@override String get en => 'Tiếng Anh';
+	@override String get ar => 'Tiếng Ả Rập';
+	@override String get de => 'Tiếng Đức';
+	@override String get es => 'Tiếng Tây Ban Nha';
+	@override String get fr => 'Tiếng Pháp';
+	@override String get hi => 'Tiếng Hindi';
+	@override String get id => 'Tiếng Indonesia';
+	@override String get ja => 'Tiếng Nhật';
+	@override String get ko => 'Tiếng Hàn';
+	@override String get pt => 'Tiếng Bồ Đào Nha';
+	@override String get vi => 'Tiếng Việt';
+	@override String get zh => 'Tiếng Trung';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsVi {
 			'profile.liked' => 'Đã thích',
 			'profile.noVideos' => 'Chưa có video',
 			'profile.noVideosDesc' => 'Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.',
+			'profile.deleteTitle' => 'Xóa video này?',
+			'profile.deleteDesc' => 'Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.',
+			'profile.cancel' => 'Hủy',
+			'profile.delete' => 'Xóa',
+			'profile.generating' => 'Đang tạo...',
+			'profile.imageGeneration' => 'Tạo hình ảnh',
 			'home_new.welcomeToAppName' => 'Chào mừng đến với Video AI',
 			'home_new.imageToVideo' => 'Ảnh sang\nVideo',
 			'home_new.transitionVideo' => 'Video\nChuyển cảnh',
@@ -339,6 +395,30 @@ extension on TranslationsVi {
 			'templates.title' => 'Mẫu',
 			'templates.all' => 'Tất cả',
 			'templates.pro' => 'PRO',
+			'settings.title' => 'Cài đặt',
+			'settings.language' => 'Ngôn ngữ',
+			'settings.termsOfService' => 'Điều khoản dịch vụ',
+			'settings.privacyPolicy' => 'Chính sách bảo mật',
+			'settings.contactUs' => 'Liên hệ với chúng tôi',
+			'settings.version' => 'Phiên bản',
+			'settings.myCredits' => 'Điểm tín dụng',
+			'settings.rateApp' => 'Đánh giá ứng dụng',
+			'settings.userCode' => 'Mã người dùng',
+			'settings.copied' => 'Đã sao chép vào bộ nhớ tạm!',
+			'settings.termsOfUse' => 'Điều khoản sử dụng',
+			'language.title' => 'Ngôn ngữ',
+			'language.en' => 'Tiếng Anh',
+			'language.ar' => 'Tiếng Ả Rập',
+			'language.de' => 'Tiếng Đức',
+			'language.es' => 'Tiếng Tây Ban Nha',
+			'language.fr' => 'Tiếng Pháp',
+			'language.hi' => 'Tiếng Hindi',
+			'language.id' => 'Tiếng Indonesia',
+			'language.ja' => 'Tiếng Nhật',
+			'language.ko' => 'Tiếng Hàn',
+			'language.pt' => 'Tiếng Bồ Đào Nha',
+			'language.vi' => 'Tiếng Việt',
+			'language.zh' => 'Tiếng Trung',
 			_ => null,
 		};
 	}

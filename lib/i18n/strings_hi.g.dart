@@ -49,6 +49,8 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$profile$hi profile = _Translations$profile$hi._(_root);
 	@override late final _Translations$home_new$hi home_new = _Translations$home_new$hi._(_root);
 	@override late final _Translations$templates$hi templates = _Translations$templates$hi._(_root);
+	@override late final _Translations$settings$hi settings = _Translations$settings$hi._(_root);
+	@override late final _Translations$language$hi language = _Translations$language$hi._(_root);
 }
 
 // Path: common
@@ -173,6 +175,12 @@ class _Translations$profile$hi extends Translations$profile$en {
 	@override String get liked => 'पसंद किया गया';
 	@override String get noVideos => 'अभी कोई वीडियो नहीं';
 	@override String get noVideosDesc => 'अपना पहला एआई वीडियो बनाएं और यह यहां दिखाई देगा।';
+	@override String get deleteTitle => 'यह वीडियो हटाएं?';
+	@override String get deleteDesc => 'क्या आप वाकई इस वीडियो को हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।';
+	@override String get cancel => 'रद्द करें';
+	@override String get delete => 'हटाएं';
+	@override String get generating => 'बनाया जा रहा है...';
+	@override String get imageGeneration => 'छवि निर्माण';
 }
 
 // Path: home_new
@@ -199,6 +207,48 @@ class _Translations$templates$hi extends Translations$templates$en {
 	@override String get title => 'टेम्पलेट्स';
 	@override String get all => 'सभी';
 	@override String get pro => 'प्रो';
+}
+
+// Path: settings
+class _Translations$settings$hi extends Translations$settings$en {
+	_Translations$settings$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'सेटिंग्स';
+	@override String get language => 'भाषा';
+	@override String get termsOfService => 'सेवा की शर्तें';
+	@override String get privacyPolicy => 'गोपनीयता नीति';
+	@override String get contactUs => 'हमसे संपर्क करें';
+	@override String get version => 'संस्करण';
+	@override String get myCredits => 'मेरे क्रेडिट';
+	@override String get rateApp => 'ऐप रेट करें';
+	@override String get userCode => 'उपयोगकर्ता कोड';
+	@override String get copied => 'क्लिपबोर्ड पर कॉपी किया गया!';
+	@override String get termsOfUse => 'उपयोग की शर्तें';
+}
+
+// Path: language
+class _Translations$language$hi extends Translations$language$en {
+	_Translations$language$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'भाषा';
+	@override String get en => 'अंग्रेज़ी';
+	@override String get ar => 'अरबी';
+	@override String get de => 'जर्मन';
+	@override String get es => 'स्पैनिश';
+	@override String get fr => 'फ़्रेंच';
+	@override String get hi => 'हिन्दी';
+	@override String get id => 'इंडोनेशियाई';
+	@override String get ja => 'जापानी';
+	@override String get ko => 'कोरियाई';
+	@override String get pt => 'पुर्तगाली';
+	@override String get vi => 'वियतनामी';
+	@override String get zh => 'चीनी';
 }
 
 // Path: onboarding.page1
@@ -331,6 +381,12 @@ extension on TranslationsHi {
 			'profile.liked' => 'पसंद किया गया',
 			'profile.noVideos' => 'अभी कोई वीडियो नहीं',
 			'profile.noVideosDesc' => 'अपना पहला एआई वीडियो बनाएं और यह यहां दिखाई देगा।',
+			'profile.deleteTitle' => 'यह वीडियो हटाएं?',
+			'profile.deleteDesc' => 'क्या आप वाकई इस वीडियो को हटाना चाहते हैं? यह कार्रवाई पूर्ववत नहीं की जा सकती।',
+			'profile.cancel' => 'रद्द करें',
+			'profile.delete' => 'हटाएं',
+			'profile.generating' => 'बनाया जा रहा है...',
+			'profile.imageGeneration' => 'छवि निर्माण',
 			'home_new.welcomeToAppName' => 'वीडियो एआई में आपका स्वागत है',
 			'home_new.imageToVideo' => 'छवि से\nवीडियो',
 			'home_new.transitionVideo' => 'संक्रमण\nवीडियो',
@@ -339,6 +395,30 @@ extension on TranslationsHi {
 			'templates.title' => 'टेम्पलेट्स',
 			'templates.all' => 'सभी',
 			'templates.pro' => 'प्रो',
+			'settings.title' => 'सेटिंग्स',
+			'settings.language' => 'भाषा',
+			'settings.termsOfService' => 'सेवा की शर्तें',
+			'settings.privacyPolicy' => 'गोपनीयता नीति',
+			'settings.contactUs' => 'हमसे संपर्क करें',
+			'settings.version' => 'संस्करण',
+			'settings.myCredits' => 'मेरे क्रेडिट',
+			'settings.rateApp' => 'ऐप रेट करें',
+			'settings.userCode' => 'उपयोगकर्ता कोड',
+			'settings.copied' => 'क्लिपबोर्ड पर कॉपी किया गया!',
+			'settings.termsOfUse' => 'उपयोग की शर्तें',
+			'language.title' => 'भाषा',
+			'language.en' => 'अंग्रेज़ी',
+			'language.ar' => 'अरबी',
+			'language.de' => 'जर्मन',
+			'language.es' => 'स्पैनिश',
+			'language.fr' => 'फ़्रेंच',
+			'language.hi' => 'हिन्दी',
+			'language.id' => 'इंडोनेशियाई',
+			'language.ja' => 'जापानी',
+			'language.ko' => 'कोरियाई',
+			'language.pt' => 'पुर्तगाली',
+			'language.vi' => 'वियतनामी',
+			'language.zh' => 'चीनी',
 			_ => null,
 		};
 	}

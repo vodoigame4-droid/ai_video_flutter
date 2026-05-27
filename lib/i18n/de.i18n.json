@@ -85,7 +85,13 @@
     "myVideo": "Mein Video",
     "liked": "Gefällt mir",
     "noVideos": "Noch keine Videos",
-    "noVideosDesc": "Erstelle dein erstes KI-Video, und es wird hier angezeigt."
+    "noVideosDesc": "Erstelle dein erstes KI-Video, und es wird hier angezeigt.",
+    "deleteTitle": "Dieses Video löschen?",
+    "deleteDesc": "Sind Sie sicher, dass Sie dieses Video löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "generating": "Generieren...",
+    "imageGeneration": "Bildgenerierung"
   },
   "home_new": {
     "welcomeToAppName": "Willkommen bei Video AI",
@@ -98,5 +104,33 @@
     "title": "Vorlagen",
     "all": "Alle",
     "pro": "PRO"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "contactUs": "Kontaktieren Sie uns",
+    "version": "Version",
+    "myCredits": "Meine Credits",
+    "rateApp": "App bewerten",
+    "userCode": "Benutzercode",
+    "copied": "In die Zwischenablage kopiert!",
+    "termsOfUse": "Nutzungsbedingungen"
+  },
+  "language": {
+    "title": "Sprache",
+    "en": "Englisch",
+    "ar": "Arabisch",
+    "de": "Deutsch",
+    "es": "Spanisch",
+    "fr": "Französisch",
+    "hi": "Hindi",
+    "id": "Indonesisch",
+    "ja": "Japanisch",
+    "ko": "Koreanisch",
+    "pt": "Portugiesisch",
+    "vi": "Vietnamesisch",
+    "zh": "Chinesisch"
   }
 }

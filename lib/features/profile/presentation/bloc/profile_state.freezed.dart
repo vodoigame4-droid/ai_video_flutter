@@ -125,7 +125,7 @@ return ready(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( int subTabIndex,  Resource<List<String>> videosState)?  ready,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState)?  ready,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
@@ -148,7 +148,7 @@ return ready(_that.subTabIndex,_that.videosState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( int subTabIndex,  Resource<List<String>> videosState)  ready,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState)  ready,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
@@ -170,7 +170,7 @@ return ready(_that.subTabIndex,_that.videosState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( int subTabIndex,  Resource<List<String>> videosState)?  ready,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState)?  ready,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
@@ -255,7 +255,7 @@ class _Ready implements ProfileState {
   
 
  final  int subTabIndex;
- final  Resource<List<String>> videosState;
+ final  Resource<List<UserVideoEntity>> videosState;
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -287,11 +287,11 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $ProfileStateCopyWith<$Res
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- int subTabIndex, Resource<List<String>> videosState
+ int subTabIndex, Resource<List<UserVideoEntity>> videosState
 });
 
 
-$ResourceCopyWith<List<String>, $Res> get videosState;
+$ResourceCopyWith<List<UserVideoEntity>, $Res> get videosState;
 
 }
 /// @nodoc
@@ -308,7 +308,7 @@ class __$ReadyCopyWithImpl<$Res>
   return _then(_Ready(
 subTabIndex: null == subTabIndex ? _self.subTabIndex : subTabIndex // ignore: cast_nullable_to_non_nullable
 as int,videosState: null == videosState ? _self.videosState : videosState // ignore: cast_nullable_to_non_nullable
-as Resource<List<String>>,
+as Resource<List<UserVideoEntity>>,
   ));
 }
 
@@ -316,9 +316,9 @@ as Resource<List<String>>,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$ResourceCopyWith<List<String>, $Res> get videosState {
+$ResourceCopyWith<List<UserVideoEntity>, $Res> get videosState {
   
-  return $ResourceCopyWith<List<String>, $Res>(_self.videosState, (value) {
+  return $ResourceCopyWith<List<UserVideoEntity>, $Res>(_self.videosState, (value) {
     return _then(_self.copyWith(videosState: value));
   });
 }

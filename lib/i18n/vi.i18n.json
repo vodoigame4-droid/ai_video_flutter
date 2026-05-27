@@ -85,7 +85,13 @@
     "myVideo": "Video của tôi",
     "liked": "Đã thích",
     "noVideos": "Chưa có video",
-    "noVideosDesc": "Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây."
+    "noVideosDesc": "Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.",
+    "deleteTitle": "Xóa video này?",
+    "deleteDesc": "Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "generating": "Đang tạo...",
+    "imageGeneration": "Tạo hình ảnh"
   },
   "home_new": {
     "welcomeToAppName": "Chào mừng đến với Video AI",
@@ -98,5 +104,33 @@
     "title": "Mẫu",
     "all": "Tất cả",
     "pro": "PRO"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "language": "Ngôn ngữ",
+    "termsOfService": "Điều khoản dịch vụ",
+    "privacyPolicy": "Chính sách bảo mật",
+    "contactUs": "Liên hệ với chúng tôi",
+    "version": "Phiên bản",
+    "myCredits": "Điểm tín dụng",
+    "rateApp": "Đánh giá ứng dụng",
+    "userCode": "Mã người dùng",
+    "copied": "Đã sao chép vào bộ nhớ tạm!",
+    "termsOfUse": "Điều khoản sử dụng"
+  },
+  "language": {
+    "title": "Ngôn ngữ",
+    "en": "Tiếng Anh",
+    "ar": "Tiếng Ả Rập",
+    "de": "Tiếng Đức",
+    "es": "Tiếng Tây Ban Nha",
+    "fr": "Tiếng Pháp",
+    "hi": "Tiếng Hindi",
+    "id": "Tiếng Indonesia",
+    "ja": "Tiếng Nhật",
+    "ko": "Tiếng Hàn",
+    "pt": "Tiếng Bồ Đào Nha",
+    "vi": "Tiếng Việt",
+    "zh": "Tiếng Trung"
   }
 }
