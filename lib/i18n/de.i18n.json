@@ -93,5 +93,10 @@
     "transitionVideo": "Übergangs-\nvideo",
     "imageToDance": "Bild zu\nTanz",
     "unifiedVideo": "Einheitliches\nVideo"
+  },
+  "templates": {
+    "title": "Vorlagen",
+    "all": "Alle",
+    "pro": "PRO"
   }
 }

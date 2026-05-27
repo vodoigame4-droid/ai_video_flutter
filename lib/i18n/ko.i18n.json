@@ -93,5 +93,10 @@
     "transitionVideo": "트랜지션\n비디오",
     "imageToDance": "이미지를\n댄스로",
     "unifiedVideo": "통합\n비디오"
+  },
+  "templates": {
+    "title": "템플릿",
+    "all": "전체",
+    "pro": "프로"
   }
 }

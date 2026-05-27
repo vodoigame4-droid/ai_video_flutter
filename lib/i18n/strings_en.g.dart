@@ -49,6 +49,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$dashboard$en dashboard = Translations$dashboard$en.internal(_root);
 	late final Translations$profile$en profile = Translations$profile$en.internal(_root);
 	late final Translations$home_new$en home_new = Translations$home_new$en.internal(_root);
+	late final Translations$templates$en templates = Translations$templates$en.internal(_root);
 }
 
 // Path: common
@@ -293,6 +294,24 @@ class Translations$home_new$en {
 	String get unifiedVideo => 'Unified\nVideo';
 }
 
+// Path: templates
+class Translations$templates$en {
+	Translations$templates$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Templates'
+	String get title => 'Templates';
+
+	/// en: 'All'
+	String get all => 'All';
+
+	/// en: 'PRO'
+	String get pro => 'PRO';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -458,6 +477,9 @@ extension on Translations {
 			'home_new.transitionVideo' => 'Transition\nVideo',
 			'home_new.imageToDance' => 'Image to\nDance',
 			'home_new.unifiedVideo' => 'Unified\nVideo',
+			'templates.title' => 'Templates',
+			'templates.all' => 'All',
+			'templates.pro' => 'PRO',
 			_ => null,
 		};
 	}

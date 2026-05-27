@@ -9,7 +9,7 @@ abstract class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: Colors.transparent,
       primaryColor: AppColors.primary,
       
       // Page transitions: Use Cupertino by default for a highly premium, smooth slide transition
@@ -122,6 +122,7 @@ abstract class AppTheme {
       extensions: [
         AppThemeExtension(
           primaryGradient: AppColors.primaryGradient,
+          borderGradient: AppColors.borderGradient,
           categoryActiveStyle: AppTextStyles.categoryActiveText,
           categoryInactiveStyle: AppTextStyles.categoryInactiveText,
           categoryActiveStyleSelected: AppTextStyles.categoryActiveTextSelected,
@@ -148,6 +149,7 @@ abstract class AppTheme {
 /// Custom theme extension for visual assets/styles specific to our App design.
 class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final LinearGradient primaryGradient;
+  final LinearGradient borderGradient;
   final TextStyle categoryActiveStyle;
   final TextStyle categoryInactiveStyle;
   final TextStyle categoryActiveStyleSelected;
@@ -168,6 +170,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
 
   const AppThemeExtension({
     required this.primaryGradient,
+    required this.borderGradient,
     required this.categoryActiveStyle,
     required this.categoryInactiveStyle,
     required this.categoryActiveStyleSelected,
@@ -190,6 +193,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   @override
   AppThemeExtension copyWith({
     LinearGradient? primaryGradient,
+    LinearGradient? borderGradient,
     TextStyle? categoryActiveStyle,
     TextStyle? categoryInactiveStyle,
     TextStyle? categoryActiveStyleSelected,
@@ -210,6 +214,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   }) {
     return AppThemeExtension(
       primaryGradient: primaryGradient ?? this.primaryGradient,
+      borderGradient: borderGradient ?? this.borderGradient,
       categoryActiveStyle: categoryActiveStyle ?? this.categoryActiveStyle,
       categoryInactiveStyle: categoryInactiveStyle ?? this.categoryInactiveStyle,
       categoryActiveStyleSelected: categoryActiveStyleSelected ?? this.categoryActiveStyleSelected,
@@ -235,6 +240,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     if (other is! AppThemeExtension) return this;
     return AppThemeExtension(
       primaryGradient: LinearGradient.lerp(primaryGradient, other.primaryGradient, t)!,
+      borderGradient: LinearGradient.lerp(borderGradient, other.borderGradient, t)!,
       categoryActiveStyle: TextStyle.lerp(categoryActiveStyle, other.categoryActiveStyle, t)!,
       categoryInactiveStyle: TextStyle.lerp(categoryInactiveStyle, other.categoryInactiveStyle, t)!,
       categoryActiveStyleSelected: TextStyle.lerp(categoryActiveStyleSelected, other.categoryActiveStyleSelected, t)!,

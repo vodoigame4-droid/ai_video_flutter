@@ -48,6 +48,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$ar dashboard = _Translations$dashboard$ar._(_root);
 	@override late final _Translations$profile$ar profile = _Translations$profile$ar._(_root);
 	@override late final _Translations$home_new$ar home_new = _Translations$home_new$ar._(_root);
+	@override late final _Translations$templates$ar templates = _Translations$templates$ar._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$ar extends Translations$home_new$en {
 	@override String get unifiedVideo => 'فيديو\nموحد';
 }
 
+// Path: templates
+class _Translations$templates$ar extends Translations$templates$en {
+	_Translations$templates$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'القوالب';
+	@override String get all => 'الكل';
+	@override String get pro => 'برو';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsAr {
 			'home_new.transitionVideo' => 'فيديو\nانتقالي',
 			'home_new.imageToDance' => 'صورة إلى\nرقص',
 			'home_new.unifiedVideo' => 'فيديو\nموحد',
+			'templates.title' => 'القوالب',
+			'templates.all' => 'الكل',
+			'templates.pro' => 'برو',
 			_ => null,
 		};
 	}

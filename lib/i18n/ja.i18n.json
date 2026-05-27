@@ -93,5 +93,10 @@
     "transitionVideo": "トランジション\n動画",
     "imageToDance": "画像から\nダンス",
     "unifiedVideo": "統合\n動画"
+  },
+  "templates": {
+    "title": "テンプレート",
+    "all": "すべて",
+    "pro": "プロ"
   }
 }

@@ -48,6 +48,7 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$de dashboard = _Translations$dashboard$de._(_root);
 	@override late final _Translations$profile$de profile = _Translations$profile$de._(_root);
 	@override late final _Translations$home_new$de home_new = _Translations$home_new$de._(_root);
+	@override late final _Translations$templates$de templates = _Translations$templates$de._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$de extends Translations$home_new$en {
 	@override String get unifiedVideo => 'Einheitliches\nVideo';
 }
 
+// Path: templates
+class _Translations$templates$de extends Translations$templates$en {
+	_Translations$templates$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Vorlagen';
+	@override String get all => 'Alle';
+	@override String get pro => 'PRO';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsDe {
 			'home_new.transitionVideo' => 'Übergangs-\nvideo',
 			'home_new.imageToDance' => 'Bild zu\nTanz',
 			'home_new.unifiedVideo' => 'Einheitliches\nVideo',
+			'templates.title' => 'Vorlagen',
+			'templates.all' => 'Alle',
+			'templates.pro' => 'PRO',
 			_ => null,
 		};
 	}

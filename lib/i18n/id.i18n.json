@@ -93,5 +93,10 @@
     "transitionVideo": "Video\nTransisi",
     "imageToDance": "Gambar ke\nTarian",
     "unifiedVideo": "Video\nTerpadu"
+  },
+  "templates": {
+    "title": "Templat",
+    "all": "Semua",
+    "pro": "PRO"
   }
 }

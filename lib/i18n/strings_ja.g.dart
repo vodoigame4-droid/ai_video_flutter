@@ -48,6 +48,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$ja dashboard = _Translations$dashboard$ja._(_root);
 	@override late final _Translations$profile$ja profile = _Translations$profile$ja._(_root);
 	@override late final _Translations$home_new$ja home_new = _Translations$home_new$ja._(_root);
+	@override late final _Translations$templates$ja templates = _Translations$templates$ja._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$ja extends Translations$home_new$en {
 	@override String get unifiedVideo => '統合\n動画';
 }
 
+// Path: templates
+class _Translations$templates$ja extends Translations$templates$en {
+	_Translations$templates$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'テンプレート';
+	@override String get all => 'すべて';
+	@override String get pro => 'プロ';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsJa {
 			'home_new.transitionVideo' => 'トランジション\n動画',
 			'home_new.imageToDance' => '画像から\nダンス',
 			'home_new.unifiedVideo' => '統合\n動画',
+			'templates.title' => 'テンプレート',
+			'templates.all' => 'すべて',
+			'templates.pro' => 'プロ',
 			_ => null,
 		};
 	}

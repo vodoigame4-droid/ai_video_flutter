@@ -93,5 +93,10 @@
     "transitionVideo": "转场\n视频",
     "imageToDance": "图片\n舞蹈",
     "unifiedVideo": "融合\n视频"
+  },
+  "templates": {
+    "title": "模板",
+    "all": "全部",
+    "pro": "专业版"
   }
 }

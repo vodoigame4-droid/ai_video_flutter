@@ -48,6 +48,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$hi dashboard = _Translations$dashboard$hi._(_root);
 	@override late final _Translations$profile$hi profile = _Translations$profile$hi._(_root);
 	@override late final _Translations$home_new$hi home_new = _Translations$home_new$hi._(_root);
+	@override late final _Translations$templates$hi templates = _Translations$templates$hi._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$hi extends Translations$home_new$en {
 	@override String get unifiedVideo => 'एकीकृत\nवीडियो';
 }
 
+// Path: templates
+class _Translations$templates$hi extends Translations$templates$en {
+	_Translations$templates$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'टेम्पलेट्स';
+	@override String get all => 'सभी';
+	@override String get pro => 'प्रो';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsHi {
 			'home_new.transitionVideo' => 'संक्रमण\nवीडियो',
 			'home_new.imageToDance' => 'छवि से\nनृत्य',
 			'home_new.unifiedVideo' => 'एकीकृत\nवीडियो',
+			'templates.title' => 'टेम्पलेट्स',
+			'templates.all' => 'सभी',
+			'templates.pro' => 'प्रो',
 			_ => null,
 		};
 	}

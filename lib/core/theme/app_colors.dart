@@ -24,4 +24,11 @@ abstract class AppColors {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
+
+  static const LinearGradient borderGradient = LinearGradient(
+    colors: [secondary, primary],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
+

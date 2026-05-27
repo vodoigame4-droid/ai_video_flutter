@@ -93,5 +93,10 @@
     "transitionVideo": "فيديو\nانتقالي",
     "imageToDance": "صورة إلى\nرقص",
     "unifiedVideo": "فيديو\nموحد"
+  },
+  "templates": {
+    "title": "القوالب",
+    "all": "الكل",
+    "pro": "برو"
   }
 }

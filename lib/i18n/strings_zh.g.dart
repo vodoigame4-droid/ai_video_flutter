@@ -48,6 +48,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$zh dashboard = _Translations$dashboard$zh._(_root);
 	@override late final _Translations$profile$zh profile = _Translations$profile$zh._(_root);
 	@override late final _Translations$home_new$zh home_new = _Translations$home_new$zh._(_root);
+	@override late final _Translations$templates$zh templates = _Translations$templates$zh._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$zh extends Translations$home_new$en {
 	@override String get unifiedVideo => '融合\n视频';
 }
 
+// Path: templates
+class _Translations$templates$zh extends Translations$templates$en {
+	_Translations$templates$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '模板';
+	@override String get all => '全部';
+	@override String get pro => '专业版';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsZh {
 			'home_new.transitionVideo' => '转场\n视频',
 			'home_new.imageToDance' => '图片\n舞蹈',
 			'home_new.unifiedVideo' => '融合\n视频',
+			'templates.title' => '模板',
+			'templates.all' => '全部',
+			'templates.pro' => '专业版',
 			_ => null,
 		};
 	}

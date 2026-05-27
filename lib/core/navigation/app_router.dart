@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../features/templates/presentation/pages/templates_page.dart';
 
 abstract class AppRoutePage {
   const AppRoutePage._();
@@ -46,6 +47,17 @@ final GoRouter appRouter = GoRouter(
         state: state,
         child: const DashboardPage(),
       ),
+    ),
+    GoRoute(
+      path: TemplatesPage.path,
+      name: TemplatesPage.name,
+      pageBuilder: (context, state) {
+        final category = state.uri.queryParameters['category'] ?? 'All';
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: TemplatesPage(initialCategory: category),
+        );
+      },
     ),
   ],
 );

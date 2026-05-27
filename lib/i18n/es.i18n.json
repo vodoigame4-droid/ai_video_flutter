@@ -93,5 +93,10 @@
     "transitionVideo": "Video de\nTransición",
     "imageToDance": "Imagen a\nBaile",
     "unifiedVideo": "Video\nUnificado"
+  },
+  "templates": {
+    "title": "Plantillas",
+    "all": "Todo",
+    "pro": "PRO"
   }
 }

@@ -48,6 +48,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$vi dashboard = _Translations$dashboard$vi._(_root);
 	@override late final _Translations$profile$vi profile = _Translations$profile$vi._(_root);
 	@override late final _Translations$home_new$vi home_new = _Translations$home_new$vi._(_root);
+	@override late final _Translations$templates$vi templates = _Translations$templates$vi._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$vi extends Translations$home_new$en {
 	@override String get unifiedVideo => 'Hợp nhất\nVideo';
 }
 
+// Path: templates
+class _Translations$templates$vi extends Translations$templates$en {
+	_Translations$templates$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Mẫu';
+	@override String get all => 'Tất cả';
+	@override String get pro => 'PRO';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsVi {
 			'home_new.transitionVideo' => 'Video\nChuyển cảnh',
 			'home_new.imageToDance' => 'Ảnh sang\nNhảy múa',
 			'home_new.unifiedVideo' => 'Hợp nhất\nVideo',
+			'templates.title' => 'Mẫu',
+			'templates.all' => 'Tất cả',
+			'templates.pro' => 'PRO',
 			_ => null,
 		};
 	}

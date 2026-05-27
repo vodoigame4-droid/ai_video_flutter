@@ -11,6 +11,19 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/ic_home.svg
+  String get icHome => 'assets/icons/ic_home.svg';
+
+  /// File path: assets/icons/profile.svg
+  String get profile => 'assets/icons/profile.svg';
+
+  /// List of all assets
+  List<String> get values => [icHome, profile];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -19,6 +32,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/arrow_right.svg
   String get arrowRight => 'assets/images/arrow_right.svg';
+
+  /// File path: assets/images/bg_app.png
+  AssetGenImage get bgApp => const AssetGenImage('assets/images/bg_app.png');
 
   /// File path: assets/images/bg_splash.png
   AssetGenImage get bgSplash => const AssetGenImage('assets/images/bg_splash.png');
@@ -75,6 +91,7 @@ class $AssetsImagesGen {
   List<dynamic> get values => [
     aiNavIcon,
     arrowRight,
+    bgApp,
     bgSplash,
     card1,
     card2,
@@ -98,6 +115,7 @@ class $AssetsImagesGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 

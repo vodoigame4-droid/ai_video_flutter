@@ -48,6 +48,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$id dashboard = _Translations$dashboard$id._(_root);
 	@override late final _Translations$profile$id profile = _Translations$profile$id._(_root);
 	@override late final _Translations$home_new$id home_new = _Translations$home_new$id._(_root);
+	@override late final _Translations$templates$id templates = _Translations$templates$id._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$id extends Translations$home_new$en {
 	@override String get unifiedVideo => 'Video\nTerpadu';
 }
 
+// Path: templates
+class _Translations$templates$id extends Translations$templates$en {
+	_Translations$templates$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Templat';
+	@override String get all => 'Semua';
+	@override String get pro => 'PRO';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsId {
 			'home_new.transitionVideo' => 'Video\nTransisi',
 			'home_new.imageToDance' => 'Gambar ke\nTarian',
 			'home_new.unifiedVideo' => 'Video\nTerpadu',
+			'templates.title' => 'Templat',
+			'templates.all' => 'Semua',
+			'templates.pro' => 'PRO',
 			_ => null,
 		};
 	}

@@ -93,5 +93,10 @@
     "transitionVideo": "संक्रमण\nवीडियो",
     "imageToDance": "छवि से\nनृत्य",
     "unifiedVideo": "एकीकृत\nवीडियो"
+  },
+  "templates": {
+    "title": "टेम्पलेट्स",
+    "all": "सभी",
+    "pro": "प्रो"
   }
 }

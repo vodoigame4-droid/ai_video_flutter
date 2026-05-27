@@ -93,5 +93,10 @@
     "transitionVideo": "Video\nChuyển cảnh",
     "imageToDance": "Ảnh sang\nNhảy múa",
     "unifiedVideo": "Hợp nhất\nVideo"
+  },
+  "templates": {
+    "title": "Mẫu",
+    "all": "Tất cả",
+    "pro": "PRO"
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/injection/injection_container.dart';
 import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'gen/assets.gen.dart';
 import 'i18n/strings.g.dart';
 
 void main() async {
@@ -31,6 +32,18 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
             ],
             routerConfig: appRouter,
+            builder: (context, child) {
+              return Stack(
+                children: [
+                  Positioned.fill(
+                    child: Assets.images.bgApp.image(
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child ?? const SizedBox.shrink(),
+                ],
+              );
+            },
           );
         },
       ),

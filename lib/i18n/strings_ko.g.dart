@@ -48,6 +48,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$dashboard$ko dashboard = _Translations$dashboard$ko._(_root);
 	@override late final _Translations$profile$ko profile = _Translations$profile$ko._(_root);
 	@override late final _Translations$home_new$ko home_new = _Translations$home_new$ko._(_root);
+	@override late final _Translations$templates$ko templates = _Translations$templates$ko._(_root);
 }
 
 // Path: common
@@ -188,6 +189,18 @@ class _Translations$home_new$ko extends Translations$home_new$en {
 	@override String get unifiedVideo => '통합\n비디오';
 }
 
+// Path: templates
+class _Translations$templates$ko extends Translations$templates$en {
+	_Translations$templates$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '템플릿';
+	@override String get all => '전체';
+	@override String get pro => '프로';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -323,6 +336,9 @@ extension on TranslationsKo {
 			'home_new.transitionVideo' => '트랜지션\n비디오',
 			'home_new.imageToDance' => '이미지를\n댄스로',
 			'home_new.unifiedVideo' => '통합\n비디오',
+			'templates.title' => '템플릿',
+			'templates.all' => '전체',
+			'templates.pro' => '프로',
 			_ => null,
 		};
 	}
