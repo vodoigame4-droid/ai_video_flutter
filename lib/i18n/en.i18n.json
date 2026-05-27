@@ -71,5 +71,27 @@
       "subtitle": "Upload Your Photos",
       "button": "Continue"
     }
+  },
+  "dashboard": {
+    "home": "Home",
+    "user": "User",
+    "createVideo": "Create Video"
+  },
+  "profile": {
+    "title": "Profile",
+    "upgradeTitle": "Premium Upgrade",
+    "upgradeSubtitle": "Add Credits - No Watermark",
+    "goPremium": "Go Premium",
+    "myVideo": "My Video",
+    "liked": "Liked",
+    "noVideos": "No videos yet",
+    "noVideosDesc": "Create your first AI video and it will appear here."
+  },
+  "home_new": {
+    "welcomeToAppName": "Welcome To Video AI",
+    "imageToVideo": "Image to\nVideo",
+    "transitionVideo": "Transition\nVideo",
+    "imageToDance": "Image to\nDance",
+    "unifiedVideo": "Unified\nVideo"
   }
 }

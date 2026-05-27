@@ -45,6 +45,9 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$fr leave_dialog = _Translations$leave_dialog$fr._(_root);
 	@override late final _Translations$splash$fr splash = _Translations$splash$fr._(_root);
 	@override late final _Translations$onboarding$fr onboarding = _Translations$onboarding$fr._(_root);
+	@override late final _Translations$dashboard$fr dashboard = _Translations$dashboard$fr._(_root);
+	@override late final _Translations$profile$fr profile = _Translations$profile$fr._(_root);
+	@override late final _Translations$home_new$fr home_new = _Translations$home_new$fr._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$fr extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$fr page3 = _Translations$onboarding$page3$fr._(_root);
 	@override late final _Translations$onboarding$page4$fr page4 = _Translations$onboarding$page4$fr._(_root);
 	@override late final _Translations$onboarding$page5$fr page5 = _Translations$onboarding$page5$fr._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$fr extends Translations$dashboard$en {
+	_Translations$dashboard$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'Accueil';
+	@override String get user => 'Profil';
+	@override String get createVideo => 'Créer Vidéo';
+}
+
+// Path: profile
+class _Translations$profile$fr extends Translations$profile$en {
+	_Translations$profile$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Profil';
+	@override String get upgradeTitle => 'Mise à niveau Premium';
+	@override String get upgradeSubtitle => 'Ajouter des crédits - Sans filigrane';
+	@override String get goPremium => 'Passer Premium';
+	@override String get myVideo => 'Ma Vidéo';
+	@override String get liked => 'Aimé';
+	@override String get noVideos => 'Pas encore de vidéos';
+	@override String get noVideosDesc => 'Créez votre première vidéo IA et elle apparaîtra ici.';
+}
+
+// Path: home_new
+class _Translations$home_new$fr extends Translations$home_new$en {
+	_Translations$home_new$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => 'Bienvenue sur Video AI';
+	@override String get imageToVideo => 'Image en\nVidéo';
+	@override String get transitionVideo => 'Transition\nVidéo';
+	@override String get imageToDance => 'Image en\nDanse';
+	@override String get unifiedVideo => 'Vidéo\nUnifiée';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsFr {
 			'onboarding.page5.title' => 'Fusion de vidéos',
 			'onboarding.page5.subtitle' => 'Téléchargez vos photos',
 			'onboarding.page5.button' => 'Continuer',
+			'dashboard.home' => 'Accueil',
+			'dashboard.user' => 'Profil',
+			'dashboard.createVideo' => 'Créer Vidéo',
+			'profile.title' => 'Profil',
+			'profile.upgradeTitle' => 'Mise à niveau Premium',
+			'profile.upgradeSubtitle' => 'Ajouter des crédits - Sans filigrane',
+			'profile.goPremium' => 'Passer Premium',
+			'profile.myVideo' => 'Ma Vidéo',
+			'profile.liked' => 'Aimé',
+			'profile.noVideos' => 'Pas encore de vidéos',
+			'profile.noVideosDesc' => 'Créez votre première vidéo IA et elle apparaîtra ici.',
+			'home_new.welcomeToAppName' => 'Bienvenue sur Video AI',
+			'home_new.imageToVideo' => 'Image en\nVidéo',
+			'home_new.transitionVideo' => 'Transition\nVidéo',
+			'home_new.imageToDance' => 'Image en\nDanse',
+			'home_new.unifiedVideo' => 'Vidéo\nUnifiée',
 			_ => null,
 		};
 	}

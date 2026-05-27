@@ -45,6 +45,9 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$hi leave_dialog = _Translations$leave_dialog$hi._(_root);
 	@override late final _Translations$splash$hi splash = _Translations$splash$hi._(_root);
 	@override late final _Translations$onboarding$hi onboarding = _Translations$onboarding$hi._(_root);
+	@override late final _Translations$dashboard$hi dashboard = _Translations$dashboard$hi._(_root);
+	@override late final _Translations$profile$hi profile = _Translations$profile$hi._(_root);
+	@override late final _Translations$home_new$hi home_new = _Translations$home_new$hi._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$hi extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$hi page3 = _Translations$onboarding$page3$hi._(_root);
 	@override late final _Translations$onboarding$page4$hi page4 = _Translations$onboarding$page4$hi._(_root);
 	@override late final _Translations$onboarding$page5$hi page5 = _Translations$onboarding$page5$hi._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$hi extends Translations$dashboard$en {
+	_Translations$dashboard$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'होम';
+	@override String get user => 'प्रोफाइल';
+	@override String get createVideo => 'वीडियो बनाएं';
+}
+
+// Path: profile
+class _Translations$profile$hi extends Translations$profile$en {
+	_Translations$profile$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'प्रोफ़ाइल';
+	@override String get upgradeTitle => 'प्रीमियम अपग्रेड';
+	@override String get upgradeSubtitle => 'क्रेडिट जोड़ें - कोई वॉटरमार्क नहीं';
+	@override String get goPremium => 'प्रीमियम बनें';
+	@override String get myVideo => 'मेरा वीडियो';
+	@override String get liked => 'पसंद किया गया';
+	@override String get noVideos => 'अभी कोई वीडियो नहीं';
+	@override String get noVideosDesc => 'अपना पहला एआई वीडियो बनाएं और यह यहां दिखाई देगा।';
+}
+
+// Path: home_new
+class _Translations$home_new$hi extends Translations$home_new$en {
+	_Translations$home_new$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => 'वीडियो एआई में आपका स्वागत है';
+	@override String get imageToVideo => 'छवि से\nवीडियो';
+	@override String get transitionVideo => 'संक्रमण\nवीडियो';
+	@override String get imageToDance => 'छवि से\nनृत्य';
+	@override String get unifiedVideo => 'एकीकृत\nवीडियो';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsHi {
 			'onboarding.page5.title' => 'वीडियो संलयन',
 			'onboarding.page5.subtitle' => 'अपनी तस्वीरें अपलोड करें',
 			'onboarding.page5.button' => 'जारी रखें',
+			'dashboard.home' => 'होम',
+			'dashboard.user' => 'प्रोफाइल',
+			'dashboard.createVideo' => 'वीडियो बनाएं',
+			'profile.title' => 'प्रोफ़ाइल',
+			'profile.upgradeTitle' => 'प्रीमियम अपग्रेड',
+			'profile.upgradeSubtitle' => 'क्रेडिट जोड़ें - कोई वॉटरमार्क नहीं',
+			'profile.goPremium' => 'प्रीमियम बनें',
+			'profile.myVideo' => 'मेरा वीडियो',
+			'profile.liked' => 'पसंद किया गया',
+			'profile.noVideos' => 'अभी कोई वीडियो नहीं',
+			'profile.noVideosDesc' => 'अपना पहला एआई वीडियो बनाएं और यह यहां दिखाई देगा।',
+			'home_new.welcomeToAppName' => 'वीडियो एआई में आपका स्वागत है',
+			'home_new.imageToVideo' => 'छवि से\nवीडियो',
+			'home_new.transitionVideo' => 'संक्रमण\nवीडियो',
+			'home_new.imageToDance' => 'छवि से\nनृत्य',
+			'home_new.unifiedVideo' => 'एकीकृत\nवीडियो',
 			_ => null,
 		};
 	}

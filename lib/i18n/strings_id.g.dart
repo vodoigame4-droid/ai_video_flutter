@@ -45,6 +45,9 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$id leave_dialog = _Translations$leave_dialog$id._(_root);
 	@override late final _Translations$splash$id splash = _Translations$splash$id._(_root);
 	@override late final _Translations$onboarding$id onboarding = _Translations$onboarding$id._(_root);
+	@override late final _Translations$dashboard$id dashboard = _Translations$dashboard$id._(_root);
+	@override late final _Translations$profile$id profile = _Translations$profile$id._(_root);
+	@override late final _Translations$home_new$id home_new = _Translations$home_new$id._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$id extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$id page3 = _Translations$onboarding$page3$id._(_root);
 	@override late final _Translations$onboarding$page4$id page4 = _Translations$onboarding$page4$id._(_root);
 	@override late final _Translations$onboarding$page5$id page5 = _Translations$onboarding$page5$id._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$id extends Translations$dashboard$en {
+	_Translations$dashboard$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'Beranda';
+	@override String get user => 'Saya';
+	@override String get createVideo => 'Buat Video';
+}
+
+// Path: profile
+class _Translations$profile$id extends Translations$profile$en {
+	_Translations$profile$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Profil';
+	@override String get upgradeTitle => 'Upgrade Premium';
+	@override String get upgradeSubtitle => 'Tambah Kredit - Tanpa Watermark';
+	@override String get goPremium => 'Go Premium';
+	@override String get myVideo => 'Video Saya';
+	@override String get liked => 'Disukai';
+	@override String get noVideos => 'Belum ada video';
+	@override String get noVideosDesc => 'Buat video AI pertama Anda dan itu akan muncul di sini.';
+}
+
+// Path: home_new
+class _Translations$home_new$id extends Translations$home_new$en {
+	_Translations$home_new$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => 'Selamat Datang di Video AI';
+	@override String get imageToVideo => 'Gambar ke\nVideo';
+	@override String get transitionVideo => 'Video\nTransisi';
+	@override String get imageToDance => 'Gambar ke\nTarian';
+	@override String get unifiedVideo => 'Video\nTerpadu';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsId {
 			'onboarding.page5.title' => 'Fusi Video',
 			'onboarding.page5.subtitle' => 'Unggah Foto Anda',
 			'onboarding.page5.button' => 'Lanjutkan',
+			'dashboard.home' => 'Beranda',
+			'dashboard.user' => 'Saya',
+			'dashboard.createVideo' => 'Buat Video',
+			'profile.title' => 'Profil',
+			'profile.upgradeTitle' => 'Upgrade Premium',
+			'profile.upgradeSubtitle' => 'Tambah Kredit - Tanpa Watermark',
+			'profile.goPremium' => 'Go Premium',
+			'profile.myVideo' => 'Video Saya',
+			'profile.liked' => 'Disukai',
+			'profile.noVideos' => 'Belum ada video',
+			'profile.noVideosDesc' => 'Buat video AI pertama Anda dan itu akan muncul di sini.',
+			'home_new.welcomeToAppName' => 'Selamat Datang di Video AI',
+			'home_new.imageToVideo' => 'Gambar ke\nVideo',
+			'home_new.transitionVideo' => 'Video\nTransisi',
+			'home_new.imageToDance' => 'Gambar ke\nTarian',
+			'home_new.unifiedVideo' => 'Video\nTerpadu',
 			_ => null,
 		};
 	}

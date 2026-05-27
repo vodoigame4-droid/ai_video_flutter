@@ -71,5 +71,27 @@
       "subtitle": "تحميل صورك",
       "button": "متابعة"
     }
+  },
+  "dashboard": {
+    "home": "الرئيسية",
+    "user": "حسابي",
+    "createVideo": "إنشاء فيديو"
+  },
+  "profile": {
+    "title": "الحساب الشخصي",
+    "upgradeTitle": "الترقية للمميز",
+    "upgradeSubtitle": "إضافة رصيد - بدون علامة مائية",
+    "goPremium": "اشترك في المميز",
+    "myVideo": "فيديوهاتي",
+    "liked": "أعجبني",
+    "noVideos": "لا توجد فيديوهات بعد",
+    "noVideosDesc": "أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا."
+  },
+  "home_new": {
+    "welcomeToAppName": "مرحبًا بك في فيديو ذكاء اصطناعي",
+    "imageToVideo": "صورة إلى\nفيديو",
+    "transitionVideo": "فيديو\nانتقالي",
+    "imageToDance": "صورة إلى\nرقص",
+    "unifiedVideo": "فيديو\nموحد"
   }
 }

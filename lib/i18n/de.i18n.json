@@ -71,5 +71,27 @@
       "subtitle": "Deine Fotos hochladen",
       "button": "Weiter"
     }
+  },
+  "dashboard": {
+    "home": "Startseite",
+    "user": "Profil",
+    "createVideo": "Video erstellen"
+  },
+  "profile": {
+    "title": "Profil",
+    "upgradeTitle": "Premium-Upgrade",
+    "upgradeSubtitle": "Guthaben hinzufügen - Kein Wasserzeichen",
+    "goPremium": "Premium holen",
+    "myVideo": "Mein Video",
+    "liked": "Gefällt mir",
+    "noVideos": "Noch keine Videos",
+    "noVideosDesc": "Erstelle dein erstes KI-Video, und es wird hier angezeigt."
+  },
+  "home_new": {
+    "welcomeToAppName": "Willkommen bei Video AI",
+    "imageToVideo": "Bild zu\nVideo",
+    "transitionVideo": "Übergangs-\nvideo",
+    "imageToDance": "Bild zu\nTanz",
+    "unifiedVideo": "Einheitliches\nVideo"
   }
 }

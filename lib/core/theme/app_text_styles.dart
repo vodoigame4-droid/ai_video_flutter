@@ -41,6 +41,24 @@ abstract class AppTextStyles {
     color: AppColors.white,
   );
 
+  static final TextStyle navLabelActive = GoogleFonts.inter(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w600, // Semi bold
+    color: AppColors.white,
+  );
+
+  static final TextStyle navLabelInactive = GoogleFonts.inter(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w600,
+    color: AppColors.activeTab, // Maps to #979797
+  );
+
+  static final TextStyle navLabelCreate = GoogleFonts.inter(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w600,
+    color: AppColors.white,
+  );
+
   static final TextStyle sectionTitle = GoogleFonts.plusJakartaSans(
     fontSize: 18.0,
     fontWeight: FontWeight.bold,

@@ -71,5 +71,27 @@
       "subtitle": "अपनी तस्वीरें अपलोड करें",
       "button": "जारी रखें"
     }
+  },
+  "dashboard": {
+    "home": "होम",
+    "user": "प्रोफाइल",
+    "createVideo": "वीडियो बनाएं"
+  },
+  "profile": {
+    "title": "प्रोफ़ाइल",
+    "upgradeTitle": "प्रीमियम अपग्रेड",
+    "upgradeSubtitle": "क्रेडिट जोड़ें - कोई वॉटरमार्क नहीं",
+    "goPremium": "प्रीमियम बनें",
+    "myVideo": "मेरा वीडियो",
+    "liked": "पसंद किया गया",
+    "noVideos": "अभी कोई वीडियो नहीं",
+    "noVideosDesc": "अपना पहला एआई वीडियो बनाएं और यह यहां दिखाई देगा।"
+  },
+  "home_new": {
+    "welcomeToAppName": "वीडियो एआई में आपका स्वागत है",
+    "imageToVideo": "छवि से\nवीडियो",
+    "transitionVideo": "संक्रमण\nवीडियो",
+    "imageToDance": "छवि से\nनृत्य",
+    "unifiedVideo": "एकीकृत\nवीडियो"
   }
 }

@@ -71,5 +71,27 @@
       "subtitle": "Téléchargez vos photos",
       "button": "Continuer"
     }
+  },
+  "dashboard": {
+    "home": "Accueil",
+    "user": "Profil",
+    "createVideo": "Créer Vidéo"
+  },
+  "profile": {
+    "title": "Profil",
+    "upgradeTitle": "Mise à niveau Premium",
+    "upgradeSubtitle": "Ajouter des crédits - Sans filigrane",
+    "goPremium": "Passer Premium",
+    "myVideo": "Ma Vidéo",
+    "liked": "Aimé",
+    "noVideos": "Pas encore de vidéos",
+    "noVideosDesc": "Créez votre première vidéo IA et elle apparaîtra ici."
+  },
+  "home_new": {
+    "welcomeToAppName": "Bienvenue sur Video AI",
+    "imageToVideo": "Image en\nVidéo",
+    "transitionVideo": "Transition\nVidéo",
+    "imageToDance": "Image en\nDanse",
+    "unifiedVideo": "Vidéo\nUnifiée"
   }
 }

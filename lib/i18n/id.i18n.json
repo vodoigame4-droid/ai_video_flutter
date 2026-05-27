@@ -71,5 +71,27 @@
       "subtitle": "Unggah Foto Anda",
       "button": "Lanjutkan"
     }
+  },
+  "dashboard": {
+    "home": "Beranda",
+    "user": "Saya",
+    "createVideo": "Buat Video"
+  },
+  "profile": {
+    "title": "Profil",
+    "upgradeTitle": "Upgrade Premium",
+    "upgradeSubtitle": "Tambah Kredit - Tanpa Watermark",
+    "goPremium": "Go Premium",
+    "myVideo": "Video Saya",
+    "liked": "Disukai",
+    "noVideos": "Belum ada video",
+    "noVideosDesc": "Buat video AI pertama Anda dan itu akan muncul di sini."
+  },
+  "home_new": {
+    "welcomeToAppName": "Selamat Datang di Video AI",
+    "imageToVideo": "Gambar ke\nVideo",
+    "transitionVideo": "Video\nTransisi",
+    "imageToDance": "Gambar ke\nTarian",
+    "unifiedVideo": "Video\nTerpadu"
   }
 }

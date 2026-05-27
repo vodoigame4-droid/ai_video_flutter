@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
-import '../../../home/presentation/pages/home_page.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../bloc/onboarding_bloc.dart';
 import '../bloc/onboarding_event.dart';
 import '../bloc/onboarding_state.dart';
@@ -60,7 +60,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           state.mapOrNull(
             currentPage: (currentState) {
               if (currentState.isCompleted) {
-                HomePage.go(context);
+                DashboardPage.go(context);
                 return;
               }
               if (_pageController.hasClients &&

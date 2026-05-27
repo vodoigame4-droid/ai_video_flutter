@@ -45,6 +45,9 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$vi leave_dialog = _Translations$leave_dialog$vi._(_root);
 	@override late final _Translations$splash$vi splash = _Translations$splash$vi._(_root);
 	@override late final _Translations$onboarding$vi onboarding = _Translations$onboarding$vi._(_root);
+	@override late final _Translations$dashboard$vi dashboard = _Translations$dashboard$vi._(_root);
+	@override late final _Translations$profile$vi profile = _Translations$profile$vi._(_root);
+	@override late final _Translations$home_new$vi home_new = _Translations$home_new$vi._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$vi extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$vi page3 = _Translations$onboarding$page3$vi._(_root);
 	@override late final _Translations$onboarding$page4$vi page4 = _Translations$onboarding$page4$vi._(_root);
 	@override late final _Translations$onboarding$page5$vi page5 = _Translations$onboarding$page5$vi._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$vi extends Translations$dashboard$en {
+	_Translations$dashboard$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'Trang chủ';
+	@override String get user => 'Tôi';
+	@override String get createVideo => 'Tạo Video';
+}
+
+// Path: profile
+class _Translations$profile$vi extends Translations$profile$en {
+	_Translations$profile$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Hồ sơ';
+	@override String get upgradeTitle => 'Nâng cấp Premium';
+	@override String get upgradeSubtitle => 'Thêm Credits - Không đóng dấu';
+	@override String get goPremium => 'Lên Premium';
+	@override String get myVideo => 'Video của tôi';
+	@override String get liked => 'Đã thích';
+	@override String get noVideos => 'Chưa có video';
+	@override String get noVideosDesc => 'Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.';
+}
+
+// Path: home_new
+class _Translations$home_new$vi extends Translations$home_new$en {
+	_Translations$home_new$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => 'Chào mừng đến với Video AI';
+	@override String get imageToVideo => 'Ảnh sang\nVideo';
+	@override String get transitionVideo => 'Video\nChuyển cảnh';
+	@override String get imageToDance => 'Ảnh sang\nNhảy múa';
+	@override String get unifiedVideo => 'Hợp nhất\nVideo';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsVi {
 			'onboarding.page5.title' => 'Video Hợp nhất',
 			'onboarding.page5.subtitle' => 'Tải ảnh của bạn lên',
 			'onboarding.page5.button' => 'Tiếp tục',
+			'dashboard.home' => 'Trang chủ',
+			'dashboard.user' => 'Tôi',
+			'dashboard.createVideo' => 'Tạo Video',
+			'profile.title' => 'Hồ sơ',
+			'profile.upgradeTitle' => 'Nâng cấp Premium',
+			'profile.upgradeSubtitle' => 'Thêm Credits - Không đóng dấu',
+			'profile.goPremium' => 'Lên Premium',
+			'profile.myVideo' => 'Video của tôi',
+			'profile.liked' => 'Đã thích',
+			'profile.noVideos' => 'Chưa có video',
+			'profile.noVideosDesc' => 'Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.',
+			'home_new.welcomeToAppName' => 'Chào mừng đến với Video AI',
+			'home_new.imageToVideo' => 'Ảnh sang\nVideo',
+			'home_new.transitionVideo' => 'Video\nChuyển cảnh',
+			'home_new.imageToDance' => 'Ảnh sang\nNhảy múa',
+			'home_new.unifiedVideo' => 'Hợp nhất\nVideo',
 			_ => null,
 		};
 	}

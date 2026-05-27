@@ -71,5 +71,27 @@
       "subtitle": "사진 업로드",
       "button": "계속"
     }
+  },
+  "dashboard": {
+    "home": "홈",
+    "user": "프로필",
+    "createVideo": "비디오 생성"
+  },
+  "profile": {
+    "title": "프로필",
+    "upgradeTitle": "프리미엄 업그레이드",
+    "upgradeSubtitle": "크레딧 추가 - 워터마크 없음",
+    "goPremium": "프리미엄 가입",
+    "myVideo": "내 비디오",
+    "liked": "좋아요",
+    "noVideos": "아직 동영상이 없습니다",
+    "noVideosDesc": "첫 번째 AI 비디오를 만들면 여기에 표시됩니다."
+  },
+  "home_new": {
+    "welcomeToAppName": "비디오 AI에 오신 것을 환영합니다",
+    "imageToVideo": "이미지를\n비디오로",
+    "transitionVideo": "트랜지션\n비디오",
+    "imageToDance": "이미지를\n댄스로",
+    "unifiedVideo": "통합\n비디오"
   }
 }

@@ -46,6 +46,9 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$leave_dialog$en leave_dialog = Translations$leave_dialog$en.internal(_root);
 	late final Translations$splash$en splash = Translations$splash$en.internal(_root);
 	late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
+	late final Translations$dashboard$en dashboard = Translations$dashboard$en.internal(_root);
+	late final Translations$profile$en profile = Translations$profile$en.internal(_root);
+	late final Translations$home_new$en home_new = Translations$home_new$en.internal(_root);
 }
 
 // Path: common
@@ -215,6 +218,81 @@ class Translations$onboarding$en {
 	late final Translations$onboarding$page5$en page5 = Translations$onboarding$page5$en.internal(_root);
 }
 
+// Path: dashboard
+class Translations$dashboard$en {
+	Translations$dashboard$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Home'
+	String get home => 'Home';
+
+	/// en: 'User'
+	String get user => 'User';
+
+	/// en: 'Create Video'
+	String get createVideo => 'Create Video';
+}
+
+// Path: profile
+class Translations$profile$en {
+	Translations$profile$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Profile'
+	String get title => 'Profile';
+
+	/// en: 'Premium Upgrade'
+	String get upgradeTitle => 'Premium Upgrade';
+
+	/// en: 'Add Credits - No Watermark'
+	String get upgradeSubtitle => 'Add Credits - No Watermark';
+
+	/// en: 'Go Premium'
+	String get goPremium => 'Go Premium';
+
+	/// en: 'My Video'
+	String get myVideo => 'My Video';
+
+	/// en: 'Liked'
+	String get liked => 'Liked';
+
+	/// en: 'No videos yet'
+	String get noVideos => 'No videos yet';
+
+	/// en: 'Create your first AI video and it will appear here.'
+	String get noVideosDesc => 'Create your first AI video and it will appear here.';
+}
+
+// Path: home_new
+class Translations$home_new$en {
+	Translations$home_new$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Welcome To Video AI'
+	String get welcomeToAppName => 'Welcome To Video AI';
+
+	/// en: 'Image to Video'
+	String get imageToVideo => 'Image to\nVideo';
+
+	/// en: 'Transition Video'
+	String get transitionVideo => 'Transition\nVideo';
+
+	/// en: 'Image to Dance'
+	String get imageToDance => 'Image to\nDance';
+
+	/// en: 'Unified Video'
+	String get unifiedVideo => 'Unified\nVideo';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -364,6 +442,22 @@ extension on Translations {
 			'onboarding.page5.title' => 'Fusion Video',
 			'onboarding.page5.subtitle' => 'Upload Your Photos',
 			'onboarding.page5.button' => 'Continue',
+			'dashboard.home' => 'Home',
+			'dashboard.user' => 'User',
+			'dashboard.createVideo' => 'Create Video',
+			'profile.title' => 'Profile',
+			'profile.upgradeTitle' => 'Premium Upgrade',
+			'profile.upgradeSubtitle' => 'Add Credits - No Watermark',
+			'profile.goPremium' => 'Go Premium',
+			'profile.myVideo' => 'My Video',
+			'profile.liked' => 'Liked',
+			'profile.noVideos' => 'No videos yet',
+			'profile.noVideosDesc' => 'Create your first AI video and it will appear here.',
+			'home_new.welcomeToAppName' => 'Welcome To Video AI',
+			'home_new.imageToVideo' => 'Image to\nVideo',
+			'home_new.transitionVideo' => 'Transition\nVideo',
+			'home_new.imageToDance' => 'Image to\nDance',
+			'home_new.unifiedVideo' => 'Unified\nVideo',
 			_ => null,
 		};
 	}

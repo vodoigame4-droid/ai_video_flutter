@@ -71,5 +71,27 @@
       "subtitle": "写真をアップロードする",
       "button": "次へ"
     }
+  },
+  "dashboard": {
+    "home": "ホーム",
+    "user": "マイページ",
+    "createVideo": "動画作成"
+  },
+  "profile": {
+    "title": "プロフィール",
+    "upgradeTitle": "プレミアムアップグレード",
+    "upgradeSubtitle": "クレジット追加 - ウォーターマークなし",
+    "goPremium": "プレミアムにする",
+    "myVideo": "マイビデオ",
+    "liked": "いいね",
+    "noVideos": "動画はまだありません",
+    "noVideosDesc": "最初のAI動画を作成すると、ここに表示されます。"
+  },
+  "home_new": {
+    "welcomeToAppName": "ビデオAIへようこそ",
+    "imageToVideo": "画像から\nビデオ",
+    "transitionVideo": "トランジション\n動画",
+    "imageToDance": "画像から\nダンス",
+    "unifiedVideo": "統合\n動画"
   }
 }

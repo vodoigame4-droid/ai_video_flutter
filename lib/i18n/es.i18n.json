@@ -71,5 +71,27 @@
       "subtitle": "Sube tus fotos",
       "button": "Continuar"
     }
+  },
+  "dashboard": {
+    "home": "Inicio",
+    "user": "Perfil",
+    "createVideo": "Crear Video"
+  },
+  "profile": {
+    "title": "Perfil",
+    "upgradeTitle": "Actualización Premium",
+    "upgradeSubtitle": "Agregar créditos - Sin marca de agua",
+    "goPremium": "Hacerse Premium",
+    "myVideo": "Mi Video",
+    "liked": "Me gusta",
+    "noVideos": "Sin videos aún",
+    "noVideosDesc": "Crea tu primer video IA y aparecerá aquí."
+  },
+  "home_new": {
+    "welcomeToAppName": "Bienvenido a Video AI",
+    "imageToVideo": "Imagen a\nVideo",
+    "transitionVideo": "Video de\nTransición",
+    "imageToDance": "Imagen a\nBaile",
+    "unifiedVideo": "Video\nUnificado"
   }
 }

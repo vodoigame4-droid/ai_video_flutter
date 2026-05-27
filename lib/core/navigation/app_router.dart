@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
@@ -40,11 +40,11 @@ final GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
-      path: HomePage.path,
-      name: HomePage.name,
+      path: DashboardPage.path,
+      name: DashboardPage.name,
       pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
         state: state,
-        child: const HomePage(),
+        child: const DashboardPage(),
       ),
     ),
   ],

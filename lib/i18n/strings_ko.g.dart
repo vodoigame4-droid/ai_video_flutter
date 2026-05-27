@@ -45,6 +45,9 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$ko leave_dialog = _Translations$leave_dialog$ko._(_root);
 	@override late final _Translations$splash$ko splash = _Translations$splash$ko._(_root);
 	@override late final _Translations$onboarding$ko onboarding = _Translations$onboarding$ko._(_root);
+	@override late final _Translations$dashboard$ko dashboard = _Translations$dashboard$ko._(_root);
+	@override late final _Translations$profile$ko profile = _Translations$profile$ko._(_root);
+	@override late final _Translations$home_new$ko home_new = _Translations$home_new$ko._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$ko extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$ko page3 = _Translations$onboarding$page3$ko._(_root);
 	@override late final _Translations$onboarding$page4$ko page4 = _Translations$onboarding$page4$ko._(_root);
 	@override late final _Translations$onboarding$page5$ko page5 = _Translations$onboarding$page5$ko._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$ko extends Translations$dashboard$en {
+	_Translations$dashboard$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => '홈';
+	@override String get user => '프로필';
+	@override String get createVideo => '비디오 생성';
+}
+
+// Path: profile
+class _Translations$profile$ko extends Translations$profile$en {
+	_Translations$profile$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '프로필';
+	@override String get upgradeTitle => '프리미엄 업그레이드';
+	@override String get upgradeSubtitle => '크레딧 추가 - 워터마크 없음';
+	@override String get goPremium => '프리미엄 가입';
+	@override String get myVideo => '내 비디오';
+	@override String get liked => '좋아요';
+	@override String get noVideos => '아직 동영상이 없습니다';
+	@override String get noVideosDesc => '첫 번째 AI 비디오를 만들면 여기에 표시됩니다.';
+}
+
+// Path: home_new
+class _Translations$home_new$ko extends Translations$home_new$en {
+	_Translations$home_new$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => '비디오 AI에 오신 것을 환영합니다';
+	@override String get imageToVideo => '이미지를\n비디오로';
+	@override String get transitionVideo => '트랜지션\n비디오';
+	@override String get imageToDance => '이미지를\n댄스로';
+	@override String get unifiedVideo => '통합\n비디오';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsKo {
 			'onboarding.page5.title' => '비디오 융합',
 			'onboarding.page5.subtitle' => '사진 업로드',
 			'onboarding.page5.button' => '계속',
+			'dashboard.home' => '홈',
+			'dashboard.user' => '프로필',
+			'dashboard.createVideo' => '비디오 생성',
+			'profile.title' => '프로필',
+			'profile.upgradeTitle' => '프리미엄 업그레이드',
+			'profile.upgradeSubtitle' => '크레딧 추가 - 워터마크 없음',
+			'profile.goPremium' => '프리미엄 가입',
+			'profile.myVideo' => '내 비디오',
+			'profile.liked' => '좋아요',
+			'profile.noVideos' => '아직 동영상이 없습니다',
+			'profile.noVideosDesc' => '첫 번째 AI 비디오를 만들면 여기에 표시됩니다.',
+			'home_new.welcomeToAppName' => '비디오 AI에 오신 것을 환영합니다',
+			'home_new.imageToVideo' => '이미지를\n비디오로',
+			'home_new.transitionVideo' => '트랜지션\n비디오',
+			'home_new.imageToDance' => '이미지를\n댄스로',
+			'home_new.unifiedVideo' => '통합\n비디오',
 			_ => null,
 		};
 	}

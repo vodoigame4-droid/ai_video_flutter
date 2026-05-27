@@ -71,5 +71,27 @@
       "subtitle": "上传您的照片",
       "button": "继续"
     }
+  },
+  "dashboard": {
+    "home": "首页",
+    "user": "我的",
+    "createVideo": "制作视频"
+  },
+  "profile": {
+    "title": "个人中心",
+    "upgradeTitle": "升级专业版",
+    "upgradeSubtitle": "添加额度 - 无水印",
+    "goPremium": "专业版特权",
+    "myVideo": "我的视频",
+    "liked": "点赞视频",
+    "noVideos": "暂无视频",
+    "noVideosDesc": "制作您的第一个AI视频，它将显示在这里。"
+  },
+  "home_new": {
+    "welcomeToAppName": "欢迎使用视频AI",
+    "imageToVideo": "图片转\n视频",
+    "transitionVideo": "转场\n视频",
+    "imageToDance": "图片\n舞蹈",
+    "unifiedVideo": "融合\n视频"
   }
 }

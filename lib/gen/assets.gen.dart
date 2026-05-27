@@ -14,17 +14,41 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/ai_nav_icon.svg
+  String get aiNavIcon => 'assets/images/ai_nav_icon.svg';
+
   /// File path: assets/images/arrow_right.svg
   String get arrowRight => 'assets/images/arrow_right.svg';
 
   /// File path: assets/images/bg_splash.png
   AssetGenImage get bgSplash => const AssetGenImage('assets/images/bg_splash.png');
 
+  /// File path: assets/images/card_1.png
+  AssetGenImage get card1 => const AssetGenImage('assets/images/card_1.png');
+
+  /// File path: assets/images/card_2.png
+  AssetGenImage get card2 => const AssetGenImage('assets/images/card_2.png');
+
+  /// File path: assets/images/credit_icon.png
+  AssetGenImage get creditIcon => const AssetGenImage('assets/images/credit_icon.png');
+
   /// File path: assets/images/ellipse.svg
   String get ellipse => 'assets/images/ellipse.svg';
 
+  /// File path: assets/images/empty_history.png
+  AssetGenImage get emptyHistory => const AssetGenImage('assets/images/empty_history.png');
+
+  /// File path: assets/images/home_banner.png
+  AssetGenImage get homeBanner => const AssetGenImage('assets/images/home_banner.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/nav_home.svg
+  String get navHome => 'assets/images/nav_home.svg';
+
+  /// File path: assets/images/nav_user.svg
+  String get navUser => 'assets/images/nav_user.svg';
 
   /// File path: assets/images/ob_1.png
   AssetGenImage get ob1 => const AssetGenImage('assets/images/ob_1.png');
@@ -41,8 +65,34 @@ class $AssetsImagesGen {
   /// File path: assets/images/ob_5.png
   AssetGenImage get ob5 => const AssetGenImage('assets/images/ob_5.png');
 
+  /// File path: assets/images/premium_banner.png
+  AssetGenImage get premiumBanner => const AssetGenImage('assets/images/premium_banner.png');
+
+  /// File path: assets/images/pro_badge_icon.png
+  AssetGenImage get proBadgeIcon => const AssetGenImage('assets/images/pro_badge_icon.png');
+
   /// List of all assets
-  List<dynamic> get values => [arrowRight, bgSplash, ellipse, logo, ob1, ob2, ob3, ob4, ob5];
+  List<dynamic> get values => [
+    aiNavIcon,
+    arrowRight,
+    bgSplash,
+    card1,
+    card2,
+    creditIcon,
+    ellipse,
+    emptyHistory,
+    homeBanner,
+    logo,
+    navHome,
+    navUser,
+    ob1,
+    ob2,
+    ob3,
+    ob4,
+    ob5,
+    premiumBanner,
+    proBadgeIcon,
+  ];
 }
 
 class Assets {

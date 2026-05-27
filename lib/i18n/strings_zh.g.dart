@@ -45,6 +45,9 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$zh leave_dialog = _Translations$leave_dialog$zh._(_root);
 	@override late final _Translations$splash$zh splash = _Translations$splash$zh._(_root);
 	@override late final _Translations$onboarding$zh onboarding = _Translations$onboarding$zh._(_root);
+	@override late final _Translations$dashboard$zh dashboard = _Translations$dashboard$zh._(_root);
+	@override late final _Translations$profile$zh profile = _Translations$profile$zh._(_root);
+	@override late final _Translations$home_new$zh home_new = _Translations$home_new$zh._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$zh extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$zh page3 = _Translations$onboarding$page3$zh._(_root);
 	@override late final _Translations$onboarding$page4$zh page4 = _Translations$onboarding$page4$zh._(_root);
 	@override late final _Translations$onboarding$page5$zh page5 = _Translations$onboarding$page5$zh._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$zh extends Translations$dashboard$en {
+	_Translations$dashboard$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => '首页';
+	@override String get user => '我的';
+	@override String get createVideo => '制作视频';
+}
+
+// Path: profile
+class _Translations$profile$zh extends Translations$profile$en {
+	_Translations$profile$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '个人中心';
+	@override String get upgradeTitle => '升级专业版';
+	@override String get upgradeSubtitle => '添加额度 - 无水印';
+	@override String get goPremium => '专业版特权';
+	@override String get myVideo => '我的视频';
+	@override String get liked => '点赞视频';
+	@override String get noVideos => '暂无视频';
+	@override String get noVideosDesc => '制作您的第一个AI视频，它将显示在这里。';
+}
+
+// Path: home_new
+class _Translations$home_new$zh extends Translations$home_new$en {
+	_Translations$home_new$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => '欢迎使用视频AI';
+	@override String get imageToVideo => '图片转\n视频';
+	@override String get transitionVideo => '转场\n视频';
+	@override String get imageToDance => '图片\n舞蹈';
+	@override String get unifiedVideo => '融合\n视频';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsZh {
 			'onboarding.page5.title' => '视频融合',
 			'onboarding.page5.subtitle' => '上传您的照片',
 			'onboarding.page5.button' => '继续',
+			'dashboard.home' => '首页',
+			'dashboard.user' => '我的',
+			'dashboard.createVideo' => '制作视频',
+			'profile.title' => '个人中心',
+			'profile.upgradeTitle' => '升级专业版',
+			'profile.upgradeSubtitle' => '添加额度 - 无水印',
+			'profile.goPremium' => '专业版特权',
+			'profile.myVideo' => '我的视频',
+			'profile.liked' => '点赞视频',
+			'profile.noVideos' => '暂无视频',
+			'profile.noVideosDesc' => '制作您的第一个AI视频，它将显示在这里。',
+			'home_new.welcomeToAppName' => '欢迎使用视频AI',
+			'home_new.imageToVideo' => '图片转\n视频',
+			'home_new.transitionVideo' => '转场\n视频',
+			'home_new.imageToDance' => '图片\n舞蹈',
+			'home_new.unifiedVideo' => '融合\n视频',
 			_ => null,
 		};
 	}

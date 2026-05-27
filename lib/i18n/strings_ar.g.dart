@@ -45,6 +45,9 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$ar leave_dialog = _Translations$leave_dialog$ar._(_root);
 	@override late final _Translations$splash$ar splash = _Translations$splash$ar._(_root);
 	@override late final _Translations$onboarding$ar onboarding = _Translations$onboarding$ar._(_root);
+	@override late final _Translations$dashboard$ar dashboard = _Translations$dashboard$ar._(_root);
+	@override late final _Translations$profile$ar profile = _Translations$profile$ar._(_root);
+	@override late final _Translations$home_new$ar home_new = _Translations$home_new$ar._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$ar extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$ar page3 = _Translations$onboarding$page3$ar._(_root);
 	@override late final _Translations$onboarding$page4$ar page4 = _Translations$onboarding$page4$ar._(_root);
 	@override late final _Translations$onboarding$page5$ar page5 = _Translations$onboarding$page5$ar._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$ar extends Translations$dashboard$en {
+	_Translations$dashboard$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'الرئيسية';
+	@override String get user => 'حسابي';
+	@override String get createVideo => 'إنشاء فيديو';
+}
+
+// Path: profile
+class _Translations$profile$ar extends Translations$profile$en {
+	_Translations$profile$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'الحساب الشخصي';
+	@override String get upgradeTitle => 'الترقية للمميز';
+	@override String get upgradeSubtitle => 'إضافة رصيد - بدون علامة مائية';
+	@override String get goPremium => 'اشترك في المميز';
+	@override String get myVideo => 'فيديوهاتي';
+	@override String get liked => 'أعجبني';
+	@override String get noVideos => 'لا توجد فيديوهات بعد';
+	@override String get noVideosDesc => 'أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا.';
+}
+
+// Path: home_new
+class _Translations$home_new$ar extends Translations$home_new$en {
+	_Translations$home_new$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => 'مرحبًا بك في فيديو ذكاء اصطناعي';
+	@override String get imageToVideo => 'صورة إلى\nفيديو';
+	@override String get transitionVideo => 'فيديو\nانتقالي';
+	@override String get imageToDance => 'صورة إلى\nرقص';
+	@override String get unifiedVideo => 'فيديو\nموحد';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsAr {
 			'onboarding.page5.title' => 'دمج الفيديو',
 			'onboarding.page5.subtitle' => 'تحميل صورك',
 			'onboarding.page5.button' => 'متابعة',
+			'dashboard.home' => 'الرئيسية',
+			'dashboard.user' => 'حسابي',
+			'dashboard.createVideo' => 'إنشاء فيديو',
+			'profile.title' => 'الحساب الشخصي',
+			'profile.upgradeTitle' => 'الترقية للمميز',
+			'profile.upgradeSubtitle' => 'إضافة رصيد - بدون علامة مائية',
+			'profile.goPremium' => 'اشترك في المميز',
+			'profile.myVideo' => 'فيديوهاتي',
+			'profile.liked' => 'أعجبني',
+			'profile.noVideos' => 'لا توجد فيديوهات بعد',
+			'profile.noVideosDesc' => 'أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا.',
+			'home_new.welcomeToAppName' => 'مرحبًا بك في فيديو ذكاء اصطناعي',
+			'home_new.imageToVideo' => 'صورة إلى\nفيديو',
+			'home_new.transitionVideo' => 'فيديو\nانتقالي',
+			'home_new.imageToDance' => 'صورة إلى\nرقص',
+			'home_new.unifiedVideo' => 'فيديو\nموحد',
 			_ => null,
 		};
 	}

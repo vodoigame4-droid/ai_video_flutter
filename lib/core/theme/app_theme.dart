@@ -136,6 +136,9 @@ abstract class AppTheme {
           onboardingTitleStyle: AppTextStyles.onboardingTitle,
           onboardingSubtitleStyle: AppTextStyles.onboardingSubtitle,
           onboardingButtonStyle: AppTextStyles.onboardingButton,
+          navLabelActiveStyle: AppTextStyles.navLabelActive,
+          navLabelInactiveStyle: AppTextStyles.navLabelInactive,
+          navLabelCreateStyle: AppTextStyles.navLabelCreate,
         ),
       ],
     );
@@ -159,6 +162,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final TextStyle onboardingTitleStyle;
   final TextStyle onboardingSubtitleStyle;
   final TextStyle onboardingButtonStyle;
+  final TextStyle navLabelActiveStyle;
+  final TextStyle navLabelInactiveStyle;
+  final TextStyle navLabelCreateStyle;
 
   const AppThemeExtension({
     required this.primaryGradient,
@@ -176,6 +182,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     required this.onboardingTitleStyle,
     required this.onboardingSubtitleStyle,
     required this.onboardingButtonStyle,
+    required this.navLabelActiveStyle,
+    required this.navLabelInactiveStyle,
+    required this.navLabelCreateStyle,
   });
 
   @override
@@ -195,6 +204,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     TextStyle? onboardingTitleStyle,
     TextStyle? onboardingSubtitleStyle,
     TextStyle? onboardingButtonStyle,
+    TextStyle? navLabelActiveStyle,
+    TextStyle? navLabelInactiveStyle,
+    TextStyle? navLabelCreateStyle,
   }) {
     return AppThemeExtension(
       primaryGradient: primaryGradient ?? this.primaryGradient,
@@ -212,6 +224,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       onboardingTitleStyle: onboardingTitleStyle ?? this.onboardingTitleStyle,
       onboardingSubtitleStyle: onboardingSubtitleStyle ?? this.onboardingSubtitleStyle,
       onboardingButtonStyle: onboardingButtonStyle ?? this.onboardingButtonStyle,
+      navLabelActiveStyle: navLabelActiveStyle ?? this.navLabelActiveStyle,
+      navLabelInactiveStyle: navLabelInactiveStyle ?? this.navLabelInactiveStyle,
+      navLabelCreateStyle: navLabelCreateStyle ?? this.navLabelCreateStyle,
     );
   }
 
@@ -234,6 +249,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       onboardingTitleStyle: TextStyle.lerp(onboardingTitleStyle, other.onboardingTitleStyle, t)!,
       onboardingSubtitleStyle: TextStyle.lerp(onboardingSubtitleStyle, other.onboardingSubtitleStyle, t)!,
       onboardingButtonStyle: TextStyle.lerp(onboardingButtonStyle, other.onboardingButtonStyle, t)!,
+      navLabelActiveStyle: TextStyle.lerp(navLabelActiveStyle, other.navLabelActiveStyle, t)!,
+      navLabelInactiveStyle: TextStyle.lerp(navLabelInactiveStyle, other.navLabelInactiveStyle, t)!,
+      navLabelCreateStyle: TextStyle.lerp(navLabelCreateStyle, other.navLabelCreateStyle, t)!,
     );
   }
 }

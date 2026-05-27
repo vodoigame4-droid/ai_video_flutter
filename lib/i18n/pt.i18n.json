@@ -71,5 +71,27 @@
       "subtitle": "Carregar suas fotos",
       "button": "Continuar"
     }
+  },
+  "dashboard": {
+    "home": "Início",
+    "user": "Perfil",
+    "createVideo": "Criar Vídeo"
+  },
+  "profile": {
+    "title": "Perfil",
+    "upgradeTitle": "Upgrade Premium",
+    "upgradeSubtitle": "Adicionar Créditos - Sem marca d'água",
+    "goPremium": "Seja Premium",
+    "myVideo": "Meu Vídeo",
+    "liked": "Curtido",
+    "noVideos": "Ainda sem vídeos",
+    "noVideosDesc": "Crie seu primeiro vídeo IA e ele aparecerá aqui."
+  },
+  "home_new": {
+    "welcomeToAppName": "Bem-vindo ao Video AI",
+    "imageToVideo": "Imagem para\nVídeo",
+    "transitionVideo": "Vídeo de\nTransição",
+    "imageToDance": "Imagem para\nDança",
+    "unifiedVideo": "Vídeo\nUnificado"
   }
 }

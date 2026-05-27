@@ -11,6 +11,13 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Generate deterministic properties based on title hash code
+    final int hash = title.hashCode;
+    final bool isEven = hash % 2 == 0;
+    final String imageAsset = isEven ? 'assets/images/card_1.png' : 'assets/images/card_2.png';
+    final bool isHot = hash % 3 == 0;
+    final String viewsStr = '${((hash % 90) + 10) / 10}k';
+
     return Container(
       width: 158,
       height: 236,
@@ -18,17 +25,13 @@ class VideoCard extends StatelessWidget {
         color: context.colorScheme.surface,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
         border: Border.all(color: context.appTheme.borderColor, width: 1),
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFF1E1E1E),
-            Color(0xFF121212),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+        image: DecorationImage(
+          image: AssetImage(imageAsset),
+          fit: BoxFit.cover,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
+            color: Colors.black.withValues(alpha: 0.35),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -36,44 +39,82 @@ class VideoCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // Play indicator in the center
-          Center(
+          // Dark overlay to read texts easily
+          Positioned.fill(
             child: Container(
-              width: 48,
-              height: 48,
               decoration: BoxDecoration(
-                color: context.colorScheme.primary.withValues(alpha: 0.15),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.play_arrow_rounded,
-                color: context.colorScheme.primary,
-                size: 28,
-              ),
-            ),
-          ),
-          // Title and Actions at the bottom
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 gradient: LinearGradient(
-                  colors: [Colors.transparent, Colors.black87],
+                  colors: [
+                    Colors.black.withValues(alpha: 0.1),
+                    Colors.black.withValues(alpha: 0.8),
+                  ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
               ),
+            ),
+          ),
+
+          // Hot/New Badge Tag
+          Positioned(
+            top: 8,
+            right: 8,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                gradient: isHot
+                    ? const LinearGradient(
+                        colors: [Color(0xFFFF5E3A), Color(0xFFFF2A68)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      )
+                    : const LinearGradient(
+                        colors: [Color(0xFF00F5D4), Color(0xFF00BBF9)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+              ),
+              child: Text(
+                isHot ? 'Hot' : 'New',
+                style: context.textTheme.labelSmall,
+              ),
+            ),
+          ),
+
+          // Play indicator in the center
+          Center(
+            child: Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.4),
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1.5),
+              ),
+              child: const Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+          ),
+
+          // Title and Views count at the bottom
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     title,
-                    style: context.textTheme.bodyMedium,
+                    style: context.appTheme.bodyNormalBold,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -83,14 +124,14 @@ class VideoCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
-                            Icons.favorite_rounded,
-                            color: context.appTheme.heartColor,
+                          const Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: Color(0xFFB0B0B0),
                             size: 14,
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '12.4k',
+                            viewsStr,
                             style: context.appTheme.seeAllTextStyle,
                           ),
                         ],

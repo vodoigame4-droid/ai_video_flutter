@@ -71,5 +71,27 @@
       "subtitle": "Tải ảnh của bạn lên",
       "button": "Tiếp tục"
     }
+  },
+  "dashboard": {
+    "home": "Trang chủ",
+    "user": "Tôi",
+    "createVideo": "Tạo Video"
+  },
+  "profile": {
+    "title": "Hồ sơ",
+    "upgradeTitle": "Nâng cấp Premium",
+    "upgradeSubtitle": "Thêm Credits - Không đóng dấu",
+    "goPremium": "Lên Premium",
+    "myVideo": "Video của tôi",
+    "liked": "Đã thích",
+    "noVideos": "Chưa có video",
+    "noVideosDesc": "Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây."
+  },
+  "home_new": {
+    "welcomeToAppName": "Chào mừng đến với Video AI",
+    "imageToVideo": "Ảnh sang\nVideo",
+    "transitionVideo": "Video\nChuyển cảnh",
+    "imageToDance": "Ảnh sang\nNhảy múa",
+    "unifiedVideo": "Hợp nhất\nVideo"
   }
 }

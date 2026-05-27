@@ -45,6 +45,9 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$leave_dialog$ja leave_dialog = _Translations$leave_dialog$ja._(_root);
 	@override late final _Translations$splash$ja splash = _Translations$splash$ja._(_root);
 	@override late final _Translations$onboarding$ja onboarding = _Translations$onboarding$ja._(_root);
+	@override late final _Translations$dashboard$ja dashboard = _Translations$dashboard$ja._(_root);
+	@override late final _Translations$profile$ja profile = _Translations$profile$ja._(_root);
+	@override late final _Translations$home_new$ja home_new = _Translations$home_new$ja._(_root);
 }
 
 // Path: common
@@ -140,6 +143,49 @@ class _Translations$onboarding$ja extends Translations$onboarding$en {
 	@override late final _Translations$onboarding$page3$ja page3 = _Translations$onboarding$page3$ja._(_root);
 	@override late final _Translations$onboarding$page4$ja page4 = _Translations$onboarding$page4$ja._(_root);
 	@override late final _Translations$onboarding$page5$ja page5 = _Translations$onboarding$page5$ja._(_root);
+}
+
+// Path: dashboard
+class _Translations$dashboard$ja extends Translations$dashboard$en {
+	_Translations$dashboard$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'ホーム';
+	@override String get user => 'マイページ';
+	@override String get createVideo => '動画作成';
+}
+
+// Path: profile
+class _Translations$profile$ja extends Translations$profile$en {
+	_Translations$profile$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'プロフィール';
+	@override String get upgradeTitle => 'プレミアムアップグレード';
+	@override String get upgradeSubtitle => 'クレジット追加 - ウォーターマークなし';
+	@override String get goPremium => 'プレミアムにする';
+	@override String get myVideo => 'マイビデオ';
+	@override String get liked => 'いいね';
+	@override String get noVideos => '動画はまだありません';
+	@override String get noVideosDesc => '最初のAI動画を作成すると、ここに表示されます。';
+}
+
+// Path: home_new
+class _Translations$home_new$ja extends Translations$home_new$en {
+	_Translations$home_new$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get welcomeToAppName => 'ビデオAIへようこそ';
+	@override String get imageToVideo => '画像から\nビデオ';
+	@override String get transitionVideo => 'トランジション\n動画';
+	@override String get imageToDance => '画像から\nダンス';
+	@override String get unifiedVideo => '統合\n動画';
 }
 
 // Path: onboarding.page1
@@ -261,6 +307,22 @@ extension on TranslationsJa {
 			'onboarding.page5.title' => 'ビデオの融合',
 			'onboarding.page5.subtitle' => '写真をアップロードする',
 			'onboarding.page5.button' => '次へ',
+			'dashboard.home' => 'ホーム',
+			'dashboard.user' => 'マイページ',
+			'dashboard.createVideo' => '動画作成',
+			'profile.title' => 'プロフィール',
+			'profile.upgradeTitle' => 'プレミアムアップグレード',
+			'profile.upgradeSubtitle' => 'クレジット追加 - ウォーターマークなし',
+			'profile.goPremium' => 'プレミアムにする',
+			'profile.myVideo' => 'マイビデオ',
+			'profile.liked' => 'いいね',
+			'profile.noVideos' => '動画はまだありません',
+			'profile.noVideosDesc' => '最初のAI動画を作成すると、ここに表示されます。',
+			'home_new.welcomeToAppName' => 'ビデオAIへようこそ',
+			'home_new.imageToVideo' => '画像から\nビデオ',
+			'home_new.transitionVideo' => 'トランジション\n動画',
+			'home_new.imageToDance' => '画像から\nダンス',
+			'home_new.unifiedVideo' => '統合\n動画',
 			_ => null,
 		};
 	}
