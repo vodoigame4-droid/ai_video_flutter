@@ -9,8 +9,8 @@ class IapBloc extends Bloc<IapEvent, IapState> {
       await event.when(
         init: () async {
           LogUtils.d('IapBloc: Initializing');
-          // Annually is selected by default for IAP
-          emit(const IapState.ready(isWeeklySelected: false));
+          // Annually is selected by default for IAP, video not revealed by default
+          emit(const IapState.ready(isWeeklySelected: false, isVideoRevealed: false));
         },
         selectWeekly: () async {
           LogUtils.d('IapBloc: Select Weekly');
@@ -28,14 +28,32 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             error: (s) => emit(s.copyWith(isWeeklySelected: false)),
           );
         },
+        toggleReveal: () async {
+          LogUtils.d('IapBloc: Toggle Reveal');
+          state.mapOrNull(
+            ready: (s) => emit(s.copyWith(isVideoRevealed: !s.isVideoRevealed)),
+            success: (s) => emit(s.copyWith(isVideoRevealed: !s.isVideoRevealed)),
+            error: (s) => emit(s.copyWith(isVideoRevealed: !s.isVideoRevealed)),
+          );
+        },
         purchase: () async {
           LogUtils.d('IapBloc: Initiating Purchase');
           bool isWeekly = false;
+          bool isRevealed = false;
 
           state.mapOrNull(
-            ready: (s) => isWeekly = s.isWeeklySelected,
-            success: (s) => isWeekly = s.isWeeklySelected,
-            error: (s) => isWeekly = s.isWeeklySelected,
+            ready: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+            },
+            success: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+            },
+            error: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+            },
           );
 
           emit(const IapState.loading());
@@ -45,9 +63,42 @@ class IapBloc extends Bloc<IapEvent, IapState> {
           emit(IapState.success(
             message: isWeekly ? 'Weekly Subscription purchased!' : 'Annual Subscription purchased!',
             isWeeklySelected: isWeekly,
+            isVideoRevealed: isRevealed,
           ));
 
-          emit(IapState.ready(isWeeklySelected: isWeekly));
+          emit(IapState.ready(isWeeklySelected: isWeekly, isVideoRevealed: isRevealed));
+        },
+        purchaseCredits: (credits, priceText) async {
+          LogUtils.d('IapBloc: Purchase $credits Credits for $priceText');
+          bool isWeekly = false;
+          bool isRevealed = false;
+
+          state.mapOrNull(
+            ready: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+            },
+            success: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+            },
+            error: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+            },
+          );
+
+          emit(const IapState.loading());
+          await Future.delayed(const Duration(milliseconds: 1500));
+
+          LogUtils.d('IapBloc: Purchase Credits Success');
+          emit(IapState.success(
+            message: 'Successfully purchased $credits Credits!',
+            isWeeklySelected: isWeekly,
+            isVideoRevealed: isRevealed,
+          ));
+
+          emit(IapState.ready(isWeeklySelected: isWeekly, isVideoRevealed: isRevealed));
         },
       );
     });

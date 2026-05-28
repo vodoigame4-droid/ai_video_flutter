@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,9 +6,9 @@ import 'package:lottie/lottie.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
-import '../bloc/buy_credits/buy_credits_bloc.dart';
-import '../bloc/buy_credits/buy_credits_event.dart';
-import '../bloc/buy_credits/buy_credits_state.dart';
+import '../bloc/iap/iap_bloc.dart';
+import '../bloc/iap/iap_event.dart';
+import '../bloc/iap/iap_state.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/credit_pack_card.dart';
 
@@ -20,7 +21,7 @@ class BuyCreditsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<BuyCreditsBloc>()..add(const BuyCreditsEvent.init()),
+      create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
       child: const BuyCreditsView(),
     );
   }
@@ -32,13 +33,14 @@ class BuyCreditsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.t;
-    final videoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+    final videoUrl =
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
 
     return Scaffold(
-      body: BlocConsumer<BuyCreditsBloc, BuyCreditsState>(
+      body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: (message, _) {
+            success: (message, isWeeklySelected, isVideoRevealed) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),
@@ -46,7 +48,7 @@ class BuyCreditsView extends StatelessWidget {
                 ),
               );
             },
-            error: (message, _) {
+            error: (message, isWeeklySelected, isVideoRevealed) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),
@@ -63,7 +65,8 @@ class BuyCreditsView extends StatelessWidget {
               children: [
                 Positioned.fill(
                   child: PremiumVideoBackground(
-                    videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+                    videoUrl:
+                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
                     isBlurred: true,
                   ),
                 ),
@@ -101,23 +104,53 @@ class BuyCreditsView extends StatelessWidget {
                     ),
                   ),
 
-                  // 2. Back Close Button top-left
+                  // 1.5. Bottom gradient fade overlay
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: 350,
+                    child: IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.transparent,
+                              Colors.black.withValues(alpha: 0.8),
+                              Colors.black,
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // 2. Glass-morphic Close Button top-left
                   Positioned(
                     top: MediaQuery.of(context).padding.top + 16,
                     left: 16,
-                    child: Material(
-                      color: Colors.black.withValues(alpha: 0.2),
-                      shape: const CircleBorder(),
-                      child: InkWell(
-                        onTap: () => context.pop(),
-                        borderRadius: const BorderRadius.all(Radius.circular(100)),
-                        child: const SizedBox(
-                          width: 36,
-                          height: 36,
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: Colors.white,
-                            size: 16,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                        child: Material(
+                          color: Colors.black.withValues(alpha: 0.1),
+                          child: InkWell(
+                            onTap: () => context.pop(),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                            child: const SizedBox(
+                              width: 36,
+                              height: 36,
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -129,15 +162,19 @@ class BuyCreditsView extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          // Padding to keep content below status bar and back button area
-                          SizedBox(height: MediaQuery.of(context).padding.top + 60),
+                          // Padding to keep content below status bar and close button area
+                          SizedBox(
+                            height: MediaQuery.of(context).padding.top + 90,
+                          ),
 
                           // Reveal button (if not revealed)
                           if (!isRevealed) ...[
                             Container(
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.15),
-                                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(100),
+                                ),
                                 border: Border.all(
                                   color: Colors.white.withValues(alpha: 0.3),
                                   width: 1.0,
@@ -146,12 +183,17 @@ class BuyCreditsView extends StatelessWidget {
                               child: Material(
                                 color: Colors.transparent,
                                 child: InkWell(
-                                  onTap: () => context.read<BuyCreditsBloc>().add(
-                                        const BuyCreditsEvent.toggleReveal(),
-                                      ),
-                                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                                  onTap: () => context.read<IapBloc>().add(
+                                    const IapEvent.toggleReveal(),
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(100),
+                                  ),
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                      vertical: 12,
+                                    ),
                                     child: Text(
                                       t.premium.tap_to_reveal,
                                       style: const TextStyle(
@@ -164,11 +206,10 @@ class BuyCreditsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 16),
                             GestureDetector(
-                              onTap: () => context.read<BuyCreditsBloc>().add(
-                                    const BuyCreditsEvent.toggleReveal(),
-                                  ),
+                              onTap: () => context.read<IapBloc>().add(
+                                const IapEvent.toggleReveal(),
+                              ),
                               child: Lottie.asset(
                                 'assets/raw/hand_tab_animation.json',
                                 width: 80,
@@ -176,34 +217,23 @@ class BuyCreditsView extends StatelessWidget {
                                 fit: BoxFit.contain,
                               ),
                             ),
-                            const SizedBox(height: 30),
                           ] else ...[
                             // Keep some space if revealed so the video preview is visible
-                            const SizedBox(height: 100),
+                            const SizedBox(height: 120),
                           ],
 
-                          // A premium gradient fade before the content
+                          // Transparent container for credits packages
                           Container(
-                            height: 80,
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.transparent, Colors.black87, Colors.black],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              ),
-                            ),
-                          ),
-
-                          // Solid dark subscription/credits container
-                          Container(
-                            color: Colors.black,
+                            color: Colors.transparent,
                             padding: const EdgeInsets.symmetric(vertical: 24),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 // Header Title & Description
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                  ),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -236,86 +266,111 @@ class BuyCreditsView extends StatelessWidget {
                                   crossAxisCount: 2,
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                                  mainAxisSpacing: 16,
-                                  crossAxisSpacing: 16,
-                                  childAspectRatio: 173 / 164,
+                                  padding: const EdgeInsets.fromLTRB(
+                                    16,
+                                    0,
+                                    16,
+                                    0,
+                                  ),
+                                  mainAxisSpacing: 12,
+                                  crossAxisSpacing: 12,
+                                  childAspectRatio: 173 / 152,
                                   children: [
                                     CreditPackCard(
                                       title: t.premium.credit_70,
-                                      videoEstimate: t.premium.approx_videos(count: 2),
+                                      videoEstimate: t.premium.approx_videos(
+                                        count: 2,
+                                      ),
                                       priceText: t.premium.price_70,
-                                      onTap: () => context.read<BuyCreditsBloc>().add(
-                                            BuyCreditsEvent.purchaseCredits(
-                                              credits: 70,
-                                              priceText: t.premium.price_70,
-                                            ),
-                                          ),
+                                      onTap: () => context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: 70,
+                                          priceText: t.premium.price_70,
+                                        ),
+                                      ),
                                     ),
                                     CreditPackCard(
                                       title: t.premium.credit_150,
-                                      videoEstimate: t.premium.approx_videos(count: 4),
+                                      videoEstimate: t.premium.approx_videos(
+                                        count: 4,
+                                      ),
                                       priceText: t.premium.price_150,
-                                      onTap: () => context.read<BuyCreditsBloc>().add(
-                                            BuyCreditsEvent.purchaseCredits(
-                                              credits: 150,
-                                              priceText: t.premium.price_150,
-                                            ),
-                                          ),
+                                      onTap: () => context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: 150,
+                                          priceText: t.premium.price_150,
+                                        ),
+                                      ),
                                     ),
                                     CreditPackCard(
                                       title: t.premium.credit_350,
-                                      videoEstimate: t.premium.approx_videos(count: 10),
+                                      videoEstimate: t.premium.approx_videos(
+                                        count: 10,
+                                      ),
                                       priceText: t.premium.price_350,
-                                      onTap: () => context.read<BuyCreditsBloc>().add(
-                                            BuyCreditsEvent.purchaseCredits(
-                                              credits: 350,
-                                              priceText: t.premium.price_350,
-                                            ),
-                                          ),
+                                      onTap: () => context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: 350,
+                                          priceText: t.premium.price_350,
+                                        ),
+                                      ),
                                     ),
                                     CreditPackCard(
                                       title: t.premium.credit_500,
-                                      videoEstimate: t.premium.approx_videos(count: 14),
+                                      videoEstimate: t.premium.approx_videos(
+                                        count: 14,
+                                      ),
                                       priceText: t.premium.price_500,
-                                      onTap: () => context.read<BuyCreditsBloc>().add(
-                                            BuyCreditsEvent.purchaseCredits(
-                                              credits: 500,
-                                              priceText: t.premium.price_500,
-                                            ),
-                                          ),
+                                      onTap: () => context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: 500,
+                                          priceText: t.premium.price_500,
+                                        ),
+                                      ),
                                     ),
                                     CreditPackCard(
                                       title: t.premium.credit_1000,
-                                      videoEstimate: t.premium.approx_videos(count: 27),
+                                      videoEstimate: t.premium.approx_videos(
+                                        count: 27,
+                                      ),
                                       priceText: t.premium.price_1000,
                                       tagText: t.premium.most_popular,
-                                      tagColors: const [Color(0xFFfae123), Color(0xFFff6320)],
-                                      onTap: () => context.read<BuyCreditsBloc>().add(
-                                            BuyCreditsEvent.purchaseCredits(
-                                              credits: 1000,
-                                              priceText: t.premium.price_1000,
-                                            ),
-                                          ),
+                                      tagColors: const [
+                                        Color(0xFFff6320),
+                                        Color(0xFFfae123),
+                                      ],
+                                      onTap: () => context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: 1000,
+                                          priceText: t.premium.price_1000,
+                                        ),
+                                      ),
                                     ),
                                     CreditPackCard(
                                       title: t.premium.credit_6000,
-                                      videoEstimate: t.premium.approx_videos(count: 142),
+                                      videoEstimate: t.premium.approx_videos(
+                                        count: 142,
+                                      ),
                                       priceText: t.premium.price_6000,
                                       tagText: t.premium.best_value,
-                                      tagColors: const [Color(0xFFfae123), Color(0xFFff6320)],
-                                      onTap: () => context.read<BuyCreditsBloc>().add(
-                                            BuyCreditsEvent.purchaseCredits(
-                                              credits: 6000,
-                                              priceText: t.premium.price_6000,
-                                            ),
-                                          ),
+                                      tagColors: const [
+                                        Color(0xFFff6320),
+                                        Color(0xFFfae123),
+                                      ],
+                                      onTap: () => context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: 6000,
+                                          priceText: t.premium.price_6000,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
+                          // Bottom safe area spacing
+                          SizedBox(height: 16),
                         ],
                       ),
                     ),

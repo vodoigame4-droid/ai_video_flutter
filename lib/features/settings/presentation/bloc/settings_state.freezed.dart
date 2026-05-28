@@ -266,12 +266,12 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&const DeepCollectionEquality().equals(other.currentLocale, currentLocale));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.currentLocale, currentLocale) || other.currentLocale == currentLocale));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(currentLocale));
+int get hashCode => Object.hash(runtimeType,currentLocale);
 
 @override
 String toString() {
@@ -303,9 +303,9 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? currentLocale = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? currentLocale = null,}) {
   return _then(_Ready(
-currentLocale: freezed == currentLocale ? _self.currentLocale : currentLocale // ignore: cast_nullable_to_non_nullable
+currentLocale: null == currentLocale ? _self.currentLocale : currentLocale // ignore: cast_nullable_to_non_nullable
 as AppLocale,
   ));
 }

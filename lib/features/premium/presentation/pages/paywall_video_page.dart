@@ -5,9 +5,9 @@ import 'package:lottie/lottie.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
-import '../bloc/paywall_video/paywall_video_bloc.dart';
-import '../bloc/paywall_video/paywall_video_event.dart';
-import '../bloc/paywall_video/paywall_video_state.dart';
+import '../bloc/iap/iap_bloc.dart';
+import '../bloc/iap/iap_event.dart';
+import '../bloc/iap/iap_state.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
@@ -22,7 +22,7 @@ class PaywallVideoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          sl<PaywallVideoBloc>()..add(const PaywallVideoEvent.init()),
+          sl<IapBloc>()..add(const IapEvent.init()),
       child: const PaywallVideoView(),
     );
   }
@@ -38,10 +38,10 @@ class PaywallVideoView extends StatelessWidget {
         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
 
     return Scaffold(
-      body: BlocConsumer<PaywallVideoBloc, PaywallVideoState>(
+      body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: (message, _, __) {
+            success: (message, isWeeklySelected, isVideoRevealed) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),
@@ -49,7 +49,7 @@ class PaywallVideoView extends StatelessWidget {
                 ),
               );
             },
-            error: (message, _, __) {
+            error: (message, isWeeklySelected, isVideoRevealed) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),
@@ -161,8 +161,8 @@ class PaywallVideoView extends StatelessWidget {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () =>
-                                    context.read<PaywallVideoBloc>().add(
-                                      const PaywallVideoEvent.toggleReveal(),
+                                    context.read<IapBloc>().add(
+                                      const IapEvent.toggleReveal(),
                                     ),
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
@@ -186,8 +186,8 @@ class PaywallVideoView extends StatelessWidget {
                           ),
                           const SizedBox(height: 24),
                           GestureDetector(
-                            onTap: () => context.read<PaywallVideoBloc>().add(
-                              const PaywallVideoEvent.toggleReveal(),
+                            onTap: () => context.read<IapBloc>().add(
+                              const IapEvent.toggleReveal(),
                             ),
                             child: Lottie.asset(
                               'assets/raw/hand_tab_animation.json',
@@ -322,8 +322,8 @@ class PaywallVideoView extends StatelessWidget {
                               Color(0xFF28c4b3),
                             ],
                             isSelected: isWeekly,
-                            onTap: () => context.read<PaywallVideoBloc>().add(
-                              const PaywallVideoEvent.selectWeekly(),
+                            onTap: () => context.read<IapBloc>().add(
+                              const IapEvent.selectWeekly(),
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -340,8 +340,8 @@ class PaywallVideoView extends StatelessWidget {
                               Color(0xFFff6320),
                             ],
                             isSelected: !isWeekly,
-                            onTap: () => context.read<PaywallVideoBloc>().add(
-                              const PaywallVideoEvent.selectAnnually(),
+                            onTap: () => context.read<IapBloc>().add(
+                              const IapEvent.selectAnnually(),
                             ),
                           ),
                           const SizedBox(height: 24),
@@ -360,8 +360,8 @@ class PaywallVideoView extends StatelessWidget {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () => context
-                                    .read<PaywallVideoBloc>()
-                                    .add(const PaywallVideoEvent.purchase()),
+                                    .read<IapBloc>()
+                                    .add(const IapEvent.purchase()),
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),

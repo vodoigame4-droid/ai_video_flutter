@@ -20,7 +20,7 @@ abstract class AppColors {
   // Generic borders to support theme rules
   static const Color border = Color(0xFF1C362B);
   static const Color lightBorder = Color(0xFF2A2A2A);
-  static const Color border2 = Color(0xFF87878780);
+  static const Color border2 = Color(0x80878787);
 
   // Gradients
   static const LinearGradient primaryGradient = LinearGradient(

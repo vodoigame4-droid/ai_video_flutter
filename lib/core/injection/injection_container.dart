@@ -18,9 +18,7 @@ import '../../features/templates/domain/repositories/templates_repository.dart';
 import '../../features/templates/domain/usecases/get_templates_use_case.dart';
 import '../../features/templates/presentation/bloc/templates_bloc.dart';
 import '../../features/create_video/presentation/bloc/create_video_bloc.dart';
-import '../../features/premium/presentation/bloc/paywall_video/paywall_video_bloc.dart';
 import '../../features/premium/presentation/bloc/iap/iap_bloc.dart';
-import '../../features/premium/presentation/bloc/buy_credits/buy_credits_bloc.dart';
 import '../../features/video_player/presentation/bloc/video_player_bloc.dart';
 
 final sl = GetIt.instance;
@@ -68,9 +66,7 @@ Future<void> initDependencies() async {
   sl.registerFactory(() => CreateVideoBloc());
 
   // Features - Premium / Paywall
-  sl.registerFactory(() => PaywallVideoBloc());
   sl.registerFactory(() => IapBloc());
-  sl.registerFactory(() => BuyCreditsBloc());
 
   // Features - Video Player
   sl.registerFactory(() => VideoPlayerBloc());

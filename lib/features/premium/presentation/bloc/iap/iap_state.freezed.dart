@@ -131,14 +131,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( bool isWeeklySelected)?  ready,TResult Function( String message,  bool isWeeklySelected)?  success,TResult Function( String message,  bool isWeeklySelected)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( bool isWeeklySelected,  bool isVideoRevealed)?  ready,TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  success,TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.isWeeklySelected);case _Success() when success != null:
-return success(_that.message,_that.isWeeklySelected);case _Error() when error != null:
-return error(_that.message,_that.isWeeklySelected);case _:
+return ready(_that.isWeeklySelected,_that.isVideoRevealed);case _Success() when success != null:
+return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _Error() when error != null:
+return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
   return orElse();
 
 }
@@ -156,14 +156,14 @@ return error(_that.message,_that.isWeeklySelected);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( bool isWeeklySelected)  ready,required TResult Function( String message,  bool isWeeklySelected)  success,required TResult Function( String message,  bool isWeeklySelected)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( bool isWeeklySelected,  bool isVideoRevealed)  ready,required TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)  success,required TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.isWeeklySelected);case _Success():
-return success(_that.message,_that.isWeeklySelected);case _Error():
-return error(_that.message,_that.isWeeklySelected);case _:
+return ready(_that.isWeeklySelected,_that.isVideoRevealed);case _Success():
+return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _Error():
+return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +180,14 @@ return error(_that.message,_that.isWeeklySelected);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( bool isWeeklySelected)?  ready,TResult? Function( String message,  bool isWeeklySelected)?  success,TResult? Function( String message,  bool isWeeklySelected)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( bool isWeeklySelected,  bool isVideoRevealed)?  ready,TResult? Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  success,TResult? Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.isWeeklySelected);case _Success() when success != null:
-return success(_that.message,_that.isWeeklySelected);case _Error() when error != null:
-return error(_that.message,_that.isWeeklySelected);case _:
+return ready(_that.isWeeklySelected,_that.isVideoRevealed);case _Success() when success != null:
+return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _Error() when error != null:
+return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
   return null;
 
 }
@@ -263,10 +263,11 @@ String toString() {
 
 
 class _Ready implements IapState {
-  const _Ready({required this.isWeeklySelected});
+  const _Ready({required this.isWeeklySelected, required this.isVideoRevealed});
   
 
  final  bool isWeeklySelected;
+ final  bool isVideoRevealed;
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
@@ -278,16 +279,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isWeeklySelected);
+int get hashCode => Object.hash(runtimeType,isWeeklySelected,isVideoRevealed);
 
 @override
 String toString() {
-  return 'IapState.ready(isWeeklySelected: $isWeeklySelected)';
+  return 'IapState.ready(isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed)';
 }
 
 
@@ -298,7 +299,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $IapStateCopyWith<$Res> {
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- bool isWeeklySelected
+ bool isWeeklySelected, bool isVideoRevealed
 });
 
 
@@ -315,9 +316,10 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? isWeeklySelected = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? isWeeklySelected = null,Object? isVideoRevealed = null,}) {
   return _then(_Ready(
 isWeeklySelected: null == isWeeklySelected ? _self.isWeeklySelected : isWeeklySelected // ignore: cast_nullable_to_non_nullable
+as bool,isVideoRevealed: null == isVideoRevealed ? _self.isVideoRevealed : isVideoRevealed // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -329,11 +331,12 @@ as bool,
 
 
 class _Success implements IapState {
-  const _Success({required this.message, required this.isWeeklySelected});
+  const _Success({required this.message, required this.isWeeklySelected, required this.isVideoRevealed});
   
 
  final  String message;
  final  bool isWeeklySelected;
+ final  bool isVideoRevealed;
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
@@ -345,16 +348,16 @@ _$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,isWeeklySelected);
+int get hashCode => Object.hash(runtimeType,message,isWeeklySelected,isVideoRevealed);
 
 @override
 String toString() {
-  return 'IapState.success(message: $message, isWeeklySelected: $isWeeklySelected)';
+  return 'IapState.success(message: $message, isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed)';
 }
 
 
@@ -365,7 +368,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $IapStateCopyWith<$Res> 
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- String message, bool isWeeklySelected
+ String message, bool isWeeklySelected, bool isVideoRevealed
 });
 
 
@@ -382,10 +385,11 @@ class __$SuccessCopyWithImpl<$Res>
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,Object? isVideoRevealed = null,}) {
   return _then(_Success(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,isWeeklySelected: null == isWeeklySelected ? _self.isWeeklySelected : isWeeklySelected // ignore: cast_nullable_to_non_nullable
+as bool,isVideoRevealed: null == isVideoRevealed ? _self.isVideoRevealed : isVideoRevealed // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -397,11 +401,12 @@ as bool,
 
 
 class _Error implements IapState {
-  const _Error({required this.message, required this.isWeeklySelected});
+  const _Error({required this.message, required this.isWeeklySelected, required this.isVideoRevealed});
   
 
  final  String message;
  final  bool isWeeklySelected;
+ final  bool isVideoRevealed;
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
@@ -413,16 +418,16 @@ _$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,isWeeklySelected);
+int get hashCode => Object.hash(runtimeType,message,isWeeklySelected,isVideoRevealed);
 
 @override
 String toString() {
-  return 'IapState.error(message: $message, isWeeklySelected: $isWeeklySelected)';
+  return 'IapState.error(message: $message, isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed)';
 }
 
 
@@ -433,7 +438,7 @@ abstract mixin class _$ErrorCopyWith<$Res> implements $IapStateCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
 @useResult
 $Res call({
- String message, bool isWeeklySelected
+ String message, bool isWeeklySelected, bool isVideoRevealed
 });
 
 
@@ -450,10 +455,11 @@ class __$ErrorCopyWithImpl<$Res>
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,Object? isVideoRevealed = null,}) {
   return _then(_Error(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,isWeeklySelected: null == isWeeklySelected ? _self.isWeeklySelected : isWeeklySelected // ignore: cast_nullable_to_non_nullable
+as bool,isVideoRevealed: null == isVideoRevealed ? _self.isVideoRevealed : isVideoRevealed // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

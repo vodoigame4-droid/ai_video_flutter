@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +33,6 @@ class ProfilePage extends StatelessWidget {
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
-
 
   void _showDeleteDialog(BuildContext context, String videoId) {
     showDialog(
@@ -79,7 +79,9 @@ class ProfileView extends StatelessWidget {
                             shape: const CircleBorder(),
                             child: InkWell(
                               onTap: () => context.push(SettingsPage.path),
-                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                               child: const SizedBox(
                                 width: 36,
                                 height: 36,
@@ -131,7 +133,11 @@ class ProfileView extends StatelessWidget {
 
                       // Premium Upgrade Banner
                       PremiumBannerWidget(
-                        onTap: () => context.push(PaywallVideoPage.path),
+                        onTap: () {
+                          // context.push(PaywallVideoPage.path);
+                          // context.push(BuyCreditsPage.path);
+                          context.push(IapPage.path);
+                        },
                       ),
 
                       const SizedBox(height: 16),
@@ -247,7 +253,8 @@ class ProfileView extends StatelessWidget {
                                 return MyVideoItemWidget(
                                   video: video,
                                   onPlayTap: () {
-                                    const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                                    const mockVideoUrl =
+                                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
                                     context.pushNamed(
                                       VideoPlayerPage.name,
                                       queryParameters: {

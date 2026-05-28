@@ -60,7 +60,7 @@ class SubscriptionPackageCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(width: 12),
+          const SizedBox(width: 30),
 
           // Right Content: Price and Suffix
           Column(
@@ -95,25 +95,40 @@ class SubscriptionPackageCard extends StatelessWidget {
     if (isSelected) {
       decoratedCard = GradientBorderContainer(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
-        backgroundColor: Colors.white.withValues(alpha: 0.05), // Subtle glass effect
+        backgroundColor: Colors.transparent,
         gradient: const LinearGradient(
           colors: [AppColors.secondary, AppColors.primary],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.secondary.withValues(alpha: 0.15),
+                AppColors.primary.withValues(alpha: 0.15),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
             borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: cardContent,
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onTap,
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              child: cardContent,
+            ),
           ),
         ),
       );
     } else {
       decoratedCard = Container(
         decoration: BoxDecoration(
-          color: AppColors.onSurface.withValues(alpha: 0.5), // Match rgba(23,23,23,0.5)
+          color: AppColors.onSurface.withValues(
+            alpha: 0.5,
+          ), // Match rgba(23,23,23,0.5)
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           border: Border.all(
             color: AppColors.activeTab.withValues(alpha: 0.5),
@@ -139,27 +154,32 @@ class SubscriptionPackageCard extends StatelessWidget {
         if (tagText != null)
           Positioned(
             top: 0,
-            right: 24,
-            child: FractionalTranslation(
-              translation: const Offset(0.0, -0.5),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: tagColors ?? [const Color(0xFFfae123), const Color(0xFFff6320)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+            right: 0,
+            child: Container(
+              constraints: const BoxConstraints(minWidth: 88, minHeight: 21),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors:
+                      tagColors ??
+                      [const Color(0xFFff6320), const Color(0xFFfae123)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
                 ),
-                child: Text(
-                  tagText!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  topRight: Radius.circular(20),
                 ),
+              ),
+              child: Text(
+                tagText!,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
