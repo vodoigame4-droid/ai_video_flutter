@@ -198,5 +198,20 @@
     "error_loading": "Không thể tải video.",
     "retry": "Thử lại",
     "buffering": "Đang tải..."
+  },
+  "generating": {
+    "title": "Đang khởi tạo",
+    "your_video": "video của bạn",
+    "desc": "Quá trình này có thể mất vài phút.\nVui lòng đợi...",
+    "notify_me": "Thông báo cho tôi khi hoàn tất",
+    "notified": "Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!"
+  },
+  "result": {
+    "title": "Video kết quả",
+    "ready_message": "Video {title} của bạn đã sẵn sàng!",
+    "regenerate": "Tạo lại",
+    "create_another": "Tạo một video khác",
+    "share": "Chia sẻ",
+    "download": "Tải xuống"
   }
 }

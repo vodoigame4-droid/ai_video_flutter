@@ -123,14 +123,11 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
             ready: (readyState) async {
               if (readyState.isGenerating) return;
 
-              LogUtils.d("Starting mock video generation...");
+              LogUtils.d("Triggering video generation navigation...");
               emit(readyState.copyWith(isGenerating: true, isSuccess: false));
 
-              // Simulate background generation
-              await Future.delayed(const Duration(milliseconds: 2000));
-
-              LogUtils.d("Video generation finished successfully");
-              emit(readyState.copyWith(isGenerating: false, isSuccess: true));
+              // Reset immediately so that popping back to this screen doesn't re-trigger navigation
+              emit(readyState.copyWith(isGenerating: false, isSuccess: false));
             },
           );
         },

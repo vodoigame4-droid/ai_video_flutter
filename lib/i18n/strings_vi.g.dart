@@ -53,6 +53,8 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$language$vi language = _Translations$language$vi._(_root);
 	@override late final _Translations$premium$vi premium = _Translations$premium$vi._(_root);
 	@override late final _Translations$video_player$vi video_player = _Translations$video_player$vi._(_root);
+	@override late final _Translations$generating$vi generating = _Translations$generating$vi._(_root);
+	@override late final _Translations$result$vi result = _Translations$result$vi._(_root);
 }
 
 // Path: common
@@ -333,6 +335,35 @@ class _Translations$video_player$vi extends Translations$video_player$en {
 	@override String get buffering => 'Đang tải...';
 }
 
+// Path: generating
+class _Translations$generating$vi extends Translations$generating$en {
+	_Translations$generating$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Đang khởi tạo';
+	@override String get your_video => 'video của bạn';
+	@override String get desc => 'Quá trình này có thể mất vài phút.\nVui lòng đợi...';
+	@override String get notify_me => 'Thông báo cho tôi khi hoàn tất';
+	@override String get notified => 'Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!';
+}
+
+// Path: result
+class _Translations$result$vi extends Translations$result$en {
+	_Translations$result$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Video kết quả';
+	@override String ready_message({required Object title}) => 'Video ${title} của bạn đã sẵn sàng!';
+	@override String get regenerate => 'Tạo lại';
+	@override String get create_another => 'Tạo một video khác';
+	@override String get share => 'Chia sẻ';
+	@override String get download => 'Tải xuống';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -563,6 +594,17 @@ extension on TranslationsVi {
 			'video_player.error_loading' => 'Không thể tải video.',
 			'video_player.retry' => 'Thử lại',
 			'video_player.buffering' => 'Đang tải...',
+			'generating.title' => 'Đang khởi tạo',
+			'generating.your_video' => 'video của bạn',
+			'generating.desc' => 'Quá trình này có thể mất vài phút.\nVui lòng đợi...',
+			'generating.notify_me' => 'Thông báo cho tôi khi hoàn tất',
+			'generating.notified' => 'Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!',
+			'result.title' => 'Video kết quả',
+			'result.ready_message' => ({required Object title}) => 'Video ${title} của bạn đã sẵn sàng!',
+			'result.regenerate' => 'Tạo lại',
+			'result.create_another' => 'Tạo một video khác',
+			'result.share' => 'Chia sẻ',
+			'result.download' => 'Tải xuống',
 			_ => null,
 		};
 	}

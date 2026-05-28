@@ -52,6 +52,8 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$ja settings = _Translations$settings$ja._(_root);
 	@override late final _Translations$language$ja language = _Translations$language$ja._(_root);
 	@override late final _Translations$premium$ja premium = _Translations$premium$ja._(_root);
+	@override late final _Translations$generating$ja generating = _Translations$generating$ja._(_root);
+	@override late final _Translations$result$ja result = _Translations$result$ja._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$ja extends Translations$premium$en {
 	@override String get discount_subtitle => 'クレジット価格';
 }
 
+// Path: generating
+class _Translations$generating$ja extends Translations$generating$en {
+	_Translations$generating$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '生成中';
+	@override String get your_video => '動画を作成しています';
+	@override String get desc => '数分かかる場合があります。\n少々お待ちください...';
+	@override String get notify_me => '完了時に通知する';
+	@override String get notified => '動画の準備ができたら通知します！';
+}
+
+// Path: result
+class _Translations$result$ja extends Translations$result$en {
+	_Translations$result$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '作成された動画';
+	@override String ready_message({required Object title}) => '「${title}」の動画の準備ができました！';
+	@override String get regenerate => '再生成する';
+	@override String get create_another => '別の動画を作成する';
+	@override String get share => '共有する';
+	@override String get download => 'ダウンロード';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsJa {
 			'premium.pro_title' => 'プロ',
 			'premium.discount_title' => '50% OFF',
 			'premium.discount_subtitle' => 'クレジット価格',
+			'generating.title' => '生成中',
+			'generating.your_video' => '動画を作成しています',
+			'generating.desc' => '数分かかる場合があります。\n少々お待ちください...',
+			'generating.notify_me' => '完了時に通知する',
+			'generating.notified' => '動画の準備ができたら通知します！',
+			'result.title' => '作成された動画',
+			'result.ready_message' => ({required Object title}) => '「${title}」の動画の準備ができました！',
+			'result.regenerate' => '再生成する',
+			'result.create_another' => '別の動画を作成する',
+			'result.share' => '共有する',
+			'result.download' => 'ダウンロード',
 			_ => null,
 		};
 	}

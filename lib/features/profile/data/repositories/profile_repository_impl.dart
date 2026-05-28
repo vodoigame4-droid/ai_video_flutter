@@ -43,4 +43,24 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Resource.error(message: e.toString());
     }
   }
+
+  @override
+  Future<Resource<void>> addUserVideo(UserVideoEntity video) async {
+    try {
+      final model = UserVideoModel(
+        id: video.id,
+        title: video.title,
+        imageUrl: video.imageUrl,
+        status: video.status,
+        progress: video.progress,
+        createdAt: video.createdAt,
+        isLiked: video.isLiked,
+      );
+      await localDataSource.addUserVideo(model);
+      return Resource.success(null);
+    } catch (e, stack) {
+      LogUtils.e('Error adding user video', error: e, stackTrace: stack);
+      return Resource.error(message: e.toString());
+    }
+  }
 }

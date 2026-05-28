@@ -191,5 +191,20 @@
     "pro_title": "プロ",
     "discount_title": "50% OFF",
     "discount_subtitle": "クレジット価格"
+  },
+  "generating": {
+    "title": "生成中",
+    "your_video": "動画を作成しています",
+    "desc": "数分かかる場合があります。\n少々お待ちください...",
+    "notify_me": "完了時に通知する",
+    "notified": "動画の準備ができたら通知します！"
+  },
+  "result": {
+    "title": "作成された動画",
+    "ready_message": "「{title}」の動画の準備ができました！",
+    "regenerate": "再生成する",
+    "create_another": "別の動画を作成する",
+    "share": "共有する",
+    "download": "ダウンロード"
   }
 }

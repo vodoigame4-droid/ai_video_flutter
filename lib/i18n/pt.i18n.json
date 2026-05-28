@@ -191,5 +191,20 @@
     "pro_title": "PRO",
     "discount_title": "50% DE DESCONTO",
     "discount_subtitle": "PREÇOS DOS CRÉDITOS"
+  },
+  "generating": {
+    "title": "Gerando",
+    "your_video": "seu vídeo",
+    "desc": "Isso pode levar alguns minutos.\nPor favor, aguarde...",
+    "notify_me": "Notificar-me quando concluído",
+    "notified": "Nós o notificaremos quando seu vídeo estiver pronto!"
+  },
+  "result": {
+    "title": "Vídeo do Resultado",
+    "ready_message": "Seu vídeo de {title} está pronto!",
+    "regenerate": "Regenerar",
+    "create_another": "Criar outro vídeo",
+    "share": "Compartilhar",
+    "download": "Baixar"
   }
 }

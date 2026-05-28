@@ -191,5 +191,20 @@
     "pro_title": "PRO",
     "discount_title": "50% RABATT",
     "discount_subtitle": "GUTHABENPREISE"
+  },
+  "generating": {
+    "title": "Generieren",
+    "your_video": "deines Videos",
+    "desc": "Dies kann einige Minuten dauern.\nBitte warten...",
+    "notify_me": "Benachrichtigen, wenn fertig",
+    "notified": "Wir benachrichtigen dich, wenn dein Video fertig ist!"
+  },
+  "result": {
+    "title": "Ergebnis-Video",
+    "ready_message": "Dein {title} Video ist bereit!",
+    "regenerate": "Neu generieren",
+    "create_another": "Anderes Video erstellen",
+    "share": "Teilen",
+    "download": "Herunterladen"
   }
 }

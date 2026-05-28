@@ -52,6 +52,8 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$de settings = _Translations$settings$de._(_root);
 	@override late final _Translations$language$de language = _Translations$language$de._(_root);
 	@override late final _Translations$premium$de premium = _Translations$premium$de._(_root);
+	@override late final _Translations$generating$de generating = _Translations$generating$de._(_root);
+	@override late final _Translations$result$de result = _Translations$result$de._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$de extends Translations$premium$en {
 	@override String get discount_subtitle => 'GUTHABENPREISE';
 }
 
+// Path: generating
+class _Translations$generating$de extends Translations$generating$en {
+	_Translations$generating$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Generieren';
+	@override String get your_video => 'deines Videos';
+	@override String get desc => 'Dies kann einige Minuten dauern.\nBitte warten...';
+	@override String get notify_me => 'Benachrichtigen, wenn fertig';
+	@override String get notified => 'Wir benachrichtigen dich, wenn dein Video fertig ist!';
+}
+
+// Path: result
+class _Translations$result$de extends Translations$result$en {
+	_Translations$result$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Ergebnis-Video';
+	@override String ready_message({required Object title}) => 'Dein ${title} Video ist bereit!';
+	@override String get regenerate => 'Neu generieren';
+	@override String get create_another => 'Anderes Video erstellen';
+	@override String get share => 'Teilen';
+	@override String get download => 'Herunterladen';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsDe {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => '50% RABATT',
 			'premium.discount_subtitle' => 'GUTHABENPREISE',
+			'generating.title' => 'Generieren',
+			'generating.your_video' => 'deines Videos',
+			'generating.desc' => 'Dies kann einige Minuten dauern.\nBitte warten...',
+			'generating.notify_me' => 'Benachrichtigen, wenn fertig',
+			'generating.notified' => 'Wir benachrichtigen dich, wenn dein Video fertig ist!',
+			'result.title' => 'Ergebnis-Video',
+			'result.ready_message' => ({required Object title}) => 'Dein ${title} Video ist bereit!',
+			'result.regenerate' => 'Neu generieren',
+			'result.create_another' => 'Anderes Video erstellen',
+			'result.share' => 'Teilen',
+			'result.download' => 'Herunterladen',
 			_ => null,
 		};
 	}

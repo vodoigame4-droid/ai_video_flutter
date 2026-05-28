@@ -52,6 +52,8 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$zh settings = _Translations$settings$zh._(_root);
 	@override late final _Translations$language$zh language = _Translations$language$zh._(_root);
 	@override late final _Translations$premium$zh premium = _Translations$premium$zh._(_root);
+	@override late final _Translations$generating$zh generating = _Translations$generating$zh._(_root);
+	@override late final _Translations$result$zh result = _Translations$result$zh._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$zh extends Translations$premium$en {
 	@override String get discount_subtitle => '点数价格';
 }
 
+// Path: generating
+class _Translations$generating$zh extends Translations$generating$en {
+	_Translations$generating$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '正在生成';
+	@override String get your_video => '您的视频';
+	@override String get desc => '这可能需要几分钟时间。\n请稍候...';
+	@override String get notify_me => '完成后通知我';
+	@override String get notified => '您的视频准备就绪后，我们将通知您！';
+}
+
+// Path: result
+class _Translations$result$zh extends Translations$result$en {
+	_Translations$result$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '生成结果';
+	@override String ready_message({required Object title}) => '您的 ${title} 视频已准备就绪！';
+	@override String get regenerate => '重新生成';
+	@override String get create_another => '创建其他视频';
+	@override String get share => '分享';
+	@override String get download => '下载';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsZh {
 			'premium.pro_title' => '专业版',
 			'premium.discount_title' => '50% 优惠',
 			'premium.discount_subtitle' => '点数价格',
+			'generating.title' => '正在生成',
+			'generating.your_video' => '您的视频',
+			'generating.desc' => '这可能需要几分钟时间。\n请稍候...',
+			'generating.notify_me' => '完成后通知我',
+			'generating.notified' => '您的视频准备就绪后，我们将通知您！',
+			'result.title' => '生成结果',
+			'result.ready_message' => ({required Object title}) => '您的 ${title} 视频已准备就绪！',
+			'result.regenerate' => '重新生成',
+			'result.create_another' => '创建其他视频',
+			'result.share' => '分享',
+			'result.download' => '下载',
 			_ => null,
 		};
 	}

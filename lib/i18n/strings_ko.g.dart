@@ -52,6 +52,8 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$ko settings = _Translations$settings$ko._(_root);
 	@override late final _Translations$language$ko language = _Translations$language$ko._(_root);
 	@override late final _Translations$premium$ko premium = _Translations$premium$ko._(_root);
+	@override late final _Translations$generating$ko generating = _Translations$generating$ko._(_root);
+	@override late final _Translations$result$ko result = _Translations$result$ko._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$ko extends Translations$premium$en {
 	@override String get discount_subtitle => '크레딧 가격';
 }
 
+// Path: generating
+class _Translations$generating$ko extends Translations$generating$en {
+	_Translations$generating$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '생성 중';
+	@override String get your_video => '동영상 생성';
+	@override String get desc => '몇 분 정도 걸릴 수 있습니다.\n잠시만 기다려 주세요...';
+	@override String get notify_me => '완료 시 나에게 알림';
+	@override String get notified => '동영상이 준비되면 알려드리겠습니다!';
+}
+
+// Path: result
+class _Translations$result$ko extends Translations$result$en {
+	_Translations$result$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '결과 동영상';
+	@override String ready_message({required Object title}) => '${title} 동영상이 준비되었습니다!';
+	@override String get regenerate => '재생성';
+	@override String get create_another => '다른 동영상 만들기';
+	@override String get share => '공유';
+	@override String get download => '다운로드';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsKo {
 			'premium.pro_title' => '프로',
 			'premium.discount_title' => '50% 할인',
 			'premium.discount_subtitle' => '크레딧 가격',
+			'generating.title' => '생성 중',
+			'generating.your_video' => '동영상 생성',
+			'generating.desc' => '몇 분 정도 걸릴 수 있습니다.\n잠시만 기다려 주세요...',
+			'generating.notify_me' => '완료 시 나에게 알림',
+			'generating.notified' => '동영상이 준비되면 알려드리겠습니다!',
+			'result.title' => '결과 동영상',
+			'result.ready_message' => ({required Object title}) => '${title} 동영상이 준비되었습니다!',
+			'result.regenerate' => '재생성',
+			'result.create_another' => '다른 동영상 만들기',
+			'result.share' => '공유',
+			'result.download' => '다운로드',
 			_ => null,
 		};
 	}

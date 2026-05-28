@@ -186,11 +186,14 @@ class $AssetsImagesGen {
 class $AssetsRawGen {
   const $AssetsRawGen();
 
+  /// File path: assets/raw/ai_animation.json
+  String get aiAnimation => 'assets/raw/ai_animation.json';
+
   /// File path: assets/raw/hand_tab_animation.json
   String get handTabAnimation => 'assets/raw/hand_tab_animation.json';
 
   /// List of all assets
-  List<String> get values => [handTabAnimation];
+  List<String> get values => [aiAnimation, handTabAnimation];
 }
 
 class Assets {

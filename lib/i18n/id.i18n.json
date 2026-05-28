@@ -191,5 +191,20 @@
     "pro_title": "PRO",
     "discount_title": "DISKON 50%",
     "discount_subtitle": "HARGA KREDIT"
+  },
+  "generating": {
+    "title": "Membuat",
+    "your_video": "video Anda",
+    "desc": "Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...",
+    "notify_me": "Beritahu saya saat selesai",
+    "notified": "Kami akan memberi tahu Anda saat video Anda siap!"
+  },
+  "result": {
+    "title": "Video Hasil",
+    "ready_message": "Video {title} Anda sudah siap!",
+    "regenerate": "Buat ulang",
+    "create_another": "Buat Video Lain",
+    "share": "Bagikan",
+    "download": "Unduh"
   }
 }

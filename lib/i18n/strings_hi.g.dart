@@ -52,6 +52,8 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$hi settings = _Translations$settings$hi._(_root);
 	@override late final _Translations$language$hi language = _Translations$language$hi._(_root);
 	@override late final _Translations$premium$hi premium = _Translations$premium$hi._(_root);
+	@override late final _Translations$generating$hi generating = _Translations$generating$hi._(_root);
+	@override late final _Translations$result$hi result = _Translations$result$hi._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$hi extends Translations$premium$en {
 	@override String get discount_subtitle => 'क्रेडिट की कीमतें';
 }
 
+// Path: generating
+class _Translations$generating$hi extends Translations$generating$en {
+	_Translations$generating$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'बनाया जा रहा है';
+	@override String get your_video => 'आपका वीडियो';
+	@override String get desc => 'इसमें कुछ मिनट लग सकते हैं।\nकृपया प्रतीक्षा करें...';
+	@override String get notify_me => 'पूरा होने पर मुझे सूचित करें';
+	@override String get notified => 'आपका वीडियो तैयार होने पर हम आपको सूचित करेंगे!';
+}
+
+// Path: result
+class _Translations$result$hi extends Translations$result$en {
+	_Translations$result$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'परिणाम वीडियो';
+	@override String ready_message({required Object title}) => 'आपका ${title} वीडियो तैयार है!';
+	@override String get regenerate => 'पुनः उत्पन्न करें';
+	@override String get create_another => 'दूसरा वीडियो बनाएं';
+	@override String get share => 'साझा करें';
+	@override String get download => 'डाउनलोड करें';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsHi {
 			'premium.pro_title' => 'प्रो',
 			'premium.discount_title' => '50% छूट',
 			'premium.discount_subtitle' => 'क्रेडिट की कीमतें',
+			'generating.title' => 'बनाया जा रहा है',
+			'generating.your_video' => 'आपका वीडियो',
+			'generating.desc' => 'इसमें कुछ मिनट लग सकते हैं।\nकृपया प्रतीक्षा करें...',
+			'generating.notify_me' => 'पूरा होने पर मुझे सूचित करें',
+			'generating.notified' => 'आपका वीडियो तैयार होने पर हम आपको सूचित करेंगे!',
+			'result.title' => 'परिणाम वीडियो',
+			'result.ready_message' => ({required Object title}) => 'आपका ${title} वीडियो तैयार है!',
+			'result.regenerate' => 'पुनः उत्पन्न करें',
+			'result.create_another' => 'दूसरा वीडियो बनाएं',
+			'result.share' => 'साझा करें',
+			'result.download' => 'डाउनलोड करें',
 			_ => null,
 		};
 	}

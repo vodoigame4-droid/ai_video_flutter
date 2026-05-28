@@ -198,5 +198,20 @@
     "error_loading": "Failed to load video.",
     "retry": "Retry",
     "buffering": "Buffering..."
+  },
+  "generating": {
+    "title": "Generating",
+    "your_video": "your video",
+    "desc": "This may take a few minutes.\nPlease wait...",
+    "notify_me": "Notify me when complete",
+    "notified": "We will notify you when your video is ready!"
+  },
+  "result": {
+    "title": "Result Video",
+    "ready_message": "Your {title} video is ready!",
+    "regenerate": "Regenerate",
+    "create_another": "Create Another Video",
+    "share": "Share",
+    "download": "Download"
   }
 }

@@ -4,6 +4,7 @@ abstract class ProfileLocalDataSource {
   Future<List<UserVideoModel>> getUserVideos();
   Future<bool> deleteUserVideo(String id);
   Future<void> updateVideoProgress(String id, double progress, String status);
+  Future<void> addUserVideo(UserVideoModel video);
 }
 
 class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
@@ -83,5 +84,11 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
         status: status,
       );
     }
+  }
+
+  @override
+  Future<void> addUserVideo(UserVideoModel video) async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    _videos.insert(0, video);
   }
 }

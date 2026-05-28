@@ -52,6 +52,8 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$ar settings = _Translations$settings$ar._(_root);
 	@override late final _Translations$language$ar language = _Translations$language$ar._(_root);
 	@override late final _Translations$premium$ar premium = _Translations$premium$ar._(_root);
+	@override late final _Translations$generating$ar generating = _Translations$generating$ar._(_root);
+	@override late final _Translations$result$ar result = _Translations$result$ar._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$ar extends Translations$premium$en {
 	@override String get discount_subtitle => 'أسعار الرصيد';
 }
 
+// Path: generating
+class _Translations$generating$ar extends Translations$generating$en {
+	_Translations$generating$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'جاري الإنشاء';
+	@override String get your_video => 'الفيديو الخاص بك';
+	@override String get desc => 'قد يستغرق هذا بضع دقائق.\nيرجى الانتظار...';
+	@override String get notify_me => 'أبلغني عند الانتهاء';
+	@override String get notified => 'سنقوم بإخطارك عندما يكون الفيديو الخاص بك جاهزًا!';
+}
+
+// Path: result
+class _Translations$result$ar extends Translations$result$en {
+	_Translations$result$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'فيديو النتيجة';
+	@override String ready_message({required Object title}) => 'الفيديو الخاص بك ${title} جاهز!';
+	@override String get regenerate => 'إعادة التوليد';
+	@override String get create_another => 'إنشاء فيديو آخر';
+	@override String get share => 'مشاركة';
+	@override String get download => 'تنزيل';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsAr {
 			'premium.pro_title' => 'بريميوم',
 			'premium.discount_title' => 'خصم 50%',
 			'premium.discount_subtitle' => 'أسعار الرصيد',
+			'generating.title' => 'جاري الإنشاء',
+			'generating.your_video' => 'الفيديو الخاص بك',
+			'generating.desc' => 'قد يستغرق هذا بضع دقائق.\nيرجى الانتظار...',
+			'generating.notify_me' => 'أبلغني عند الانتهاء',
+			'generating.notified' => 'سنقوم بإخطارك عندما يكون الفيديو الخاص بك جاهزًا!',
+			'result.title' => 'فيديو النتيجة',
+			'result.ready_message' => ({required Object title}) => 'الفيديو الخاص بك ${title} جاهز!',
+			'result.regenerate' => 'إعادة التوليد',
+			'result.create_another' => 'إنشاء فيديو آخر',
+			'result.share' => 'مشاركة',
+			'result.download' => 'تنزيل',
 			_ => null,
 		};
 	}

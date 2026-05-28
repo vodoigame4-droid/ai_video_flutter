@@ -8,6 +8,7 @@ import '../../../../i18n/strings.g.dart';
 import '../../../profile/presentation/pages/profile_page.dart';
 import '../bloc/create_video_bloc.dart';
 import '../bloc/create_video_event.dart';
+import 'generating_page.dart';
 import '../bloc/create_video_state.dart';
 import '../widgets/create_video_tab_bar_widget.dart';
 import '../widgets/image_to_video_tab.dart';
@@ -45,14 +46,19 @@ class CreateVideoView extends StatelessWidget {
         listener: (context, state) {
           state.mapOrNull(
             ready: (readyState) {
-              if (readyState.isSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(t.profile.generating),
-                    duration: const Duration(seconds: 2),
-                  ),
+              if (readyState.isGenerating) {
+                context.pushNamed(
+                  GeneratingPage.name,
+                  queryParameters: {
+                    'title': readyState.customPrompt.trim().isEmpty
+                        ? t.profile.imageGeneration
+                        : readyState.customPrompt,
+                    'imageUrl': readyState.slotsPaths.firstWhere(
+                          (p) => p != null,
+                          orElse: () => '',
+                        ) ?? '',
+                  },
                 );
-                context.pop();
               }
             },
           );

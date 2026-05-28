@@ -52,6 +52,8 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$settings$id settings = _Translations$settings$id._(_root);
 	@override late final _Translations$language$id language = _Translations$language$id._(_root);
 	@override late final _Translations$premium$id premium = _Translations$premium$id._(_root);
+	@override late final _Translations$generating$id generating = _Translations$generating$id._(_root);
+	@override late final _Translations$result$id result = _Translations$result$id._(_root);
 }
 
 // Path: common
@@ -318,6 +320,35 @@ class _Translations$premium$id extends Translations$premium$en {
 	@override String get discount_subtitle => 'HARGA KREDIT';
 }
 
+// Path: generating
+class _Translations$generating$id extends Translations$generating$en {
+	_Translations$generating$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Membuat';
+	@override String get your_video => 'video Anda';
+	@override String get desc => 'Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...';
+	@override String get notify_me => 'Beritahu saya saat selesai';
+	@override String get notified => 'Kami akan memberi tahu Anda saat video Anda siap!';
+}
+
+// Path: result
+class _Translations$result$id extends Translations$result$en {
+	_Translations$result$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Video Hasil';
+	@override String ready_message({required Object title}) => 'Video ${title} Anda sudah siap!';
+	@override String get regenerate => 'Buat ulang';
+	@override String get create_another => 'Buat Video Lain';
+	@override String get share => 'Bagikan';
+	@override String get download => 'Unduh';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -543,6 +574,17 @@ extension on TranslationsId {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => 'DISKON 50%',
 			'premium.discount_subtitle' => 'HARGA KREDIT',
+			'generating.title' => 'Membuat',
+			'generating.your_video' => 'video Anda',
+			'generating.desc' => 'Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...',
+			'generating.notify_me' => 'Beritahu saya saat selesai',
+			'generating.notified' => 'Kami akan memberi tahu Anda saat video Anda siap!',
+			'result.title' => 'Video Hasil',
+			'result.ready_message' => ({required Object title}) => 'Video ${title} Anda sudah siap!',
+			'result.regenerate' => 'Buat ulang',
+			'result.create_another' => 'Buat Video Lain',
+			'result.share' => 'Bagikan',
+			'result.download' => 'Unduh',
 			_ => null,
 		};
 	}

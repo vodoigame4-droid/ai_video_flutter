@@ -191,5 +191,20 @@
     "pro_title": "专业版",
     "discount_title": "50% 优惠",
     "discount_subtitle": "点数价格"
+  },
+  "generating": {
+    "title": "正在生成",
+    "your_video": "您的视频",
+    "desc": "这可能需要几分钟时间。\n请稍候...",
+    "notify_me": "完成后通知我",
+    "notified": "您的视频准备就绪后，我们将通知您！"
+  },
+  "result": {
+    "title": "生成结果",
+    "ready_message": "您的 {title} 视频已准备就绪！",
+    "regenerate": "重新生成",
+    "create_another": "创建其他视频",
+    "share": "分享",
+    "download": "下载"
   }
 }

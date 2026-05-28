@@ -54,6 +54,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$language$en language = Translations$language$en.internal(_root);
 	late final Translations$premium$en premium = Translations$premium$en.internal(_root);
 	late final Translations$video_player$en video_player = Translations$video_player$en.internal(_root);
+	late final Translations$generating$en generating = Translations$generating$en.internal(_root);
+	late final Translations$result$en result = Translations$result$en.internal(_root);
 }
 
 // Path: common
@@ -628,6 +630,57 @@ class Translations$video_player$en {
 	String get buffering => 'Buffering...';
 }
 
+// Path: generating
+class Translations$generating$en {
+	Translations$generating$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Generating'
+	String get title => 'Generating';
+
+	/// en: 'your video'
+	String get your_video => 'your video';
+
+	/// en: 'This may take a few minutes. Please wait...'
+	String get desc => 'This may take a few minutes.\nPlease wait...';
+
+	/// en: 'Notify me when complete'
+	String get notify_me => 'Notify me when complete';
+
+	/// en: 'We will notify you when your video is ready!'
+	String get notified => 'We will notify you when your video is ready!';
+}
+
+// Path: result
+class Translations$result$en {
+	Translations$result$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Result Video'
+	String get title => 'Result Video';
+
+	/// en: 'Your {title} video is ready!'
+	String ready_message({required Object title}) => 'Your ${title} video is ready!';
+
+	/// en: 'Regenerate'
+	String get regenerate => 'Regenerate';
+
+	/// en: 'Create Another Video'
+	String get create_another => 'Create Another Video';
+
+	/// en: 'Share'
+	String get share => 'Share';
+
+	/// en: 'Download'
+	String get download => 'Download';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -888,6 +941,17 @@ extension on Translations {
 			'video_player.error_loading' => 'Failed to load video.',
 			'video_player.retry' => 'Retry',
 			'video_player.buffering' => 'Buffering...',
+			'generating.title' => 'Generating',
+			'generating.your_video' => 'your video',
+			'generating.desc' => 'This may take a few minutes.\nPlease wait...',
+			'generating.notify_me' => 'Notify me when complete',
+			'generating.notified' => 'We will notify you when your video is ready!',
+			'result.title' => 'Result Video',
+			'result.ready_message' => ({required Object title}) => 'Your ${title} video is ready!',
+			'result.regenerate' => 'Regenerate',
+			'result.create_another' => 'Create Another Video',
+			'result.share' => 'Share',
+			'result.download' => 'Download',
 			_ => null,
 		};
 	}

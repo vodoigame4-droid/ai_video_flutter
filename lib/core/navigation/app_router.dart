@@ -7,6 +7,8 @@ import '../../features/templates/presentation/pages/templates_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/settings/presentation/pages/language_page.dart';
 import '../../features/create_video/presentation/pages/create_video_page.dart';
+import '../../features/create_video/presentation/pages/generating_page.dart';
+import '../../features/create_video/presentation/pages/result_page.dart';
 import '../../features/premium/presentation/pages/paywall_video_page.dart';
 import '../../features/premium/presentation/pages/iap_page.dart';
 import '../../features/premium/presentation/pages/buy_credits_page.dart';
@@ -94,6 +96,39 @@ final GoRouter appRouter = GoRouter(
         return AppRoutePage.cupertino<void>(
           state: state,
           child: CreateVideoPage(initialTab: initialTab),
+        );
+      },
+    ),
+    GoRoute(
+      path: GeneratingPage.path,
+      name: GeneratingPage.name,
+      pageBuilder: (context, state) {
+        final title = state.uri.queryParameters['title'] ?? 'Image Generation';
+        final imageUrl = state.uri.queryParameters['imageUrl'];
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: GeneratingPage(title: title, imageUrl: imageUrl),
+        );
+      },
+    ),
+    GoRoute(
+      path: ResultPage.path,
+      name: ResultPage.name,
+      pageBuilder: (context, state) {
+        final videoId = state.uri.queryParameters['videoId'] ?? '';
+        final title = state.uri.queryParameters['title'] ?? 'Image Generation';
+        final imageUrl = state.uri.queryParameters['imageUrl'] ?? '';
+        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        final createdAt = state.uri.queryParameters['createdAt'] ?? '';
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: ResultPage(
+            videoId: videoId,
+            title: title,
+            imageUrl: imageUrl,
+            videoUrl: videoUrl,
+            createdAt: createdAt,
+          ),
         );
       },
     ),
