@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_svg_icon.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 
 class CustomPromptCardWidget extends StatefulWidget {
@@ -60,10 +63,7 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         borderRadius: const BorderRadius.all(Radius.circular(15)),
-        border: Border.all(
-          color: context.appTheme.lightBorderColor,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.subText, width: 1),
       ),
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -84,14 +84,14 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
               ),
             ),
           ),
-          
+
           // Action row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Inspire Me Button
               _buildInspireMeButton(context),
-              
+
               // Count & Trash bin
               Row(
                 children: [
@@ -104,10 +104,11 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
                   const SizedBox(width: 6),
                   IconButton(
                     onPressed: widget.onClearPressed,
-                    icon: const Icon(
-                      Icons.delete_outline_rounded,
-                      color: AppColors.white,
-                      size: 20,
+                    icon: AppSvgIcon(
+                      assetName: Assets.icons.icTrash,
+                      color: AppColors.subText,
+                      width: 20,
+                      height: 20,
                     ),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -128,33 +129,47 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
     final t = context.t;
     final hasUsesLeft = widget.inspireMeCount > 0;
 
-    return InkWell(
-      onTap: hasUsesLeft ? widget.onInspireMePressed : null,
-      borderRadius: const BorderRadius.all(Radius.circular(100)),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: AppColors.black.withValues(alpha: 0.2),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.black.withValues(alpha: 0.2),
+        borderRadius: const BorderRadius.all(Radius.circular(100)),
+        border: hasUsesLeft
+            ? GradientBoxBorder(
+                gradient: context.appTheme.primaryGradient,
+                width: 1,
+              )
+            : Border.all(
+                color: context.appTheme.borderColor,
+                width: 1,
+              ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: hasUsesLeft ? widget.onInspireMePressed : null,
           borderRadius: const BorderRadius.all(Radius.circular(100)),
-          border: Border.all(
-            color: hasUsesLeft ? context.colorScheme.secondary : context.appTheme.borderColor,
-            width: 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AppSvgIcon(
+                  assetName: Assets.icons.icInspireMe,
+                  gradient: hasUsesLeft ? context.appTheme.primaryGradient : null,
+                  color: hasUsesLeft ? null : AppColors.white.withValues(alpha: 0.4),
+                  width: 14,
+                  height: 14,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  t.create.inspire_me_count(count: widget.inspireMeCount),
+                  style: hasUsesLeft
+                      ? context.appTheme.navLabelActiveStyle
+                      : context.appTheme.navLabelInactiveStyle,
+                ),
+              ],
+            ),
           ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.auto_awesome_rounded,
-              color: hasUsesLeft ? context.colorScheme.secondary : AppColors.white.withValues(alpha: 0.4),
-              size: 14,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              t.create.inspire_me_count(count: widget.inspireMeCount),
-              style: hasUsesLeft ? context.appTheme.navLabelActiveStyle : context.appTheme.navLabelInactiveStyle,
-            ),
-          ],
         ),
       ),
     );

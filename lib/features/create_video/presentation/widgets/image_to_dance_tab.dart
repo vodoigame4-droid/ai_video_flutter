@@ -9,6 +9,7 @@ import '../bloc/create_video_state.dart';
 import 'custom_prompt_card_widget.dart';
 import '../../../../core/widgets/upload_slot_widget.dart';
 import 'video_settings_card_widget.dart';
+import 'create_video_button_widget.dart';
 
 class ImageToDanceTab extends StatelessWidget {
   const ImageToDanceTab({super.key});

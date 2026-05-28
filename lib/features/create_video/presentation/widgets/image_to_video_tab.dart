@@ -9,6 +9,7 @@ import '../bloc/create_video_state.dart';
 import 'custom_prompt_card_widget.dart';
 import '../../../../core/widgets/upload_slot_widget.dart';
 import 'video_settings_card_widget.dart';
+import 'create_video_button_widget.dart';
 
 class ImageToVideoTab extends StatelessWidget {
   const ImageToVideoTab({super.key});
@@ -44,26 +45,25 @@ class ImageToVideoTab extends StatelessWidget {
                             const SizedBox(height: 16),
                             _buildUploadSectionHeader(context),
                             const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 173,
-                                  child: UploadSlotWidget(
-                                    mediaPath: slotsPaths[0],
-                                    labelText: t.create.tap_upload,
-                                    onMediaRemoved: () {
-                                      context.read<CreateVideoBloc>().add(
-                                        const CreateVideoEvent.removeMedia(0),
-                                      );
-                                    },
-                                    onMediaSelected: (path) {
-                                      context.read<CreateVideoBloc>().add(
-                                        CreateVideoEvent.selectMedia(0, path),
-                                      );
-                                    },
-                                  ),
+                            Center(
+                              child: SizedBox(
+                                width: 173,
+                                height: 173,
+                                child: UploadSlotWidget(
+                                  mediaPath: slotsPaths[0],
+                                  labelText: t.create.tap_upload,
+                                  onMediaRemoved: () {
+                                    context.read<CreateVideoBloc>().add(
+                                      const CreateVideoEvent.removeMedia(0),
+                                    );
+                                  },
+                                  onMediaSelected: (path) {
+                                    context.read<CreateVideoBloc>().add(
+                                      CreateVideoEvent.selectMedia(0, path),
+                                    );
+                                  },
                                 ),
-                              ],
+                              ),
                             ),
                             const SizedBox(height: 24),
                             _buildPromptSectionHeader(

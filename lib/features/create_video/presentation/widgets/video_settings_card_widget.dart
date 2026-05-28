@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_svg_icon.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 
 class VideoSettingsCardWidget extends StatelessWidget {
@@ -32,7 +34,7 @@ class VideoSettingsCardWidget extends StatelessWidget {
         children: [
           // Quality row
           SettingsRowWidget(
-            icon: Icons.hd_rounded,
+            icon: Assets.icons.icQuality,
             title: t.create.quality,
             description: t.create.quality_desc,
             trailing: Row(
@@ -52,12 +54,12 @@ class VideoSettingsCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          
+
           const Divider(height: 1),
-          
+
           // Duration row
           SettingsRowWidget(
-            icon: Icons.access_time_filled_rounded,
+            icon: Assets.icons.icDuration,
             title: t.create.duration,
             description: t.create.duration_desc,
             trailing: Row(
@@ -89,71 +91,8 @@ class VideoSettingsCardWidget extends StatelessWidget {
   }
 }
 
-class CreateVideoButtonWidget extends StatelessWidget {
-  final bool isEnabled;
-  final bool isLoading;
-  final VoidCallback onPressed;
-  final String? label;
-  final IconData? icon;
-
-  const CreateVideoButtonWidget({
-    super.key,
-    required this.isEnabled,
-    required this.isLoading,
-    required this.onPressed,
-    this.label,
-    this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final t = context.t;
-    final buttonIcon = icon ?? Icons.star_rounded;
-    final buttonLabel = label ?? t.common.generate;
-
-    return InkWell(
-      onTap: isEnabled ? onPressed : null,
-      borderRadius: const BorderRadius.all(Radius.circular(100)),
-      child: Ink(
-        height: 56,
-        decoration: BoxDecoration(
-          gradient: isEnabled ? context.appTheme.primaryGradient : null,
-          color: isEnabled ? null : context.colorScheme.onSurface,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-        ),
-        child: Center(
-          child: isLoading
-              ? const SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      buttonIcon,
-                      color: isEnabled ? AppColors.white : AppColors.white.withValues(alpha: 0.4),
-                      size: 24,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      buttonLabel,
-                      style: context.textTheme.labelLarge,
-                    ),
-                  ],
-                ),
-        ),
-      ),
-    );
-  }
-}
-
 class SettingsRowWidget extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String title;
   final String description;
   final Widget trailing;
@@ -176,10 +115,11 @@ class SettingsRowWidget extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                Icon(
-                  icon,
-                  color: AppColors.white,
-                  size: 24,
+                AppSvgIcon(
+                  assetName: icon,
+                  gradient: context.appTheme.primaryGradient,
+                  width: 24,
+                  height: 24,
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -187,10 +127,7 @@ class SettingsRowWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        title,
-                        style: context.textTheme.titleSmall,
-                      ),
+                      Text(title, style: context.textTheme.titleSmall),
                       const SizedBox(height: 4),
                       Text(
                         description,
@@ -226,28 +163,39 @@ class ToggleOptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: const BorderRadius.all(Radius.circular(10)),
-      child: Ink(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        decoration: BoxDecoration(
-          gradient: isSelected ? context.appTheme.primaryGradient : null,
-          color: isSelected ? null : context.colorScheme.surface,
+    return Container(
+      constraints: const BoxConstraints(minWidth: 64),
+      decoration: BoxDecoration(
+        gradient: isSelected ? context.appTheme.primaryGradient : null,
+        color: isSelected ? null : Colors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        border: isSelected
+            ? null
+            : Border.all(
+                color: AppColors.subText,
+                width: 1,
+              ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: isSelected
-              ? null
-              : Border.all(
-                  color: context.appTheme.lightBorderColor,
-                  width: 1,
-                ),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: isSelected
-                ? context.appTheme.categoryActiveStyleSelected
-                : context.appTheme.qualityLabelInactiveStyle,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Center(
+              child: Text(
+                label,
+                style: isSelected
+                    ? context.appTheme.categoryActiveStyleSelected.copyWith(
+                        fontWeight: FontWeight.w600,
+                      )
+                    : context.appTheme.qualityLabelInactiveStyle.copyWith(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.normal,
+                      ),
+              ),
+            ),
           ),
         ),
       ),
