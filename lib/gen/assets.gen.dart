@@ -23,14 +23,40 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_home.svg
   String get icHome => 'assets/icons/ic_home.svg';
 
+  /// File path: assets/icons/ic_image_to_dance.svg
+  String get icImageToDance => 'assets/icons/ic_image_to_dance.svg';
+
+  /// File path: assets/icons/ic_image_to_video.svg
+  String get icImageToVideo => 'assets/icons/ic_image_to_video.svg';
+
+  /// File path: assets/icons/ic_question.svg
+  String get icQuestion => 'assets/icons/ic_question.svg';
+
   /// File path: assets/icons/ic_star_vip.png
   AssetGenImage get icStarVip => const AssetGenImage('assets/icons/ic_star_vip.png');
+
+  /// File path: assets/icons/ic_translate_video.svg
+  String get icTranslateVideo => 'assets/icons/ic_translate_video.svg';
+
+  /// File path: assets/icons/ic_unifiled_video.svg
+  String get icUnifiledVideo => 'assets/icons/ic_unifiled_video.svg';
 
   /// File path: assets/icons/profile.svg
   String get profile => 'assets/icons/profile.svg';
 
   /// List of all assets
-  List<dynamic> get values => [icArrowRight, icCreditIcon, icHome, icStarVip, profile];
+  List<dynamic> get values => [
+    icArrowRight,
+    icCreditIcon,
+    icHome,
+    icImageToDance,
+    icImageToVideo,
+    icQuestion,
+    icStarVip,
+    icTranslateVideo,
+    icUnifiledVideo,
+    profile,
+  ];
 }
 
 class $AssetsImagesGen {

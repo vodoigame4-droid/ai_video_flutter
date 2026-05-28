@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -77,67 +76,62 @@ class PremiumBannerWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
-                // Go Premium Button with glassmorphism blur, gradient border, and flipped arrow svg
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                    child: GradientBorderContainer(
-                      width: 176,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(100),
-                      ),
-                      borderWidth: 1.0,
-                      backgroundColor: Colors.white.withValues(alpha: 0.25),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: onTap,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 16,
-                              right: 8,
-                              top: 6,
-                              bottom: 6,
+                // Go Premium Button with gradient border, and flipped arrow svg
+                GradientBorderContainer(
+                  width: 176,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(100),
+                  ),
+                  borderWidth: 1.0,
+                  backgroundColor: Colors.white.withValues(alpha: 0.15),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: onTap,
+                      borderRadius: const BorderRadius.all(Radius.circular(100)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 8,
+                          top: 6,
+                          bottom: 6,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                t.profile.goPremium,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    t.profile.goPremium,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                            const SizedBox(width: 8),
+                            Ink(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                gradient: context.appTheme.primaryGradient,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  'assets/icons/ic_arrow_right.svg',
+                                  width: 16,
+                                  height: 16,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.white,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
-                                const SizedBox(width: 8),
-                                Ink(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    gradient: context.appTheme.primaryGradient,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      'assets/icons/ic_arrow_right.svg',
-                                      width: 16,
-                                      height: 16,
-                                      colorFilter: const ColorFilter.mode(
-                                        Colors.white,
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),

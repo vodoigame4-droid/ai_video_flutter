@@ -1,14 +1,20 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../gen/assets.gen.dart';
-import '../../../../i18n/strings.g.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../theme/app_colors.dart';
+import '../theme/app_theme.dart';
+import '../../gen/assets.gen.dart';
+import '../../i18n/strings.g.dart';
 
 class UploadSlotWidget extends StatelessWidget {
   final String? mediaPath;
   final String labelText;
-  final IconData placeholderIcon;
+  final IconData? placeholderIcon;
+  final String? placeholderSvg;
+  final Widget? placeholderWidget;
+  final Color? borderColor;
+  final double borderRadius;
   final VoidCallback onMediaRemoved;
   final ValueChanged<String> onMediaSelected;
   final bool isVideoSlot;
@@ -17,7 +23,11 @@ class UploadSlotWidget extends StatelessWidget {
     super.key,
     required this.mediaPath,
     required this.labelText,
-    required this.placeholderIcon,
+    this.placeholderIcon,
+    this.placeholderSvg,
+    this.placeholderWidget,
+    this.borderColor,
+    this.borderRadius = 15.0,
     required this.onMediaRemoved,
     required this.onMediaSelected,
     this.isVideoSlot = false,
@@ -27,45 +37,87 @@ class UploadSlotWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final hasMedia = mediaPath != null && mediaPath!.isNotEmpty;
 
-    return Expanded(
-      child: AspectRatio(
-        aspectRatio: 1.0, // Square slots matching Figma (173px x 173px)
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-          child: Stack(
-            children: [
-              // Content Area
-              Positioned.fill(
-                child: GestureDetector(
-                  onTap: () => _showMockMediaPicker(context),
-                  child: hasMedia
-                      ? _buildFilledState(context)
-                      : _buildEmptyState(context),
-                ),
+    return AspectRatio(
+      aspectRatio: 1.0, // Square slots matching Figma (173px x 173px)
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        child: Stack(
+          children: [
+            // Content Area
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: () => _showMockMediaPicker(context),
+                child: hasMedia
+                    ? _buildFilledState(context)
+                    : _buildEmptyState(context),
               ),
-              // Close/Remove Button
-              if (hasMedia)
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: InkWell(
-                    onTap: onMediaRemoved,
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: AppColors.black.withValues(alpha: 0.5),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.close_rounded,
-                        color: AppColors.white,
-                        size: 12,
+            ),
+            // Glassmorphic Close/Remove Button matching Figma node 99:436
+            if (hasMedia)
+              Positioned(
+                top: 10,
+                right: 10,
+                child: ClipOval(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                    child: Material(
+                      color: const Color(
+                        0x99979797,
+                      ), // rgba(151, 151, 151, 0.6)
+                      child: InkWell(
+                        onTap: onMediaRemoved,
+                        child: const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: AppColors.white,
+                            size: 12,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyState(BuildContext context) {
+    final activeBorderColor = borderColor ?? AppColors.primary;
+
+    return Container(
+      color: AppColors.background,
+      child: CustomPaint(
+        painter: _DashedBorderPainter(
+          color: activeBorderColor,
+          borderRadius: borderRadius,
+          strokeWidth: 1.0,
+          dashWidth: 12.0,
+          dashGap: 8.0,
+        ),
+        child: Container(
+          color: Colors.transparent,
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildPlaceholder(context),
+              const SizedBox(height: 12),
+              Text(
+                labelText,
+                style:
+                    context.textTheme.bodySmall?.copyWith(
+                      color: AppColors.subText, // Match Figma's label #B1B1B1
+                    ) ??
+                    const TextStyle(color: AppColors.subText, fontSize: 12),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           ),
         ),
@@ -73,49 +125,43 @@ class UploadSlotWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState(BuildContext context) {
-    return CustomPaint(
-      painter: _DashedBorderPainter(
-        color: context.colorScheme.primary,
-        strokeWidth: 1.0,
-        gap: 5.0,
-      ),
-      child: Container(
-        color: context.colorScheme.surface,
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              placeholderIcon,
-              color: context.colorScheme.primary,
-              size: 40,
-            ),
-            const SizedBox(height: 12),
-            Text(
-              labelText,
-              style: context.textTheme.bodySmall,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
-      ),
-    );
+  Widget _buildPlaceholder(BuildContext context) {
+    if (placeholderWidget != null) {
+      return placeholderWidget!;
+    }
+
+    if (placeholderSvg != null) {
+      return SvgPicture.asset(placeholderSvg!, width: 40, height: 40);
+    }
+
+    if (placeholderIcon != null) {
+      return Icon(placeholderIcon, color: AppColors.primary, size: 40);
+    }
+
+    // Default Fallbacks
+    if (isVideoSlot) {
+      return const Icon(
+        Icons.play_circle_outline_rounded,
+        color: AppColors.primary,
+        size: 40,
+      );
+    } else {
+      // Use the newly added/existing SVG for image uploader placeholder
+      return SvgPicture.asset(
+        'assets/icons/ic_image_add.svg',
+        width: 40,
+        height: 40,
+      );
+    }
   }
 
   Widget _buildFilledState(BuildContext context) {
-    // Determine if asset is local SVG, local asset image, or network
     final path = mediaPath!;
     final isLocalAsset = path.startsWith('assets/');
 
     Widget imageWidget;
     if (isLocalAsset) {
-      imageWidget = Image.asset(
-        path,
-        fit: BoxFit.cover,
-      );
+      imageWidget = Image.asset(path, fit: BoxFit.cover);
     } else {
       imageWidget = Image.file(
         File(path),
@@ -198,7 +244,8 @@ class UploadSlotWidget extends StatelessWidget {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: mockAssets.length,
-                    separatorBuilder: (context, index) => const SizedBox(width: 12),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 12),
                     itemBuilder: (context, index) {
                       final item = mockAssets[index];
                       return GestureDetector(
@@ -209,20 +256,21 @@ class UploadSlotWidget extends StatelessWidget {
                         child: Container(
                           width: 100,
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(12)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(12),
+                            ),
                             border: Border.all(
                               color: context.appTheme.borderColor,
                             ),
                           ),
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.all(Radius.circular(11)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(11),
+                            ),
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
-                                Image.asset(
-                                  item.path,
-                                  fit: BoxFit.cover,
-                                ),
+                                Image.asset(item.path, fit: BoxFit.cover),
                                 Container(
                                   color: AppColors.black.withValues(alpha: 0.3),
                                   alignment: Alignment.bottomCenter,
@@ -260,13 +308,17 @@ class _MockMediaOption {
 
 class _DashedBorderPainter extends CustomPainter {
   final Color color;
+  final double borderRadius;
   final double strokeWidth;
-  final double gap;
+  final double dashWidth;
+  final double dashGap;
 
   _DashedBorderPainter({
     required this.color,
+    required this.borderRadius,
     this.strokeWidth = 1.0,
-    this.gap = 5.0,
+    required this.dashWidth,
+    required this.dashGap,
   });
 
   @override
@@ -276,15 +328,21 @@ class _DashedBorderPainter extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke;
 
+    final halfStroke = strokeWidth / 2;
     final path = Path()
       ..addRRect(
         RRect.fromRectAndRadius(
-          Rect.fromLTWH(0, 0, size.width, size.height),
-          const Radius.circular(15),
+          Rect.fromLTWH(
+            halfStroke,
+            halfStroke,
+            size.width - strokeWidth,
+            size.height - strokeWidth,
+          ),
+          Radius.circular(borderRadius - halfStroke),
         ),
       );
 
-    final dashPath = _buildDashedPath(path, gap, gap);
+    final dashPath = _buildDashedPath(path, dashWidth, dashGap);
     canvas.drawPath(dashPath, paint);
   }
 

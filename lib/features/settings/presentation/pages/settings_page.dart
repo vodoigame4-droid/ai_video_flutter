@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,23 +57,19 @@ class SettingsView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Back Button
-                  ClipOval(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                      child: Material(
-                        color: Colors.white.withValues(alpha: 0.1),
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () => context.pop(),
-                          child: const SizedBox(
-                            width: 36,
-                            height: 36,
-                            child: Icon(
-                              Icons.arrow_back_ios_new_rounded,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ),
+                  Material(
+                    color: Colors.white.withValues(alpha: 0.1),
+                    shape: const CircleBorder(),
+                    child: InkWell(
+                      onTap: () => context.pop(),
+                      borderRadius: const BorderRadius.all(Radius.circular(100)),
+                      child: const SizedBox(
+                        width: 36,
+                        height: 36,
+                        child: Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: Colors.white,
+                          size: 18,
                         ),
                       ),
                     ),

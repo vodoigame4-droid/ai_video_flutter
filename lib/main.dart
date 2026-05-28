@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
             title: 'Video AI',
             theme: AppTheme.darkTheme,
             themeMode: ThemeMode.dark,
+            scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
             locale: TranslationProvider.of(context).locale.flutterLocale,
             supportedLocales: AppLocaleUtils.supportedLocales,
             localizationsDelegates: const [

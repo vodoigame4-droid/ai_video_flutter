@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -33,20 +32,16 @@ class CustomBottomNavBar extends StatelessWidget {
             left: 0,
             right: 0,
             height: 64,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(100)),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 7.5, sigmaY: 7.5),
-                child: Container(
-                  height: 64,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.15),
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    border: Border.all(
-                      color: const Color(0xFF878787),
-                      width: 1,
-                    ),
-                  ),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: context.colorScheme.surface,
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                border: Border.all(
+                  color: AppColors.white.withValues(alpha: 0.08),
+                  width: 1,
+                ),
+              ),
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,8 +66,6 @@ class CustomBottomNavBar extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          ),
           // Elevated central button "Create Video"
           Positioned(
             top: 0,

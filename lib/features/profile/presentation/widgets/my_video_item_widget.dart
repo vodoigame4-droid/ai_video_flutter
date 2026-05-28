@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
@@ -42,14 +41,11 @@ class MyVideoItemWidget extends StatelessWidget {
             ),
           ),
 
-          // Generating State overlay & blur
+          // Generating State overlay
           if (isGenerating) ...[
             Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                child: Container(
-                  color: Colors.black.withValues(alpha: 0.5),
-                ),
+              child: Container(
+                color: Colors.black.withValues(alpha: 0.65),
               ),
             ),
             
@@ -134,25 +130,21 @@ class MyVideoItemWidget extends StatelessWidget {
             Positioned(
               top: 10,
               right: 10,
-              child: ClipOval(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                  child: Material(
-                    color: Colors.black.withValues(alpha: 0.2),
-                    shape: const CircleBorder(),
-                    clipBehavior: Clip.antiAlias,
-                    child: InkWell(
-                      onTap: onDeleteTap,
-                      child: const SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: Center(
-                          child: Icon(
-                            Icons.delete_outline_rounded,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                        ),
+              child: Material(
+                color: Colors.black.withValues(alpha: 0.4),
+                shape: const CircleBorder(),
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: onDeleteTap,
+                  borderRadius: const BorderRadius.all(Radius.circular(100)),
+                  child: const SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: Center(
+                      child: Icon(
+                        Icons.delete_outline_rounded,
+                        color: Colors.white,
+                        size: 18,
                       ),
                     ),
                   ),

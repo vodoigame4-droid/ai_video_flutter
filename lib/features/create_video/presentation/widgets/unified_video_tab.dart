@@ -7,7 +7,7 @@ import '../bloc/create_video_bloc.dart';
 import '../bloc/create_video_event.dart';
 import '../bloc/create_video_state.dart';
 import 'custom_prompt_card_widget.dart';
-import 'upload_slot_widget.dart';
+import '../../../../core/widgets/upload_slot_widget.dart';
 import 'video_settings_card_widget.dart';
 
 class UnifiedVideoTab extends StatelessWidget {
@@ -35,9 +35,9 @@ class UnifiedVideoTab extends StatelessWidget {
                 slotsPaths[2] != null &&
                 customPrompt.trim().isNotEmpty;
 
-            return Stack(
+            return Column(
               children: [
-                Positioned.fill(
+                Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -48,52 +48,55 @@ class UnifiedVideoTab extends StatelessWidget {
                         const SizedBox(height: 16),
                         Row(
                           children: [
-                            UploadSlotWidget(
-                              mediaPath: slotsPaths[0],
-                              labelText: t.create.photo_slot_num(num: "1"),
-                              placeholderIcon: Icons.add_photo_alternate_outlined,
-                              onMediaRemoved: () {
-                                context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.removeMedia(0),
-                                    );
-                              },
-                              onMediaSelected: (path) {
-                                context.read<CreateVideoBloc>().add(
-                                      CreateVideoEvent.selectMedia(0, path),
-                                    );
-                              },
+                            Expanded(
+                              child: UploadSlotWidget(
+                                mediaPath: slotsPaths[0],
+                                labelText: t.create.photo_slot_num(num: "1"),
+                                onMediaRemoved: () {
+                                  context.read<CreateVideoBloc>().add(
+                                        const CreateVideoEvent.removeMedia(0),
+                                      );
+                                },
+                                onMediaSelected: (path) {
+                                  context.read<CreateVideoBloc>().add(
+                                        CreateVideoEvent.selectMedia(0, path),
+                                      );
+                                },
+                              ),
                             ),
                             const SizedBox(width: 12),
-                            UploadSlotWidget(
-                              mediaPath: slotsPaths[1],
-                              labelText: t.create.photo_slot_num(num: "2"),
-                              placeholderIcon: Icons.add_photo_alternate_outlined,
-                              onMediaRemoved: () {
-                                context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.removeMedia(1),
-                                    );
-                              },
-                              onMediaSelected: (path) {
-                                context.read<CreateVideoBloc>().add(
-                                      CreateVideoEvent.selectMedia(1, path),
-                                    );
-                              },
+                            Expanded(
+                              child: UploadSlotWidget(
+                                mediaPath: slotsPaths[1],
+                                labelText: t.create.photo_slot_num(num: "2"),
+                                onMediaRemoved: () {
+                                  context.read<CreateVideoBloc>().add(
+                                        const CreateVideoEvent.removeMedia(1),
+                                      );
+                                },
+                                onMediaSelected: (path) {
+                                  context.read<CreateVideoBloc>().add(
+                                        CreateVideoEvent.selectMedia(1, path),
+                                      );
+                                },
+                              ),
                             ),
                             const SizedBox(width: 12),
-                            UploadSlotWidget(
-                              mediaPath: slotsPaths[2],
-                              labelText: t.create.photo_slot_num(num: "3"),
-                              placeholderIcon: Icons.add_photo_alternate_outlined,
-                              onMediaRemoved: () {
-                                context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.removeMedia(2),
-                                    );
-                              },
-                              onMediaSelected: (path) {
-                                context.read<CreateVideoBloc>().add(
-                                      CreateVideoEvent.selectMedia(2, path),
-                                    );
-                              },
+                            Expanded(
+                              child: UploadSlotWidget(
+                                mediaPath: slotsPaths[2],
+                                labelText: t.create.photo_slot_num(num: "3"),
+                                onMediaRemoved: () {
+                                  context.read<CreateVideoBloc>().add(
+                                        const CreateVideoEvent.removeMedia(2),
+                                      );
+                                },
+                                onMediaSelected: (path) {
+                                  context.read<CreateVideoBloc>().add(
+                                        CreateVideoEvent.selectMedia(2, path),
+                                      );
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -136,19 +139,21 @@ class UnifiedVideoTab extends StatelessWidget {
                                 );
                           },
                         ),
-                        const SizedBox(height: 100),
+                        const SizedBox(height: 24),
                       ],
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: 24,
-                  left: 16,
-                  right: 16,
-                  child: _buildGenerateButton(
-                    context,
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
+                  child: CreateVideoButtonWidget(
                     isEnabled: isGenerateEnabled && !isGenerating,
                     isLoading: isGenerating,
+                    onPressed: () {
+                      context.read<CreateVideoBloc>().add(
+                            const CreateVideoEvent.generateVideo(),
+                          );
+                    },
                   ),
                 ),
               ],
@@ -221,55 +226,6 @@ class UnifiedVideoTab extends StatelessWidget {
           style: context.textTheme.labelMedium,
         ),
       ],
-    );
-  }
-
-  Widget _buildGenerateButton(
-    BuildContext context, {
-    required bool isEnabled,
-    required bool isLoading,
-  }) {
-    final t = context.t;
-
-    return InkWell(
-      onTap: isEnabled
-          ? () => context.read<CreateVideoBloc>().add(const CreateVideoEvent.generateVideo())
-          : null,
-      borderRadius: const BorderRadius.all(Radius.circular(100)),
-      child: Ink(
-        height: 56,
-        decoration: BoxDecoration(
-          gradient: isEnabled ? context.appTheme.primaryGradient : null,
-          color: isEnabled ? null : context.colorScheme.onSurface,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-        ),
-        child: Center(
-          child: isLoading
-              ? const SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star_rounded,
-                      color: isEnabled ? AppColors.white : AppColors.white.withValues(alpha: 0.4),
-                      size: 24,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      t.common.generate,
-                      style: isEnabled ? context.textTheme.labelLarge : context.textTheme.labelLarge,
-                    ),
-                  ],
-                ),
-        ),
-      ),
     );
   }
 }

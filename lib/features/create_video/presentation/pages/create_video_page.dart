@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../profile/presentation/pages/profile_page.dart';
 import '../bloc/create_video_bloc.dart';
@@ -23,15 +21,13 @@ class CreateVideoPage extends StatelessWidget {
 
   final int initialTab;
 
-  const CreateVideoPage({
-    super.key,
-    required this.initialTab,
-  });
+  const CreateVideoPage({super.key, required this.initialTab});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<CreateVideoBloc>()..add(CreateVideoEvent.init(initialTab)),
+      create: (context) =>
+          sl<CreateVideoBloc>()..add(CreateVideoEvent.init(initialTab)),
       child: const CreateVideoView(),
     );
   }
@@ -69,36 +65,23 @@ class CreateVideoView extends StatelessWidget {
               error: (message) => Center(
                 child: Text(message, style: context.appTheme.errorTextStyle),
               ),
-              ready: (
-                selectedTab,
-                customPrompt,
-                inspireMeCount,
-                slotsPaths,
-                quality,
-                duration,
-                isGenerating,
-                isSuccess,
-              ) {
-                return Stack(
-                  children: [
-                    // Top-left glow vector
-                    Positioned(
-                      top: -120,
-                      left: -120,
-                      width: 300,
-                      height: 300,
-                      child: SvgPicture.asset(
-                        Assets.images.ellipse,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-
-                    // Main layout content
-                    SafeArea(
+              ready:
+                  (
+                    selectedTab,
+                    customPrompt,
+                    inspireMeCount,
+                    slotsPaths,
+                    quality,
+                    duration,
+                    isGenerating,
+                    isSuccess,
+                  ) {
+                    return SafeArea(
                       child: Column(
                         children: [
                           // Header
                           _buildHeader(context),
+                          SizedBox(height: 16),
 
                           // Tab Bar selector
                           Padding(
@@ -107,8 +90,8 @@ class CreateVideoView extends StatelessWidget {
                               selectedIndex: selectedTab,
                               onTabSelected: (index) {
                                 context.read<CreateVideoBloc>().add(
-                                      CreateVideoEvent.changeTab(index),
-                                    );
+                                  CreateVideoEvent.changeTab(index),
+                                );
                               },
                               onHistoryPressed: () {
                                 context.pushNamed(ProfilePage.name);
@@ -117,15 +100,11 @@ class CreateVideoView extends StatelessWidget {
                           ),
 
                           // The selected tab view
-                          Expanded(
-                            child: _buildSelectedTab(selectedTab),
-                          ),
+                          Expanded(child: _buildSelectedTab(selectedTab)),
                         ],
                       ),
-                    ),
-                  ],
-                );
-              },
+                    );
+                  },
             );
           },
         ),
@@ -161,10 +140,7 @@ class CreateVideoView extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            t.create.generate_title,
-            style: context.textTheme.titleLarge,
-          ),
+          Text(t.create.generate_title, style: context.textTheme.titleLarge),
         ],
       ),
     );

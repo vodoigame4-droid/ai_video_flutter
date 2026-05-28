@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -81,23 +80,19 @@ class ProfileView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // Settings Button
-                          ClipOval(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                              child: Material(
-                                color: Colors.white.withValues(alpha: 0.1),
-                                shape: const CircleBorder(),
-                                child: InkWell(
-                                  onTap: () => context.push(SettingsPage.path),
-                                  child: const SizedBox(
-                                    width: 36,
-                                    height: 36,
-                                    child: Icon(
-                                      Icons.settings_outlined,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                  ),
+                          Material(
+                            color: Colors.white.withValues(alpha: 0.1),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () => context.push(SettingsPage.path),
+                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.settings_outlined,
+                                  color: Colors.white,
+                                  size: 20,
                                 ),
                               ),
                             ),

@@ -10,14 +10,17 @@ abstract class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color onSurface = Color(0xFF171717);
   static const Color background = Color(0xFF171717);
-  static const Color surface = Color(0xFF222222); // Darker gray for card/container surfaces
+  static const Color surface = Color(
+    0xFF222222,
+  ); // Darker gray for card/container surfaces
   static const Color heart = Color(0xFFFF4747);
   static const Color subText = Color(0xFFB1B1B1);
   static const Color darkGreenBorder = Color(0xFF1C362B);
-  
+
   // Generic borders to support theme rules
   static const Color border = Color(0xFF1C362B);
   static const Color lightBorder = Color(0xFF2A2A2A);
+  static const Color border2 = Color(0xFF87878780);
 
   // Gradients
   static const LinearGradient primaryGradient = LinearGradient(
@@ -32,4 +35,3 @@ abstract class AppColors {
     end: Alignment.bottomRight,
   );
 }
-

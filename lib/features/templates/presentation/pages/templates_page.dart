@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -87,29 +86,24 @@ class TemplatesView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Glassmorphic Back Button
-                              ClipOval(
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                                  child: Container(
-                                    width: 36,
-                                    height: 36,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withValues(alpha: 0.1),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        borderRadius: const BorderRadius.all(Radius.circular(18)),
-                                        onTap: () => context.pop(),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: Colors.white,
-                                            size: 16,
-                                          ),
-                                        ),
+                              // Back Button
+                              Container(
+                                width: 36,
+                                height: 36,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: const BorderRadius.all(Radius.circular(18)),
+                                    onTap: () => context.pop(),
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.arrow_back_ios_new_rounded,
+                                        color: Colors.white,
+                                        size: 16,
                                       ),
                                     ),
                                   ),
