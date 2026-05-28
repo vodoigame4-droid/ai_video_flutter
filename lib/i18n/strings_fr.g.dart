@@ -54,6 +54,9 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$fr premium = _Translations$premium$fr._(_root);
 	@override late final _Translations$generating$fr generating = _Translations$generating$fr._(_root);
 	@override late final _Translations$result$fr result = _Translations$result$fr._(_root);
+	@override late final _Translations$privacy_dialog$fr privacy_dialog = _Translations$privacy_dialog$fr._(_root);
+	@override late final _Translations$report_dialog$fr report_dialog = _Translations$report_dialog$fr._(_root);
+	@override late final _Translations$tips_sheet$fr tips_sheet = _Translations$tips_sheet$fr._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$fr extends Translations$result$en {
 	@override String get download => 'Télécharger';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$fr extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Confidentialité des données';
+	@override String get desc => 'Vos photos sont traitées en toute sécurité par nos systèmes d\'IA internes. Nous ne partageons, ne vendons ni ne divulguons vos informations à des tiers.';
+	@override String get cancel => 'Annuler';
+	@override String get confirm => 'Confirmer';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$fr extends Translations$report_dialog$en {
+	_Translations$report_dialog$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Signaler';
+	@override String get desc => 'Êtes-vous sûr de vouloir envoyer le signalement ?';
+	@override String get cancel => 'Annuler';
+	@override String get submit => 'Signaler';
+	@override String get success => 'Vidéo signalée avec succès';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$fr extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Conseils pour de meilleurs résultats';
+	@override String get button_got_it => 'J\'ai compris !';
+	@override String get use_photos => 'Utilisez des photos comme celles-ci';
+	@override String get avoid_photos => 'Évitez les photos comme celles-ci';
+	@override String get one_person => 'Une personne';
+	@override String get clear_face => 'Visage clair';
+	@override String get half_body => 'Demi-corps';
+	@override String get hidden_face => 'Visage masqué';
+	@override String get multiple_people => 'Plusieurs personnes';
+	@override String get blurry_photo => 'Photo floue';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$fr extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$fr._(TranslationsFr root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsFr {
 			'result.create_another' => 'Créer une autre vidéo',
 			'result.share' => 'Partager',
 			'result.download' => 'Télécharger',
+			'privacy_dialog.title' => 'Confidentialité des données',
+			'privacy_dialog.desc' => 'Vos photos sont traitées en toute sécurité par nos systèmes d\'IA internes. Nous ne partageons, ne vendons ni ne divulguons vos informations à des tiers.',
+			'privacy_dialog.cancel' => 'Annuler',
+			'privacy_dialog.confirm' => 'Confirmer',
+			'report_dialog.title' => 'Signaler',
+			'report_dialog.desc' => 'Êtes-vous sûr de vouloir envoyer le signalement ?',
+			'report_dialog.cancel' => 'Annuler',
+			'report_dialog.submit' => 'Signaler',
+			'report_dialog.success' => 'Vidéo signalée avec succès',
+			'tips_sheet.title' => 'Conseils pour de meilleurs résultats',
+			'tips_sheet.button_got_it' => 'J\'ai compris !',
+			'tips_sheet.use_photos' => 'Utilisez des photos comme celles-ci',
+			'tips_sheet.avoid_photos' => 'Évitez les photos comme celles-ci',
+			'tips_sheet.one_person' => 'Une personne',
+			'tips_sheet.clear_face' => 'Visage clair',
+			'tips_sheet.half_body' => 'Demi-corps',
+			'tips_sheet.hidden_face' => 'Visage masqué',
+			'tips_sheet.multiple_people' => 'Plusieurs personnes',
+			'tips_sheet.blurry_photo' => 'Photo floue',
 			_ => null,
 		};
 	}

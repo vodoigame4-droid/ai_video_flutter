@@ -213,5 +213,30 @@
     "create_another": "Tạo một video khác",
     "share": "Chia sẻ",
     "download": "Tải xuống"
+  },
+  "privacy_dialog": {
+    "title": "Quyền riêng tư dữ liệu",
+    "desc": "Ảnh của bạn được xử lý an toàn bởi hệ thống AI nội bộ của chúng tôi. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin của bạn cho bất kỳ bên thứ ba nào.",
+    "cancel": "Hủy bỏ",
+    "confirm": "Xác nhận"
+  },
+  "report_dialog": {
+    "title": "Báo cáo",
+    "desc": "Bạn có chắc chắn muốn gửi báo cáo không?",
+    "cancel": "Hủy bỏ",
+    "submit": "Gửi",
+    "success": "Báo cáo video thành công"
+  },
+  "tips_sheet": {
+    "title": "Mẹo để có kết quả tốt nhất",
+    "button_got_it": "Tôi đã hiểu!",
+    "use_photos": "Nên dùng ảnh như thế này",
+    "avoid_photos": "Tránh dùng ảnh như thế này",
+    "one_person": "Một người",
+    "clear_face": "Rõ khuôn mặt",
+    "half_body": "Nửa người",
+    "hidden_face": "Bị che khuôn mặt",
+    "multiple_people": "Nhiều người",
+    "blurry_photo": "Ảnh bị mờ"
   }
 }

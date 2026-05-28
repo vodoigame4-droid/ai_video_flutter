@@ -206,5 +206,30 @@
     "create_another": "创建其他视频",
     "share": "分享",
     "download": "下载"
+  },
+  "privacy_dialog": {
+    "title": "数据隐私",
+    "desc": "您的照片将通过我们的内部AI系统进行安全处理。我们不会与任何第三方分享、出售或披露您的信息。",
+    "cancel": "取消",
+    "confirm": "确认"
+  },
+  "report_dialog": {
+    "title": "举报",
+    "desc": "您确定要提交举报吗？",
+    "cancel": "取消",
+    "submit": "提交",
+    "success": "视频举报成功"
+  },
+  "tips_sheet": {
+    "title": "获得最佳效果的建议",
+    "button_got_it": "我知道了！",
+    "use_photos": "使用类似这样的照片",
+    "avoid_photos": "避免类似这样的照片",
+    "one_person": "单人",
+    "clear_face": "脸部清晰",
+    "half_body": "半身照",
+    "hidden_face": "脸部遮挡",
+    "multiple_people": "多人",
+    "blurry_photo": "照片模糊"
   }
 }

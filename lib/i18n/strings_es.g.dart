@@ -54,6 +54,9 @@ class TranslationsEs extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$es premium = _Translations$premium$es._(_root);
 	@override late final _Translations$generating$es generating = _Translations$generating$es._(_root);
 	@override late final _Translations$result$es result = _Translations$result$es._(_root);
+	@override late final _Translations$privacy_dialog$es privacy_dialog = _Translations$privacy_dialog$es._(_root);
+	@override late final _Translations$report_dialog$es report_dialog = _Translations$report_dialog$es._(_root);
+	@override late final _Translations$tips_sheet$es tips_sheet = _Translations$tips_sheet$es._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$es extends Translations$result$en {
 	@override String get download => 'Descargar';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$es extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Privacidad de datos';
+	@override String get desc => 'Sus fotos se procesan de forma segura mediante nuestros sistemas internos de IA. No compartimos, vendemos ni divulgamos su información a terceros.';
+	@override String get cancel => 'Cancelar';
+	@override String get confirm => 'Confirmar';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$es extends Translations$report_dialog$en {
+	_Translations$report_dialog$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Reportar';
+	@override String get desc => '¿Está seguro de que desea enviar el reporte?';
+	@override String get cancel => 'Cancelar';
+	@override String get submit => 'Enviar';
+	@override String get success => 'Video reportado con éxito';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$es extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Consejos para mejores resultados';
+	@override String get button_got_it => '¡Entendido!';
+	@override String get use_photos => 'Use fotos como estas';
+	@override String get avoid_photos => 'Evite fotos como estas';
+	@override String get one_person => 'Una persona';
+	@override String get clear_face => 'Cara despejada';
+	@override String get half_body => 'Medio cuerpo';
+	@override String get hidden_face => 'Cara oculta';
+	@override String get multiple_people => 'Varias personas';
+	@override String get blurry_photo => 'Foto borrosa';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$es extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$es._(TranslationsEs root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsEs {
 			'result.create_another' => 'Crear otro video',
 			'result.share' => 'Compartir',
 			'result.download' => 'Descargar',
+			'privacy_dialog.title' => 'Privacidad de datos',
+			'privacy_dialog.desc' => 'Sus fotos se procesan de forma segura mediante nuestros sistemas internos de IA. No compartimos, vendemos ni divulgamos su información a terceros.',
+			'privacy_dialog.cancel' => 'Cancelar',
+			'privacy_dialog.confirm' => 'Confirmar',
+			'report_dialog.title' => 'Reportar',
+			'report_dialog.desc' => '¿Está seguro de que desea enviar el reporte?',
+			'report_dialog.cancel' => 'Cancelar',
+			'report_dialog.submit' => 'Enviar',
+			'report_dialog.success' => 'Video reportado con éxito',
+			'tips_sheet.title' => 'Consejos para mejores resultados',
+			'tips_sheet.button_got_it' => '¡Entendido!',
+			'tips_sheet.use_photos' => 'Use fotos como estas',
+			'tips_sheet.avoid_photos' => 'Evite fotos como estas',
+			'tips_sheet.one_person' => 'Una persona',
+			'tips_sheet.clear_face' => 'Cara despejada',
+			'tips_sheet.half_body' => 'Medio cuerpo',
+			'tips_sheet.hidden_face' => 'Cara oculta',
+			'tips_sheet.multiple_people' => 'Varias personas',
+			'tips_sheet.blurry_photo' => 'Foto borrosa',
 			_ => null,
 		};
 	}

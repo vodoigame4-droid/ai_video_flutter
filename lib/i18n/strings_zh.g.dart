@@ -54,6 +54,9 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$zh premium = _Translations$premium$zh._(_root);
 	@override late final _Translations$generating$zh generating = _Translations$generating$zh._(_root);
 	@override late final _Translations$result$zh result = _Translations$result$zh._(_root);
+	@override late final _Translations$privacy_dialog$zh privacy_dialog = _Translations$privacy_dialog$zh._(_root);
+	@override late final _Translations$report_dialog$zh report_dialog = _Translations$report_dialog$zh._(_root);
+	@override late final _Translations$tips_sheet$zh tips_sheet = _Translations$tips_sheet$zh._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$zh extends Translations$result$en {
 	@override String get download => '下载';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$zh extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '数据隐私';
+	@override String get desc => '您的照片将通过我们的内部AI系统进行安全处理。我们不会与任何第三方分享、出售或披露您的信息。';
+	@override String get cancel => '取消';
+	@override String get confirm => '确认';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$zh extends Translations$report_dialog$en {
+	_Translations$report_dialog$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '举报';
+	@override String get desc => '您确定要提交举报吗？';
+	@override String get cancel => '取消';
+	@override String get submit => '提交';
+	@override String get success => '视频举报成功';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$zh extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '获得最佳效果的建议';
+	@override String get button_got_it => '我知道了！';
+	@override String get use_photos => '使用类似这样的照片';
+	@override String get avoid_photos => '避免类似这样的照片';
+	@override String get one_person => '单人';
+	@override String get clear_face => '脸部清晰';
+	@override String get half_body => '半身照';
+	@override String get hidden_face => '脸部遮挡';
+	@override String get multiple_people => '多人';
+	@override String get blurry_photo => '照片模糊';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsZh {
 			'result.create_another' => '创建其他视频',
 			'result.share' => '分享',
 			'result.download' => '下载',
+			'privacy_dialog.title' => '数据隐私',
+			'privacy_dialog.desc' => '您的照片将通过我们的内部AI系统进行安全处理。我们不会与任何第三方分享、出售或披露您的信息。',
+			'privacy_dialog.cancel' => '取消',
+			'privacy_dialog.confirm' => '确认',
+			'report_dialog.title' => '举报',
+			'report_dialog.desc' => '您确定要提交举报吗？',
+			'report_dialog.cancel' => '取消',
+			'report_dialog.submit' => '提交',
+			'report_dialog.success' => '视频举报成功',
+			'tips_sheet.title' => '获得最佳效果的建议',
+			'tips_sheet.button_got_it' => '我知道了！',
+			'tips_sheet.use_photos' => '使用类似这样的照片',
+			'tips_sheet.avoid_photos' => '避免类似这样的照片',
+			'tips_sheet.one_person' => '单人',
+			'tips_sheet.clear_face' => '脸部清晰',
+			'tips_sheet.half_body' => '半身照',
+			'tips_sheet.hidden_face' => '脸部遮挡',
+			'tips_sheet.multiple_people' => '多人',
+			'tips_sheet.blurry_photo' => '照片模糊',
 			_ => null,
 		};
 	}

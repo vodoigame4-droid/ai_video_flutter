@@ -54,6 +54,9 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$hi premium = _Translations$premium$hi._(_root);
 	@override late final _Translations$generating$hi generating = _Translations$generating$hi._(_root);
 	@override late final _Translations$result$hi result = _Translations$result$hi._(_root);
+	@override late final _Translations$privacy_dialog$hi privacy_dialog = _Translations$privacy_dialog$hi._(_root);
+	@override late final _Translations$report_dialog$hi report_dialog = _Translations$report_dialog$hi._(_root);
+	@override late final _Translations$tips_sheet$hi tips_sheet = _Translations$tips_sheet$hi._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$hi extends Translations$result$en {
 	@override String get download => 'डाउनलोड करें';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$hi extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'डेटा गोपनीयता';
+	@override String get desc => 'आपकी तस्वीरों को हमारे आंतरिक एआई सिस्टम द्वारा सुरक्षित रूप से संसाधित किया जाता है। हम आपकी जानकारी किसी भी तीसरे पक्ष के साथ साझा, बेच या प्रकट नहीं करते हैं।';
+	@override String get cancel => 'रद्द करें';
+	@override String get confirm => 'पुष्टि करें';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$hi extends Translations$report_dialog$en {
+	_Translations$report_dialog$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'रिपोर्ट करें';
+	@override String get desc => 'क्या आप वाकई रिपोर्ट सबमिट करना चाहते हैं?';
+	@override String get cancel => 'रद्द करें';
+	@override String get submit => 'सबमिट करें';
+	@override String get success => 'वीडियो की सफलतापूर्वक रिपोर्ट की गई';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$hi extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'सर्वोत्तम परिणामों के लिए सुझाव';
+	@override String get button_got_it => 'समझ गया!';
+	@override String get use_photos => 'इस तरह की तस्वीरों का उपयोग करें';
+	@override String get avoid_photos => 'इस तरह की तस्वीरों से बचें';
+	@override String get one_person => 'एक व्यक्ति';
+	@override String get clear_face => 'स्पष्ट चेहरा';
+	@override String get half_body => 'आधा शरीर';
+	@override String get hidden_face => 'छिपा हुआ चेहरा';
+	@override String get multiple_people => 'कई लोग';
+	@override String get blurry_photo => 'धुंधली तस्वीर';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsHi {
 			'result.create_another' => 'दूसरा वीडियो बनाएं',
 			'result.share' => 'साझा करें',
 			'result.download' => 'डाउनलोड करें',
+			'privacy_dialog.title' => 'डेटा गोपनीयता',
+			'privacy_dialog.desc' => 'आपकी तस्वीरों को हमारे आंतरिक एआई सिस्टम द्वारा सुरक्षित रूप से संसाधित किया जाता है। हम आपकी जानकारी किसी भी तीसरे पक्ष के साथ साझा, बेच या प्रकट नहीं करते हैं।',
+			'privacy_dialog.cancel' => 'रद्द करें',
+			'privacy_dialog.confirm' => 'पुष्टि करें',
+			'report_dialog.title' => 'रिपोर्ट करें',
+			'report_dialog.desc' => 'क्या आप वाकई रिपोर्ट सबमिट करना चाहते हैं?',
+			'report_dialog.cancel' => 'रद्द करें',
+			'report_dialog.submit' => 'सबमिट करें',
+			'report_dialog.success' => 'वीडियो की सफलतापूर्वक रिपोर्ट की गई',
+			'tips_sheet.title' => 'सर्वोत्तम परिणामों के लिए सुझाव',
+			'tips_sheet.button_got_it' => 'समझ गया!',
+			'tips_sheet.use_photos' => 'इस तरह की तस्वीरों का उपयोग करें',
+			'tips_sheet.avoid_photos' => 'इस तरह की तस्वीरों से बचें',
+			'tips_sheet.one_person' => 'एक व्यक्ति',
+			'tips_sheet.clear_face' => 'स्पष्ट चेहरा',
+			'tips_sheet.half_body' => 'आधा शरीर',
+			'tips_sheet.hidden_face' => 'छिपा हुआ चेहरा',
+			'tips_sheet.multiple_people' => 'कई लोग',
+			'tips_sheet.blurry_photo' => 'धुंधली तस्वीर',
 			_ => null,
 		};
 	}

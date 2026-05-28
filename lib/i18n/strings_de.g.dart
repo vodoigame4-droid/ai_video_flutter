@@ -54,6 +54,9 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$de premium = _Translations$premium$de._(_root);
 	@override late final _Translations$generating$de generating = _Translations$generating$de._(_root);
 	@override late final _Translations$result$de result = _Translations$result$de._(_root);
+	@override late final _Translations$privacy_dialog$de privacy_dialog = _Translations$privacy_dialog$de._(_root);
+	@override late final _Translations$report_dialog$de report_dialog = _Translations$report_dialog$de._(_root);
+	@override late final _Translations$tips_sheet$de tips_sheet = _Translations$tips_sheet$de._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$de extends Translations$result$en {
 	@override String get download => 'Herunterladen';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$de extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Datenschutz';
+	@override String get desc => 'Ihre Fotos werden von unseren internen KI-Systemen sicher verarbeitet. Wir teilen, verkaufen oder geben Ihre Informationen nicht an Dritte weiter.';
+	@override String get cancel => 'Abbrechen';
+	@override String get confirm => 'Bestätigen';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$de extends Translations$report_dialog$en {
+	_Translations$report_dialog$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Melden';
+	@override String get desc => 'Sind Sie sicher, dass Sie den Bericht senden möchten?';
+	@override String get cancel => 'Abbrechen';
+	@override String get submit => 'Senden';
+	@override String get success => 'Video erfolgreich gemeldet';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$de extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Tipps für beste Ergebnisse';
+	@override String get button_got_it => 'Verstanden!';
+	@override String get use_photos => 'Verwenden Sie solche Fotos';
+	@override String get avoid_photos => 'Vermeiden Sie solche Fotos';
+	@override String get one_person => 'Eine Person';
+	@override String get clear_face => 'Klares Gesicht';
+	@override String get half_body => 'Halbkörper';
+	@override String get hidden_face => 'Verdecktes Gesicht';
+	@override String get multiple_people => 'Mehrere Personen';
+	@override String get blurry_photo => 'Unscharfes Foto';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsDe {
 			'result.create_another' => 'Anderes Video erstellen',
 			'result.share' => 'Teilen',
 			'result.download' => 'Herunterladen',
+			'privacy_dialog.title' => 'Datenschutz',
+			'privacy_dialog.desc' => 'Ihre Fotos werden von unseren internen KI-Systemen sicher verarbeitet. Wir teilen, verkaufen oder geben Ihre Informationen nicht an Dritte weiter.',
+			'privacy_dialog.cancel' => 'Abbrechen',
+			'privacy_dialog.confirm' => 'Bestätigen',
+			'report_dialog.title' => 'Melden',
+			'report_dialog.desc' => 'Sind Sie sicher, dass Sie den Bericht senden möchten?',
+			'report_dialog.cancel' => 'Abbrechen',
+			'report_dialog.submit' => 'Senden',
+			'report_dialog.success' => 'Video erfolgreich gemeldet',
+			'tips_sheet.title' => 'Tipps für beste Ergebnisse',
+			'tips_sheet.button_got_it' => 'Verstanden!',
+			'tips_sheet.use_photos' => 'Verwenden Sie solche Fotos',
+			'tips_sheet.avoid_photos' => 'Vermeiden Sie solche Fotos',
+			'tips_sheet.one_person' => 'Eine Person',
+			'tips_sheet.clear_face' => 'Klares Gesicht',
+			'tips_sheet.half_body' => 'Halbkörper',
+			'tips_sheet.hidden_face' => 'Verdecktes Gesicht',
+			'tips_sheet.multiple_people' => 'Mehrere Personen',
+			'tips_sheet.blurry_photo' => 'Unscharfes Foto',
 			_ => null,
 		};
 	}

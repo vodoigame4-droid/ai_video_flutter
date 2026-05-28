@@ -213,5 +213,30 @@
     "create_another": "Create Another Video",
     "share": "Share",
     "download": "Download"
+  },
+  "privacy_dialog": {
+    "title": "Data Privacy",
+    "desc": "Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "report_dialog": {
+    "title": "Report",
+    "desc": "Are you sure you want to submit the report?",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "success": "Video reported successfully"
+  },
+  "tips_sheet": {
+    "title": "Tips for best results",
+    "button_got_it": "I got it!",
+    "use_photos": "Use photos like these",
+    "avoid_photos": "Avoid photos like these",
+    "one_person": "One person",
+    "clear_face": "Clear face",
+    "half_body": "Half body",
+    "hidden_face": "Hidden face",
+    "multiple_people": "Multiple people",
+    "blurry_photo": "Blurry photo"
   }
 }

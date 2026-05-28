@@ -206,5 +206,30 @@
     "create_another": "다른 동영상 만들기",
     "share": "공유",
     "download": "다운로드"
+  },
+  "privacy_dialog": {
+    "title": "데이터 개인정보 보호",
+    "desc": "사진은 당사의 내부 AI 시스템에 의해 안전하게 처리됩니다. 당사는 귀하의 정보를 제3자에게 공유, 판매 또는 공개하지 않습니다.",
+    "cancel": "취소",
+    "confirm": "확인"
+  },
+  "report_dialog": {
+    "title": "신고",
+    "desc": "신고를 제출하시겠습니까?",
+    "cancel": "취소",
+    "submit": "제출",
+    "success": "동영상이 성공적으로 신고되었습니다"
+  },
+  "tips_sheet": {
+    "title": "최상의 결과를 위한 팁",
+    "button_got_it": "알겠습니다!",
+    "use_photos": "이런 사진을 사용하세요",
+    "avoid_photos": "이런 사진은 피하세요",
+    "one_person": "한 사람",
+    "clear_face": "선명한 얼굴",
+    "half_body": "반신",
+    "hidden_face": "가려진 얼굴",
+    "multiple_people": "여러 사람",
+    "blurry_photo": "흐린 사진"
   }
 }

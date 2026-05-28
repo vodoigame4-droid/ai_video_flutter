@@ -206,5 +206,30 @@
     "create_another": "Criar outro vídeo",
     "share": "Compartilhar",
     "download": "Baixar"
+  },
+  "privacy_dialog": {
+    "title": "Privacidade de Dados",
+    "desc": "Suas fotos são processadas com segurança por nossos sistemas internos de IA. Não compartilhamos, vendemos ou divulgamos suas informações a terceiros.",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  },
+  "report_dialog": {
+    "title": "Denunciar",
+    "desc": "Tem certeza de que deseja enviar a denúncia?",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "success": "Vídeo denunciado com sucesso"
+  },
+  "tips_sheet": {
+    "title": "Dicas para melhores resultados",
+    "button_got_it": "Entendi!",
+    "use_photos": "Use fotos como estas",
+    "avoid_photos": "Evite fotos como estas",
+    "one_person": "Uma pessoa",
+    "clear_face": "Rosto nítido",
+    "half_body": "Meio corpo",
+    "hidden_face": "Rosto coberto",
+    "multiple_people": "Várias pessoas",
+    "blurry_photo": "Foto embaçada"
   }
 }

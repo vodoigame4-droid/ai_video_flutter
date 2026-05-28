@@ -206,5 +206,30 @@
     "create_another": "Buat Video Lain",
     "share": "Bagikan",
     "download": "Unduh"
+  },
+  "privacy_dialog": {
+    "title": "Privasi Data",
+    "desc": "Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.",
+    "cancel": "Batal",
+    "confirm": "Konfirmasi"
+  },
+  "report_dialog": {
+    "title": "Laporkan",
+    "desc": "Apakah Anda yakin ingin mengirimkan laporan?",
+    "cancel": "Batal",
+    "submit": "Kirim",
+    "success": "Video berhasil dilaporkan"
+  },
+  "tips_sheet": {
+    "title": "Tips untuk hasil terbaik",
+    "button_got_it": "Saya mengerti!",
+    "use_photos": "Gunakan foto seperti ini",
+    "avoid_photos": "Hindari foto seperti ini",
+    "one_person": "Satu orang",
+    "clear_face": "Wajah jelas",
+    "half_body": "Setengah badan",
+    "hidden_face": "Wajah tersembunyi",
+    "multiple_people": "Banyak orang",
+    "blurry_photo": "Foto buram"
   }
 }

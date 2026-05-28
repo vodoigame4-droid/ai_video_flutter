@@ -206,5 +206,30 @@
     "create_another": "別の動画を作成する",
     "share": "共有する",
     "download": "ダウンロード"
+  },
+  "privacy_dialog": {
+    "title": "データプライバシー",
+    "desc": "あなたの写真は当社の内部AIシステムによって安全に処理されます。お客様の情報を第三者に共有、販売、または開示することはありません。",
+    "cancel": "キャンセル",
+    "confirm": "確認"
+  },
+  "report_dialog": {
+    "title": "報告",
+    "desc": "報告を送信してもよろしいですか？",
+    "cancel": "キャンセル",
+    "submit": "送信",
+    "success": "動画が正常に報告されました"
+  },
+  "tips_sheet": {
+    "title": "最良の結果を得るためのヒント",
+    "button_got_it": "了解しました！",
+    "use_photos": "このような写真を使用してください",
+    "avoid_photos": "このような写真は避けてください",
+    "one_person": "一人",
+    "clear_face": "はっきりした顔",
+    "half_body": "上半身",
+    "hidden_face": "隠れた顔",
+    "multiple_people": "複数人",
+    "blurry_photo": "ぼやけた写真"
   }
 }

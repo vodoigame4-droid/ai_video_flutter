@@ -54,6 +54,9 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$ko premium = _Translations$premium$ko._(_root);
 	@override late final _Translations$generating$ko generating = _Translations$generating$ko._(_root);
 	@override late final _Translations$result$ko result = _Translations$result$ko._(_root);
+	@override late final _Translations$privacy_dialog$ko privacy_dialog = _Translations$privacy_dialog$ko._(_root);
+	@override late final _Translations$report_dialog$ko report_dialog = _Translations$report_dialog$ko._(_root);
+	@override late final _Translations$tips_sheet$ko tips_sheet = _Translations$tips_sheet$ko._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$ko extends Translations$result$en {
 	@override String get download => '다운로드';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$ko extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '데이터 개인정보 보호';
+	@override String get desc => '사진은 당사의 내부 AI 시스템에 의해 안전하게 처리됩니다. 당사는 귀하의 정보를 제3자에게 공유, 판매 또는 공개하지 않습니다.';
+	@override String get cancel => '취소';
+	@override String get confirm => '확인';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$ko extends Translations$report_dialog$en {
+	_Translations$report_dialog$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '신고';
+	@override String get desc => '신고를 제출하시겠습니까?';
+	@override String get cancel => '취소';
+	@override String get submit => '제출';
+	@override String get success => '동영상이 성공적으로 신고되었습니다';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$ko extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '최상의 결과를 위한 팁';
+	@override String get button_got_it => '알겠습니다!';
+	@override String get use_photos => '이런 사진을 사용하세요';
+	@override String get avoid_photos => '이런 사진은 피하세요';
+	@override String get one_person => '한 사람';
+	@override String get clear_face => '선명한 얼굴';
+	@override String get half_body => '반신';
+	@override String get hidden_face => '가려진 얼굴';
+	@override String get multiple_people => '여러 사람';
+	@override String get blurry_photo => '흐린 사진';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsKo {
 			'result.create_another' => '다른 동영상 만들기',
 			'result.share' => '공유',
 			'result.download' => '다운로드',
+			'privacy_dialog.title' => '데이터 개인정보 보호',
+			'privacy_dialog.desc' => '사진은 당사의 내부 AI 시스템에 의해 안전하게 처리됩니다. 당사는 귀하의 정보를 제3자에게 공유, 판매 또는 공개하지 않습니다.',
+			'privacy_dialog.cancel' => '취소',
+			'privacy_dialog.confirm' => '확인',
+			'report_dialog.title' => '신고',
+			'report_dialog.desc' => '신고를 제출하시겠습니까?',
+			'report_dialog.cancel' => '취소',
+			'report_dialog.submit' => '제출',
+			'report_dialog.success' => '동영상이 성공적으로 신고되었습니다',
+			'tips_sheet.title' => '최상의 결과를 위한 팁',
+			'tips_sheet.button_got_it' => '알겠습니다!',
+			'tips_sheet.use_photos' => '이런 사진을 사용하세요',
+			'tips_sheet.avoid_photos' => '이런 사진은 피하세요',
+			'tips_sheet.one_person' => '한 사람',
+			'tips_sheet.clear_face' => '선명한 얼굴',
+			'tips_sheet.half_body' => '반신',
+			'tips_sheet.hidden_face' => '가려진 얼굴',
+			'tips_sheet.multiple_people' => '여러 사람',
+			'tips_sheet.blurry_photo' => '흐린 사진',
 			_ => null,
 		};
 	}

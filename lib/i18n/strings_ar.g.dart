@@ -54,6 +54,9 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$ar premium = _Translations$premium$ar._(_root);
 	@override late final _Translations$generating$ar generating = _Translations$generating$ar._(_root);
 	@override late final _Translations$result$ar result = _Translations$result$ar._(_root);
+	@override late final _Translations$privacy_dialog$ar privacy_dialog = _Translations$privacy_dialog$ar._(_root);
+	@override late final _Translations$report_dialog$ar report_dialog = _Translations$report_dialog$ar._(_root);
+	@override late final _Translations$tips_sheet$ar tips_sheet = _Translations$tips_sheet$ar._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$ar extends Translations$result$en {
 	@override String get download => 'تنزيل';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$ar extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'خصوصية البيانات';
+	@override String get desc => 'يتم معالجة صورك بأمان بواسطة أنظمة الذكاء الاصطناعي الداخلية لدينا. نحن لا نشارك أو نبيع أو نكشف عن معلوماتك لأي طرف ثالث.';
+	@override String get cancel => 'إلغاء';
+	@override String get confirm => 'تأكيد';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$ar extends Translations$report_dialog$en {
+	_Translations$report_dialog$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'إبلاغ';
+	@override String get desc => 'هل أنت متأكد أنك تريد إرسال الإبلاغ؟';
+	@override String get cancel => 'إلغاء';
+	@override String get submit => 'إرسال';
+	@override String get success => 'تم الإبلاغ عن الفيديو بنجاح';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$ar extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'نصائح لأفضل النتائج';
+	@override String get button_got_it => 'فهمت ذلك!';
+	@override String get use_photos => 'استخدم صوراً مثل هذه';
+	@override String get avoid_photos => 'تجنب صوراً مثل هذه';
+	@override String get one_person => 'شخص واحد';
+	@override String get clear_face => 'وجه واضح';
+	@override String get half_body => 'نصف الجسم';
+	@override String get hidden_face => 'وجه مخفي';
+	@override String get multiple_people => 'عدة أشخاص';
+	@override String get blurry_photo => 'صورة ضبابية';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsAr {
 			'result.create_another' => 'إنشاء فيديو آخر',
 			'result.share' => 'مشاركة',
 			'result.download' => 'تنزيل',
+			'privacy_dialog.title' => 'خصوصية البيانات',
+			'privacy_dialog.desc' => 'يتم معالجة صورك بأمان بواسطة أنظمة الذكاء الاصطناعي الداخلية لدينا. نحن لا نشارك أو نبيع أو نكشف عن معلوماتك لأي طرف ثالث.',
+			'privacy_dialog.cancel' => 'إلغاء',
+			'privacy_dialog.confirm' => 'تأكيد',
+			'report_dialog.title' => 'إبلاغ',
+			'report_dialog.desc' => 'هل أنت متأكد أنك تريد إرسال الإبلاغ؟',
+			'report_dialog.cancel' => 'إلغاء',
+			'report_dialog.submit' => 'إرسال',
+			'report_dialog.success' => 'تم الإبلاغ عن الفيديو بنجاح',
+			'tips_sheet.title' => 'نصائح لأفضل النتائج',
+			'tips_sheet.button_got_it' => 'فهمت ذلك!',
+			'tips_sheet.use_photos' => 'استخدم صوراً مثل هذه',
+			'tips_sheet.avoid_photos' => 'تجنب صوراً مثل هذه',
+			'tips_sheet.one_person' => 'شخص واحد',
+			'tips_sheet.clear_face' => 'وجه واضح',
+			'tips_sheet.half_body' => 'نصف الجسم',
+			'tips_sheet.hidden_face' => 'وجه مخفي',
+			'tips_sheet.multiple_people' => 'عدة أشخاص',
+			'tips_sheet.blurry_photo' => 'صورة ضبابية',
 			_ => null,
 		};
 	}

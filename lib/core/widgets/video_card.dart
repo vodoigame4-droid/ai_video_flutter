@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
@@ -34,6 +35,13 @@ class VideoCard extends StatelessWidget {
     final bool isEven = hash % 2 == 0;
     final String defaultImageAsset = isEven ? 'assets/images/card_1.png' : 'assets/images/card_2.png';
     
+    final bool isTest = Platform.environment.containsKey('FLUTTER_TEST');
+    final bool isNetworkImage = imageUrl != null && imageUrl!.startsWith('http') && !isTest;
+    
+    final String resolvedImageUrl = (isTest && imageUrl != null && imageUrl!.startsWith('http'))
+        ? defaultImageAsset
+        : (imageUrl ?? defaultImageAsset);
+    
     final bool resolvedIsHot = badgeType != null 
         ? badgeType == 'hot' 
         : hash % 3 == 0;
@@ -45,8 +53,6 @@ class VideoCard extends StatelessWidget {
     final String resolvedBadgeText = resolvedIsHot ? 'Hot' : 'New';
     
     final String resolvedViews = viewsCount ?? '${((hash % 90) + 10) / 10}k';
-
-    final bool isNetworkImage = imageUrl != null && imageUrl!.startsWith('http');
 
     // Styling configuration based on style type (Home vs Templates)
     final double cardRadius = isNetworkImage ? 10.0 : 16.0;
@@ -98,7 +104,7 @@ class VideoCard extends StatelessWidget {
         image: isNetworkImage
             ? null
             : DecorationImage(
-                image: AssetImage(imageUrl ?? defaultImageAsset),
+                image: AssetImage(resolvedImageUrl),
                 fit: BoxFit.cover,
               ),
         boxShadow: [

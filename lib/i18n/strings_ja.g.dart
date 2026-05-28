@@ -54,6 +54,9 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$ja premium = _Translations$premium$ja._(_root);
 	@override late final _Translations$generating$ja generating = _Translations$generating$ja._(_root);
 	@override late final _Translations$result$ja result = _Translations$result$ja._(_root);
+	@override late final _Translations$privacy_dialog$ja privacy_dialog = _Translations$privacy_dialog$ja._(_root);
+	@override late final _Translations$report_dialog$ja report_dialog = _Translations$report_dialog$ja._(_root);
+	@override late final _Translations$tips_sheet$ja tips_sheet = _Translations$tips_sheet$ja._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$ja extends Translations$result$en {
 	@override String get download => 'ダウンロード';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$ja extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'データプライバシー';
+	@override String get desc => 'あなたの写真は当社の内部AIシステムによって安全に処理されます。お客様の情報を第三者に共有、販売、または開示することはありません。';
+	@override String get cancel => 'キャンセル';
+	@override String get confirm => '確認';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$ja extends Translations$report_dialog$en {
+	_Translations$report_dialog$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '報告';
+	@override String get desc => '報告を送信してもよろしいですか？';
+	@override String get cancel => 'キャンセル';
+	@override String get submit => '送信';
+	@override String get success => '動画が正常に報告されました';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$ja extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '最良の結果を得るためのヒント';
+	@override String get button_got_it => '了解しました！';
+	@override String get use_photos => 'このような写真を使用してください';
+	@override String get avoid_photos => 'このような写真は避けてください';
+	@override String get one_person => '一人';
+	@override String get clear_face => 'はっきりした顔';
+	@override String get half_body => '上半身';
+	@override String get hidden_face => '隠れた顔';
+	@override String get multiple_people => '複数人';
+	@override String get blurry_photo => 'ぼやけた写真';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsJa {
 			'result.create_another' => '別の動画を作成する',
 			'result.share' => '共有する',
 			'result.download' => 'ダウンロード',
+			'privacy_dialog.title' => 'データプライバシー',
+			'privacy_dialog.desc' => 'あなたの写真は当社の内部AIシステムによって安全に処理されます。お客様の情報を第三者に共有、販売、または開示することはありません。',
+			'privacy_dialog.cancel' => 'キャンセル',
+			'privacy_dialog.confirm' => '確認',
+			'report_dialog.title' => '報告',
+			'report_dialog.desc' => '報告を送信してもよろしいですか？',
+			'report_dialog.cancel' => 'キャンセル',
+			'report_dialog.submit' => '送信',
+			'report_dialog.success' => '動画が正常に報告されました',
+			'tips_sheet.title' => '最良の結果を得るためのヒント',
+			'tips_sheet.button_got_it' => '了解しました！',
+			'tips_sheet.use_photos' => 'このような写真を使用してください',
+			'tips_sheet.avoid_photos' => 'このような写真は避けてください',
+			'tips_sheet.one_person' => '一人',
+			'tips_sheet.clear_face' => 'はっきりした顔',
+			'tips_sheet.half_body' => '上半身',
+			'tips_sheet.hidden_face' => '隠れた顔',
+			'tips_sheet.multiple_people' => '複数人',
+			'tips_sheet.blurry_photo' => 'ぼやけた写真',
 			_ => null,
 		};
 	}

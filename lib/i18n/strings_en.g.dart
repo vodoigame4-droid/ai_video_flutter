@@ -56,6 +56,9 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$video_player$en video_player = Translations$video_player$en.internal(_root);
 	late final Translations$generating$en generating = Translations$generating$en.internal(_root);
 	late final Translations$result$en result = Translations$result$en.internal(_root);
+	late final Translations$privacy_dialog$en privacy_dialog = Translations$privacy_dialog$en.internal(_root);
+	late final Translations$report_dialog$en report_dialog = Translations$report_dialog$en.internal(_root);
+	late final Translations$tips_sheet$en tips_sheet = Translations$tips_sheet$en.internal(_root);
 }
 
 // Path: common
@@ -681,6 +684,90 @@ class Translations$result$en {
 	String get download => 'Download';
 }
 
+// Path: privacy_dialog
+class Translations$privacy_dialog$en {
+	Translations$privacy_dialog$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Data Privacy'
+	String get title => 'Data Privacy';
+
+	/// en: 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.'
+	String get desc => 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+
+	/// en: 'Confirm'
+	String get confirm => 'Confirm';
+}
+
+// Path: report_dialog
+class Translations$report_dialog$en {
+	Translations$report_dialog$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Report'
+	String get title => 'Report';
+
+	/// en: 'Are you sure you want to submit the report?'
+	String get desc => 'Are you sure you want to submit the report?';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+
+	/// en: 'Submit'
+	String get submit => 'Submit';
+
+	/// en: 'Video reported successfully'
+	String get success => 'Video reported successfully';
+}
+
+// Path: tips_sheet
+class Translations$tips_sheet$en {
+	Translations$tips_sheet$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Tips for best results'
+	String get title => 'Tips for best results';
+
+	/// en: 'I got it!'
+	String get button_got_it => 'I got it!';
+
+	/// en: 'Use photos like these'
+	String get use_photos => 'Use photos like these';
+
+	/// en: 'Avoid photos like these'
+	String get avoid_photos => 'Avoid photos like these';
+
+	/// en: 'One person'
+	String get one_person => 'One person';
+
+	/// en: 'Clear face'
+	String get clear_face => 'Clear face';
+
+	/// en: 'Half body'
+	String get half_body => 'Half body';
+
+	/// en: 'Hidden face'
+	String get hidden_face => 'Hidden face';
+
+	/// en: 'Multiple people'
+	String get multiple_people => 'Multiple people';
+
+	/// en: 'Blurry photo'
+	String get blurry_photo => 'Blurry photo';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -952,6 +1039,25 @@ extension on Translations {
 			'result.create_another' => 'Create Another Video',
 			'result.share' => 'Share',
 			'result.download' => 'Download',
+			'privacy_dialog.title' => 'Data Privacy',
+			'privacy_dialog.desc' => 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.',
+			'privacy_dialog.cancel' => 'Cancel',
+			'privacy_dialog.confirm' => 'Confirm',
+			'report_dialog.title' => 'Report',
+			'report_dialog.desc' => 'Are you sure you want to submit the report?',
+			'report_dialog.cancel' => 'Cancel',
+			'report_dialog.submit' => 'Submit',
+			'report_dialog.success' => 'Video reported successfully',
+			'tips_sheet.title' => 'Tips for best results',
+			'tips_sheet.button_got_it' => 'I got it!',
+			'tips_sheet.use_photos' => 'Use photos like these',
+			'tips_sheet.avoid_photos' => 'Avoid photos like these',
+			'tips_sheet.one_person' => 'One person',
+			'tips_sheet.clear_face' => 'Clear face',
+			'tips_sheet.half_body' => 'Half body',
+			'tips_sheet.hidden_face' => 'Hidden face',
+			'tips_sheet.multiple_people' => 'Multiple people',
+			'tips_sheet.blurry_photo' => 'Blurry photo',
 			_ => null,
 		};
 	}

@@ -8,6 +8,7 @@ import '../../../../../core/theme/app_theme.dart';
 import '../../../../../core/resources/resource.dart';
 import '../../../../../i18n/strings.g.dart';
 import '../../../templates/presentation/pages/templates_page.dart';
+import '../../../templates/domain/entities/template_entity.dart';
 import '../../../create_video/presentation/pages/create_video_page.dart';
 import '../blocs/home_bloc.dart';
 import '../blocs/home_event.dart';
@@ -15,6 +16,7 @@ import '../blocs/home_state.dart';
 import '../widgets/category_selector.dart';
 import '../../../../core/widgets/video_card.dart';
 import '../../../video_player/presentation/pages/video_player_page.dart';
+import '../../../create_video/presentation/pages/create_from_template_page.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';
@@ -283,17 +285,23 @@ class HomeView extends StatelessWidget {
                               separatorBuilder: (context, index) =>
                                   const SizedBox(width: 12),
                               itemBuilder: (context, index) {
+                                final template = trendingVideos[index];
                                 return VideoCard(
-                                  title: trendingVideos[index],
+                                  title: template.title,
+                                  imageUrl: template.imageUrl,
+                                  viewsCount: template.viewsCount,
+                                  badgeType: template.badgeType,
                                   width: 158,
                                   height: 236,
                                   onTap: () {
                                     const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
                                     context.pushNamed(
-                                      VideoPlayerPage.name,
+                                      CreateFromTemplatePage.name,
                                       queryParameters: {
+                                        'templateId': template.id,
+                                        'title': template.title,
                                         'videoUrl': mockVideoUrl,
-                                        'title': trendingVideos[index],
+                                        'imageUrl': template.imageUrl,
                                       },
                                     );
                                   },
@@ -360,17 +368,23 @@ class HomeView extends StatelessWidget {
                               separatorBuilder: (context, index) =>
                                   const SizedBox(width: 12),
                               itemBuilder: (context, index) {
+                                final template = newVideos[index];
                                 return VideoCard(
-                                  title: newVideos[index],
+                                  title: template.title,
+                                  imageUrl: template.imageUrl,
+                                  viewsCount: template.viewsCount,
+                                  badgeType: template.badgeType,
                                   width: 158,
                                   height: 236,
                                   onTap: () {
                                     const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
                                     context.pushNamed(
-                                      VideoPlayerPage.name,
+                                      CreateFromTemplatePage.name,
                                       queryParameters: {
+                                        'templateId': template.id,
+                                        'title': template.title,
                                         'videoUrl': mockVideoUrl,
-                                        'title': newVideos[index],
+                                        'imageUrl': template.imageUrl,
                                       },
                                     );
                                   },

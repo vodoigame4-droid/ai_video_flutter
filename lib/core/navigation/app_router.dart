@@ -12,6 +12,7 @@ import '../../features/create_video/presentation/pages/result_page.dart';
 import '../../features/premium/presentation/pages/paywall_video_page.dart';
 import '../../features/premium/presentation/pages/iap_page.dart';
 import '../../features/premium/presentation/pages/buy_credits_page.dart';
+import '../../features/create_video/presentation/pages/create_from_template_page.dart';
 import '../../features/video_player/presentation/pages/video_player_page.dart';
 
 abstract class AppRoutePage {
@@ -96,6 +97,25 @@ final GoRouter appRouter = GoRouter(
         return AppRoutePage.cupertino<void>(
           state: state,
           child: CreateVideoPage(initialTab: initialTab),
+        );
+      },
+    ),
+    GoRoute(
+      path: CreateFromTemplatePage.path,
+      name: CreateFromTemplatePage.name,
+      pageBuilder: (context, state) {
+        final templateId = state.uri.queryParameters['templateId'] ?? '';
+        final title = state.uri.queryParameters['title'] ?? '';
+        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        final imageUrl = state.uri.queryParameters['imageUrl'] ?? '';
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: CreateFromTemplatePage(
+            templateId: templateId,
+            title: title,
+            videoUrl: videoUrl,
+            imageUrl: imageUrl,
+          ),
         );
       },
     ),

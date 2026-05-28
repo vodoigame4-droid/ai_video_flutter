@@ -54,6 +54,9 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$premium$id premium = _Translations$premium$id._(_root);
 	@override late final _Translations$generating$id generating = _Translations$generating$id._(_root);
 	@override late final _Translations$result$id result = _Translations$result$id._(_root);
+	@override late final _Translations$privacy_dialog$id privacy_dialog = _Translations$privacy_dialog$id._(_root);
+	@override late final _Translations$report_dialog$id report_dialog = _Translations$report_dialog$id._(_root);
+	@override late final _Translations$tips_sheet$id tips_sheet = _Translations$tips_sheet$id._(_root);
 }
 
 // Path: common
@@ -349,6 +352,52 @@ class _Translations$result$id extends Translations$result$en {
 	@override String get download => 'Unduh';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$id extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Privasi Data';
+	@override String get desc => 'Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.';
+	@override String get cancel => 'Batal';
+	@override String get confirm => 'Konfirmasi';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$id extends Translations$report_dialog$en {
+	_Translations$report_dialog$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Laporkan';
+	@override String get desc => 'Apakah Anda yakin ingin mengirimkan laporan?';
+	@override String get cancel => 'Batal';
+	@override String get submit => 'Kirim';
+	@override String get success => 'Video berhasil dilaporkan';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$id extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Tips untuk hasil terbaik';
+	@override String get button_got_it => 'Saya mengerti!';
+	@override String get use_photos => 'Gunakan foto seperti ini';
+	@override String get avoid_photos => 'Hindari foto seperti ini';
+	@override String get one_person => 'Satu orang';
+	@override String get clear_face => 'Wajah jelas';
+	@override String get half_body => 'Setengah badan';
+	@override String get hidden_face => 'Wajah tersembunyi';
+	@override String get multiple_people => 'Banyak orang';
+	@override String get blurry_photo => 'Foto buram';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -585,6 +634,25 @@ extension on TranslationsId {
 			'result.create_another' => 'Buat Video Lain',
 			'result.share' => 'Bagikan',
 			'result.download' => 'Unduh',
+			'privacy_dialog.title' => 'Privasi Data',
+			'privacy_dialog.desc' => 'Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.',
+			'privacy_dialog.cancel' => 'Batal',
+			'privacy_dialog.confirm' => 'Konfirmasi',
+			'report_dialog.title' => 'Laporkan',
+			'report_dialog.desc' => 'Apakah Anda yakin ingin mengirimkan laporan?',
+			'report_dialog.cancel' => 'Batal',
+			'report_dialog.submit' => 'Kirim',
+			'report_dialog.success' => 'Video berhasil dilaporkan',
+			'tips_sheet.title' => 'Tips untuk hasil terbaik',
+			'tips_sheet.button_got_it' => 'Saya mengerti!',
+			'tips_sheet.use_photos' => 'Gunakan foto seperti ini',
+			'tips_sheet.avoid_photos' => 'Hindari foto seperti ini',
+			'tips_sheet.one_person' => 'Satu orang',
+			'tips_sheet.clear_face' => 'Wajah jelas',
+			'tips_sheet.half_body' => 'Setengah badan',
+			'tips_sheet.hidden_face' => 'Wajah tersembunyi',
+			'tips_sheet.multiple_people' => 'Banyak orang',
+			'tips_sheet.blurry_photo' => 'Foto buram',
 			_ => null,
 		};
 	}

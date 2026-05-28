@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_state.dart';
+part of 'create_from_template_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +12,7 @@ part of 'home_state.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$HomeState {
+mixin _$CreateFromTemplateState {
 
 
 
@@ -20,7 +20,7 @@ mixin _$HomeState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateFromTemplateState);
 }
 
 
@@ -29,20 +29,20 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeState()';
+  return 'CreateFromTemplateState()';
 }
 
 
 }
 
 /// @nodoc
-class $HomeStateCopyWith<$Res>  {
-$HomeStateCopyWith(HomeState _, $Res Function(HomeState) __);
+class $CreateFromTemplateStateCopyWith<$Res>  {
+$CreateFromTemplateStateCopyWith(CreateFromTemplateState _, $Res Function(CreateFromTemplateState) __);
 }
 
 
-/// Adds pattern-matching-related methods to [HomeState].
-extension HomeStatePatterns on HomeState {
+/// Adds pattern-matching-related methods to [CreateFromTemplateState].
+extension CreateFromTemplateStatePatterns on CreateFromTemplateState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( Resource<List<String>> categoriesState,  String selectedCategory,  Resource<List<TemplateEntity>> trendingVideosState,  Resource<List<TemplateEntity>> newVideosState,  String currentLocale)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String? selectedPhotoPath,  bool showSettings,  String quality,  String duration,  bool isGenerating,  bool isSuccess)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.categoriesState,_that.selectedCategory,_that.trendingVideosState,_that.newVideosState,_that.currentLocale);case _Error() when error != null:
+return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.selectedPhotoPath,_that.showSettings,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( Resource<List<String>> categoriesState,  String selectedCategory,  Resource<List<TemplateEntity>> trendingVideosState,  Resource<List<TemplateEntity>> newVideosState,  String currentLocale)  ready,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String? selectedPhotoPath,  bool showSettings,  String quality,  String duration,  bool isGenerating,  bool isSuccess)  ready,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.categoriesState,_that.selectedCategory,_that.trendingVideosState,_that.newVideosState,_that.currentLocale);case _Error():
+return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.selectedPhotoPath,_that.showSettings,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( Resource<List<String>> categoriesState,  String selectedCategory,  Resource<List<TemplateEntity>> trendingVideosState,  Resource<List<TemplateEntity>> newVideosState,  String currentLocale)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String? selectedPhotoPath,  bool showSettings,  String quality,  String duration,  bool isGenerating,  bool isSuccess)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.categoriesState,_that.selectedCategory,_that.trendingVideosState,_that.newVideosState,_that.currentLocale);case _Error() when error != null:
+return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.selectedPhotoPath,_that.showSettings,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -192,7 +192,7 @@ return error(_that.message);case _:
 /// @nodoc
 
 
-class _Initial implements HomeState {
+class _Initial implements CreateFromTemplateState {
   const _Initial();
   
 
@@ -212,7 +212,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeState.initial()';
+  return 'CreateFromTemplateState.initial()';
 }
 
 
@@ -224,7 +224,7 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements HomeState {
+class _Loading implements CreateFromTemplateState {
   const _Loading();
   
 
@@ -244,7 +244,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeState.loading()';
+  return 'CreateFromTemplateState.loading()';
 }
 
 
@@ -256,17 +256,22 @@ String toString() {
 /// @nodoc
 
 
-class _Ready implements HomeState {
-  const _Ready({required this.categoriesState, required this.selectedCategory, required this.trendingVideosState, required this.newVideosState, required this.currentLocale});
+class _Ready implements CreateFromTemplateState {
+  const _Ready({required this.templateId, required this.title, required this.videoUrl, required this.imageUrl, this.selectedPhotoPath, required this.showSettings, required this.quality, required this.duration, required this.isGenerating, this.isSuccess = false});
   
 
- final  Resource<List<String>> categoriesState;
- final  String selectedCategory;
- final  Resource<List<TemplateEntity>> trendingVideosState;
- final  Resource<List<TemplateEntity>> newVideosState;
- final  String currentLocale;
+ final  String templateId;
+ final  String title;
+ final  String videoUrl;
+ final  String imageUrl;
+ final  String? selectedPhotoPath;
+ final  bool showSettings;
+ final  String quality;
+ final  String duration;
+ final  bool isGenerating;
+@JsonKey() final  bool isSuccess;
 
-/// Create a copy of HomeState
+/// Create a copy of CreateFromTemplateState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -276,31 +281,31 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.categoriesState, categoriesState) || other.categoriesState == categoriesState)&&(identical(other.selectedCategory, selectedCategory) || other.selectedCategory == selectedCategory)&&(identical(other.trendingVideosState, trendingVideosState) || other.trendingVideosState == trendingVideosState)&&(identical(other.newVideosState, newVideosState) || other.newVideosState == newVideosState)&&(identical(other.currentLocale, currentLocale) || other.currentLocale == currentLocale));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.templateId, templateId) || other.templateId == templateId)&&(identical(other.title, title) || other.title == title)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.selectedPhotoPath, selectedPhotoPath) || other.selectedPhotoPath == selectedPhotoPath)&&(identical(other.showSettings, showSettings) || other.showSettings == showSettings)&&(identical(other.quality, quality) || other.quality == quality)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,categoriesState,selectedCategory,trendingVideosState,newVideosState,currentLocale);
+int get hashCode => Object.hash(runtimeType,templateId,title,videoUrl,imageUrl,selectedPhotoPath,showSettings,quality,duration,isGenerating,isSuccess);
 
 @override
 String toString() {
-  return 'HomeState.ready(categoriesState: $categoriesState, selectedCategory: $selectedCategory, trendingVideosState: $trendingVideosState, newVideosState: $newVideosState, currentLocale: $currentLocale)';
+  return 'CreateFromTemplateState.ready(templateId: $templateId, title: $title, videoUrl: $videoUrl, imageUrl: $imageUrl, selectedPhotoPath: $selectedPhotoPath, showSettings: $showSettings, quality: $quality, duration: $duration, isGenerating: $isGenerating, isSuccess: $isSuccess)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ReadyCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+abstract mixin class _$ReadyCopyWith<$Res> implements $CreateFromTemplateStateCopyWith<$Res> {
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- Resource<List<String>> categoriesState, String selectedCategory, Resource<List<TemplateEntity>> trendingVideosState, Resource<List<TemplateEntity>> newVideosState, String currentLocale
+ String templateId, String title, String videoUrl, String imageUrl, String? selectedPhotoPath, bool showSettings, String quality, String duration, bool isGenerating, bool isSuccess
 });
 
 
-$ResourceCopyWith<List<String>, $Res> get categoriesState;$ResourceCopyWith<List<TemplateEntity>, $Res> get trendingVideosState;$ResourceCopyWith<List<TemplateEntity>, $Res> get newVideosState;
+
 
 }
 /// @nodoc
@@ -311,59 +316,37 @@ class __$ReadyCopyWithImpl<$Res>
   final _Ready _self;
   final $Res Function(_Ready) _then;
 
-/// Create a copy of HomeState
+/// Create a copy of CreateFromTemplateState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? categoriesState = null,Object? selectedCategory = null,Object? trendingVideosState = null,Object? newVideosState = null,Object? currentLocale = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? templateId = null,Object? title = null,Object? videoUrl = null,Object? imageUrl = null,Object? selectedPhotoPath = freezed,Object? showSettings = null,Object? quality = null,Object? duration = null,Object? isGenerating = null,Object? isSuccess = null,}) {
   return _then(_Ready(
-categoriesState: null == categoriesState ? _self.categoriesState : categoriesState // ignore: cast_nullable_to_non_nullable
-as Resource<List<String>>,selectedCategory: null == selectedCategory ? _self.selectedCategory : selectedCategory // ignore: cast_nullable_to_non_nullable
-as String,trendingVideosState: null == trendingVideosState ? _self.trendingVideosState : trendingVideosState // ignore: cast_nullable_to_non_nullable
-as Resource<List<TemplateEntity>>,newVideosState: null == newVideosState ? _self.newVideosState : newVideosState // ignore: cast_nullable_to_non_nullable
-as Resource<List<TemplateEntity>>,currentLocale: null == currentLocale ? _self.currentLocale : currentLocale // ignore: cast_nullable_to_non_nullable
-as String,
+templateId: null == templateId ? _self.templateId : templateId // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,videoUrl: null == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
+as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,selectedPhotoPath: freezed == selectedPhotoPath ? _self.selectedPhotoPath : selectedPhotoPath // ignore: cast_nullable_to_non_nullable
+as String?,showSettings: null == showSettings ? _self.showSettings : showSettings // ignore: cast_nullable_to_non_nullable
+as bool,quality: null == quality ? _self.quality : quality // ignore: cast_nullable_to_non_nullable
+as String,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
+as String,isGenerating: null == isGenerating ? _self.isGenerating : isGenerating // ignore: cast_nullable_to_non_nullable
+as bool,isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
-/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ResourceCopyWith<List<String>, $Res> get categoriesState {
-  
-  return $ResourceCopyWith<List<String>, $Res>(_self.categoriesState, (value) {
-    return _then(_self.copyWith(categoriesState: value));
-  });
-}/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ResourceCopyWith<List<TemplateEntity>, $Res> get trendingVideosState {
-  
-  return $ResourceCopyWith<List<TemplateEntity>, $Res>(_self.trendingVideosState, (value) {
-    return _then(_self.copyWith(trendingVideosState: value));
-  });
-}/// Create a copy of HomeState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ResourceCopyWith<List<TemplateEntity>, $Res> get newVideosState {
-  
-  return $ResourceCopyWith<List<TemplateEntity>, $Res>(_self.newVideosState, (value) {
-    return _then(_self.copyWith(newVideosState: value));
-  });
-}
+
 }
 
 /// @nodoc
 
 
-class _Error implements HomeState {
+class _Error implements CreateFromTemplateState {
   const _Error({required this.message});
   
 
  final  String message;
 
-/// Create a copy of HomeState
+/// Create a copy of CreateFromTemplateState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -382,14 +365,14 @@ int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'HomeState.error(message: $message)';
+  return 'CreateFromTemplateState.error(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ErrorCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+abstract mixin class _$ErrorCopyWith<$Res> implements $CreateFromTemplateStateCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
 @useResult
 $Res call({
@@ -408,7 +391,7 @@ class __$ErrorCopyWithImpl<$Res>
   final _Error _self;
   final $Res Function(_Error) _then;
 
-/// Create a copy of HomeState
+/// Create a copy of CreateFromTemplateState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(_Error(

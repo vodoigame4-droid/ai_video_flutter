@@ -10,6 +10,7 @@ import '../bloc/templates_event.dart';
 import '../bloc/templates_state.dart';
 import '../../../../core/widgets/video_card.dart';
 import '../../../../features/video_player/presentation/pages/video_player_page.dart';
+import '../../../../features/create_video/presentation/pages/create_from_template_page.dart';
 import '../../../../core/widgets/credit_badge_widget.dart';
 import '../../../../features/home/presentation/widgets/video_settings_sheet.dart';
 import '../widgets/category_selector_widget.dart';
@@ -203,10 +204,12 @@ class TemplatesView extends StatelessWidget {
                                       onTap: () {
                                         const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
                                         context.pushNamed(
-                                          VideoPlayerPage.name,
+                                          CreateFromTemplatePage.name,
                                           queryParameters: {
-                                            'videoUrl': mockVideoUrl,
+                                            'templateId': template.id,
                                             'title': template.title,
+                                            'videoUrl': mockVideoUrl,
+                                            'imageUrl': template.imageUrl,
                                           },
                                         );
                                       },

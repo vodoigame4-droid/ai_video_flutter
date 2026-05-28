@@ -1,31 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/resource.dart';
+import 'package:ai_video_flutter/features/templates/domain/usecases/get_templates_use_case.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const HomeState.initial()) {
+  final GetTemplatesUseCase getTemplatesUseCase;
+
+  HomeBloc({required this.getTemplatesUseCase}) : super(const HomeState.initial()) {
     on<HomeEvent>((event, emit) async {
       await event.when(
         init: () async {
           emit(const HomeState.loading());
-          // Giả lập thời gian load dữ liệu từ API
-          await Future.delayed(const Duration(milliseconds: 600));
+          
+          final trendingVideosResult = await getTemplatesUseCase('Trending');
+          final newVideosResult = await getTemplatesUseCase('New');
+          
           emit(HomeState.ready(
             categoriesState: const Resource.success(['All', 'Anime', 'Epic Morph', 'Toy Box', 'Trending', 'New']),
             selectedCategory: 'All',
-            trendingVideosState: const Resource.success([
-              'Selfie Aquaman',
-              'Cyberpunk Girl',
-              'Robot Dance',
-              'Neon Forest'
-            ]),
-            newVideosState: const Resource.success([
-              'Sunset Drive',
-              'Glitch City',
-              'Astronaut Moon',
-              'Epic Waves'
-            ]),
+            trendingVideosState: trendingVideosResult,
+            newVideosState: newVideosResult,
             currentLocale: 'en',
           ));
         },
@@ -47,3 +42,4 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 }
+

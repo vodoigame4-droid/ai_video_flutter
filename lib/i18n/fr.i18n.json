@@ -206,5 +206,30 @@
     "create_another": "Créer une autre vidéo",
     "share": "Partager",
     "download": "Télécharger"
+  },
+  "privacy_dialog": {
+    "title": "Confidentialité des données",
+    "desc": "Vos photos sont traitées en toute sécurité par nos systèmes d'IA internes. Nous ne partageons, ne vendons ni ne divulguons vos informations à des tiers.",
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
+  },
+  "report_dialog": {
+    "title": "Signaler",
+    "desc": "Êtes-vous sûr de vouloir envoyer le signalement ?",
+    "cancel": "Annuler",
+    "submit": "Signaler",
+    "success": "Vidéo signalée avec succès"
+  },
+  "tips_sheet": {
+    "title": "Conseils pour de meilleurs résultats",
+    "button_got_it": "J'ai compris !",
+    "use_photos": "Utilisez des photos comme celles-ci",
+    "avoid_photos": "Évitez les photos comme celles-ci",
+    "one_person": "Une personne",
+    "clear_face": "Visage clair",
+    "half_body": "Demi-corps",
+    "hidden_face": "Visage masqué",
+    "multiple_people": "Plusieurs personnes",
+    "blurry_photo": "Photo floue"
   }
 }

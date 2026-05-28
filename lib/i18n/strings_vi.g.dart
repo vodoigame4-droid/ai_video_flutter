@@ -55,6 +55,9 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$video_player$vi video_player = _Translations$video_player$vi._(_root);
 	@override late final _Translations$generating$vi generating = _Translations$generating$vi._(_root);
 	@override late final _Translations$result$vi result = _Translations$result$vi._(_root);
+	@override late final _Translations$privacy_dialog$vi privacy_dialog = _Translations$privacy_dialog$vi._(_root);
+	@override late final _Translations$report_dialog$vi report_dialog = _Translations$report_dialog$vi._(_root);
+	@override late final _Translations$tips_sheet$vi tips_sheet = _Translations$tips_sheet$vi._(_root);
 }
 
 // Path: common
@@ -364,6 +367,52 @@ class _Translations$result$vi extends Translations$result$en {
 	@override String get download => 'Tải xuống';
 }
 
+// Path: privacy_dialog
+class _Translations$privacy_dialog$vi extends Translations$privacy_dialog$en {
+	_Translations$privacy_dialog$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Quyền riêng tư dữ liệu';
+	@override String get desc => 'Ảnh của bạn được xử lý an toàn bởi hệ thống AI nội bộ của chúng tôi. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin của bạn cho bất kỳ bên thứ ba nào.';
+	@override String get cancel => 'Hủy bỏ';
+	@override String get confirm => 'Xác nhận';
+}
+
+// Path: report_dialog
+class _Translations$report_dialog$vi extends Translations$report_dialog$en {
+	_Translations$report_dialog$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Báo cáo';
+	@override String get desc => 'Bạn có chắc chắn muốn gửi báo cáo không?';
+	@override String get cancel => 'Hủy bỏ';
+	@override String get submit => 'Gửi';
+	@override String get success => 'Báo cáo video thành công';
+}
+
+// Path: tips_sheet
+class _Translations$tips_sheet$vi extends Translations$tips_sheet$en {
+	_Translations$tips_sheet$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Mẹo để có kết quả tốt nhất';
+	@override String get button_got_it => 'Tôi đã hiểu!';
+	@override String get use_photos => 'Nên dùng ảnh như thế này';
+	@override String get avoid_photos => 'Tránh dùng ảnh như thế này';
+	@override String get one_person => 'Một người';
+	@override String get clear_face => 'Rõ khuôn mặt';
+	@override String get half_body => 'Nửa người';
+	@override String get hidden_face => 'Bị che khuôn mặt';
+	@override String get multiple_people => 'Nhiều người';
+	@override String get blurry_photo => 'Ảnh bị mờ';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -605,6 +654,25 @@ extension on TranslationsVi {
 			'result.create_another' => 'Tạo một video khác',
 			'result.share' => 'Chia sẻ',
 			'result.download' => 'Tải xuống',
+			'privacy_dialog.title' => 'Quyền riêng tư dữ liệu',
+			'privacy_dialog.desc' => 'Ảnh của bạn được xử lý an toàn bởi hệ thống AI nội bộ của chúng tôi. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin của bạn cho bất kỳ bên thứ ba nào.',
+			'privacy_dialog.cancel' => 'Hủy bỏ',
+			'privacy_dialog.confirm' => 'Xác nhận',
+			'report_dialog.title' => 'Báo cáo',
+			'report_dialog.desc' => 'Bạn có chắc chắn muốn gửi báo cáo không?',
+			'report_dialog.cancel' => 'Hủy bỏ',
+			'report_dialog.submit' => 'Gửi',
+			'report_dialog.success' => 'Báo cáo video thành công',
+			'tips_sheet.title' => 'Mẹo để có kết quả tốt nhất',
+			'tips_sheet.button_got_it' => 'Tôi đã hiểu!',
+			'tips_sheet.use_photos' => 'Nên dùng ảnh như thế này',
+			'tips_sheet.avoid_photos' => 'Tránh dùng ảnh như thế này',
+			'tips_sheet.one_person' => 'Một người',
+			'tips_sheet.clear_face' => 'Rõ khuôn mặt',
+			'tips_sheet.half_body' => 'Nửa người',
+			'tips_sheet.hidden_face' => 'Bị che khuôn mặt',
+			'tips_sheet.multiple_people' => 'Nhiều người',
+			'tips_sheet.blurry_photo' => 'Ảnh bị mờ',
 			_ => null,
 		};
 	}

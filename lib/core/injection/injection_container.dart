@@ -20,6 +20,7 @@ import '../../features/templates/presentation/bloc/templates_bloc.dart';
 import '../../features/create_video/presentation/bloc/create_video_bloc.dart';
 import '../../features/create_video/presentation/bloc/generating_bloc.dart';
 import '../../features/create_video/presentation/bloc/result_bloc.dart';
+import '../../features/create_video/presentation/bloc/create_from_template_bloc.dart';
 import '../../features/premium/presentation/bloc/iap/iap_bloc.dart';
 import '../../features/video_player/presentation/bloc/video_player_bloc.dart';
 
@@ -33,7 +34,7 @@ Future<void> initDependencies() async {
   sl.registerFactory(() => OnboardingBloc());
 
   // Features - Home
-  sl.registerFactory(() => HomeBloc());
+  sl.registerFactory(() => HomeBloc(getTemplatesUseCase: sl()));
 
   // Features - Dashboard
   sl.registerFactory(() => DashboardBloc());
@@ -68,6 +69,7 @@ Future<void> initDependencies() async {
   sl.registerFactory(() => CreateVideoBloc());
   sl.registerFactory(() => GeneratingBloc(profileRepository: sl()));
   sl.registerFactory(() => ResultBloc());
+  sl.registerFactory(() => CreateFromTemplateBloc());
 
   // Features - Premium / Paywall
   sl.registerFactory(() => IapBloc());
