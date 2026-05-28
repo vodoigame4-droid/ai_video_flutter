@@ -52,6 +52,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$templates$en templates = Translations$templates$en.internal(_root);
 	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
 	late final Translations$language$en language = Translations$language$en.internal(_root);
+	late final Translations$premium$en premium = Translations$premium$en.internal(_root);
+	late final Translations$video_player$en video_player = Translations$video_player$en.internal(_root);
 }
 
 // Path: common
@@ -461,6 +463,171 @@ class Translations$language$en {
 	String get zh => 'Chinese';
 }
 
+// Path: premium
+class Translations$premium$en {
+	Translations$premium$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Tap to Reveal'
+	String get tap_to_reveal => 'Tap to Reveal';
+
+	/// en: 'Weekly'
+	String get weekly => 'Weekly';
+
+	/// en: '7-day unlimited access, then 249.000đ/week'
+	String get weekly_desc => '7-day unlimited access, then 249.000đ/week';
+
+	/// en: '199.000 đ'
+	String get weekly_price => '199.000 đ';
+
+	/// en: '/week'
+	String get weekly_suffix => '/week';
+
+	/// en: 'Annually'
+	String get annually => 'Annually';
+
+	/// en: 'Only 24.980đ/week'
+	String get annually_desc => 'Only 24.980đ/week';
+
+	/// en: '1.299.000 đ'
+	String get annually_price => '1.299.000 đ';
+
+	/// en: '/year'
+	String get annually_suffix => '/year';
+
+	/// en: 'Best Value'
+	String get best_value => 'Best Value';
+
+	/// en: 'Save 80%'
+	String get save_80 => 'Save 80%';
+
+	/// en: 'Start Free Trial'
+	String get start_free_trial => 'Start Free Trial';
+
+	/// en: 'Start My Subscription'
+	String get start_my_subscription => 'Start My Subscription';
+
+	/// en: 'Auto-Renewable. Cancel Anytime.'
+	String get auto_renewable => 'Auto-Renewable. Cancel Anytime.';
+
+	/// en: 'Privacy Policy'
+	String get privacy_policy => 'Privacy Policy';
+
+	/// en: 'Term of Use'
+	String get terms_of_use => 'Term of Use';
+
+	/// en: 'Restore'
+	String get restore => 'Restore';
+
+	/// en: 'Unlock 200+ Templates'
+	String get unlock_templates => 'Unlock 200+ Templates';
+
+	/// en: 'Fast Video Generation'
+	String get fast_generation => 'Fast Video Generation';
+
+	/// en: '50% Off Credit Packs'
+	String get discount_packs => '50% Off Credit Packs';
+
+	/// en: '80 Videos Per Year'
+	String get videos_per_year => '80 Videos Per Year';
+
+	/// en: 'Buy More Credit'
+	String get buy_more_credit => 'Buy More Credit';
+
+	/// en: '35 Credit generates 1 video. No ads while using purchased credits.'
+	String get credit_desc => '35 Credit generates 1 video. No ads while using purchased credits.';
+
+	/// en: '70 Credit'
+	String get credit_70 => '70 Credit';
+
+	/// en: '150 Credit'
+	String get credit_150 => '150 Credit';
+
+	/// en: '350 Credit'
+	String get credit_350 => '350 Credit';
+
+	/// en: '500 Credit'
+	String get credit_500 => '500 Credit';
+
+	/// en: '1.000 Credit'
+	String get credit_1000 => '1.000 Credit';
+
+	/// en: '6.000 Credit'
+	String get credit_6000 => '6.000 Credit';
+
+	/// en: '(~ {count} video)'
+	String approx_videos({required Object count}) => '(~ ${count} video)';
+
+	/// en: '149.000 đ'
+	String get price_70 => '149.000 đ';
+
+	/// en: '299.000 đ'
+	String get price_150 => '299.000 đ';
+
+	/// en: '599.000 đ'
+	String get price_350 => '599.000 đ';
+
+	/// en: '799.000 đ'
+	String get price_500 => '799.000 đ';
+
+	/// en: '1.499.000 đ'
+	String get price_1000 => '1.499.000 đ';
+
+	/// en: '5.999.000 đ'
+	String get price_6000 => '5.999.000 đ';
+
+	/// en: 'Most Popular'
+	String get most_popular => 'Most Popular';
+
+	/// en: 'Purchase successful: {item}'
+	String purchase_success({required Object item}) => 'Purchase successful: ${item}';
+
+	/// en: 'Purchase failed.'
+	String get purchase_failed => 'Purchase failed.';
+
+	/// en: 'Credit Packages'
+	String get credit_packages => 'Credit Packages';
+
+	/// en: 'Buy Credit Now'
+	String get buy_credit_now => 'Buy Credit Now';
+
+	/// en: 'PRO'
+	String get pro_title => 'PRO';
+
+	/// en: '50% OFF'
+	String get discount_title => '50% OFF';
+
+	/// en: 'CREDIT PRICES'
+	String get discount_subtitle => 'CREDIT PRICES';
+}
+
+// Path: video_player
+class Translations$video_player$en {
+	Translations$video_player$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Play'
+	String get play => 'Play';
+
+	/// en: 'Pause'
+	String get pause => 'Pause';
+
+	/// en: 'Failed to load video.'
+	String get error_loading => 'Failed to load video.';
+
+	/// en: 'Retry'
+	String get retry => 'Retry';
+
+	/// en: 'Buffering...'
+	String get buffering => 'Buffering...';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -672,6 +839,55 @@ extension on Translations {
 			'language.pt' => 'Portuguese',
 			'language.vi' => 'Vietnamese',
 			'language.zh' => 'Chinese',
+			'premium.tap_to_reveal' => 'Tap to Reveal',
+			'premium.weekly' => 'Weekly',
+			'premium.weekly_desc' => '7-day unlimited access, then 249.000đ/week',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/week',
+			'premium.annually' => 'Annually',
+			'premium.annually_desc' => 'Only 24.980đ/week',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/year',
+			'premium.best_value' => 'Best Value',
+			'premium.save_80' => 'Save 80%',
+			'premium.start_free_trial' => 'Start Free Trial',
+			'premium.start_my_subscription' => 'Start My Subscription',
+			'premium.auto_renewable' => 'Auto-Renewable. Cancel Anytime.',
+			'premium.privacy_policy' => 'Privacy Policy',
+			'premium.terms_of_use' => 'Term of Use',
+			'premium.restore' => 'Restore',
+			'premium.unlock_templates' => 'Unlock 200+ Templates',
+			'premium.fast_generation' => 'Fast Video Generation',
+			'premium.discount_packs' => '50% Off Credit Packs',
+			'premium.videos_per_year' => '80 Videos Per Year',
+			'premium.buy_more_credit' => 'Buy More Credit',
+			'premium.credit_desc' => '35 Credit generates 1 video. No ads while using purchased credits.',
+			'premium.credit_70' => '70 Credit',
+			'premium.credit_150' => '150 Credit',
+			'premium.credit_350' => '350 Credit',
+			'premium.credit_500' => '500 Credit',
+			'premium.credit_1000' => '1.000 Credit',
+			'premium.credit_6000' => '6.000 Credit',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} video)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => 'Most Popular',
+			'premium.purchase_success' => ({required Object item}) => 'Purchase successful: ${item}',
+			'premium.purchase_failed' => 'Purchase failed.',
+			'premium.credit_packages' => 'Credit Packages',
+			'premium.buy_credit_now' => 'Buy Credit Now',
+			'premium.pro_title' => 'PRO',
+			'premium.discount_title' => '50% OFF',
+			'premium.discount_subtitle' => 'CREDIT PRICES',
+			'video_player.play' => 'Play',
+			'video_player.pause' => 'Pause',
+			'video_player.error_loading' => 'Failed to load video.',
+			'video_player.retry' => 'Retry',
+			'video_player.buffering' => 'Buffering...',
 			_ => null,
 		};
 	}

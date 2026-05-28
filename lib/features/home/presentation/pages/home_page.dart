@@ -14,6 +14,7 @@ import '../blocs/home_event.dart';
 import '../blocs/home_state.dart';
 import '../widgets/category_selector.dart';
 import '../../../../core/widgets/video_card.dart';
+import '../../../video_player/presentation/pages/video_player_page.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';
@@ -286,6 +287,16 @@ class HomeView extends StatelessWidget {
                                   title: trendingVideos[index],
                                   width: 158,
                                   height: 236,
+                                  onTap: () {
+                                    const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                                    context.pushNamed(
+                                      VideoPlayerPage.name,
+                                      queryParameters: {
+                                        'videoUrl': mockVideoUrl,
+                                        'title': trendingVideos[index],
+                                      },
+                                    );
+                                  },
                                 );
                               },
                             ),
@@ -353,6 +364,16 @@ class HomeView extends StatelessWidget {
                                   title: newVideos[index],
                                   width: 158,
                                   height: 236,
+                                  onTap: () {
+                                    const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                                    context.pushNamed(
+                                      VideoPlayerPage.name,
+                                      queryParameters: {
+                                        'videoUrl': mockVideoUrl,
+                                        'title': newVideos[index],
+                                      },
+                                    );
+                                  },
                                 );
                               },
                             ),

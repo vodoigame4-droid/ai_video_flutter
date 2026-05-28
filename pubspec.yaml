@@ -28,6 +28,9 @@ dependencies:
   slang: ^4.14.0
   slang_flutter: ^4.14.0
   video_player: ^2.11.1
+  media_kit: ^1.1.10
+  media_kit_video: ^1.2.4
+  media_kit_libs_video: ^1.0.4
   cached_network_image: ^3.4.1
   sqlite3_flutter_libs: ^0.5.0
   intl: ^0.20.2

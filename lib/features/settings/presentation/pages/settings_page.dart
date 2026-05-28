@@ -6,8 +6,9 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
-import '../../../home/presentation/widgets/video_settings_sheet.dart';
 import '../../../profile/presentation/widgets/premium_banner_widget.dart';
+import '../../../premium/presentation/pages/iap_page.dart';
+import '../../../premium/presentation/pages/buy_credits_page.dart';
 import '../bloc/settings_bloc.dart';
 import '../bloc/settings_event.dart';
 import '../bloc/settings_state.dart';
@@ -31,13 +32,6 @@ class SettingsPage extends StatelessWidget {
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
 
-  void _showPremiumSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => const VideoSettingsSheet(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +103,7 @@ class SettingsView extends StatelessWidget {
                           children: [
                             // 1. Premium Upgrade Banner
                             PremiumBannerWidget(
-                              onTap: () => _showPremiumSheet(context),
+                              onTap: () => context.push(IapPage.path),
                             ),
                             const SizedBox(height: 12),
 
@@ -122,7 +116,7 @@ class SettingsView extends StatelessWidget {
                               ),
                               title: t.settings.myCredits,
                               trailingText: '300',
-                              onTap: () => _showPremiumSheet(context),
+                              onTap: () => context.push(BuyCreditsPage.path),
                             ),
 
                             // 3. Language

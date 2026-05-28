@@ -51,6 +51,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$zh templates = _Translations$templates$zh._(_root);
 	@override late final _Translations$settings$zh settings = _Translations$settings$zh._(_root);
 	@override late final _Translations$language$zh language = _Translations$language$zh._(_root);
+	@override late final _Translations$premium$zh premium = _Translations$premium$zh._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$zh extends Translations$language$en {
 	@override String get zh => '中文';
 }
 
+// Path: premium
+class _Translations$premium$zh extends Translations$premium$en {
+	_Translations$premium$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => '轻触解锁';
+	@override String get weekly => '每周';
+	@override String get weekly_desc => '7天免费体验，之后 249.000đ/周';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/周';
+	@override String get annually => '每年';
+	@override String get annually_desc => '仅折合 24.980đ/周';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/年';
+	@override String get best_value => '超值推荐';
+	@override String get save_80 => '立省 80%';
+	@override String get start_free_trial => '开始免费试用';
+	@override String get start_my_subscription => '开始我的订阅';
+	@override String get auto_renewable => '自动续订。可随时取消。';
+	@override String get privacy_policy => '隐私政策';
+	@override String get terms_of_use => '使用条款';
+	@override String get restore => '恢复购买';
+	@override String get unlock_templates => '解锁 200+ 热门模板';
+	@override String get fast_generation => '快速视频生成';
+	@override String get discount_packs => '点数包 50% 优惠';
+	@override String get videos_per_year => '每年 80 个视频';
+	@override String get buy_more_credit => '购买更多点数';
+	@override String get credit_desc => '35 点数可生成 1 个视频。使用购买的点数期间无广告。';
+	@override String get credit_70 => '70 点数';
+	@override String get credit_150 => '150 点数';
+	@override String get credit_350 => '350 点数';
+	@override String get credit_500 => '500 点数';
+	@override String get credit_1000 => '1.000 点数';
+	@override String get credit_6000 => '6.000 点数';
+	@override String approx_videos({required Object count}) => '(约 ${count} 个视频)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => '最受欢迎';
+	@override String purchase_success({required Object item}) => '购买成功: ${item}';
+	@override String get purchase_failed => '购买失败。';
+	@override String get credit_packages => '点数包';
+	@override String get buy_credit_now => '立即购买点数';
+	@override String get pro_title => '专业版';
+	@override String get discount_title => '50% 优惠';
+	@override String get discount_subtitle => '点数价格';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsZh {
 			'language.pt' => '葡萄牙语',
 			'language.vi' => '越南语',
 			'language.zh' => '中文',
+			'premium.tap_to_reveal' => '轻触解锁',
+			'premium.weekly' => '每周',
+			'premium.weekly_desc' => '7天免费体验，之后 249.000đ/周',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/周',
+			'premium.annually' => '每年',
+			'premium.annually_desc' => '仅折合 24.980đ/周',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/年',
+			'premium.best_value' => '超值推荐',
+			'premium.save_80' => '立省 80%',
+			'premium.start_free_trial' => '开始免费试用',
+			'premium.start_my_subscription' => '开始我的订阅',
+			'premium.auto_renewable' => '自动续订。可随时取消。',
+			'premium.privacy_policy' => '隐私政策',
+			'premium.terms_of_use' => '使用条款',
+			'premium.restore' => '恢复购买',
+			'premium.unlock_templates' => '解锁 200+ 热门模板',
+			'premium.fast_generation' => '快速视频生成',
+			'premium.discount_packs' => '点数包 50% 优惠',
+			'premium.videos_per_year' => '每年 80 个视频',
+			'premium.buy_more_credit' => '购买更多点数',
+			'premium.credit_desc' => '35 点数可生成 1 个视频。使用购买的点数期间无广告。',
+			'premium.credit_70' => '70 点数',
+			'premium.credit_150' => '150 点数',
+			'premium.credit_350' => '350 点数',
+			'premium.credit_500' => '500 点数',
+			'premium.credit_1000' => '1.000 点数',
+			'premium.credit_6000' => '6.000 点数',
+			'premium.approx_videos' => ({required Object count}) => '(约 ${count} 个视频)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => '最受欢迎',
+			'premium.purchase_success' => ({required Object item}) => '购买成功: ${item}',
+			'premium.purchase_failed' => '购买失败。',
+			'premium.credit_packages' => '点数包',
+			'premium.buy_credit_now' => '立即购买点数',
+			'premium.pro_title' => '专业版',
+			'premium.discount_title' => '50% 优惠',
+			'premium.discount_subtitle' => '点数价格',
 			_ => null,
 		};
 	}

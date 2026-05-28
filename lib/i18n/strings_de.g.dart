@@ -51,6 +51,7 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$de templates = _Translations$templates$de._(_root);
 	@override late final _Translations$settings$de settings = _Translations$settings$de._(_root);
 	@override late final _Translations$language$de language = _Translations$language$de._(_root);
+	@override late final _Translations$premium$de premium = _Translations$premium$de._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$de extends Translations$language$en {
 	@override String get zh => 'Chinesisch';
 }
 
+// Path: premium
+class _Translations$premium$de extends Translations$premium$en {
+	_Translations$premium$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'Tippen zum Enthüllen';
+	@override String get weekly => 'Wöchentlich';
+	@override String get weekly_desc => '7 Tage unbegrenzter Zugriff, dann 249.000đ/Woche';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/Woche';
+	@override String get annually => 'Jährlich';
+	@override String get annually_desc => 'Nur 24.980đ/Woche';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/Jahr';
+	@override String get best_value => 'Bester Wert';
+	@override String get save_80 => '80% sparen';
+	@override String get start_free_trial => 'Kostenlose Testversion starten';
+	@override String get start_my_subscription => 'Mein Abonnement starten';
+	@override String get auto_renewable => 'Automatisch verlängerbar. Jederzeit kündbar.';
+	@override String get privacy_policy => 'Datenschutz-Bestimmungen';
+	@override String get terms_of_use => 'Nutzungsbedingungen';
+	@override String get restore => 'Wiederherstellen';
+	@override String get unlock_templates => 'Schalte über 200 Vorlagen frei';
+	@override String get fast_generation => 'Schnelle Videogenerierung';
+	@override String get discount_packs => '50% Rabatt auf Guthabenpakete';
+	@override String get videos_per_year => '80 Videos pro Jahr';
+	@override String get buy_more_credit => 'Mehr Guthaben kaufen';
+	@override String get credit_desc => '35 Guthaben generieren 1 Video. Keine Werbung bei Verwendung des gekauften Guthabens.';
+	@override String get credit_70 => '70 Guthaben';
+	@override String get credit_150 => '150 Guthaben';
+	@override String get credit_350 => '350 Guthaben';
+	@override String get credit_500 => '500 Guthaben';
+	@override String get credit_1000 => '1.000 Guthaben';
+	@override String get credit_6000 => '6.000 Guthaben';
+	@override String approx_videos({required Object count}) => '(~ ${count} Video)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => 'Am beliebtesten';
+	@override String purchase_success({required Object item}) => 'Kauf erfolgreich: ${item}';
+	@override String get purchase_failed => 'Kauf fehlgeschlagen.';
+	@override String get credit_packages => 'Guthabenpakete';
+	@override String get buy_credit_now => 'Jetzt Guthaben kaufen';
+	@override String get pro_title => 'PRO';
+	@override String get discount_title => '50% RABATT';
+	@override String get discount_subtitle => 'GUTHABENPREISE';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsDe {
 			'language.pt' => 'Portugiesisch',
 			'language.vi' => 'Vietnamesisch',
 			'language.zh' => 'Chinesisch',
+			'premium.tap_to_reveal' => 'Tippen zum Enthüllen',
+			'premium.weekly' => 'Wöchentlich',
+			'premium.weekly_desc' => '7 Tage unbegrenzter Zugriff, dann 249.000đ/Woche',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/Woche',
+			'premium.annually' => 'Jährlich',
+			'premium.annually_desc' => 'Nur 24.980đ/Woche',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/Jahr',
+			'premium.best_value' => 'Bester Wert',
+			'premium.save_80' => '80% sparen',
+			'premium.start_free_trial' => 'Kostenlose Testversion starten',
+			'premium.start_my_subscription' => 'Mein Abonnement starten',
+			'premium.auto_renewable' => 'Automatisch verlängerbar. Jederzeit kündbar.',
+			'premium.privacy_policy' => 'Datenschutz-Bestimmungen',
+			'premium.terms_of_use' => 'Nutzungsbedingungen',
+			'premium.restore' => 'Wiederherstellen',
+			'premium.unlock_templates' => 'Schalte über 200 Vorlagen frei',
+			'premium.fast_generation' => 'Schnelle Videogenerierung',
+			'premium.discount_packs' => '50% Rabatt auf Guthabenpakete',
+			'premium.videos_per_year' => '80 Videos pro Jahr',
+			'premium.buy_more_credit' => 'Mehr Guthaben kaufen',
+			'premium.credit_desc' => '35 Guthaben generieren 1 Video. Keine Werbung bei Verwendung des gekauften Guthabens.',
+			'premium.credit_70' => '70 Guthaben',
+			'premium.credit_150' => '150 Guthaben',
+			'premium.credit_350' => '350 Guthaben',
+			'premium.credit_500' => '500 Guthaben',
+			'premium.credit_1000' => '1.000 Guthaben',
+			'premium.credit_6000' => '6.000 Guthaben',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} Video)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => 'Am beliebtesten',
+			'premium.purchase_success' => ({required Object item}) => 'Kauf erfolgreich: ${item}',
+			'premium.purchase_failed' => 'Kauf fehlgeschlagen.',
+			'premium.credit_packages' => 'Guthabenpakete',
+			'premium.buy_credit_now' => 'Jetzt Guthaben kaufen',
+			'premium.pro_title' => 'PRO',
+			'premium.discount_title' => '50% RABATT',
+			'premium.discount_subtitle' => 'GUTHABENPREISE',
 			_ => null,
 		};
 	}

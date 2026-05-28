@@ -183,11 +183,22 @@ class $AssetsImagesGen {
   ];
 }
 
+class $AssetsRawGen {
+  const $AssetsRawGen();
+
+  /// File path: assets/raw/hand_tab_animation.json
+  String get handTabAnimation => 'assets/raw/hand_tab_animation.json';
+
+  /// List of all assets
+  List<String> get values => [handTabAnimation];
+}
+
 class Assets {
   const Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsRawGen raw = $AssetsRawGen();
 }
 
 class AssetGenImage {

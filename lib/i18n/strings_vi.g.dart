@@ -51,6 +51,8 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$vi templates = _Translations$templates$vi._(_root);
 	@override late final _Translations$settings$vi settings = _Translations$settings$vi._(_root);
 	@override late final _Translations$language$vi language = _Translations$language$vi._(_root);
+	@override late final _Translations$premium$vi premium = _Translations$premium$vi._(_root);
+	@override late final _Translations$video_player$vi video_player = _Translations$video_player$vi._(_root);
 }
 
 // Path: common
@@ -264,6 +266,73 @@ class _Translations$language$vi extends Translations$language$en {
 	@override String get zh => 'Tiếng Trung';
 }
 
+// Path: premium
+class _Translations$premium$vi extends Translations$premium$en {
+	_Translations$premium$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'Chạm để Mở khóa';
+	@override String get weekly => 'Hàng tuần';
+	@override String get weekly_desc => '7 ngày truy cập không giới hạn, sau đó 249.000đ/tuần';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/tuần';
+	@override String get annually => 'Hàng năm';
+	@override String get annually_desc => 'Chỉ 24.980đ/tuần';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/năm';
+	@override String get best_value => 'Tốt nhất';
+	@override String get save_80 => 'Tiết kiệm 80%';
+	@override String get start_free_trial => 'Bắt đầu Dùng thử Miễn phí';
+	@override String get start_my_subscription => 'Bắt đầu Đăng ký';
+	@override String get auto_renewable => 'Tự động Gia hạn. Hủy bất kỳ lúc nào.';
+	@override String get privacy_policy => 'Chính sách Bảo mật';
+	@override String get terms_of_use => 'Điều khoản Sử dụng';
+	@override String get restore => 'Khôi phục';
+	@override String get unlock_templates => 'Mở khóa hơn 200 Mẫu';
+	@override String get fast_generation => 'Tạo Video Nhanh chóng';
+	@override String get discount_packs => 'Giảm giá 50% Gói Tín dụng';
+	@override String get videos_per_year => '80 Video Mỗi Năm';
+	@override String get buy_more_credit => 'Mua thêm Tín dụng';
+	@override String get credit_desc => '35 Tín dụng tạo được 1 video. Không có quảng cáo khi dùng tín dụng đã mua.';
+	@override String get credit_70 => '70 Tín dụng';
+	@override String get credit_150 => '150 Tín dụng';
+	@override String get credit_350 => '350 Tín dụng';
+	@override String get credit_500 => '500 Tín dụng';
+	@override String get credit_1000 => '1.000 Tín dụng';
+	@override String get credit_6000 => '6.000 Tín dụng';
+	@override String approx_videos({required Object count}) => '(~ ${count} video)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => 'Phổ biến Nhất';
+	@override String purchase_success({required Object item}) => 'Mua thành công: ${item}';
+	@override String get purchase_failed => 'Mua thất bại.';
+	@override String get credit_packages => 'Gói Tín dụng';
+	@override String get buy_credit_now => 'Mua Tín dụng Ngay';
+	@override String get pro_title => 'PRO';
+	@override String get discount_title => 'GIẢM 50%';
+	@override String get discount_subtitle => 'GIÁ TÍN DỤNG';
+}
+
+// Path: video_player
+class _Translations$video_player$vi extends Translations$video_player$en {
+	_Translations$video_player$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get play => 'Phát';
+	@override String get pause => 'Tạm dừng';
+	@override String get error_loading => 'Không thể tải video.';
+	@override String get retry => 'Thử lại';
+	@override String get buffering => 'Đang tải...';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -445,6 +514,55 @@ extension on TranslationsVi {
 			'language.pt' => 'Tiếng Bồ Đào Nha',
 			'language.vi' => 'Tiếng Việt',
 			'language.zh' => 'Tiếng Trung',
+			'premium.tap_to_reveal' => 'Chạm để Mở khóa',
+			'premium.weekly' => 'Hàng tuần',
+			'premium.weekly_desc' => '7 ngày truy cập không giới hạn, sau đó 249.000đ/tuần',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/tuần',
+			'premium.annually' => 'Hàng năm',
+			'premium.annually_desc' => 'Chỉ 24.980đ/tuần',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/năm',
+			'premium.best_value' => 'Tốt nhất',
+			'premium.save_80' => 'Tiết kiệm 80%',
+			'premium.start_free_trial' => 'Bắt đầu Dùng thử Miễn phí',
+			'premium.start_my_subscription' => 'Bắt đầu Đăng ký',
+			'premium.auto_renewable' => 'Tự động Gia hạn. Hủy bất kỳ lúc nào.',
+			'premium.privacy_policy' => 'Chính sách Bảo mật',
+			'premium.terms_of_use' => 'Điều khoản Sử dụng',
+			'premium.restore' => 'Khôi phục',
+			'premium.unlock_templates' => 'Mở khóa hơn 200 Mẫu',
+			'premium.fast_generation' => 'Tạo Video Nhanh chóng',
+			'premium.discount_packs' => 'Giảm giá 50% Gói Tín dụng',
+			'premium.videos_per_year' => '80 Video Mỗi Năm',
+			'premium.buy_more_credit' => 'Mua thêm Tín dụng',
+			'premium.credit_desc' => '35 Tín dụng tạo được 1 video. Không có quảng cáo khi dùng tín dụng đã mua.',
+			'premium.credit_70' => '70 Tín dụng',
+			'premium.credit_150' => '150 Tín dụng',
+			'premium.credit_350' => '350 Tín dụng',
+			'premium.credit_500' => '500 Tín dụng',
+			'premium.credit_1000' => '1.000 Tín dụng',
+			'premium.credit_6000' => '6.000 Tín dụng',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} video)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => 'Phổ biến Nhất',
+			'premium.purchase_success' => ({required Object item}) => 'Mua thành công: ${item}',
+			'premium.purchase_failed' => 'Mua thất bại.',
+			'premium.credit_packages' => 'Gói Tín dụng',
+			'premium.buy_credit_now' => 'Mua Tín dụng Ngay',
+			'premium.pro_title' => 'PRO',
+			'premium.discount_title' => 'GIẢM 50%',
+			'premium.discount_subtitle' => 'GIÁ TÍN DỤNG',
+			'video_player.play' => 'Phát',
+			'video_player.pause' => 'Tạm dừng',
+			'video_player.error_loading' => 'Không thể tải video.',
+			'video_player.retry' => 'Thử lại',
+			'video_player.buffering' => 'Đang tải...',
 			_ => null,
 		};
 	}

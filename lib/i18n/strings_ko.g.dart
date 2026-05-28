@@ -51,6 +51,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$ko templates = _Translations$templates$ko._(_root);
 	@override late final _Translations$settings$ko settings = _Translations$settings$ko._(_root);
 	@override late final _Translations$language$ko language = _Translations$language$ko._(_root);
+	@override late final _Translations$premium$ko premium = _Translations$premium$ko._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$ko extends Translations$language$en {
 	@override String get zh => '중국어';
 }
 
+// Path: premium
+class _Translations$premium$ko extends Translations$premium$en {
+	_Translations$premium$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => '탭하여 잠금 해제';
+	@override String get weekly => '주간';
+	@override String get weekly_desc => '7일 무료 체험, 이후 249.000đ/주';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/주';
+	@override String get annually => '연간';
+	@override String get annually_desc => '주당 24.980đ 상당';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/년';
+	@override String get best_value => '최고의 가치';
+	@override String get save_80 => '80% 할인';
+	@override String get start_free_trial => '무료 체험 시작';
+	@override String get start_my_subscription => '구독 시작하기';
+	@override String get auto_renewable => '자동 갱신. 언제든지 취소 가능.';
+	@override String get privacy_policy => '개인정보 처리방침';
+	@override String get terms_of_use => '이용 약관';
+	@override String get restore => '구독 복원';
+	@override String get unlock_templates => '200개 이상의 템플릿 잠금 해제';
+	@override String get fast_generation => '빠른 비디오 생성';
+	@override String get discount_packs => '크레딧 팩 50% 할인';
+	@override String get videos_per_year => '연간 80개 비디오';
+	@override String get buy_more_credit => '크레딧 추가 구매';
+	@override String get credit_desc => '35 크레딧으로 비디오 1개 생성. 구매한 크레딧 사용 시 광고 없음.';
+	@override String get credit_70 => '70 크레딧';
+	@override String get credit_150 => '150 크레딧';
+	@override String get credit_350 => '350 크레딧';
+	@override String get credit_500 => '500 크레딧';
+	@override String get credit_1000 => '1.000 크레딧';
+	@override String get credit_6000 => '6.000 크레딧';
+	@override String approx_videos({required Object count}) => '(~ ${count}개 비디오)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => '가장 인기 있음';
+	@override String purchase_success({required Object item}) => '구매 완료: ${item}';
+	@override String get purchase_failed => '구매 실패.';
+	@override String get credit_packages => '크레딧 패키지';
+	@override String get buy_credit_now => '지금 크레딧 구매';
+	@override String get pro_title => '프로';
+	@override String get discount_title => '50% 할인';
+	@override String get discount_subtitle => '크레딧 가격';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsKo {
 			'language.pt' => '포르투갈어',
 			'language.vi' => '베트남어',
 			'language.zh' => '중국어',
+			'premium.tap_to_reveal' => '탭하여 잠금 해제',
+			'premium.weekly' => '주간',
+			'premium.weekly_desc' => '7일 무료 체험, 이후 249.000đ/주',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/주',
+			'premium.annually' => '연간',
+			'premium.annually_desc' => '주당 24.980đ 상당',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/년',
+			'premium.best_value' => '최고의 가치',
+			'premium.save_80' => '80% 할인',
+			'premium.start_free_trial' => '무료 체험 시작',
+			'premium.start_my_subscription' => '구독 시작하기',
+			'premium.auto_renewable' => '자동 갱신. 언제든지 취소 가능.',
+			'premium.privacy_policy' => '개인정보 처리방침',
+			'premium.terms_of_use' => '이용 약관',
+			'premium.restore' => '구독 복원',
+			'premium.unlock_templates' => '200개 이상의 템플릿 잠금 해제',
+			'premium.fast_generation' => '빠른 비디오 생성',
+			'premium.discount_packs' => '크레딧 팩 50% 할인',
+			'premium.videos_per_year' => '연간 80개 비디오',
+			'premium.buy_more_credit' => '크레딧 추가 구매',
+			'premium.credit_desc' => '35 크레딧으로 비디오 1개 생성. 구매한 크레딧 사용 시 광고 없음.',
+			'premium.credit_70' => '70 크레딧',
+			'premium.credit_150' => '150 크레딧',
+			'premium.credit_350' => '350 크레딧',
+			'premium.credit_500' => '500 크레딧',
+			'premium.credit_1000' => '1.000 크레딧',
+			'premium.credit_6000' => '6.000 크레딧',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count}개 비디오)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => '가장 인기 있음',
+			'premium.purchase_success' => ({required Object item}) => '구매 완료: ${item}',
+			'premium.purchase_failed' => '구매 실패.',
+			'premium.credit_packages' => '크레딧 패키지',
+			'premium.buy_credit_now' => '지금 크레딧 구매',
+			'premium.pro_title' => '프로',
+			'premium.discount_title' => '50% 할인',
+			'premium.discount_subtitle' => '크레딧 가격',
 			_ => null,
 		};
 	}

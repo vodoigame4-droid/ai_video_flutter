@@ -51,6 +51,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$ar templates = _Translations$templates$ar._(_root);
 	@override late final _Translations$settings$ar settings = _Translations$settings$ar._(_root);
 	@override late final _Translations$language$ar language = _Translations$language$ar._(_root);
+	@override late final _Translations$premium$ar premium = _Translations$premium$ar._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$ar extends Translations$language$en {
 	@override String get zh => 'الصينية';
 }
 
+// Path: premium
+class _Translations$premium$ar extends Translations$premium$en {
+	_Translations$premium$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'اضغط للكشف';
+	@override String get weekly => 'أسبوعي';
+	@override String get weekly_desc => 'وصول غير محدود لمدة 7 أيام، ثم 249.000đ/أسبوع';
+	@override String get weekly_price => '199.000 د.إ';
+	@override String get weekly_suffix => '/أسبوع';
+	@override String get annually => 'سنوي';
+	@override String get annually_desc => 'فقط 24.980đ/أسبوع';
+	@override String get annually_price => '1.299.000 د.إ';
+	@override String get annually_suffix => '/سنة';
+	@override String get best_value => 'أفضل قيمة';
+	@override String get save_80 => 'وفر 80%';
+	@override String get start_free_trial => 'ابدأ الفترة التجريبية المجانية';
+	@override String get start_my_subscription => 'ابدأ اشتراكي';
+	@override String get auto_renewable => 'يتجدد تلقائياً. يمكنك الإلغاء في أي وقت.';
+	@override String get privacy_policy => 'سياسة الخصوصية';
+	@override String get terms_of_use => 'شروط الاستخدام';
+	@override String get restore => 'استعادة';
+	@override String get unlock_templates => 'فتح أكثر من 200 قالب';
+	@override String get fast_generation => 'إنشاء فيديو سريع';
+	@override String get discount_packs => 'خصم 50% على حزم الرصيد';
+	@override String get videos_per_year => '80 فيديو سنوياً';
+	@override String get buy_more_credit => 'شراء المزيد من الرصيد';
+	@override String get credit_desc => '35 رصيد ينشئ فيديو واحد. لا توجد إعلانات أثناء استخدام الرصيد المشترى.';
+	@override String get credit_70 => '70 رصيد';
+	@override String get credit_150 => '150 رصيد';
+	@override String get credit_350 => '350 رصيد';
+	@override String get credit_500 => '500 رصيد';
+	@override String get credit_1000 => '1.000 رصيد';
+	@override String get credit_6000 => '6.000 رصيد';
+	@override String approx_videos({required Object count}) => '(~ ${count} فيديو)';
+	@override String get price_70 => '149.000 د.إ';
+	@override String get price_150 => '299.000 د.إ';
+	@override String get price_350 => '599.000 د.إ';
+	@override String get price_500 => '799.000 د.إ';
+	@override String get price_1000 => '1.499.000 د.إ';
+	@override String get price_6000 => '5.999.000 د.إ';
+	@override String get most_popular => 'الأكثر شيوعاً';
+	@override String purchase_success({required Object item}) => 'تم الشراء بنجاح: ${item}';
+	@override String get purchase_failed => 'فشلت عملية الشراء.';
+	@override String get credit_packages => 'حزم الرصيد';
+	@override String get buy_credit_now => 'شراء رصيد الآن';
+	@override String get pro_title => 'بريميوم';
+	@override String get discount_title => 'خصم 50%';
+	@override String get discount_subtitle => 'أسعار الرصيد';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsAr {
 			'language.pt' => 'البرتغالية',
 			'language.vi' => 'الفيتنامية',
 			'language.zh' => 'الصينية',
+			'premium.tap_to_reveal' => 'اضغط للكشف',
+			'premium.weekly' => 'أسبوعي',
+			'premium.weekly_desc' => 'وصول غير محدود لمدة 7 أيام، ثم 249.000đ/أسبوع',
+			'premium.weekly_price' => '199.000 د.إ',
+			'premium.weekly_suffix' => '/أسبوع',
+			'premium.annually' => 'سنوي',
+			'premium.annually_desc' => 'فقط 24.980đ/أسبوع',
+			'premium.annually_price' => '1.299.000 د.إ',
+			'premium.annually_suffix' => '/سنة',
+			'premium.best_value' => 'أفضل قيمة',
+			'premium.save_80' => 'وفر 80%',
+			'premium.start_free_trial' => 'ابدأ الفترة التجريبية المجانية',
+			'premium.start_my_subscription' => 'ابدأ اشتراكي',
+			'premium.auto_renewable' => 'يتجدد تلقائياً. يمكنك الإلغاء في أي وقت.',
+			'premium.privacy_policy' => 'سياسة الخصوصية',
+			'premium.terms_of_use' => 'شروط الاستخدام',
+			'premium.restore' => 'استعادة',
+			'premium.unlock_templates' => 'فتح أكثر من 200 قالب',
+			'premium.fast_generation' => 'إنشاء فيديو سريع',
+			'premium.discount_packs' => 'خصم 50% على حزم الرصيد',
+			'premium.videos_per_year' => '80 فيديو سنوياً',
+			'premium.buy_more_credit' => 'شراء المزيد من الرصيد',
+			'premium.credit_desc' => '35 رصيد ينشئ فيديو واحد. لا توجد إعلانات أثناء استخدام الرصيد المشترى.',
+			'premium.credit_70' => '70 رصيد',
+			'premium.credit_150' => '150 رصيد',
+			'premium.credit_350' => '350 رصيد',
+			'premium.credit_500' => '500 رصيد',
+			'premium.credit_1000' => '1.000 رصيد',
+			'premium.credit_6000' => '6.000 رصيد',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} فيديو)',
+			'premium.price_70' => '149.000 د.إ',
+			'premium.price_150' => '299.000 د.إ',
+			'premium.price_350' => '599.000 د.إ',
+			'premium.price_500' => '799.000 د.إ',
+			'premium.price_1000' => '1.499.000 د.إ',
+			'premium.price_6000' => '5.999.000 د.إ',
+			'premium.most_popular' => 'الأكثر شيوعاً',
+			'premium.purchase_success' => ({required Object item}) => 'تم الشراء بنجاح: ${item}',
+			'premium.purchase_failed' => 'فشلت عملية الشراء.',
+			'premium.credit_packages' => 'حزم الرصيد',
+			'premium.buy_credit_now' => 'شراء رصيد الآن',
+			'premium.pro_title' => 'بريميوم',
+			'premium.discount_title' => 'خصم 50%',
+			'premium.discount_subtitle' => 'أسعار الرصيد',
 			_ => null,
 		};
 	}

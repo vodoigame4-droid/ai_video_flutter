@@ -51,6 +51,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$ja templates = _Translations$templates$ja._(_root);
 	@override late final _Translations$settings$ja settings = _Translations$settings$ja._(_root);
 	@override late final _Translations$language$ja language = _Translations$language$ja._(_root);
+	@override late final _Translations$premium$ja premium = _Translations$premium$ja._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$ja extends Translations$language$en {
 	@override String get zh => '中国語';
 }
 
+// Path: premium
+class _Translations$premium$ja extends Translations$premium$en {
+	_Translations$premium$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'タップして表示';
+	@override String get weekly => '週週プラン';
+	@override String get weekly_desc => '7日間の無料体験、その後 249.000đ/週';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/週';
+	@override String get annually => '年額プラン';
+	@override String get annually_desc => '実質 24.980đ/週';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/年';
+	@override String get best_value => '最もお得';
+	@override String get save_80 => '80%お得';
+	@override String get start_free_trial => '無料トライアルを開始';
+	@override String get start_my_subscription => '購読を開始する';
+	@override String get auto_renewable => '自動更新。いつでもキャンセル可能。';
+	@override String get privacy_policy => 'プライバシーポリシー';
+	@override String get terms_of_use => '利用規約';
+	@override String get restore => '復元する';
+	@override String get unlock_templates => '200以上のテンプレートを解放';
+	@override String get fast_generation => '高速ビデオ生成';
+	@override String get discount_packs => 'クレジットパック50%OFF';
+	@override String get videos_per_year => '年間80本のビデオ';
+	@override String get buy_more_credit => 'クレジットを追加購入';
+	@override String get credit_desc => '35クレジットで1本のビデオを生成。購入したクレジットの使用中は広告なし。';
+	@override String get credit_70 => '70 クレジット';
+	@override String get credit_150 => '150 クレジット';
+	@override String get credit_350 => '350 クレジット';
+	@override String get credit_500 => '500 クレジット';
+	@override String get credit_1000 => '1.000 クレジット';
+	@override String get credit_6000 => '6.000 クレジット';
+	@override String approx_videos({required Object count}) => '(約 ${count} 本の動画)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => '一番人気';
+	@override String purchase_success({required Object item}) => '購入完了: ${item}';
+	@override String get purchase_failed => '購入に失敗しました。';
+	@override String get credit_packages => 'クレジットパック';
+	@override String get buy_credit_now => '今すぐクレジットを購入';
+	@override String get pro_title => 'プロ';
+	@override String get discount_title => '50% OFF';
+	@override String get discount_subtitle => 'クレジット価格';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsJa {
 			'language.pt' => 'ポルトガル語',
 			'language.vi' => 'ベトナム語',
 			'language.zh' => '中国語',
+			'premium.tap_to_reveal' => 'タップして表示',
+			'premium.weekly' => '週週プラン',
+			'premium.weekly_desc' => '7日間の無料体験、その後 249.000đ/週',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/週',
+			'premium.annually' => '年額プラン',
+			'premium.annually_desc' => '実質 24.980đ/週',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/年',
+			'premium.best_value' => '最もお得',
+			'premium.save_80' => '80%お得',
+			'premium.start_free_trial' => '無料トライアルを開始',
+			'premium.start_my_subscription' => '購読を開始する',
+			'premium.auto_renewable' => '自動更新。いつでもキャンセル可能。',
+			'premium.privacy_policy' => 'プライバシーポリシー',
+			'premium.terms_of_use' => '利用規約',
+			'premium.restore' => '復元する',
+			'premium.unlock_templates' => '200以上のテンプレートを解放',
+			'premium.fast_generation' => '高速ビデオ生成',
+			'premium.discount_packs' => 'クレジットパック50%OFF',
+			'premium.videos_per_year' => '年間80本のビデオ',
+			'premium.buy_more_credit' => 'クレジットを追加購入',
+			'premium.credit_desc' => '35クレジットで1本のビデオを生成。購入したクレジットの使用中は広告なし。',
+			'premium.credit_70' => '70 クレジット',
+			'premium.credit_150' => '150 クレジット',
+			'premium.credit_350' => '350 クレジット',
+			'premium.credit_500' => '500 クレジット',
+			'premium.credit_1000' => '1.000 クレジット',
+			'premium.credit_6000' => '6.000 クレジット',
+			'premium.approx_videos' => ({required Object count}) => '(約 ${count} 本の動画)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => '一番人気',
+			'premium.purchase_success' => ({required Object item}) => '購入完了: ${item}',
+			'premium.purchase_failed' => '購入に失敗しました。',
+			'premium.credit_packages' => 'クレジットパック',
+			'premium.buy_credit_now' => '今すぐクレジットを購入',
+			'premium.pro_title' => 'プロ',
+			'premium.discount_title' => '50% OFF',
+			'premium.discount_subtitle' => 'クレジット価格',
 			_ => null,
 		};
 	}

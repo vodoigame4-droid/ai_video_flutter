@@ -228,12 +228,12 @@ _$ChangeLanguageCopyWith<_ChangeLanguage> get copyWith => __$ChangeLanguageCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChangeLanguage&&(identical(other.locale, locale) || other.locale == locale));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChangeLanguage&&const DeepCollectionEquality().equals(other.locale, locale));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,locale);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(locale));
 
 @override
 String toString() {
@@ -265,9 +265,9 @@ class __$ChangeLanguageCopyWithImpl<$Res>
 
 /// Create a copy of SettingsEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? locale = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? locale = freezed,}) {
   return _then(_ChangeLanguage(
-null == locale ? _self.locale : locale // ignore: cast_nullable_to_non_nullable
+freezed == locale ? _self.locale : locale // ignore: cast_nullable_to_non_nullable
 as AppLocale,
   ));
 }

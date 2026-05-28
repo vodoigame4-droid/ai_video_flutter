@@ -9,6 +9,7 @@ import '../bloc/templates_bloc.dart';
 import '../bloc/templates_event.dart';
 import '../bloc/templates_state.dart';
 import '../../../../core/widgets/video_card.dart';
+import '../../../../features/video_player/presentation/pages/video_player_page.dart';
 import '../../../../core/widgets/credit_badge_widget.dart';
 import '../../../../features/home/presentation/widgets/video_settings_sheet.dart';
 import '../widgets/category_selector_widget.dart';
@@ -200,7 +201,14 @@ class TemplatesView extends StatelessWidget {
                                       showPlayButton: false,
                                       showVolumeIcon: false,
                                       onTap: () {
-                                        // Handle card click
+                                        const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                                        context.pushNamed(
+                                          VideoPlayerPage.name,
+                                          queryParameters: {
+                                            'videoUrl': mockVideoUrl,
+                                            'title': template.title,
+                                          },
+                                        );
                                       },
                                     );
                                   },

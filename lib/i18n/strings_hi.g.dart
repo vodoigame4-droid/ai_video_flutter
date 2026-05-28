@@ -51,6 +51,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$hi templates = _Translations$templates$hi._(_root);
 	@override late final _Translations$settings$hi settings = _Translations$settings$hi._(_root);
 	@override late final _Translations$language$hi language = _Translations$language$hi._(_root);
+	@override late final _Translations$premium$hi premium = _Translations$premium$hi._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$hi extends Translations$language$en {
 	@override String get zh => 'चीनी';
 }
 
+// Path: premium
+class _Translations$premium$hi extends Translations$premium$en {
+	_Translations$premium$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'दिखाने के लिए टैप करें';
+	@override String get weekly => 'साप्ताहिक';
+	@override String get weekly_desc => '7-दिन का असीमित एक्सेस, फिर 249.000đ/सप्ताह';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/सप्ताह';
+	@override String get annually => 'वार्षिक';
+	@override String get annually_desc => 'केवल 24.980đ/सप्ताह';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/वर्ष';
+	@override String get best_value => 'सर्वोत्तम मूल्य';
+	@override String get save_80 => '80% बचाएं';
+	@override String get start_free_trial => 'मुफ़्त ट्रायल शुरू करें';
+	@override String get start_my_subscription => 'मेरा सब्सक्रिप्शन शुरू करें';
+	@override String get auto_renewable => 'ऑटो-रिन्यूएबल। किसी भी समय रद्द करें।';
+	@override String get privacy_policy => 'गोपनीयता नीति';
+	@override String get terms_of_use => 'उपयोग की शर्तें';
+	@override String get restore => 'पुनर्स्थापित करें';
+	@override String get unlock_templates => '200+ टेम्प्लेट अनलॉक करें';
+	@override String get fast_generation => 'तेज़ वीडियो जनरेशन';
+	@override String get discount_packs => 'क्रेडिट पैक पर 50% छूट';
+	@override String get videos_per_year => 'प्रति वर्ष 80 वीडियो';
+	@override String get buy_more_credit => 'और क्रेडिट खरीदें';
+	@override String get credit_desc => '35 क्रेडिट 1 वीडियो बनाते हैं। खरीदे गए क्रेडिट का उपयोग करते समय कोई विज्ञापन नहीं।';
+	@override String get credit_70 => '70 क्रेडिट';
+	@override String get credit_150 => '150 क्रेडिट';
+	@override String get credit_350 => '350 क्रेडिट';
+	@override String get credit_500 => '500 क्रेडिट';
+	@override String get credit_1000 => '1.000 क्रेडिट';
+	@override String get credit_6000 => '6.000 क्रेडिट';
+	@override String approx_videos({required Object count}) => '(~ ${count} वीडियो)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => 'सबसे लोकप्रिय';
+	@override String purchase_success({required Object item}) => 'खरीद सफल: ${item}';
+	@override String get purchase_failed => 'खरीद विफल रही।';
+	@override String get credit_packages => 'क्रेडिट पैकेज';
+	@override String get buy_credit_now => 'अभी क्रेडिट खरीदें';
+	@override String get pro_title => 'प्रो';
+	@override String get discount_title => '50% छूट';
+	@override String get discount_subtitle => 'क्रेडिट की कीमतें';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsHi {
 			'language.pt' => 'पुर्तगाली',
 			'language.vi' => 'वियतनामी',
 			'language.zh' => 'चीनी',
+			'premium.tap_to_reveal' => 'दिखाने के लिए टैप करें',
+			'premium.weekly' => 'साप्ताहिक',
+			'premium.weekly_desc' => '7-दिन का असीमित एक्सेस, फिर 249.000đ/सप्ताह',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/सप्ताह',
+			'premium.annually' => 'वार्षिक',
+			'premium.annually_desc' => 'केवल 24.980đ/सप्ताह',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/वर्ष',
+			'premium.best_value' => 'सर्वोत्तम मूल्य',
+			'premium.save_80' => '80% बचाएं',
+			'premium.start_free_trial' => 'मुफ़्त ट्रायल शुरू करें',
+			'premium.start_my_subscription' => 'मेरा सब्सक्रिप्शन शुरू करें',
+			'premium.auto_renewable' => 'ऑटो-रिन्यूएबल। किसी भी समय रद्द करें।',
+			'premium.privacy_policy' => 'गोपनीयता नीति',
+			'premium.terms_of_use' => 'उपयोग की शर्तें',
+			'premium.restore' => 'पुनर्स्थापित करें',
+			'premium.unlock_templates' => '200+ टेम्प्लेट अनलॉक करें',
+			'premium.fast_generation' => 'तेज़ वीडियो जनरेशन',
+			'premium.discount_packs' => 'क्रेडिट पैक पर 50% छूट',
+			'premium.videos_per_year' => 'प्रति वर्ष 80 वीडियो',
+			'premium.buy_more_credit' => 'और क्रेडिट खरीदें',
+			'premium.credit_desc' => '35 क्रेडिट 1 वीडियो बनाते हैं। खरीदे गए क्रेडिट का उपयोग करते समय कोई विज्ञापन नहीं।',
+			'premium.credit_70' => '70 क्रेडिट',
+			'premium.credit_150' => '150 क्रेडिट',
+			'premium.credit_350' => '350 क्रेडिट',
+			'premium.credit_500' => '500 क्रेडिट',
+			'premium.credit_1000' => '1.000 क्रेडिट',
+			'premium.credit_6000' => '6.000 क्रेडिट',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} वीडियो)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => 'सबसे लोकप्रिय',
+			'premium.purchase_success' => ({required Object item}) => 'खरीद सफल: ${item}',
+			'premium.purchase_failed' => 'खरीद विफल रही।',
+			'premium.credit_packages' => 'क्रेडिट पैकेज',
+			'premium.buy_credit_now' => 'अभी क्रेडिट खरीदें',
+			'premium.pro_title' => 'प्रो',
+			'premium.discount_title' => '50% छूट',
+			'premium.discount_subtitle' => 'क्रेडिट की कीमतें',
 			_ => null,
 		};
 	}

@@ -5,8 +5,9 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/resources/resource.dart';
 import '../../../../i18n/strings.g.dart';
-import '../../../../features/home/presentation/widgets/video_settings_sheet.dart';
 import '../../../settings/presentation/pages/settings_page.dart';
+import '../../../premium/presentation/pages/paywall_video_page.dart';
+import '../../../video_player/presentation/pages/video_player_page.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
 import '../bloc/profile_state.dart';
@@ -32,13 +33,6 @@ class ProfilePage extends StatelessWidget {
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
-  void _showSettingsSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => const VideoSettingsSheet(),
-    );
-  }
 
   void _showDeleteDialog(BuildContext context, String videoId) {
     showDialog(
@@ -119,7 +113,7 @@ class ProfileView extends StatelessWidget {
                             color: Colors.transparent,
                             shape: const CircleBorder(),
                             child: InkWell(
-                              onTap: () => _showSettingsSheet(context),
+                              onTap: () => context.push(PaywallVideoPage.path),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(100),
                               ),
@@ -137,7 +131,7 @@ class ProfileView extends StatelessWidget {
 
                       // Premium Upgrade Banner
                       PremiumBannerWidget(
-                        onTap: () => _showSettingsSheet(context),
+                        onTap: () => context.push(PaywallVideoPage.path),
                       ),
 
                       const SizedBox(height: 16),
@@ -253,7 +247,14 @@ class ProfileView extends StatelessWidget {
                                 return MyVideoItemWidget(
                                   video: video,
                                   onPlayTap: () {
-                                    // Handle Play tap logic
+                                    const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                                    context.pushNamed(
+                                      VideoPlayerPage.name,
+                                      queryParameters: {
+                                        'videoUrl': mockVideoUrl,
+                                        'title': video.title,
+                                      },
+                                    );
                                   },
                                   onDeleteTap: () =>
                                       _showDeleteDialog(context, video.id),

@@ -51,6 +51,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$fr templates = _Translations$templates$fr._(_root);
 	@override late final _Translations$settings$fr settings = _Translations$settings$fr._(_root);
 	@override late final _Translations$language$fr language = _Translations$language$fr._(_root);
+	@override late final _Translations$premium$fr premium = _Translations$premium$fr._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$fr extends Translations$language$en {
 	@override String get zh => 'Chinois';
 }
 
+// Path: premium
+class _Translations$premium$fr extends Translations$premium$en {
+	_Translations$premium$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'Appuyez pour révéler';
+	@override String get weekly => 'Hebdomadaire';
+	@override String get weekly_desc => 'Accès illimité de 7 jours, puis 249.000đ/semaine';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/semaine';
+	@override String get annually => 'Annuel';
+	@override String get annually_desc => 'Seulement 24.980đ/semaine';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/an';
+	@override String get best_value => 'Meilleur prix';
+	@override String get save_80 => 'Économisez 80%';
+	@override String get start_free_trial => 'Commencer l\'essai gratuit';
+	@override String get start_my_subscription => 'Commencer mon abonnement';
+	@override String get auto_renewable => 'Renouvellement automatique. Annulez à tout moment.';
+	@override String get privacy_policy => 'Politique de confidentialité';
+	@override String get terms_of_use => 'Conditions d\'utilisation';
+	@override String get restore => 'Restaurer';
+	@override String get unlock_templates => 'Débloquez plus de 200 modèles';
+	@override String get fast_generation => 'Génération de vidéo rapide';
+	@override String get discount_packs => '50% de réduction sur les packs de crédits';
+	@override String get videos_per_year => '80 vidéos par an';
+	@override String get buy_more_credit => 'Acheter plus de crédits';
+	@override String get credit_desc => '35 crédits génèrent 1 vidéo. Pas de publicité pendant l\'utilisation des crédits achetés.';
+	@override String get credit_70 => '70 crédits';
+	@override String get credit_150 => '150 crédits';
+	@override String get credit_350 => '350 crédits';
+	@override String get credit_500 => '500 crédits';
+	@override String get credit_1000 => '1.000 crédits';
+	@override String get credit_6000 => '6.000 crédits';
+	@override String approx_videos({required Object count}) => '(~ ${count} vidéo)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => 'Le plus populaire';
+	@override String purchase_success({required Object item}) => 'Achat réussi: ${item}';
+	@override String get purchase_failed => 'Échec de l\'achat.';
+	@override String get credit_packages => 'Packs de crédits';
+	@override String get buy_credit_now => 'Acheter des crédits';
+	@override String get pro_title => 'PRO';
+	@override String get discount_title => '50% DE RÉDUCTION';
+	@override String get discount_subtitle => 'PRIX DES CRÉDITS';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$fr extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$fr._(TranslationsFr root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsFr {
 			'language.pt' => 'Portugais',
 			'language.vi' => 'Vietnamien',
 			'language.zh' => 'Chinois',
+			'premium.tap_to_reveal' => 'Appuyez pour révéler',
+			'premium.weekly' => 'Hebdomadaire',
+			'premium.weekly_desc' => 'Accès illimité de 7 jours, puis 249.000đ/semaine',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/semaine',
+			'premium.annually' => 'Annuel',
+			'premium.annually_desc' => 'Seulement 24.980đ/semaine',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/an',
+			'premium.best_value' => 'Meilleur prix',
+			'premium.save_80' => 'Économisez 80%',
+			'premium.start_free_trial' => 'Commencer l\'essai gratuit',
+			'premium.start_my_subscription' => 'Commencer mon abonnement',
+			'premium.auto_renewable' => 'Renouvellement automatique. Annulez à tout moment.',
+			'premium.privacy_policy' => 'Politique de confidentialité',
+			'premium.terms_of_use' => 'Conditions d\'utilisation',
+			'premium.restore' => 'Restaurer',
+			'premium.unlock_templates' => 'Débloquez plus de 200 modèles',
+			'premium.fast_generation' => 'Génération de vidéo rapide',
+			'premium.discount_packs' => '50% de réduction sur les packs de crédits',
+			'premium.videos_per_year' => '80 vidéos par an',
+			'premium.buy_more_credit' => 'Acheter plus de crédits',
+			'premium.credit_desc' => '35 crédits génèrent 1 vidéo. Pas de publicité pendant l\'utilisation des crédits achetés.',
+			'premium.credit_70' => '70 crédits',
+			'premium.credit_150' => '150 crédits',
+			'premium.credit_350' => '350 crédits',
+			'premium.credit_500' => '500 crédits',
+			'premium.credit_1000' => '1.000 crédits',
+			'premium.credit_6000' => '6.000 crédits',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} vidéo)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => 'Le plus populaire',
+			'premium.purchase_success' => ({required Object item}) => 'Achat réussi: ${item}',
+			'premium.purchase_failed' => 'Échec de l\'achat.',
+			'premium.credit_packages' => 'Packs de crédits',
+			'premium.buy_credit_now' => 'Acheter des crédits',
+			'premium.pro_title' => 'PRO',
+			'premium.discount_title' => '50% DE RÉDUCTION',
+			'premium.discount_subtitle' => 'PRIX DES CRÉDITS',
 			_ => null,
 		};
 	}

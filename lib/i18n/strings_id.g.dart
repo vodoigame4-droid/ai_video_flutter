@@ -51,6 +51,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$templates$id templates = _Translations$templates$id._(_root);
 	@override late final _Translations$settings$id settings = _Translations$settings$id._(_root);
 	@override late final _Translations$language$id language = _Translations$language$id._(_root);
+	@override late final _Translations$premium$id premium = _Translations$premium$id._(_root);
 }
 
 // Path: common
@@ -264,6 +265,59 @@ class _Translations$language$id extends Translations$language$en {
 	@override String get zh => 'Tionghoa';
 }
 
+// Path: premium
+class _Translations$premium$id extends Translations$premium$en {
+	_Translations$premium$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get tap_to_reveal => 'Ketuk untuk Membuka';
+	@override String get weekly => 'Mingguan';
+	@override String get weekly_desc => 'Akses tak terbatas 7 hari, lalu 249.000đ/minggu';
+	@override String get weekly_price => '199.000 đ';
+	@override String get weekly_suffix => '/minggu';
+	@override String get annually => 'Tahunan';
+	@override String get annually_desc => 'Hanya 24.980đ/minggu';
+	@override String get annually_price => '1.299.000 đ';
+	@override String get annually_suffix => '/tahun';
+	@override String get best_value => 'Nilai Terbaik';
+	@override String get save_80 => 'Hemat 80%';
+	@override String get start_free_trial => 'Mulai Uji Coba Gratis';
+	@override String get start_my_subscription => 'Mulai Berlangganan';
+	@override String get auto_renewable => 'Diperbarui Otomatis. Batalkan Kapan Saja.';
+	@override String get privacy_policy => 'Kebijakan Privasi';
+	@override String get terms_of_use => 'Ketentuan Penggunaan';
+	@override String get restore => 'Pulihkan';
+	@override String get unlock_templates => 'Buka 200+ Templat';
+	@override String get fast_generation => 'Pembuatan Video Cepat';
+	@override String get discount_packs => 'Diskon 50% Paket Kredit';
+	@override String get videos_per_year => '80 Video Per Tahun';
+	@override String get buy_more_credit => 'Beli Lebih Banyak Kredit';
+	@override String get credit_desc => '35 Kredit menghasilkan 1 video. Tanpa iklan saat menggunakan kredit yang dibeli.';
+	@override String get credit_70 => '70 Kredit';
+	@override String get credit_150 => '150 Kredit';
+	@override String get credit_350 => '350 Kredit';
+	@override String get credit_500 => '500 Kredit';
+	@override String get credit_1000 => '1.000 Kredit';
+	@override String get credit_6000 => '6.000 Kredit';
+	@override String approx_videos({required Object count}) => '(~ ${count} video)';
+	@override String get price_70 => '149.000 đ';
+	@override String get price_150 => '299.000 đ';
+	@override String get price_350 => '599.000 đ';
+	@override String get price_500 => '799.000 đ';
+	@override String get price_1000 => '1.499.000 đ';
+	@override String get price_6000 => '5.999.000 đ';
+	@override String get most_popular => 'Terpopuler';
+	@override String purchase_success({required Object item}) => 'Pembelian berhasil: ${item}';
+	@override String get purchase_failed => 'Pembelian gagal.';
+	@override String get credit_packages => 'Paket Kredit';
+	@override String get buy_credit_now => 'Beli Kredit Sekarang';
+	@override String get pro_title => 'PRO';
+	@override String get discount_title => 'DISKON 50%';
+	@override String get discount_subtitle => 'HARGA KREDIT';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -445,6 +499,50 @@ extension on TranslationsId {
 			'language.pt' => 'Portugis',
 			'language.vi' => 'Vietnam',
 			'language.zh' => 'Tionghoa',
+			'premium.tap_to_reveal' => 'Ketuk untuk Membuka',
+			'premium.weekly' => 'Mingguan',
+			'premium.weekly_desc' => 'Akses tak terbatas 7 hari, lalu 249.000đ/minggu',
+			'premium.weekly_price' => '199.000 đ',
+			'premium.weekly_suffix' => '/minggu',
+			'premium.annually' => 'Tahunan',
+			'premium.annually_desc' => 'Hanya 24.980đ/minggu',
+			'premium.annually_price' => '1.299.000 đ',
+			'premium.annually_suffix' => '/tahun',
+			'premium.best_value' => 'Nilai Terbaik',
+			'premium.save_80' => 'Hemat 80%',
+			'premium.start_free_trial' => 'Mulai Uji Coba Gratis',
+			'premium.start_my_subscription' => 'Mulai Berlangganan',
+			'premium.auto_renewable' => 'Diperbarui Otomatis. Batalkan Kapan Saja.',
+			'premium.privacy_policy' => 'Kebijakan Privasi',
+			'premium.terms_of_use' => 'Ketentuan Penggunaan',
+			'premium.restore' => 'Pulihkan',
+			'premium.unlock_templates' => 'Buka 200+ Templat',
+			'premium.fast_generation' => 'Pembuatan Video Cepat',
+			'premium.discount_packs' => 'Diskon 50% Paket Kredit',
+			'premium.videos_per_year' => '80 Video Per Tahun',
+			'premium.buy_more_credit' => 'Beli Lebih Banyak Kredit',
+			'premium.credit_desc' => '35 Kredit menghasilkan 1 video. Tanpa iklan saat menggunakan kredit yang dibeli.',
+			'premium.credit_70' => '70 Kredit',
+			'premium.credit_150' => '150 Kredit',
+			'premium.credit_350' => '350 Kredit',
+			'premium.credit_500' => '500 Kredit',
+			'premium.credit_1000' => '1.000 Kredit',
+			'premium.credit_6000' => '6.000 Kredit',
+			'premium.approx_videos' => ({required Object count}) => '(~ ${count} video)',
+			'premium.price_70' => '149.000 đ',
+			'premium.price_150' => '299.000 đ',
+			'premium.price_350' => '599.000 đ',
+			'premium.price_500' => '799.000 đ',
+			'premium.price_1000' => '1.499.000 đ',
+			'premium.price_6000' => '5.999.000 đ',
+			'premium.most_popular' => 'Terpopuler',
+			'premium.purchase_success' => ({required Object item}) => 'Pembelian berhasil: ${item}',
+			'premium.purchase_failed' => 'Pembelian gagal.',
+			'premium.credit_packages' => 'Paket Kredit',
+			'premium.buy_credit_now' => 'Beli Kredit Sekarang',
+			'premium.pro_title' => 'PRO',
+			'premium.discount_title' => 'DISKON 50%',
+			'premium.discount_subtitle' => 'HARGA KREDIT',
 			_ => null,
 		};
 	}
