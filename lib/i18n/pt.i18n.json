@@ -205,7 +205,12 @@
     "regenerate": "Regenerar",
     "create_another": "Criar outro vídeo",
     "share": "Compartilhar",
-    "download": "Baixar"
+    "download": "Baixar",
+    "extend_video": "Estender vídeo",
+    "extends_title": "Extensões",
+    "delete": "Excluir",
+    "share_success": "Link do vídeo copiado para compartilhar",
+    "download_success": "Vídeo salvo na galeria"
   },
   "privacy_dialog": {
     "title": "Privacidade de Dados",

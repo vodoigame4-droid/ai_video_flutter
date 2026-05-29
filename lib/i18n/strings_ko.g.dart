@@ -350,6 +350,11 @@ class _Translations$result$ko extends Translations$result$en {
 	@override String get create_another => '다른 동영상 만들기';
 	@override String get share => '공유';
 	@override String get download => '다운로드';
+	@override String get extend_video => '비디오 확장';
+	@override String get extends_title => '확장';
+	@override String get delete => '삭제';
+	@override String get share_success => '공유할 비디오 링크가 복사되었습니다';
+	@override String get download_success => '비디오가 갤러리에 저장되었습니다';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsKo {
 			'result.create_another' => '다른 동영상 만들기',
 			'result.share' => '공유',
 			'result.download' => '다운로드',
+			'result.extend_video' => '비디오 확장',
+			'result.extends_title' => '확장',
+			'result.delete' => '삭제',
+			'result.share_success' => '공유할 비디오 링크가 복사되었습니다',
+			'result.download_success' => '비디오가 갤러리에 저장되었습니다',
 			'privacy_dialog.title' => '데이터 개인정보 보호',
 			'privacy_dialog.desc' => '사진은 당사의 내부 AI 시스템에 의해 안전하게 처리됩니다. 당사는 귀하의 정보를 제3자에게 공유, 판매 또는 공개하지 않습니다.',
 			'privacy_dialog.cancel' => '취소',

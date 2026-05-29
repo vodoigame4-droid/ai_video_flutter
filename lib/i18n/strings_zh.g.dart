@@ -350,6 +350,11 @@ class _Translations$result$zh extends Translations$result$en {
 	@override String get create_another => '创建其他视频';
 	@override String get share => '分享';
 	@override String get download => '下载';
+	@override String get extend_video => '延长视频';
+	@override String get extends_title => '扩展';
+	@override String get delete => '删除';
+	@override String get share_success => '视频链接已复制以分享';
+	@override String get download_success => '视频已保存至相册';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsZh {
 			'result.create_another' => '创建其他视频',
 			'result.share' => '分享',
 			'result.download' => '下载',
+			'result.extend_video' => '延长视频',
+			'result.extends_title' => '扩展',
+			'result.delete' => '删除',
+			'result.share_success' => '视频链接已复制以分享',
+			'result.download_success' => '视频已保存至相册',
 			'privacy_dialog.title' => '数据隐私',
 			'privacy_dialog.desc' => '您的照片将通过我们的内部AI系统进行安全处理。我们不会与任何第三方分享、出售或披露您的信息。',
 			'privacy_dialog.cancel' => '取消',

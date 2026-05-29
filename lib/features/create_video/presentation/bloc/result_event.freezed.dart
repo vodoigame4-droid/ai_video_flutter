@@ -55,7 +55,7 @@ extension ResultEventPatterns on ResultEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _TogglePlay value)?  togglePlay,TResult Function( _ToggleMute value)?  toggleMute,TResult Function( _UpdatePlaying value)?  updatePlaying,TResult Function( _UpdateBuffering value)?  updateBuffering,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _TogglePlay value)?  togglePlay,TResult Function( _ToggleMute value)?  toggleMute,TResult Function( _UpdatePlaying value)?  updatePlaying,TResult Function( _UpdateBuffering value)?  updateBuffering,TResult Function( _ChangeExtendPrompt value)?  changeExtendPrompt,TResult Function( _ClearPrompt value)?  clearExtendPrompt,TResult Function( _UseInspireMe value)?  useInspireMe,TResult Function( _ChangeExtendQuality value)?  changeExtendQuality,TResult Function( _ChangeExtendDuration value)?  changeExtendDuration,TResult Function( _DeleteVideo value)?  deleteVideo,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -63,7 +63,13 @@ return init(_that);case _TogglePlay() when togglePlay != null:
 return togglePlay(_that);case _ToggleMute() when toggleMute != null:
 return toggleMute(_that);case _UpdatePlaying() when updatePlaying != null:
 return updatePlaying(_that);case _UpdateBuffering() when updateBuffering != null:
-return updateBuffering(_that);case _:
+return updateBuffering(_that);case _ChangeExtendPrompt() when changeExtendPrompt != null:
+return changeExtendPrompt(_that);case _ClearPrompt() when clearExtendPrompt != null:
+return clearExtendPrompt(_that);case _UseInspireMe() when useInspireMe != null:
+return useInspireMe(_that);case _ChangeExtendQuality() when changeExtendQuality != null:
+return changeExtendQuality(_that);case _ChangeExtendDuration() when changeExtendDuration != null:
+return changeExtendDuration(_that);case _DeleteVideo() when deleteVideo != null:
+return deleteVideo(_that);case _:
   return orElse();
 
 }
@@ -81,7 +87,7 @@ return updateBuffering(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _TogglePlay value)  togglePlay,required TResult Function( _ToggleMute value)  toggleMute,required TResult Function( _UpdatePlaying value)  updatePlaying,required TResult Function( _UpdateBuffering value)  updateBuffering,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _TogglePlay value)  togglePlay,required TResult Function( _ToggleMute value)  toggleMute,required TResult Function( _UpdatePlaying value)  updatePlaying,required TResult Function( _UpdateBuffering value)  updateBuffering,required TResult Function( _ChangeExtendPrompt value)  changeExtendPrompt,required TResult Function( _ClearPrompt value)  clearExtendPrompt,required TResult Function( _UseInspireMe value)  useInspireMe,required TResult Function( _ChangeExtendQuality value)  changeExtendQuality,required TResult Function( _ChangeExtendDuration value)  changeExtendDuration,required TResult Function( _DeleteVideo value)  deleteVideo,}){
 final _that = this;
 switch (_that) {
 case _Init():
@@ -89,7 +95,13 @@ return init(_that);case _TogglePlay():
 return togglePlay(_that);case _ToggleMute():
 return toggleMute(_that);case _UpdatePlaying():
 return updatePlaying(_that);case _UpdateBuffering():
-return updateBuffering(_that);case _:
+return updateBuffering(_that);case _ChangeExtendPrompt():
+return changeExtendPrompt(_that);case _ClearPrompt():
+return clearExtendPrompt(_that);case _UseInspireMe():
+return useInspireMe(_that);case _ChangeExtendQuality():
+return changeExtendQuality(_that);case _ChangeExtendDuration():
+return changeExtendDuration(_that);case _DeleteVideo():
+return deleteVideo(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +118,7 @@ return updateBuffering(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _TogglePlay value)?  togglePlay,TResult? Function( _ToggleMute value)?  toggleMute,TResult? Function( _UpdatePlaying value)?  updatePlaying,TResult? Function( _UpdateBuffering value)?  updateBuffering,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _TogglePlay value)?  togglePlay,TResult? Function( _ToggleMute value)?  toggleMute,TResult? Function( _UpdatePlaying value)?  updatePlaying,TResult? Function( _UpdateBuffering value)?  updateBuffering,TResult? Function( _ChangeExtendPrompt value)?  changeExtendPrompt,TResult? Function( _ClearPrompt value)?  clearExtendPrompt,TResult? Function( _UseInspireMe value)?  useInspireMe,TResult? Function( _ChangeExtendQuality value)?  changeExtendQuality,TResult? Function( _ChangeExtendDuration value)?  changeExtendDuration,TResult? Function( _DeleteVideo value)?  deleteVideo,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -114,7 +126,13 @@ return init(_that);case _TogglePlay() when togglePlay != null:
 return togglePlay(_that);case _ToggleMute() when toggleMute != null:
 return toggleMute(_that);case _UpdatePlaying() when updatePlaying != null:
 return updatePlaying(_that);case _UpdateBuffering() when updateBuffering != null:
-return updateBuffering(_that);case _:
+return updateBuffering(_that);case _ChangeExtendPrompt() when changeExtendPrompt != null:
+return changeExtendPrompt(_that);case _ClearPrompt() when clearExtendPrompt != null:
+return clearExtendPrompt(_that);case _UseInspireMe() when useInspireMe != null:
+return useInspireMe(_that);case _ChangeExtendQuality() when changeExtendQuality != null:
+return changeExtendQuality(_that);case _ChangeExtendDuration() when changeExtendDuration != null:
+return changeExtendDuration(_that);case _DeleteVideo() when deleteVideo != null:
+return deleteVideo(_that);case _:
   return null;
 
 }
@@ -131,14 +149,20 @@ return updateBuffering(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult Function()?  togglePlay,TResult Function()?  toggleMute,TResult Function( bool isPlaying)?  updatePlaying,TResult Function( bool isBuffering)?  updateBuffering,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult Function()?  togglePlay,TResult Function()?  toggleMute,TResult Function( bool isPlaying)?  updatePlaying,TResult Function( bool isBuffering)?  updateBuffering,TResult Function( String prompt)?  changeExtendPrompt,TResult Function()?  clearExtendPrompt,TResult Function()?  useInspireMe,TResult Function( String quality)?  changeExtendQuality,TResult Function( String duration)?  changeExtendDuration,TResult Function()?  deleteVideo,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _TogglePlay() when togglePlay != null:
 return togglePlay();case _ToggleMute() when toggleMute != null:
 return toggleMute();case _UpdatePlaying() when updatePlaying != null:
 return updatePlaying(_that.isPlaying);case _UpdateBuffering() when updateBuffering != null:
-return updateBuffering(_that.isBuffering);case _:
+return updateBuffering(_that.isBuffering);case _ChangeExtendPrompt() when changeExtendPrompt != null:
+return changeExtendPrompt(_that.prompt);case _ClearPrompt() when clearExtendPrompt != null:
+return clearExtendPrompt();case _UseInspireMe() when useInspireMe != null:
+return useInspireMe();case _ChangeExtendQuality() when changeExtendQuality != null:
+return changeExtendQuality(_that.quality);case _ChangeExtendDuration() when changeExtendDuration != null:
+return changeExtendDuration(_that.duration);case _DeleteVideo() when deleteVideo != null:
+return deleteVideo();case _:
   return orElse();
 
 }
@@ -156,14 +180,20 @@ return updateBuffering(_that.isBuffering);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)  init,required TResult Function()  togglePlay,required TResult Function()  toggleMute,required TResult Function( bool isPlaying)  updatePlaying,required TResult Function( bool isBuffering)  updateBuffering,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)  init,required TResult Function()  togglePlay,required TResult Function()  toggleMute,required TResult Function( bool isPlaying)  updatePlaying,required TResult Function( bool isBuffering)  updateBuffering,required TResult Function( String prompt)  changeExtendPrompt,required TResult Function()  clearExtendPrompt,required TResult Function()  useInspireMe,required TResult Function( String quality)  changeExtendQuality,required TResult Function( String duration)  changeExtendDuration,required TResult Function()  deleteVideo,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _TogglePlay():
 return togglePlay();case _ToggleMute():
 return toggleMute();case _UpdatePlaying():
 return updatePlaying(_that.isPlaying);case _UpdateBuffering():
-return updateBuffering(_that.isBuffering);case _:
+return updateBuffering(_that.isBuffering);case _ChangeExtendPrompt():
+return changeExtendPrompt(_that.prompt);case _ClearPrompt():
+return clearExtendPrompt();case _UseInspireMe():
+return useInspireMe();case _ChangeExtendQuality():
+return changeExtendQuality(_that.quality);case _ChangeExtendDuration():
+return changeExtendDuration(_that.duration);case _DeleteVideo():
+return deleteVideo();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +210,20 @@ return updateBuffering(_that.isBuffering);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult? Function()?  togglePlay,TResult? Function()?  toggleMute,TResult? Function( bool isPlaying)?  updatePlaying,TResult? Function( bool isBuffering)?  updateBuffering,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult? Function()?  togglePlay,TResult? Function()?  toggleMute,TResult? Function( bool isPlaying)?  updatePlaying,TResult? Function( bool isBuffering)?  updateBuffering,TResult? Function( String prompt)?  changeExtendPrompt,TResult? Function()?  clearExtendPrompt,TResult? Function()?  useInspireMe,TResult? Function( String quality)?  changeExtendQuality,TResult? Function( String duration)?  changeExtendDuration,TResult? Function()?  deleteVideo,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _TogglePlay() when togglePlay != null:
 return togglePlay();case _ToggleMute() when toggleMute != null:
 return toggleMute();case _UpdatePlaying() when updatePlaying != null:
 return updatePlaying(_that.isPlaying);case _UpdateBuffering() when updateBuffering != null:
-return updateBuffering(_that.isBuffering);case _:
+return updateBuffering(_that.isBuffering);case _ChangeExtendPrompt() when changeExtendPrompt != null:
+return changeExtendPrompt(_that.prompt);case _ClearPrompt() when clearExtendPrompt != null:
+return clearExtendPrompt();case _UseInspireMe() when useInspireMe != null:
+return useInspireMe();case _ChangeExtendQuality() when changeExtendQuality != null:
+return changeExtendQuality(_that.quality);case _ChangeExtendDuration() when changeExtendDuration != null:
+return changeExtendDuration(_that.duration);case _DeleteVideo() when deleteVideo != null:
+return deleteVideo();case _:
   return null;
 
 }
@@ -464,5 +500,299 @@ as bool,
 
 
 }
+
+/// @nodoc
+
+
+class _ChangeExtendPrompt implements ResultEvent {
+  const _ChangeExtendPrompt(this.prompt);
+  
+
+ final  String prompt;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChangeExtendPromptCopyWith<_ChangeExtendPrompt> get copyWith => __$ChangeExtendPromptCopyWithImpl<_ChangeExtendPrompt>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChangeExtendPrompt&&(identical(other.prompt, prompt) || other.prompt == prompt));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,prompt);
+
+@override
+String toString() {
+  return 'ResultEvent.changeExtendPrompt(prompt: $prompt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChangeExtendPromptCopyWith<$Res> implements $ResultEventCopyWith<$Res> {
+  factory _$ChangeExtendPromptCopyWith(_ChangeExtendPrompt value, $Res Function(_ChangeExtendPrompt) _then) = __$ChangeExtendPromptCopyWithImpl;
+@useResult
+$Res call({
+ String prompt
+});
+
+
+
+
+}
+/// @nodoc
+class __$ChangeExtendPromptCopyWithImpl<$Res>
+    implements _$ChangeExtendPromptCopyWith<$Res> {
+  __$ChangeExtendPromptCopyWithImpl(this._self, this._then);
+
+  final _ChangeExtendPrompt _self;
+  final $Res Function(_ChangeExtendPrompt) _then;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? prompt = null,}) {
+  return _then(_ChangeExtendPrompt(
+null == prompt ? _self.prompt : prompt // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ClearPrompt implements ResultEvent {
+  const _ClearPrompt();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ClearPrompt);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ResultEvent.clearExtendPrompt()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _UseInspireMe implements ResultEvent {
+  const _UseInspireMe();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UseInspireMe);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ResultEvent.useInspireMe()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _ChangeExtendQuality implements ResultEvent {
+  const _ChangeExtendQuality(this.quality);
+  
+
+ final  String quality;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChangeExtendQualityCopyWith<_ChangeExtendQuality> get copyWith => __$ChangeExtendQualityCopyWithImpl<_ChangeExtendQuality>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChangeExtendQuality&&(identical(other.quality, quality) || other.quality == quality));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,quality);
+
+@override
+String toString() {
+  return 'ResultEvent.changeExtendQuality(quality: $quality)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChangeExtendQualityCopyWith<$Res> implements $ResultEventCopyWith<$Res> {
+  factory _$ChangeExtendQualityCopyWith(_ChangeExtendQuality value, $Res Function(_ChangeExtendQuality) _then) = __$ChangeExtendQualityCopyWithImpl;
+@useResult
+$Res call({
+ String quality
+});
+
+
+
+
+}
+/// @nodoc
+class __$ChangeExtendQualityCopyWithImpl<$Res>
+    implements _$ChangeExtendQualityCopyWith<$Res> {
+  __$ChangeExtendQualityCopyWithImpl(this._self, this._then);
+
+  final _ChangeExtendQuality _self;
+  final $Res Function(_ChangeExtendQuality) _then;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? quality = null,}) {
+  return _then(_ChangeExtendQuality(
+null == quality ? _self.quality : quality // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ChangeExtendDuration implements ResultEvent {
+  const _ChangeExtendDuration(this.duration);
+  
+
+ final  String duration;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChangeExtendDurationCopyWith<_ChangeExtendDuration> get copyWith => __$ChangeExtendDurationCopyWithImpl<_ChangeExtendDuration>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChangeExtendDuration&&(identical(other.duration, duration) || other.duration == duration));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,duration);
+
+@override
+String toString() {
+  return 'ResultEvent.changeExtendDuration(duration: $duration)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChangeExtendDurationCopyWith<$Res> implements $ResultEventCopyWith<$Res> {
+  factory _$ChangeExtendDurationCopyWith(_ChangeExtendDuration value, $Res Function(_ChangeExtendDuration) _then) = __$ChangeExtendDurationCopyWithImpl;
+@useResult
+$Res call({
+ String duration
+});
+
+
+
+
+}
+/// @nodoc
+class __$ChangeExtendDurationCopyWithImpl<$Res>
+    implements _$ChangeExtendDurationCopyWith<$Res> {
+  __$ChangeExtendDurationCopyWithImpl(this._self, this._then);
+
+  final _ChangeExtendDuration _self;
+  final $Res Function(_ChangeExtendDuration) _then;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? duration = null,}) {
+  return _then(_ChangeExtendDuration(
+null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _DeleteVideo implements ResultEvent {
+  const _DeleteVideo();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteVideo);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ResultEvent.deleteVideo()';
+}
+
+
+}
+
+
+
 
 // dart format on

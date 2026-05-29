@@ -2,16 +2,29 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_kit/media_kit.dart';
 import '../../../../core/utils/log_utils.dart';
+import '../../../../core/resources/resource.dart';
+import '../../../../core/utils/video_cache_manager.dart';
+import '../../../profile/domain/usecases/delete_user_video_use_case.dart';
 import 'result_event.dart';
 import 'result_state.dart';
 
 class ResultBloc extends Bloc<ResultEvent, ResultState> {
+  final DeleteUserVideoUseCase deleteUserVideoUseCase;
   final Player player = Player();
+  final VideoCacheManager _cacheManager = VideoCacheManager();
 
   StreamSubscription? _bufferingSub;
   StreamSubscription? _playingSub;
+  Timer? _bufferingTimer;
 
-  ResultBloc() : super(const ResultState.initial()) {
+  static const List<String> _presetPrompts = [
+    "Realistic female portrait, close-up, looking at camera, blinking naturally, blue studio lighting, cinematic, ultra detailed",
+    "Neon lit cyberpunk street, rainy night, reflections on puddles, drone shot flying through skyscrapers, futuristic city vibe",
+    "Fantasy forest with glowing mushrooms, majestic waterfall in the background, sunlight filtering through ancient trees, ethereal style",
+    "Cute fluffy orange cat wearing spacesuit on the moon, looking at Earth, cartoon 3d style, highly detailed"
+  ];
+
+  ResultBloc({required this.deleteUserVideoUseCase}) : super(const ResultState.initial()) {
     on<ResultEvent>((event, emit) async {
       await event.when(
         init: (videoId, title, imageUrl, videoUrl, createdAt) async {
@@ -29,6 +42,24 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
         updateBuffering: (isBuffering) async {
           _onUpdateBuffering(isBuffering, emit);
         },
+        changeExtendPrompt: (prompt) async {
+          _onChangeExtendPrompt(prompt, emit);
+        },
+        clearExtendPrompt: () async {
+          _onClearExtendPrompt(emit);
+        },
+        useInspireMe: () async {
+          _onUseInspireMe(emit);
+        },
+        changeExtendQuality: (quality) async {
+          _onChangeExtendQuality(quality, emit);
+        },
+        changeExtendDuration: (duration) async {
+          _onChangeExtendDuration(duration, emit);
+        },
+        deleteVideo: () async {
+          await _onDeleteVideo(emit);
+        },
       );
     });
   }
@@ -45,21 +76,29 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     emit(const ResultState.loading());
 
     try {
-      // Setup listeners
+      // 1. Check offline cache
+      final cachedPath = await _cacheManager.getCachedOrDownload(videoUrl);
+      final mediaPath = cachedPath ?? videoUrl;
+
+      // 2. Setup listeners with a small debounce on buffering to prevent loop flicker
       _bufferingSub = player.stream.buffering.listen((buf) {
-        if (!isClosed) add(ResultEvent.updateBuffering(buf));
+        _bufferingTimer?.cancel();
+        if (buf) {
+          _bufferingTimer = Timer(const Duration(milliseconds: 150), () {
+            if (!isClosed) add(ResultEvent.updateBuffering(true));
+          });
+        } else {
+          if (!isClosed) add(ResultEvent.updateBuffering(false));
+        }
       });
       _playingSub = player.stream.playing.listen((playing) {
         if (!isClosed) add(ResultEvent.updatePlaying(playing));
       });
 
-      // Open and start muted by default (standard video preview UX) or unmuted.
-      // Let's start with volume 100 or 0? The figma shows loudspeaker unmuted/muted toggle.
-      // Let's start muted, so user can unmute if they want, or start unmuted since they just generated it.
-      // Let's start unmuted (100).
       player.setVolume(100.0);
-      await player.open(Media(videoUrl));
-      player.setPlaylistMode(PlaylistMode.loop);
+      await player.open(Media(mediaPath), play: true);
+      player.setPlaylistMode(PlaylistMode.single);
+      player.play();
 
       emit(ResultState.ready(
         videoId: videoId,
@@ -71,6 +110,11 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
         isMuted: false,
         isBuffering: player.state.buffering,
       ));
+
+      // Trigger download if not cached, so next time it loads locally
+      if (cachedPath == null) {
+        _cacheManager.getCachedOrDownload(videoUrl, waitForDownload: false);
+      }
     } catch (e, stack) {
       LogUtils.e('ResultBloc: Failed to initialize player', error: e, stackTrace: stack);
       emit(const ResultState.error(message: 'Error playing video'));
@@ -106,8 +150,68 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     );
   }
 
+  void _onChangeExtendPrompt(String prompt, Emitter<ResultState> emit) {
+    state.mapOrNull(
+      ready: (s) => emit(s.copyWith(extendPrompt: prompt)),
+    );
+  }
+
+  void _onClearExtendPrompt(Emitter<ResultState> emit) {
+    state.mapOrNull(
+      ready: (s) => emit(s.copyWith(extendPrompt: "")),
+    );
+  }
+
+  void _onUseInspireMe(Emitter<ResultState> emit) {
+    state.mapOrNull(
+      ready: (s) {
+        if (s.inspireMeCount <= 0) return;
+        final currentCount = s.inspireMeCount;
+        final promptIndex = (3 - currentCount) % _presetPrompts.length;
+        final selectedPrompt = _presetPrompts[promptIndex];
+        emit(s.copyWith(
+          extendPrompt: selectedPrompt,
+          inspireMeCount: currentCount - 1,
+        ));
+      },
+    );
+  }
+
+  void _onChangeExtendQuality(String quality, Emitter<ResultState> emit) {
+    state.mapOrNull(
+      ready: (s) => emit(s.copyWith(extendQuality: quality)),
+    );
+  }
+
+  void _onChangeExtendDuration(String duration, Emitter<ResultState> emit) {
+    state.mapOrNull(
+      ready: (s) => emit(s.copyWith(extendDuration: duration)),
+    );
+  }
+
+  Future<void> _onDeleteVideo(Emitter<ResultState> emit) async {
+    await state.mapOrNull(
+      ready: (s) async {
+        LogUtils.d('ResultBloc: Deleting video with id ${s.videoId}');
+        final result = await deleteUserVideoUseCase(s.videoId);
+        await result.when(
+          initial: () async {},
+          loading: () async {},
+          empty: () async {},
+          success: (data) async {
+            emit(s.copyWith(isDeleted: true));
+          },
+          error: (message) async {
+            LogUtils.e('ResultBloc: Failed to delete video: $message');
+          },
+        );
+      },
+    );
+  }
+
   @override
   Future<void> close() {
+    _bufferingTimer?.cancel();
     _bufferingSub?.cancel();
     _playingSub?.cancel();
     player.dispose();

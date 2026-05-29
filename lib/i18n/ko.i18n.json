@@ -205,7 +205,12 @@
     "regenerate": "재생성",
     "create_another": "다른 동영상 만들기",
     "share": "공유",
-    "download": "다운로드"
+    "download": "다운로드",
+    "extend_video": "비디오 확장",
+    "extends_title": "확장",
+    "delete": "삭제",
+    "share_success": "공유할 비디오 링크가 복사되었습니다",
+    "download_success": "비디오가 갤러리에 저장되었습니다"
   },
   "privacy_dialog": {
     "title": "데이터 개인정보 보호",

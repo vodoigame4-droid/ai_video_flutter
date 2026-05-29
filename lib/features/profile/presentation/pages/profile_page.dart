@@ -9,6 +9,7 @@ import '../../../../i18n/strings.g.dart';
 import '../../../settings/presentation/pages/settings_page.dart';
 import '../../../premium/presentation/pages/paywall_video_page.dart';
 import '../../../video_player/presentation/pages/video_player_page.dart';
+import '../../../create_video/presentation/pages/result_page.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_event.dart';
 import '../bloc/profile_state.dart';
@@ -255,12 +256,13 @@ class ProfileView extends StatelessWidget {
                                   onPlayTap: () {
                                     const mockVideoUrl =
                                         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
-                                    context.pushNamed(
-                                      VideoPlayerPage.name,
-                                      queryParameters: {
-                                        'videoUrl': mockVideoUrl,
-                                        'title': video.title,
-                                      },
+                                    ResultPage.push(
+                                      context,
+                                      videoId: video.id,
+                                      title: video.title,
+                                      imageUrl: video.imageUrl,
+                                      videoUrl: mockVideoUrl,
+                                      createdAt: video.createdAt,
                                     );
                                   },
                                   onDeleteTap: () =>

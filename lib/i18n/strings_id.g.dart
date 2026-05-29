@@ -350,6 +350,11 @@ class _Translations$result$id extends Translations$result$en {
 	@override String get create_another => 'Buat Video Lain';
 	@override String get share => 'Bagikan';
 	@override String get download => 'Unduh';
+	@override String get extend_video => 'Perpanjang video';
+	@override String get extends_title => 'Perpanjangan';
+	@override String get delete => 'Hapus';
+	@override String get share_success => 'Tautan video disalin untuk dibagikan';
+	@override String get download_success => 'Video disimpan ke galeri';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsId {
 			'result.create_another' => 'Buat Video Lain',
 			'result.share' => 'Bagikan',
 			'result.download' => 'Unduh',
+			'result.extend_video' => 'Perpanjang video',
+			'result.extends_title' => 'Perpanjangan',
+			'result.delete' => 'Hapus',
+			'result.share_success' => 'Tautan video disalin untuk dibagikan',
+			'result.download_success' => 'Video disimpan ke galeri',
 			'privacy_dialog.title' => 'Privasi Data',
 			'privacy_dialog.desc' => 'Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.',
 			'privacy_dialog.cancel' => 'Batal',

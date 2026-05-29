@@ -205,7 +205,12 @@
     "regenerate": "Neu generieren",
     "create_another": "Anderes Video erstellen",
     "share": "Teilen",
-    "download": "Herunterladen"
+    "download": "Herunterladen",
+    "extend_video": "Video verlängern",
+    "extends_title": "Erweiterungen",
+    "delete": "Löschen",
+    "share_success": "Videolink zum Teilen kopiert",
+    "download_success": "Video in der Galerie gespeichert"
   },
   "privacy_dialog": {
     "title": "Datenschutz",

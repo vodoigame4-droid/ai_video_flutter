@@ -212,7 +212,12 @@
     "regenerate": "Regenerate",
     "create_another": "Create Another Video",
     "share": "Share",
-    "download": "Download"
+    "download": "Download",
+    "extend_video": "Extend Video",
+    "extends_title": "Extends",
+    "delete": "Delete",
+    "share_success": "Video link copied to share",
+    "download_success": "Video saved to gallery"
   },
   "privacy_dialog": {
     "title": "Data Privacy",

@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/resources/resource.dart';
+import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/video_card.dart';
+import '../../../../i18n/strings.g.dart';
+import '../../../create_video/presentation/pages/create_from_template_page.dart';
+import '../../../templates/domain/entities/template_entity.dart';
+
+/// A reusable widget to represent a section containing a category header (title, icon, "See All" button)
+/// and a horizontal list of template video cards supporting all state configurations (loading, error, success).
+class HomeTemplatesSectionWidget extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Color iconColor;
+  final Resource<List<TemplateEntity>> videosState;
+  final VoidCallback onSeeAllPressed;
+
+  const HomeTemplatesSectionWidget({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.iconColor,
+    required this.videosState,
+    required this.onSeeAllPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.t;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Section Header Row
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    icon,
+                    color: iconColor,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    title,
+                    style: context.textTheme.titleMedium,
+                  ),
+                ],
+              ),
+              TextButton(
+                onPressed: onSeeAllPressed,
+                child: Text(t.common.see_all),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        // Videos horizontal list
+        videosState.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const SizedBox(
+            height: 236,
+            child: Center(child: CircularProgressIndicator()),
+          ),
+          success: (videos) => SizedBox(
+            height: 236,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: videos.length,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              separatorBuilder: (context, index) => const SizedBox(width: 12),
+              itemBuilder: (context, index) {
+                final template = videos[index];
+                return VideoCard(
+                  title: template.title,
+                  imageUrl: template.imageUrl,
+                  viewsCount: template.viewsCount,
+                  badgeType: template.badgeType,
+                  width: 158,
+                  height: 236,
+                  onTap: () {
+                    const mockVideoUrl =
+                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                    context.pushNamed(
+                      CreateFromTemplatePage.name,
+                      queryParameters: {
+                        'templateId': template.id,
+                        'title': template.title,
+                        'videoUrl': mockVideoUrl,
+                        'imageUrl': template.imageUrl,
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+          empty: () => const SizedBox.shrink(),
+          error: (message) => Center(
+            child: Text(
+              message,
+              style: context.appTheme.errorTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

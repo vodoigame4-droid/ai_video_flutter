@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering);case _Error() when error != null:
+return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering)  ready,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted)  ready,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering);case _Error():
+return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering);case _Error() when error != null:
+return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -257,7 +257,7 @@ String toString() {
 
 
 class _Ready implements ResultState {
-  const _Ready({required this.videoId, required this.title, required this.imageUrl, required this.videoUrl, required this.createdAt, required this.isPlaying, required this.isMuted, required this.isBuffering});
+  const _Ready({required this.videoId, required this.title, required this.imageUrl, required this.videoUrl, required this.createdAt, required this.isPlaying, required this.isMuted, required this.isBuffering, this.extendPrompt = '', this.extendQuality = 'Full HD', this.extendDuration = '5s', this.inspireMeCount = 3, this.isGeneratingExtended = false, this.isDeleted = false});
   
 
  final  String videoId;
@@ -268,6 +268,12 @@ class _Ready implements ResultState {
  final  bool isPlaying;
  final  bool isMuted;
  final  bool isBuffering;
+@JsonKey() final  String extendPrompt;
+@JsonKey() final  String extendQuality;
+@JsonKey() final  String extendDuration;
+@JsonKey() final  int inspireMeCount;
+@JsonKey() final  bool isGeneratingExtended;
+@JsonKey() final  bool isDeleted;
 
 /// Create a copy of ResultState
 /// with the given fields replaced by the non-null parameter values.
@@ -279,16 +285,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.videoId, videoId) || other.videoId == videoId)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying)&&(identical(other.isMuted, isMuted) || other.isMuted == isMuted)&&(identical(other.isBuffering, isBuffering) || other.isBuffering == isBuffering));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.videoId, videoId) || other.videoId == videoId)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying)&&(identical(other.isMuted, isMuted) || other.isMuted == isMuted)&&(identical(other.isBuffering, isBuffering) || other.isBuffering == isBuffering)&&(identical(other.extendPrompt, extendPrompt) || other.extendPrompt == extendPrompt)&&(identical(other.extendQuality, extendQuality) || other.extendQuality == extendQuality)&&(identical(other.extendDuration, extendDuration) || other.extendDuration == extendDuration)&&(identical(other.inspireMeCount, inspireMeCount) || other.inspireMeCount == inspireMeCount)&&(identical(other.isGeneratingExtended, isGeneratingExtended) || other.isGeneratingExtended == isGeneratingExtended)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,videoId,title,imageUrl,videoUrl,createdAt,isPlaying,isMuted,isBuffering);
+int get hashCode => Object.hash(runtimeType,videoId,title,imageUrl,videoUrl,createdAt,isPlaying,isMuted,isBuffering,extendPrompt,extendQuality,extendDuration,inspireMeCount,isGeneratingExtended,isDeleted);
 
 @override
 String toString() {
-  return 'ResultState.ready(videoId: $videoId, title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, createdAt: $createdAt, isPlaying: $isPlaying, isMuted: $isMuted, isBuffering: $isBuffering)';
+  return 'ResultState.ready(videoId: $videoId, title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, createdAt: $createdAt, isPlaying: $isPlaying, isMuted: $isMuted, isBuffering: $isBuffering, extendPrompt: $extendPrompt, extendQuality: $extendQuality, extendDuration: $extendDuration, inspireMeCount: $inspireMeCount, isGeneratingExtended: $isGeneratingExtended, isDeleted: $isDeleted)';
 }
 
 
@@ -299,7 +305,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $ResultStateCopyWith<$Res>
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- String videoId, String title, String? imageUrl, String videoUrl, String createdAt, bool isPlaying, bool isMuted, bool isBuffering
+ String videoId, String title, String? imageUrl, String videoUrl, String createdAt, bool isPlaying, bool isMuted, bool isBuffering, String extendPrompt, String extendQuality, String extendDuration, int inspireMeCount, bool isGeneratingExtended, bool isDeleted
 });
 
 
@@ -316,7 +322,7 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of ResultState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? videoId = null,Object? title = null,Object? imageUrl = freezed,Object? videoUrl = null,Object? createdAt = null,Object? isPlaying = null,Object? isMuted = null,Object? isBuffering = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? videoId = null,Object? title = null,Object? imageUrl = freezed,Object? videoUrl = null,Object? createdAt = null,Object? isPlaying = null,Object? isMuted = null,Object? isBuffering = null,Object? extendPrompt = null,Object? extendQuality = null,Object? extendDuration = null,Object? inspireMeCount = null,Object? isGeneratingExtended = null,Object? isDeleted = null,}) {
   return _then(_Ready(
 videoId: null == videoId ? _self.videoId : videoId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -326,6 +332,12 @@ as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: 
 as String,isPlaying: null == isPlaying ? _self.isPlaying : isPlaying // ignore: cast_nullable_to_non_nullable
 as bool,isMuted: null == isMuted ? _self.isMuted : isMuted // ignore: cast_nullable_to_non_nullable
 as bool,isBuffering: null == isBuffering ? _self.isBuffering : isBuffering // ignore: cast_nullable_to_non_nullable
+as bool,extendPrompt: null == extendPrompt ? _self.extendPrompt : extendPrompt // ignore: cast_nullable_to_non_nullable
+as String,extendQuality: null == extendQuality ? _self.extendQuality : extendQuality // ignore: cast_nullable_to_non_nullable
+as String,extendDuration: null == extendDuration ? _self.extendDuration : extendDuration // ignore: cast_nullable_to_non_nullable
+as String,inspireMeCount: null == inspireMeCount ? _self.inspireMeCount : inspireMeCount // ignore: cast_nullable_to_non_nullable
+as int,isGeneratingExtended: null == isGeneratingExtended ? _self.isGeneratingExtended : isGeneratingExtended // ignore: cast_nullable_to_non_nullable
+as bool,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

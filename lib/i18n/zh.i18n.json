@@ -205,7 +205,12 @@
     "regenerate": "重新生成",
     "create_another": "创建其他视频",
     "share": "分享",
-    "download": "下载"
+    "download": "下载",
+    "extend_video": "延长视频",
+    "extends_title": "扩展",
+    "delete": "删除",
+    "share_success": "视频链接已复制以分享",
+    "download_success": "视频已保存至相册"
   },
   "privacy_dialog": {
     "title": "数据隐私",

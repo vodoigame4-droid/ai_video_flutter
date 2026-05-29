@@ -205,7 +205,12 @@
     "regenerate": "Buat ulang",
     "create_another": "Buat Video Lain",
     "share": "Bagikan",
-    "download": "Unduh"
+    "download": "Unduh",
+    "extend_video": "Perpanjang video",
+    "extends_title": "Perpanjangan",
+    "delete": "Hapus",
+    "share_success": "Tautan video disalin untuk dibagikan",
+    "download_success": "Video disimpan ke galeri"
   },
   "privacy_dialog": {
     "title": "Privasi Data",

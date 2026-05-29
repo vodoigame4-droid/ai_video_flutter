@@ -350,6 +350,11 @@ class _Translations$result$ar extends Translations$result$en {
 	@override String get create_another => 'إنشاء فيديو آخر';
 	@override String get share => 'مشاركة';
 	@override String get download => 'تنزيل';
+	@override String get extend_video => 'تمديد الفيديو';
+	@override String get extends_title => 'امتدادات';
+	@override String get delete => 'حذف';
+	@override String get share_success => 'تم نسخ رابط الفيديو للمشاركة';
+	@override String get download_success => 'تم حفظ الفيديو في المعرض';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsAr {
 			'result.create_another' => 'إنشاء فيديو آخر',
 			'result.share' => 'مشاركة',
 			'result.download' => 'تنزيل',
+			'result.extend_video' => 'تمديد الفيديو',
+			'result.extends_title' => 'امتدادات',
+			'result.delete' => 'حذف',
+			'result.share_success' => 'تم نسخ رابط الفيديو للمشاركة',
+			'result.download_success' => 'تم حفظ الفيديو في المعرض',
 			'privacy_dialog.title' => 'خصوصية البيانات',
 			'privacy_dialog.desc' => 'يتم معالجة صورك بأمان بواسطة أنظمة الذكاء الاصطناعي الداخلية لدينا. نحن لا نشارك أو نبيع أو نكشف عن معلوماتك لأي طرف ثالث.',
 			'privacy_dialog.cancel' => 'إلغاء',

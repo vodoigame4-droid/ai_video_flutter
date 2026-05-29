@@ -205,7 +205,12 @@
     "regenerate": "再生成する",
     "create_another": "別の動画を作成する",
     "share": "共有する",
-    "download": "ダウンロード"
+    "download": "ダウンロード",
+    "extend_video": "動画を延長",
+    "extends_title": "拡張",
+    "delete": "削除",
+    "share_success": "共有用ビデオリンクがコピーされました",
+    "download_success": "ビデオがギャラリーに保存されました"
   },
   "privacy_dialog": {
     "title": "データプライバシー",

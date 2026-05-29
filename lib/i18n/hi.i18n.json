@@ -205,7 +205,12 @@
     "regenerate": "पुनः उत्पन्न करें",
     "create_another": "दूसरा वीडियो बनाएं",
     "share": "साझा करें",
-    "download": "डाउनलोड करें"
+    "download": "डाउनलोड करें",
+    "extend_video": "वीडियो बढ़ाएं",
+    "extends_title": "विस्तार",
+    "delete": "हटाएं",
+    "share_success": "साझा करने के लिए वीडियो लिंक कॉपी किया गया",
+    "download_success": "वीडियो गैलरी में सहेजा गया"
   },
   "privacy_dialog": {
     "title": "डेटा गोपनीयता",

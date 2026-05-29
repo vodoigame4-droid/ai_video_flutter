@@ -350,6 +350,11 @@ class _Translations$result$fr extends Translations$result$en {
 	@override String get create_another => 'Créer une autre vidéo';
 	@override String get share => 'Partager';
 	@override String get download => 'Télécharger';
+	@override String get extend_video => 'Prolonger la vidéo';
+	@override String get extends_title => 'Extensions';
+	@override String get delete => 'Supprimer';
+	@override String get share_success => 'Lien vidéo copié pour partager';
+	@override String get download_success => 'Vidéo enregistrée dans la galerie';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsFr {
 			'result.create_another' => 'Créer une autre vidéo',
 			'result.share' => 'Partager',
 			'result.download' => 'Télécharger',
+			'result.extend_video' => 'Prolonger la vidéo',
+			'result.extends_title' => 'Extensions',
+			'result.delete' => 'Supprimer',
+			'result.share_success' => 'Lien vidéo copié pour partager',
+			'result.download_success' => 'Vidéo enregistrée dans la galerie',
 			'privacy_dialog.title' => 'Confidentialité des données',
 			'privacy_dialog.desc' => 'Vos photos sont traitées en toute sécurité par nos systèmes d\'IA internes. Nous ne partageons, ne vendons ni ne divulguons vos informations à des tiers.',
 			'privacy_dialog.cancel' => 'Annuler',

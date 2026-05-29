@@ -68,7 +68,7 @@ Future<void> initDependencies() async {
   // Features - Create Video
   sl.registerFactory(() => CreateVideoBloc());
   sl.registerFactory(() => GeneratingBloc(profileRepository: sl()));
-  sl.registerFactory(() => ResultBloc());
+  sl.registerFactory(() => ResultBloc(deleteUserVideoUseCase: sl()));
   sl.registerFactory(() => CreateFromTemplateBloc());
 
   // Features - Premium / Paywall

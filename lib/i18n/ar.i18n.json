@@ -205,7 +205,12 @@
     "regenerate": "إعادة التوليد",
     "create_another": "إنشاء فيديو آخر",
     "share": "مشاركة",
-    "download": "تنزيل"
+    "download": "تنزيل",
+    "extend_video": "تمديد الفيديو",
+    "extends_title": "امتدادات",
+    "delete": "حذف",
+    "share_success": "تم نسخ رابط الفيديو للمشاركة",
+    "download_success": "تم حفظ الفيديو في المعرض"
   },
   "privacy_dialog": {
     "title": "خصوصية البيانات",

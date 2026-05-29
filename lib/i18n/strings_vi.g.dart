@@ -365,6 +365,11 @@ class _Translations$result$vi extends Translations$result$en {
 	@override String get create_another => 'Tạo một video khác';
 	@override String get share => 'Chia sẻ';
 	@override String get download => 'Tải xuống';
+	@override String get extend_video => 'Mở rộng video';
+	@override String get extends_title => 'Mở rộng';
+	@override String get delete => 'Xóa';
+	@override String get share_success => 'Đã sao chép liên kết video để chia sẻ';
+	@override String get download_success => 'Đã lưu video vào thư viện';
 }
 
 // Path: privacy_dialog
@@ -654,6 +659,11 @@ extension on TranslationsVi {
 			'result.create_another' => 'Tạo một video khác',
 			'result.share' => 'Chia sẻ',
 			'result.download' => 'Tải xuống',
+			'result.extend_video' => 'Mở rộng video',
+			'result.extends_title' => 'Mở rộng',
+			'result.delete' => 'Xóa',
+			'result.share_success' => 'Đã sao chép liên kết video để chia sẻ',
+			'result.download_success' => 'Đã lưu video vào thư viện',
 			'privacy_dialog.title' => 'Quyền riêng tư dữ liệu',
 			'privacy_dialog.desc' => 'Ảnh của bạn được xử lý an toàn bởi hệ thống AI nội bộ của chúng tôi. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin của bạn cho bất kỳ bên thứ ba nào.',
 			'privacy_dialog.cancel' => 'Hủy bỏ',

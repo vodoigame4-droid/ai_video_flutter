@@ -350,6 +350,11 @@ class _Translations$result$hi extends Translations$result$en {
 	@override String get create_another => 'दूसरा वीडियो बनाएं';
 	@override String get share => 'साझा करें';
 	@override String get download => 'डाउनलोड करें';
+	@override String get extend_video => 'वीडियो बढ़ाएं';
+	@override String get extends_title => 'विस्तार';
+	@override String get delete => 'हटाएं';
+	@override String get share_success => 'साझा करने के लिए वीडियो लिंक कॉपी किया गया';
+	@override String get download_success => 'वीडियो गैलरी में सहेजा गया';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsHi {
 			'result.create_another' => 'दूसरा वीडियो बनाएं',
 			'result.share' => 'साझा करें',
 			'result.download' => 'डाउनलोड करें',
+			'result.extend_video' => 'वीडियो बढ़ाएं',
+			'result.extends_title' => 'विस्तार',
+			'result.delete' => 'हटाएं',
+			'result.share_success' => 'साझा करने के लिए वीडियो लिंक कॉपी किया गया',
+			'result.download_success' => 'वीडियो गैलरी में सहेजा गया',
 			'privacy_dialog.title' => 'डेटा गोपनीयता',
 			'privacy_dialog.desc' => 'आपकी तस्वीरों को हमारे आंतरिक एआई सिस्टम द्वारा सुरक्षित रूप से संसाधित किया जाता है। हम आपकी जानकारी किसी भी तीसरे पक्ष के साथ साझा, बेच या प्रकट नहीं करते हैं।',
 			'privacy_dialog.cancel' => 'रद्द करें',

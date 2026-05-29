@@ -11,11 +11,24 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsAnimationsGen {
+  const $AssetsAnimationsGen();
+
+  /// File path: assets/animations/.gitkeep
+  String get aGitkeep => 'assets/animations/.gitkeep';
+
+  /// List of all assets
+  List<String> get values => [aGitkeep];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
   /// File path: assets/icons/ic_arrow_right.svg
   String get icArrowRight => 'assets/icons/ic_arrow_right.svg';
+
+  /// File path: assets/icons/ic_camera.svg
+  String get icCamera => 'assets/icons/ic_camera.svg';
 
   /// File path: assets/icons/ic_credit_icon.png
   AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
@@ -23,8 +36,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_duration.svg
   String get icDuration => 'assets/icons/ic_duration.svg';
 
+  /// File path: assets/icons/ic_gallery.svg
+  String get icGallery => 'assets/icons/ic_gallery.svg';
+
   /// File path: assets/icons/ic_generate.svg
   String get icGenerate => 'assets/icons/ic_generate.svg';
+
+  /// File path: assets/icons/ic_heart.svg
+  String get icHeart => 'assets/icons/ic_heart.svg';
 
   /// File path: assets/icons/ic_home.svg
   String get icHome => 'assets/icons/ic_home.svg';
@@ -68,9 +87,12 @@ class $AssetsIconsGen {
   /// List of all assets
   List<dynamic> get values => [
     icArrowRight,
+    icCamera,
     icCreditIcon,
     icDuration,
+    icGallery,
     icGenerate,
+    icHeart,
     icHome,
     icImageAdd,
     icImageToDance,
@@ -199,6 +221,7 @@ class $AssetsRawGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsRawGen raw = $AssetsRawGen();

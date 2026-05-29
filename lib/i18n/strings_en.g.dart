@@ -682,6 +682,21 @@ class Translations$result$en {
 
 	/// en: 'Download'
 	String get download => 'Download';
+
+	/// en: 'Extend Video'
+	String get extend_video => 'Extend Video';
+
+	/// en: 'Extends'
+	String get extends_title => 'Extends';
+
+	/// en: 'Delete'
+	String get delete => 'Delete';
+
+	/// en: 'Video link copied to share'
+	String get share_success => 'Video link copied to share';
+
+	/// en: 'Video saved to gallery'
+	String get download_success => 'Video saved to gallery';
 }
 
 // Path: privacy_dialog
@@ -1039,6 +1054,11 @@ extension on Translations {
 			'result.create_another' => 'Create Another Video',
 			'result.share' => 'Share',
 			'result.download' => 'Download',
+			'result.extend_video' => 'Extend Video',
+			'result.extends_title' => 'Extends',
+			'result.delete' => 'Delete',
+			'result.share_success' => 'Video link copied to share',
+			'result.download_success' => 'Video saved to gallery',
 			'privacy_dialog.title' => 'Data Privacy',
 			'privacy_dialog.desc' => 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.',
 			'privacy_dialog.cancel' => 'Cancel',

@@ -49,15 +49,14 @@ class GeneratingView extends StatelessWidget {
           state.mapOrNull(
             success: (successState) {
               // Replace screen with ResultPage so back button doesn't go back to Generating
-              context.replaceNamed(
-                ResultPage.name,
-                queryParameters: {
-                  'videoId': successState.videoId,
-                  'title': successState.title,
-                  'imageUrl': successState.imageUrl ?? '',
-                  'videoUrl': successState.videoUrl,
-                  'createdAt': successState.createdAt,
-                },
+              ResultPage.push(
+                context,
+                videoId: successState.videoId,
+                title: successState.title,
+                imageUrl: successState.imageUrl ?? '',
+                videoUrl: successState.videoUrl,
+                createdAt: successState.createdAt,
+                replace: true,
               );
             },
             notifiedAndExited: (_) {

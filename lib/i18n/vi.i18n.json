@@ -212,7 +212,12 @@
     "regenerate": "Tạo lại",
     "create_another": "Tạo một video khác",
     "share": "Chia sẻ",
-    "download": "Tải xuống"
+    "download": "Tải xuống",
+    "extend_video": "Mở rộng video",
+    "extends_title": "Mở rộng",
+    "delete": "Xóa",
+    "share_success": "Đã sao chép liên kết video để chia sẻ",
+    "download_success": "Đã lưu video vào thư viện"
   },
   "privacy_dialog": {
     "title": "Quyền riêng tư dữ liệu",

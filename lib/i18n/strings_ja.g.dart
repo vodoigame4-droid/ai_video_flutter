@@ -350,6 +350,11 @@ class _Translations$result$ja extends Translations$result$en {
 	@override String get create_another => '別の動画を作成する';
 	@override String get share => '共有する';
 	@override String get download => 'ダウンロード';
+	@override String get extend_video => '動画を延長';
+	@override String get extends_title => '拡張';
+	@override String get delete => '削除';
+	@override String get share_success => '共有用ビデオリンクがコピーされました';
+	@override String get download_success => 'ビデオがギャラリーに保存されました';
 }
 
 // Path: privacy_dialog
@@ -634,6 +639,11 @@ extension on TranslationsJa {
 			'result.create_another' => '別の動画を作成する',
 			'result.share' => '共有する',
 			'result.download' => 'ダウンロード',
+			'result.extend_video' => '動画を延長',
+			'result.extends_title' => '拡張',
+			'result.delete' => '削除',
+			'result.share_success' => '共有用ビデオリンクがコピーされました',
+			'result.download_success' => 'ビデオがギャラリーに保存されました',
 			'privacy_dialog.title' => 'データプライバシー',
 			'privacy_dialog.desc' => 'あなたの写真は当社の内部AIシステムによって安全に処理されます。お客様の情報を第三者に共有、販売、または開示することはありません。',
 			'privacy_dialog.cancel' => 'キャンセル',

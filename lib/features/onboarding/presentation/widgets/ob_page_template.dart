@@ -1,7 +1,9 @@
+import 'package:ai_video_flutter/core/extensions/animation_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/glassmorphic_container.dart';
+import '../../../../core/widgets/gradient_button.dart';
 
 class ObPageTemplate extends StatelessWidget {
   final String backgroundImage;
@@ -24,12 +26,7 @@ class ObPageTemplate extends StatelessWidget {
     return Stack(
       children: [
         // Background image
-        Positioned.fill(
-          child: Image.asset(
-            backgroundImage,
-            fit: BoxFit.cover,
-          ),
-        ),
+        Positioned.fill(child: Image.asset(backgroundImage, fit: BoxFit.cover)),
         // Top shadow overlay
         Positioned(
           top: 0,
@@ -54,15 +51,17 @@ class ObPageTemplate extends StatelessWidget {
           bottom: 0,
           left: 0,
           right: 0,
-          height: 465,
+          height: MediaQuery.sizeOf(context).height * 0.5,
           child: IgnorePointer(
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.95),
+                    Colors.black.withValues(alpha: 0.5),
+                    Colors.black,
                   ],
+                  stops: const [0.0, 0.4, 1.0],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -75,16 +74,8 @@ class ObPageTemplate extends StatelessWidget {
           bottom: 60,
           left: 24,
           right: 24,
-          child: Container(
+          child: GlassmorphicContainer(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-            decoration: BoxDecoration(
-              color: context.colorScheme.surface,
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              border: Border.all(
-                color: AppColors.white.withValues(alpha: 0.08),
-                width: 1,
-              ),
-            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -102,44 +93,20 @@ class ObPageTemplate extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 // Gradient action button
-                Container(
-                  width: 300,
-                  height: 56,
-                  decoration: const BoxDecoration(
-                    gradient: AppColors.primaryGradient,
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                    child: InkWell(
-                      onTap: onButtonPressed,
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Button text
-                          Text(
-                            buttonText,
-                            style: context.appTheme.onboardingButtonStyle,
-                          ),
-                          // Arrow icon on the right
-                          Positioned(
-                            right: 24,
-                            child: SvgPicture.asset(
-                              'assets/images/arrow_right.svg',
-                              width: 20,
-                              height: 20,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                GradientButton(
+                  width: double.infinity,
+                  label: buttonText,
+                  onPressed: onButtonPressed,
+                  trailingIcon: SvgPicture.asset(
+                    'assets/icons/ic_arrow_right.svg',
+                    width: 20,
+                    height: 20,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
                     ),
                   ),
-                ),
+                ).shake().shimmer(),
               ],
             ),
           ),
