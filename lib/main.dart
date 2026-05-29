@@ -45,16 +45,7 @@ class MyApp extends StatelessWidget {
             ],
             routerConfig: appRouter,
             builder: (context, child) {
-              return Stack(
-                children: [
-                  Positioned.fill(
-                    child: Assets.images.bgApp.image(
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child ?? const SizedBox.shrink(),
-                ],
-              );
+              return child ?? const SizedBox.shrink();
             },
           );
         },

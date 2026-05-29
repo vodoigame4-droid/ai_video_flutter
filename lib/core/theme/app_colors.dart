@@ -9,7 +9,7 @@ abstract class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color onSurface = Color(0xFF171717);
-  static const Color background = Color(0xFF171717);
+  static const Color background = Color(0xFF000200);
   static const Color surface = Color(
     0xFF222222,
   ); // Darker gray for card/container surfaces

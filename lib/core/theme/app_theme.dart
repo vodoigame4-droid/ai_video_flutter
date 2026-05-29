@@ -9,9 +9,9 @@ abstract class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: Colors.transparent,
+      scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.primary,
-      
+
       // Page transitions: Use Cupertino by default for a highly premium, smooth slide transition
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
@@ -114,9 +114,7 @@ abstract class AppTheme {
       ),
 
       // Icon Theme
-      iconTheme: const IconThemeData(
-        color: AppColors.white,
-      ),
+      iconTheme: const IconThemeData(color: AppColors.white),
 
       // Extensions
       extensions: [
@@ -131,6 +129,7 @@ abstract class AppTheme {
           bodyNormalBold: AppTextStyles.bodyNormalBold,
           errorTextStyle: AppTextStyles.errorText,
           seeAllTextStyle: AppTextStyles.seeAllText,
+          viewsCountTextStyle: AppTextStyles.viewsCountText,
           heartColor: AppColors.heart,
           borderColor: AppColors.border,
           lightBorderColor: AppColors.lightBorder,
@@ -158,6 +157,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final TextStyle bodyNormalBold;
   final TextStyle errorTextStyle;
   final TextStyle seeAllTextStyle;
+  final TextStyle viewsCountTextStyle;
   final Color heartColor;
   final Color borderColor;
   final Color lightBorderColor;
@@ -179,6 +179,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     required this.bodyNormalBold,
     required this.errorTextStyle,
     required this.seeAllTextStyle,
+    required this.viewsCountTextStyle,
     required this.heartColor,
     required this.borderColor,
     required this.lightBorderColor,
@@ -202,6 +203,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     TextStyle? bodyNormalBold,
     TextStyle? errorTextStyle,
     TextStyle? seeAllTextStyle,
+    TextStyle? viewsCountTextStyle,
     Color? heartColor,
     Color? borderColor,
     Color? lightBorderColor,
@@ -216,21 +218,29 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       primaryGradient: primaryGradient ?? this.primaryGradient,
       borderGradient: borderGradient ?? this.borderGradient,
       categoryActiveStyle: categoryActiveStyle ?? this.categoryActiveStyle,
-      categoryInactiveStyle: categoryInactiveStyle ?? this.categoryInactiveStyle,
-      categoryActiveStyleSelected: categoryActiveStyleSelected ?? this.categoryActiveStyleSelected,
-      qualityLabelActiveStyle: qualityLabelActiveStyle ?? this.qualityLabelActiveStyle,
-      qualityLabelInactiveStyle: qualityLabelInactiveStyle ?? this.qualityLabelInactiveStyle,
+      categoryInactiveStyle:
+          categoryInactiveStyle ?? this.categoryInactiveStyle,
+      categoryActiveStyleSelected:
+          categoryActiveStyleSelected ?? this.categoryActiveStyleSelected,
+      qualityLabelActiveStyle:
+          qualityLabelActiveStyle ?? this.qualityLabelActiveStyle,
+      qualityLabelInactiveStyle:
+          qualityLabelInactiveStyle ?? this.qualityLabelInactiveStyle,
       bodyNormalBold: bodyNormalBold ?? this.bodyNormalBold,
       errorTextStyle: errorTextStyle ?? this.errorTextStyle,
       seeAllTextStyle: seeAllTextStyle ?? this.seeAllTextStyle,
+      viewsCountTextStyle: viewsCountTextStyle ?? this.viewsCountTextStyle,
       heartColor: heartColor ?? this.heartColor,
       borderColor: borderColor ?? this.borderColor,
       lightBorderColor: lightBorderColor ?? this.lightBorderColor,
       onboardingTitleStyle: onboardingTitleStyle ?? this.onboardingTitleStyle,
-      onboardingSubtitleStyle: onboardingSubtitleStyle ?? this.onboardingSubtitleStyle,
-      onboardingButtonStyle: onboardingButtonStyle ?? this.onboardingButtonStyle,
+      onboardingSubtitleStyle:
+          onboardingSubtitleStyle ?? this.onboardingSubtitleStyle,
+      onboardingButtonStyle:
+          onboardingButtonStyle ?? this.onboardingButtonStyle,
       navLabelActiveStyle: navLabelActiveStyle ?? this.navLabelActiveStyle,
-      navLabelInactiveStyle: navLabelInactiveStyle ?? this.navLabelInactiveStyle,
+      navLabelInactiveStyle:
+          navLabelInactiveStyle ?? this.navLabelInactiveStyle,
       navLabelCreateStyle: navLabelCreateStyle ?? this.navLabelCreateStyle,
     );
   }
@@ -239,25 +249,90 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   AppThemeExtension lerp(ThemeExtension<AppThemeExtension>? other, double t) {
     if (other is! AppThemeExtension) return this;
     return AppThemeExtension(
-      primaryGradient: LinearGradient.lerp(primaryGradient, other.primaryGradient, t)!,
-      borderGradient: LinearGradient.lerp(borderGradient, other.borderGradient, t)!,
-      categoryActiveStyle: TextStyle.lerp(categoryActiveStyle, other.categoryActiveStyle, t)!,
-      categoryInactiveStyle: TextStyle.lerp(categoryInactiveStyle, other.categoryInactiveStyle, t)!,
-      categoryActiveStyleSelected: TextStyle.lerp(categoryActiveStyleSelected, other.categoryActiveStyleSelected, t)!,
-      qualityLabelActiveStyle: TextStyle.lerp(qualityLabelActiveStyle, other.qualityLabelActiveStyle, t)!,
-      qualityLabelInactiveStyle: TextStyle.lerp(qualityLabelInactiveStyle, other.qualityLabelInactiveStyle, t)!,
+      primaryGradient: LinearGradient.lerp(
+        primaryGradient,
+        other.primaryGradient,
+        t,
+      )!,
+      borderGradient: LinearGradient.lerp(
+        borderGradient,
+        other.borderGradient,
+        t,
+      )!,
+      categoryActiveStyle: TextStyle.lerp(
+        categoryActiveStyle,
+        other.categoryActiveStyle,
+        t,
+      )!,
+      categoryInactiveStyle: TextStyle.lerp(
+        categoryInactiveStyle,
+        other.categoryInactiveStyle,
+        t,
+      )!,
+      categoryActiveStyleSelected: TextStyle.lerp(
+        categoryActiveStyleSelected,
+        other.categoryActiveStyleSelected,
+        t,
+      )!,
+      qualityLabelActiveStyle: TextStyle.lerp(
+        qualityLabelActiveStyle,
+        other.qualityLabelActiveStyle,
+        t,
+      )!,
+      qualityLabelInactiveStyle: TextStyle.lerp(
+        qualityLabelInactiveStyle,
+        other.qualityLabelInactiveStyle,
+        t,
+      )!,
       bodyNormalBold: TextStyle.lerp(bodyNormalBold, other.bodyNormalBold, t)!,
       errorTextStyle: TextStyle.lerp(errorTextStyle, other.errorTextStyle, t)!,
-      seeAllTextStyle: TextStyle.lerp(seeAllTextStyle, other.seeAllTextStyle, t)!,
+      seeAllTextStyle: TextStyle.lerp(
+        seeAllTextStyle,
+        other.seeAllTextStyle,
+        t,
+      )!,
+      viewsCountTextStyle: TextStyle.lerp(
+        viewsCountTextStyle,
+        other.viewsCountTextStyle,
+        t,
+      )!,
       heartColor: Color.lerp(heartColor, other.heartColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      lightBorderColor: Color.lerp(lightBorderColor, other.lightBorderColor, t)!,
-      onboardingTitleStyle: TextStyle.lerp(onboardingTitleStyle, other.onboardingTitleStyle, t)!,
-      onboardingSubtitleStyle: TextStyle.lerp(onboardingSubtitleStyle, other.onboardingSubtitleStyle, t)!,
-      onboardingButtonStyle: TextStyle.lerp(onboardingButtonStyle, other.onboardingButtonStyle, t)!,
-      navLabelActiveStyle: TextStyle.lerp(navLabelActiveStyle, other.navLabelActiveStyle, t)!,
-      navLabelInactiveStyle: TextStyle.lerp(navLabelInactiveStyle, other.navLabelInactiveStyle, t)!,
-      navLabelCreateStyle: TextStyle.lerp(navLabelCreateStyle, other.navLabelCreateStyle, t)!,
+      lightBorderColor: Color.lerp(
+        lightBorderColor,
+        other.lightBorderColor,
+        t,
+      )!,
+      onboardingTitleStyle: TextStyle.lerp(
+        onboardingTitleStyle,
+        other.onboardingTitleStyle,
+        t,
+      )!,
+      onboardingSubtitleStyle: TextStyle.lerp(
+        onboardingSubtitleStyle,
+        other.onboardingSubtitleStyle,
+        t,
+      )!,
+      onboardingButtonStyle: TextStyle.lerp(
+        onboardingButtonStyle,
+        other.onboardingButtonStyle,
+        t,
+      )!,
+      navLabelActiveStyle: TextStyle.lerp(
+        navLabelActiveStyle,
+        other.navLabelActiveStyle,
+        t,
+      )!,
+      navLabelInactiveStyle: TextStyle.lerp(
+        navLabelInactiveStyle,
+        other.navLabelInactiveStyle,
+        t,
+      )!,
+      navLabelCreateStyle: TextStyle.lerp(
+        navLabelCreateStyle,
+        other.navLabelCreateStyle,
+        t,
+      )!,
     );
   }
 }

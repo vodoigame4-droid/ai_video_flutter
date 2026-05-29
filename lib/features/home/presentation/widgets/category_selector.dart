@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/app_theme.dart';
 
@@ -15,8 +16,9 @@ class CategorySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 37,
+      color: AppColors.background,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -32,13 +34,20 @@ class CategorySelector extends StatelessWidget {
               onTap: () => onSelected(category),
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: Ink(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
-                  gradient: isSelected ? context.appTheme.primaryGradient : null,
+                  gradient: isSelected
+                      ? context.appTheme.primaryGradient
+                      : null,
                   color: isSelected ? null : context.colorScheme.surface,
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   border: Border.all(
-                    color: isSelected ? Colors.transparent : context.appTheme.borderColor,
+                    color: isSelected
+                        ? Colors.transparent
+                        : context.appTheme.borderColor,
                     width: 1,
                   ),
                 ),

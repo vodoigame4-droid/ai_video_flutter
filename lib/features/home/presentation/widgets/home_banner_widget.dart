@@ -1,91 +1,57 @@
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/widgets/credit_badge_widget.dart';
-import '../../../../i18n/strings.g.dart';
+import '../../../../core/widgets/app_image.dart';
 
-/// The top banner section of the HomePage.
-/// Renders the background image, top status overlays, app title, PRO badge, and the user's credits.
+/// The top banner background section of the HomePage.
+/// Renders the background image (animated WebP) and dark gradient overlay.
 class HomeBannerWidget extends StatelessWidget {
   const HomeBannerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final t = context.t;
-
-    return Stack(
-      children: [
-        // Banner background image
-        Container(
-          height: 250,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/home_banner.png',
-              ),
+    return SizedBox(
+      width: double.infinity,
+      height: 320,
+      child: Stack(
+        children: [
+          // Banner background image (Animated WebP loaded with cache and shimmer, falls back to asset on error)
+          Positioned.fill(
+            child: AppImage(
+              imageUrl:
+                  'https://mathiasbynens.be/demo/animated-webp-supported.webp',
               fit: BoxFit.cover,
+              errorWidget: Image.asset(
+                'assets/images/home_banner.png',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        // Dark gradient overlay
-        Container(
-          height: 250,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black.withValues(alpha: 0.6),
-                Colors.black.withValues(alpha: 0.1),
-                Colors.black.withValues(alpha: 0.8),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
-        // Content over the banner
-        SafeArea(
-          bottom: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 12),
-                // Header Row: Title, PRO badge, and credit status
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          t.home.title,
-                          style: context.textTheme.displayMedium,
-                        ),
-                        const SizedBox(width: 8),
-                        Image.asset(
-                          'assets/images/pro_badge_icon.png',
-                          height: 22,
-                          fit: BoxFit.contain,
-                        ),
-                      ],
-                    ),
-                    const CreditBadgeWidget(),
-                  ],
+          // Dark gradient overlay to blend into the app's background color (0xFF171717)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: SizedBox(
+              height: 50,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.background,
+                      Colors
+                          .transparent, // Top: semi-transparent app backgrounddle: transparent to show image clearly
+                      // Bottom: solid app background to blend seamlessly
+                    ],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    stops: [0.5, 1],
+                  ),
                 ),
-                const SizedBox(height: 48),
-                // Inner Banner Title
-                Text(
-                  t.home_new.welcomeToAppName,
-                  style: context.appTheme.onboardingTitleStyle,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

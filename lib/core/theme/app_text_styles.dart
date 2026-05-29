@@ -42,19 +42,19 @@ abstract class AppTextStyles {
   );
 
   static final TextStyle navLabelActive = GoogleFonts.inter(
-    fontSize: 12.0,
+    fontSize: 13.0,
     fontWeight: FontWeight.w600, // Semi bold
     color: AppColors.white,
   );
 
   static final TextStyle navLabelInactive = GoogleFonts.inter(
-    fontSize: 12.0,
+    fontSize: 13.0,
     fontWeight: FontWeight.w600,
     color: AppColors.activeTab, // Maps to #979797
   );
 
   static final TextStyle navLabelCreate = GoogleFonts.inter(
-    fontSize: 12.0,
+    fontSize: 13.0,
     fontWeight: FontWeight.w600,
     color: AppColors.white,
   );
@@ -103,19 +103,19 @@ abstract class AppTextStyles {
   );
 
   static final TextStyle proBadgeText = GoogleFonts.inter(
-    fontSize: 10.0,
+    fontSize: 12.0,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
   );
 
   static final TextStyle categoryActiveText = GoogleFonts.inter(
-    fontSize: 14.0,
+    fontSize: 15.0,
     fontWeight: FontWeight.bold,
     color: AppColors.primary,
   );
 
   static final TextStyle categoryInactiveText = GoogleFonts.inter(
-    fontSize: 14.0,
+    fontSize: 15.0,
     fontWeight: FontWeight.normal,
     color: AppColors.subText,
   );
@@ -127,13 +127,19 @@ abstract class AppTextStyles {
   );
 
   static final TextStyle seeAllText = GoogleFonts.inter(
-    fontSize: 11.0,
+    fontSize: 16.0,
     fontWeight: FontWeight.w500, // Medium
     color: AppColors.subText,
   );
 
+  static final TextStyle viewsCountText = GoogleFonts.inter(
+    fontSize: 12.0,
+    fontWeight: FontWeight.normal,
+    color: AppColors.white.withValues(alpha: 0.8),
+  );
+
   static final TextStyle settingsHeader = GoogleFonts.inter(
-    fontSize: 13.0,
+    fontSize: 14.0,
     fontWeight: FontWeight.w500,
     color: AppColors.white,
   );
@@ -151,7 +157,7 @@ abstract class AppTextStyles {
   );
 
   static final TextStyle characterCountText = GoogleFonts.inter(
-    fontSize: 12.0,
+    fontSize: 13.0,
     fontWeight: FontWeight.normal,
     color: AppColors.subText,
   );
@@ -195,7 +201,7 @@ abstract class AppTextStyles {
   );
 
   static final TextStyle categoryActiveTextSelected = GoogleFonts.inter(
-    fontSize: 14.0,
+    fontSize: 16.0,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
   );

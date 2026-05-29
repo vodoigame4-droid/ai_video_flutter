@@ -21,7 +21,8 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<DashboardBloc>()..add(const DashboardEvent.init()),
+      create: (context) =>
+          sl<DashboardBloc>()..add(const DashboardEvent.init()),
       child: const DashboardView(),
     );
   }
@@ -47,10 +48,7 @@ class DashboardView extends StatelessWidget {
               Positioned.fill(
                 child: IndexedStack(
                   index: currentIndex,
-                  children: const [
-                    HomePage(),
-                    ProfilePage(),
-                  ],
+                  children: const [HomePage(), ProfilePage()],
                 ),
               ),
               // Floating Bottom Nav Bar
@@ -62,7 +60,9 @@ class DashboardView extends StatelessWidget {
                   child: CustomBottomNavBar(
                     selectedIndex: currentIndex,
                     onTabSelected: (index) {
-                      context.read<DashboardBloc>().add(DashboardEvent.changeTab(index));
+                      context.read<DashboardBloc>().add(
+                        DashboardEvent.changeTab(index),
+                      );
                     },
                     onCreatePressed: () {
                       context.pushNamed(

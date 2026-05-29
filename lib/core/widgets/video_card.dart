@@ -30,33 +30,37 @@ class VideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int hash = title.hashCode;
-    
+
     // Fallback deterministic logic for Home page if parameters are omitted
     final bool isEven = hash % 2 == 0;
-    final String defaultImageAsset = isEven ? 'assets/images/card_1.png' : 'assets/images/card_2.png';
-    
+    final String defaultImageAsset = isEven
+        ? 'assets/images/card_1.png'
+        : 'assets/images/card_2.png';
+
     final bool isTest = Platform.environment.containsKey('FLUTTER_TEST');
-    final bool isNetworkImage = imageUrl != null && imageUrl!.startsWith('http') && !isTest;
-    
-    final String resolvedImageUrl = (isTest && imageUrl != null && imageUrl!.startsWith('http'))
+    final bool isNetworkImage =
+        imageUrl != null && imageUrl!.startsWith('http') && !isTest;
+
+    final String resolvedImageUrl =
+        (isTest && imageUrl != null && imageUrl!.startsWith('http'))
         ? defaultImageAsset
         : (imageUrl ?? defaultImageAsset);
-    
-    final bool resolvedIsHot = badgeType != null 
-        ? badgeType == 'hot' 
+
+    final bool resolvedIsHot = badgeType != null
+        ? badgeType == 'hot'
         : hash % 3 == 0;
-    
-    final bool hasBadge = badgeType != null 
-        ? badgeType!.isNotEmpty 
+
+    final bool hasBadge = badgeType != null
+        ? badgeType!.isNotEmpty
         : true; // Default to true if badgeType is null (for Home page fallback)
-    
+
     final String resolvedBadgeText = resolvedIsHot ? 'Hot' : 'New';
-    
+
     final String resolvedViews = viewsCount ?? '${((hash % 90) + 10) / 10}k';
 
     // Styling configuration based on style type (Home vs Templates)
     final double cardRadius = isNetworkImage ? 10.0 : 16.0;
-    
+
     final BorderRadius badgeBorderRadius = isNetworkImage
         ? const BorderRadius.only(
             bottomLeft: Radius.circular(10),
@@ -167,17 +171,26 @@ class VideoCard extends StatelessWidget {
                 top: 8,
                 right: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     gradient: badgeGradient,
                     borderRadius: badgeBorderRadius,
                   ),
                   child: Text(
                     resolvedBadgeText,
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ) ?? const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                    style:
+                        context.textTheme.labelSmall?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ) ??
+                        const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
               ),
@@ -191,7 +204,10 @@ class VideoCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.4),
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1.5),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      width: 1.5,
+                    ),
                   ),
                   child: const Icon(
                     Icons.play_arrow_rounded,
@@ -214,7 +230,9 @@ class VideoCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: context.appTheme.bodyNormalBold.copyWith(color: Colors.white),
+                      style: context.appTheme.bodyNormalBold.copyWith(
+                        color: Colors.white,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -236,9 +254,7 @@ class VideoCard extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               resolvedViews,
-                              style: context.appTheme.seeAllTextStyle.copyWith(
-                                color: Colors.white.withValues(alpha: 0.8),
-                              ),
+                              style: context.appTheme.viewsCountTextStyle,
                             ),
                           ],
                         ),

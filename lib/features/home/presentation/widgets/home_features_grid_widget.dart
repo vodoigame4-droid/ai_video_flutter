@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
 import '../../../../i18n/strings.g.dart';
@@ -14,8 +15,18 @@ class HomeFeaturesGridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [
+            AppColors.background, // solid background at bottom
+            Colors.transparent, // transparent at top
+          ],
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Row(
         children: [
           _buildFeatureItem(

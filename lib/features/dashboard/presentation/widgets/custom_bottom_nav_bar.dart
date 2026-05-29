@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/core/extensions/animation_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -42,30 +43,30 @@ class CustomBottomNavBar extends StatelessWidget {
                   width: 1,
                 ),
               ),
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Home Tab
-                      _buildTabItem(
-                        context,
-                        index: 0,
-                        iconAsset: 'assets/images/nav_home.svg',
-                        label: t.dashboard.home,
-                      ),
-                      // Spacer to yield room for elevated central button
-                      const SizedBox(width: 80),
-                      // Profile/User Tab
-                      _buildTabItem(
-                        context,
-                        index: 1,
-                        iconAsset: 'assets/images/nav_user.svg',
-                        label: t.dashboard.user,
-                      ),
-                    ],
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Home Tab
+                  _buildTabItem(
+                    context,
+                    index: 0,
+                    iconAsset: 'assets/images/nav_home.svg',
+                    label: t.dashboard.home,
                   ),
-                ),
+                  // Spacer to yield room for elevated central button
+                  const SizedBox(width: 80),
+                  // Profile/User Tab
+                  _buildTabItem(
+                    context,
+                    index: 1,
+                    iconAsset: 'assets/images/nav_user.svg',
+                    label: t.dashboard.user,
+                  ),
+                ],
               ),
+            ),
+          ),
           // Elevated central button "Create Video"
           Positioned(
             top: 0,
@@ -80,10 +81,10 @@ class CustomBottomNavBar extends StatelessWidget {
                     width: 64,
                     height: 64,
                     decoration: BoxDecoration(
-                      gradient: AppColors.primaryGradient,
+                      color: AppColors.primary,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: const Color(0x3306F294), // rgba(6, 242, 148, 0.2)
+                        color: AppColors.primary.withValues(alpha: 0.2),
                         width: 3,
                       ),
                       boxShadow: [
@@ -101,7 +102,7 @@ class CustomBottomNavBar extends StatelessWidget {
                       height: 40,
                     ),
                   ),
-                ),
+                ).shimmer().pulse(),
                 const SizedBox(height: 4),
                 // Gradient Text Label
                 ShaderMask(

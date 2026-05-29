@@ -40,21 +40,17 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(
-                    icon,
-                    color: iconColor,
-                    size: 20,
-                  ),
+                  Icon(icon, color: iconColor, size: 20),
                   const SizedBox(width: 6),
-                  Text(
-                    title,
-                    style: context.textTheme.titleMedium,
-                  ),
+                  Text(title, style: context.textTheme.titleMedium),
                 ],
               ),
               TextButton(
                 onPressed: onSeeAllPressed,
-                child: Text(t.common.see_all),
+                child: Text(
+                  t.common.see_all,
+                  style: context.appTheme.seeAllTextStyle,
+                ),
               ),
             ],
           ),
@@ -81,6 +77,8 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
                   imageUrl: template.imageUrl,
                   viewsCount: template.viewsCount,
                   badgeType: template.badgeType,
+                  showPlayButton: false,
+                  showVolumeIcon: false,
                   width: 158,
                   height: 236,
                   onTap: () {
@@ -102,10 +100,7 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
           ),
           empty: () => const SizedBox.shrink(),
           error: (message) => Center(
-            child: Text(
-              message,
-              style: context.appTheme.errorTextStyle,
-            ),
+            child: Text(message, style: context.appTheme.errorTextStyle),
           ),
         ),
       ],
