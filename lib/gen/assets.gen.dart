@@ -33,8 +33,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_credit_icon.png
   AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
 
+  /// File path: assets/icons/ic_delete.svg
+  String get icDelete => 'assets/icons/ic_delete.svg';
+
+  /// File path: assets/icons/ic_download.svg
+  String get icDownload => 'assets/icons/ic_download.svg';
+
   /// File path: assets/icons/ic_duration.svg
   String get icDuration => 'assets/icons/ic_duration.svg';
+
+  /// File path: assets/icons/ic_extend_video.svg
+  String get icExtendVideo => 'assets/icons/ic_extend_video.svg';
 
   /// File path: assets/icons/ic_gallery.svg
   String get icGallery => 'assets/icons/ic_gallery.svg';
@@ -66,6 +75,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_question.svg
   String get icQuestion => 'assets/icons/ic_question.svg';
 
+  /// File path: assets/icons/ic_regenerate.svg
+  String get icRegenerate => 'assets/icons/ic_regenerate.svg';
+
+  /// File path: assets/icons/ic_share.svg
+  String get icShare => 'assets/icons/ic_share.svg';
+
   /// File path: assets/icons/ic_star_vip.png
   AssetGenImage get icStarVip => const AssetGenImage('assets/icons/ic_star_vip.png');
 
@@ -89,7 +104,10 @@ class $AssetsIconsGen {
     icArrowRight,
     icCamera,
     icCreditIcon,
+    icDelete,
+    icDownload,
     icDuration,
+    icExtendVideo,
     icGallery,
     icGenerate,
     icHeart,
@@ -100,6 +118,8 @@ class $AssetsIconsGen {
     icInspireMe,
     icQuality,
     icQuestion,
+    icRegenerate,
+    icShare,
     icStarVip,
     icTranslateVideo,
     icTrash,

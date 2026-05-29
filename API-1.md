@@ -1,6 +1,6 @@
 # AI Video Swap & Generator - API Documentation
 
-Base URL: `/api/v1`
+Base URL: `https://video-effect-be.apihub.today/api/v1`
 
 ---
 
@@ -14,9 +14,9 @@ Base URL: `/api/v1`
 {
   "deviceId": "abc123xyz",
   "app": "android",
-  "appVersion": "1.0.5",
+  "app-version": "1.0.5",
   "refCode": "ABC123",
-  "appType": "ai_video_swap_and_generator"
+  "app-type": "ai_video_swap_and_generator"
 }
 ```
 
@@ -126,8 +126,8 @@ Lấy danh sách home categories.
 | Header | Value |
 |--------|-------|
 | Authorization | Bearer \<token\> |
-| apptype | ios / android |
-| version | 1.0.5 |
+| app-type | ios / android |
+| app-version | 1.0.5 |
 
 **Response:**
 ```json
@@ -170,8 +170,8 @@ Lấy danh sách category từ theme service.
 | Header | Value |
 |--------|-------|
 | Authorization | Bearer \<token\> |
-| apptype | ios / android |
-| version | 1.0.5 |
+| app-type | ios / android |
+| app-version | 1.0.5 |
 
 **Response:**
 ```json
@@ -199,8 +199,8 @@ Lấy danh sách themes theo category.
 | Header | Value |
 |--------|-------|
 | Authorization | Bearer \<token\> |
-| apptype | ios / android |
-| version | 1.0.5 |
+| app-type | ios / android |
+| app-version | 1.0.5 |
 
 **Query Params:**
 | Param | Type | Required | Description |

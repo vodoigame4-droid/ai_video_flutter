@@ -2,6 +2,24 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:network/network.dart';
 import '../utils/log_utils.dart';
+
+// Auth
+import '../../features/auth/data/datasources/auth_api_client.dart';
+import '../../features/auth/data/datasources/auth_remote_datasource.dart';
+import '../../features/auth/domain/repositories/auth_repository.dart';
+import '../../features/auth/data/repositories/auth_repository_impl.dart';
+
+// Media
+import '../../features/media/data/datasources/media_api_client.dart';
+import '../../features/media/data/datasources/media_remote_datasource.dart';
+import '../../features/media/domain/repositories/media_repository.dart';
+import '../../features/media/data/repositories/media_repository_impl.dart';
+
+// IAP
+import '../../features/premium/data/datasources/iap_api_client.dart';
+import '../../features/premium/data/datasources/iap_remote_datasource.dart';
+import '../../features/premium/domain/repositories/iap_repository.dart';
+import '../../features/premium/data/repositories/iap_repository_impl.dart';
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import '../../features/home/presentation/blocs/home_bloc.dart';
@@ -82,13 +100,43 @@ Future<void> initDependencies() async {
   // Network Client
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(
-      baseUrl: 'https://api.example.com/',
+      baseUrl: 'https://video-effect-be.apihub.today/api/v1',
       logCallback: LogUtils.d,
       tokenProvider: () async {
-        // Return active user token dynamically if authentication is implemented
-        return null;
+        final prefs = sl<SharedPreferences>();
+        return prefs.getString('auth_access_token');
       },
     ),
+  );
+
+  // Auth Feature
+  sl.registerLazySingleton(() => AuthApiClient(sl<ApiClient>().dio));
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(apiClient: sl()),
+  );
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(
+      remoteDataSource: sl(),
+      sharedPreferences: sl(),
+    ),
+  );
+
+  // Media Feature
+  sl.registerLazySingleton(() => MediaApiClient(sl<ApiClient>().dio));
+  sl.registerLazySingleton<MediaRemoteDataSource>(
+    () => MediaRemoteDataSourceImpl(apiClient: sl()),
+  );
+  sl.registerLazySingleton<MediaRepository>(
+    () => MediaRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  // IAP Feature
+  sl.registerLazySingleton(() => IapApiClient(sl<ApiClient>().dio));
+  sl.registerLazySingleton<IapRemoteDataSource>(
+    () => IapRemoteDataSourceImpl(apiClient: sl()),
+  );
+  sl.registerLazySingleton<IapRepository>(
+    () => IapRepositoryImpl(remoteDataSource: sl()),
   );
 
   // Shared Preferences
