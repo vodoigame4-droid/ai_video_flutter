@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:network/network.dart';
+import '../utils/log_utils.dart';
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import '../../features/home/presentation/blocs/home_bloc.dart';
@@ -76,6 +78,18 @@ Future<void> initDependencies() async {
 
   // Features - Video Player
   sl.registerFactory(() => VideoPlayerBloc());
+
+  // Network Client
+  sl.registerLazySingleton<ApiClient>(
+    () => ApiClient(
+      baseUrl: 'https://api.example.com/',
+      logCallback: LogUtils.d,
+      tokenProvider: () async {
+        // Return active user token dynamically if authentication is implemented
+        return null;
+      },
+    ),
+  );
 
   // Shared Preferences
   final sharedPrefs = await SharedPreferences.getInstance();
