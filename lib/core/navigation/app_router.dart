@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:core_business/core_business.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
@@ -13,6 +14,7 @@ import '../../features/premium/presentation/pages/paywall_video_page.dart';
 import '../../features/premium/presentation/pages/iap_page.dart';
 import '../../features/premium/presentation/pages/buy_credits_page.dart';
 import '../../features/create_video/presentation/pages/create_from_template_page.dart';
+import '../../features/create_video/presentation/pages/create_template_settings_page.dart';
 import '../../features/video_player/presentation/pages/video_player_page.dart';
 
 abstract class AppRoutePage {
@@ -108,6 +110,8 @@ final GoRouter appRouter = GoRouter(
         final title = state.uri.queryParameters['title'] ?? '';
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
         final imageUrl = state.uri.queryParameters['imageUrl'] ?? '';
+        final themeType = state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
+        final themeOrgId = int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
         return AppRoutePage.cupertino<void>(
           state: state,
           child: CreateFromTemplatePage(
@@ -115,7 +119,20 @@ final GoRouter appRouter = GoRouter(
             title: title,
             videoUrl: videoUrl,
             imageUrl: imageUrl,
+            themeType: themeType,
+            themeOrgId: themeOrgId,
           ),
+        );
+      },
+    ),
+    GoRoute(
+      path: CreateTemplateSettingsPage.path,
+      name: CreateTemplateSettingsPage.name,
+      pageBuilder: (context, state) {
+        final bloc = state.extra as CreateFromTemplateBloc;
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: CreateTemplateSettingsPage(bloc: bloc),
         );
       },
     ),
@@ -125,9 +142,22 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) {
         final title = state.uri.queryParameters['title'] ?? 'Image Generation';
         final imageUrl = state.uri.queryParameters['imageUrl'];
+        final themeId = state.uri.queryParameters['themeId'] ?? '1';
+        final themeType = state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
+        final themeOrgId = int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
+        final isHd = state.uri.queryParameters['isHd'] == 'true';
+        final isLongTime = state.uri.queryParameters['isLongTime'] == 'true';
         return AppRoutePage.cupertino<void>(
           state: state,
-          child: GeneratingPage(title: title, imageUrl: imageUrl),
+          child: GeneratingPage(
+            title: title,
+            imageUrl: imageUrl,
+            themeId: themeId,
+            themeType: themeType,
+            themeOrgId: themeOrgId,
+            isHd: isHd,
+            isLongTime: isLongTime,
+          ),
         );
       },
     ),

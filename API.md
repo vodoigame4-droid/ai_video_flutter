@@ -14,9 +14,9 @@ Base URL: `https://video-effect-be.apihub.today/api/v1`
 {
   "deviceId": "abc123xyz",
   "app": "android",
-  "app-version": "1.0.5",
+  "appVersion": "1.0.5",
   "refCode": "ABC123",
-  "app-type": "ai_video_swap_and_generator"
+  "appType": "ai_video_swap_and_generator"
 }
 ```
 
@@ -137,20 +137,19 @@ Lấy danh sách home categories.
     {
       "id": 1,
       "name": "Trending",
-      "theme" : [
+      "themes" : [
         {
-        "id": "uuid",
-        "name": "Dance Move",
-        "description": "Make your photo dance",
-        "resultUrl": "https://...",
-        "sourceUrl": "https://...",
-        "sourceUrls": ["https://..."],
-        "thumbnailUrl": "https://...",
-        "prompt": "dancing motion",
-        "type": "TEMPLATE",
-        "orgId": 123
-      }, 
-
+          "id": "uuid",
+          "name": "Dance Move",
+          "description": "Make your photo dance",
+          "resultUrl": "https://...",
+          "sourceUrl": "https://...",
+          "sourceUrls": ["https://..."],
+          "thumbnailUrl": "https://...",
+          "prompt": "dancing motion",
+          "type": "TEMPLATE",
+          "orgId": 123
+        }
       ]
     },
     {

@@ -81,13 +81,20 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
                   onTap: () {
                     const mockVideoUrl =
                         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                    final videoUrl = template.resultUrl.isNotEmpty
+                        ? template.resultUrl
+                        : (template.sourceUrl.isNotEmpty
+                            ? template.sourceUrl
+                            : mockVideoUrl);
                     context.pushNamed(
                       CreateFromTemplatePage.name,
                       queryParameters: {
                         'templateId': template.id,
                         'title': template.name,
-                        'videoUrl': mockVideoUrl,
+                        'videoUrl': videoUrl,
                         'imageUrl': template.thumbnailUrl,
+                        'themeType': template.type,
+                        'themeOrgId': template.orgId.toString(),
                       },
                     );
                   },

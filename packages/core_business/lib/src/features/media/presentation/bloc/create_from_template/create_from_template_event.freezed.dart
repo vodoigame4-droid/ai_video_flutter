@@ -55,14 +55,13 @@ extension CreateFromTemplateEventPatterns on CreateFromTemplateEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectPhoto value)?  selectPhoto,TResult Function( _RemovePhoto value)?  removePhoto,TResult Function( _ToggleSettings value)?  toggleSettings,TResult Function( _SelectQuality value)?  selectQuality,TResult Function( _SelectDuration value)?  selectDuration,TResult Function( _StartGenerating value)?  startGenerating,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectPhoto value)?  selectPhoto,TResult Function( _RemovePhoto value)?  removePhoto,TResult Function( _SelectQuality value)?  selectQuality,TResult Function( _SelectDuration value)?  selectDuration,TResult Function( _StartGenerating value)?  startGenerating,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that);case _SelectPhoto() when selectPhoto != null:
 return selectPhoto(_that);case _RemovePhoto() when removePhoto != null:
-return removePhoto(_that);case _ToggleSettings() when toggleSettings != null:
-return toggleSettings(_that);case _SelectQuality() when selectQuality != null:
+return removePhoto(_that);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that);case _StartGenerating() when startGenerating != null:
 return startGenerating(_that);case _:
@@ -83,14 +82,13 @@ return startGenerating(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectPhoto value)  selectPhoto,required TResult Function( _RemovePhoto value)  removePhoto,required TResult Function( _ToggleSettings value)  toggleSettings,required TResult Function( _SelectQuality value)  selectQuality,required TResult Function( _SelectDuration value)  selectDuration,required TResult Function( _StartGenerating value)  startGenerating,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectPhoto value)  selectPhoto,required TResult Function( _RemovePhoto value)  removePhoto,required TResult Function( _SelectQuality value)  selectQuality,required TResult Function( _SelectDuration value)  selectDuration,required TResult Function( _StartGenerating value)  startGenerating,}){
 final _that = this;
 switch (_that) {
 case _Init():
 return init(_that);case _SelectPhoto():
 return selectPhoto(_that);case _RemovePhoto():
-return removePhoto(_that);case _ToggleSettings():
-return toggleSettings(_that);case _SelectQuality():
+return removePhoto(_that);case _SelectQuality():
 return selectQuality(_that);case _SelectDuration():
 return selectDuration(_that);case _StartGenerating():
 return startGenerating(_that);case _:
@@ -110,14 +108,13 @@ return startGenerating(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectPhoto value)?  selectPhoto,TResult? Function( _RemovePhoto value)?  removePhoto,TResult? Function( _ToggleSettings value)?  toggleSettings,TResult? Function( _SelectQuality value)?  selectQuality,TResult? Function( _SelectDuration value)?  selectDuration,TResult? Function( _StartGenerating value)?  startGenerating,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectPhoto value)?  selectPhoto,TResult? Function( _RemovePhoto value)?  removePhoto,TResult? Function( _SelectQuality value)?  selectQuality,TResult? Function( _SelectDuration value)?  selectDuration,TResult? Function( _StartGenerating value)?  startGenerating,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that);case _SelectPhoto() when selectPhoto != null:
 return selectPhoto(_that);case _RemovePhoto() when removePhoto != null:
-return removePhoto(_that);case _ToggleSettings() when toggleSettings != null:
-return toggleSettings(_that);case _SelectQuality() when selectQuality != null:
+return removePhoto(_that);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that);case _StartGenerating() when startGenerating != null:
 return startGenerating(_that);case _:
@@ -137,13 +134,12 @@ return startGenerating(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl)?  init,TResult Function( String path)?  selectPhoto,TResult Function()?  removePhoto,TResult Function( bool show)?  toggleSettings,TResult Function( String quality)?  selectQuality,TResult Function( String duration)?  selectDuration,TResult Function()?  startGenerating,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)?  init,TResult Function( String path)?  selectPhoto,TResult Function()?  removePhoto,TResult Function( String quality)?  selectQuality,TResult Function( String duration)?  selectDuration,TResult Function()?  startGenerating,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl);case _SelectPhoto() when selectPhoto != null:
+return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId);case _SelectPhoto() when selectPhoto != null:
 return selectPhoto(_that.path);case _RemovePhoto() when removePhoto != null:
-return removePhoto();case _ToggleSettings() when toggleSettings != null:
-return toggleSettings(_that.show);case _SelectQuality() when selectQuality != null:
+return removePhoto();case _SelectQuality() when selectQuality != null:
 return selectQuality(_that.quality);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that.duration);case _StartGenerating() when startGenerating != null:
 return startGenerating();case _:
@@ -164,13 +160,12 @@ return startGenerating();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl)  init,required TResult Function( String path)  selectPhoto,required TResult Function()  removePhoto,required TResult Function( bool show)  toggleSettings,required TResult Function( String quality)  selectQuality,required TResult Function( String duration)  selectDuration,required TResult Function()  startGenerating,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)  init,required TResult Function( String path)  selectPhoto,required TResult Function()  removePhoto,required TResult Function( String quality)  selectQuality,required TResult Function( String duration)  selectDuration,required TResult Function()  startGenerating,}) {final _that = this;
 switch (_that) {
 case _Init():
-return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl);case _SelectPhoto():
+return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId);case _SelectPhoto():
 return selectPhoto(_that.path);case _RemovePhoto():
-return removePhoto();case _ToggleSettings():
-return toggleSettings(_that.show);case _SelectQuality():
+return removePhoto();case _SelectQuality():
 return selectQuality(_that.quality);case _SelectDuration():
 return selectDuration(_that.duration);case _StartGenerating():
 return startGenerating();case _:
@@ -190,13 +185,12 @@ return startGenerating();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl)?  init,TResult? Function( String path)?  selectPhoto,TResult? Function()?  removePhoto,TResult? Function( bool show)?  toggleSettings,TResult? Function( String quality)?  selectQuality,TResult? Function( String duration)?  selectDuration,TResult? Function()?  startGenerating,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)?  init,TResult? Function( String path)?  selectPhoto,TResult? Function()?  removePhoto,TResult? Function( String quality)?  selectQuality,TResult? Function( String duration)?  selectDuration,TResult? Function()?  startGenerating,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl);case _SelectPhoto() when selectPhoto != null:
+return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId);case _SelectPhoto() when selectPhoto != null:
 return selectPhoto(_that.path);case _RemovePhoto() when removePhoto != null:
-return removePhoto();case _ToggleSettings() when toggleSettings != null:
-return toggleSettings(_that.show);case _SelectQuality() when selectQuality != null:
+return removePhoto();case _SelectQuality() when selectQuality != null:
 return selectQuality(_that.quality);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that.duration);case _StartGenerating() when startGenerating != null:
 return startGenerating();case _:
@@ -211,13 +205,15 @@ return startGenerating();case _:
 
 
 class _Init implements CreateFromTemplateEvent {
-  const _Init({required this.templateId, required this.title, required this.videoUrl, required this.imageUrl});
+  const _Init({required this.templateId, required this.title, required this.videoUrl, required this.imageUrl, required this.themeType, required this.themeOrgId});
   
 
  final  String templateId;
  final  String title;
  final  String videoUrl;
  final  String imageUrl;
+ final  String themeType;
+ final  int themeOrgId;
 
 /// Create a copy of CreateFromTemplateEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +225,16 @@ _$InitCopyWith<_Init> get copyWith => __$InitCopyWithImpl<_Init>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init&&(identical(other.templateId, templateId) || other.templateId == templateId)&&(identical(other.title, title) || other.title == title)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init&&(identical(other.templateId, templateId) || other.templateId == templateId)&&(identical(other.title, title) || other.title == title)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,templateId,title,videoUrl,imageUrl);
+int get hashCode => Object.hash(runtimeType,templateId,title,videoUrl,imageUrl,themeType,themeOrgId);
 
 @override
 String toString() {
-  return 'CreateFromTemplateEvent.init(templateId: $templateId, title: $title, videoUrl: $videoUrl, imageUrl: $imageUrl)';
+  return 'CreateFromTemplateEvent.init(templateId: $templateId, title: $title, videoUrl: $videoUrl, imageUrl: $imageUrl, themeType: $themeType, themeOrgId: $themeOrgId)';
 }
 
 
@@ -249,7 +245,7 @@ abstract mixin class _$InitCopyWith<$Res> implements $CreateFromTemplateEventCop
   factory _$InitCopyWith(_Init value, $Res Function(_Init) _then) = __$InitCopyWithImpl;
 @useResult
 $Res call({
- String templateId, String title, String videoUrl, String imageUrl
+ String templateId, String title, String videoUrl, String imageUrl, String themeType, int themeOrgId
 });
 
 
@@ -266,13 +262,15 @@ class __$InitCopyWithImpl<$Res>
 
 /// Create a copy of CreateFromTemplateEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? templateId = null,Object? title = null,Object? videoUrl = null,Object? imageUrl = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? templateId = null,Object? title = null,Object? videoUrl = null,Object? imageUrl = null,Object? themeType = null,Object? themeOrgId = null,}) {
   return _then(_Init(
 templateId: null == templateId ? _self.templateId : templateId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,videoUrl: null == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,
+as String,themeType: null == themeType ? _self.themeType : themeType // ignore: cast_nullable_to_non_nullable
+as String,themeOrgId: null == themeOrgId ? _self.themeOrgId : themeOrgId // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -376,72 +374,6 @@ String toString() {
 
 
 
-
-/// @nodoc
-
-
-class _ToggleSettings implements CreateFromTemplateEvent {
-  const _ToggleSettings(this.show);
-  
-
- final  bool show;
-
-/// Create a copy of CreateFromTemplateEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ToggleSettingsCopyWith<_ToggleSettings> get copyWith => __$ToggleSettingsCopyWithImpl<_ToggleSettings>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleSettings&&(identical(other.show, show) || other.show == show));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,show);
-
-@override
-String toString() {
-  return 'CreateFromTemplateEvent.toggleSettings(show: $show)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$ToggleSettingsCopyWith<$Res> implements $CreateFromTemplateEventCopyWith<$Res> {
-  factory _$ToggleSettingsCopyWith(_ToggleSettings value, $Res Function(_ToggleSettings) _then) = __$ToggleSettingsCopyWithImpl;
-@useResult
-$Res call({
- bool show
-});
-
-
-
-
-}
-/// @nodoc
-class __$ToggleSettingsCopyWithImpl<$Res>
-    implements _$ToggleSettingsCopyWith<$Res> {
-  __$ToggleSettingsCopyWithImpl(this._self, this._then);
-
-  final _ToggleSettings _self;
-  final $Res Function(_ToggleSettings) _then;
-
-/// Create a copy of CreateFromTemplateEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? show = null,}) {
-  return _then(_ToggleSettings(
-null == show ? _self.show : show // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-}
-
-
-}
 
 /// @nodoc
 

@@ -24,13 +24,13 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
   }) : super(const GeneratingState.initial()) {
     on<GeneratingEvent>((event, emit) async {
       await event.when(
-        startGenerating: (title, imageUrl) async {
+        startGenerating: (title, imageUrl, themeId, themeType, themeOrgId, isHd, isLongTime) async {
           emit(GeneratingState.generating(
             progress: 0.0,
             title: title,
             imageUrl: imageUrl,
           ));
-          LogUtils.d('GeneratingBloc: Start generating video for $title, image: $imageUrl');
+          LogUtils.d('GeneratingBloc: Start generating video for $title, image: $imageUrl, themeId: $themeId, themeType: $themeType, orgId: $themeOrgId, isHd: $isHd, isLongTime: $isLongTime');
 
           try {
             // 1. Upload image if it is local path
@@ -55,16 +55,24 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
               );
             }
 
-            // 2. Create TGV Request
+            // 2. Tạo Request sinh video TGV gửi lên API
             final request = CreateTgvRequestModel(
+              // CDN URL của bức ảnh đã upload thành công
               imageUrl: finalImageUrl,
+              // Tên của video tạo ra
               name: title,
-              prompt: title, // use title or custom prompt
-              themeId: '1',  // Default or template ID
-              isHd: false,
-              isLongTime: false,
-              themeType: 'TEMPLATE',
-              themeOrgId: 1,
+              // Mô tả prompt tạo chuyển động (ở đây sử dụng tiêu đề hoặc mô tả của template mẫu)
+              prompt: title,
+              // ID chủ đề / template dùng để tạo (themeId)
+              themeId: themeId,
+              // Cấu hình chất lượng cao (HD)
+              isHd: isHd,
+              // Cấu hình thời gian video dài (Long Time)
+              isLongTime: isLongTime,
+              // Phân loại chủ đề tạo video (Ví dụ: "TEMPLATE")
+              themeType: themeType,
+              // ID tổ chức quản lý của template này
+              themeOrgId: themeOrgId,
             );
 
             LogUtils.d('GeneratingBloc: Creating TGV request: $request');

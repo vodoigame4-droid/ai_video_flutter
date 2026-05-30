@@ -16,18 +16,36 @@ class GeneratingPage extends StatelessWidget {
 
   final String title;
   final String? imageUrl;
+  final String themeId;
+  final String themeType;
+  final int themeOrgId;
+  final bool isHd;
+  final bool isLongTime;
 
   const GeneratingPage({
     super.key,
     required this.title,
     this.imageUrl,
+    required this.themeId,
+    required this.themeType,
+    required this.themeOrgId,
+    required this.isHd,
+    required this.isLongTime,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<GeneratingBloc>()
-        ..add(GeneratingEvent.startGenerating(title: title, imageUrl: imageUrl)),
+        ..add(GeneratingEvent.startGenerating(
+          title: title,
+          imageUrl: imageUrl,
+          themeId: themeId,
+          themeType: themeType,
+          themeOrgId: themeOrgId,
+          isHd: isHd,
+          isLongTime: isLongTime,
+        )),
       child: const GeneratingView(),
     );
   }

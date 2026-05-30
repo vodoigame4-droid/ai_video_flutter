@@ -11,12 +11,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../core/widgets/gradient_border_container.dart';
+import '../../../../core/widgets/app_play_button.dart';
+import '../../../../core/widgets/app_heart_button.dart';
+import '../../../../core/widgets/app_loudspeaker_button.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
-import '../widgets/video_settings_card_widget.dart';
-import 'generating_page.dart';
+import 'create_template_settings_page.dart';
 
 class CreateFromTemplatePage extends StatefulWidget {
   static const String path = '/create-from-template';
@@ -26,6 +27,8 @@ class CreateFromTemplatePage extends StatefulWidget {
   final String title;
   final String videoUrl;
   final String imageUrl;
+  final String themeType;
+  final int themeOrgId;
 
   const CreateFromTemplatePage({
     super.key,
@@ -33,6 +36,8 @@ class CreateFromTemplatePage extends StatefulWidget {
     required this.title,
     required this.videoUrl,
     required this.imageUrl,
+    required this.themeType,
+    required this.themeOrgId,
   });
 
   @override
@@ -54,6 +59,8 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           title: widget.title,
           videoUrl: widget.videoUrl,
           imageUrl: widget.imageUrl,
+          themeType: widget.themeType,
+          themeOrgId: widget.themeOrgId,
         ),
       );
     _player = Player();
@@ -102,8 +109,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
 
   @override
   Widget build(BuildContext context) {
-    final t = context.t;
-
     return BlocProvider.value(
       value: _bloc,
       child: WillPopScope(
@@ -112,99 +117,61 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: SafeArea(
-              child: BlocListener<CreateFromTemplateBloc, CreateFromTemplateState>(
-                listener: (context, state) {
-                  state.mapOrNull(
-                    ready: (readyState) {
-                      if (readyState.isGenerating) {
-                        context.pushNamed(
-                          GeneratingPage.name,
-                          queryParameters: {
-                            'title': readyState.title,
-                            'imageUrl': readyState.selectedPhotoPath ?? '',
-                          },
-                        );
-                      }
+              child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (msg) => Center(
+                      child: Text(
+                        msg,
+                        style: context.appTheme.errorTextStyle,
+                      ),
+                    ),
+                    ready: (
+                      templateId,
+                      title,
+                      videoUrl,
+                      imageUrl,
+                      themeType,
+                      themeOrgId,
+                      selectedPhotoPath,
+                      quality,
+                      duration,
+                      isGenerating,
+                      isSuccess,
+                    ) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                        ),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 8),
+                            _buildHeader(context, title),
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    _buildTopCard(context, imageUrl),
+                                    const SizedBox(height: 16),
+                                    _buildBottomCard(context, selectedPhotoPath),
+                                    const SizedBox(height: 100),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            _buildContinueButton(context, selectedPhotoPath),
+                            const SizedBox(height: 24),
+                          ],
+                        ),
+                      );
                     },
                   );
                 },
-                child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
-                  builder: (context, state) {
-                    return state.when(
-                      initial: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      loading: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      error: (msg) => Center(
-                        child: Text(
-                          msg,
-                          style: context.appTheme.errorTextStyle,
-                        ),
-                      ),
-                      ready:
-                          (
-                            templateId,
-                            title,
-                            videoUrl,
-                            imageUrl,
-                            selectedPhotoPath,
-                            showSettings,
-                            quality,
-                            duration,
-                            isGenerating,
-                            isSuccess,
-                          ) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                              ),
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 8),
-                                  // Header Row
-                                  _buildHeader(context, title),
-                                  const SizedBox(height: 12),
-                                  // Main Editor Area
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        children: [
-                                          // Top card container
-                                          _buildTopCard(
-                                            context,
-                                            imageUrl,
-                                            selectedPhotoPath,
-                                            showSettings,
-                                          ),
-                                          const SizedBox(height: 16),
-                                          // Bottom card container (Uploader or Settings)
-                                          _buildBottomCard(
-                                            context,
-                                            selectedPhotoPath,
-                                            showSettings,
-                                            quality,
-                                            duration,
-                                          ),
-                                          const SizedBox(
-                                            height: 100,
-                                          ), // Spacing
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  // Bottom Action Button
-                                  _buildGenerateButton(
-                                    context,
-                                    selectedPhotoPath,
-                                  ),
-                                  const SizedBox(height: 24),
-                                ],
-                              ),
-                            );
-                          },
-                    );
-                  },
-                ),
               ),
             ),
           ),
@@ -217,7 +184,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Back Button
         Material(
           color: AppColors.white.withValues(alpha: 0.1),
           shape: const CircleBorder(),
@@ -239,29 +205,19 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             ),
           ),
         ),
-        // Title
         Expanded(
           child: Text(
             title,
-            style:
-                context.textTheme.titleMedium?.copyWith(
-                  color: AppColors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ) ??
-                const TextStyle(
-                  color: AppColors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-            textAlign: Alignment.center == Alignment.center
-                ? TextAlign.center
-                : TextAlign.left,
+            style: context.textTheme.titleMedium?.copyWith(
+              color: AppColors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        // Flag / Report Button
         Material(
           color: AppColors.white.withValues(alpha: 0.1),
           shape: const CircleBorder(),
@@ -283,12 +239,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  Widget _buildTopCard(
-    BuildContext context,
-    String defaultImageUrl,
-    String? selectedPhotoPath,
-    bool showSettings,
-  ) {
+  Widget _buildTopCard(BuildContext context, String defaultImageUrl) {
     final t = context.t;
 
     return Container(
@@ -303,432 +254,240 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            if (!showSettings) ...[
-              // Video Player for Template
-              Positioned.fill(
-                child: Video(
-                  controller: _videoController,
-                  fill: AppColors.black,
-                  fit: BoxFit.cover,
-                  controls: NoVideoControls,
-                ),
+            Positioned.fill(
+              child: Video(
+                controller: _videoController,
+                fill: AppColors.black,
+                fit: BoxFit.cover,
+                controls: NoVideoControls,
               ),
-              // Loudspeaker Mute/Unmute at Top-Left
-              Positioned(
-                top: 10,
-                left: 10,
-                child: StreamBuilder<double>(
-                  stream: _player.stream.volume,
-                  builder: (context, snapshot) {
-                    final volume = snapshot.data ?? 100.0;
-                    final isMuted = volume == 0.0;
-                    return ClipOval(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                        child: Material(
-                          color: AppColors.black.withValues(alpha: 0.1),
-                          child: InkWell(
-                            onTap: () {
-                              _player.setVolume(isMuted ? 100.0 : 0.0);
-                            },
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            child: SizedBox(
-                              width: 42,
-                              height: 42,
-                              child: Icon(
-                                isMuted
-                                    ? Icons.volume_off_rounded
-                                    : Icons.volume_up_rounded,
-                                color: AppColors.white,
-                                size: 22,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              // Play/Pause icon overlay (visible when paused)
-              StreamBuilder<bool>(
-                stream: _player.stream.playing,
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: StreamBuilder<double>(
+                stream: _player.stream.volume,
                 builder: (context, snapshot) {
-                  final isPlaying = snapshot.data ?? true;
-                  if (isPlaying) return const SizedBox.shrink();
-                  return GestureDetector(
-                    onTap: () => _player.play(),
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.black.withValues(alpha: 0.25),
-                      ),
-                      child: const Icon(
-                        Icons.play_arrow_rounded,
-                        color: AppColors.white,
-                        size: 40,
-                      ),
-                    ),
+                  final volume = snapshot.data ?? 100.0;
+                  final isMuted = volume == 0.0;
+                  return AppLoudspeakerButton(
+                    isMuted: isMuted,
+                    onTap: () => _player.setVolume(isMuted ? 100.0 : 0.0),
                   );
                 },
               ),
-              // Bottom caption overlay
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: 88,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        AppColors.black.withValues(alpha: 0.8),
-                        AppColors.black.withValues(alpha: 0.0),
-                      ],
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      // Spark icon
-                      const Icon(
-                        Icons.auto_awesome_rounded,
-                        color: AppColors.white,
-                        size: 24,
-                      ),
-                      const SizedBox(width: 16),
-                      // Text Description
-                      Expanded(
-                        child: Text(
-                          t
-                              .create
-                              .tap_upload, // Upload your photo and create...
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: AppColors.white,
-                            fontSize: 16,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      // Info Button to open Tips
-                      Material(
-                        color: Colors.transparent,
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () => _showTipsBottomSheet(context),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: const SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: Icon(
-                              Icons.info_outline_rounded,
-                              color: AppColors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ),
+            ),
+            StreamBuilder<bool>(
+              stream: _player.stream.playing,
+              builder: (context, snapshot) {
+                final isPlaying = snapshot.data ?? true;
+                if (isPlaying) return const SizedBox.shrink();
+                return AppPlayButton(
+                  isPlaying: isPlaying,
+                  onTap: () => _player.play(),
+                );
+              },
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 88,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      AppColors.black.withValues(alpha: 0.8),
+                      AppColors.black.withValues(alpha: 0.0),
                     ],
                   ),
                 ),
-              ),
-              // Bottom-Right Heart Likes overlay
-              Positioned(
-                bottom: 88,
-                right: 16,
-                child: Column(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
                   children: [
-                    ClipOval(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                        child: Material(
-                          color: AppColors.black.withValues(alpha: 0.1),
-                          child: const SizedBox(
-                            width: 42,
-                            height: 42,
-                            child: Icon(
-                              Icons.favorite_rounded,
-                              color: AppColors.heart,
-                              size: 20,
-                            ),
-                          ),
+                    const Icon(
+                      Icons.auto_awesome_rounded,
+                      color: AppColors.white,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        t.create.tap_upload,
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: AppColors.white,
+                          fontSize: 16,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    const Text(
-                      "11.0K",
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
+                    const SizedBox(width: 8),
+                    Material(
+                      color: Colors.transparent,
+                      shape: const CircleBorder(),
+                      child: InkWell(
+                        onTap: () => _showTipsBottomSheet(context),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(100),
+                        ),
+                        child: const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: Icon(
+                            Icons.info_outline_rounded,
+                            color: AppColors.white,
+                            size: 20,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ] else ...[
-              // Settings View: Displays the selected photo
-              Positioned.fill(
-                child: selectedPhotoPath != null
-                    ? (selectedPhotoPath.startsWith('assets/')
-                          ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                          : Image.file(
-                              File(selectedPhotoPath),
-                              fit: BoxFit.cover,
-                            ))
-                    : const Icon(
-                        Icons.image,
-                        size: 80,
-                        color: AppColors.subText,
-                      ),
-              ),
-              // Top-Left Settings Toggle (Show Template back button)
-              Positioned(
-                top: 10,
-                left: 10,
-                child: ClipOval(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                    child: Material(
-                      color: AppColors.black.withValues(alpha: 0.2),
-                      child: InkWell(
-                        onTap: () => _bloc.add(
-                          const CreateFromTemplateEvent.toggleSettings(false),
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(100),
-                        ),
-                        child: const SizedBox(
-                          width: 42,
-                          height: 42,
-                          child: Icon(
-                            Icons.visibility_rounded, // Show Template
-                            color: AppColors.white,
-                            size: 22,
-                          ),
-                        ),
-                      ),
+            ),
+            Positioned(
+              bottom: 88,
+              right: 16,
+              child: Column(
+                children: [
+                  AppHeartButton(
+                    isLiked: true,
+                    onTap: () {
+                      // Handle like/unlike template logic if needed
+                    },
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    "11.0K",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
-                ),
+                ],
               ),
-              // Bottom Overlay caption
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: 88,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        AppColors.black.withValues(alpha: 0.8),
-                        AppColors.black.withValues(alpha: 0.0),
-                      ],
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.auto_awesome_rounded,
-                        color: AppColors.white,
-                        size: 24,
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(
-                          "Choose video quality and duration before generating.",
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: AppColors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBottomCard(
-    BuildContext context,
-    String? selectedPhotoPath,
-    bool showSettings,
-    String quality,
-    String duration,
-  ) {
+  Widget _buildBottomCard(BuildContext context, String? selectedPhotoPath) {
     final t = context.t;
 
-    if (!showSettings) {
-      // Photo Upload Area
-      return GestureDetector(
-        onTap: () => _showUploadBottomSheet(context),
-        child: Container(
-          height: 152,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColors.onSurface,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (selectedPhotoPath != null) ...[
-                  // Photo preview centered
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        width: 132,
-                        height: 152,
-                        child: selectedPhotoPath.startsWith('assets/')
-                            ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                            : Image.file(
-                                File(selectedPhotoPath),
-                                fit: BoxFit.cover,
-                              ),
-                      ),
+    return GestureDetector(
+      onTap: () => _showUploadBottomSheet(context),
+      child: Container(
+        height: 152,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.onSurface,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (selectedPhotoPath != null) ...[
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      width: 132,
+                      height: 152,
+                      child: selectedPhotoPath.startsWith('assets/')
+                          ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
+                          : Image.file(
+                              File(selectedPhotoPath),
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
-                  // Glassmorphic Close/Remove Button matching Figma node 106:295
-                  Positioned(
-                    top: 14,
-                    right: 14,
-                    child: ClipOval(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                        child: Material(
-                          color: const Color(
-                            0x99979797,
-                          ), // rgba(151, 151, 151, 0.6)
-                          child: InkWell(
-                            onTap: () => _bloc.add(
-                              const CreateFromTemplateEvent.removePhoto(),
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            child: const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: Icon(
-                                Icons.close_rounded,
-                                color: AppColors.white,
-                                size: 12,
-                              ),
+                ),
+                Positioned(
+                  top: 14,
+                  right: 14,
+                  child: ClipOval(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                      child: Material(
+                        color: const Color(0x99979797),
+                        child: InkWell(
+                          onTap: () => _bloc.add(
+                            const CreateFromTemplateEvent.removePhoto(),
+                          ),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          child: const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Icon(
+                              Icons.close_rounded,
+                              color: AppColors.white,
+                              size: 12,
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  // Toggle to settings view button at top-left
-                  Positioned(
-                    top: 14,
-                    left: 14,
-                    child: ClipOval(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                        child: Material(
-                          color: const Color(0x99979797),
-                          child: InkWell(
-                            onTap: () => _bloc.add(
-                              const CreateFromTemplateEvent.toggleSettings(
-                                true,
-                              ),
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            child: const SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: Icon(
-                                Icons.settings_rounded,
-                                color: AppColors.white,
-                                size: 16,
-                              ),
-                            ),
+                ),
+              ] else ...[
+                Container(
+                  width: double.infinity,
+                  height: 152,
+                  decoration: BoxDecoration(
+                    color: AppColors.background,
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/ic_image_add.svg',
+                          width: 40,
+                          height: 40,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          t.create.tap_upload,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: AppColors.subText,
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ] else ...[
-                  // Dotted Upload Placeholder Card conforming to 106-239
-                  Container(
-                    width: double.infinity,
-                    height: 152,
-                    decoration: BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/ic_image_add.svg',
-                            width: 40,
-                            height: 40,
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            t.create.tap_upload,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: AppColors.subText,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ],
-            ),
+            ],
           ),
         ),
-      );
-    } else {
-      // Settings View
-      return VideoSettingsCardWidget(
-        selectedQuality: quality,
-        selectedDuration: duration,
-        onQualityChanged: (q) =>
-            _bloc.add(CreateFromTemplateEvent.selectQuality(q)),
-        onDurationChanged: (d) =>
-            _bloc.add(CreateFromTemplateEvent.selectDuration(d)),
-      );
-    }
+      ),
+    );
   }
 
-  Widget _buildGenerateButton(BuildContext context, String? selectedPhotoPath) {
+  Widget _buildContinueButton(BuildContext context, String? selectedPhotoPath) {
     final t = context.t;
     final isEnabled = selectedPhotoPath != null;
 
     return InkWell(
-      onTap: isEnabled ? () => _showPrivacyDialog(context) : null,
+      onTap: isEnabled
+          ? () {
+              context.pushNamed(
+                CreateTemplateSettingsPage.name,
+                extra: _bloc,
+              );
+            }
+          : null,
       borderRadius: const BorderRadius.all(Radius.circular(100)),
       child: Ink(
         height: 56,
@@ -741,15 +500,8 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Sparkle icon
-              Icon(
-                Icons.auto_awesome_rounded,
-                color: isEnabled ? AppColors.white : AppColors.subText,
-                size: 24,
-              ),
-              const SizedBox(width: 8),
               Text(
-                t.common.generate,
+                t.onboarding.page2.button, // "Continue" translated text
                 style: context.textTheme.labelLarge?.copyWith(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -763,116 +515,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  // Dialog 1: Privacy Confirmation
-  void _showPrivacyDialog(BuildContext context) {
-    final t = context.t;
-    showDialog(
-      context: context,
-      barrierColor: AppColors.black.withValues(alpha: 0.5),
-      builder: (context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: Dialog(
-            backgroundColor: AppColors.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              side: BorderSide(color: AppColors.secondary, width: 1.2),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    t.privacy_dialog.title,
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    t.privacy_dialog.desc,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.subText,
-                      fontSize: 15,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Text(
-                              t.privacy_dialog.cancel,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                            _bloc.add(
-                              const CreateFromTemplateEvent.startGenerating(),
-                            );
-                          },
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Ink(
-                            height: 48,
-                            decoration: const BoxDecoration(
-                              gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                t.privacy_dialog.confirm,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  // Dialog 2: Report Dialog
   void _showReportDialog(BuildContext context) {
     final t = context.t;
     showDialog(
@@ -984,7 +626,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  // Dialog 3: Leave Dialog
   Future<bool?> _showLeaveDialog(BuildContext context) {
     final t = context.t;
     return showDialog<bool>(
@@ -1088,7 +729,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  // Bottom Sheet 1: Select Upload Media
   void _showUploadBottomSheet(BuildContext context) {
     final t = context.t;
     showModalBottomSheet(
@@ -1107,7 +747,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Title and Close Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -1129,7 +768,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                // Camera Button
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -1164,7 +802,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                // Gallery Button
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -1206,7 +843,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  // Mock Picker triggered after selecting Camera/Gallery
   void _showMockPicker(BuildContext context) {
     final t = context.t;
     final mockAssets = [
@@ -1318,7 +954,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  // Bottom Sheet 2: Tips for best results
   void _showTipsBottomSheet(BuildContext context) {
     final t = context.t;
     final goodMockPhotos = [
@@ -1352,7 +987,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title Row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1374,7 +1008,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  // Yes photos header
                   Row(
                     children: [
                       const Icon(
@@ -1394,7 +1027,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  // Yes photos cards list
                   Row(
                     children: List.generate(goodMockPhotos.length, (idx) {
                       final path = goodMockPhotos[idx];
@@ -1442,7 +1074,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     }),
                   ),
                   const SizedBox(height: 24),
-                  // No photos header
                   Row(
                     children: [
                       const Icon(
@@ -1462,7 +1093,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  // No photos cards list
                   Row(
                     children: List.generate(badMockPhotos.length, (idx) {
                       final path = badMockPhotos[idx];
@@ -1510,7 +1140,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     }),
                   ),
                   const SizedBox(height: 32),
-                  // I got it button
                   InkWell(
                     onTap: () => Navigator.pop(context),
                     borderRadius: const BorderRadius.all(Radius.circular(100)),

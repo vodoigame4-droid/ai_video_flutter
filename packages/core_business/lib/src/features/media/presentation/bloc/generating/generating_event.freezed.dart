@@ -125,10 +125,10 @@ return notifyComplete(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String title,  String? imageUrl)?  startGenerating,TResult Function()?  tickProgress,TResult Function()?  notifyComplete,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String title,  String? imageUrl,  String themeId,  String themeType,  int themeOrgId,  bool isHd,  bool isLongTime)?  startGenerating,TResult Function()?  tickProgress,TResult Function()?  notifyComplete,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _StartGenerating() when startGenerating != null:
-return startGenerating(_that.title,_that.imageUrl);case _TickProgress() when tickProgress != null:
+return startGenerating(_that.title,_that.imageUrl,_that.themeId,_that.themeType,_that.themeOrgId,_that.isHd,_that.isLongTime);case _TickProgress() when tickProgress != null:
 return tickProgress();case _NotifyComplete() when notifyComplete != null:
 return notifyComplete();case _:
   return orElse();
@@ -148,10 +148,10 @@ return notifyComplete();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String title,  String? imageUrl)  startGenerating,required TResult Function()  tickProgress,required TResult Function()  notifyComplete,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String title,  String? imageUrl,  String themeId,  String themeType,  int themeOrgId,  bool isHd,  bool isLongTime)  startGenerating,required TResult Function()  tickProgress,required TResult Function()  notifyComplete,}) {final _that = this;
 switch (_that) {
 case _StartGenerating():
-return startGenerating(_that.title,_that.imageUrl);case _TickProgress():
+return startGenerating(_that.title,_that.imageUrl,_that.themeId,_that.themeType,_that.themeOrgId,_that.isHd,_that.isLongTime);case _TickProgress():
 return tickProgress();case _NotifyComplete():
 return notifyComplete();case _:
   throw StateError('Unexpected subclass');
@@ -170,10 +170,10 @@ return notifyComplete();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String title,  String? imageUrl)?  startGenerating,TResult? Function()?  tickProgress,TResult? Function()?  notifyComplete,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String title,  String? imageUrl,  String themeId,  String themeType,  int themeOrgId,  bool isHd,  bool isLongTime)?  startGenerating,TResult? Function()?  tickProgress,TResult? Function()?  notifyComplete,}) {final _that = this;
 switch (_that) {
 case _StartGenerating() when startGenerating != null:
-return startGenerating(_that.title,_that.imageUrl);case _TickProgress() when tickProgress != null:
+return startGenerating(_that.title,_that.imageUrl,_that.themeId,_that.themeType,_that.themeOrgId,_that.isHd,_that.isLongTime);case _TickProgress() when tickProgress != null:
 return tickProgress();case _NotifyComplete() when notifyComplete != null:
 return notifyComplete();case _:
   return null;
@@ -187,11 +187,16 @@ return notifyComplete();case _:
 
 
 class _StartGenerating implements GeneratingEvent {
-  const _StartGenerating({required this.title, required this.imageUrl});
+  const _StartGenerating({required this.title, required this.imageUrl, this.themeId = '1', this.themeType = 'TEMPLATE', this.themeOrgId = 1, this.isHd = false, this.isLongTime = false});
   
 
  final  String title;
  final  String? imageUrl;
+@JsonKey() final  String themeId;
+@JsonKey() final  String themeType;
+@JsonKey() final  int themeOrgId;
+@JsonKey() final  bool isHd;
+@JsonKey() final  bool isLongTime;
 
 /// Create a copy of GeneratingEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -203,16 +208,16 @@ _$StartGeneratingCopyWith<_StartGenerating> get copyWith => __$StartGeneratingCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartGenerating&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartGenerating&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.themeId, themeId) || other.themeId == themeId)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId)&&(identical(other.isHd, isHd) || other.isHd == isHd)&&(identical(other.isLongTime, isLongTime) || other.isLongTime == isLongTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,imageUrl);
+int get hashCode => Object.hash(runtimeType,title,imageUrl,themeId,themeType,themeOrgId,isHd,isLongTime);
 
 @override
 String toString() {
-  return 'GeneratingEvent.startGenerating(title: $title, imageUrl: $imageUrl)';
+  return 'GeneratingEvent.startGenerating(title: $title, imageUrl: $imageUrl, themeId: $themeId, themeType: $themeType, themeOrgId: $themeOrgId, isHd: $isHd, isLongTime: $isLongTime)';
 }
 
 
@@ -223,7 +228,7 @@ abstract mixin class _$StartGeneratingCopyWith<$Res> implements $GeneratingEvent
   factory _$StartGeneratingCopyWith(_StartGenerating value, $Res Function(_StartGenerating) _then) = __$StartGeneratingCopyWithImpl;
 @useResult
 $Res call({
- String title, String? imageUrl
+ String title, String? imageUrl, String themeId, String themeType, int themeOrgId, bool isHd, bool isLongTime
 });
 
 
@@ -240,11 +245,16 @@ class __$StartGeneratingCopyWithImpl<$Res>
 
 /// Create a copy of GeneratingEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? title = null,Object? imageUrl = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? title = null,Object? imageUrl = freezed,Object? themeId = null,Object? themeType = null,Object? themeOrgId = null,Object? isHd = null,Object? isLongTime = null,}) {
   return _then(_StartGenerating(
 title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: freezed == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,themeId: null == themeId ? _self.themeId : themeId // ignore: cast_nullable_to_non_nullable
+as String,themeType: null == themeType ? _self.themeType : themeType // ignore: cast_nullable_to_non_nullable
+as String,themeOrgId: null == themeOrgId ? _self.themeOrgId : themeOrgId // ignore: cast_nullable_to_non_nullable
+as int,isHd: null == isHd ? _self.isHd : isHd // ignore: cast_nullable_to_non_nullable
+as bool,isLongTime: null == isLongTime ? _self.isLongTime : isLongTime // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

@@ -7,7 +7,7 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
   CreateFromTemplateBloc() : super(const CreateFromTemplateState.initial()) {
     on<CreateFromTemplateEvent>((event, emit) async {
       await event.when(
-        init: (templateId, title, videoUrl, imageUrl) async {
+        init: (templateId, title, videoUrl, imageUrl, themeType, themeOrgId) async {
           LogUtils.d("Initializing CreateFromTemplateBloc for template: $title");
           emit(const CreateFromTemplateState.loading());
           await Future.delayed(const Duration(milliseconds: 100));
@@ -17,8 +17,9 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
             title: title,
             videoUrl: videoUrl,
             imageUrl: imageUrl,
+            themeType: themeType,
+            themeOrgId: themeOrgId,
             selectedPhotoPath: null,
-            showSettings: false,
             quality: 'Full HD',
             duration: '5s',
             isGenerating: false,
@@ -41,17 +42,6 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
               LogUtils.d("Template Editor: Removed Photo");
               emit(readyState.copyWith(
                 selectedPhotoPath: null,
-                isSuccess: false,
-              ));
-            },
-          );
-        },
-        toggleSettings: (show) {
-          state.mapOrNull(
-            ready: (readyState) {
-              LogUtils.d("Template Editor: Toggle settings view: $show");
-              emit(readyState.copyWith(
-                showSettings: show,
                 isSuccess: false,
               ));
             },
