@@ -12,7 +12,7 @@ void main() {
 
   setUp(() {
     mockPrefs = MockSharedPreferences();
-    when(() => mockPrefs.getString('selected_locale')).thenReturn(null);
+    when(() => mockPrefs.getString(StorageKeys.selectedLocale)).thenReturn(null);
     when(() => mockPrefs.setString(any(), any())).thenAnswer((_) async => true);
     
     settingsBloc = SettingsBloc(
@@ -39,14 +39,14 @@ void main() {
         const SettingsState.ready(currentLanguageCode: 'en'),
       ],
       verify: (_) {
-        verify(() => mockPrefs.getString('selected_locale')).called(1);
+        verify(() => mockPrefs.getString(StorageKeys.selectedLocale)).called(1);
       },
     );
 
     blocTest<SettingsBloc, SettingsState>(
       'emits [loading, ready] with saved locale on init when saved locale exists',
       setUp: () {
-        when(() => mockPrefs.getString('selected_locale')).thenReturn('vi');
+        when(() => mockPrefs.getString(StorageKeys.selectedLocale)).thenReturn('vi');
       },
       build: () => settingsBloc,
       act: (bloc) => bloc.add(const SettingsEvent.init()),
@@ -65,7 +65,7 @@ void main() {
         const SettingsState.ready(currentLanguageCode: 'vi'),
       ],
       verify: (_) {
-        verify(() => mockPrefs.setString('selected_locale', 'vi')).called(1);
+        verify(() => mockPrefs.setString(StorageKeys.selectedLocale, 'vi')).called(1);
       },
     );
   });

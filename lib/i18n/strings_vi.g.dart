@@ -350,6 +350,7 @@ class _Translations$generating$vi extends Translations$generating$en {
 	@override String get desc => 'Quá trình này có thể mất vài phút.\nVui lòng đợi...';
 	@override String get notify_me => 'Thông báo cho tôi khi hoàn tất';
 	@override String get notified => 'Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!';
+	@override String get notification_denied => 'Quyền thông báo bị từ chối. Vui lòng bật lại trong Cài đặt.';
 }
 
 // Path: result
@@ -653,6 +654,7 @@ extension on TranslationsVi {
 			'generating.desc' => 'Quá trình này có thể mất vài phút.\nVui lòng đợi...',
 			'generating.notify_me' => 'Thông báo cho tôi khi hoàn tất',
 			'generating.notified' => 'Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!',
+			'generating.notification_denied' => 'Quyền thông báo bị từ chối. Vui lòng bật lại trong Cài đặt.',
 			'result.title' => 'Video kết quả',
 			'result.ready_message' => ({required Object title}) => 'Video ${title} của bạn đã sẵn sàng!',
 			'result.regenerate' => 'Tạo lại',

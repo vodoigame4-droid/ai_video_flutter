@@ -169,5 +169,11 @@
 			<string>8s468mfl3y.skadnetwork</string>
 		</dict>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to your photo library to select and upload photos for AI video generation.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to your camera to capture and upload photos for AI video generation.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires access to your microphone when capturing videos for AI video generation.</string>
 </dict>
 </plist>

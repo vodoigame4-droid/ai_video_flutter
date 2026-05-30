@@ -204,7 +204,8 @@
     "your_video": "your video",
     "desc": "This may take a few minutes.\nPlease wait...",
     "notify_me": "Notify me when complete",
-    "notified": "We will notify you when your video is ready!"
+    "notified": "We will notify you when your video is ready!",
+    "notification_denied": "Notification permission denied. Please enable it in Settings."
   },
   "result": {
     "title": "Result Video",

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92781845692",
+    "project_id": "aivideo-tgv",
+    "storage_bucket": "aivideo-tgv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92781845692:android:0fb9f12f96356aa2a084b9",
+        "android_client_info": {
+          "package_name": "com.tgv.aivideo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuJRyxMqT9PlLV1wruJ64vsD7aI2WzrBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

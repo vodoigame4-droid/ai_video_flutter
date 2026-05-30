@@ -8,11 +8,13 @@ import '../../../domain/usecases/get_media_detail_usecase.dart';
 import '../../../data/models/media_models.dart';
 import 'generating_event.dart';
 import 'generating_state.dart';
+import '../../../domain/repositories/notification_repository.dart';
 
 class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
   final UploadImageUseCase uploadImageUseCase;
   final CreateTgvUseCase createTgvUseCase;
   final GetMediaDetailUseCase getMediaDetailUseCase;
+  final NotificationRepository notificationRepository;
   Timer? _timer;
   String? _mediaId;
   double _mockProgress = 0.0;
@@ -21,6 +23,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
     required this.uploadImageUseCase,
     required this.createTgvUseCase,
     required this.getMediaDetailUseCase,
+    required this.notificationRepository,
   }) : super(const GeneratingState.initial()) {
     on<GeneratingEvent>((event, emit) async {
       await event.when(
@@ -173,9 +176,14 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
           );
         },
         notifyComplete: () async {
+          final isGranted = await notificationRepository.requestPermission();
+          if (isGranted && _mediaId != null) {
+            // Đăng ký FCM Topic nhận thông báo khi video này sinh xong
+            await notificationRepository.subscribeToTopic('aivideo_generation_$_mediaId');
+          }
           _timer?.cancel();
           _timer = null;
-          emit(const GeneratingState.notifiedAndExited());
+          emit(GeneratingState.notifiedAndExited(isPermissionGranted: isGranted));
         },
       );
     });

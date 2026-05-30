@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -14,6 +15,7 @@ import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
+import '../widgets/upload_bottom_sheet_widget.dart';
 import 'create_template_settings_page.dart';
 
 class CreateFromTemplatePage extends StatefulWidget {
@@ -690,227 +692,31 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  void _showUploadBottomSheet(BuildContext context) {
-    final t = context.t;
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.onSurface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 24.0,
-              horizontal: 16.0,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      t.create.select_upload_title,
-                      style: context.textTheme.titleMedium?.copyWith(
-                        color: AppColors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.close_rounded,
-                        color: AppColors.white,
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    _showMockPicker(context);
-                  },
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  child: Container(
-                    height: 56,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: AppColors.white.withValues(alpha: 0.08),
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.camera_alt_outlined,
-                          color: AppColors.white,
-                          size: 24,
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          t.common.camera,
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    _showMockPicker(context);
-                  },
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  child: Container(
-                    height: 56,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: AppColors.white.withValues(alpha: 0.08),
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.image_outlined,
-                          color: AppColors.white,
-                          size: 24,
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          t.common.gallery,
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: source);
+      if (image != null) {
+        _bloc.add(CreateFromTemplateEvent.selectPhoto(image.path));
+      }
+    } catch (e, stack) {
+      LogUtils.e(
+        'CreateFromTemplatePage: Error picking image',
+        error: e,
+        stackTrace: stack,
+      );
+    }
   }
 
-  void _showMockPicker(BuildContext context) {
-    final t = context.t;
-    final mockAssets = [
-      Assets.images.ob1.path,
-      Assets.images.ob2.path,
-      Assets.images.ob3.path,
-      Assets.images.ob4.path,
-      Assets.images.ob5.path,
-      Assets.images.card1.path,
-      Assets.images.card2.path,
-    ];
-
+  void _showUploadBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.onSurface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
       builder: (context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 24.0,
-              horizontal: 16.0,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  t.create.select_mock_media,
-                  style: context.textTheme.titleMedium?.copyWith(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  t.create.select_media_desc,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: AppColors.subText,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 120,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: mockAssets.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: 12),
-                    itemBuilder: (context, index) {
-                      final path = mockAssets[index];
-                      final name = path
-                          .split('/')
-                          .last
-                          .split('.')
-                          .first
-                          .toUpperCase();
-                      return GestureDetector(
-                        onTap: () {
-                          _bloc.add(CreateFromTemplateEvent.selectPhoto(path));
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                            border: Border.all(color: AppColors.lightBorder),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(11),
-                            ),
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                Image.asset(path, fit: BoxFit.cover),
-                                Container(
-                                  color: AppColors.black.withValues(alpha: 0.3),
-                                  alignment: Alignment.bottomCenter,
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text(
-                                    name,
-                                    style: const TextStyle(
-                                      color: AppColors.white,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+        return UploadBottomSheetWidget(onImageSourceSelected: _pickImage);
       },
     );
   }

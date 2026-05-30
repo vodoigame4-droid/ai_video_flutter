@@ -75,10 +75,13 @@ class GeneratingView extends StatelessWidget {
                 replace: true,
               );
             },
-            notifiedAndExited: (_) {
+            notifiedAndExited: (state) {
+              final message = state.isPermissionGranted
+                  ? t.generating.notified
+                  : t.generating.notification_denied;
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(t.generating.notified),
+                  content: Text(message),
                   duration: const Duration(seconds: 2),
                 ),
               );

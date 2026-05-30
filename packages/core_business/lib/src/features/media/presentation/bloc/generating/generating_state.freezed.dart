@@ -128,13 +128,13 @@ return notifiedAndExited(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( double progress,  String title,  String? imageUrl)?  generating,TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  success,TResult Function()?  notifiedAndExited,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( double progress,  String title,  String? imageUrl)?  generating,TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  success,TResult Function( bool isPermissionGranted)?  notifiedAndExited,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Generating() when generating != null:
 return generating(_that.progress,_that.title,_that.imageUrl);case _Success() when success != null:
 return success(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _NotifiedAndExited() when notifiedAndExited != null:
-return notifiedAndExited();case _:
+return notifiedAndExited(_that.isPermissionGranted);case _:
   return orElse();
 
 }
@@ -152,13 +152,13 @@ return notifiedAndExited();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( double progress,  String title,  String? imageUrl)  generating,required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)  success,required TResult Function()  notifiedAndExited,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( double progress,  String title,  String? imageUrl)  generating,required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)  success,required TResult Function( bool isPermissionGranted)  notifiedAndExited,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Generating():
 return generating(_that.progress,_that.title,_that.imageUrl);case _Success():
 return success(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _NotifiedAndExited():
-return notifiedAndExited();case _:
+return notifiedAndExited(_that.isPermissionGranted);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +175,13 @@ return notifiedAndExited();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( double progress,  String title,  String? imageUrl)?  generating,TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  success,TResult? Function()?  notifiedAndExited,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( double progress,  String title,  String? imageUrl)?  generating,TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  success,TResult? Function( bool isPermissionGranted)?  notifiedAndExited,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Generating() when generating != null:
 return generating(_that.progress,_that.title,_that.imageUrl);case _Success() when success != null:
 return success(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _NotifiedAndExited() when notifiedAndExited != null:
-return notifiedAndExited();case _:
+return notifiedAndExited(_that.isPermissionGranted);case _:
   return null;
 
 }
@@ -369,32 +369,66 @@ as String,
 
 
 class _NotifiedAndExited implements GeneratingState {
-  const _NotifiedAndExited();
+  const _NotifiedAndExited({required this.isPermissionGranted});
   
 
+ final  bool isPermissionGranted;
 
-
+/// Create a copy of GeneratingState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$NotifiedAndExitedCopyWith<_NotifiedAndExited> get copyWith => __$NotifiedAndExitedCopyWithImpl<_NotifiedAndExited>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotifiedAndExited);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotifiedAndExited&&(identical(other.isPermissionGranted, isPermissionGranted) || other.isPermissionGranted == isPermissionGranted));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,isPermissionGranted);
 
 @override
 String toString() {
-  return 'GeneratingState.notifiedAndExited()';
+  return 'GeneratingState.notifiedAndExited(isPermissionGranted: $isPermissionGranted)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$NotifiedAndExitedCopyWith<$Res> implements $GeneratingStateCopyWith<$Res> {
+  factory _$NotifiedAndExitedCopyWith(_NotifiedAndExited value, $Res Function(_NotifiedAndExited) _then) = __$NotifiedAndExitedCopyWithImpl;
+@useResult
+$Res call({
+ bool isPermissionGranted
+});
 
 
+
+
+}
+/// @nodoc
+class __$NotifiedAndExitedCopyWithImpl<$Res>
+    implements _$NotifiedAndExitedCopyWith<$Res> {
+  __$NotifiedAndExitedCopyWithImpl(this._self, this._then);
+
+  final _NotifiedAndExited _self;
+  final $Res Function(_NotifiedAndExited) _then;
+
+/// Create a copy of GeneratingState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? isPermissionGranted = null,}) {
+  return _then(_NotifiedAndExited(
+isPermissionGranted: null == isPermissionGranted ? _self.isPermissionGranted : isPermissionGranted // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 // dart format on

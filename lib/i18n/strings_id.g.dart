@@ -335,6 +335,7 @@ class _Translations$generating$id extends Translations$generating$en {
 	@override String get desc => 'Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...';
 	@override String get notify_me => 'Beritahu saya saat selesai';
 	@override String get notified => 'Kami akan memberi tahu Anda saat video Anda siap!';
+	@override String get notification_denied => 'Izin notifikasi ditolak. Silakan aktifkan di Pengaturan.';
 }
 
 // Path: result
@@ -633,6 +634,7 @@ extension on TranslationsId {
 			'generating.desc' => 'Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...',
 			'generating.notify_me' => 'Beritahu saya saat selesai',
 			'generating.notified' => 'Kami akan memberi tahu Anda saat video Anda siap!',
+			'generating.notification_denied' => 'Izin notifikasi ditolak. Silakan aktifkan di Pengaturan.',
 			'result.title' => 'Video Hasil',
 			'result.ready_message' => ({required Object title}) => 'Video ${title} Anda sudah siap!',
 			'result.regenerate' => 'Buat ulang',

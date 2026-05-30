@@ -335,6 +335,7 @@ class _Translations$generating$ja extends Translations$generating$en {
 	@override String get desc => '数分かかる場合があります。\n少々お待ちください...';
 	@override String get notify_me => '完了時に通知する';
 	@override String get notified => '動画の準備ができたら通知します！';
+	@override String get notification_denied => '通知権限が拒否されました。設定で有効にしてください。';
 }
 
 // Path: result
@@ -633,6 +634,7 @@ extension on TranslationsJa {
 			'generating.desc' => '数分かかる場合があります。\n少々お待ちください...',
 			'generating.notify_me' => '完了時に通知する',
 			'generating.notified' => '動画の準備ができたら通知します！',
+			'generating.notification_denied' => '通知権限が拒否されました。設定で有効にしてください。',
 			'result.title' => '作成された動画',
 			'result.ready_message' => ({required Object title}) => '「${title}」の動画の準備ができました！',
 			'result.regenerate' => '再生成する',

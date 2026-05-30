@@ -655,6 +655,9 @@ class Translations$generating$en {
 
 	/// en: 'We will notify you when your video is ready!'
 	String get notified => 'We will notify you when your video is ready!';
+
+	/// en: 'Notification permission denied. Please enable it in Settings.'
+	String get notification_denied => 'Notification permission denied. Please enable it in Settings.';
 }
 
 // Path: result
@@ -1048,6 +1051,7 @@ extension on Translations {
 			'generating.desc' => 'This may take a few minutes.\nPlease wait...',
 			'generating.notify_me' => 'Notify me when complete',
 			'generating.notified' => 'We will notify you when your video is ready!',
+			'generating.notification_denied' => 'Notification permission denied. Please enable it in Settings.',
 			'result.title' => 'Result Video',
 			'result.ready_message' => ({required Object title}) => 'Your ${title} video is ready!',
 			'result.regenerate' => 'Regenerate',

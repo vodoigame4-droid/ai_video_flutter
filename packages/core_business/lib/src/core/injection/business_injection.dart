@@ -160,6 +160,7 @@ void initBusinessDependencies(GetIt sl) {
       uploadImageUseCase: sl(),
       createTgvUseCase: sl(),
       getMediaDetailUseCase: sl(),
+      notificationRepository: sl(),
     ),
   );
   sl.registerFactory(

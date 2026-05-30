@@ -204,7 +204,8 @@
     "your_video": "video của bạn",
     "desc": "Quá trình này có thể mất vài phút.\nVui lòng đợi...",
     "notify_me": "Thông báo cho tôi khi hoàn tất",
-    "notified": "Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!"
+    "notified": "Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!",
+    "notification_denied": "Quyền thông báo bị từ chối. Vui lòng bật lại trong Cài đặt."
   },
   "result": {
     "title": "Video kết quả",

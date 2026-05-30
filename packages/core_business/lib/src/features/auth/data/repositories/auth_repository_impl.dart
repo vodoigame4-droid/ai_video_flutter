@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
 import '../../../../core/utils/log_utils.dart';
+import '../../../../core/constants/storage_keys.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_datasource.dart';
@@ -75,7 +76,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   Future<void> _saveTokens(String accessToken, String refreshToken) async {
-    await _sharedPreferences.setString('auth_access_token', accessToken);
-    await _sharedPreferences.setString('auth_refresh_token', refreshToken);
+    await _sharedPreferences.setString(StorageKeys.authAccessToken, accessToken);
+    await _sharedPreferences.setString(StorageKeys.authRefreshToken, refreshToken);
   }
 }

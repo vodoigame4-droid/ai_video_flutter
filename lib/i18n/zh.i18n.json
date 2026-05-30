@@ -197,7 +197,8 @@
     "your_video": "您的视频",
     "desc": "这可能需要几分钟时间。\n请稍候...",
     "notify_me": "完成后通知我",
-    "notified": "您的视频准备就绪后，我们将通知您！"
+    "notified": "您的视频准备就绪后，我们将通知您！",
+    "notification_denied": "通知权限被拒绝。请在设置中启用。"
   },
   "result": {
     "title": "生成结果",

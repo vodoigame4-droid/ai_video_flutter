@@ -335,6 +335,7 @@ class _Translations$generating$zh extends Translations$generating$en {
 	@override String get desc => '这可能需要几分钟时间。\n请稍候...';
 	@override String get notify_me => '完成后通知我';
 	@override String get notified => '您的视频准备就绪后，我们将通知您！';
+	@override String get notification_denied => '通知权限被拒绝。请在设置中启用。';
 }
 
 // Path: result
@@ -633,6 +634,7 @@ extension on TranslationsZh {
 			'generating.desc' => '这可能需要几分钟时间。\n请稍候...',
 			'generating.notify_me' => '完成后通知我',
 			'generating.notified' => '您的视频准备就绪后，我们将通知您！',
+			'generating.notification_denied' => '通知权限被拒绝。请在设置中启用。',
 			'result.title' => '生成结果',
 			'result.ready_message' => ({required Object title}) => '您的 ${title} 视频已准备就绪！',
 			'result.regenerate' => '重新生成',

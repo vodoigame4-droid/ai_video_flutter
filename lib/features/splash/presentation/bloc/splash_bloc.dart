@@ -9,6 +9,7 @@ import 'splash_state.dart';
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final LoginUseCase loginUseCase;
   final SharedPreferences sharedPreferences;
+  final NotificationRepository notificationRepository;
   Timer? _timer;
   bool _isLoginCompleted = false;
   int _progress = 0;
@@ -16,6 +17,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc({
     required this.loginUseCase,
     required this.sharedPreferences,
+    required this.notificationRepository,
   }) : super(const SplashState.initial()) {
     on<SplashEvent>((event, emit) async {
       await event.when(
@@ -60,15 +62,22 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _performBackgroundLogin() async {
     try {
-      final token = sharedPreferences.getString('auth_access_token');
+      final token = sharedPreferences.getString(StorageKeys.authAccessToken);
+      String? deviceId = sharedPreferences.getString(StorageKeys.deviceId);
+      if (deviceId == null || deviceId.isEmpty) {
+        deviceId = const Uuid().v4();
+        await sharedPreferences.setString(StorageKeys.deviceId, deviceId);
+      }
+      
       if (token == null || token.isEmpty) {
-        String? deviceId = sharedPreferences.getString('device_id');
-        if (deviceId == null || deviceId.isEmpty) {
-          deviceId = const Uuid().v4();
-          await sharedPreferences.setString('device_id', deviceId);
-        }
-        
         await loginUseCase(LoginParams(deviceId: deviceId));
+      }
+
+      // Request notification permission and subscribe to topics
+      final isGranted = await notificationRepository.requestPermission();
+      if (isGranted) {
+        await notificationRepository.subscribeToTopic('all');
+        await notificationRepository.subscribeToTopic(deviceId);
       }
     } catch (_) {
       // Gracefully continue to allow app usage even if network fails/offline

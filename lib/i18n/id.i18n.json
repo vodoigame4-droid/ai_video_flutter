@@ -197,7 +197,8 @@
     "your_video": "video Anda",
     "desc": "Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...",
     "notify_me": "Beritahu saya saat selesai",
-    "notified": "Kami akan memberi tahu Anda saat video Anda siap!"
+    "notified": "Kami akan memberi tahu Anda saat video Anda siap!",
+    "notification_denied": "Izin notifikasi ditolak. Silakan aktifkan di Pengaturan."
   },
   "result": {
     "title": "Video Hasil",

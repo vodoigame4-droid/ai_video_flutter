@@ -197,7 +197,8 @@
     "your_video": "de votre vidéo",
     "desc": "Cela peut prendre quelques minutes.\nVeuillez patienter...",
     "notify_me": "M'avertir une fois terminé",
-    "notified": "Nous vous informerons lorsque votre vidéo sera prête !"
+    "notified": "Nous vous informerons lorsque votre vidéo sera prête !",
+    "notification_denied": "Autorisation de notification refusée. Veuillez l'activer dans les Paramètres."
   },
   "result": {
     "title": "Vidéo finale",

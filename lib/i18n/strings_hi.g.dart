@@ -335,6 +335,7 @@ class _Translations$generating$hi extends Translations$generating$en {
 	@override String get desc => 'इसमें कुछ मिनट लग सकते हैं।\nकृपया प्रतीक्षा करें...';
 	@override String get notify_me => 'पूरा होने पर मुझे सूचित करें';
 	@override String get notified => 'आपका वीडियो तैयार होने पर हम आपको सूचित करेंगे!';
+	@override String get notification_denied => 'सूचना अनुमति अस्वीकार कर दी गई। कृपया सेटिंग्स में इसे सक्षम करें।';
 }
 
 // Path: result
@@ -633,6 +634,7 @@ extension on TranslationsHi {
 			'generating.desc' => 'इसमें कुछ मिनट लग सकते हैं।\nकृपया प्रतीक्षा करें...',
 			'generating.notify_me' => 'पूरा होने पर मुझे सूचित करें',
 			'generating.notified' => 'आपका वीडियो तैयार होने पर हम आपको सूचित करेंगे!',
+			'generating.notification_denied' => 'सूचना अनुमति अस्वीकार कर दी गई। कृपया सेटिंग्स में इसे सक्षम करें।',
 			'result.title' => 'परिणाम वीडियो',
 			'result.ready_message' => ({required Object title}) => 'आपका ${title} वीडियो तैयार है!',
 			'result.regenerate' => 'पुनः उत्पन्न करें',

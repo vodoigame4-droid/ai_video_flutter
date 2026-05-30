@@ -17,5 +17,5 @@ abstract class GeneratingState with _$GeneratingState {
     required String videoUrl,
     required String createdAt,
   }) = _Success;
-  const factory GeneratingState.notifiedAndExited() = _NotifiedAndExited;
+  const factory GeneratingState.notifiedAndExited({required bool isPermissionGranted}) = _NotifiedAndExited;
 }

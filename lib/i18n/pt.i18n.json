@@ -197,7 +197,8 @@
     "your_video": "seu vídeo",
     "desc": "Isso pode levar alguns minutos.\nPor favor, aguarde...",
     "notify_me": "Notificar-me quando concluído",
-    "notified": "Nós o notificaremos quando seu vídeo estiver pronto!"
+    "notified": "Nós o notificaremos quando seu vídeo estiver pronto!",
+    "notification_denied": "Permissão de notificação negada. Ative nas Configurações."
   },
   "result": {
     "title": "Vídeo do Resultado",

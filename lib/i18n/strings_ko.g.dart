@@ -335,6 +335,7 @@ class _Translations$generating$ko extends Translations$generating$en {
 	@override String get desc => '몇 분 정도 걸릴 수 있습니다.\n잠시만 기다려 주세요...';
 	@override String get notify_me => '완료 시 나에게 알림';
 	@override String get notified => '동영상이 준비되면 알려드리겠습니다!';
+	@override String get notification_denied => '알림 권한이 거부되었습니다. 설정에서 활성화해주세요.';
 }
 
 // Path: result
@@ -633,6 +634,7 @@ extension on TranslationsKo {
 			'generating.desc' => '몇 분 정도 걸릴 수 있습니다.\n잠시만 기다려 주세요...',
 			'generating.notify_me' => '완료 시 나에게 알림',
 			'generating.notified' => '동영상이 준비되면 알려드리겠습니다!',
+			'generating.notification_denied' => '알림 권한이 거부되었습니다. 설정에서 활성화해주세요.',
 			'result.title' => '결과 동영상',
 			'result.ready_message' => ({required Object title}) => '${title} 동영상이 준비되었습니다!',
 			'result.regenerate' => '재생성',

@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:network/network.dart';
 import '../config/app_config.dart';
 import '../utils/log_utils.dart';
+import '../constants/storage_keys.dart';
 
 /// Interceptor to handle automatic token refresh and background login on 401 errors.
 class AuthRetryInterceptor extends QueuedInterceptor {
@@ -88,7 +89,7 @@ class AuthRetryInterceptor extends QueuedInterceptor {
   }
 
   Future<bool> _attemptRefresh(String baseUrl) async {
-    final refreshToken = _sharedPreferences.getString('auth_refresh_token');
+    final refreshToken = _sharedPreferences.getString(StorageKeys.authRefreshToken);
     if (refreshToken == null || refreshToken.isEmpty) {
       return false;
     }
@@ -112,8 +113,8 @@ class AuthRetryInterceptor extends QueuedInterceptor {
           final newAccessToken = dataMap['accessToken'] as String?;
           final newRefreshToken = dataMap['refreshToken'] as String?;
           if (newAccessToken != null && newRefreshToken != null) {
-            await _sharedPreferences.setString('auth_access_token', newAccessToken);
-            await _sharedPreferences.setString('auth_refresh_token', newRefreshToken);
+            await _sharedPreferences.setString(StorageKeys.authAccessToken, newAccessToken);
+            await _sharedPreferences.setString(StorageKeys.authRefreshToken, newRefreshToken);
             return true;
           }
         }
@@ -125,11 +126,11 @@ class AuthRetryInterceptor extends QueuedInterceptor {
   }
 
   Future<bool> _attemptLogin(String baseUrl) async {
-    final deviceId = _sharedPreferences.getString('device_id');
+    final deviceId = _sharedPreferences.getString(StorageKeys.deviceId);
     if (deviceId == null || deviceId.isEmpty) {
       return false;
     }
-    final refCode = _sharedPreferences.getString('ref_code');
+    final refCode = _sharedPreferences.getString(StorageKeys.refCode);
 
     try {
       final response = await _authDio.post(
@@ -156,8 +157,8 @@ class AuthRetryInterceptor extends QueuedInterceptor {
           final newAccessToken = dataMap['accessToken'] as String?;
           final newRefreshToken = dataMap['refreshToken'] as String?;
           if (newAccessToken != null && newRefreshToken != null) {
-            await _sharedPreferences.setString('auth_access_token', newAccessToken);
-            await _sharedPreferences.setString('auth_refresh_token', newRefreshToken);
+            await _sharedPreferences.setString(StorageKeys.authAccessToken, newAccessToken);
+            await _sharedPreferences.setString(StorageKeys.authRefreshToken, newRefreshToken);
             return true;
           }
         }
@@ -169,7 +170,7 @@ class AuthRetryInterceptor extends QueuedInterceptor {
   }
 
   Future<Response<dynamic>> _retryRequest(RequestOptions requestOptions) async {
-    final accessToken = _sharedPreferences.getString('auth_access_token');
+    final accessToken = _sharedPreferences.getString(StorageKeys.authAccessToken);
     final headers = Map<String, dynamic>.from(requestOptions.headers);
     if (accessToken != null && accessToken.isNotEmpty) {
       headers['Authorization'] = 'Bearer $accessToken';

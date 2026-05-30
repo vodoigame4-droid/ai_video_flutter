@@ -5,6 +5,8 @@ import 'package:network/network.dart';
 import 'package:core_business/core_business.dart';
 import '../utils/log_utils.dart';
 import '../config/app_config_impl.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import '../notification/notification_repository_impl.dart';
 
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -18,6 +20,7 @@ Future<void> initDependencies() async {
     () => SplashBloc(
       loginUseCase: sl(),
       sharedPreferences: sl(),
+      notificationRepository: sl(),
     ),
   );
 
@@ -53,7 +56,7 @@ Future<void> initDependencies() async {
       },
       tokenProvider: () async {
         final prefs = sl<SharedPreferences>();
-        return prefs.getString('auth_access_token');
+        return prefs.getString(StorageKeys.authAccessToken);
       },
       additionalInterceptors: [
         AuthRetryInterceptor(
@@ -78,6 +81,12 @@ Future<void> initDependencies() async {
   }
   sl.registerLazySingleton<AppConfig>(
     () => AppConfigImpl(appVersion: version),
+  );
+
+  // Firebase Messaging
+  sl.registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance);
+  sl.registerLazySingleton<NotificationRepository>(
+    () => NotificationRepositoryImpl(sl()),
   );
 
   // Initialize Business Logic Package Dependencies (Settings, Auth, Media, etc.)

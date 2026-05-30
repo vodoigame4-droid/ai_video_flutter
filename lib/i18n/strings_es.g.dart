@@ -335,6 +335,7 @@ class _Translations$generating$es extends Translations$generating$en {
 	@override String get desc => 'Esto puede tardar unos minutos.\nPor favor, espera...';
 	@override String get notify_me => 'Notificarme cuando termine';
 	@override String get notified => '¡Te notificaremos cuando tu video esté listo!';
+	@override String get notification_denied => 'Permiso de notificación denegado. Actívalo en la Configuración.';
 }
 
 // Path: result
@@ -633,6 +634,7 @@ extension on TranslationsEs {
 			'generating.desc' => 'Esto puede tardar unos minutos.\nPor favor, espera...',
 			'generating.notify_me' => 'Notificarme cuando termine',
 			'generating.notified' => '¡Te notificaremos cuando tu video esté listo!',
+			'generating.notification_denied' => 'Permiso de notificación denegado. Actívalo en la Configuración.',
 			'result.title' => 'Video del resultado',
 			'result.ready_message' => ({required Object title}) => '¡Tu video de ${title} está listo!',
 			'result.regenerate' => 'Regenerar',
