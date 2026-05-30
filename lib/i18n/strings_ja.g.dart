@@ -57,6 +57,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$privacy_dialog$ja privacy_dialog = _Translations$privacy_dialog$ja._(_root);
 	@override late final _Translations$report_dialog$ja report_dialog = _Translations$report_dialog$ja._(_root);
 	@override late final _Translations$tips_sheet$ja tips_sheet = _Translations$tips_sheet$ja._(_root);
+	@override late final _Translations$errors$ja errors = _Translations$errors$ja._(_root);
 }
 
 // Path: common
@@ -336,6 +337,7 @@ class _Translations$generating$ja extends Translations$generating$en {
 	@override String get notify_me => '完了時に通知する';
 	@override String get notified => '動画の準備ができたら通知します！';
 	@override String get notification_denied => '通知権限が拒否されました。設定で有効にしてください。';
+	@override String get failed => '動画の生成に失敗しました。もう一度お試しください。';
 }
 
 // Path: result
@@ -402,6 +404,104 @@ class _Translations$tips_sheet$ja extends Translations$tips_sheet$en {
 	@override String get hidden_face => '隠れた顔';
 	@override String get multiple_people => '複数人';
 	@override String get blurry_photo => 'ぼやけた写真';
+}
+
+// Path: errors
+class _Translations$errors$ja extends Translations$errors$en {
+	_Translations$errors$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get unknown => 'An unexpected error occurred. Please try again.';
+	@override String get unauthorized => 'Session expired. Please log in again.';
+	@override String get validation_error => 'Invalid inputs. Please check your data.';
+	@override String get password_incorrect => 'Incorrect password. Please try again.';
+	@override String get account_not_found => 'Account not found.';
+	@override String get email_template_already_exists => 'Email template already exists.';
+	@override String get email_template_not_found => 'Email template not found.';
+	@override String get account_email_limit_register => 'Registration limit reached for this email.';
+	@override String get account_username_is_exist => 'Username is already taken.';
+	@override String get token_invalid => 'Invalid session token. Please log in again.';
+	@override String get already_enable_2fa => 'Two-factor authentication is already enabled.';
+	@override String get account_are_not_enable_2fa => 'Two-factor authentication is not enabled.';
+	@override String get ref_account_not_found => 'Referral account not found.';
+	@override String get account_already_vip => 'Account is already VIP.';
+	@override String get perm_not_found => 'Permission not found.';
+	@override String get account_register_not_found => 'Registration details not found.';
+	@override String get otp_invalid => 'Invalid OTP code. Please check and try again.';
+	@override String get otp_expired => 'OTP code has expired. Please request a new one.';
+	@override String get otp_to_many_request => 'Too many requests. Please wait before trying again.';
+	@override String get account_info_not_found => 'Account information not found.';
+	@override String get account_info_already_created => 'Account information is already created.';
+	@override String get id_number_already_in_use => 'ID number is already in use.';
+	@override String get account_info_can_not_update => 'Account information cannot be updated.';
+	@override String get account_profile_is_processed => 'Account profile is currently being processed.';
+	@override String get insufficient_fund => 'Insufficient funds or credits.';
+	@override String get account_email_is_exist => 'Email is already registered.';
+	@override String get proxy_error => 'Proxy connection error.';
+	@override String get invalid_file_type => 'Invalid file type. Please use supported formats.';
+	@override String get file_too_large => 'File size exceeds the 20MB limit.';
+	@override String get account_banned => 'Your account has been banned.';
+	@override String get login_failed => 'Login failed. Please check your credentials.';
+	@override String get error_code => 'An error occurred with code validation.';
+	@override String get user_not_found => 'User not found.';
+	@override String get user_used_invite_code => 'Invite code has already been used.';
+	@override String get get_me_failed => 'Failed to retrieve user profile.';
+	@override String get user_cannot_use_own_invite_code => 'You cannot use your own invite code.';
+	@override String get file_not_found => 'File not found.';
+	@override String get file_upload_failed => 'Failed to upload file. Please try again.';
+	@override String get upload_webp_failed => 'Failed to upload WEBP file.';
+	@override String get create_theme_failed => 'Failed to create theme.';
+	@override String get get_theme_failed => 'Failed to retrieve themes.';
+	@override String get category_already_exists => 'Category already exists.';
+	@override String get create_category_failed => 'Failed to create category.';
+	@override String get invalid_ratio => 'Invalid video ratio.';
+	@override String get create_media_failed => 'Failed to initiate video generation.';
+	@override String get media_not_found => 'Video or image file not found.';
+	@override String get callback_media_failed => 'Callback media processing failed.';
+	@override String get get_media_detail_failed => 'Failed to retrieve video details.';
+	@override String get get_media_failed => 'Failed to retrieve media list.';
+	@override String get update_theme_failed => 'Failed to update theme.';
+	@override String get delete_theme_failed => 'Failed to delete theme.';
+	@override String get category_not_found => 'Category not found.';
+	@override String get delete_category_failed => 'Failed to delete category.';
+	@override String get media_not_owned => 'You do not own this media.';
+	@override String get theme_already_exists => 'Theme already exists.';
+	@override String get like_media_failed => 'Failed to update like status.';
+	@override String get user_not_vip => 'This feature requires a VIP subscription.';
+	@override String get not_enough_credit => 'Not enough credits. Please purchase more credits.';
+	@override String get create_photo_enhance_failed => 'Photo enhancement failed.';
+	@override String get remove_object_failed => 'Failed to remove object from photo.';
+	@override String get get_suggestion_prompt_failed => 'Failed to suggest prompt.';
+	@override String get get_tasks_failed => 'Failed to load tasks.';
+	@override String get action_task_failed => 'Failed to perform task action.';
+	@override String get task_not_found => 'Task not found.';
+	@override String get task_already_claimed => 'Task reward already claimed.';
+	@override String get task_already_started => 'Task has already been started.';
+	@override String get task_not_completed => 'Task is not completed yet.';
+	@override String get rate_app_failed => 'Rating app failed.';
+	@override String get daily_login_task_not_found => 'Daily login task not found.';
+	@override String get get_daily_login_failed => 'Failed to get daily login task.';
+	@override String get today_login_reward_already_claimed => 'Today\'s reward already claimed.';
+	@override String get take_login_reward_failed => 'Failed to claim login reward.';
+	@override String get iap_receipt_already_exists => 'Purchase receipt already registered.';
+	@override String get iap_verify_product_failed => 'Failed to verify purchase product.';
+	@override String get iap_product_not_purchased => 'Product is not purchased.';
+	@override String get iap_product_not_found => 'In-app purchase product not found.';
+	@override String get iap_subscription_not_active => 'Subscription is not active.';
+	@override String get iap_subscription_already_acknowledged => 'Subscription already acknowledged.';
+	@override String get iap_verify_subscription_failed => 'Failed to verify subscription.';
+	@override String get refill_subscription_credits_failed => 'Failed to refill subscription credits.';
+	@override String get cancel_subscription_failed => 'Failed to cancel subscription.';
+	@override String get plan_not_found => 'Subscription plan not found.';
+	@override String get transaction_action_failed => 'Transaction action failed.';
+	@override String get iap_verify_ios_product_failed => 'Failed to verify iOS purchase.';
+	@override String get iap_subscription_invalid_type => 'Invalid subscription type.';
+	@override String get subscription_not_active_for_refill => 'Subscription is not active for credit refill.';
+	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
+	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
+	@override String get iap_subscription_not_found => 'Subscription not found.';
 }
 
 // Path: onboarding.page1
@@ -635,6 +735,7 @@ extension on TranslationsJa {
 			'generating.notify_me' => '完了時に通知する',
 			'generating.notified' => '動画の準備ができたら通知します！',
 			'generating.notification_denied' => '通知権限が拒否されました。設定で有効にしてください。',
+			'generating.failed' => '動画の生成に失敗しました。もう一度お試しください。',
 			'result.title' => '作成された動画',
 			'result.ready_message' => ({required Object title}) => '「${title}」の動画の準備ができました！',
 			'result.regenerate' => '再生成する',
@@ -665,6 +766,95 @@ extension on TranslationsJa {
 			'tips_sheet.hidden_face' => '隠れた顔',
 			'tips_sheet.multiple_people' => '複数人',
 			'tips_sheet.blurry_photo' => 'ぼやけた写真',
+			'errors.unknown' => 'An unexpected error occurred. Please try again.',
+			'errors.unauthorized' => 'Session expired. Please log in again.',
+			'errors.validation_error' => 'Invalid inputs. Please check your data.',
+			'errors.password_incorrect' => 'Incorrect password. Please try again.',
+			'errors.account_not_found' => 'Account not found.',
+			'errors.email_template_already_exists' => 'Email template already exists.',
+			'errors.email_template_not_found' => 'Email template not found.',
+			'errors.account_email_limit_register' => 'Registration limit reached for this email.',
+			'errors.account_username_is_exist' => 'Username is already taken.',
+			'errors.token_invalid' => 'Invalid session token. Please log in again.',
+			'errors.already_enable_2fa' => 'Two-factor authentication is already enabled.',
+			'errors.account_are_not_enable_2fa' => 'Two-factor authentication is not enabled.',
+			'errors.ref_account_not_found' => 'Referral account not found.',
+			'errors.account_already_vip' => 'Account is already VIP.',
+			'errors.perm_not_found' => 'Permission not found.',
+			'errors.account_register_not_found' => 'Registration details not found.',
+			'errors.otp_invalid' => 'Invalid OTP code. Please check and try again.',
+			'errors.otp_expired' => 'OTP code has expired. Please request a new one.',
+			'errors.otp_to_many_request' => 'Too many requests. Please wait before trying again.',
+			'errors.account_info_not_found' => 'Account information not found.',
+			'errors.account_info_already_created' => 'Account information is already created.',
+			'errors.id_number_already_in_use' => 'ID number is already in use.',
+			'errors.account_info_can_not_update' => 'Account information cannot be updated.',
+			'errors.account_profile_is_processed' => 'Account profile is currently being processed.',
+			'errors.insufficient_fund' => 'Insufficient funds or credits.',
+			'errors.account_email_is_exist' => 'Email is already registered.',
+			'errors.proxy_error' => 'Proxy connection error.',
+			'errors.invalid_file_type' => 'Invalid file type. Please use supported formats.',
+			'errors.file_too_large' => 'File size exceeds the 20MB limit.',
+			'errors.account_banned' => 'Your account has been banned.',
+			'errors.login_failed' => 'Login failed. Please check your credentials.',
+			'errors.error_code' => 'An error occurred with code validation.',
+			'errors.user_not_found' => 'User not found.',
+			'errors.user_used_invite_code' => 'Invite code has already been used.',
+			'errors.get_me_failed' => 'Failed to retrieve user profile.',
+			'errors.user_cannot_use_own_invite_code' => 'You cannot use your own invite code.',
+			'errors.file_not_found' => 'File not found.',
+			'errors.file_upload_failed' => 'Failed to upload file. Please try again.',
+			'errors.upload_webp_failed' => 'Failed to upload WEBP file.',
+			'errors.create_theme_failed' => 'Failed to create theme.',
+			'errors.get_theme_failed' => 'Failed to retrieve themes.',
+			'errors.category_already_exists' => 'Category already exists.',
+			'errors.create_category_failed' => 'Failed to create category.',
+			'errors.invalid_ratio' => 'Invalid video ratio.',
+			'errors.create_media_failed' => 'Failed to initiate video generation.',
+			'errors.media_not_found' => 'Video or image file not found.',
+			'errors.callback_media_failed' => 'Callback media processing failed.',
+			'errors.get_media_detail_failed' => 'Failed to retrieve video details.',
+			'errors.get_media_failed' => 'Failed to retrieve media list.',
+			'errors.update_theme_failed' => 'Failed to update theme.',
+			'errors.delete_theme_failed' => 'Failed to delete theme.',
+			'errors.category_not_found' => 'Category not found.',
+			'errors.delete_category_failed' => 'Failed to delete category.',
+			'errors.media_not_owned' => 'You do not own this media.',
+			'errors.theme_already_exists' => 'Theme already exists.',
+			'errors.like_media_failed' => 'Failed to update like status.',
+			'errors.user_not_vip' => 'This feature requires a VIP subscription.',
+			'errors.not_enough_credit' => 'Not enough credits. Please purchase more credits.',
+			'errors.create_photo_enhance_failed' => 'Photo enhancement failed.',
+			'errors.remove_object_failed' => 'Failed to remove object from photo.',
+			'errors.get_suggestion_prompt_failed' => 'Failed to suggest prompt.',
+			'errors.get_tasks_failed' => 'Failed to load tasks.',
+			'errors.action_task_failed' => 'Failed to perform task action.',
+			'errors.task_not_found' => 'Task not found.',
+			'errors.task_already_claimed' => 'Task reward already claimed.',
+			'errors.task_already_started' => 'Task has already been started.',
+			'errors.task_not_completed' => 'Task is not completed yet.',
+			'errors.rate_app_failed' => 'Rating app failed.',
+			'errors.daily_login_task_not_found' => 'Daily login task not found.',
+			'errors.get_daily_login_failed' => 'Failed to get daily login task.',
+			'errors.today_login_reward_already_claimed' => 'Today\'s reward already claimed.',
+			'errors.take_login_reward_failed' => 'Failed to claim login reward.',
+			'errors.iap_receipt_already_exists' => 'Purchase receipt already registered.',
+			'errors.iap_verify_product_failed' => 'Failed to verify purchase product.',
+			'errors.iap_product_not_purchased' => 'Product is not purchased.',
+			'errors.iap_product_not_found' => 'In-app purchase product not found.',
+			'errors.iap_subscription_not_active' => 'Subscription is not active.',
+			'errors.iap_subscription_already_acknowledged' => 'Subscription already acknowledged.',
+			'errors.iap_verify_subscription_failed' => 'Failed to verify subscription.',
+			'errors.refill_subscription_credits_failed' => 'Failed to refill subscription credits.',
+			'errors.cancel_subscription_failed' => 'Failed to cancel subscription.',
+			'errors.plan_not_found' => 'Subscription plan not found.',
+			'errors.transaction_action_failed' => 'Transaction action failed.',
+			'errors.iap_verify_ios_product_failed' => 'Failed to verify iOS purchase.',
+			'errors.iap_subscription_invalid_type' => 'Invalid subscription type.',
+			'errors.subscription_not_active_for_refill' => 'Subscription is not active for credit refill.',
+			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
+			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
+			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			_ => null,
 		};
 	}

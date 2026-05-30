@@ -59,6 +59,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$privacy_dialog$en privacy_dialog = Translations$privacy_dialog$en.internal(_root);
 	late final Translations$report_dialog$en report_dialog = Translations$report_dialog$en.internal(_root);
 	late final Translations$tips_sheet$en tips_sheet = Translations$tips_sheet$en.internal(_root);
+	late final Translations$errors$en errors = Translations$errors$en.internal(_root);
 }
 
 // Path: common
@@ -658,6 +659,9 @@ class Translations$generating$en {
 
 	/// en: 'Notification permission denied. Please enable it in Settings.'
 	String get notification_denied => 'Notification permission denied. Please enable it in Settings.';
+
+	/// en: 'Failed to generate video. Please try again.'
+	String get failed => 'Failed to generate video. Please try again.';
 }
 
 // Path: result
@@ -784,6 +788,282 @@ class Translations$tips_sheet$en {
 
 	/// en: 'Blurry photo'
 	String get blurry_photo => 'Blurry photo';
+}
+
+// Path: errors
+class Translations$errors$en {
+	Translations$errors$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'An unexpected error occurred. Please try again.'
+	String get unknown => 'An unexpected error occurred. Please try again.';
+
+	/// en: 'Session expired. Please log in again.'
+	String get unauthorized => 'Session expired. Please log in again.';
+
+	/// en: 'Invalid inputs. Please check your data.'
+	String get validation_error => 'Invalid inputs. Please check your data.';
+
+	/// en: 'Incorrect password. Please try again.'
+	String get password_incorrect => 'Incorrect password. Please try again.';
+
+	/// en: 'Account not found.'
+	String get account_not_found => 'Account not found.';
+
+	/// en: 'Email template already exists.'
+	String get email_template_already_exists => 'Email template already exists.';
+
+	/// en: 'Email template not found.'
+	String get email_template_not_found => 'Email template not found.';
+
+	/// en: 'Registration limit reached for this email.'
+	String get account_email_limit_register => 'Registration limit reached for this email.';
+
+	/// en: 'Username is already taken.'
+	String get account_username_is_exist => 'Username is already taken.';
+
+	/// en: 'Invalid session token. Please log in again.'
+	String get token_invalid => 'Invalid session token. Please log in again.';
+
+	/// en: 'Two-factor authentication is already enabled.'
+	String get already_enable_2fa => 'Two-factor authentication is already enabled.';
+
+	/// en: 'Two-factor authentication is not enabled.'
+	String get account_are_not_enable_2fa => 'Two-factor authentication is not enabled.';
+
+	/// en: 'Referral account not found.'
+	String get ref_account_not_found => 'Referral account not found.';
+
+	/// en: 'Account is already VIP.'
+	String get account_already_vip => 'Account is already VIP.';
+
+	/// en: 'Permission not found.'
+	String get perm_not_found => 'Permission not found.';
+
+	/// en: 'Registration details not found.'
+	String get account_register_not_found => 'Registration details not found.';
+
+	/// en: 'Invalid OTP code. Please check and try again.'
+	String get otp_invalid => 'Invalid OTP code. Please check and try again.';
+
+	/// en: 'OTP code has expired. Please request a new one.'
+	String get otp_expired => 'OTP code has expired. Please request a new one.';
+
+	/// en: 'Too many requests. Please wait before trying again.'
+	String get otp_to_many_request => 'Too many requests. Please wait before trying again.';
+
+	/// en: 'Account information not found.'
+	String get account_info_not_found => 'Account information not found.';
+
+	/// en: 'Account information is already created.'
+	String get account_info_already_created => 'Account information is already created.';
+
+	/// en: 'ID number is already in use.'
+	String get id_number_already_in_use => 'ID number is already in use.';
+
+	/// en: 'Account information cannot be updated.'
+	String get account_info_can_not_update => 'Account information cannot be updated.';
+
+	/// en: 'Account profile is currently being processed.'
+	String get account_profile_is_processed => 'Account profile is currently being processed.';
+
+	/// en: 'Insufficient funds or credits.'
+	String get insufficient_fund => 'Insufficient funds or credits.';
+
+	/// en: 'Email is already registered.'
+	String get account_email_is_exist => 'Email is already registered.';
+
+	/// en: 'Proxy connection error.'
+	String get proxy_error => 'Proxy connection error.';
+
+	/// en: 'Invalid file type. Please use supported formats.'
+	String get invalid_file_type => 'Invalid file type. Please use supported formats.';
+
+	/// en: 'File size exceeds the 20MB limit.'
+	String get file_too_large => 'File size exceeds the 20MB limit.';
+
+	/// en: 'Your account has been banned.'
+	String get account_banned => 'Your account has been banned.';
+
+	/// en: 'Login failed. Please check your credentials.'
+	String get login_failed => 'Login failed. Please check your credentials.';
+
+	/// en: 'An error occurred with code validation.'
+	String get error_code => 'An error occurred with code validation.';
+
+	/// en: 'User not found.'
+	String get user_not_found => 'User not found.';
+
+	/// en: 'Invite code has already been used.'
+	String get user_used_invite_code => 'Invite code has already been used.';
+
+	/// en: 'Failed to retrieve user profile.'
+	String get get_me_failed => 'Failed to retrieve user profile.';
+
+	/// en: 'You cannot use your own invite code.'
+	String get user_cannot_use_own_invite_code => 'You cannot use your own invite code.';
+
+	/// en: 'File not found.'
+	String get file_not_found => 'File not found.';
+
+	/// en: 'Failed to upload file. Please try again.'
+	String get file_upload_failed => 'Failed to upload file. Please try again.';
+
+	/// en: 'Failed to upload WEBP file.'
+	String get upload_webp_failed => 'Failed to upload WEBP file.';
+
+	/// en: 'Failed to create theme.'
+	String get create_theme_failed => 'Failed to create theme.';
+
+	/// en: 'Failed to retrieve themes.'
+	String get get_theme_failed => 'Failed to retrieve themes.';
+
+	/// en: 'Category already exists.'
+	String get category_already_exists => 'Category already exists.';
+
+	/// en: 'Failed to create category.'
+	String get create_category_failed => 'Failed to create category.';
+
+	/// en: 'Invalid video ratio.'
+	String get invalid_ratio => 'Invalid video ratio.';
+
+	/// en: 'Failed to initiate video generation.'
+	String get create_media_failed => 'Failed to initiate video generation.';
+
+	/// en: 'Video or image file not found.'
+	String get media_not_found => 'Video or image file not found.';
+
+	/// en: 'Callback media processing failed.'
+	String get callback_media_failed => 'Callback media processing failed.';
+
+	/// en: 'Failed to retrieve video details.'
+	String get get_media_detail_failed => 'Failed to retrieve video details.';
+
+	/// en: 'Failed to retrieve media list.'
+	String get get_media_failed => 'Failed to retrieve media list.';
+
+	/// en: 'Failed to update theme.'
+	String get update_theme_failed => 'Failed to update theme.';
+
+	/// en: 'Failed to delete theme.'
+	String get delete_theme_failed => 'Failed to delete theme.';
+
+	/// en: 'Category not found.'
+	String get category_not_found => 'Category not found.';
+
+	/// en: 'Failed to delete category.'
+	String get delete_category_failed => 'Failed to delete category.';
+
+	/// en: 'You do not own this media.'
+	String get media_not_owned => 'You do not own this media.';
+
+	/// en: 'Theme already exists.'
+	String get theme_already_exists => 'Theme already exists.';
+
+	/// en: 'Failed to update like status.'
+	String get like_media_failed => 'Failed to update like status.';
+
+	/// en: 'This feature requires a VIP subscription.'
+	String get user_not_vip => 'This feature requires a VIP subscription.';
+
+	/// en: 'Not enough credits. Please purchase more credits.'
+	String get not_enough_credit => 'Not enough credits. Please purchase more credits.';
+
+	/// en: 'Photo enhancement failed.'
+	String get create_photo_enhance_failed => 'Photo enhancement failed.';
+
+	/// en: 'Failed to remove object from photo.'
+	String get remove_object_failed => 'Failed to remove object from photo.';
+
+	/// en: 'Failed to suggest prompt.'
+	String get get_suggestion_prompt_failed => 'Failed to suggest prompt.';
+
+	/// en: 'Failed to load tasks.'
+	String get get_tasks_failed => 'Failed to load tasks.';
+
+	/// en: 'Failed to perform task action.'
+	String get action_task_failed => 'Failed to perform task action.';
+
+	/// en: 'Task not found.'
+	String get task_not_found => 'Task not found.';
+
+	/// en: 'Task reward already claimed.'
+	String get task_already_claimed => 'Task reward already claimed.';
+
+	/// en: 'Task has already been started.'
+	String get task_already_started => 'Task has already been started.';
+
+	/// en: 'Task is not completed yet.'
+	String get task_not_completed => 'Task is not completed yet.';
+
+	/// en: 'Rating app failed.'
+	String get rate_app_failed => 'Rating app failed.';
+
+	/// en: 'Daily login task not found.'
+	String get daily_login_task_not_found => 'Daily login task not found.';
+
+	/// en: 'Failed to get daily login task.'
+	String get get_daily_login_failed => 'Failed to get daily login task.';
+
+	/// en: 'Today's reward already claimed.'
+	String get today_login_reward_already_claimed => 'Today\'s reward already claimed.';
+
+	/// en: 'Failed to claim login reward.'
+	String get take_login_reward_failed => 'Failed to claim login reward.';
+
+	/// en: 'Purchase receipt already registered.'
+	String get iap_receipt_already_exists => 'Purchase receipt already registered.';
+
+	/// en: 'Failed to verify purchase product.'
+	String get iap_verify_product_failed => 'Failed to verify purchase product.';
+
+	/// en: 'Product is not purchased.'
+	String get iap_product_not_purchased => 'Product is not purchased.';
+
+	/// en: 'In-app purchase product not found.'
+	String get iap_product_not_found => 'In-app purchase product not found.';
+
+	/// en: 'Subscription is not active.'
+	String get iap_subscription_not_active => 'Subscription is not active.';
+
+	/// en: 'Subscription already acknowledged.'
+	String get iap_subscription_already_acknowledged => 'Subscription already acknowledged.';
+
+	/// en: 'Failed to verify subscription.'
+	String get iap_verify_subscription_failed => 'Failed to verify subscription.';
+
+	/// en: 'Failed to refill subscription credits.'
+	String get refill_subscription_credits_failed => 'Failed to refill subscription credits.';
+
+	/// en: 'Failed to cancel subscription.'
+	String get cancel_subscription_failed => 'Failed to cancel subscription.';
+
+	/// en: 'Subscription plan not found.'
+	String get plan_not_found => 'Subscription plan not found.';
+
+	/// en: 'Transaction action failed.'
+	String get transaction_action_failed => 'Transaction action failed.';
+
+	/// en: 'Failed to verify iOS purchase.'
+	String get iap_verify_ios_product_failed => 'Failed to verify iOS purchase.';
+
+	/// en: 'Invalid subscription type.'
+	String get iap_subscription_invalid_type => 'Invalid subscription type.';
+
+	/// en: 'Subscription is not active for credit refill.'
+	String get subscription_not_active_for_refill => 'Subscription is not active for credit refill.';
+
+	/// en: 'Failed to retrieve credit price list.'
+	String get get_price_list_failed => 'Failed to retrieve credit price list.';
+
+	/// en: 'Purchase receipt not found.'
+	String get iap_receipt_not_found => 'Purchase receipt not found.';
+
+	/// en: 'Subscription not found.'
+	String get iap_subscription_not_found => 'Subscription not found.';
 }
 
 // Path: onboarding.page1
@@ -1052,6 +1332,7 @@ extension on Translations {
 			'generating.notify_me' => 'Notify me when complete',
 			'generating.notified' => 'We will notify you when your video is ready!',
 			'generating.notification_denied' => 'Notification permission denied. Please enable it in Settings.',
+			'generating.failed' => 'Failed to generate video. Please try again.',
 			'result.title' => 'Result Video',
 			'result.ready_message' => ({required Object title}) => 'Your ${title} video is ready!',
 			'result.regenerate' => 'Regenerate',
@@ -1082,6 +1363,95 @@ extension on Translations {
 			'tips_sheet.hidden_face' => 'Hidden face',
 			'tips_sheet.multiple_people' => 'Multiple people',
 			'tips_sheet.blurry_photo' => 'Blurry photo',
+			'errors.unknown' => 'An unexpected error occurred. Please try again.',
+			'errors.unauthorized' => 'Session expired. Please log in again.',
+			'errors.validation_error' => 'Invalid inputs. Please check your data.',
+			'errors.password_incorrect' => 'Incorrect password. Please try again.',
+			'errors.account_not_found' => 'Account not found.',
+			'errors.email_template_already_exists' => 'Email template already exists.',
+			'errors.email_template_not_found' => 'Email template not found.',
+			'errors.account_email_limit_register' => 'Registration limit reached for this email.',
+			'errors.account_username_is_exist' => 'Username is already taken.',
+			'errors.token_invalid' => 'Invalid session token. Please log in again.',
+			'errors.already_enable_2fa' => 'Two-factor authentication is already enabled.',
+			'errors.account_are_not_enable_2fa' => 'Two-factor authentication is not enabled.',
+			'errors.ref_account_not_found' => 'Referral account not found.',
+			'errors.account_already_vip' => 'Account is already VIP.',
+			'errors.perm_not_found' => 'Permission not found.',
+			'errors.account_register_not_found' => 'Registration details not found.',
+			'errors.otp_invalid' => 'Invalid OTP code. Please check and try again.',
+			'errors.otp_expired' => 'OTP code has expired. Please request a new one.',
+			'errors.otp_to_many_request' => 'Too many requests. Please wait before trying again.',
+			'errors.account_info_not_found' => 'Account information not found.',
+			'errors.account_info_already_created' => 'Account information is already created.',
+			'errors.id_number_already_in_use' => 'ID number is already in use.',
+			'errors.account_info_can_not_update' => 'Account information cannot be updated.',
+			'errors.account_profile_is_processed' => 'Account profile is currently being processed.',
+			'errors.insufficient_fund' => 'Insufficient funds or credits.',
+			'errors.account_email_is_exist' => 'Email is already registered.',
+			'errors.proxy_error' => 'Proxy connection error.',
+			'errors.invalid_file_type' => 'Invalid file type. Please use supported formats.',
+			'errors.file_too_large' => 'File size exceeds the 20MB limit.',
+			'errors.account_banned' => 'Your account has been banned.',
+			'errors.login_failed' => 'Login failed. Please check your credentials.',
+			'errors.error_code' => 'An error occurred with code validation.',
+			'errors.user_not_found' => 'User not found.',
+			'errors.user_used_invite_code' => 'Invite code has already been used.',
+			'errors.get_me_failed' => 'Failed to retrieve user profile.',
+			'errors.user_cannot_use_own_invite_code' => 'You cannot use your own invite code.',
+			'errors.file_not_found' => 'File not found.',
+			'errors.file_upload_failed' => 'Failed to upload file. Please try again.',
+			'errors.upload_webp_failed' => 'Failed to upload WEBP file.',
+			'errors.create_theme_failed' => 'Failed to create theme.',
+			'errors.get_theme_failed' => 'Failed to retrieve themes.',
+			'errors.category_already_exists' => 'Category already exists.',
+			'errors.create_category_failed' => 'Failed to create category.',
+			'errors.invalid_ratio' => 'Invalid video ratio.',
+			'errors.create_media_failed' => 'Failed to initiate video generation.',
+			'errors.media_not_found' => 'Video or image file not found.',
+			'errors.callback_media_failed' => 'Callback media processing failed.',
+			'errors.get_media_detail_failed' => 'Failed to retrieve video details.',
+			'errors.get_media_failed' => 'Failed to retrieve media list.',
+			'errors.update_theme_failed' => 'Failed to update theme.',
+			'errors.delete_theme_failed' => 'Failed to delete theme.',
+			'errors.category_not_found' => 'Category not found.',
+			'errors.delete_category_failed' => 'Failed to delete category.',
+			'errors.media_not_owned' => 'You do not own this media.',
+			'errors.theme_already_exists' => 'Theme already exists.',
+			'errors.like_media_failed' => 'Failed to update like status.',
+			'errors.user_not_vip' => 'This feature requires a VIP subscription.',
+			'errors.not_enough_credit' => 'Not enough credits. Please purchase more credits.',
+			'errors.create_photo_enhance_failed' => 'Photo enhancement failed.',
+			'errors.remove_object_failed' => 'Failed to remove object from photo.',
+			'errors.get_suggestion_prompt_failed' => 'Failed to suggest prompt.',
+			'errors.get_tasks_failed' => 'Failed to load tasks.',
+			'errors.action_task_failed' => 'Failed to perform task action.',
+			'errors.task_not_found' => 'Task not found.',
+			'errors.task_already_claimed' => 'Task reward already claimed.',
+			'errors.task_already_started' => 'Task has already been started.',
+			'errors.task_not_completed' => 'Task is not completed yet.',
+			'errors.rate_app_failed' => 'Rating app failed.',
+			'errors.daily_login_task_not_found' => 'Daily login task not found.',
+			'errors.get_daily_login_failed' => 'Failed to get daily login task.',
+			'errors.today_login_reward_already_claimed' => 'Today\'s reward already claimed.',
+			'errors.take_login_reward_failed' => 'Failed to claim login reward.',
+			'errors.iap_receipt_already_exists' => 'Purchase receipt already registered.',
+			'errors.iap_verify_product_failed' => 'Failed to verify purchase product.',
+			'errors.iap_product_not_purchased' => 'Product is not purchased.',
+			'errors.iap_product_not_found' => 'In-app purchase product not found.',
+			'errors.iap_subscription_not_active' => 'Subscription is not active.',
+			'errors.iap_subscription_already_acknowledged' => 'Subscription already acknowledged.',
+			'errors.iap_verify_subscription_failed' => 'Failed to verify subscription.',
+			'errors.refill_subscription_credits_failed' => 'Failed to refill subscription credits.',
+			'errors.cancel_subscription_failed' => 'Failed to cancel subscription.',
+			'errors.plan_not_found' => 'Subscription plan not found.',
+			'errors.transaction_action_failed' => 'Transaction action failed.',
+			'errors.iap_verify_ios_product_failed' => 'Failed to verify iOS purchase.',
+			'errors.iap_subscription_invalid_type' => 'Invalid subscription type.',
+			'errors.subscription_not_active_for_refill' => 'Subscription is not active for credit refill.',
+			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
+			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
+			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			_ => null,
 		};
 	}

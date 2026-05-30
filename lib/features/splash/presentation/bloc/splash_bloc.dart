@@ -61,9 +61,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Future<void> _performBackgroundLogin() async {
+    String? deviceId;
     try {
       final token = sharedPreferences.getString(StorageKeys.authAccessToken);
-      String? deviceId = sharedPreferences.getString(StorageKeys.deviceId);
+      deviceId = sharedPreferences.getString(StorageKeys.deviceId);
       if (deviceId == null || deviceId.isEmpty) {
         deviceId = const Uuid().v4();
         await sharedPreferences.setString(StorageKeys.deviceId, deviceId);
@@ -72,15 +73,21 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       if (token == null || token.isEmpty) {
         await loginUseCase(LoginParams(deviceId: deviceId));
       }
+    } catch (e, stack) {
+      LogUtils.e('SplashBloc: Background login failed', error: e, stackTrace: stack);
+    }
 
-      // Request notification permission and subscribe to topics
-      final isGranted = await notificationRepository.requestPermission();
-      if (isGranted) {
-        await notificationRepository.subscribeToTopic('all');
-        await notificationRepository.subscribeToTopic(deviceId);
+    try {
+      deviceId ??= sharedPreferences.getString(StorageKeys.deviceId);
+      if (deviceId != null && deviceId.isNotEmpty) {
+        final isGranted = await notificationRepository.requestPermission();
+        if (isGranted) {
+          await notificationRepository.subscribeToTopic('all');
+          await notificationRepository.subscribeToTopic(deviceId);
+        }
       }
-    } catch (_) {
-      // Gracefully continue to allow app usage even if network fails/offline
+    } catch (e, stack) {
+      LogUtils.e('SplashBloc: Notification setup failed', error: e, stackTrace: stack);
     } finally {
       _isLoginCompleted = true;
       if (_progress >= 99) {

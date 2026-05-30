@@ -1,6 +1,7 @@
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
 import '../../../../core/utils/log_utils.dart';
+import '../../../../core/utils/error_parser.dart';
 import '../../domain/entities/media_entities.dart';
 import '../../domain/repositories/media_repository.dart';
 import '../datasources/media_remote_datasource.dart';
@@ -28,7 +29,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getHomeCategories failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -44,7 +45,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getCategories failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -72,7 +73,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getThemes failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -84,7 +85,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: createTgv failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -96,7 +97,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getMediaDetail failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -118,7 +119,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getHistory failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -132,7 +133,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getMediaStatuses failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -144,7 +145,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: deleteMedia failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -156,7 +157,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadImage failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -169,7 +170,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadImages failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 }

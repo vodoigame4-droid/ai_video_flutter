@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
 import '../../../../core/utils/log_utils.dart';
+import '../../../../core/utils/error_parser.dart';
 import '../../../../core/constants/storage_keys.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -37,7 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(response.user.toEntity());
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: login failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -49,7 +50,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(response.user.toEntity());
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: refresh failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -60,7 +61,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(userModel.toEntity());
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: getProfile failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -71,7 +72,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(userModel.toEntity());
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: updateProfile failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 

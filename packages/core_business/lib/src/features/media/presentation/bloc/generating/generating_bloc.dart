@@ -76,6 +76,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
               themeType: themeType,
               // ID tổ chức quản lý của template này
               themeOrgId: themeOrgId,
+              serviceType: 'IMAGE_TO_VIDEO',
             );
 
             LogUtils.d('GeneratingBloc: Creating TGV request: $request');
@@ -96,7 +97,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
 
                 // 3. Start Polling Status
                 _timer?.cancel();
-                _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+                _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
                   if (!isClosed) {
                     add(const GeneratingEvent.tickProgress());
                   }
@@ -104,25 +105,12 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
               },
               error: (message) async {
                 LogUtils.e('GeneratingBloc: Create TGV failed: $message');
-                emit(GeneratingState.success(
-                  videoId: 'fallback_mock_id',
-                  title: title,
-                  imageUrl: imageUrl,
-                  videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-                  createdAt: _formatCurrentDate(),
-                ));
+                emit(GeneratingState.failure(message: message));
               },
             );
           } catch (e) {
             LogUtils.e('GeneratingBloc: Generation failed with exception', error: e);
-            // Fallback for mockup if upload or server request fails
-            emit(GeneratingState.success(
-              videoId: 'fallback_mock_id',
-              title: title,
-              imageUrl: imageUrl,
-              videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-              createdAt: _formatCurrentDate(),
-            ));
+            emit(GeneratingState.failure(message: e.toString()));
           }
         },
         tickProgress: () async {
@@ -153,13 +141,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                   } else if (status == 'failed') {
                     _timer?.cancel();
                     _timer = null;
-                    emit(GeneratingState.success(
-                      videoId: mediaEntity.id,
-                      title: generatingState.title,
-                      imageUrl: generatingState.imageUrl,
-                      videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-                      createdAt: _formatCurrentDate(),
-                    ));
+                    emit(const GeneratingState.failure(message: ''));
                   } else {
                     // Still generating, increment progress mock value slightly
                     _mockProgress = (_mockProgress + 0.15).clamp(0.05, 0.95);

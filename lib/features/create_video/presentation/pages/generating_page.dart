@@ -7,6 +7,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
 import '../../../../i18n/strings.g.dart';
+import '../../../../core/errors/backend_error_handler.dart';
 import 'package:core_business/core_business.dart';
 import 'result_page.dart';
 
@@ -83,6 +84,16 @@ class GeneratingView extends StatelessWidget {
                 SnackBar(
                   content: Text(message),
                   duration: const Duration(seconds: 2),
+                ),
+              );
+              context.pop();
+            },
+            failure: (failureState) {
+              final message = BackendErrorHelper.getErrorMessage(context, failureState.message);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                  duration: const Duration(seconds: 3),
                 ),
               );
               context.pop();

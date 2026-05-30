@@ -18,4 +18,5 @@ abstract class GeneratingState with _$GeneratingState {
     required String createdAt,
   }) = _Success;
   const factory GeneratingState.notifiedAndExited({required bool isPermissionGranted}) = _NotifiedAndExited;
+  const factory GeneratingState.failure({required String message}) = _Failure;
 }

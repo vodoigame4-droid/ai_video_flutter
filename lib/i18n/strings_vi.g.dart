@@ -58,6 +58,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$privacy_dialog$vi privacy_dialog = _Translations$privacy_dialog$vi._(_root);
 	@override late final _Translations$report_dialog$vi report_dialog = _Translations$report_dialog$vi._(_root);
 	@override late final _Translations$tips_sheet$vi tips_sheet = _Translations$tips_sheet$vi._(_root);
+	@override late final _Translations$errors$vi errors = _Translations$errors$vi._(_root);
 }
 
 // Path: common
@@ -351,6 +352,7 @@ class _Translations$generating$vi extends Translations$generating$en {
 	@override String get notify_me => 'Thông báo cho tôi khi hoàn tất';
 	@override String get notified => 'Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!';
 	@override String get notification_denied => 'Quyền thông báo bị từ chối. Vui lòng bật lại trong Cài đặt.';
+	@override String get failed => 'Không thể tạo video. Vui lòng thử lại.';
 }
 
 // Path: result
@@ -417,6 +419,104 @@ class _Translations$tips_sheet$vi extends Translations$tips_sheet$en {
 	@override String get hidden_face => 'Bị che khuôn mặt';
 	@override String get multiple_people => 'Nhiều người';
 	@override String get blurry_photo => 'Ảnh bị mờ';
+}
+
+// Path: errors
+class _Translations$errors$vi extends Translations$errors$en {
+	_Translations$errors$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get unknown => 'Đã xảy ra lỗi không xác định. Vui lòng thử lại sau.';
+	@override String get unauthorized => 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
+	@override String get validation_error => 'Thông tin không hợp lệ. Vui lòng kiểm tra lại.';
+	@override String get password_incorrect => 'Mật khẩu không chính xác. Vui lòng thử lại.';
+	@override String get account_not_found => 'Không tìm thấy tài khoản.';
+	@override String get email_template_already_exists => 'Mẫu email đã tồn tại.';
+	@override String get email_template_not_found => 'Không tìm thấy mẫu email.';
+	@override String get account_email_limit_register => 'Email này đã đạt giới hạn đăng ký.';
+	@override String get account_username_is_exist => 'Tên đăng nhập đã được sử dụng.';
+	@override String get token_invalid => 'Phiên làm việc không hợp lệ. Vui lòng đăng nhập lại.';
+	@override String get already_enable_2fa => 'Bảo mật 2 lớp đã được bật.';
+	@override String get account_are_not_enable_2fa => 'Tài khoản chưa bật bảo mật 2 lớp.';
+	@override String get ref_account_not_found => 'Không tìm thấy tài khoản người giới thiệu.';
+	@override String get account_already_vip => 'Tài khoản đã là VIP.';
+	@override String get perm_not_found => 'Không tìm thấy quyền hạn.';
+	@override String get account_register_not_found => 'Không tìm thấy thông tin đăng ký.';
+	@override String get otp_invalid => 'Mã OTP không hợp lệ. Vui lòng kiểm tra lại.';
+	@override String get otp_expired => 'Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới.';
+	@override String get otp_to_many_request => 'Quá nhiều yêu cầu. Vui lòng đợi trước khi thử lại.';
+	@override String get account_info_not_found => 'Không tìm thấy thông tin tài khoản.';
+	@override String get account_info_already_created => 'Thông tin tài khoản đã được tạo.';
+	@override String get id_number_already_in_use => 'Số ID đã được sử dụng.';
+	@override String get account_info_can_not_update => 'Không thể cập nhật thông tin tài khoản.';
+	@override String get account_profile_is_processed => 'Thông tin cá nhân đang được xử lý.';
+	@override String get insufficient_fund => 'Không đủ tiền hoặc số dư tín dụng.';
+	@override String get account_email_is_exist => 'Email đã được đăng ký sử dụng.';
+	@override String get proxy_error => 'Lỗi kết nối proxy.';
+	@override String get invalid_file_type => 'Định dạng file không hợp lệ. Vui lòng dùng định dạng hỗ trợ.';
+	@override String get file_too_large => 'Kích thước file vượt quá giới hạn 20MB.';
+	@override String get account_banned => 'Tài khoản của bạn đã bị khóa.';
+	@override String get login_failed => 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.';
+	@override String get error_code => 'Mã xác thực không hợp lệ.';
+	@override String get user_not_found => 'Không tìm thấy người dùng.';
+	@override String get user_used_invite_code => 'Mã giới thiệu đã được sử dụng.';
+	@override String get get_me_failed => 'Tải thông tin cá nhân thất bại.';
+	@override String get user_cannot_use_own_invite_code => 'Bạn không thể sử dụng mã giới thiệu của chính mình.';
+	@override String get file_not_found => 'Không tìm thấy file.';
+	@override String get file_upload_failed => 'Tải file lên thất bại. Vui lòng thử lại.';
+	@override String get upload_webp_failed => 'Tải file WEBP lên thất bại.';
+	@override String get create_theme_failed => 'Tạo chủ đề thất bại.';
+	@override String get get_theme_failed => 'Không thể lấy thông tin chủ đề.';
+	@override String get category_already_exists => 'Danh mục đã tồn tại.';
+	@override String get create_category_failed => 'Tạo danh mục thất bại.';
+	@override String get invalid_ratio => 'Tỷ lệ video không hợp lệ.';
+	@override String get create_media_failed => 'Không thể khởi tạo quá trình tạo video.';
+	@override String get media_not_found => 'Không tìm thấy file video hoặc ảnh.';
+	@override String get callback_media_failed => 'Xử lý phản hồi media thất bại.';
+	@override String get get_media_detail_failed => 'Không thể lấy thông tin chi tiết video.';
+	@override String get get_media_failed => 'Không thể tải danh sách media.';
+	@override String get update_theme_failed => 'Cập nhật chủ đề thất bại.';
+	@override String get delete_theme_failed => 'Xóa chủ đề thất bại.';
+	@override String get category_not_found => 'Không tìm thấy danh mục.';
+	@override String get delete_category_failed => 'Xóa danh mục thất bại.';
+	@override String get media_not_owned => 'Bạn không sở hữu tệp tin này.';
+	@override String get theme_already_exists => 'Chủ đề đã tồn tại.';
+	@override String get like_media_failed => 'Không thể cập nhật trạng thái yêu thích.';
+	@override String get user_not_vip => 'Tính năng này yêu cầu đăng ký VIP.';
+	@override String get not_enough_credit => 'Không đủ tín dụng. Vui lòng mua thêm credit.';
+	@override String get create_photo_enhance_failed => 'Nâng cấp chất lượng ảnh thất bại.';
+	@override String get remove_object_failed => 'Xóa vật thể khỏi ảnh thất bại.';
+	@override String get get_suggestion_prompt_failed => 'Không thể tạo gợi ý mô tả.';
+	@override String get get_tasks_failed => 'Không thể tải danh sách nhiệm vụ.';
+	@override String get action_task_failed => 'Thực hiện nhiệm vụ thất bại.';
+	@override String get task_not_found => 'Không tìm thấy nhiệm vụ.';
+	@override String get task_already_claimed => 'Phần thưởng nhiệm vụ đã được nhận.';
+	@override String get task_already_started => 'Nhiệm vụ đã được bắt đầu trước đó.';
+	@override String get task_not_completed => 'Nhiệm vụ chưa được hoàn thành.';
+	@override String get rate_app_failed => 'Đánh giá ứng dụng thất bại.';
+	@override String get daily_login_task_not_found => 'Không tìm thấy nhiệm vụ điểm danh.';
+	@override String get get_daily_login_failed => 'Tải nhiệm vụ điểm danh thất bại.';
+	@override String get today_login_reward_already_claimed => 'Phần thưởng điểm danh hôm nay đã được nhận.';
+	@override String get take_login_reward_failed => 'Nhận phần thưởng điểm danh thất bại.';
+	@override String get iap_receipt_already_exists => 'Hóa đơn mua hàng đã được đăng ký trước đó.';
+	@override String get iap_verify_product_failed => 'Xác minh sản phẩm mua hàng thất bại.';
+	@override String get iap_product_not_purchased => 'Sản phẩm chưa được mua hàng.';
+	@override String get iap_product_not_found => 'Không tìm thấy sản phẩm mua hàng.';
+	@override String get iap_subscription_not_active => 'Gói đăng ký hiện không hoạt động.';
+	@override String get iap_subscription_already_acknowledged => 'Gói đăng ký đã được xác nhận trước đó.';
+	@override String get iap_verify_subscription_failed => 'Xác minh gói đăng ký thất bại.';
+	@override String get refill_subscription_credits_failed => 'Nạp lại credit gói đăng ký thất bại.';
+	@override String get cancel_subscription_failed => 'Hủy gói đăng ký thất bại.';
+	@override String get plan_not_found => 'Không tìm thấy gói dịch vụ.';
+	@override String get transaction_action_failed => 'Giao dịch thất bại.';
+	@override String get iap_verify_ios_product_failed => 'Xác minh mua hàng iOS thất bại.';
+	@override String get iap_subscription_invalid_type => 'Loại gói đăng ký không hợp lệ.';
+	@override String get subscription_not_active_for_refill => 'Gói đăng ký không hoạt động để nạp lại credit.';
+	@override String get get_price_list_failed => 'Không thể tải danh sách giá credit.';
+	@override String get iap_receipt_not_found => 'Không tìm thấy hóa đơn mua hàng.';
+	@override String get iap_subscription_not_found => 'Không tìm thấy thông tin gói đăng ký.';
 }
 
 // Path: onboarding.page1
@@ -655,6 +755,7 @@ extension on TranslationsVi {
 			'generating.notify_me' => 'Thông báo cho tôi khi hoàn tất',
 			'generating.notified' => 'Chúng tôi sẽ thông báo khi video của bạn sẵn sàng!',
 			'generating.notification_denied' => 'Quyền thông báo bị từ chối. Vui lòng bật lại trong Cài đặt.',
+			'generating.failed' => 'Không thể tạo video. Vui lòng thử lại.',
 			'result.title' => 'Video kết quả',
 			'result.ready_message' => ({required Object title}) => 'Video ${title} của bạn đã sẵn sàng!',
 			'result.regenerate' => 'Tạo lại',
@@ -685,6 +786,95 @@ extension on TranslationsVi {
 			'tips_sheet.hidden_face' => 'Bị che khuôn mặt',
 			'tips_sheet.multiple_people' => 'Nhiều người',
 			'tips_sheet.blurry_photo' => 'Ảnh bị mờ',
+			'errors.unknown' => 'Đã xảy ra lỗi không xác định. Vui lòng thử lại sau.',
+			'errors.unauthorized' => 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
+			'errors.validation_error' => 'Thông tin không hợp lệ. Vui lòng kiểm tra lại.',
+			'errors.password_incorrect' => 'Mật khẩu không chính xác. Vui lòng thử lại.',
+			'errors.account_not_found' => 'Không tìm thấy tài khoản.',
+			'errors.email_template_already_exists' => 'Mẫu email đã tồn tại.',
+			'errors.email_template_not_found' => 'Không tìm thấy mẫu email.',
+			'errors.account_email_limit_register' => 'Email này đã đạt giới hạn đăng ký.',
+			'errors.account_username_is_exist' => 'Tên đăng nhập đã được sử dụng.',
+			'errors.token_invalid' => 'Phiên làm việc không hợp lệ. Vui lòng đăng nhập lại.',
+			'errors.already_enable_2fa' => 'Bảo mật 2 lớp đã được bật.',
+			'errors.account_are_not_enable_2fa' => 'Tài khoản chưa bật bảo mật 2 lớp.',
+			'errors.ref_account_not_found' => 'Không tìm thấy tài khoản người giới thiệu.',
+			'errors.account_already_vip' => 'Tài khoản đã là VIP.',
+			'errors.perm_not_found' => 'Không tìm thấy quyền hạn.',
+			'errors.account_register_not_found' => 'Không tìm thấy thông tin đăng ký.',
+			'errors.otp_invalid' => 'Mã OTP không hợp lệ. Vui lòng kiểm tra lại.',
+			'errors.otp_expired' => 'Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới.',
+			'errors.otp_to_many_request' => 'Quá nhiều yêu cầu. Vui lòng đợi trước khi thử lại.',
+			'errors.account_info_not_found' => 'Không tìm thấy thông tin tài khoản.',
+			'errors.account_info_already_created' => 'Thông tin tài khoản đã được tạo.',
+			'errors.id_number_already_in_use' => 'Số ID đã được sử dụng.',
+			'errors.account_info_can_not_update' => 'Không thể cập nhật thông tin tài khoản.',
+			'errors.account_profile_is_processed' => 'Thông tin cá nhân đang được xử lý.',
+			'errors.insufficient_fund' => 'Không đủ tiền hoặc số dư tín dụng.',
+			'errors.account_email_is_exist' => 'Email đã được đăng ký sử dụng.',
+			'errors.proxy_error' => 'Lỗi kết nối proxy.',
+			'errors.invalid_file_type' => 'Định dạng file không hợp lệ. Vui lòng dùng định dạng hỗ trợ.',
+			'errors.file_too_large' => 'Kích thước file vượt quá giới hạn 20MB.',
+			'errors.account_banned' => 'Tài khoản của bạn đã bị khóa.',
+			'errors.login_failed' => 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.',
+			'errors.error_code' => 'Mã xác thực không hợp lệ.',
+			'errors.user_not_found' => 'Không tìm thấy người dùng.',
+			'errors.user_used_invite_code' => 'Mã giới thiệu đã được sử dụng.',
+			'errors.get_me_failed' => 'Tải thông tin cá nhân thất bại.',
+			'errors.user_cannot_use_own_invite_code' => 'Bạn không thể sử dụng mã giới thiệu của chính mình.',
+			'errors.file_not_found' => 'Không tìm thấy file.',
+			'errors.file_upload_failed' => 'Tải file lên thất bại. Vui lòng thử lại.',
+			'errors.upload_webp_failed' => 'Tải file WEBP lên thất bại.',
+			'errors.create_theme_failed' => 'Tạo chủ đề thất bại.',
+			'errors.get_theme_failed' => 'Không thể lấy thông tin chủ đề.',
+			'errors.category_already_exists' => 'Danh mục đã tồn tại.',
+			'errors.create_category_failed' => 'Tạo danh mục thất bại.',
+			'errors.invalid_ratio' => 'Tỷ lệ video không hợp lệ.',
+			'errors.create_media_failed' => 'Không thể khởi tạo quá trình tạo video.',
+			'errors.media_not_found' => 'Không tìm thấy file video hoặc ảnh.',
+			'errors.callback_media_failed' => 'Xử lý phản hồi media thất bại.',
+			'errors.get_media_detail_failed' => 'Không thể lấy thông tin chi tiết video.',
+			'errors.get_media_failed' => 'Không thể tải danh sách media.',
+			'errors.update_theme_failed' => 'Cập nhật chủ đề thất bại.',
+			'errors.delete_theme_failed' => 'Xóa chủ đề thất bại.',
+			'errors.category_not_found' => 'Không tìm thấy danh mục.',
+			'errors.delete_category_failed' => 'Xóa danh mục thất bại.',
+			'errors.media_not_owned' => 'Bạn không sở hữu tệp tin này.',
+			'errors.theme_already_exists' => 'Chủ đề đã tồn tại.',
+			'errors.like_media_failed' => 'Không thể cập nhật trạng thái yêu thích.',
+			'errors.user_not_vip' => 'Tính năng này yêu cầu đăng ký VIP.',
+			'errors.not_enough_credit' => 'Không đủ tín dụng. Vui lòng mua thêm credit.',
+			'errors.create_photo_enhance_failed' => 'Nâng cấp chất lượng ảnh thất bại.',
+			'errors.remove_object_failed' => 'Xóa vật thể khỏi ảnh thất bại.',
+			'errors.get_suggestion_prompt_failed' => 'Không thể tạo gợi ý mô tả.',
+			'errors.get_tasks_failed' => 'Không thể tải danh sách nhiệm vụ.',
+			'errors.action_task_failed' => 'Thực hiện nhiệm vụ thất bại.',
+			'errors.task_not_found' => 'Không tìm thấy nhiệm vụ.',
+			'errors.task_already_claimed' => 'Phần thưởng nhiệm vụ đã được nhận.',
+			'errors.task_already_started' => 'Nhiệm vụ đã được bắt đầu trước đó.',
+			'errors.task_not_completed' => 'Nhiệm vụ chưa được hoàn thành.',
+			'errors.rate_app_failed' => 'Đánh giá ứng dụng thất bại.',
+			'errors.daily_login_task_not_found' => 'Không tìm thấy nhiệm vụ điểm danh.',
+			'errors.get_daily_login_failed' => 'Tải nhiệm vụ điểm danh thất bại.',
+			'errors.today_login_reward_already_claimed' => 'Phần thưởng điểm danh hôm nay đã được nhận.',
+			'errors.take_login_reward_failed' => 'Nhận phần thưởng điểm danh thất bại.',
+			'errors.iap_receipt_already_exists' => 'Hóa đơn mua hàng đã được đăng ký trước đó.',
+			'errors.iap_verify_product_failed' => 'Xác minh sản phẩm mua hàng thất bại.',
+			'errors.iap_product_not_purchased' => 'Sản phẩm chưa được mua hàng.',
+			'errors.iap_product_not_found' => 'Không tìm thấy sản phẩm mua hàng.',
+			'errors.iap_subscription_not_active' => 'Gói đăng ký hiện không hoạt động.',
+			'errors.iap_subscription_already_acknowledged' => 'Gói đăng ký đã được xác nhận trước đó.',
+			'errors.iap_verify_subscription_failed' => 'Xác minh gói đăng ký thất bại.',
+			'errors.refill_subscription_credits_failed' => 'Nạp lại credit gói đăng ký thất bại.',
+			'errors.cancel_subscription_failed' => 'Hủy gói đăng ký thất bại.',
+			'errors.plan_not_found' => 'Không tìm thấy gói dịch vụ.',
+			'errors.transaction_action_failed' => 'Giao dịch thất bại.',
+			'errors.iap_verify_ios_product_failed' => 'Xác minh mua hàng iOS thất bại.',
+			'errors.iap_subscription_invalid_type' => 'Loại gói đăng ký không hợp lệ.',
+			'errors.subscription_not_active_for_refill' => 'Gói đăng ký không hoạt động để nạp lại credit.',
+			'errors.get_price_list_failed' => 'Không thể tải danh sách giá credit.',
+			'errors.iap_receipt_not_found' => 'Không tìm thấy hóa đơn mua hàng.',
+			'errors.iap_subscription_not_found' => 'Không tìm thấy thông tin gói đăng ký.',
 			_ => null,
 		};
 	}

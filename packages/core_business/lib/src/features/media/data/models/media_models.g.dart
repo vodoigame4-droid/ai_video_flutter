@@ -80,6 +80,7 @@ _CreateTgvRequestModel _$CreateTgvRequestModelFromJson(
   isLongTime: json['isLongTime'] as bool,
   themeType: json['themeType'] as String,
   themeOrgId: (json['themeOrgId'] as num).toInt(),
+  serviceType: json['serviceType'] as String? ?? 'IMAGE_TO_VIDEO',
 );
 
 Map<String, dynamic> _$CreateTgvRequestModelToJson(
@@ -93,6 +94,7 @@ Map<String, dynamic> _$CreateTgvRequestModelToJson(
   'isLongTime': instance.isLongTime,
   'themeType': instance.themeType,
   'themeOrgId': instance.themeOrgId,
+  'serviceType': instance.serviceType,
 };
 
 _MediaModel _$MediaModelFromJson(Map<String, dynamic> json) => _MediaModel(

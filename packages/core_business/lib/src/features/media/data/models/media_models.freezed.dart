@@ -590,7 +590,7 @@ as List<ThemeModel>?,
 /// @nodoc
 mixin _$CreateTgvRequestModel {
 
- String get imageUrl; String get name; String get prompt; String get themeId; bool get isHd; bool get isLongTime; String get themeType; int get themeOrgId;
+ String get imageUrl; String get name; String get prompt; String get themeId; bool get isHd; bool get isLongTime; String get themeType; int get themeOrgId; String get serviceType;
 /// Create a copy of CreateTgvRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -603,16 +603,16 @@ $CreateTgvRequestModelCopyWith<CreateTgvRequestModel> get copyWith => _$CreateTg
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateTgvRequestModel&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.name, name) || other.name == name)&&(identical(other.prompt, prompt) || other.prompt == prompt)&&(identical(other.themeId, themeId) || other.themeId == themeId)&&(identical(other.isHd, isHd) || other.isHd == isHd)&&(identical(other.isLongTime, isLongTime) || other.isLongTime == isLongTime)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateTgvRequestModel&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.name, name) || other.name == name)&&(identical(other.prompt, prompt) || other.prompt == prompt)&&(identical(other.themeId, themeId) || other.themeId == themeId)&&(identical(other.isHd, isHd) || other.isHd == isHd)&&(identical(other.isLongTime, isLongTime) || other.isLongTime == isLongTime)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId)&&(identical(other.serviceType, serviceType) || other.serviceType == serviceType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,imageUrl,name,prompt,themeId,isHd,isLongTime,themeType,themeOrgId);
+int get hashCode => Object.hash(runtimeType,imageUrl,name,prompt,themeId,isHd,isLongTime,themeType,themeOrgId,serviceType);
 
 @override
 String toString() {
-  return 'CreateTgvRequestModel(imageUrl: $imageUrl, name: $name, prompt: $prompt, themeId: $themeId, isHd: $isHd, isLongTime: $isLongTime, themeType: $themeType, themeOrgId: $themeOrgId)';
+  return 'CreateTgvRequestModel(imageUrl: $imageUrl, name: $name, prompt: $prompt, themeId: $themeId, isHd: $isHd, isLongTime: $isLongTime, themeType: $themeType, themeOrgId: $themeOrgId, serviceType: $serviceType)';
 }
 
 
@@ -623,7 +623,7 @@ abstract mixin class $CreateTgvRequestModelCopyWith<$Res>  {
   factory $CreateTgvRequestModelCopyWith(CreateTgvRequestModel value, $Res Function(CreateTgvRequestModel) _then) = _$CreateTgvRequestModelCopyWithImpl;
 @useResult
 $Res call({
- String imageUrl, String name, String prompt, String themeId, bool isHd, bool isLongTime, String themeType, int themeOrgId
+ String imageUrl, String name, String prompt, String themeId, bool isHd, bool isLongTime, String themeType, int themeOrgId, String serviceType
 });
 
 
@@ -640,7 +640,7 @@ class _$CreateTgvRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of CreateTgvRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? imageUrl = null,Object? name = null,Object? prompt = null,Object? themeId = null,Object? isHd = null,Object? isLongTime = null,Object? themeType = null,Object? themeOrgId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? imageUrl = null,Object? name = null,Object? prompt = null,Object? themeId = null,Object? isHd = null,Object? isLongTime = null,Object? themeType = null,Object? themeOrgId = null,Object? serviceType = null,}) {
   return _then(_self.copyWith(
 imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -650,7 +650,8 @@ as String,isHd: null == isHd ? _self.isHd : isHd // ignore: cast_nullable_to_non
 as bool,isLongTime: null == isLongTime ? _self.isLongTime : isLongTime // ignore: cast_nullable_to_non_nullable
 as bool,themeType: null == themeType ? _self.themeType : themeType // ignore: cast_nullable_to_non_nullable
 as String,themeOrgId: null == themeOrgId ? _self.themeOrgId : themeOrgId // ignore: cast_nullable_to_non_nullable
-as int,
+as int,serviceType: null == serviceType ? _self.serviceType : serviceType // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -735,10 +736,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String imageUrl,  String name,  String prompt,  String themeId,  bool isHd,  bool isLongTime,  String themeType,  int themeOrgId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String imageUrl,  String name,  String prompt,  String themeId,  bool isHd,  bool isLongTime,  String themeType,  int themeOrgId,  String serviceType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreateTgvRequestModel() when $default != null:
-return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,_that.isLongTime,_that.themeType,_that.themeOrgId);case _:
+return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,_that.isLongTime,_that.themeType,_that.themeOrgId,_that.serviceType);case _:
   return orElse();
 
 }
@@ -756,10 +757,10 @@ return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String imageUrl,  String name,  String prompt,  String themeId,  bool isHd,  bool isLongTime,  String themeType,  int themeOrgId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String imageUrl,  String name,  String prompt,  String themeId,  bool isHd,  bool isLongTime,  String themeType,  int themeOrgId,  String serviceType)  $default,) {final _that = this;
 switch (_that) {
 case _CreateTgvRequestModel():
-return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,_that.isLongTime,_that.themeType,_that.themeOrgId);case _:
+return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,_that.isLongTime,_that.themeType,_that.themeOrgId,_that.serviceType);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -776,10 +777,10 @@ return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String imageUrl,  String name,  String prompt,  String themeId,  bool isHd,  bool isLongTime,  String themeType,  int themeOrgId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String imageUrl,  String name,  String prompt,  String themeId,  bool isHd,  bool isLongTime,  String themeType,  int themeOrgId,  String serviceType)?  $default,) {final _that = this;
 switch (_that) {
 case _CreateTgvRequestModel() when $default != null:
-return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,_that.isLongTime,_that.themeType,_that.themeOrgId);case _:
+return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,_that.isLongTime,_that.themeType,_that.themeOrgId,_that.serviceType);case _:
   return null;
 
 }
@@ -791,7 +792,7 @@ return $default(_that.imageUrl,_that.name,_that.prompt,_that.themeId,_that.isHd,
 @JsonSerializable()
 
 class _CreateTgvRequestModel implements CreateTgvRequestModel {
-  const _CreateTgvRequestModel({required this.imageUrl, required this.name, required this.prompt, required this.themeId, required this.isHd, required this.isLongTime, required this.themeType, required this.themeOrgId});
+  const _CreateTgvRequestModel({required this.imageUrl, required this.name, required this.prompt, required this.themeId, required this.isHd, required this.isLongTime, required this.themeType, required this.themeOrgId, this.serviceType = 'IMAGE_TO_VIDEO'});
   factory _CreateTgvRequestModel.fromJson(Map<String, dynamic> json) => _$CreateTgvRequestModelFromJson(json);
 
 @override final  String imageUrl;
@@ -802,6 +803,7 @@ class _CreateTgvRequestModel implements CreateTgvRequestModel {
 @override final  bool isLongTime;
 @override final  String themeType;
 @override final  int themeOrgId;
+@override@JsonKey() final  String serviceType;
 
 /// Create a copy of CreateTgvRequestModel
 /// with the given fields replaced by the non-null parameter values.
@@ -816,16 +818,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateTgvRequestModel&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.name, name) || other.name == name)&&(identical(other.prompt, prompt) || other.prompt == prompt)&&(identical(other.themeId, themeId) || other.themeId == themeId)&&(identical(other.isHd, isHd) || other.isHd == isHd)&&(identical(other.isLongTime, isLongTime) || other.isLongTime == isLongTime)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateTgvRequestModel&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.name, name) || other.name == name)&&(identical(other.prompt, prompt) || other.prompt == prompt)&&(identical(other.themeId, themeId) || other.themeId == themeId)&&(identical(other.isHd, isHd) || other.isHd == isHd)&&(identical(other.isLongTime, isLongTime) || other.isLongTime == isLongTime)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId)&&(identical(other.serviceType, serviceType) || other.serviceType == serviceType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,imageUrl,name,prompt,themeId,isHd,isLongTime,themeType,themeOrgId);
+int get hashCode => Object.hash(runtimeType,imageUrl,name,prompt,themeId,isHd,isLongTime,themeType,themeOrgId,serviceType);
 
 @override
 String toString() {
-  return 'CreateTgvRequestModel(imageUrl: $imageUrl, name: $name, prompt: $prompt, themeId: $themeId, isHd: $isHd, isLongTime: $isLongTime, themeType: $themeType, themeOrgId: $themeOrgId)';
+  return 'CreateTgvRequestModel(imageUrl: $imageUrl, name: $name, prompt: $prompt, themeId: $themeId, isHd: $isHd, isLongTime: $isLongTime, themeType: $themeType, themeOrgId: $themeOrgId, serviceType: $serviceType)';
 }
 
 
@@ -836,7 +838,7 @@ abstract mixin class _$CreateTgvRequestModelCopyWith<$Res> implements $CreateTgv
   factory _$CreateTgvRequestModelCopyWith(_CreateTgvRequestModel value, $Res Function(_CreateTgvRequestModel) _then) = __$CreateTgvRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- String imageUrl, String name, String prompt, String themeId, bool isHd, bool isLongTime, String themeType, int themeOrgId
+ String imageUrl, String name, String prompt, String themeId, bool isHd, bool isLongTime, String themeType, int themeOrgId, String serviceType
 });
 
 
@@ -853,7 +855,7 @@ class __$CreateTgvRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of CreateTgvRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? imageUrl = null,Object? name = null,Object? prompt = null,Object? themeId = null,Object? isHd = null,Object? isLongTime = null,Object? themeType = null,Object? themeOrgId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? imageUrl = null,Object? name = null,Object? prompt = null,Object? themeId = null,Object? isHd = null,Object? isLongTime = null,Object? themeType = null,Object? themeOrgId = null,Object? serviceType = null,}) {
   return _then(_CreateTgvRequestModel(
 imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -863,7 +865,8 @@ as String,isHd: null == isHd ? _self.isHd : isHd // ignore: cast_nullable_to_non
 as bool,isLongTime: null == isLongTime ? _self.isLongTime : isLongTime // ignore: cast_nullable_to_non_nullable
 as bool,themeType: null == themeType ? _self.themeType : themeType // ignore: cast_nullable_to_non_nullable
 as String,themeOrgId: null == themeOrgId ? _self.themeOrgId : themeOrgId // ignore: cast_nullable_to_non_nullable
-as int,
+as int,serviceType: null == serviceType ? _self.serviceType : serviceType // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

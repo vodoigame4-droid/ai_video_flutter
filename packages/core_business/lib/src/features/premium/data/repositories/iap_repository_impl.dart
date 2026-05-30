@@ -1,5 +1,6 @@
 import '../../../../core/resources/resource.dart';
 import '../../../../core/utils/log_utils.dart';
+import '../../../../core/utils/error_parser.dart';
 import '../../domain/repositories/iap_repository.dart';
 import '../datasources/iap_remote_datasource.dart';
 import '../models/iap_models.dart';
@@ -17,7 +18,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: verifyProduct failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -28,7 +29,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: verifySubscription failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -39,7 +40,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: restoreSubscription failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -50,7 +51,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: verifyProductIos failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -61,7 +62,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: verifySubscriptionIos failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -72,7 +73,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: restoreSubscriptionIos failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -83,7 +84,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: googleWebhook failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 
@@ -94,7 +95,7 @@ class IapRepositoryImpl implements IapRepository {
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('IapRepositoryImpl: appleWebhook failed', error: e, stackTrace: stack);
-      return Resource.error(message: e.toString());
+      return Resource.error(message: parseRepositoryError(e));
     }
   }
 }
