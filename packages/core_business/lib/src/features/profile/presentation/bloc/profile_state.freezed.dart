@@ -125,12 +125,12 @@ return ready(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState)?  ready,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState,  List<ThemeEntity> likedTemplates)?  ready,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.subTabIndex,_that.videosState);case _:
+return ready(_that.subTabIndex,_that.videosState,_that.likedTemplates);case _:
   return orElse();
 
 }
@@ -148,12 +148,12 @@ return ready(_that.subTabIndex,_that.videosState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState)  ready,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState,  List<ThemeEntity> likedTemplates)  ready,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.subTabIndex,_that.videosState);case _:
+return ready(_that.subTabIndex,_that.videosState,_that.likedTemplates);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +170,12 @@ return ready(_that.subTabIndex,_that.videosState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState)?  ready,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( int subTabIndex,  Resource<List<UserVideoEntity>> videosState,  List<ThemeEntity> likedTemplates)?  ready,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.subTabIndex,_that.videosState);case _:
+return ready(_that.subTabIndex,_that.videosState,_that.likedTemplates);case _:
   return null;
 
 }
@@ -251,11 +251,18 @@ String toString() {
 
 
 class _Ready implements ProfileState {
-  const _Ready({required this.subTabIndex, required this.videosState});
+  const _Ready({required this.subTabIndex, required this.videosState, required final  List<ThemeEntity> likedTemplates}): _likedTemplates = likedTemplates;
   
 
  final  int subTabIndex;
  final  Resource<List<UserVideoEntity>> videosState;
+ final  List<ThemeEntity> _likedTemplates;
+ List<ThemeEntity> get likedTemplates {
+  if (_likedTemplates is EqualUnmodifiableListView) return _likedTemplates;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_likedTemplates);
+}
+
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -267,16 +274,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.subTabIndex, subTabIndex) || other.subTabIndex == subTabIndex)&&(identical(other.videosState, videosState) || other.videosState == videosState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.subTabIndex, subTabIndex) || other.subTabIndex == subTabIndex)&&(identical(other.videosState, videosState) || other.videosState == videosState)&&const DeepCollectionEquality().equals(other._likedTemplates, _likedTemplates));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,subTabIndex,videosState);
+int get hashCode => Object.hash(runtimeType,subTabIndex,videosState,const DeepCollectionEquality().hash(_likedTemplates));
 
 @override
 String toString() {
-  return 'ProfileState.ready(subTabIndex: $subTabIndex, videosState: $videosState)';
+  return 'ProfileState.ready(subTabIndex: $subTabIndex, videosState: $videosState, likedTemplates: $likedTemplates)';
 }
 
 
@@ -287,7 +294,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $ProfileStateCopyWith<$Res
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- int subTabIndex, Resource<List<UserVideoEntity>> videosState
+ int subTabIndex, Resource<List<UserVideoEntity>> videosState, List<ThemeEntity> likedTemplates
 });
 
 
@@ -304,11 +311,12 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? subTabIndex = null,Object? videosState = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? subTabIndex = null,Object? videosState = null,Object? likedTemplates = null,}) {
   return _then(_Ready(
 subTabIndex: null == subTabIndex ? _self.subTabIndex : subTabIndex // ignore: cast_nullable_to_non_nullable
 as int,videosState: null == videosState ? _self.videosState : videosState // ignore: cast_nullable_to_non_nullable
-as Resource<List<UserVideoEntity>>,
+as Resource<List<UserVideoEntity>>,likedTemplates: null == likedTemplates ? _self._likedTemplates : likedTemplates // ignore: cast_nullable_to_non_nullable
+as List<ThemeEntity>,
   ));
 }
 

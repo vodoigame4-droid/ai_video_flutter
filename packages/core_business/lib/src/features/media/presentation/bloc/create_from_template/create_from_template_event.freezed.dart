@@ -55,7 +55,7 @@ extension CreateFromTemplateEventPatterns on CreateFromTemplateEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectPhoto value)?  selectPhoto,TResult Function( _RemovePhoto value)?  removePhoto,TResult Function( _SelectQuality value)?  selectQuality,TResult Function( _SelectDuration value)?  selectDuration,TResult Function( _StartGenerating value)?  startGenerating,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectPhoto value)?  selectPhoto,TResult Function( _RemovePhoto value)?  removePhoto,TResult Function( _SelectQuality value)?  selectQuality,TResult Function( _SelectDuration value)?  selectDuration,TResult Function( _StartGenerating value)?  startGenerating,TResult Function( _ToggleLike value)?  toggleLike,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -64,7 +64,8 @@ return selectPhoto(_that);case _RemovePhoto() when removePhoto != null:
 return removePhoto(_that);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that);case _StartGenerating() when startGenerating != null:
-return startGenerating(_that);case _:
+return startGenerating(_that);case _ToggleLike() when toggleLike != null:
+return toggleLike(_that);case _:
   return orElse();
 
 }
@@ -82,7 +83,7 @@ return startGenerating(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectPhoto value)  selectPhoto,required TResult Function( _RemovePhoto value)  removePhoto,required TResult Function( _SelectQuality value)  selectQuality,required TResult Function( _SelectDuration value)  selectDuration,required TResult Function( _StartGenerating value)  startGenerating,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectPhoto value)  selectPhoto,required TResult Function( _RemovePhoto value)  removePhoto,required TResult Function( _SelectQuality value)  selectQuality,required TResult Function( _SelectDuration value)  selectDuration,required TResult Function( _StartGenerating value)  startGenerating,required TResult Function( _ToggleLike value)  toggleLike,}){
 final _that = this;
 switch (_that) {
 case _Init():
@@ -91,7 +92,8 @@ return selectPhoto(_that);case _RemovePhoto():
 return removePhoto(_that);case _SelectQuality():
 return selectQuality(_that);case _SelectDuration():
 return selectDuration(_that);case _StartGenerating():
-return startGenerating(_that);case _:
+return startGenerating(_that);case _ToggleLike():
+return toggleLike(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -108,7 +110,7 @@ return startGenerating(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectPhoto value)?  selectPhoto,TResult? Function( _RemovePhoto value)?  removePhoto,TResult? Function( _SelectQuality value)?  selectQuality,TResult? Function( _SelectDuration value)?  selectDuration,TResult? Function( _StartGenerating value)?  startGenerating,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectPhoto value)?  selectPhoto,TResult? Function( _RemovePhoto value)?  removePhoto,TResult? Function( _SelectQuality value)?  selectQuality,TResult? Function( _SelectDuration value)?  selectDuration,TResult? Function( _StartGenerating value)?  startGenerating,TResult? Function( _ToggleLike value)?  toggleLike,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -117,7 +119,8 @@ return selectPhoto(_that);case _RemovePhoto() when removePhoto != null:
 return removePhoto(_that);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that);case _StartGenerating() when startGenerating != null:
-return startGenerating(_that);case _:
+return startGenerating(_that);case _ToggleLike() when toggleLike != null:
+return toggleLike(_that);case _:
   return null;
 
 }
@@ -134,7 +137,7 @@ return startGenerating(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)?  init,TResult Function( String path)?  selectPhoto,TResult Function()?  removePhoto,TResult Function( String quality)?  selectQuality,TResult Function( String duration)?  selectDuration,TResult Function()?  startGenerating,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)?  init,TResult Function( String path)?  selectPhoto,TResult Function()?  removePhoto,TResult Function( String quality)?  selectQuality,TResult Function( String duration)?  selectDuration,TResult Function()?  startGenerating,TResult Function()?  toggleLike,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId);case _SelectPhoto() when selectPhoto != null:
@@ -142,7 +145,8 @@ return selectPhoto(_that.path);case _RemovePhoto() when removePhoto != null:
 return removePhoto();case _SelectQuality() when selectQuality != null:
 return selectQuality(_that.quality);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that.duration);case _StartGenerating() when startGenerating != null:
-return startGenerating();case _:
+return startGenerating();case _ToggleLike() when toggleLike != null:
+return toggleLike();case _:
   return orElse();
 
 }
@@ -160,7 +164,7 @@ return startGenerating();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)  init,required TResult Function( String path)  selectPhoto,required TResult Function()  removePhoto,required TResult Function( String quality)  selectQuality,required TResult Function( String duration)  selectDuration,required TResult Function()  startGenerating,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)  init,required TResult Function( String path)  selectPhoto,required TResult Function()  removePhoto,required TResult Function( String quality)  selectQuality,required TResult Function( String duration)  selectDuration,required TResult Function()  startGenerating,required TResult Function()  toggleLike,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId);case _SelectPhoto():
@@ -168,7 +172,8 @@ return selectPhoto(_that.path);case _RemovePhoto():
 return removePhoto();case _SelectQuality():
 return selectQuality(_that.quality);case _SelectDuration():
 return selectDuration(_that.duration);case _StartGenerating():
-return startGenerating();case _:
+return startGenerating();case _ToggleLike():
+return toggleLike();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -185,7 +190,7 @@ return startGenerating();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)?  init,TResult? Function( String path)?  selectPhoto,TResult? Function()?  removePhoto,TResult? Function( String quality)?  selectQuality,TResult? Function( String duration)?  selectDuration,TResult? Function()?  startGenerating,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId)?  init,TResult? Function( String path)?  selectPhoto,TResult? Function()?  removePhoto,TResult? Function( String quality)?  selectQuality,TResult? Function( String duration)?  selectDuration,TResult? Function()?  startGenerating,TResult? Function()?  toggleLike,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId);case _SelectPhoto() when selectPhoto != null:
@@ -193,7 +198,8 @@ return selectPhoto(_that.path);case _RemovePhoto() when removePhoto != null:
 return removePhoto();case _SelectQuality() when selectQuality != null:
 return selectQuality(_that.quality);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that.duration);case _StartGenerating() when startGenerating != null:
-return startGenerating();case _:
+return startGenerating();case _ToggleLike() when toggleLike != null:
+return toggleLike();case _:
   return null;
 
 }
@@ -531,6 +537,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'CreateFromTemplateEvent.startGenerating()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _ToggleLike implements CreateFromTemplateEvent {
+  const _ToggleLike();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleLike);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CreateFromTemplateEvent.toggleLike()';
 }
 
 

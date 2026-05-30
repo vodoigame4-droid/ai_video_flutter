@@ -12,6 +12,8 @@ import '../../../create_video/presentation/pages/result_page.dart';
 import '../widgets/my_video_item_widget.dart';
 import '../widgets/delete_confirm_dialog.dart';
 import '../widgets/premium_banner_widget.dart';
+import '../widgets/liked_template_item_widget.dart';
+import '../../../create_video/presentation/pages/create_from_template_page.dart';
 
 class ProfilePage extends StatelessWidget {
   static const String path = '/profile';
@@ -58,7 +60,7 @@ class ProfileView extends StatelessWidget {
             return state.when(
               initial: () => const Center(child: CircularProgressIndicator()),
               loading: () => const Center(child: CircularProgressIndicator()),
-              ready: (subTabIndex, videosState) {
+              ready: (subTabIndex, videosState, likedTemplates) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -219,61 +221,90 @@ class ProfileView extends StatelessWidget {
 
                       // Grid/Empty content handling
                       Expanded(
-                        child: videosState.when(
-                          initial: () => const SizedBox.shrink(),
-                          loading: () =>
-                              const Center(child: CircularProgressIndicator()),
-                          empty: () => _buildEmptyPlaceholder(t),
-                          success: (videos) {
-                            // Filter list based on selected sub tab
-                            final filteredList = subTabIndex == 0
-                                ? videos
-                                : videos.where((v) => v.isLiked).toList();
-
-                            if (filteredList.isEmpty) {
-                              return _buildEmptyPlaceholder(t);
-                            }
-
-                            return GridView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 12,
-                                    crossAxisSpacing: 12,
-                                    childAspectRatio: 173 / 248,
+                        child: subTabIndex == 0
+                            ? videosState.when(
+                                initial: () => const SizedBox.shrink(),
+                                loading: () => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                empty: () => _buildEmptyPlaceholder(t),
+                                success: (videos) {
+                                  if (videos.isEmpty) {
+                                    return _buildEmptyPlaceholder(t);
+                                  }
+                                  return GridView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 12,
+                                      crossAxisSpacing: 12,
+                                      childAspectRatio: 173 / 248,
+                                    ),
+                                    itemCount: videos.length,
+                                    padding: const EdgeInsets.only(bottom: 100),
+                                    itemBuilder: (context, index) {
+                                      final video = videos[index];
+                                      return MyVideoItemWidget(
+                                        video: video,
+                                        onPlayTap: () {
+                                          const mockVideoUrl =
+                                              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+                                          ResultPage.push(
+                                            context,
+                                            videoId: video.id,
+                                            title: video.title,
+                                            imageUrl: video.imageUrl,
+                                            videoUrl: mockVideoUrl,
+                                            createdAt: video.createdAt,
+                                          );
+                                        },
+                                        onDeleteTap: () =>
+                                            _showDeleteDialog(context, video.id),
+                                      );
+                                    },
+                                  );
+                                },
+                                error: (msg) => Center(
+                                  child: Text(
+                                    msg,
+                                    style: context.appTheme.errorTextStyle,
                                   ),
-                              itemCount: filteredList.length,
-                              padding: const EdgeInsets.only(bottom: 100),
-                              itemBuilder: (context, index) {
-                                final video = filteredList[index];
-                                return MyVideoItemWidget(
-                                  video: video,
-                                  onPlayTap: () {
-                                    const mockVideoUrl =
-                                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
-                                    ResultPage.push(
-                                      context,
-                                      videoId: video.id,
-                                      title: video.title,
-                                      imageUrl: video.imageUrl,
-                                      videoUrl: mockVideoUrl,
-                                      createdAt: video.createdAt,
-                                    );
-                                  },
-                                  onDeleteTap: () =>
-                                      _showDeleteDialog(context, video.id),
-                                );
-                              },
-                            );
-                          },
-                          error: (msg) => Center(
-                            child: Text(
-                              msg,
-                              style: context.appTheme.errorTextStyle,
-                            ),
-                          ),
-                        ),
+                                ),
+                              )
+                            : (likedTemplates.isEmpty
+                                ? _buildEmptyPlaceholder(t)
+                                : GridView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 12,
+                                      crossAxisSpacing: 12,
+                                      childAspectRatio: 173 / 248,
+                                    ),
+                                    itemCount: likedTemplates.length,
+                                    padding: const EdgeInsets.only(bottom: 100),
+                                    itemBuilder: (context, index) {
+                                      final template = likedTemplates[index];
+                                      return LikedTemplateItemWidget(
+                                        template: template,
+                                        onTap: () {
+                                          context.pushNamed(
+                                            CreateFromTemplatePage.name,
+                                            queryParameters: {
+                                              'templateId': template.id,
+                                              'title': template.name,
+                                              'videoUrl': template.sourceUrl,
+                                              'imageUrl': template.thumbnailUrl,
+                                              'themeType': template.type,
+                                              'themeOrgId': template.orgId.toString(),
+                                            },
+                                          );
+                                        },
+                                      );
+                                    },
+                                  )),
                       ),
                     ],
                   ),

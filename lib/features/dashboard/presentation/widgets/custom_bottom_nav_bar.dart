@@ -22,7 +22,7 @@ class CustomBottomNavBar extends StatelessWidget {
     final t = context.t;
 
     return SizedBox(
-      width: 300,
+      width: 350,
       height: 100, // Elevated button extends above the 64px bar
       child: Stack(
         clipBehavior: Clip.none,

@@ -73,6 +73,7 @@ class CreateTemplateSettingsPage extends StatelessWidget {
                       duration,
                       isGenerating,
                       isSuccess,
+                      isLiked,
                     ) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),

@@ -30,6 +30,14 @@ import '../../features/media/domain/usecases/get_history_usecase.dart';
 import '../../features/media/domain/usecases/get_media_statuses_usecase.dart';
 import '../../features/media/domain/usecases/delete_media_usecase.dart';
 
+// Liked Templates / Local DB
+import '../../core/database/app_database.dart';
+import '../../features/media/data/datasources/liked_templates_local_datasource.dart';
+import '../../features/media/domain/repositories/liked_templates_repository.dart';
+import '../../features/media/data/repositories/liked_templates_repository_impl.dart';
+import '../../features/media/domain/usecases/liked_templates_usecases.dart';
+import '../../features/media/domain/usecases/watch_liked_templates_usecase.dart';
+
 // Premium / IAP
 import '../../features/premium/data/datasources/iap_api_client.dart';
 import '../../features/premium/data/datasources/iap_remote_datasource.dart';
@@ -98,6 +106,19 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => GetMediaStatusesUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => DeleteMediaUseCase(mediaRepository: sl()));
 
+  // Drift Database & Liked Templates Local Storage
+  sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
+  sl.registerLazySingleton<LikedTemplatesLocalDataSource>(
+    () => LikedTemplatesLocalDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<LikedTemplatesRepository>(
+    () => LikedTemplatesRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton(() => GetLikedTemplatesUseCase(sl()));
+  sl.registerLazySingleton(() => IsTemplateLikedUseCase(sl()));
+  sl.registerLazySingleton(() => ToggleLikeTemplateUseCase(sl()));
+  sl.registerLazySingleton(() => WatchLikedTemplatesUseCase(sl()));
+
   // Premium / IAP
   sl.registerLazySingleton(() => IapApiClient(sl<ApiClient>().dio));
   sl.registerLazySingleton<IapRemoteDataSource>(
@@ -128,7 +149,12 @@ void initBusinessDependencies(GetIt sl) {
     ),
   );
   sl.registerFactory(() => CreateVideoBloc());
-  sl.registerFactory(() => CreateFromTemplateBloc());
+  sl.registerFactory(
+    () => CreateFromTemplateBloc(
+      isTemplateLikedUseCase: sl(),
+      toggleLikeTemplateUseCase: sl(),
+    ),
+  );
   sl.registerFactory(
     () => GeneratingBloc(
       uploadImageUseCase: sl(),
@@ -147,6 +173,7 @@ void initBusinessDependencies(GetIt sl) {
       getHistoryUseCase: sl(),
       deleteMediaUseCase: sl(),
       getMediaStatusesUseCase: sl(),
+      watchLikedTemplatesUseCase: sl(),
     ),
   );
 }

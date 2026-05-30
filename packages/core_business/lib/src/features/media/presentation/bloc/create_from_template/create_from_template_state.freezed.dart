@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId,  String? selectedPhotoPath,  String quality,  String duration,  bool isGenerating,  bool isSuccess)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId,  String? selectedPhotoPath,  String quality,  String duration,  bool isGenerating,  bool isSuccess,  bool isLiked)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId,_that.selectedPhotoPath,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error() when error != null:
+return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId,_that.selectedPhotoPath,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess,_that.isLiked);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId,  String? selectedPhotoPath,  String quality,  String duration,  bool isGenerating,  bool isSuccess)  ready,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId,  String? selectedPhotoPath,  String quality,  String duration,  bool isGenerating,  bool isSuccess,  bool isLiked)  ready,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId,_that.selectedPhotoPath,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error():
+return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId,_that.selectedPhotoPath,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess,_that.isLiked);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId,  String? selectedPhotoPath,  String quality,  String duration,  bool isGenerating,  bool isSuccess)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String templateId,  String title,  String videoUrl,  String imageUrl,  String themeType,  int themeOrgId,  String? selectedPhotoPath,  String quality,  String duration,  bool isGenerating,  bool isSuccess,  bool isLiked)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId,_that.selectedPhotoPath,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error() when error != null:
+return ready(_that.templateId,_that.title,_that.videoUrl,_that.imageUrl,_that.themeType,_that.themeOrgId,_that.selectedPhotoPath,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess,_that.isLiked);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -257,7 +257,7 @@ String toString() {
 
 
 class _Ready implements CreateFromTemplateState {
-  const _Ready({required this.templateId, required this.title, required this.videoUrl, required this.imageUrl, required this.themeType, required this.themeOrgId, this.selectedPhotoPath, required this.quality, required this.duration, required this.isGenerating, this.isSuccess = false});
+  const _Ready({required this.templateId, required this.title, required this.videoUrl, required this.imageUrl, required this.themeType, required this.themeOrgId, this.selectedPhotoPath, required this.quality, required this.duration, required this.isGenerating, this.isSuccess = false, this.isLiked = false});
   
 
  final  String templateId;
@@ -271,6 +271,7 @@ class _Ready implements CreateFromTemplateState {
  final  String duration;
  final  bool isGenerating;
 @JsonKey() final  bool isSuccess;
+@JsonKey() final  bool isLiked;
 
 /// Create a copy of CreateFromTemplateState
 /// with the given fields replaced by the non-null parameter values.
@@ -282,16 +283,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.templateId, templateId) || other.templateId == templateId)&&(identical(other.title, title) || other.title == title)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId)&&(identical(other.selectedPhotoPath, selectedPhotoPath) || other.selectedPhotoPath == selectedPhotoPath)&&(identical(other.quality, quality) || other.quality == quality)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.templateId, templateId) || other.templateId == templateId)&&(identical(other.title, title) || other.title == title)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.themeType, themeType) || other.themeType == themeType)&&(identical(other.themeOrgId, themeOrgId) || other.themeOrgId == themeOrgId)&&(identical(other.selectedPhotoPath, selectedPhotoPath) || other.selectedPhotoPath == selectedPhotoPath)&&(identical(other.quality, quality) || other.quality == quality)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,templateId,title,videoUrl,imageUrl,themeType,themeOrgId,selectedPhotoPath,quality,duration,isGenerating,isSuccess);
+int get hashCode => Object.hash(runtimeType,templateId,title,videoUrl,imageUrl,themeType,themeOrgId,selectedPhotoPath,quality,duration,isGenerating,isSuccess,isLiked);
 
 @override
 String toString() {
-  return 'CreateFromTemplateState.ready(templateId: $templateId, title: $title, videoUrl: $videoUrl, imageUrl: $imageUrl, themeType: $themeType, themeOrgId: $themeOrgId, selectedPhotoPath: $selectedPhotoPath, quality: $quality, duration: $duration, isGenerating: $isGenerating, isSuccess: $isSuccess)';
+  return 'CreateFromTemplateState.ready(templateId: $templateId, title: $title, videoUrl: $videoUrl, imageUrl: $imageUrl, themeType: $themeType, themeOrgId: $themeOrgId, selectedPhotoPath: $selectedPhotoPath, quality: $quality, duration: $duration, isGenerating: $isGenerating, isSuccess: $isSuccess, isLiked: $isLiked)';
 }
 
 
@@ -302,7 +303,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $CreateFromTemplateStateCo
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- String templateId, String title, String videoUrl, String imageUrl, String themeType, int themeOrgId, String? selectedPhotoPath, String quality, String duration, bool isGenerating, bool isSuccess
+ String templateId, String title, String videoUrl, String imageUrl, String themeType, int themeOrgId, String? selectedPhotoPath, String quality, String duration, bool isGenerating, bool isSuccess, bool isLiked
 });
 
 
@@ -319,7 +320,7 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of CreateFromTemplateState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? templateId = null,Object? title = null,Object? videoUrl = null,Object? imageUrl = null,Object? themeType = null,Object? themeOrgId = null,Object? selectedPhotoPath = freezed,Object? quality = null,Object? duration = null,Object? isGenerating = null,Object? isSuccess = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? templateId = null,Object? title = null,Object? videoUrl = null,Object? imageUrl = null,Object? themeType = null,Object? themeOrgId = null,Object? selectedPhotoPath = freezed,Object? quality = null,Object? duration = null,Object? isGenerating = null,Object? isSuccess = null,Object? isLiked = null,}) {
   return _then(_Ready(
 templateId: null == templateId ? _self.templateId : templateId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -332,6 +333,7 @@ as String?,quality: null == quality ? _self.quality : quality // ignore: cast_nu
 as String,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
 as String,isGenerating: null == isGenerating ? _self.isGenerating : isGenerating // ignore: cast_nullable_to_non_nullable
 as bool,isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool,isLiked: null == isLiked ? _self.isLiked : isLiked // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

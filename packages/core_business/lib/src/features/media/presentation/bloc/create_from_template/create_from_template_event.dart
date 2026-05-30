@@ -18,4 +18,5 @@ abstract class CreateFromTemplateEvent with _$CreateFromTemplateEvent {
   const factory CreateFromTemplateEvent.selectQuality(String quality) = _SelectQuality;
   const factory CreateFromTemplateEvent.selectDuration(String duration) = _SelectDuration;
   const factory CreateFromTemplateEvent.startGenerating() = _StartGenerating;
+  const factory CreateFromTemplateEvent.toggleLike() = _ToggleLike;
 }

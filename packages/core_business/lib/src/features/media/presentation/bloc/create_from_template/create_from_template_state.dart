@@ -19,6 +19,7 @@ abstract class CreateFromTemplateState with _$CreateFromTemplateState {
     required String duration,
     required bool isGenerating,
     @Default(false) bool isSuccess,
+    @Default(false) bool isLiked,
   }) = _Ready;
 
   const factory CreateFromTemplateState.error({required String message}) = _Error;

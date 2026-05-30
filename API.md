@@ -1,15 +1,20 @@
 # AI Video Swap & Generator - API Documentation
 
-Base URL: `https://video-effect-be.apihub.today/api/v1`
+Base URL: `https://<host>/api/v1`
+
+All authenticated APIs require: `Authorization: Bearer <access_token>`
+
+Response wrapper: `{ "statusCode": 200, "data": <payload> }`
+
+Error: `{ "statusCode": 400, "message": "...", "error": "ER00XXX" }`
 
 ---
 
-## 1. Auth
+## Auth
 
 ### POST `/auth/login`
-Đăng nhập hoặc tạo user mới bằng deviceId.
 
-**Request Body:**
+**Request:**
 ```json
 {
   "deviceId": "abc123xyz",
@@ -19,6 +24,8 @@ Base URL: `https://video-effect-be.apihub.today/api/v1`
   "appType": "ai_video_swap_and_generator"
 }
 ```
+- `app`: `"android"` | `"ios"`
+- `refCode`: optional
 
 **Response:**
 ```json
@@ -32,9 +39,9 @@ Base URL: `https://video-effect-be.apihub.today/api/v1`
     "user": {
       "id": "uuid",
       "deviceId": "abc123xyz",
-      "name": "John Doe",
-      "email": "john@example.com",
-      "avatarUrl": "https://...",
+      "name": null,
+      "email": null,
+      "avatarUrl": null,
       "inviteCode": "XYZ789",
       "status": "active",
       "credits": 50,
@@ -43,19 +50,23 @@ Base URL: `https://video-effect-be.apihub.today/api/v1`
       "isRated": false,
       "isVip": true,
       "activeSubId": "com.vexa.ai.video.weekly",
-      "refUsersCount": 3,
+      "refUsersCount": 0,
+      "url": "",
       "createdAt": "2024-01-01T00:00:00.000Z"
     }
   }
 }
 ```
+- `credits` = `extraCredits` + `subscribeCredits`
+- `extraCredits`: credits vĩnh viễn
+- `subscribeCredits`: credits tạm từ subscription
+- `activeSubId`: null nếu không phải VIP
 
 ---
 
 ### POST `/auth/refresh`
-Refresh access token.
 
-**Request Body:**
+**Request:**
 ```json
 {
   "refreshToken": "eyJhbGciOi..."
@@ -66,12 +77,9 @@ Refresh access token.
 
 ---
 
-## 2. User
+## User
 
 ### GET `/user/me`
-Lấy thông tin user hiện tại.
-
-**Headers:** `Authorization: Bearer <token>`
 
 **Response:**
 ```json
@@ -92,6 +100,7 @@ Lấy thông tin user hiện tại.
     "isVip": true,
     "activeSubId": "com.vexa.ai.video.weekly",
     "refUsersCount": 3,
+    "url": "",
     "createdAt": "2024-01-01T00:00:00.000Z"
   }
 }
@@ -100,11 +109,8 @@ Lấy thông tin user hiện tại.
 ---
 
 ### PUT `/user/me`
-Cập nhật thông tin user.
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "name": "John Doe",
@@ -112,22 +118,17 @@ Cập nhật thông tin user.
   "avatarUrl": "https://..."
 }
 ```
+Tất cả optional.
 
 **Response:** Giống GET `/user/me`.
 
 ---
 
-## 3. Media
+## Media
 
 ### GET `/media/home/tgv`
-Lấy danh sách home categories.
 
-**Headers:**
-| Header | Value |
-|--------|-------|
-| Authorization | Bearer \<token\> |
-| app-type | ios / android |
-| app-version | 1.0.5 |
+**Headers:** `app-type: ios`, `app-version: 1.0.5`
 
 **Response:**
 ```json
@@ -137,24 +138,21 @@ Lấy danh sách home categories.
     {
       "id": 1,
       "name": "Trending",
-      "themes" : [
+      "description": "Hot themes",
+      "themeData": [
         {
           "id": "uuid",
           "name": "Dance Move",
           "description": "Make your photo dance",
+          "thumbnailUrl": "https://...",
           "resultUrl": "https://...",
           "sourceUrl": "https://...",
           "sourceUrls": ["https://..."],
-          "thumbnailUrl": "https://...",
           "prompt": "dancing motion",
           "type": "TEMPLATE",
           "orgId": 123
         }
       ]
-    },
-    {
-      "id": 2,
-      "name": "Popular"
     }
   ]
 }
@@ -163,28 +161,16 @@ Lấy danh sách home categories.
 ---
 
 ### GET `/media/category`
-Lấy danh sách category từ theme service.
 
-**Headers:**
-| Header | Value |
-|--------|-------|
-| Authorization | Bearer \<token\> |
-| app-type | ios / android |
-| app-version | 1.0.5 |
+**Headers:** `app-type: ios`, `app-version: 1.0.5`
 
 **Response:**
 ```json
 {
   "statusCode": 200,
   "data": [
-    {
-      "id": 1,
-      "name": "Dance"
-    },
-    {
-      "id": 2,
-      "name": "Funny"
-    }
+    { "id": 1, "name": "Dance" },
+    { "id": 2, "name": "Funny" }
   ]
 }
 ```
@@ -192,22 +178,16 @@ Lấy danh sách category từ theme service.
 ---
 
 ### GET `/media/theme`
-Lấy danh sách themes theo category.
 
-**Headers:**
-| Header | Value |
-|--------|-------|
-| Authorization | Bearer \<token\> |
-| app-type | ios / android |
-| app-version | 1.0.5 |
+**Headers:** `app-type: ios`, `app-version: 1.0.5`
 
-**Query Params:**
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| categoryId | string | ❌ | Filter theo category |
-| page | number | ❌ | Trang (default 1) |
-| take | number | ❌ | Số item/trang (default 10) |
-| isFeatured | boolean | ❌ | Chỉ lấy featured |
+**Query:**
+| Param | Type | Required | Default |
+|-------|------|----------|---------|
+| categoryId | string | ❌ | - |
+| page | number | ❌ | 1 |
+| take | number | ❌ | 10 |
+| isFeatured | boolean | ❌ | - |
 
 **Response:**
 ```json
@@ -232,7 +212,9 @@ Lấy danh sách themes theo category.
       "page": 1,
       "take": 10,
       "total": 50,
-      "pageCount": 5
+      "pageCount": 5,
+      "hasPreviousPage": false,
+      "hasNextPage": true
     }
   }
 }
@@ -241,11 +223,8 @@ Lấy danh sách themes theo category.
 ---
 
 ### POST `/media/tgv`
-Tạo media TGV (text-guided video).
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "imageUrl": "https://...",
@@ -255,9 +234,25 @@ Tạo media TGV (text-guided video).
   "isHd": false,
   "isLongTime": false,
   "themeType": "TEMPLATE",
-  "themeOrgId": 123
+  "themeOrgId": 123,
+  "serviceType": "IMAGE_TO_VIDEO",
+  "videoUrl": "https://..."
 }
 ```
+
+**serviceType values:**
+| Value | Description | imageUrl | videoUrl |
+|-------|-------------|----------|----------|
+| `IMAGE_TO_VIDEO` | Dùng theme | 1 ảnh | ❌ |
+| `ITV_SINGLE_SOURCE` | Image to video, không dùng theme | 1 ảnh | ❌ |
+| `ITV_DUAL_SOURCE` | Unified video, không dùng theme | 1-3 ảnh (phân cách bằng `,`) | ❌ |
+| `DANCING_IMAGE` | Image to dance, không dùng theme | 1 ảnh | ✅ bắt buộc |
+| `TRANSITION_VIDEO` | Transition video, không dùng theme | 2 ảnh (phân cách bằng `,`) | ❌ |
+
+- `imageUrl`: required. Với multi-source dùng comma-separated: `"https://img1.jpg,https://img2.jpg"`
+- `videoUrl`: chỉ dùng khi `serviceType = DANCING_IMAGE`, upload qua `POST /file/upload/video`
+- `serviceType`: required
+- Còn lại optional
 
 **Response:**
 ```json
@@ -282,15 +277,11 @@ Tạo media TGV (text-guided video).
   }
 }
 ```
+- `status`: `"pending"` | `"completed"` | `"failed"`
 
 ---
 
 ### GET `/media/detail/:id`
-Lấy chi tiết 1 media.
-
-**Headers:** `Authorization: Bearer <token>`
-
-**Path Params:** `id` - UUID của media
 
 **Response:**
 ```json
@@ -319,15 +310,12 @@ Lấy chi tiết 1 media.
 ---
 
 ### GET `/media/history`
-Lịch sử media của user (paginated).
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Query Params:**
+**Query:**
 | Param | Type | Required |
 |-------|------|----------|
-| take | number | ❌ |
 | page | number | ❌ |
+| take | number | ❌ |
 
 **Response:**
 ```json
@@ -357,7 +345,9 @@ Lịch sử media của user (paginated).
       "page": 1,
       "take": 10,
       "total": 25,
-      "pageCount": 3
+      "pageCount": 3,
+      "hasPreviousPage": false,
+      "hasNextPage": true
     }
   }
 }
@@ -366,14 +356,11 @@ Lịch sử media của user (paginated).
 ---
 
 ### GET `/media/status`
-Check status nhiều media cùng lúc.
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Query Params:**
+**Query:**
 | Param | Type | Required | Description |
 |-------|------|----------|-------------|
-| ids | string | ✅ | Comma-separated UUIDs |
+| ids | string | ✅ | Comma-separated UUIDs: `uuid1,uuid2` |
 
 **Response:**
 ```json
@@ -382,15 +369,20 @@ Check status nhiều media cùng lúc.
   "data": [
     {
       "id": "uuid-1",
-      "status": "completed",
+      "name": "My Video",
+      "imageUrl": "https://...",
+      "imageUrls": ["https://..."],
+      "imageQuantity": 1,
+      "requestId": "req-123",
       "resultUrl": "https://...",
-      "finishedTime": "2024-01-01T00:01:00.000Z"
-    },
-    {
-      "id": "uuid-2",
-      "status": "pending",
-      "resultUrl": null,
-      "finishedTime": null
+      "finishedTime": "2024-01-01T00:01:00.000Z",
+      "prompt": "Make it dance",
+      "isHd": false,
+      "isLongTime": false,
+      "themeId": "uuid",
+      "thumbnailUrl": "https://...",
+      "status": "completed",
+      "createdAt": "2024-01-01T00:00:00.000Z"
     }
   ]
 }
@@ -399,11 +391,6 @@ Check status nhiều media cùng lúc.
 ---
 
 ### DELETE `/media/:id`
-Xóa media.
-
-**Headers:** `Authorization: Bearer <token>`
-
-**Path Params:** `id` - UUID của media
 
 **Response:**
 ```json
@@ -415,14 +402,41 @@ Xóa media.
 
 ---
 
-## 4. IAP (In-App Purchase)
+### GET `/media/prices`
 
-### POST `/iap/verify/product`
-Verify mua product lẻ (Android).
+**Response:**
+```json
+{
+  "statusCode": 200,
+  "data": [
+    {
+      "id": "uuid",
+      "name": "Image to Video",
+      "description": "Generate video from image",
+      "useByVip": false,
+      "defaultCredits": 1,
+      "type": "IMAGE_TO_VIDEO",
+      "servicePrices": [
+        {
+          "id": "uuid",
+          "tierCode": "HD",
+          "extraType": "HD",
+          "costCredits": 2,
+          "isActive": true
+        }
+      ]
+    }
+  ]
+}
+```
 
-**Headers:** `Authorization: Bearer <token>`
+---
 
-**Request Body:**
+## IAP
+
+### POST `/iap/verify/product` (Android)
+
+**Request:**
 ```json
 {
   "productId": "com.vexa.ai.video.50credits",
@@ -432,20 +446,14 @@ Verify mua product lẻ (Android).
 
 **Response:**
 ```json
-{
-  "statusCode": 200,
-  "data": null
-}
+{ "statusCode": 200, "data": null }
 ```
 
 ---
 
-### POST `/iap/verify/subscription`
-Verify mua subscription mới (Android).
+### POST `/iap/verify/subscription` (Android)
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "productId": "com.vexa.ai.video.weekly",
@@ -455,20 +463,14 @@ Verify mua subscription mới (Android).
 
 **Response:**
 ```json
-{
-  "statusCode": 200,
-  "data": null
-}
+{ "statusCode": 200, "data": null }
 ```
 
 ---
 
-### POST `/iap/restore/subscription`
-Restore subscription (Android).
+### POST `/iap/restore/subscription` (Android)
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "productId": "com.vexa.ai.video.weekly",
@@ -478,20 +480,14 @@ Restore subscription (Android).
 
 **Response:**
 ```json
-{
-  "statusCode": 200,
-  "data": null
-}
+{ "statusCode": 200, "data": null }
 ```
 
 ---
 
 ### POST `/iap/verify/product/ios`
-Verify mua product lẻ (iOS).
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "productId": "com.vexa.ai.video.50credits",
@@ -501,20 +497,14 @@ Verify mua product lẻ (iOS).
 
 **Response:**
 ```json
-{
-  "statusCode": 200,
-  "data": null
-}
+{ "statusCode": 200, "data": null }
 ```
 
 ---
 
 ### POST `/iap/verify/subscription/ios`
-Verify mua subscription mới (iOS).
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "productId": "com.vexa.ai.video.weekly",
@@ -524,20 +514,14 @@ Verify mua subscription mới (iOS).
 
 **Response:**
 ```json
-{
-  "statusCode": 200,
-  "data": null
-}
+{ "statusCode": 200, "data": null }
 ```
 
 ---
 
 ### POST `/iap/restore/subscription/ios`
-Restore subscription (iOS).
 
-**Headers:** `Authorization: Bearer <token>`
-
-**Request Body:**
+**Request:**
 ```json
 {
   "productId": "com.vexa.ai.video.weekly",
@@ -547,95 +531,43 @@ Restore subscription (iOS).
 
 **Response:**
 ```json
-{
-  "statusCode": 200,
-  "data": null
-}
+{ "statusCode": 200, "data": null }
 ```
 
 ---
 
-### POST `/iap/google`
-Google Play Pub/Sub webhook. **Public API.**
+## File
 
-**Request Body:**
-```json
-{
-  "message": {
-    "data": "<base64_encoded_payload>",
-    "messageId": "msg-123",
-    "publishTime": "2024-01-01T00:00:00Z"
-  },
-  "subscription": "projects/xxx/subscriptions/yyy"
-}
-```
-
-**Response:**
-```json
-{
-  "statusCode": 200,
-  "data": null
-}
-```
-
----
-
-### POST `/iap/apple`
-Apple Server Notification webhook. **Public API.**
-
-**Request Body:**
-```json
-{
-  "signedPayload": "<JWS_signed_payload>"
-}
-```
-
-**Response:**
-```json
-{
-  "statusCode": 200,
-  "data": null
-}
-```
-
-
-**Transaction titleType enum:**
-| titleType | Description |
-|-----------|-------------|
-| `SUBSCRIBED_PLAN` | Mua subscription |
-| `IN_APP_PURCHASE` | Mua credits lẻ |
-| `SUBSCRIPTION_RENEWED` | Subscription renew (cấp credits mới) |
-| `CREDITS_USED` | Tiêu credits |
-| `REFUND_FAILED_SERVICE` | Hoàn credits do service lỗi |
-| `SUBSCRIPTION_CANCELLED` | Thu hồi credits khi sub hết hạn/refund |
-| `PURCHASE_REVERSED` | Purchase bị reversed |
-| `LOGIN_REWARD_STREAK` | Thưởng login liên tiếp |
-| `TASK_REWARD` | Thưởng hoàn thành task |
-| `CREDITS_EARNED` | Kiếm credits |
-| `WELCOME_BONUS` | Bonus đăng nhập lần đầu |
-
----
-
-## 5. File
-
-### POST `/file/upload/image`
-Upload 1 ảnh.
-
-**Headers:** `Authorization: Bearer <token>`
+### POST `/file/upload/video`
 
 **Content-Type:** `multipart/form-data`
 
-**Form Data:**
-| Field | Type | Constraint |
-|-------|------|-----------|
-| file | File | jpeg/png/webp, max 20MB |
+**Form field:** `file` (mp4/webm/mov, max 20MB)
 
 **Response:**
 ```json
 {
   "statusCode": 200,
   "data": {
-    "url": "https://cdn.example.com/uploads/image-uuid.webp"
+    "url": "https://cdn.example.com/video.mp4"
+  }
+}
+```
+
+---
+
+### POST `/file/upload/image`
+
+**Content-Type:** `multipart/form-data`
+
+**Form field:** `file` (jpeg/png/webp, max 20MB)
+
+**Response:**
+```json
+{
+  "statusCode": 200,
+  "data": {
+    "url": "https://cdn.example.com/image.webp"
   }
 }
 ```
@@ -643,39 +575,18 @@ Upload 1 ảnh.
 ---
 
 ### POST `/file/upload/images`
-Upload nhiều ảnh.
-
-**Headers:** `Authorization: Bearer <token>`
 
 **Content-Type:** `multipart/form-data`
 
-**Form Data:**
-| Field | Type | Constraint |
-|-------|------|-----------|
-| files | File[] | jpeg/png/webp, max 20MB each, max 10 files |
+**Form field:** `files` (jpeg/png/webp, max 20MB each, max 10 files)
 
 **Response:**
 ```json
 {
   "statusCode": 200,
   "data": [
-    { "url": "https://cdn.example.com/uploads/image-1.webp" },
-    { "url": "https://cdn.example.com/uploads/image-2.webp" }
+    { "url": "https://cdn.example.com/image-1.webp" },
+    { "url": "https://cdn.example.com/image-2.webp" }
   ]
 }
 ```
-
----
-
-## Notes
-
-- Tất cả API có Auth cần header: `Authorization: Bearer <access_token>`
-- Response format chung: `{ "statusCode": 200, "data": {...} }`
-- Error format: `{ "statusCode": 400, "message": "...", "error": "ER00XXX" }`
-- Sandbox detection tự động đánh dấu `user.is_reviewer = true`:
-  - iOS: `environment === 'Sandbox' || 'ProductionSandbox'`
-  - Android Product: `purchaseType === 0`
-  - Android Subscription: `testPurchase !== undefined`
-- Credits hiển thị cho user: `credits = extraCredits + subscribeCredits`
-  - `extraCredits`: credits vĩnh viễn (mua lẻ, earn, bonus)
-  - `subscribeCredits`: credits tạm từ subscription (expire theo chu kỳ sub)

@@ -6,6 +6,7 @@ import 'package:core_business/src/features/media/domain/entities/media_entities.
 import 'package:core_business/src/features/media/domain/usecases/get_history_usecase.dart';
 import 'package:core_business/src/features/media/domain/usecases/delete_media_usecase.dart';
 import 'package:core_business/src/features/media/domain/usecases/get_media_statuses_usecase.dart';
+import 'package:core_business/src/features/media/domain/usecases/watch_liked_templates_usecase.dart';
 import '../../domain/entities/user_video_entity.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
@@ -14,12 +15,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetHistoryUseCase getHistoryUseCase;
   final DeleteMediaUseCase deleteMediaUseCase;
   final GetMediaStatusesUseCase getMediaStatusesUseCase;
+  final WatchLikedTemplatesUseCase watchLikedTemplatesUseCase;
   Timer? _progressTimer;
+  List<ThemeEntity> _currentLikedTemplates = const [];
 
   ProfileBloc({
     required this.getHistoryUseCase,
     required this.deleteMediaUseCase,
     required this.getMediaStatusesUseCase,
+    required this.watchLikedTemplatesUseCase,
   }) : super(const ProfileState.initial()) {
     on<ProfileEvent>((event, emit) async {
       await event.when(
@@ -27,21 +31,26 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         changeSubTab: (subTabIndex) => _onChangeSubTab(subTabIndex, emit),
         deleteVideo: (id) => _onDeleteVideo(id, emit),
         tickProgress: () => _onTickProgress(emit),
+        watchLikedTemplates: () => _onWatchLikedTemplates(emit),
       );
     });
   }
 
   Future<void> _onInit(Emitter<ProfileState> emit) async {
     emit(const ProfileState.loading());
+    
+    add(const ProfileEvent.watchLikedTemplates());
+
     final result = await getHistoryUseCase(GetHistoryParams(page: 1, take: 50));
     
     result.when(
       initial: () {},
       loading: () {},
       empty: () {
-        emit(const ProfileState.ready(
+        emit(ProfileState.ready(
           subTabIndex: 0,
-          videosState: Resource.success([]),
+          videosState: const Resource.success([]),
+          likedTemplates: _currentLikedTemplates,
         ));
       },
       success: (paginated) {
@@ -49,6 +58,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileState.ready(
           subTabIndex: 0,
           videosState: Resource.success(videos),
+          likedTemplates: _currentLikedTemplates,
         ));
         _startProgressTimerIfNeeded(videos);
       },
@@ -56,7 +66,25 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileState.ready(
           subTabIndex: 0,
           videosState: Resource.error(message: message),
+          likedTemplates: _currentLikedTemplates,
         ));
+      },
+    );
+  }
+
+  Future<void> _onWatchLikedTemplates(Emitter<ProfileState> emit) async {
+    await emit.forEach<List<ThemeEntity>>(
+      watchLikedTemplatesUseCase(),
+      onData: (templates) {
+        _currentLikedTemplates = templates;
+        return state.maybeMap(
+          ready: (readyState) => readyState.copyWith(likedTemplates: templates),
+          orElse: () => ProfileState.ready(
+            subTabIndex: 0,
+            videosState: const Resource.initial(),
+            likedTemplates: templates,
+          ),
+        );
       },
     );
   }

@@ -4,16 +4,13 @@ import 'package:ai_video_flutter/core/widgets/app_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../core/widgets/app_play_button.dart';
 import '../../../../core/widgets/app_heart_button.dart';
-import '../../../../core/widgets/app_loudspeaker_button.dart';
+import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
@@ -46,8 +43,6 @@ class CreateFromTemplatePage extends StatefulWidget {
 
 class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   late final CreateFromTemplateBloc _bloc;
-  late final Player _player;
-  late final VideoController _videoController;
 
   @override
   void initState() {
@@ -63,27 +58,6 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           themeOrgId: widget.themeOrgId,
         ),
       );
-    _player = Player();
-    _videoController = VideoController(_player);
-
-    _initVideo();
-  }
-
-  Future<void> _initVideo() async {
-    try {
-      await _player.open(Media(widget.videoUrl));
-      await _player.setPlaylistMode(PlaylistMode.loop);
-      await _player.setVolume(100);
-      await _player.play();
-    } catch (e) {
-      debugPrint("Error initializing template video: $e");
-    }
-  }
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
   }
 
   Future<bool> _onWillPop() async {
@@ -117,62 +91,75 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: SafeArea(
-              child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    error: (msg) => Center(
-                      child: Text(
-                        msg,
-                        style: context.appTheme.errorTextStyle,
-                      ),
-                    ),
-                    ready: (
-                      templateId,
-                      title,
-                      videoUrl,
-                      imageUrl,
-                      themeType,
-                      themeOrgId,
-                      selectedPhotoPath,
-                      quality,
-                      duration,
-                      isGenerating,
-                      isSuccess,
-                    ) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
+              child:
+                  BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
+                    builder: (context, state) {
+                      return state.when(
+                        initial: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        error: (msg) => Center(
+                          child: Text(
+                            msg,
+                            style: context.appTheme.errorTextStyle,
+                          ),
                         ),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 8),
-                            _buildHeader(context, title),
-                            const SizedBox(height: 12),
-                            Expanded(
-                              child: SingleChildScrollView(
+                        ready:
+                            (
+                              templateId,
+                              title,
+                              videoUrl,
+                              imageUrl,
+                              themeType,
+                              themeOrgId,
+                              selectedPhotoPath,
+                              quality,
+                              duration,
+                              isGenerating,
+                              isSuccess,
+                              isLiked,
+                            ) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                ),
                                 child: Column(
                                   children: [
-                                    _buildTopCard(context, imageUrl),
-                                    const SizedBox(height: 16),
-                                    _buildBottomCard(context, selectedPhotoPath),
-                                    const SizedBox(height: 100),
+                                    const SizedBox(height: 8),
+                                    _buildHeader(context, title),
+                                    const SizedBox(height: 12),
+                                    Expanded(
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            _buildTopCard(
+                                              context,
+                                              imageUrl,
+                                              isLiked,
+                                            ),
+                                            const SizedBox(height: 16),
+                                            _buildBottomCard(
+                                              context,
+                                              selectedPhotoPath,
+                                            ),
+                                            const SizedBox(height: 100),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    _buildContinueButton(
+                                      context,
+                                      selectedPhotoPath,
+                                    ),
+                                    const SizedBox(height: 24),
                                   ],
                                 ),
-                              ),
-                            ),
-                            _buildContinueButton(context, selectedPhotoPath),
-                            const SizedBox(height: 24),
-                          ],
-                        ),
+                              );
+                            },
                       );
                     },
-                  );
-                },
-              ),
+                  ),
             ),
           ),
         ),
@@ -239,7 +226,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     );
   }
 
-  Widget _buildTopCard(BuildContext context, String defaultImageUrl) {
+  Widget _buildTopCard(
+    BuildContext context,
+    String defaultImageUrl,
+    bool isLiked,
+  ) {
     final t = context.t;
 
     return Container(
@@ -255,38 +246,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           alignment: Alignment.center,
           children: [
             Positioned.fill(
-              child: Video(
-                controller: _videoController,
-                fill: AppColors.black,
-                fit: BoxFit.cover,
-                controls: NoVideoControls,
+              child: SmoothVideoPlayerWidget(
+                videoUrl: widget.videoUrl,
+                imageUrl: widget.imageUrl,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
-            ),
-            Positioned(
-              top: 10,
-              left: 10,
-              child: StreamBuilder<double>(
-                stream: _player.stream.volume,
-                builder: (context, snapshot) {
-                  final volume = snapshot.data ?? 100.0;
-                  final isMuted = volume == 0.0;
-                  return AppLoudspeakerButton(
-                    isMuted: isMuted,
-                    onTap: () => _player.setVolume(isMuted ? 100.0 : 0.0),
-                  );
-                },
-              ),
-            ),
-            StreamBuilder<bool>(
-              stream: _player.stream.playing,
-              builder: (context, snapshot) {
-                final isPlaying = snapshot.data ?? true;
-                if (isPlaying) return const SizedBox.shrink();
-                return AppPlayButton(
-                  isPlaying: isPlaying,
-                  onTap: () => _player.play(),
-                );
-              },
             ),
             Positioned(
               bottom: 0,
@@ -354,9 +318,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
               child: Column(
                 children: [
                   AppHeartButton(
-                    isLiked: true,
+                    isLiked: isLiked,
                     onTap: () {
-                      // Handle like/unlike template logic if needed
+                      _bloc.add(const CreateFromTemplateEvent.toggleLike());
                     },
                   ),
                   const SizedBox(height: 4),
@@ -444,7 +408,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   width: double.infinity,
                   height: 152,
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: Color(0xFF171717),
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
                   child: Center(
@@ -482,10 +446,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     return InkWell(
       onTap: isEnabled
           ? () {
-              context.pushNamed(
-                CreateTemplateSettingsPage.name,
-                extra: _bloc,
-              );
+              context.pushNamed(CreateTemplateSettingsPage.name, extra: _bloc);
             }
           : null,
       borderRadius: const BorderRadius.all(Radius.circular(100)),
