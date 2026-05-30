@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:ai_video_flutter/core/widgets/app_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -47,15 +48,17 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   void initState() {
     super.initState();
     _bloc = sl<CreateFromTemplateBloc>()
-      ..add(CreateFromTemplateEvent.init(
-        templateId: widget.templateId,
-        title: widget.title,
-        videoUrl: widget.videoUrl,
-        imageUrl: widget.imageUrl,
-      ));
+      ..add(
+        CreateFromTemplateEvent.init(
+          templateId: widget.templateId,
+          title: widget.title,
+          videoUrl: widget.videoUrl,
+          imageUrl: widget.imageUrl,
+        ),
+      );
     _player = Player();
     _videoController = VideoController(_player);
-    
+
     _initVideo();
   }
 
@@ -105,88 +108,103 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       value: _bloc,
       child: WillPopScope(
         onWillPop: _onWillPop,
-        child: Scaffold(
-          backgroundColor: AppColors.black,
-          body: SafeArea(
-            child: BlocListener<CreateFromTemplateBloc, CreateFromTemplateState>(
-              listener: (context, state) {
-                state.mapOrNull(
-                  ready: (readyState) {
-                    if (readyState.isGenerating) {
-                      context.pushNamed(
-                        GeneratingPage.name,
-                        queryParameters: {
-                          'title': readyState.title,
-                          'imageUrl': readyState.selectedPhotoPath ?? '',
-                        },
-                      );
-                    }
-                  },
-                );
-              },
-              child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () => const Center(child: CircularProgressIndicator()),
-                    loading: () => const Center(child: CircularProgressIndicator()),
-                    error: (msg) => Center(
-                      child: Text(msg, style: context.appTheme.errorTextStyle),
-                    ),
-                    ready: (
-                      templateId,
-                      title,
-                      videoUrl,
-                      imageUrl,
-                      selectedPhotoPath,
-                      showSettings,
-                      quality,
-                      duration,
-                      isGenerating,
-                      isSuccess,
-                    ) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 8),
-                            // Header Row
-                            _buildHeader(context, title),
-                            const SizedBox(height: 12),
-                            // Main Editor Area
-                            Expanded(
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    // Top card container
-                                    _buildTopCard(
-                                      context,
-                                      imageUrl,
-                                      selectedPhotoPath,
-                                      showSettings,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    // Bottom card container (Uploader or Settings)
-                                    _buildBottomCard(
-                                      context,
-                                      selectedPhotoPath,
-                                      showSettings,
-                                      quality,
-                                      duration,
-                                    ),
-                                    const SizedBox(height: 100), // Spacing
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // Bottom Action Button
-                            _buildGenerateButton(context, selectedPhotoPath),
-                            const SizedBox(height: 24),
-                          ],
-                        ),
-                      );
+        child: AppBackground(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              child: BlocListener<CreateFromTemplateBloc, CreateFromTemplateState>(
+                listener: (context, state) {
+                  state.mapOrNull(
+                    ready: (readyState) {
+                      if (readyState.isGenerating) {
+                        context.pushNamed(
+                          GeneratingPage.name,
+                          queryParameters: {
+                            'title': readyState.title,
+                            'imageUrl': readyState.selectedPhotoPath ?? '',
+                          },
+                        );
+                      }
                     },
                   );
                 },
+                child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
+                  builder: (context, state) {
+                    return state.when(
+                      initial: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      error: (msg) => Center(
+                        child: Text(
+                          msg,
+                          style: context.appTheme.errorTextStyle,
+                        ),
+                      ),
+                      ready:
+                          (
+                            templateId,
+                            title,
+                            videoUrl,
+                            imageUrl,
+                            selectedPhotoPath,
+                            showSettings,
+                            quality,
+                            duration,
+                            isGenerating,
+                            isSuccess,
+                          ) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  const SizedBox(height: 8),
+                                  // Header Row
+                                  _buildHeader(context, title),
+                                  const SizedBox(height: 12),
+                                  // Main Editor Area
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          // Top card container
+                                          _buildTopCard(
+                                            context,
+                                            imageUrl,
+                                            selectedPhotoPath,
+                                            showSettings,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          // Bottom card container (Uploader or Settings)
+                                          _buildBottomCard(
+                                            context,
+                                            selectedPhotoPath,
+                                            showSettings,
+                                            quality,
+                                            duration,
+                                          ),
+                                          const SizedBox(
+                                            height: 100,
+                                          ), // Spacing
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  // Bottom Action Button
+                                  _buildGenerateButton(
+                                    context,
+                                    selectedPhotoPath,
+                                  ),
+                                  const SizedBox(height: 24),
+                                ],
+                              ),
+                            );
+                          },
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -225,13 +243,20 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
         Expanded(
           child: Text(
             title,
-            style: context.textTheme.titleMedium?.copyWith(
+            style:
+                context.textTheme.titleMedium?.copyWith(
                   color: AppColors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ) ??
-                const TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.bold),
-            textAlign: Alignment.center == Alignment.center ? TextAlign.center : TextAlign.left,
+                const TextStyle(
+                  color: AppColors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+            textAlign: Alignment.center == Alignment.center
+                ? TextAlign.center
+                : TextAlign.left,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -306,12 +331,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                             onTap: () {
                               _player.setVolume(isMuted ? 100.0 : 0.0);
                             },
-                            borderRadius: const BorderRadius.all(Radius.circular(100)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
                             child: SizedBox(
                               width: 42,
                               height: 42,
                               child: Icon(
-                                isMuted ? Icons.volume_off_rounded : Icons.volume_up_rounded,
+                                isMuted
+                                    ? Icons.volume_off_rounded
+                                    : Icons.volume_up_rounded,
                                 color: AppColors.white,
                                 size: 22,
                               ),
@@ -377,7 +406,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       // Text Description
                       Expanded(
                         child: Text(
-                          t.create.tap_upload, // Upload your photo and create...
+                          t
+                              .create
+                              .tap_upload, // Upload your photo and create...
                           style: context.textTheme.bodyMedium?.copyWith(
                             color: AppColors.white,
                             fontSize: 16,
@@ -393,7 +424,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         shape: const CircleBorder(),
                         child: InkWell(
                           onTap: () => _showTipsBottomSheet(context),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: const SizedBox(
                             width: 24,
                             height: 24,
@@ -449,9 +482,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
               Positioned.fill(
                 child: selectedPhotoPath != null
                     ? (selectedPhotoPath.startsWith('assets/')
-                        ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                        : Image.file(File(selectedPhotoPath), fit: BoxFit.cover))
-                    : const Icon(Icons.image, size: 80, color: AppColors.subText),
+                          ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
+                          : Image.file(
+                              File(selectedPhotoPath),
+                              fit: BoxFit.cover,
+                            ))
+                    : const Icon(
+                        Icons.image,
+                        size: 80,
+                        color: AppColors.subText,
+                      ),
               ),
               // Top-Left Settings Toggle (Show Template back button)
               Positioned(
@@ -463,8 +503,12 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     child: Material(
                       color: AppColors.black.withValues(alpha: 0.2),
                       child: InkWell(
-                        onTap: () => _bloc.add(const CreateFromTemplateEvent.toggleSettings(false)),
-                        borderRadius: const BorderRadius.all(Radius.circular(100)),
+                        onTap: () => _bloc.add(
+                          const CreateFromTemplateEvent.toggleSettings(false),
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(100),
+                        ),
                         child: const SizedBox(
                           width: 42,
                           height: 42,
@@ -560,7 +604,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         height: 152,
                         child: selectedPhotoPath.startsWith('assets/')
                             ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                            : Image.file(File(selectedPhotoPath), fit: BoxFit.cover),
+                            : Image.file(
+                                File(selectedPhotoPath),
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                   ),
@@ -572,10 +619,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
                         child: Material(
-                          color: const Color(0x99979797), // rgba(151, 151, 151, 0.6)
+                          color: const Color(
+                            0x99979797,
+                          ), // rgba(151, 151, 151, 0.6)
                           child: InkWell(
-                            onTap: () => _bloc.add(const CreateFromTemplateEvent.removePhoto()),
-                            borderRadius: const BorderRadius.all(Radius.circular(100)),
+                            onTap: () => _bloc.add(
+                              const CreateFromTemplateEvent.removePhoto(),
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
                             child: const SizedBox(
                               width: 20,
                               height: 20,
@@ -600,8 +653,14 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         child: Material(
                           color: const Color(0x99979797),
                           child: InkWell(
-                            onTap: () => _bloc.add(const CreateFromTemplateEvent.toggleSettings(true)),
-                            borderRadius: const BorderRadius.all(Radius.circular(100)),
+                            onTap: () => _bloc.add(
+                              const CreateFromTemplateEvent.toggleSettings(
+                                true,
+                              ),
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
                             child: const SizedBox(
                               width: 24,
                               height: 24,
@@ -645,7 +704,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       ),
                     ),
                   ),
-                ]
+                ],
               ],
             ),
           ),
@@ -656,8 +715,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       return VideoSettingsCardWidget(
         selectedQuality: quality,
         selectedDuration: duration,
-        onQualityChanged: (q) => _bloc.add(CreateFromTemplateEvent.selectQuality(q)),
-        onDurationChanged: (d) => _bloc.add(CreateFromTemplateEvent.selectDuration(d)),
+        onQualityChanged: (q) =>
+            _bloc.add(CreateFromTemplateEvent.selectQuality(q)),
+        onDurationChanged: (d) =>
+            _bloc.add(CreateFromTemplateEvent.selectDuration(d)),
       );
     }
   }
@@ -746,13 +807,17 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       Expanded(
                         child: InkWell(
                           onTap: () => Navigator.pop(context),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Container(
                             height: 48,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Text(
                               t.privacy_dialog.cancel,
@@ -769,14 +834,20 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         child: InkWell(
                           onTap: () {
                             Navigator.pop(context);
-                            _bloc.add(const CreateFromTemplateEvent.startGenerating());
+                            _bloc.add(
+                              const CreateFromTemplateEvent.startGenerating(),
+                            );
                           },
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Ink(
                             height: 48,
                             decoration: const BoxDecoration(
                               gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Center(
                               child: Text(
@@ -791,7 +862,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -845,13 +916,17 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       Expanded(
                         child: InkWell(
                           onTap: () => Navigator.pop(context),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Container(
                             height: 48,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Text(
                               t.report_dialog.cancel,
@@ -875,12 +950,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                               ),
                             );
                           },
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Ink(
                             height: 48,
                             decoration: const BoxDecoration(
                               gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Center(
                               child: Text(
@@ -895,7 +974,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -949,13 +1028,17 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       Expanded(
                         child: InkWell(
                           onTap: () => Navigator.pop(context, false),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Container(
                             height: 48,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Text(
                               t.common.stay,
@@ -971,12 +1054,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       Expanded(
                         child: InkWell(
                           onTap: () => Navigator.pop(context, true),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Ink(
                             height: 48,
                             decoration: const BoxDecoration(
                               gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Center(
                               child: Text(
@@ -991,7 +1078,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -1013,7 +1100,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       builder: (context) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 24.0,
+              horizontal: 16.0,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -1030,7 +1120,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close_rounded, color: AppColors.white),
+                      icon: const Icon(
+                        Icons.close_rounded,
+                        color: AppColors.white,
+                      ),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ],
@@ -1052,7 +1145,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.camera_alt_outlined, color: AppColors.white, size: 24),
+                        const Icon(
+                          Icons.camera_alt_outlined,
+                          color: AppColors.white,
+                          size: 24,
+                        ),
                         const SizedBox(width: 12),
                         Text(
                           t.common.camera,
@@ -1083,7 +1180,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.image_outlined, color: AppColors.white, size: 24),
+                        const Icon(
+                          Icons.image_outlined,
+                          color: AppColors.white,
+                          size: 24,
+                        ),
                         const SizedBox(width: 12),
                         Text(
                           t.common.gallery,
@@ -1127,7 +1228,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       builder: (context) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 24.0,
+              horizontal: 16.0,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1142,7 +1246,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                 const SizedBox(height: 6),
                 Text(
                   t.create.select_media_desc,
-                  style: context.textTheme.bodySmall?.copyWith(color: AppColors.subText),
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: AppColors.subText,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -1150,10 +1256,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: mockAssets.length,
-                    separatorBuilder: (context, index) => const SizedBox(width: 12),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 12),
                     itemBuilder: (context, index) {
                       final path = mockAssets[index];
-                      final name = path.split('/').last.split('.').first.toUpperCase();
+                      final name = path
+                          .split('/')
+                          .last
+                          .split('.')
+                          .first
+                          .toUpperCase();
                       return GestureDetector(
                         onTap: () {
                           _bloc.add(CreateFromTemplateEvent.selectPhoto(path));
@@ -1162,11 +1274,15 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         child: Container(
                           width: 100,
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(Radius.circular(12)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(12),
+                            ),
                             border: Border.all(color: AppColors.lightBorder),
                           ),
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.all(Radius.circular(11)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(11),
+                            ),
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
@@ -1249,7 +1365,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close_rounded, color: AppColors.white),
+                        icon: const Icon(
+                          Icons.close_rounded,
+                          color: AppColors.white,
+                        ),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ],
@@ -1258,7 +1377,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   // Yes photos header
                   Row(
                     children: [
-                      const Icon(Icons.check_circle_rounded, color: AppColors.primary, size: 24),
+                      const Icon(
+                        Icons.check_circle_rounded,
+                        color: AppColors.primary,
+                        size: 24,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         t.tips_sheet.use_photos,
@@ -1288,18 +1411,27 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                               Container(
                                 height: 130,
                                 decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                  border: Border.all(color: AppColors.lightBorder),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  border: Border.all(
+                                    color: AppColors.lightBorder,
+                                  ),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(Radius.circular(11)),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(11),
+                                  ),
                                   child: Image.asset(path, fit: BoxFit.cover),
                                 ),
                               ),
                               const SizedBox(height: 6),
                               Text(
                                 label,
-                                style: const TextStyle(color: AppColors.subText, fontSize: 11),
+                                style: const TextStyle(
+                                  color: AppColors.subText,
+                                  fontSize: 11,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -1313,7 +1445,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   // No photos header
                   Row(
                     children: [
-                      const Icon(Icons.cancel_rounded, color: AppColors.heart, size: 24),
+                      const Icon(
+                        Icons.cancel_rounded,
+                        color: AppColors.heart,
+                        size: 24,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         t.tips_sheet.avoid_photos,
@@ -1343,18 +1479,27 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                               Container(
                                 height: 130,
                                 decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                  border: Border.all(color: AppColors.lightBorder),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  border: Border.all(
+                                    color: AppColors.lightBorder,
+                                  ),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(Radius.circular(11)),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(11),
+                                  ),
                                   child: Image.asset(path, fit: BoxFit.cover),
                                 ),
                               ),
                               const SizedBox(height: 6),
                               Text(
                                 label,
-                                style: const TextStyle(color: AppColors.subText, fontSize: 11),
+                                style: const TextStyle(
+                                  color: AppColors.subText,
+                                  fontSize: 11,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),

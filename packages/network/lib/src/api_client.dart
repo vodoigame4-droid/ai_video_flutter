@@ -11,8 +11,8 @@ class ApiClient {
     TokenProvider? tokenProvider,
     void Function(String message)? logCallback,
     List<Interceptor>? additionalInterceptors,
-    Duration connectTimeout = const Duration(seconds: 15),
-    Duration receiveTimeout = const Duration(seconds: 15),
+    Duration connectTimeout = const Duration(seconds: 30),
+    Duration receiveTimeout = const Duration(seconds: 30),
   }) {
     _dio = Dio(
       BaseOptions(

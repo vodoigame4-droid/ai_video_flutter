@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/core/widgets/app_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -39,78 +40,85 @@ class CreateVideoView extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Scaffold(
-      body: BlocListener<CreateVideoBloc, CreateVideoState>(
-        listener: (context, state) {
-          state.mapOrNull(
-            ready: (readyState) {
-              if (readyState.isGenerating) {
-                context.pushNamed(
-                  GeneratingPage.name,
-                  queryParameters: {
-                    'title': readyState.customPrompt.trim().isEmpty
-                        ? t.profile.imageGeneration
-                        : readyState.customPrompt,
-                    'imageUrl': readyState.slotsPaths.firstWhere(
-                          (p) => p != null,
-                          orElse: () => '',
-                        ) ?? '',
-                  },
-                );
-              }
-            },
-          );
-        },
-        child: BlocBuilder<CreateVideoBloc, CreateVideoState>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const Center(child: CircularProgressIndicator()),
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (message) => Center(
-                child: Text(message, style: context.appTheme.errorTextStyle),
-              ),
-              ready:
-                  (
-                    selectedTab,
-                    customPrompt,
-                    inspireMeCount,
-                    slotsPaths,
-                    quality,
-                    duration,
-                    isGenerating,
-                    isSuccess,
-                  ) {
-                    return SafeArea(
-                      child: Column(
-                        children: [
-                          // Header
-                          _buildHeader(context),
-                          SizedBox(height: 16),
-
-                          // Tab Bar selector
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: CreateVideoTabBarWidget(
-                              selectedIndex: selectedTab,
-                              onTabSelected: (index) {
-                                context.read<CreateVideoBloc>().add(
-                                  CreateVideoEvent.changeTab(index),
-                                );
-                              },
-                              onHistoryPressed: () {
-                                context.pushNamed(ProfilePage.name);
-                              },
-                            ),
-                          ),
-
-                          // The selected tab view
-                          Expanded(child: _buildSelectedTab(selectedTab)),
-                        ],
-                      ),
-                    );
-                  },
+    return AppBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: BlocListener<CreateVideoBloc, CreateVideoState>(
+          listener: (context, state) {
+            state.mapOrNull(
+              ready: (readyState) {
+                if (readyState.isGenerating) {
+                  context.pushNamed(
+                    GeneratingPage.name,
+                    queryParameters: {
+                      'title': readyState.customPrompt.trim().isEmpty
+                          ? t.profile.imageGeneration
+                          : readyState.customPrompt,
+                      'imageUrl':
+                          readyState.slotsPaths.firstWhere(
+                            (p) => p != null,
+                            orElse: () => '',
+                          ) ??
+                          '',
+                    },
+                  );
+                }
+              },
             );
           },
+          child: BlocBuilder<CreateVideoBloc, CreateVideoState>(
+            builder: (context, state) {
+              return state.when(
+                initial: () => const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (message) => Center(
+                  child: Text(message, style: context.appTheme.errorTextStyle),
+                ),
+                ready:
+                    (
+                      selectedTab,
+                      customPrompt,
+                      inspireMeCount,
+                      slotsPaths,
+                      quality,
+                      duration,
+                      isGenerating,
+                      isSuccess,
+                    ) {
+                      return SafeArea(
+                        child: Column(
+                          children: [
+                            // Header
+                            _buildHeader(context),
+                            SizedBox(height: 16),
+
+                            // Tab Bar selector
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: CreateVideoTabBarWidget(
+                                selectedIndex: selectedTab,
+                                onTabSelected: (index) {
+                                  context.read<CreateVideoBloc>().add(
+                                    CreateVideoEvent.changeTab(index),
+                                  );
+                                },
+                                onHistoryPressed: () {
+                                  context.pushNamed(ProfilePage.name);
+                                },
+                              ),
+                            ),
+
+                            // The selected tab view
+                            Expanded(child: _buildSelectedTab(selectedTab)),
+                          ],
+                        ),
+                      );
+                    },
+              );
+            },
+          ),
         ),
       ),
     );

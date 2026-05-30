@@ -36,6 +36,12 @@ Future<void> initDependencies() async {
         final prefs = sl<SharedPreferences>();
         return prefs.getString('auth_access_token');
       },
+      additionalInterceptors: [
+        AuthRetryInterceptor(
+          sharedPreferences: sl(),
+          appConfig: sl(),
+        ),
+      ],
     ),
   );
 
