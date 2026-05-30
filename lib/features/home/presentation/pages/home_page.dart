@@ -32,6 +32,69 @@ class HomePage extends StatelessWidget {
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
+  IconData _getIconForCategory(String name) {
+    switch (name.toLowerCase()) {
+      case 'trending':
+        return Icons.bolt_rounded;
+      case 'new':
+      case 'new_section':
+        return Icons.fiber_new_rounded;
+      case 'popular':
+        return Icons.star_rounded;
+      case 'toy box':
+      case 'toy figure box':
+        return Icons.smart_toy_rounded;
+      case 'epic morph':
+        return Icons.transform_rounded;
+      case 'anime':
+        return Icons.face_rounded;
+      default:
+        return Icons.movie_creation_outlined;
+    }
+  }
+
+  Color _getIconColorForCategory(String name, BuildContext context) {
+    switch (name.toLowerCase()) {
+      case 'trending':
+        return context.colorScheme.primary;
+      case 'new':
+      case 'new_section':
+        return context.colorScheme.secondary;
+      case 'popular':
+        return Colors.orangeAccent;
+      case 'toy box':
+      case 'toy figure box':
+        return Colors.purpleAccent;
+      case 'epic morph':
+        return Colors.lightBlueAccent;
+      case 'anime':
+        return Colors.pinkAccent;
+      default:
+        return Colors.white70;
+    }
+  }
+
+  String _getTranslatedCategory(BuildContext context, String category) {
+    final t = Translations.of(context);
+    switch (category.toLowerCase()) {
+      case 'all':
+        return t.templates.all;
+      case 'trending':
+        return t.home.trending;
+      case 'new':
+        return t.home.new_section;
+      case 'toy box':
+      case 'toy figure box':
+        return t.home.toy_box;
+      case 'epic morph':
+        return t.home.epic_morph;
+      case 'anime':
+        return t.home.anime;
+      default:
+        return category;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = context.t;
@@ -77,63 +140,88 @@ class HomeView extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(height: 24),
+                                    const SizedBox(height: 8),
 
-                                    // Category Selector Row
+                                    // Category Selector Row & Dynamic Sections
                                     categoriesState.when(
                                       initial: () => const SizedBox.shrink(),
                                       loading: () => const SizedBox(
-                                        height: 37,
+                                        height: 200,
                                         child: Center(
                                           child: CircularProgressIndicator(),
                                         ),
                                       ),
-                                      success: (categories) => CategorySelector(
-                                        categories: categories.map((c) => c.name).toList(),
-                                        selectedCategory: selectedCategory,
-                                        onSelected: (category) {
-                                          context.read<HomeBloc>().add(
-                                            HomeEvent.selectCategory(category),
-                                          );
-                                        },
+                                      success: (categories) => Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          // CategorySelector(
+                                          //   categories: categories.map((c) => c.name).toList(),
+                                          //   selectedCategory: selectedCategory,
+                                          //   onSelected: (category) {
+                                          //     context.read<HomeBloc>().add(
+                                          //       HomeEvent.selectCategory(category),
+                                          //     );
+                                          //     // Navigate directly to TemplatesPage with this category selected
+                                          //     context.pushNamed(
+                                          //       TemplatesPage.name,
+                                          //       queryParameters: {
+                                          //         'category': category,
+                                          //       },
+                                          //     );
+                                          //   },
+                                          // ),
+                                          // const SizedBox(height: 24),
+                                          ...categories.map((category) {
+                                            final themes = category.theme ?? [];
+                                            if (themes.isEmpty)
+                                              return const SizedBox.shrink();
+
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                bottom: 28,
+                                              ),
+                                              child: HomeTemplatesSectionWidget(
+                                                title: _getTranslatedCategory(
+                                                  context,
+                                                  category.name,
+                                                ),
+                                                icon: _getIconForCategory(
+                                                  category.name,
+                                                ),
+                                                iconColor:
+                                                    _getIconColorForCategory(
+                                                      category.name,
+                                                      context,
+                                                    ),
+                                                videosState: Resource.success(
+                                                  themes,
+                                                ),
+                                                onSeeAllPressed: () =>
+                                                    context.pushNamed(
+                                                      TemplatesPage.name,
+                                                      queryParameters: {
+                                                        'category':
+                                                            category.name,
+                                                      },
+                                                    ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ],
                                       ),
                                       empty: () => const SizedBox.shrink(),
                                       error: (message) => Center(
-                                        child: Text(
-                                          message,
-                                          style:
-                                              context.appTheme.errorTextStyle,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 40,
+                                          ),
+                                          child: Text(
+                                            message,
+                                            style:
+                                                context.appTheme.errorTextStyle,
+                                          ),
                                         ),
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 24),
-
-                                    // Trending Section
-                                    HomeTemplatesSectionWidget(
-                                      title: t.home.trending,
-                                      icon: Icons.bolt_rounded,
-                                      iconColor: context.colorScheme.primary,
-                                      videosState: trendingVideosState,
-                                      onSeeAllPressed: () => context.pushNamed(
-                                        TemplatesPage.name,
-                                        queryParameters: {
-                                          'category': 'Trending',
-                                        },
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 28),
-
-                                    // New Section
-                                    HomeTemplatesSectionWidget(
-                                      title: t.home.new_section,
-                                      icon: Icons.fiber_new_rounded,
-                                      iconColor: context.colorScheme.secondary,
-                                      videosState: newVideosState,
-                                      onSeeAllPressed: () => context.pushNamed(
-                                        TemplatesPage.name,
-                                        queryParameters: {'category': 'New'},
                                       ),
                                     ),
 
