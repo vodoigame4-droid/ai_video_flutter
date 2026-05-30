@@ -2,19 +2,26 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
-import '../../../domain/repositories/media_repository.dart';
+import '../../../domain/usecases/upload_image_usecase.dart';
+import '../../../domain/usecases/create_tgv_usecase.dart';
+import '../../../domain/usecases/get_media_detail_usecase.dart';
 import '../../../data/models/media_models.dart';
 import 'generating_event.dart';
 import 'generating_state.dart';
 
 class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
-  final MediaRepository mediaRepository;
+  final UploadImageUseCase uploadImageUseCase;
+  final CreateTgvUseCase createTgvUseCase;
+  final GetMediaDetailUseCase getMediaDetailUseCase;
   Timer? _timer;
   String? _mediaId;
   double _mockProgress = 0.0;
 
-  GeneratingBloc({required this.mediaRepository})
-      : super(const GeneratingState.initial()) {
+  GeneratingBloc({
+    required this.uploadImageUseCase,
+    required this.createTgvUseCase,
+    required this.getMediaDetailUseCase,
+  }) : super(const GeneratingState.initial()) {
     on<GeneratingEvent>((event, emit) async {
       await event.when(
         startGenerating: (title, imageUrl) async {
@@ -32,7 +39,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 !finalImageUrl.startsWith('http') &&
                 !finalImageUrl.startsWith('assets/')) {
               LogUtils.d('GeneratingBloc: Uploading local image: $finalImageUrl');
-              final uploadResult = await mediaRepository.uploadImage(finalImageUrl);
+              final uploadResult = await uploadImageUseCase(finalImageUrl);
               uploadResult.when(
                 initial: () {},
                 loading: () {},
@@ -61,7 +68,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
             );
 
             LogUtils.d('GeneratingBloc: Creating TGV request: $request');
-            final createResult = await mediaRepository.createTgv(request);
+            final createResult = await createTgvUseCase(request);
             
             await createResult.when(
               initial: () async {},
@@ -112,7 +119,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
             generating: (generatingState) async {
               if (_mediaId == null) return;
 
-              final statusResult = await mediaRepository.getMediaDetail(_mediaId!);
+              final statusResult = await getMediaDetailUseCase(_mediaId!);
               
               await statusResult.when(
                 initial: () async {},

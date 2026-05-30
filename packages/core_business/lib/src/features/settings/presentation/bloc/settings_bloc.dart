@@ -1,13 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:core_business/src/core/resources/resource.dart';
+import '../../domain/usecases/get_settings_usecase.dart';
+import '../../domain/usecases/save_settings_usecase.dart';
+import '../../../../core/usecases/usecase.dart';
 import 'settings_event.dart';
 import 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SharedPreferences sharedPreferences;
+  final GetSettingsUseCase getSettingsUseCase;
+  final SaveSettingsUseCase saveSettingsUseCase;
 
   SettingsBloc({
-    required this.sharedPreferences,
+    required this.getSettingsUseCase,
+    required this.saveSettingsUseCase,
   }) : super(const SettingsState.initial()) {
     on<SettingsEvent>((event, emit) async {
       await event.when(
@@ -19,16 +24,25 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Future<void> _onInit(Emitter<SettingsState> emit) async {
     emit(const SettingsState.loading());
-    final savedLocaleCode = sharedPreferences.getString('selected_locale') ?? 'en';
-    emit(SettingsState.ready(currentLanguageCode: savedLocaleCode));
+    final result = await getSettingsUseCase(NoParams());
+    result.when(
+      initial: () {},
+      loading: () {},
+      empty: () => emit(const SettingsState.ready(currentLanguageCode: 'en')),
+      success: (locale) => emit(SettingsState.ready(currentLanguageCode: locale)),
+      error: (message) => emit(const SettingsState.ready(currentLanguageCode: 'en')),
+    );
   }
 
   Future<void> _onChangeLanguage(String languageCode, Emitter<SettingsState> emit) async {
     emit(const SettingsState.loading());
-    
-    // Persist locale code
-    await sharedPreferences.setString('selected_locale', languageCode);
-
-    emit(SettingsState.ready(currentLanguageCode: languageCode));
+    final result = await saveSettingsUseCase(languageCode);
+    result.when(
+      initial: () {},
+      loading: () {},
+      empty: () {},
+      success: (_) => emit(SettingsState.ready(currentLanguageCode: languageCode)),
+      error: (message) => emit(SettingsState.ready(currentLanguageCode: languageCode)),
+    );
   }
 }

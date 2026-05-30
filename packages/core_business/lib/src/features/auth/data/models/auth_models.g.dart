@@ -10,18 +10,18 @@ _LoginRequestModel _$LoginRequestModelFromJson(Map<String, dynamic> json) =>
     _LoginRequestModel(
       deviceId: json['deviceId'] as String,
       app: json['app'] as String,
-      appVersion: json['app-version'] as String,
+      appVersion: json['appVersion'] as String,
       refCode: json['refCode'] as String?,
-      appType: json['app-type'] as String,
+      appType: json['appType'] as String,
     );
 
 Map<String, dynamic> _$LoginRequestModelToJson(_LoginRequestModel instance) =>
     <String, dynamic>{
       'deviceId': instance.deviceId,
       'app': instance.app,
-      'app-version': instance.appVersion,
+      'appVersion': instance.appVersion,
       'refCode': instance.refCode,
-      'app-type': instance.appType,
+      'appType': instance.appType,
     };
 
 _LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
@@ -29,7 +29,7 @@ _LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
       accessToken: json['accessToken'] as String,
       tokenExpires: (json['tokenExpires'] as num).toInt(),
       refreshToken: json['refreshToken'] as String,
-      refreshTokenExpires: (json['refreshTokenExpires'] as num).toInt(),
+      refreshTokenExpires: (json['refreshTokenExpires'] as num?)?.toInt() ?? 0,
       user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 

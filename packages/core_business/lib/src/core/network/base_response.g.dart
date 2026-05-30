@@ -10,7 +10,7 @@ BaseResponse<T> _$BaseResponseFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) => BaseResponse<T>(
-  statusCode: (json['statusCode'] as num).toInt(),
+  statusCode: (_readStatusCode(json, 'statusCode') as num).toInt(),
   data: fromJsonT(json['data']),
 );
 

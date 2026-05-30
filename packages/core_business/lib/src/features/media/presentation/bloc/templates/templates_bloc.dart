@@ -1,24 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
+import 'package:core_business/src/core/usecases/usecase.dart';
 import '../../../domain/entities/media_entities.dart';
-import '../../../domain/repositories/media_repository.dart';
+import '../../../domain/usecases/get_categories_usecase.dart';
+import '../../../domain/usecases/get_themes_usecase.dart';
 import 'templates_event.dart';
 import 'templates_state.dart';
 
 class TemplatesBloc extends Bloc<TemplatesEvent, TemplatesState> {
-  final MediaRepository mediaRepository;
+  final GetCategoriesUseCase getCategoriesUseCase;
+  final GetThemesUseCase getThemesUseCase;
   List<HomeCategoryEntity> _categoriesList = [];
 
-  TemplatesBloc({required this.mediaRepository})
-      : super(const TemplatesState.initial()) {
+  TemplatesBloc({
+    required this.getCategoriesUseCase,
+    required this.getThemesUseCase,
+  }) : super(const TemplatesState.initial()) {
     on<TemplatesEvent>((event, emit) async {
       await event.when(
         init: (category) async {
           emit(const TemplatesState.loading());
           LogUtils.d('TemplatesBloc: Fetching categories');
 
-          final catResult = await mediaRepository.getCategories();
+          final catResult = await getCategoriesUseCase(NoParams());
           
           await catResult.when(
             initial: () async {},
@@ -38,9 +43,9 @@ class TemplatesBloc extends Bloc<TemplatesEvent, TemplatesState> {
               final initialId = _getCategoryIdByName(category);
               LogUtils.d('TemplatesBloc: Fetching themes for $category (id: $initialId)');
               
-              final themesResult = await mediaRepository.getThemes(
+              final themesResult = await getThemesUseCase(GetThemesParams(
                 categoryId: initialId,
-              );
+              ));
 
               emit(TemplatesState.ready(
                 categoriesState: Resource.success(categoryNames),
@@ -67,9 +72,9 @@ class TemplatesBloc extends Bloc<TemplatesEvent, TemplatesState> {
               final categoryId = _getCategoryIdByName(category);
               LogUtils.d('TemplatesBloc: Selected category $category (id: $categoryId)');
               
-              final themesResult = await mediaRepository.getThemes(
+              final themesResult = await getThemesUseCase(GetThemesParams(
                 categoryId: categoryId,
-              );
+              ));
 
               emit(readyState.copyWith(
                 selectedCategory: category,

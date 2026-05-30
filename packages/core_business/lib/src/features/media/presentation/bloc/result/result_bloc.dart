@@ -4,12 +4,12 @@ import 'package:media_kit/media_kit.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/video_cache_manager.dart';
-import 'package:core_business/src/features/media/domain/repositories/media_repository.dart';
+import '../../../domain/usecases/delete_media_usecase.dart';
 import 'result_event.dart';
 import 'result_state.dart';
 
 class ResultBloc extends Bloc<ResultEvent, ResultState> {
-  final MediaRepository mediaRepository;
+  final DeleteMediaUseCase deleteMediaUseCase;
   final Player player = Player();
   final VideoCacheManager _cacheManager = VideoCacheManager();
 
@@ -24,7 +24,7 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     "Cute fluffy orange cat wearing spacesuit on the moon, looking at Earth, cartoon 3d style, highly detailed"
   ];
 
-  ResultBloc({required this.mediaRepository}) : super(const ResultState.initial()) {
+  ResultBloc({required this.deleteMediaUseCase}) : super(const ResultState.initial()) {
     on<ResultEvent>((event, emit) async {
       await event.when(
         init: (videoId, title, imageUrl, videoUrl, createdAt) async {
@@ -193,7 +193,7 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     await state.mapOrNull(
       ready: (s) async {
         LogUtils.d('ResultBloc: Deleting video with id ${s.videoId}');
-        final result = await mediaRepository.deleteMedia(s.videoId);
+        final result = await deleteMediaUseCase(s.videoId);
         result.when(
           initial: () {},
           loading: () {},

@@ -14,7 +14,12 @@ final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
   // Features - Splash
-  sl.registerFactory(() => SplashBloc());
+  sl.registerFactory(
+    () => SplashBloc(
+      loginUseCase: sl(),
+      sharedPreferences: sl(),
+    ),
+  );
 
   // Features - Onboarding
   sl.registerFactory(() => OnboardingBloc());

@@ -4,19 +4,38 @@ import '../../domain/entities/media_entities.dart';
 part 'media_models.freezed.dart';
 part 'media_models.g.dart';
 
+Object? _readStringId(Map json, String key) {
+  return json['id']?.toString();
+}
+
+Object? _readOrgId(Map json, String key) {
+  final val = json['orgId'] ?? json['org_id'];
+  if (val is num) return val.toInt();
+  if (val is String) return int.tryParse(val) ?? 0;
+  return 0;
+}
+
+Object? _readPaginatedData(Map json, String key) {
+  return json['data'] ?? json['docs'] ?? const [];
+}
+
+Object? _readPageCount(Map json, String key) {
+  return json['pageCount'] ?? json['totalPage'] ?? 0;
+}
+
 @freezed
 abstract class ThemeModel with _$ThemeModel {
   const factory ThemeModel({
     required String id,
     required String name,
-    required String description,
-    required String resultUrl,
-    required String sourceUrl,
+    required String? description,
+    required String? resultUrl,
+    required String? sourceUrl,
     required List<String>? sourceUrls,
-    required String thumbnailUrl,
-    required String prompt,
-    required String type,
-    required int orgId,
+    required String? thumbnailUrl,
+    required String? prompt,
+    required String? type,
+    @JsonKey(readValue: _readOrgId) required int orgId,
   }) = _ThemeModel;
 
   factory ThemeModel.fromJson(Map<String, dynamic> json) =>
@@ -27,13 +46,13 @@ extension ThemeModelX on ThemeModel {
   ThemeEntity toEntity() => ThemeEntity(
         id: id,
         name: name,
-        description: description,
-        resultUrl: resultUrl,
-        sourceUrl: sourceUrl,
+        description: description ?? '',
+        resultUrl: resultUrl ?? '',
+        sourceUrl: sourceUrl ?? '',
         sourceUrls: sourceUrls ?? [],
-        thumbnailUrl: thumbnailUrl,
-        prompt: prompt,
-        type: type,
+        thumbnailUrl: thumbnailUrl ?? '',
+        prompt: prompt ?? '',
+        type: type ?? '',
         orgId: orgId,
       );
 }
@@ -41,9 +60,9 @@ extension ThemeModelX on ThemeModel {
 @freezed
 abstract class HomeCategoryModel with _$HomeCategoryModel {
   const factory HomeCategoryModel({
-    required int id,
+    @JsonKey(readValue: _readStringId) required String id,
     required String name,
-    required List<ThemeModel>? theme,
+    @JsonKey(name: 'themes') required List<ThemeModel>? theme,
   }) = _HomeCategoryModel;
 
   factory HomeCategoryModel.fromJson(Map<String, dynamic> json) =>
@@ -83,15 +102,15 @@ abstract class MediaModel with _$MediaModel {
   const factory MediaModel({
     required String id,
     required String name,
-    required String imageUrl,
+    required String? imageUrl,
     required List<String>? imageUrls,
-    required int imageQuantity,
-    required String requestId,
+    @Default(1) int imageQuantity,
+    @Default('') String requestId,
     required String? resultUrl,
     required String? finishedTime,
     required String prompt,
-    required bool isHd,
-    required bool isLongTime,
+    @Default(false) bool isHd,
+    @Default(false) bool isLongTime,
     required String themeId,
     required String? thumbnailUrl,
     required String status,
@@ -106,7 +125,7 @@ extension MediaModelX on MediaModel {
   MediaEntity toEntity() => MediaEntity(
         id: id,
         name: name,
-        imageUrl: imageUrl,
+        imageUrl: imageUrl ?? '',
         imageUrls: imageUrls,
         imageQuantity: imageQuantity,
         requestId: requestId,
@@ -150,7 +169,7 @@ abstract class PaginationMetaModel with _$PaginationMetaModel {
     required int page,
     required int take,
     required int total,
-    required int pageCount,
+    @JsonKey(readValue: _readPageCount) required int pageCount,
   }) = _PaginationMetaModel;
 
   factory PaginationMetaModel.fromJson(Map<String, dynamic> json) =>
@@ -168,6 +187,7 @@ extension PaginationMetaModelX on PaginationMetaModel {
 
 @JsonSerializable(genericArgumentFactories: true)
 class PaginatedListModel<T> {
+  @JsonKey(readValue: _readPaginatedData)
   final List<T> data;
   final PaginationMetaModel meta;
 

@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ai_video_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "ai_video_flutter (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "ai_video_flutter (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "core_business",
+            "cwd": "packages/core_business",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "core_business (profile mode)",
+            "cwd": "packages/core_business",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "core_business (release mode)",
+            "cwd": "packages/core_business",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "network",
+            "cwd": "packages/network",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "network (profile mode)",
+            "cwd": "packages/network",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "network (release mode)",
+            "cwd": "packages/network",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

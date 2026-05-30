@@ -21,7 +21,7 @@ abstract class ThemeEntity with _$ThemeEntity {
 @freezed
 abstract class HomeCategoryEntity with _$HomeCategoryEntity {
   const factory HomeCategoryEntity({
-    required int id,
+    required String id,
     required String name,
     required List<ThemeEntity>? theme,
   }) = _HomeCategoryEntity;

@@ -304,7 +304,7 @@ as int,
 /// @nodoc
 mixin _$HomeCategoryEntity {
 
- int get id; String get name; List<ThemeEntity>? get theme;
+ String get id; String get name; List<ThemeEntity>? get theme;
 /// Create a copy of HomeCategoryEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -335,7 +335,7 @@ abstract mixin class $HomeCategoryEntityCopyWith<$Res>  {
   factory $HomeCategoryEntityCopyWith(HomeCategoryEntity value, $Res Function(HomeCategoryEntity) _then) = _$HomeCategoryEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, List<ThemeEntity>? theme
+ String id, String name, List<ThemeEntity>? theme
 });
 
 
@@ -355,7 +355,7 @@ class _$HomeCategoryEntityCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? theme = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
 as List<ThemeEntity>?,
   ));
@@ -442,7 +442,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  List<ThemeEntity>? theme)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  List<ThemeEntity>? theme)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeCategoryEntity() when $default != null:
 return $default(_that.id,_that.name,_that.theme);case _:
@@ -463,7 +463,7 @@ return $default(_that.id,_that.name,_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  List<ThemeEntity>? theme)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  List<ThemeEntity>? theme)  $default,) {final _that = this;
 switch (_that) {
 case _HomeCategoryEntity():
 return $default(_that.id,_that.name,_that.theme);case _:
@@ -483,7 +483,7 @@ return $default(_that.id,_that.name,_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  List<ThemeEntity>? theme)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  List<ThemeEntity>? theme)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeCategoryEntity() when $default != null:
 return $default(_that.id,_that.name,_that.theme);case _:
@@ -501,7 +501,7 @@ class _HomeCategoryEntity implements HomeCategoryEntity {
   const _HomeCategoryEntity({required this.id, required this.name, required final  List<ThemeEntity>? theme}): _theme = theme;
   
 
-@override final  int id;
+@override final  String id;
 @override final  String name;
  final  List<ThemeEntity>? _theme;
 @override List<ThemeEntity>? get theme {
@@ -543,7 +543,7 @@ abstract mixin class _$HomeCategoryEntityCopyWith<$Res> implements $HomeCategory
   factory _$HomeCategoryEntityCopyWith(_HomeCategoryEntity value, $Res Function(_HomeCategoryEntity) _then) = __$HomeCategoryEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, List<ThemeEntity>? theme
+ String id, String name, List<ThemeEntity>? theme
 });
 
 
@@ -563,7 +563,7 @@ class __$HomeCategoryEntityCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? theme = freezed,}) {
   return _then(_HomeCategoryEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,theme: freezed == theme ? _self._theme : theme // ignore: cast_nullable_to_non_nullable
 as List<ThemeEntity>?,
   ));

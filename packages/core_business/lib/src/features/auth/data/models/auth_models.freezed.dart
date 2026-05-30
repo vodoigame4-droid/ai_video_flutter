@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginRequestModel {
 
- String get deviceId; String get app;@JsonKey(name: 'app-version') String get appVersion; String? get refCode;@JsonKey(name: 'app-type') String get appType;
+ String get deviceId; String get app; String get appVersion; String? get refCode; String get appType;
 /// Create a copy of LoginRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $LoginRequestModelCopyWith<$Res>  {
   factory $LoginRequestModelCopyWith(LoginRequestModel value, $Res Function(LoginRequestModel) _then) = _$LoginRequestModelCopyWithImpl;
 @useResult
 $Res call({
- String deviceId, String app,@JsonKey(name: 'app-version') String appVersion, String? refCode,@JsonKey(name: 'app-type') String appType
+ String deviceId, String app, String appVersion, String? refCode, String appType
 });
 
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String deviceId,  String app, @JsonKey(name: 'app-version')  String appVersion,  String? refCode, @JsonKey(name: 'app-type')  String appType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String deviceId,  String app,  String appVersion,  String? refCode,  String appType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginRequestModel() when $default != null:
 return $default(_that.deviceId,_that.app,_that.appVersion,_that.refCode,_that.appType);case _:
@@ -178,7 +178,7 @@ return $default(_that.deviceId,_that.app,_that.appVersion,_that.refCode,_that.ap
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String deviceId,  String app, @JsonKey(name: 'app-version')  String appVersion,  String? refCode, @JsonKey(name: 'app-type')  String appType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String deviceId,  String app,  String appVersion,  String? refCode,  String appType)  $default,) {final _that = this;
 switch (_that) {
 case _LoginRequestModel():
 return $default(_that.deviceId,_that.app,_that.appVersion,_that.refCode,_that.appType);case _:
@@ -198,7 +198,7 @@ return $default(_that.deviceId,_that.app,_that.appVersion,_that.refCode,_that.ap
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String deviceId,  String app, @JsonKey(name: 'app-version')  String appVersion,  String? refCode, @JsonKey(name: 'app-type')  String appType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String deviceId,  String app,  String appVersion,  String? refCode,  String appType)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginRequestModel() when $default != null:
 return $default(_that.deviceId,_that.app,_that.appVersion,_that.refCode,_that.appType);case _:
@@ -213,14 +213,14 @@ return $default(_that.deviceId,_that.app,_that.appVersion,_that.refCode,_that.ap
 @JsonSerializable()
 
 class _LoginRequestModel implements LoginRequestModel {
-  const _LoginRequestModel({required this.deviceId, required this.app, @JsonKey(name: 'app-version') required this.appVersion, required this.refCode, @JsonKey(name: 'app-type') required this.appType});
+  const _LoginRequestModel({required this.deviceId, required this.app, required this.appVersion, required this.refCode, required this.appType});
   factory _LoginRequestModel.fromJson(Map<String, dynamic> json) => _$LoginRequestModelFromJson(json);
 
 @override final  String deviceId;
 @override final  String app;
-@override@JsonKey(name: 'app-version') final  String appVersion;
+@override final  String appVersion;
 @override final  String? refCode;
-@override@JsonKey(name: 'app-type') final  String appType;
+@override final  String appType;
 
 /// Create a copy of LoginRequestModel
 /// with the given fields replaced by the non-null parameter values.
@@ -255,7 +255,7 @@ abstract mixin class _$LoginRequestModelCopyWith<$Res> implements $LoginRequestM
   factory _$LoginRequestModelCopyWith(_LoginRequestModel value, $Res Function(_LoginRequestModel) _then) = __$LoginRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- String deviceId, String app,@JsonKey(name: 'app-version') String appVersion, String? refCode,@JsonKey(name: 'app-type') String appType
+ String deviceId, String app, String appVersion, String? refCode, String appType
 });
 
 
@@ -497,13 +497,13 @@ return $default(_that.accessToken,_that.tokenExpires,_that.refreshToken,_that.re
 @JsonSerializable()
 
 class _LoginResponseModel implements LoginResponseModel {
-  const _LoginResponseModel({required this.accessToken, required this.tokenExpires, required this.refreshToken, required this.refreshTokenExpires, required this.user});
+  const _LoginResponseModel({required this.accessToken, required this.tokenExpires, required this.refreshToken, this.refreshTokenExpires = 0, required this.user});
   factory _LoginResponseModel.fromJson(Map<String, dynamic> json) => _$LoginResponseModelFromJson(json);
 
 @override final  String accessToken;
 @override final  int tokenExpires;
 @override final  String refreshToken;
-@override final  int refreshTokenExpires;
+@override@JsonKey() final  int refreshTokenExpires;
 @override final  UserModel user;
 
 /// Create a copy of LoginResponseModel

@@ -9,9 +9,9 @@ abstract class LoginRequestModel with _$LoginRequestModel {
   const factory LoginRequestModel({
     required String deviceId,
     required String app,
-    @JsonKey(name: 'app-version') required String appVersion,
+    required String appVersion,
     required String? refCode,
-    @JsonKey(name: 'app-type') required String appType,
+    required String appType,
   }) = _LoginRequestModel;
 
   factory LoginRequestModel.fromJson(Map<String, dynamic> json) =>
@@ -27,7 +27,7 @@ abstract class LoginResponseModel with _$LoginResponseModel {
     required String accessToken,
     required int tokenExpires,
     required String refreshToken,
-    required int refreshTokenExpires,
+    @Default(0) int refreshTokenExpires,
     required UserModel user,
   }) = _LoginResponseModel;
 

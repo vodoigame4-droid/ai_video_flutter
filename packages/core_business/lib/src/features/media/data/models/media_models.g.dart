@@ -10,7 +10,9 @@ PaginatedListModel<T> _$PaginatedListModelFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) => PaginatedListModel<T>(
-  data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
+  data: (_readPaginatedData(json, 'data') as List<dynamic>)
+      .map(fromJsonT)
+      .toList(),
   meta: PaginationMetaModel.fromJson(json['meta'] as Map<String, dynamic>),
 );
 
@@ -25,16 +27,16 @@ Map<String, dynamic> _$PaginatedListModelToJson<T>(
 _ThemeModel _$ThemeModelFromJson(Map<String, dynamic> json) => _ThemeModel(
   id: json['id'] as String,
   name: json['name'] as String,
-  description: json['description'] as String,
-  resultUrl: json['resultUrl'] as String,
-  sourceUrl: json['sourceUrl'] as String,
+  description: json['description'] as String?,
+  resultUrl: json['resultUrl'] as String?,
+  sourceUrl: json['sourceUrl'] as String?,
   sourceUrls: (json['sourceUrls'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  thumbnailUrl: json['thumbnailUrl'] as String,
-  prompt: json['prompt'] as String,
-  type: json['type'] as String,
-  orgId: (json['orgId'] as num).toInt(),
+  thumbnailUrl: json['thumbnailUrl'] as String?,
+  prompt: json['prompt'] as String?,
+  type: json['type'] as String?,
+  orgId: (_readOrgId(json, 'orgId') as num).toInt(),
 );
 
 Map<String, dynamic> _$ThemeModelToJson(_ThemeModel instance) =>
@@ -53,9 +55,9 @@ Map<String, dynamic> _$ThemeModelToJson(_ThemeModel instance) =>
 
 _HomeCategoryModel _$HomeCategoryModelFromJson(Map<String, dynamic> json) =>
     _HomeCategoryModel(
-      id: (json['id'] as num).toInt(),
+      id: _readStringId(json, 'id') as String,
       name: json['name'] as String,
-      theme: (json['theme'] as List<dynamic>?)
+      theme: (json['themes'] as List<dynamic>?)
           ?.map((e) => ThemeModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -64,7 +66,7 @@ Map<String, dynamic> _$HomeCategoryModelToJson(_HomeCategoryModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'theme': instance.theme,
+      'themes': instance.theme,
     };
 
 _CreateTgvRequestModel _$CreateTgvRequestModelFromJson(
@@ -96,17 +98,17 @@ Map<String, dynamic> _$CreateTgvRequestModelToJson(
 _MediaModel _$MediaModelFromJson(Map<String, dynamic> json) => _MediaModel(
   id: json['id'] as String,
   name: json['name'] as String,
-  imageUrl: json['imageUrl'] as String,
+  imageUrl: json['imageUrl'] as String?,
   imageUrls: (json['imageUrls'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  imageQuantity: (json['imageQuantity'] as num).toInt(),
-  requestId: json['requestId'] as String,
+  imageQuantity: (json['imageQuantity'] as num?)?.toInt() ?? 1,
+  requestId: json['requestId'] as String? ?? '',
   resultUrl: json['resultUrl'] as String?,
   finishedTime: json['finishedTime'] as String?,
   prompt: json['prompt'] as String,
-  isHd: json['isHd'] as bool,
-  isLongTime: json['isLongTime'] as bool,
+  isHd: json['isHd'] as bool? ?? false,
+  isLongTime: json['isLongTime'] as bool? ?? false,
   themeId: json['themeId'] as String,
   thumbnailUrl: json['thumbnailUrl'] as String?,
   status: json['status'] as String,
@@ -153,7 +155,7 @@ _PaginationMetaModel _$PaginationMetaModelFromJson(Map<String, dynamic> json) =>
       page: (json['page'] as num).toInt(),
       take: (json['take'] as num).toInt(),
       total: (json['total'] as num).toInt(),
-      pageCount: (json['pageCount'] as num).toInt(),
+      pageCount: (_readPageCount(json, 'pageCount') as num).toInt(),
     );
 
 Map<String, dynamic> _$PaginationMetaModelToJson(

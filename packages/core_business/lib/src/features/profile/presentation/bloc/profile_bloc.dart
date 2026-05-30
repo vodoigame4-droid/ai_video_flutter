@@ -3,16 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/features/media/domain/entities/media_entities.dart';
-import 'package:core_business/src/features/media/domain/repositories/media_repository.dart';
+import 'package:core_business/src/features/media/domain/usecases/get_history_usecase.dart';
+import 'package:core_business/src/features/media/domain/usecases/delete_media_usecase.dart';
+import 'package:core_business/src/features/media/domain/usecases/get_media_statuses_usecase.dart';
 import '../../domain/entities/user_video_entity.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final MediaRepository mediaRepository;
+  final GetHistoryUseCase getHistoryUseCase;
+  final DeleteMediaUseCase deleteMediaUseCase;
+  final GetMediaStatusesUseCase getMediaStatusesUseCase;
   Timer? _progressTimer;
 
-  ProfileBloc({required this.mediaRepository}) : super(const ProfileState.initial()) {
+  ProfileBloc({
+    required this.getHistoryUseCase,
+    required this.deleteMediaUseCase,
+    required this.getMediaStatusesUseCase,
+  }) : super(const ProfileState.initial()) {
     on<ProfileEvent>((event, emit) async {
       await event.when(
         init: () => _onInit(emit),
@@ -25,7 +33,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   Future<void> _onInit(Emitter<ProfileState> emit) async {
     emit(const ProfileState.loading());
-    final result = await mediaRepository.getHistory(page: 1, take: 50);
+    final result = await getHistoryUseCase(GetHistoryParams(page: 1, take: 50));
     
     result.when(
       initial: () {},
@@ -61,7 +69,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           videosState: const Resource.loading(),
         ));
 
-        final result = await mediaRepository.getHistory(page: 1, take: 50);
+        final result = await getHistoryUseCase(GetHistoryParams(page: 1, take: 50));
         result.when(
           initial: () {},
           loading: () {},
@@ -93,13 +101,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Future<void> _onDeleteVideo(String id, Emitter<ProfileState> emit) async {
     await state.mapOrNull(
       ready: (readyState) async {
-        final deleteResult = await mediaRepository.deleteMedia(id);
+        final deleteResult = await deleteMediaUseCase(id);
         await deleteResult.when(
           initial: () async {},
           loading: () async {},
           empty: () async {},
           success: (_) async {
-            final fetchResult = await mediaRepository.getHistory(page: 1, take: 50);
+            final fetchResult = await getHistoryUseCase(GetHistoryParams(page: 1, take: 50));
             fetchResult.when(
               initial: () {},
               loading: () {},
@@ -154,7 +162,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }
 
         LogUtils.d('ProfileBloc: Polling status for: $generatingIds');
-        final statusResult = await mediaRepository.getMediaStatuses(generatingIds);
+        final statusResult = await getMediaStatusesUseCase(generatingIds);
         
         await statusResult.when(
           initial: () async {},

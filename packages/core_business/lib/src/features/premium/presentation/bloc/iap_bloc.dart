@@ -1,15 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
-import '../../domain/repositories/iap_repository.dart';
+import '../../domain/usecases/verify_subscription_usecase.dart';
+import '../../domain/usecases/verify_product_usecase.dart';
 import '../../data/models/iap_models.dart';
 import 'iap_event.dart';
 import 'iap_state.dart';
 
 class IapBloc extends Bloc<IapEvent, IapState> {
-  final IapRepository iapRepository;
+  final VerifySubscriptionUseCase verifySubscriptionUseCase;
+  final VerifyProductUseCase verifyProductUseCase;
 
-  IapBloc({required this.iapRepository}) : super(const IapState.initial()) {
+  IapBloc({
+    required this.verifySubscriptionUseCase,
+    required this.verifyProductUseCase,
+  }) : super(const IapState.initial()) {
     on<IapEvent>((event, emit) async {
       await event.when(
         init: () async {
@@ -69,7 +74,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             purchaseToken: 'mock_google_purchase_token_for_white_label',
           );
           
-          final result = await iapRepository.verifySubscription(request);
+          final result = await verifySubscriptionUseCase(request);
           
           result.when(
             initial: () {},
@@ -124,7 +129,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             purchaseToken: 'mock_google_purchase_token_for_credits',
           );
 
-          final result = await iapRepository.verifyProduct(request);
+          final result = await verifyProductUseCase(request);
 
           result.when(
             initial: () {},

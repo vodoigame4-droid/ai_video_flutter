@@ -15,7 +15,10 @@ void main() {
     when(() => mockPrefs.getString('selected_locale')).thenReturn(null);
     when(() => mockPrefs.setString(any(), any())).thenAnswer((_) async => true);
     
-    settingsBloc = SettingsBloc(sharedPreferences: mockPrefs);
+    settingsBloc = SettingsBloc(
+      getSettingsUseCase: GetSettingsUseCase(sharedPreferences: mockPrefs),
+      saveSettingsUseCase: SaveSettingsUseCase(sharedPreferences: mockPrefs),
+    );
   });
 
   tearDown(() {

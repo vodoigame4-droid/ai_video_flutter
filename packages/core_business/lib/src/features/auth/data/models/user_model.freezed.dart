@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- String get id; String get deviceId; String get name; String get email; String get avatarUrl; String get inviteCode; String get status; int get credits; int get extraCredits; int get subscribeCredits; bool get isRated; bool get isVip; String? get activeSubId; int get refUsersCount; String get createdAt;
+ String get id;@JsonKey(readValue: _readDeviceId) String get deviceId; String? get name; String? get email; String? get avatarUrl;@JsonKey(readValue: _readInviteCode) String get inviteCode; String get status; int get credits;@JsonKey(readValue: _readExtraCredits) int get extraCredits;@JsonKey(readValue: _readSubscribeCredits) int get subscribeCredits;@JsonKey(readValue: _readIsRated) bool get isRated;@JsonKey(readValue: _readIsVip) bool get isVip;@JsonKey(readValue: _readActiveSubId) String? get activeSubId;@JsonKey(readValue: _readRefUsersCount) int get refUsersCount;@JsonKey(readValue: _readCreatedAt) String get createdAt;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String deviceId, String name, String email, String avatarUrl, String inviteCode, String status, int credits, int extraCredits, int subscribeCredits, bool isRated, bool isVip, String? activeSubId, int refUsersCount, String createdAt
+ String id,@JsonKey(readValue: _readDeviceId) String deviceId, String? name, String? email, String? avatarUrl,@JsonKey(readValue: _readInviteCode) String inviteCode, String status, int credits,@JsonKey(readValue: _readExtraCredits) int extraCredits,@JsonKey(readValue: _readSubscribeCredits) int subscribeCredits,@JsonKey(readValue: _readIsRated) bool isRated,@JsonKey(readValue: _readIsVip) bool isVip,@JsonKey(readValue: _readActiveSubId) String? activeSubId,@JsonKey(readValue: _readRefUsersCount) int refUsersCount,@JsonKey(readValue: _readCreatedAt) String createdAt
 });
 
 
@@ -65,14 +65,14 @@ class _$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? deviceId = null,Object? name = null,Object? email = null,Object? avatarUrl = null,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? deviceId = null,Object? name = freezed,Object? email = freezed,Object? avatarUrl = freezed,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,deviceId: null == deviceId ? _self.deviceId : deviceId // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,avatarUrl: null == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
-as String,inviteCode: null == inviteCode ? _self.inviteCode : inviteCode // ignore: cast_nullable_to_non_nullable
+as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,inviteCode: null == inviteCode ? _self.inviteCode : inviteCode // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,credits: null == credits ? _self.credits : credits // ignore: cast_nullable_to_non_nullable
 as int,extraCredits: null == extraCredits ? _self.extraCredits : extraCredits // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  String? activeSubId,  int refUsersCount,  String createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(readValue: _readDeviceId)  String deviceId,  String? name,  String? email,  String? avatarUrl, @JsonKey(readValue: _readInviteCode)  String inviteCode,  String status,  int credits, @JsonKey(readValue: _readExtraCredits)  int extraCredits, @JsonKey(readValue: _readSubscribeCredits)  int subscribeCredits, @JsonKey(readValue: _readIsRated)  bool isRated, @JsonKey(readValue: _readIsVip)  bool isVip, @JsonKey(readValue: _readActiveSubId)  String? activeSubId, @JsonKey(readValue: _readRefUsersCount)  int refUsersCount, @JsonKey(readValue: _readCreatedAt)  String createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
@@ -188,7 +188,7 @@ return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  String? activeSubId,  int refUsersCount,  String createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(readValue: _readDeviceId)  String deviceId,  String? name,  String? email,  String? avatarUrl, @JsonKey(readValue: _readInviteCode)  String inviteCode,  String status,  int credits, @JsonKey(readValue: _readExtraCredits)  int extraCredits, @JsonKey(readValue: _readSubscribeCredits)  int subscribeCredits, @JsonKey(readValue: _readIsRated)  bool isRated, @JsonKey(readValue: _readIsVip)  bool isVip, @JsonKey(readValue: _readActiveSubId)  String? activeSubId, @JsonKey(readValue: _readRefUsersCount)  int refUsersCount, @JsonKey(readValue: _readCreatedAt)  String createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
 return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
@@ -208,7 +208,7 @@ return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  String? activeSubId,  int refUsersCount,  String createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(readValue: _readDeviceId)  String deviceId,  String? name,  String? email,  String? avatarUrl, @JsonKey(readValue: _readInviteCode)  String inviteCode,  String status,  int credits, @JsonKey(readValue: _readExtraCredits)  int extraCredits, @JsonKey(readValue: _readSubscribeCredits)  int subscribeCredits, @JsonKey(readValue: _readIsRated)  bool isRated, @JsonKey(readValue: _readIsVip)  bool isVip, @JsonKey(readValue: _readActiveSubId)  String? activeSubId, @JsonKey(readValue: _readRefUsersCount)  int refUsersCount, @JsonKey(readValue: _readCreatedAt)  String createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
@@ -223,24 +223,24 @@ return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_
 @JsonSerializable()
 
 class _UserModel implements UserModel {
-  const _UserModel({required this.id, required this.deviceId, required this.name, required this.email, required this.avatarUrl, required this.inviteCode, required this.status, required this.credits, required this.extraCredits, required this.subscribeCredits, required this.isRated, required this.isVip, required this.activeSubId, required this.refUsersCount, required this.createdAt});
+  const _UserModel({required this.id, @JsonKey(readValue: _readDeviceId) required this.deviceId, required this.name, required this.email, required this.avatarUrl, @JsonKey(readValue: _readInviteCode) required this.inviteCode, required this.status, required this.credits, @JsonKey(readValue: _readExtraCredits) required this.extraCredits, @JsonKey(readValue: _readSubscribeCredits) required this.subscribeCredits, @JsonKey(readValue: _readIsRated) required this.isRated, @JsonKey(readValue: _readIsVip) required this.isVip, @JsonKey(readValue: _readActiveSubId) required this.activeSubId, @JsonKey(readValue: _readRefUsersCount) required this.refUsersCount, @JsonKey(readValue: _readCreatedAt) required this.createdAt});
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;
-@override final  String deviceId;
-@override final  String name;
-@override final  String email;
-@override final  String avatarUrl;
-@override final  String inviteCode;
+@override@JsonKey(readValue: _readDeviceId) final  String deviceId;
+@override final  String? name;
+@override final  String? email;
+@override final  String? avatarUrl;
+@override@JsonKey(readValue: _readInviteCode) final  String inviteCode;
 @override final  String status;
 @override final  int credits;
-@override final  int extraCredits;
-@override final  int subscribeCredits;
-@override final  bool isRated;
-@override final  bool isVip;
-@override final  String? activeSubId;
-@override final  int refUsersCount;
-@override final  String createdAt;
+@override@JsonKey(readValue: _readExtraCredits) final  int extraCredits;
+@override@JsonKey(readValue: _readSubscribeCredits) final  int subscribeCredits;
+@override@JsonKey(readValue: _readIsRated) final  bool isRated;
+@override@JsonKey(readValue: _readIsVip) final  bool isVip;
+@override@JsonKey(readValue: _readActiveSubId) final  String? activeSubId;
+@override@JsonKey(readValue: _readRefUsersCount) final  int refUsersCount;
+@override@JsonKey(readValue: _readCreatedAt) final  String createdAt;
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -275,7 +275,7 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String deviceId, String name, String email, String avatarUrl, String inviteCode, String status, int credits, int extraCredits, int subscribeCredits, bool isRated, bool isVip, String? activeSubId, int refUsersCount, String createdAt
+ String id,@JsonKey(readValue: _readDeviceId) String deviceId, String? name, String? email, String? avatarUrl,@JsonKey(readValue: _readInviteCode) String inviteCode, String status, int credits,@JsonKey(readValue: _readExtraCredits) int extraCredits,@JsonKey(readValue: _readSubscribeCredits) int subscribeCredits,@JsonKey(readValue: _readIsRated) bool isRated,@JsonKey(readValue: _readIsVip) bool isVip,@JsonKey(readValue: _readActiveSubId) String? activeSubId,@JsonKey(readValue: _readRefUsersCount) int refUsersCount,@JsonKey(readValue: _readCreatedAt) String createdAt
 });
 
 
@@ -292,14 +292,14 @@ class __$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? deviceId = null,Object? name = null,Object? email = null,Object? avatarUrl = null,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? deviceId = null,Object? name = freezed,Object? email = freezed,Object? avatarUrl = freezed,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
   return _then(_UserModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,deviceId: null == deviceId ? _self.deviceId : deviceId // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,avatarUrl: null == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
-as String,inviteCode: null == inviteCode ? _self.inviteCode : inviteCode // ignore: cast_nullable_to_non_nullable
+as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
+as String?,inviteCode: null == inviteCode ? _self.inviteCode : inviteCode // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,credits: null == credits ? _self.credits : credits // ignore: cast_nullable_to_non_nullable
 as int,extraCredits: null == extraCredits ? _self.extraCredits : extraCredits // ignore: cast_nullable_to_non_nullable

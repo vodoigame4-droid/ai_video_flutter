@@ -2,9 +2,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'base_response.g.dart';
 
+Object? _readStatusCode(Map json, String key) {
+  return json['status'] ?? json['statusCode'] ?? 200;
+}
+
 @JsonSerializable(genericArgumentFactories: true)
 class BaseResponse<T> {
-  @JsonKey(name: 'statusCode')
+  @JsonKey(readValue: _readStatusCode)
   final int statusCode;
   
   @JsonKey(name: 'data')

@@ -24,7 +24,7 @@ void main() {
     when(() => mockMediaRepository.getHomeCategories()).thenAnswer(
       (_) async => const Resource.success([
         HomeCategoryEntity(
-          id: 1,
+          id: '1',
           name: 'trending',
           theme: [
             ThemeEntity(
@@ -42,7 +42,7 @@ void main() {
           ],
         ),
         HomeCategoryEntity(
-          id: 2,
+          id: '2',
           name: 'new',
           theme: [
             ThemeEntity(

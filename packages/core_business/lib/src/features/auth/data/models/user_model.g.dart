@@ -8,20 +8,21 @@ part of 'user_model.dart';
 
 _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
   id: json['id'] as String,
-  deviceId: json['deviceId'] as String,
-  name: json['name'] as String,
-  email: json['email'] as String,
-  avatarUrl: json['avatarUrl'] as String,
-  inviteCode: json['inviteCode'] as String,
+  deviceId: _readDeviceId(json, 'deviceId') as String,
+  name: json['name'] as String?,
+  email: json['email'] as String?,
+  avatarUrl: json['avatarUrl'] as String?,
+  inviteCode: _readInviteCode(json, 'inviteCode') as String,
   status: json['status'] as String,
   credits: (json['credits'] as num).toInt(),
-  extraCredits: (json['extraCredits'] as num).toInt(),
-  subscribeCredits: (json['subscribeCredits'] as num).toInt(),
-  isRated: json['isRated'] as bool,
-  isVip: json['isVip'] as bool,
-  activeSubId: json['activeSubId'] as String?,
-  refUsersCount: (json['refUsersCount'] as num).toInt(),
-  createdAt: json['createdAt'] as String,
+  extraCredits: (_readExtraCredits(json, 'extraCredits') as num).toInt(),
+  subscribeCredits: (_readSubscribeCredits(json, 'subscribeCredits') as num)
+      .toInt(),
+  isRated: _readIsRated(json, 'isRated') as bool,
+  isVip: _readIsVip(json, 'isVip') as bool,
+  activeSubId: _readActiveSubId(json, 'activeSubId') as String?,
+  refUsersCount: (_readRefUsersCount(json, 'refUsersCount') as num).toInt(),
+  createdAt: _readCreatedAt(json, 'createdAt') as String,
 );
 
 Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>

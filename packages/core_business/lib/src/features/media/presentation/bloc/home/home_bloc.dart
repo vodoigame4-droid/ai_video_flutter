@@ -1,22 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
+import 'package:core_business/src/core/usecases/usecase.dart';
 import '../../../domain/entities/media_entities.dart';
-import '../../../domain/repositories/media_repository.dart';
+import '../../../domain/usecases/get_home_categories_usecase.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final MediaRepository mediaRepository;
+  final GetHomeCategoriesUseCase getHomeCategoriesUseCase;
 
-  HomeBloc({required this.mediaRepository}) : super(const HomeState.initial()) {
+  HomeBloc({required this.getHomeCategoriesUseCase}) : super(const HomeState.initial()) {
     on<HomeEvent>((event, emit) async {
       await event.when(
         init: () async {
           emit(const HomeState.loading());
           LogUtils.d('HomeBloc: Init fetching home categories');
 
-          final result = await mediaRepository.getHomeCategories();
+          final result = await getHomeCategoriesUseCase(NoParams());
 
           result.when(
             initial: () {},
@@ -36,14 +37,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 (c) => c.name.toLowerCase() == 'trending',
                 orElse: () => categories.isNotEmpty
                     ? categories.first
-                    : const HomeCategoryEntity(id: 0, name: 'Trending', theme: []),
+                    : const HomeCategoryEntity(id: '0', name: 'Trending', theme: []),
               );
               
               final newCategory = categories.firstWhere(
                 (c) => c.name.toLowerCase() == 'new' || c.name.toLowerCase() == 'popular',
                 orElse: () => categories.length > 1
                     ? categories[1]
-                    : (categories.isNotEmpty ? categories.first : const HomeCategoryEntity(id: 0, name: 'New', theme: [])),
+                    : (categories.isNotEmpty ? categories.first : const HomeCategoryEntity(id: '0', name: 'New', theme: [])),
               );
 
               final trendingThemes = trendingCategory.theme ?? [];
@@ -58,6 +59,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ));
             },
             error: (message) {
+              LogUtils.e('HomeBloc: Fetch categories failed: $message');
               emit(HomeState.error(message: message));
             },
           );
