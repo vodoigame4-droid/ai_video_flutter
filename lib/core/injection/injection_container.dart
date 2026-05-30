@@ -32,18 +32,23 @@ Future<void> initDependencies() async {
     () => ApiClient(
       baseUrl: 'https://video-effect-be.apihub.today/api/v1',
       logCallback: (msg) {
-        if (msg.startsWith('-->')) {
-          LogUtils.d(msg); // Request line (Blue)
-        } else if (msg.startsWith('Headers:') || msg.startsWith('Body:')) {
-          LogUtils.v(msg); // Headers & request body (Cyan)
-        } else if (msg.startsWith('<--')) {
-          LogUtils.i(msg); // Response status line (Green)
-        } else if (msg.startsWith('Response Body:')) {
-          LogUtils.v(msg); // Response body payload (Cyan)
-        } else if (msg.startsWith('!!!') || msg.startsWith('Status code:') || msg.startsWith('Error response:')) {
-          LogUtils.e(msg); // Network error details (Red)
+        final lines = msg.split('\n');
+        if (msg.startsWith('📤') || msg.startsWith('-->')) {
+          for (final line in lines) {
+            LogUtils.d(line); // Request (Blue)
+          }
+        } else if (msg.startsWith('📥') || msg.startsWith('<--')) {
+          for (final line in lines) {
+            LogUtils.i(line); // Response (Green)
+          }
+        } else if (msg.startsWith('🚨') || msg.startsWith('!!!')) {
+          for (final line in lines) {
+            LogUtils.e(line); // Error (Red)
+          }
         } else {
-          LogUtils.d(msg);
+          for (final line in lines) {
+            LogUtils.v(line); // Fallback (Cyan)
+          }
         }
       },
       tokenProvider: () async {

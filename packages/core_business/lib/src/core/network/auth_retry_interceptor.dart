@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:network/network.dart';
 import '../config/app_config.dart';
 import '../utils/log_utils.dart';
 
@@ -14,7 +15,30 @@ class AuthRetryInterceptor extends QueuedInterceptor {
     required AppConfig appConfig,
   })  : _sharedPreferences = sharedPreferences,
         _appConfig = appConfig,
-        _authDio = Dio();
+        _authDio = Dio() {
+    _authDio.interceptors.add(LoggingInterceptor(
+      logCallback: (msg) {
+        final lines = msg.split('\n');
+        if (msg.startsWith('📤') || msg.startsWith('-->')) {
+          for (final line in lines) {
+            LogUtils.d(line);
+          }
+        } else if (msg.startsWith('📥') || msg.startsWith('<--')) {
+          for (final line in lines) {
+            LogUtils.i(line);
+          }
+        } else if (msg.startsWith('🚨') || msg.startsWith('!!!')) {
+          for (final line in lines) {
+            LogUtils.e(line);
+          }
+        } else {
+          for (final line in lines) {
+            LogUtils.v(line);
+          }
+        }
+      },
+    ));
+  }
 
   @override
   Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {

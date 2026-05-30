@@ -10,45 +10,101 @@ class LoggingInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    _log('--> ${options.method} ${options.uri}');
+    options.extra['startTime'] = DateTime.now().millisecondsSinceEpoch;
+
+    final buffer = StringBuffer();
+    buffer.writeln('📤 --> ${options.method} ${options.uri}');
+    
+    // Headers
+    buffer.writeln('Headers:');
     if (options.headers.isNotEmpty) {
-      _log('Headers:\n${_formatMap(options.headers)}');
+      options.headers.forEach((key, value) {
+        buffer.writeln('  $key: $value');
+      });
+    } else {
+      buffer.writeln('  (none)');
     }
+
+    // Query Parameters
+    buffer.writeln('Query Parameters:');
+    if (options.queryParameters.isNotEmpty) {
+      options.queryParameters.forEach((key, value) {
+        buffer.writeln('  $key: $value');
+      });
+    } else {
+      buffer.writeln('  (none)');
+    }
+
+    // Body
     if (options.data != null) {
-      _log('Body:\n${_formatData(options.data)}');
+      buffer.writeln('Body:');
+      buffer.writeln(_formatData(options.data));
     }
+
+    _log(buffer.toString().trimRight());
     super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    _log('<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.uri}');
-    if (response.data != null) {
-      _log('Response Body:\n${_formatData(response.data)}');
+    final buffer = StringBuffer();
+    final startTime = response.requestOptions.extra['startTime'] as int?;
+    final durationSuffix = startTime != null 
+        ? ' (${DateTime.now().millisecondsSinceEpoch - startTime}ms)'
+        : '';
+
+    buffer.writeln('📥 <-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.uri}$durationSuffix');
+    
+    // Response Headers
+    buffer.writeln('Headers:');
+    if (response.headers.map.isNotEmpty) {
+      response.headers.map.forEach((key, values) {
+        buffer.writeln('  $key: ${values.join(', ')}');
+      });
+    } else {
+      buffer.writeln('  (none)');
     }
+
+    // Response Body
+    if (response.data != null) {
+      buffer.writeln('Response Body:');
+      buffer.writeln(_formatData(response.data));
+    }
+
+    _log(buffer.toString().trimRight());
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    _log('!!! Network Error: ${err.message}');
-    if (err.response != null) {
-      _log('Status code: ${err.response?.statusCode}');
-      _log('Error response:\n${_formatData(err.response?.data)}');
-    }
-    super.onError(err, handler);
-  }
+    final buffer = StringBuffer();
+    final startTime = err.requestOptions.extra['startTime'] as int?;
+    final durationSuffix = startTime != null 
+        ? ' (${DateTime.now().millisecondsSinceEpoch - startTime}ms)'
+        : '';
 
-  String _formatMap(Map<dynamic, dynamic> map) {
-    try {
-      final lines = <String>[];
-      map.forEach((key, value) {
-        lines.add('  $key: $value');
-      });
-      return lines.join('\n');
-    } catch (_) {
-      return map.toString();
+    buffer.writeln('🚨 !!! Network Error: ${err.message}$durationSuffix');
+    buffer.writeln('Request: ${err.requestOptions.method} ${err.requestOptions.uri}');
+    
+    if (err.response != null) {
+      final response = err.response!;
+      buffer.writeln('Status code: ${response.statusCode}');
+      buffer.writeln('Headers:');
+      if (response.headers.map.isNotEmpty) {
+        response.headers.map.forEach((key, values) {
+          buffer.writeln('  $key: ${values.join(', ')}');
+        });
+      } else {
+        buffer.writeln('  (none)');
+      }
+      if (response.data != null) {
+        buffer.writeln('Error Response Body:');
+        buffer.writeln(_formatData(response.data));
+      }
     }
+    
+    _log(buffer.toString().trimRight());
+    super.onError(err, handler);
   }
 
   String _formatData(dynamic data) {
