@@ -31,7 +31,21 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(
       baseUrl: 'https://video-effect-be.apihub.today/api/v1',
-      logCallback: LogUtils.d,
+      logCallback: (msg) {
+        if (msg.startsWith('-->')) {
+          LogUtils.d(msg); // Request line (Blue)
+        } else if (msg.startsWith('Headers:') || msg.startsWith('Body:')) {
+          LogUtils.v(msg); // Headers & request body (Cyan)
+        } else if (msg.startsWith('<--')) {
+          LogUtils.i(msg); // Response status line (Green)
+        } else if (msg.startsWith('Response Body:')) {
+          LogUtils.v(msg); // Response body payload (Cyan)
+        } else if (msg.startsWith('!!!') || msg.startsWith('Status code:') || msg.startsWith('Error response:')) {
+          LogUtils.e(msg); // Network error details (Red)
+        } else {
+          LogUtils.d(msg);
+        }
+      },
       tokenProvider: () async {
         final prefs = sl<SharedPreferences>();
         return prefs.getString('auth_access_token');
