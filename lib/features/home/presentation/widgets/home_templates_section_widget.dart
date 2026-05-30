@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/resources/resource.dart';
+import 'package:core_business/core_business.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/video_card.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../create_video/presentation/pages/create_from_template_page.dart';
-import '../../../templates/domain/entities/template_entity.dart';
 
 /// A reusable widget to represent a section containing a category header (title, icon, "See All" button)
 /// and a horizontal list of template video cards supporting all state configurations (loading, error, success).
@@ -13,7 +12,7 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
-  final Resource<List<TemplateEntity>> videosState;
+  final Resource<List<ThemeEntity>> videosState;
   final VoidCallback onSeeAllPressed;
 
   const HomeTemplatesSectionWidget({
@@ -73,10 +72,8 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final template = videos[index];
                 return VideoCard(
-                  title: template.title,
-                  imageUrl: template.imageUrl,
-                  viewsCount: template.viewsCount,
-                  badgeType: template.badgeType,
+                  title: template.name,
+                  imageUrl: template.thumbnailUrl,
                   showPlayButton: false,
                   showVolumeIcon: false,
                   width: 158,
@@ -88,9 +85,9 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
                       CreateFromTemplatePage.name,
                       queryParameters: {
                         'templateId': template.id,
-                        'title': template.title,
+                        'title': template.name,
                         'videoUrl': mockVideoUrl,
-                        'imageUrl': template.imageUrl,
+                        'imageUrl': template.thumbnailUrl,
                       },
                     );
                   },

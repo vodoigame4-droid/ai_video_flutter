@@ -7,9 +7,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
 import '../../../../i18n/strings.g.dart';
-import '../bloc/generating_bloc.dart';
-import '../bloc/generating_event.dart';
-import '../bloc/generating_state.dart';
+import 'package:core_business/core_business.dart';
 import 'result_page.dart';
 
 class GeneratingPage extends StatelessWidget {

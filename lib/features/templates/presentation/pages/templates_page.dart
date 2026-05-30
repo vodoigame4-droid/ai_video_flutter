@@ -3,11 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../core/resources/resource.dart';
+import 'package:core_business/core_business.dart';
 import '../../../../../i18n/strings.g.dart';
-import '../bloc/templates_bloc.dart';
-import '../bloc/templates_event.dart';
-import '../bloc/templates_state.dart';
 import '../../../../core/widgets/video_card.dart';
 import '../../../../features/video_player/presentation/pages/video_player_page.dart';
 import '../../../../features/create_video/presentation/pages/create_from_template_page.dart';
@@ -195,10 +192,8 @@ class TemplatesView extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     final template = templates[index];
                                     return VideoCard(
-                                      title: template.title,
-                                      imageUrl: template.imageUrl,
-                                      viewsCount: template.viewsCount,
-                                      badgeType: template.badgeType,
+                                      title: template.name,
+                                      imageUrl: template.thumbnailUrl,
                                       showPlayButton: false,
                                       showVolumeIcon: false,
                                       onTap: () {
@@ -207,9 +202,9 @@ class TemplatesView extends StatelessWidget {
                                           CreateFromTemplatePage.name,
                                           queryParameters: {
                                             'templateId': template.id,
-                                            'title': template.title,
+                                            'title': template.name,
                                             'videoUrl': mockVideoUrl,
-                                            'imageUrl': template.imageUrl,
+                                            'imageUrl': template.thumbnailUrl,
                                           },
                                         );
                                       },

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
-import '../../domain/entities/user_video_entity.dart';
+import 'package:core_business/core_business.dart';
 
 class MyVideoItemWidget extends StatelessWidget {
   final UserVideoEntity video;

@@ -8,9 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
-import '../bloc/result_bloc.dart';
-import '../bloc/result_event.dart';
-import '../bloc/result_state.dart';
+import 'package:core_business/core_business.dart';
 import '../widgets/extend_video_bottom_sheet.dart';
 import 'generating_page.dart';
 

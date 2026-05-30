@@ -4,9 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../i18n/strings.g.dart';
-import '../bloc/settings_bloc.dart';
-import '../bloc/settings_event.dart';
-import '../bloc/settings_state.dart';
+import 'package:core_business/core_business.dart';
 
 class LanguagePage extends StatelessWidget {
   static const String path = '/settings/language';
@@ -81,36 +79,56 @@ class LanguageView extends StatelessWidget {
 
               // Language Items List
               Expanded(
-                child: BlocBuilder<SettingsBloc, SettingsState>(
-                  builder: (context, state) {
-                    return state.when(
-                      initial: () => const Center(child: CircularProgressIndicator()),
-                      loading: () => const Center(child: CircularProgressIndicator()),
-                      ready: (currentLocale) {
-                        return ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: AppLocale.values.length,
-                          itemBuilder: (context, index) {
-                            final locale = AppLocale.values[index];
-                            final isSelected = locale == currentLocale;
-                            final nativeName = _getNativeLanguageName(locale);
-
-                            return _buildLanguageItem(
-                              context: context,
-                              locale: locale,
-                              title: nativeName,
-                              isSelected: isSelected,
-                              onTap: () {
-                                context.read<SettingsBloc>().add(
-                                      SettingsEvent.changeLanguage(locale),
-                                    );
-                              },
-                            );
-                          },
+                child: BlocListener<SettingsBloc, SettingsState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      ready: (currentLanguageCode) {
+                        final locale = AppLocale.values.firstWhere(
+                          (l) => l.languageCode == currentLanguageCode,
+                          orElse: () => AppLocale.en,
                         );
+                        if (LocaleSettings.currentLocale != locale) {
+                          LocaleSettings.setLocale(locale);
+                        }
                       },
+                      orElse: () {},
                     );
                   },
+                  child: BlocBuilder<SettingsBloc, SettingsState>(
+                    builder: (context, state) {
+                      return state.when(
+                        initial: () => const Center(child: CircularProgressIndicator()),
+                        loading: () => const Center(child: CircularProgressIndicator()),
+                        ready: (currentLanguageCode) {
+                          final currentLocale = AppLocale.values.firstWhere(
+                            (l) => l.languageCode == currentLanguageCode,
+                            orElse: () => AppLocale.en,
+                          );
+                          return ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: AppLocale.values.length,
+                            itemBuilder: (context, index) {
+                              final locale = AppLocale.values[index];
+                              final isSelected = locale == currentLocale;
+                              final nativeName = _getNativeLanguageName(locale);
+
+                              return _buildLanguageItem(
+                                context: context,
+                                locale: locale,
+                                title: nativeName,
+                                isSelected: isSelected,
+                                onTap: () {
+                                  context.read<SettingsBloc>().add(
+                                        SettingsEvent.changeLanguage(locale.languageCode),
+                                      );
+                                },
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

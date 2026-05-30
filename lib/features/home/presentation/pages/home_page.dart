@@ -4,12 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../../core/theme/app_theme.dart';
-import '../../../../../core/resources/resource.dart';
-import '../../../../../i18n/strings.g.dart';
+import 'package:core_business/core_business.dart';
+import '../../../../i18n/strings.g.dart';
 import '../../../templates/presentation/pages/templates_page.dart';
-import '../blocs/home_bloc.dart';
-import '../blocs/home_event.dart';
-import '../blocs/home_state.dart';
 import '../widgets/category_selector.dart';
 import '../widgets/home_banner_widget.dart';
 import '../widgets/home_features_grid_widget.dart';
@@ -92,7 +89,7 @@ class HomeView extends StatelessWidget {
                                         ),
                                       ),
                                       success: (categories) => CategorySelector(
-                                        categories: categories,
+                                        categories: categories.map((c) => c.name).toList(),
                                         selectedCategory: selectedCategory,
                                         onSelected: (category) {
                                           context.read<HomeBloc>().add(

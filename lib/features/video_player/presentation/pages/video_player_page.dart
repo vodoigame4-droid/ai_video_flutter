@@ -6,9 +6,7 @@ import 'package:media_kit_video/media_kit_video.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
-import '../bloc/video_player_bloc.dart';
-import '../bloc/video_player_event.dart';
-import '../bloc/video_player_state.dart';
+import 'package:core_business/core_business.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   static const String path = '/video-player';

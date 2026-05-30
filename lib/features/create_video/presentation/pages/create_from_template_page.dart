@@ -13,9 +13,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
-import '../bloc/create_from_template_bloc.dart';
-import '../bloc/create_from_template_event.dart';
-import '../bloc/create_from_template_state.dart';
+import 'package:core_business/core_business.dart';
 import '../widgets/video_settings_card_widget.dart';
 import 'generating_page.dart';
 

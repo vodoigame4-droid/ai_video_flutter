@@ -9,9 +9,7 @@ import '../../../../i18n/strings.g.dart';
 import '../../../profile/presentation/widgets/premium_banner_widget.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
 import '../../../premium/presentation/pages/buy_credits_page.dart';
-import '../bloc/settings_bloc.dart';
-import '../bloc/settings_event.dart';
-import '../bloc/settings_state.dart';
+import 'package:core_business/core_business.dart';
 import 'language_page.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -95,7 +93,11 @@ class SettingsView extends StatelessWidget {
                           const Center(child: CircularProgressIndicator()),
                       loading: () =>
                           const Center(child: CircularProgressIndicator()),
-                      ready: (currentLocale) {
+                      ready: (currentLanguageCode) {
+                        final currentLocale = AppLocale.values.firstWhere(
+                          (l) => l.languageCode == currentLanguageCode,
+                          orElse: () => AppLocale.en,
+                        );
                         final localeName = _getLocaleName(t, currentLocale);
 
                         return ListView(

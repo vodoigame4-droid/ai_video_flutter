@@ -4,8 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ai_video_flutter/core/injection/injection_container.dart';
 import 'package:ai_video_flutter/core/theme/app_theme.dart';
-import 'package:ai_video_flutter/features/settings/presentation/bloc/settings_bloc.dart';
-import 'package:ai_video_flutter/features/settings/presentation/bloc/settings_state.dart';
+import 'package:core_business/core_business.dart';
 import 'package:ai_video_flutter/i18n/strings.g.dart';
 
 class MockSettingsBloc extends Mock implements SettingsBloc {}
@@ -16,7 +15,7 @@ void main() {
   setUp(() async {
     mockSettingsBloc = MockSettingsBloc();
     when(() => mockSettingsBloc.state).thenReturn(
-      const SettingsState.ready(currentLocale: AppLocale.en),
+      const SettingsState.ready(currentLanguageCode: 'en'),
     );
     when(() => mockSettingsBloc.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockSettingsBloc.close()).thenAnswer((_) async {});
