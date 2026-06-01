@@ -19,6 +19,7 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
   final double? height;
   final BorderRadius? borderRadius;
   final Player? externalPlayer;
+  final bool playMuted;
 
   const SmoothVideoPlayerWidget({
     super.key,
@@ -33,6 +34,7 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
     this.height,
     this.borderRadius,
     this.externalPlayer,
+    this.playMuted = false,
   });
 
   @override
@@ -103,7 +105,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
           _player.setPlaylistMode(PlaylistMode.single);
         }
         
-        _player.setVolume(widget.showMuteButton ? 0.0 : 100.0);
+        _player.setVolume(widget.playMuted ? 0.0 : (widget.showMuteButton ? 0.0 : 100.0));
         await _player.open(Media(mediaSource), play: widget.autoPlay);
 
         // Trigger background download if not cached

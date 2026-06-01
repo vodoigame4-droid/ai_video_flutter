@@ -58,6 +58,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$report_dialog$zh report_dialog = _Translations$report_dialog$zh._(_root);
 	@override late final _Translations$tips_sheet$zh tips_sheet = _Translations$tips_sheet$zh._(_root);
 	@override late final _Translations$errors$zh errors = _Translations$errors$zh._(_root);
+	@override late final _Translations$guide$zh guide = _Translations$guide$zh._(_root);
 }
 
 // Path: common
@@ -505,6 +506,19 @@ class _Translations$errors$zh extends Translations$errors$en {
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 }
 
+// Path: guide
+class _Translations$guide$zh extends Translations$guide$en {
+	_Translations$guide$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get step_1 => '第1步';
+	@override String get step_2 => '第2步';
+	@override String get upload_photo => '上传图片';
+	@override String get got_it => '我知道了！';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -857,6 +871,10 @@ extension on TranslationsZh {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'guide.step_1' => '第1步',
+			'guide.step_2' => '第2步',
+			'guide.upload_photo' => '上传图片',
+			'guide.got_it' => '我知道了！',
 			_ => null,
 		};
 	}

@@ -6,7 +6,6 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
-import '../../../profile/presentation/pages/profile_page.dart';
 import 'package:core_business/core_business.dart';
 import 'generating_page.dart';
 import '../widgets/create_video_tab_bar_widget.dart';
@@ -14,6 +13,14 @@ import '../widgets/image_to_video_tab.dart';
 import '../widgets/image_to_dance_tab.dart';
 import '../widgets/transition_video_tab.dart';
 import '../widgets/unified_video_tab.dart';
+import '../widgets/create_video_guide_bottom_sheet.dart';
+
+const List<String> _guideImageUrls = [
+  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp',
+  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp',
+  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp',
+  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp',
+];
 
 class CreateVideoPage extends StatelessWidget {
   static const String path = '/create-video';
@@ -137,9 +144,11 @@ class CreateVideoView extends StatelessWidget {
                                     CreateVideoEvent.changeTab(index),
                                   );
                                 },
-                                onHistoryPressed: () {
-                                  sl<ProfileBloc>().add(const ProfileEvent.init());
-                                  context.goNamed(ProfilePage.name);
+                                onHelpPressed: () {
+                                  final imageUrl = selectedTab >= 0 && selectedTab < _guideImageUrls.length
+                                      ? _guideImageUrls[selectedTab]
+                                      : _guideImageUrls[0];
+                                  CreateVideoGuideBottomSheet.show(context, imageUrl: imageUrl);
                                 },
                               ),
                             ),

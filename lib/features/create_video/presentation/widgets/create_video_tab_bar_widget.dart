@@ -8,13 +8,13 @@ import '../../../../i18n/strings.g.dart';
 class CreateVideoTabBarWidget extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
-  final VoidCallback onHistoryPressed;
+  final VoidCallback onHelpPressed;
 
   const CreateVideoTabBarWidget({
     super.key,
     required this.selectedIndex,
     required this.onTabSelected,
-    required this.onHistoryPressed,
+    required this.onHelpPressed,
   });
 
   @override
@@ -112,9 +112,9 @@ class CreateVideoTabBarWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        // History Button
+        // Help/Guide Button
         InkWell(
-          onTap: onHistoryPressed,
+          onTap: onHelpPressed,
           borderRadius: const BorderRadius.all(Radius.circular(100)),
           child: Container(
             width: 36,

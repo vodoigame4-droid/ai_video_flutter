@@ -330,5 +330,11 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found."
+  },
+  "guide": {
+    "step_1": "Passo 1",
+    "step_2": "Passo 2",
+    "upload_photo": "Enviar foto",
+    "got_it": "Entendi!"
   }
 }

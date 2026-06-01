@@ -337,5 +337,11 @@
     "get_price_list_failed": "Không thể tải danh sách giá credit.",
     "iap_receipt_not_found": "Không tìm thấy hóa đơn mua hàng.",
     "iap_subscription_not_found": "Không tìm thấy thông tin gói đăng ký."
+  },
+  "guide": {
+    "step_1": "Bước 1",
+    "step_2": "Bước 2",
+    "upload_photo": "Tải ảnh lên",
+    "got_it": "Đã hiểu!"
   }
 }

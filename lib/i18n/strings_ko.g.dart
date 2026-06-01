@@ -58,6 +58,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$report_dialog$ko report_dialog = _Translations$report_dialog$ko._(_root);
 	@override late final _Translations$tips_sheet$ko tips_sheet = _Translations$tips_sheet$ko._(_root);
 	@override late final _Translations$errors$ko errors = _Translations$errors$ko._(_root);
+	@override late final _Translations$guide$ko guide = _Translations$guide$ko._(_root);
 }
 
 // Path: common
@@ -505,6 +506,19 @@ class _Translations$errors$ko extends Translations$errors$en {
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 }
 
+// Path: guide
+class _Translations$guide$ko extends Translations$guide$en {
+	_Translations$guide$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get step_1 => '1단계';
+	@override String get step_2 => '2단계';
+	@override String get upload_photo => '사진 업로드';
+	@override String get got_it => '이해했습니다!';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -857,6 +871,10 @@ extension on TranslationsKo {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'guide.step_1' => '1단계',
+			'guide.step_2' => '2단계',
+			'guide.upload_photo' => '사진 업로드',
+			'guide.got_it' => '이해했습니다!',
 			_ => null,
 		};
 	}

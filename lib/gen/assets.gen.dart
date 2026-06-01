@@ -159,6 +159,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/empty_history.png
   AssetGenImage get emptyHistory => const AssetGenImage('assets/images/empty_history.png');
 
+  /// File path: assets/images/guide_background.png
+  AssetGenImage get guideBackground => const AssetGenImage('assets/images/guide_background.png');
+
   /// File path: assets/images/home_banner.png
   AssetGenImage get homeBanner => const AssetGenImage('assets/images/home_banner.png');
 
@@ -209,6 +212,7 @@ class $AssetsImagesGen {
     creditIcon,
     ellipse,
     emptyHistory,
+    guideBackground,
     homeBanner,
     icRadioActive,
     icRadioInactive,
@@ -231,11 +235,14 @@ class $AssetsRawGen {
   /// File path: assets/raw/ai_animation.json
   String get aiAnimation => 'assets/raw/ai_animation.json';
 
+  /// File path: assets/raw/guide_background.mp4
+  String get guideBackground => 'assets/raw/guide_background.mp4';
+
   /// File path: assets/raw/hand_tab_animation.json
   String get handTabAnimation => 'assets/raw/hand_tab_animation.json';
 
   /// List of all assets
-  List<String> get values => [aiAnimation, handTabAnimation];
+  List<String> get values => [aiAnimation, guideBackground, handTabAnimation];
 }
 
 class Assets {

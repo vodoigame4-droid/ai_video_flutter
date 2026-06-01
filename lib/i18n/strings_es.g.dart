@@ -58,6 +58,7 @@ class TranslationsEs extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$report_dialog$es report_dialog = _Translations$report_dialog$es._(_root);
 	@override late final _Translations$tips_sheet$es tips_sheet = _Translations$tips_sheet$es._(_root);
 	@override late final _Translations$errors$es errors = _Translations$errors$es._(_root);
+	@override late final _Translations$guide$es guide = _Translations$guide$es._(_root);
 }
 
 // Path: common
@@ -505,6 +506,19 @@ class _Translations$errors$es extends Translations$errors$en {
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 }
 
+// Path: guide
+class _Translations$guide$es extends Translations$guide$en {
+	_Translations$guide$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get step_1 => 'Paso 1';
+	@override String get step_2 => 'Paso 2';
+	@override String get upload_photo => 'Subir foto';
+	@override String get got_it => '¡Lo tengo!';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$es extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$es._(TranslationsEs root) : this._root = root, super.internal(root);
@@ -857,6 +871,10 @@ extension on TranslationsEs {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'guide.step_1' => 'Paso 1',
+			'guide.step_2' => 'Paso 2',
+			'guide.upload_photo' => 'Subir foto',
+			'guide.got_it' => '¡Lo tengo!',
 			_ => null,
 		};
 	}

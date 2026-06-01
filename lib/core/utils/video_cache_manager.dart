@@ -19,6 +19,9 @@ class VideoCacheManager {
   /// Otherwise, it returns null immediately, letting the caller fallback to network playback.
   Future<String?> getCachedOrDownload(String url, {bool waitForDownload = false}) async {
     if (url.isEmpty) return null;
+    if (url.startsWith('asset://') || url.startsWith('assets/')) {
+      return null;
+    }
 
     try {
       final cacheDir = await getTemporaryDirectory();

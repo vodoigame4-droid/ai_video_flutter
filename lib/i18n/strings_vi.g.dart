@@ -59,6 +59,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$report_dialog$vi report_dialog = _Translations$report_dialog$vi._(_root);
 	@override late final _Translations$tips_sheet$vi tips_sheet = _Translations$tips_sheet$vi._(_root);
 	@override late final _Translations$errors$vi errors = _Translations$errors$vi._(_root);
+	@override late final _Translations$guide$vi guide = _Translations$guide$vi._(_root);
 }
 
 // Path: common
@@ -520,6 +521,19 @@ class _Translations$errors$vi extends Translations$errors$en {
 	@override String get iap_subscription_not_found => 'Không tìm thấy thông tin gói đăng ký.';
 }
 
+// Path: guide
+class _Translations$guide$vi extends Translations$guide$en {
+	_Translations$guide$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get step_1 => 'Bước 1';
+	@override String get step_2 => 'Bước 2';
+	@override String get upload_photo => 'Tải ảnh lên';
+	@override String get got_it => 'Đã hiểu!';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -877,6 +891,10 @@ extension on TranslationsVi {
 			'errors.get_price_list_failed' => 'Không thể tải danh sách giá credit.',
 			'errors.iap_receipt_not_found' => 'Không tìm thấy hóa đơn mua hàng.',
 			'errors.iap_subscription_not_found' => 'Không tìm thấy thông tin gói đăng ký.',
+			'guide.step_1' => 'Bước 1',
+			'guide.step_2' => 'Bước 2',
+			'guide.upload_photo' => 'Tải ảnh lên',
+			'guide.got_it' => 'Đã hiểu!',
 			_ => null,
 		};
 	}

@@ -60,6 +60,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$report_dialog$en report_dialog = Translations$report_dialog$en.internal(_root);
 	late final Translations$tips_sheet$en tips_sheet = Translations$tips_sheet$en.internal(_root);
 	late final Translations$errors$en errors = Translations$errors$en.internal(_root);
+	late final Translations$guide$en guide = Translations$guide$en.internal(_root);
 }
 
 // Path: common
@@ -1069,6 +1070,27 @@ class Translations$errors$en {
 	String get iap_subscription_not_found => 'Subscription not found.';
 }
 
+// Path: guide
+class Translations$guide$en {
+	Translations$guide$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Step 1'
+	String get step_1 => 'Step 1';
+
+	/// en: 'Step 2'
+	String get step_2 => 'Step 2';
+
+	/// en: 'Upload Photo'
+	String get upload_photo => 'Upload Photo';
+
+	/// en: 'I got it!'
+	String get got_it => 'I got it!';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -1456,6 +1478,10 @@ extension on Translations {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'guide.step_1' => 'Step 1',
+			'guide.step_2' => 'Step 2',
+			'guide.upload_photo' => 'Upload Photo',
+			'guide.got_it' => 'I got it!',
 			_ => null,
 		};
 	}

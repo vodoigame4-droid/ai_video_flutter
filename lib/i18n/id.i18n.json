@@ -330,5 +330,11 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found."
+  },
+  "guide": {
+    "step_1": "Langkah 1",
+    "step_2": "Langkah 2",
+    "upload_photo": "Unggah Foto",
+    "got_it": "Saya mengerti!"
   }
 }

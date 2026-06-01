@@ -58,6 +58,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$report_dialog$hi report_dialog = _Translations$report_dialog$hi._(_root);
 	@override late final _Translations$tips_sheet$hi tips_sheet = _Translations$tips_sheet$hi._(_root);
 	@override late final _Translations$errors$hi errors = _Translations$errors$hi._(_root);
+	@override late final _Translations$guide$hi guide = _Translations$guide$hi._(_root);
 }
 
 // Path: common
@@ -505,6 +506,19 @@ class _Translations$errors$hi extends Translations$errors$en {
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 }
 
+// Path: guide
+class _Translations$guide$hi extends Translations$guide$en {
+	_Translations$guide$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get step_1 => 'चरण 1';
+	@override String get step_2 => 'चरण 2';
+	@override String get upload_photo => 'फोटो अपलोड करें';
+	@override String get got_it => 'मुझे समझ आ गया!';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -857,6 +871,10 @@ extension on TranslationsHi {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'guide.step_1' => 'चरण 1',
+			'guide.step_2' => 'चरण 2',
+			'guide.upload_photo' => 'फोटो अपलोड करें',
+			'guide.got_it' => 'मुझे समझ आ गया!',
 			_ => null,
 		};
 	}
