@@ -23,6 +23,9 @@ class GeneratingPage extends StatelessWidget {
   final int themeOrgId;
   final bool isHd;
   final bool isLongTime;
+  final String serviceType;
+  final String? videoUrl;
+  final String? prompt;
 
   const GeneratingPage({
     super.key,
@@ -33,6 +36,9 @@ class GeneratingPage extends StatelessWidget {
     required this.themeOrgId,
     required this.isHd,
     required this.isLongTime,
+    required this.serviceType,
+    this.videoUrl,
+    this.prompt,
   });
 
   @override
@@ -47,14 +53,42 @@ class GeneratingPage extends StatelessWidget {
           themeOrgId: themeOrgId,
           isHd: isHd,
           isLongTime: isLongTime,
+          serviceType: serviceType,
+          videoUrl: videoUrl,
+          prompt: prompt,
         )),
-      child: const GeneratingView(),
+      child: GeneratingView(
+        serviceType: serviceType,
+        videoUrlSrc: videoUrl,
+        themeId: themeId,
+        themeType: themeType,
+        themeOrgId: themeOrgId,
+        isHd: isHd,
+        isLongTime: isLongTime,
+      ),
     );
   }
 }
 
 class GeneratingView extends StatelessWidget {
-  const GeneratingView({super.key});
+  final String serviceType;
+  final String? videoUrlSrc;
+  final String themeId;
+  final String themeType;
+  final int themeOrgId;
+  final bool isHd;
+  final bool isLongTime;
+
+  const GeneratingView({
+    super.key,
+    required this.serviceType,
+    this.videoUrlSrc,
+    required this.themeId,
+    required this.themeType,
+    required this.themeOrgId,
+    required this.isHd,
+    required this.isLongTime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +109,13 @@ class GeneratingView extends StatelessWidget {
                   imageUrl: successState.imageUrl ?? '',
                   videoUrl: successState.videoUrl,
                   createdAt: successState.createdAt,
+                  serviceType: serviceType,
+                  videoUrlSrc: videoUrlSrc,
+                  themeId: themeId,
+                  themeType: themeType,
+                  themeOrgId: themeOrgId,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
                 ),
                 replace: true,
               );

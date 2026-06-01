@@ -2,9 +2,12 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
+import '../utils/log_utils.dart';
+import 'package:ai_video_flutter/features/create_video/presentation/widgets/upload_bottom_sheet_widget.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
-import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
 
 class UploadSlotWidget extends StatelessWidget {
@@ -43,16 +46,23 @@ class UploadSlotWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
         child: Stack(
           children: [
-            // Content Area
+            // 1. Content Area
             Positioned.fill(
-              child: GestureDetector(
-                onTap: () => _showMockMediaPicker(context),
-                child: hasMedia
-                    ? _buildFilledState(context)
-                    : _buildEmptyState(context),
+              child: hasMedia
+                  ? _buildFilledState(context)
+                  : _buildEmptyState(context),
+            ),
+            // 2. Click Layer (InkWell ripple effect)
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => _showMediaPicker(context),
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                ),
               ),
             ),
-            // Glassmorphic Close/Remove Button matching Figma node 99:436
+            // 3. Glassmorphic Close/Remove Button matching Figma node 99:436
             if (hasMedia)
               Positioned(
                 top: 10,
@@ -201,110 +211,112 @@ class UploadSlotWidget extends StatelessWidget {
     );
   }
 
-  void _showMockMediaPicker(BuildContext context) {
-    final t = context.t;
 
-    // Define mock options based on whether this is a video or photo slot
-    final mockAssets = isVideoSlot
-        ? [
-            _MockMediaOption(Assets.images.ob1.path, 'Dance Video 1'),
-            _MockMediaOption(Assets.images.ob2.path, 'Dance Video 2'),
-            _MockMediaOption(Assets.images.ob3.path, 'Promo Video'),
-          ]
-        : [
-            _MockMediaOption(Assets.images.ob1.path, 'Portrait 1'),
-            _MockMediaOption(Assets.images.ob2.path, 'Portrait 2'),
-            _MockMediaOption(Assets.images.card1.path, 'Landscape 1'),
-            _MockMediaOption(Assets.images.card2.path, 'Landscape 2'),
-          ];
+  Future<void> _pickMedia(BuildContext context, ImageSource source) async {
+    LogUtils.i('UploadSlotWidget: Starting _pickMedia. isVideoSlot: $isVideoSlot, source: $source');
+    final cropTitle = context.t.tips_sheet.title;
+    try {
+      final ImagePicker picker = ImagePicker();
+      if (isVideoSlot) {
+        LogUtils.d('UploadSlotWidget: Picking video...');
+        final XFile? video = await picker.pickVideo(source: source);
+        if (video != null) {
+          LogUtils.i('UploadSlotWidget: Video picked successfully: ${video.path}');
+          onMediaSelected(video.path);
+        } else {
+          LogUtils.w('UploadSlotWidget: Video picking cancelled or returned null');
+        }
+      } else {
+        LogUtils.d('UploadSlotWidget: Picking image...');
+        final XFile? image = await picker.pickImage(source: source);
+        if (image != null) {
+          LogUtils.i('UploadSlotWidget: Image picked successfully: ${image.path}');
+          final croppedPath = await _cropImage(cropTitle, image.path);
+          LogUtils.i('UploadSlotWidget: Crop result path: $croppedPath');
+          if (croppedPath != null) {
+            onMediaSelected(croppedPath);
+          }
+        } else {
+          LogUtils.w('UploadSlotWidget: Image picking cancelled or returned null');
+        }
+      }
+    } catch (e, stack) {
+      LogUtils.e(
+        'UploadSlotWidget: Error picking media',
+        error: e,
+        stackTrace: stack,
+      );
+    }
+  }
 
+  Future<String?> _cropImage(String title, String sourcePath) async {
+    LogUtils.i('UploadSlotWidget: Starting _cropImage for path: $sourcePath');
+    try {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: sourcePath,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: title,
+            toolbarColor: AppColors.surface,
+            toolbarWidgetColor: AppColors.white,
+            activeControlsWidgetColor: AppColors.primary,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: false,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio16x9,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio3x2,
+            ],
+          ),
+          IOSUiSettings(
+            title: title,
+            aspectRatioLockEnabled: false,
+            resetAspectRatioEnabled: true,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio16x9,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio3x2,
+            ],
+          ),
+        ],
+      );
+      if (croppedFile != null) {
+        LogUtils.i('UploadSlotWidget: Cropped successfully: ${croppedFile.path}');
+      } else {
+        LogUtils.w('UploadSlotWidget: Cropping cancelled or returned null');
+      }
+      return croppedFile?.path;
+    } catch (e, stack) {
+      LogUtils.e(
+        'UploadSlotWidget: Error cropping image',
+        error: e,
+        stackTrace: stack,
+      );
+      return null;
+    }
+  }
+
+  void _showMediaPicker(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: context.colorScheme.surface,
-      builder: (context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  t.create.select_mock_media,
-                  style: context.textTheme.titleMedium,
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  t.create.select_media_desc,
-                  style: context.textTheme.bodySmall,
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 100,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: mockAssets.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: 12),
-                    itemBuilder: (context, index) {
-                      final item = mockAssets[index];
-                      return GestureDetector(
-                        onTap: () {
-                          onMediaSelected(item.path);
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                            border: Border.all(
-                              color: context.appTheme.borderColor,
-                            ),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(11),
-                            ),
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                Image.asset(item.path, fit: BoxFit.cover),
-                                Container(
-                                  color: AppColors.black.withValues(alpha: 0.3),
-                                  alignment: Alignment.bottomCenter,
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text(
-                                    item.name,
-                                    style: context.appTheme.navLabelActiveStyle,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
+      backgroundColor: AppColors.onSurface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (sheetContext) {
+        return UploadBottomSheetWidget(
+          title: isVideoSlot ? sheetContext.t.create.upload_video_slot : sheetContext.t.create.select_upload_title,
+          onImageSourceSelected: (source) => _pickMedia(context, source),
         );
       },
     );
   }
 }
 
-class _MockMediaOption {
-  final String path;
-  final String name;
-
-  _MockMediaOption(this.path, this.name);
-}
 
 class _DashedBorderPainter extends CustomPainter {
   final Color color;

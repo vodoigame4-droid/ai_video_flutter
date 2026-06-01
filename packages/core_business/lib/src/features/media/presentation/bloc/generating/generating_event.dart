@@ -12,6 +12,9 @@ abstract class GeneratingEvent with _$GeneratingEvent {
     @Default(1) int themeOrgId,
     @Default(false) bool isHd,
     @Default(false) bool isLongTime,
+    @Default('IMAGE_TO_VIDEO') String serviceType,
+    String? videoUrl,
+    String? prompt,
   }) = _StartGenerating;
 
   const factory GeneratingEvent.tickProgress() = _TickProgress;

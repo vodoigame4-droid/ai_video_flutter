@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -697,7 +698,12 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: source);
       if (image != null) {
-        _bloc.add(CreateFromTemplateEvent.selectPhoto(image.path));
+        if (mounted) {
+          final croppedPath = await _cropImage(context, image.path);
+          if (croppedPath != null) {
+            _bloc.add(CreateFromTemplateEvent.selectPhoto(croppedPath));
+          }
+        }
       }
     } catch (e, stack) {
       LogUtils.e(
@@ -705,6 +711,51 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
         error: e,
         stackTrace: stack,
       );
+    }
+  }
+
+  Future<String?> _cropImage(BuildContext context, String sourcePath) async {
+    try {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: sourcePath,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: context.t.tips_sheet.title,
+            toolbarColor: AppColors.surface,
+            toolbarWidgetColor: AppColors.white,
+            activeControlsWidgetColor: AppColors.primary,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: false,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio16x9,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio3x2,
+            ],
+          ),
+          IOSUiSettings(
+            title: context.t.tips_sheet.title,
+            aspectRatioLockEnabled: false,
+            resetAspectRatioEnabled: true,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio16x9,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio3x2,
+            ],
+          ),
+        ],
+      );
+      return croppedFile?.path;
+    } catch (e, stack) {
+      LogUtils.e(
+        'CreateFromTemplatePage: Error cropping image',
+        error: e,
+        stackTrace: stack,
+      );
+      return null;
     }
   }
 

@@ -172,6 +172,9 @@ final GoRouter appRouter = GoRouter(
         final themeOrgId = int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
         final isHd = state.uri.queryParameters['isHd'] == 'true';
         final isLongTime = state.uri.queryParameters['isLongTime'] == 'true';
+        final serviceType = state.uri.queryParameters['serviceType'] ?? 'IMAGE_TO_VIDEO';
+        final videoUrl = state.uri.queryParameters['videoUrl'];
+        final prompt = state.uri.queryParameters['prompt'];
         return AppRoutePage.cupertino<void>(
           state: state,
           child: GeneratingPage(
@@ -182,6 +185,9 @@ final GoRouter appRouter = GoRouter(
             themeOrgId: themeOrgId,
             isHd: isHd,
             isLongTime: isLongTime,
+            serviceType: serviceType,
+            videoUrl: videoUrl,
+            prompt: prompt,
           ),
         );
       },
@@ -201,6 +207,18 @@ final GoRouter appRouter = GoRouter(
         final videoUrl = extraArgs?.videoUrl ?? (rawVideoUrl.isNotEmpty ? Uri.decodeComponent(rawVideoUrl) : '');
         
         final createdAt = extraArgs?.createdAt ?? state.uri.queryParameters['createdAt'] ?? '';
+        
+        final serviceType = extraArgs?.serviceType ?? state.uri.queryParameters['serviceType'] ?? 'IMAGE_TO_VIDEO';
+        
+        final rawVideoUrlSrc = state.uri.queryParameters['videoUrlSrc'] ?? '';
+        final videoUrlSrc = extraArgs?.videoUrlSrc ?? (rawVideoUrlSrc.isNotEmpty ? Uri.decodeComponent(rawVideoUrlSrc) : null);
+        
+        final themeId = extraArgs?.themeId ?? state.uri.queryParameters['themeId'] ?? '1';
+        final themeType = extraArgs?.themeType ?? state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
+        final themeOrgId = extraArgs?.themeOrgId ?? int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
+        final isHd = extraArgs?.isHd ?? state.uri.queryParameters['isHd'] == 'true';
+        final isLongTime = extraArgs?.isLongTime ?? state.uri.queryParameters['isLongTime'] == 'true';
+
         return AppRoutePage.cupertino<void>(
           state: state,
           child: ResultPage(
@@ -209,6 +227,13 @@ final GoRouter appRouter = GoRouter(
             imageUrl: imageUrl,
             videoUrl: videoUrl,
             createdAt: createdAt,
+            serviceType: serviceType,
+            videoUrlSrc: videoUrlSrc,
+            themeId: themeId,
+            themeType: themeType,
+            themeOrgId: themeOrgId,
+            isHd: isHd,
+            isLongTime: isLongTime,
           ),
         );
       },

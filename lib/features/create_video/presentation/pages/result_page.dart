@@ -18,6 +18,13 @@ class ResultPageArgs {
   final String imageUrl;
   final String videoUrl;
   final String createdAt;
+  final String serviceType;
+  final String? videoUrlSrc;
+  final String themeId;
+  final String themeType;
+  final int themeOrgId;
+  final bool isHd;
+  final bool isLongTime;
 
   const ResultPageArgs({
     required this.videoId,
@@ -25,6 +32,13 @@ class ResultPageArgs {
     required this.imageUrl,
     required this.videoUrl,
     required this.createdAt,
+    this.serviceType = 'IMAGE_TO_VIDEO',
+    this.videoUrlSrc,
+    this.themeId = '1',
+    this.themeType = 'TEMPLATE',
+    this.themeOrgId = 1,
+    this.isHd = false,
+    this.isLongTime = false,
   });
 }
 
@@ -39,12 +53,20 @@ class ResultPage extends StatefulWidget {
   }) {
     final encodedImageUrl = Uri.encodeComponent(args.imageUrl);
     final encodedVideoUrl = Uri.encodeComponent(args.videoUrl);
+    final encodedVideoUrlSrc = args.videoUrlSrc != null ? Uri.encodeComponent(args.videoUrlSrc!) : '';
     final params = {
       'videoId': args.videoId,
       'title': args.title,
       'imageUrl': encodedImageUrl,
       'videoUrl': encodedVideoUrl,
       'createdAt': args.createdAt,
+      'serviceType': args.serviceType,
+      if (encodedVideoUrlSrc.isNotEmpty) 'videoUrlSrc': encodedVideoUrlSrc,
+      'themeId': args.themeId,
+      'themeType': args.themeType,
+      'themeOrgId': args.themeOrgId.toString(),
+      'isHd': args.isHd.toString(),
+      'isLongTime': args.isLongTime.toString(),
     };
     if (replace) {
       context.replaceNamed(name, queryParameters: params, extra: args);
@@ -58,6 +80,13 @@ class ResultPage extends StatefulWidget {
   final String imageUrl;
   final String videoUrl;
   final String createdAt;
+  final String serviceType;
+  final String? videoUrlSrc;
+  final String themeId;
+  final String themeType;
+  final int themeOrgId;
+  final bool isHd;
+  final bool isLongTime;
 
   const ResultPage({
     super.key,
@@ -66,6 +95,13 @@ class ResultPage extends StatefulWidget {
     required this.imageUrl,
     required this.videoUrl,
     required this.createdAt,
+    required this.serviceType,
+    this.videoUrlSrc,
+    required this.themeId,
+    required this.themeType,
+    required this.themeOrgId,
+    required this.isHd,
+    required this.isLongTime,
   });
 
   @override
@@ -235,48 +271,49 @@ class _ResultPageState extends State<ResultPage> {
 
                   const SizedBox(height: 12),
 
-                  // Subtitle/Info row: Spark icon + Video title status info
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) =>
-                            AppColors.primaryGradient.createShader(bounds),
-                        blendMode: BlendMode.srcIn,
-                        child: const Icon(Icons.auto_awesome_rounded, size: 16),
+                  // Subtitle/Info row: Spark icon + Video title status info (Embedded as WidgetSpan to prevent Row overflow)
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: AppColors.subText,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
                       ),
-                      const SizedBox(width: 6),
-                      RichText(
-                        text: TextSpan(
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: AppColors.subText,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                      children: [
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: ShaderMask(
+                            shaderCallback: (bounds) =>
+                                AppColors.primaryGradient.createShader(bounds),
+                            blendMode: BlendMode.srcIn,
+                            child: const Padding(
+                              padding: EdgeInsets.only(right: 6.0),
+                              child: Icon(Icons.auto_awesome_rounded, size: 16),
+                            ),
                           ),
-                          children: [
-                            TextSpan(text: prefix),
-                            WidgetSpan(
-                              alignment: PlaceholderAlignment.middle,
-                              child: ShaderMask(
-                                shaderCallback: (bounds) => AppColors
-                                    .primaryGradient
-                                    .createShader(bounds),
-                                blendMode: BlendMode.srcIn,
-                                child: Text(
-                                  widget.title,
-                                  style: context.textTheme.bodySmall?.copyWith(
-                                    color: AppColors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                        ),
+                        TextSpan(text: prefix),
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: ShaderMask(
+                            shaderCallback: (bounds) => AppColors
+                                .primaryGradient
+                                .createShader(bounds),
+                            blendMode: BlendMode.srcIn,
+                            child: Text(
+                              widget.title,
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: AppColors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            TextSpan(text: suffix),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                        TextSpan(text: suffix),
+                      ],
+                    ),
                   ),
 
                   const SizedBox(height: 16),
@@ -702,6 +739,13 @@ class _ResultPageState extends State<ResultPage> {
                             queryParameters: {
                               'title': widget.title,
                               'imageUrl': widget.imageUrl,
+                              'themeId': widget.themeId,
+                              'themeType': widget.themeType,
+                              'themeOrgId': widget.themeOrgId.toString(),
+                              'isHd': widget.isHd.toString(),
+                              'isLongTime': widget.isLongTime.toString(),
+                              'serviceType': widget.serviceType,
+                              if (widget.videoUrlSrc != null) 'videoUrl': widget.videoUrlSrc,
                             },
                           );
                         },

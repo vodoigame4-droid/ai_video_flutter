@@ -8,10 +8,12 @@ import '../../../../i18n/strings.g.dart';
 
 class UploadBottomSheetWidget extends StatelessWidget {
   final ValueChanged<ImageSource> onImageSourceSelected;
+  final String? title;
 
   const UploadBottomSheetWidget({
     super.key,
     required this.onImageSourceSelected,
+    this.title,
   });
 
   @override
@@ -46,7 +48,7 @@ class UploadBottomSheetWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                t.create.select_upload_title,
+                title ?? t.create.select_upload_title,
                 style: context.textTheme.titleMedium?.copyWith(
                   color: AppColors.white,
                   fontSize: 20,
@@ -158,6 +160,7 @@ class UploadBottomSheetWidget extends StatelessWidget {
               ),
             ),
           ),
+
         ],
       ),
     );

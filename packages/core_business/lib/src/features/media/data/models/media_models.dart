@@ -113,6 +113,7 @@ abstract class CreateTgvRequestModel with _$CreateTgvRequestModel {
     required String themeType,
     required int themeOrgId,
     @Default('IMAGE_TO_VIDEO') String serviceType,
+    String? videoUrl,
   }) = _CreateTgvRequestModel;
 
   factory CreateTgvRequestModel.fromJson(Map<String, dynamic> json) =>

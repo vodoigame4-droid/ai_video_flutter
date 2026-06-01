@@ -41,25 +41,58 @@ class CreateVideoView extends StatelessWidget {
     final t = context.t;
 
     return AppBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: BlocListener<CreateVideoBloc, CreateVideoState>(
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        behavior: HitTestBehavior.translucent,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            behavior: HitTestBehavior.opaque,
+            child: BlocListener<CreateVideoBloc, CreateVideoState>(
           listener: (context, state) {
             state.mapOrNull(
               ready: (readyState) {
                 if (readyState.isGenerating) {
+                  final String serviceType;
+                  final String imageUrl;
+                  String? videoUrl;
+
+                  switch (readyState.selectedTab) {
+                    case 0:
+                      serviceType = 'ITV_SINGLE_SOURCE';
+                      imageUrl = readyState.slotsPaths[0] ?? '';
+                      break;
+                    case 1:
+                      serviceType = 'TRANSITION_VIDEO';
+                      imageUrl = '${readyState.slotsPaths[0] ?? ''},${readyState.slotsPaths[1] ?? ''}';
+                      break;
+                    case 2:
+                      serviceType = 'DANCING_IMAGE';
+                      imageUrl = readyState.slotsPaths[1] ?? '';
+                      videoUrl = readyState.slotsPaths[0] ?? '';
+                      break;
+                    case 3:
+                      serviceType = 'ITV_DUAL_SOURCE';
+                      imageUrl = readyState.slotsPaths.where((p) => p != null).join(',');
+                      break;
+                    default:
+                      serviceType = 'IMAGE_TO_VIDEO';
+                      imageUrl = readyState.slotsPaths.firstWhere((p) => p != null, orElse: () => '') ?? '';
+                  }
+
                   context.pushNamed(
                     GeneratingPage.name,
                     queryParameters: {
                       'title': readyState.customPrompt.trim().isEmpty
                           ? t.profile.imageGeneration
                           : readyState.customPrompt,
-                      'imageUrl':
-                          readyState.slotsPaths.firstWhere(
-                            (p) => p != null,
-                            orElse: () => '',
-                          ) ??
-                          '',
+                      'imageUrl': imageUrl,
+                      'serviceType': serviceType,
+                      'videoUrl': videoUrl,
+                      'prompt': readyState.customPrompt,
+                      'isHd': (readyState.quality == 'Full HD' || readyState.quality == 'HD').toString(),
+                      'isLongTime': (readyState.duration == '10s' || readyState.duration == '15s').toString(),
                     },
                   );
                 }
@@ -122,8 +155,10 @@ class CreateVideoView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+    ),
+  ),
+);
+}
 
   Widget _buildHeader(BuildContext context) {
     final t = context.t;

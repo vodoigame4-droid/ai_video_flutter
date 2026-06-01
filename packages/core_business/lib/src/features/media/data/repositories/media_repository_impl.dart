@@ -173,4 +173,16 @@ class MediaRepositoryImpl implements MediaRepository {
       return Resource.error(message: parseRepositoryError(e));
     }
   }
+
+  @override
+  Future<Resource<String>> uploadVideo(String filePath) async {
+    try {
+      final model = await _remoteDataSource.uploadVideo(filePath);
+      return Resource.success(model.url);
+    } catch (e, stack) {
+      LogUtils.e('MediaRepositoryImpl: uploadVideo failed',
+          error: e, stackTrace: stack);
+      return Resource.error(message: parseRepositoryError(e));
+    }
+  }
 }

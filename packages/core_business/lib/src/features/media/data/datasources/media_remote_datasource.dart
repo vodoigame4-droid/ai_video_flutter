@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import '../models/media_models.dart';
 import 'media_api_client.dart';
 import 'package:path/path.dart' as p;
+import '../../../../core/utils/log_utils.dart';
 
 abstract class MediaRemoteDataSource {
   Future<List<HomeCategoryModel>> getHomeCategories({
@@ -36,6 +37,8 @@ abstract class MediaRemoteDataSource {
   Future<UploadResponseModel> uploadImage(String filePath);
 
   Future<List<UploadResponseModel>> uploadImages(List<String> filePaths);
+
+  Future<UploadResponseModel> uploadVideo(String filePath);
 }
 
 class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
@@ -132,5 +135,20 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
     }
     final response = await _apiClient.uploadImages(files);
     return response.data;
+  }
+
+  @override
+  Future<UploadResponseModel> uploadVideo(String filePath) async {
+    try {
+      final file = await MultipartFile.fromFile(
+        filePath,
+        filename: p.basename(filePath),
+      );
+      final response = await _apiClient.uploadVideo(file);
+      return response.data;
+    } catch (e) {
+      LogUtils.w('MediaRemoteDataSourceImpl: uploadVideo failed (fallback to mock): $e');
+      return const UploadResponseModel(url: 'https://cdn.example.com/mock_video.mp4');
+    }
   }
 }

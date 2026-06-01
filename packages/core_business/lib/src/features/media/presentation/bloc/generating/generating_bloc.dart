@@ -3,16 +3,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import '../../../domain/usecases/upload_image_usecase.dart';
+import '../../../domain/usecases/upload_video_usecase.dart';
 import '../../../domain/usecases/create_tgv_usecase.dart';
+import '../../../domain/usecases/create_image_to_video_usecase.dart';
+import '../../../domain/usecases/create_itv_single_source_usecase.dart';
+import '../../../domain/usecases/create_transition_video_usecase.dart';
+import '../../../domain/usecases/create_dancing_image_usecase.dart';
+import '../../../domain/usecases/create_itv_dual_source_usecase.dart';
 import '../../../domain/usecases/get_media_detail_usecase.dart';
 import '../../../data/models/media_models.dart';
+import '../../../domain/entities/media_entities.dart';
 import 'generating_event.dart';
 import 'generating_state.dart';
 import '../../../domain/repositories/notification_repository.dart';
 
 class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
   final UploadImageUseCase uploadImageUseCase;
+  final UploadVideoUseCase uploadVideoUseCase;
   final CreateTgvUseCase createTgvUseCase;
+  final CreateImageToVideoUseCase createImageToVideoUseCase;
+  final CreateItvSingleSourceUseCase createItvSingleSourceUseCase;
+  final CreateTransitionVideoUseCase createTransitionVideoUseCase;
+  final CreateDancingImageUseCase createDancingImageUseCase;
+  final CreateItvDualSourceUseCase createItvDualSourceUseCase;
   final GetMediaDetailUseCase getMediaDetailUseCase;
   final NotificationRepository notificationRepository;
   Timer? _timer;
@@ -21,67 +34,155 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
 
   GeneratingBloc({
     required this.uploadImageUseCase,
+    required this.uploadVideoUseCase,
     required this.createTgvUseCase,
+    required this.createImageToVideoUseCase,
+    required this.createItvSingleSourceUseCase,
+    required this.createTransitionVideoUseCase,
+    required this.createDancingImageUseCase,
+    required this.createItvDualSourceUseCase,
     required this.getMediaDetailUseCase,
     required this.notificationRepository,
   }) : super(const GeneratingState.initial()) {
     on<GeneratingEvent>((event, emit) async {
       await event.when(
-        startGenerating: (title, imageUrl, themeId, themeType, themeOrgId, isHd, isLongTime) async {
+        startGenerating: (title, imageUrl, themeId, themeType, themeOrgId, isHd, isLongTime, serviceType, videoUrl, prompt) async {
           emit(GeneratingState.generating(
             progress: 0.0,
             title: title,
             imageUrl: imageUrl,
           ));
-          LogUtils.d('GeneratingBloc: Start generating video for $title, image: $imageUrl, themeId: $themeId, themeType: $themeType, orgId: $themeOrgId, isHd: $isHd, isLongTime: $isLongTime');
+          LogUtils.d('GeneratingBloc: Start generating video for $title, image: $imageUrl, themeId: $themeId, themeType: $themeType, orgId: $themeOrgId, isHd: $isHd, isLongTime: $isLongTime, serviceType: $serviceType, videoUrl: $videoUrl, prompt: $prompt');
 
           try {
-            // 1. Upload image if it is local path
-            String finalImageUrl = imageUrl ?? '';
-            if (finalImageUrl.isNotEmpty &&
-                !finalImageUrl.startsWith('http') &&
-                !finalImageUrl.startsWith('assets/')) {
-              LogUtils.d('GeneratingBloc: Uploading local image: $finalImageUrl');
-              final uploadResult = await uploadImageUseCase(finalImageUrl);
+            // 1. Upload images (handle single or comma-separated multiple paths)
+            String finalImageUrl = '';
+            if (imageUrl != null && imageUrl.isNotEmpty) {
+              final imagePaths = imageUrl.split(',');
+              final uploadedUrls = <String>[];
+              for (final path in imagePaths) {
+                final trimmedPath = path.trim();
+                if (trimmedPath.isNotEmpty) {
+                  if (trimmedPath.startsWith('http') || trimmedPath.startsWith('assets/')) {
+                    uploadedUrls.add(trimmedPath);
+                  } else {
+                    LogUtils.d('GeneratingBloc: Uploading local image: $trimmedPath');
+                    final uploadResult = await uploadImageUseCase(trimmedPath);
+                    String? remoteUrl;
+                    uploadResult.whenOrNull(
+                      success: (url) {
+                        remoteUrl = url;
+                      },
+                    );
+                    if (remoteUrl != null) {
+                      uploadedUrls.add(remoteUrl!);
+                      LogUtils.d('GeneratingBloc: Image upload success, remote url: $remoteUrl');
+                    } else {
+                      throw Exception('Failed to upload image: $trimmedPath');
+                    }
+                  }
+                }
+              }
+              finalImageUrl = uploadedUrls.join(',');
+            }
+
+            // 2. Upload video if local path is provided
+            String finalVideoUrl = videoUrl ?? '';
+            if (finalVideoUrl.isNotEmpty &&
+                !finalVideoUrl.startsWith('http') &&
+                !finalVideoUrl.startsWith('assets/')) {
+              LogUtils.d('GeneratingBloc: Uploading local video: $finalVideoUrl');
+              final uploadResult = await uploadVideoUseCase(finalVideoUrl);
               uploadResult.when(
                 initial: () {},
                 loading: () {},
                 empty: () {},
                 success: (url) {
-                  finalImageUrl = url;
-                  LogUtils.d('GeneratingBloc: Upload success, remote url: $finalImageUrl');
+                  finalVideoUrl = url;
+                  LogUtils.d('GeneratingBloc: Video upload success, remote url: $finalVideoUrl');
                 },
                 error: (message) {
-                  LogUtils.e('GeneratingBloc: Image upload failed: $message');
-                  throw Exception('Failed to upload image: $message');
+                  LogUtils.e('GeneratingBloc: Video upload failed: $message');
+                  throw Exception('Failed to upload video: $message');
                 },
               );
             }
 
-            // 2. Tạo Request sinh video TGV gửi lên API
-            final request = CreateTgvRequestModel(
-              // CDN URL của bức ảnh đã upload thành công
-              imageUrl: finalImageUrl,
-              // Tên của video tạo ra
-              name: title,
-              // Mô tả prompt tạo chuyển động (ở đây sử dụng tiêu đề hoặc mô tả của template mẫu)
-              prompt: title,
-              // ID chủ đề / template dùng để tạo (themeId)
-              themeId: themeId,
-              // Cấu hình chất lượng cao (HD)
-              isHd: isHd,
-              // Cấu hình thời gian video dài (Long Time)
-              isLongTime: isLongTime,
-              // Phân loại chủ đề tạo video (Ví dụ: "TEMPLATE")
-              themeType: themeType,
-              // ID tổ chức quản lý của template này
-              themeOrgId: themeOrgId,
-              serviceType: 'IMAGE_TO_VIDEO',
-            );
+            // 3. Dispatch to the correct UseCase based on serviceType
+            final String finalPrompt = (prompt != null && prompt.trim().isNotEmpty) ? prompt : title;
+            final Resource<MediaEntity> createResult;
 
-            LogUtils.d('GeneratingBloc: Creating TGV request: $request');
-            final createResult = await createTgvUseCase(request);
-            
+            switch (serviceType) {
+              case 'IMAGE_TO_VIDEO':
+                createResult = await createImageToVideoUseCase(CreateImageToVideoParams(
+                  imageUrl: finalImageUrl,
+                  name: title,
+                  prompt: finalPrompt,
+                  themeId: themeId,
+                  themeType: themeType,
+                  themeOrgId: themeOrgId,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                ));
+                break;
+              case 'ITV_SINGLE_SOURCE':
+                createResult = await createItvSingleSourceUseCase(CreateItvSingleSourceParams(
+                  imageUrl: finalImageUrl,
+                  name: title,
+                  prompt: finalPrompt,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                ));
+                break;
+              case 'TRANSITION_VIDEO':
+                final parts = finalImageUrl.split(',');
+                final firstImg = parts.isNotEmpty ? parts[0] : '';
+                final secondImg = parts.length > 1 ? parts[1] : '';
+                createResult = await createTransitionVideoUseCase(CreateTransitionVideoParams(
+                  firstImageUrl: firstImg,
+                  secondImageUrl: secondImg,
+                  name: title,
+                  prompt: finalPrompt,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                ));
+                break;
+              case 'DANCING_IMAGE':
+                createResult = await createDancingImageUseCase(CreateDancingImageParams(
+                  imageUrl: finalImageUrl,
+                  videoUrl: finalVideoUrl,
+                  name: title,
+                  prompt: finalPrompt,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                ));
+                break;
+              case 'ITV_DUAL_SOURCE':
+                final imageList = finalImageUrl.split(',').where((x) => x.trim().isNotEmpty).toList();
+                createResult = await createItvDualSourceUseCase(CreateItvDualSourceParams(
+                  imageUrls: imageList,
+                  name: title,
+                  prompt: finalPrompt,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                ));
+                break;
+              default:
+                final request = CreateTgvRequestModel(
+                  imageUrl: finalImageUrl,
+                  videoUrl: finalVideoUrl.isEmpty ? null : finalVideoUrl,
+                  name: title,
+                  prompt: finalPrompt,
+                  themeId: themeId,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                  themeType: themeType,
+                  themeOrgId: themeOrgId,
+                  serviceType: serviceType,
+                );
+                createResult = await createTgvUseCase(request);
+            }
+
             await createResult.when(
               initial: () async {},
               loading: () async {},
@@ -95,7 +196,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                   imageUrl: imageUrl,
                 ));
 
-                // 3. Start Polling Status
+                // 4. Start Polling Status
                 _timer?.cancel();
                 _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
                   if (!isClosed) {
