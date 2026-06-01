@@ -55,7 +55,7 @@ extension ProfileEventPatterns on ProfileEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ChangeSubTab value)?  changeSubTab,TResult Function( _DeleteVideo value)?  deleteVideo,TResult Function( _TickProgress value)?  tickProgress,TResult Function( _WatchLikedTemplates value)?  watchLikedTemplates,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ChangeSubTab value)?  changeSubTab,TResult Function( _DeleteVideo value)?  deleteVideo,TResult Function( _TickProgress value)?  tickProgress,TResult Function( _WatchLikedTemplates value)?  watchLikedTemplates,TResult Function( _StopPolling value)?  stopPolling,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -63,7 +63,8 @@ return init(_that);case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that);case _DeleteVideo() when deleteVideo != null:
 return deleteVideo(_that);case _TickProgress() when tickProgress != null:
 return tickProgress(_that);case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates(_that);case _:
+return watchLikedTemplates(_that);case _StopPolling() when stopPolling != null:
+return stopPolling(_that);case _:
   return orElse();
 
 }
@@ -81,7 +82,7 @@ return watchLikedTemplates(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ChangeSubTab value)  changeSubTab,required TResult Function( _DeleteVideo value)  deleteVideo,required TResult Function( _TickProgress value)  tickProgress,required TResult Function( _WatchLikedTemplates value)  watchLikedTemplates,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ChangeSubTab value)  changeSubTab,required TResult Function( _DeleteVideo value)  deleteVideo,required TResult Function( _TickProgress value)  tickProgress,required TResult Function( _WatchLikedTemplates value)  watchLikedTemplates,required TResult Function( _StopPolling value)  stopPolling,}){
 final _that = this;
 switch (_that) {
 case _Init():
@@ -89,7 +90,8 @@ return init(_that);case _ChangeSubTab():
 return changeSubTab(_that);case _DeleteVideo():
 return deleteVideo(_that);case _TickProgress():
 return tickProgress(_that);case _WatchLikedTemplates():
-return watchLikedTemplates(_that);case _:
+return watchLikedTemplates(_that);case _StopPolling():
+return stopPolling(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +108,7 @@ return watchLikedTemplates(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ChangeSubTab value)?  changeSubTab,TResult? Function( _DeleteVideo value)?  deleteVideo,TResult? Function( _TickProgress value)?  tickProgress,TResult? Function( _WatchLikedTemplates value)?  watchLikedTemplates,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ChangeSubTab value)?  changeSubTab,TResult? Function( _DeleteVideo value)?  deleteVideo,TResult? Function( _TickProgress value)?  tickProgress,TResult? Function( _WatchLikedTemplates value)?  watchLikedTemplates,TResult? Function( _StopPolling value)?  stopPolling,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -114,7 +116,8 @@ return init(_that);case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that);case _DeleteVideo() when deleteVideo != null:
 return deleteVideo(_that);case _TickProgress() when tickProgress != null:
 return tickProgress(_that);case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates(_that);case _:
+return watchLikedTemplates(_that);case _StopPolling() when stopPolling != null:
+return stopPolling(_that);case _:
   return null;
 
 }
@@ -131,14 +134,15 @@ return watchLikedTemplates(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int subTabIndex)?  changeSubTab,TResult Function( String id)?  deleteVideo,TResult Function()?  tickProgress,TResult Function()?  watchLikedTemplates,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int subTabIndex)?  changeSubTab,TResult Function( String id)?  deleteVideo,TResult Function()?  tickProgress,TResult Function()?  watchLikedTemplates,TResult Function()?  stopPolling,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init();case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that.subTabIndex);case _DeleteVideo() when deleteVideo != null:
 return deleteVideo(_that.id);case _TickProgress() when tickProgress != null:
 return tickProgress();case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates();case _:
+return watchLikedTemplates();case _StopPolling() when stopPolling != null:
+return stopPolling();case _:
   return orElse();
 
 }
@@ -156,14 +160,15 @@ return watchLikedTemplates();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int subTabIndex)  changeSubTab,required TResult Function( String id)  deleteVideo,required TResult Function()  tickProgress,required TResult Function()  watchLikedTemplates,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int subTabIndex)  changeSubTab,required TResult Function( String id)  deleteVideo,required TResult Function()  tickProgress,required TResult Function()  watchLikedTemplates,required TResult Function()  stopPolling,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init();case _ChangeSubTab():
 return changeSubTab(_that.subTabIndex);case _DeleteVideo():
 return deleteVideo(_that.id);case _TickProgress():
 return tickProgress();case _WatchLikedTemplates():
-return watchLikedTemplates();case _:
+return watchLikedTemplates();case _StopPolling():
+return stopPolling();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +185,15 @@ return watchLikedTemplates();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int subTabIndex)?  changeSubTab,TResult? Function( String id)?  deleteVideo,TResult? Function()?  tickProgress,TResult? Function()?  watchLikedTemplates,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int subTabIndex)?  changeSubTab,TResult? Function( String id)?  deleteVideo,TResult? Function()?  tickProgress,TResult? Function()?  watchLikedTemplates,TResult? Function()?  stopPolling,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init();case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that.subTabIndex);case _DeleteVideo() when deleteVideo != null:
 return deleteVideo(_that.id);case _TickProgress() when tickProgress != null:
 return tickProgress();case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates();case _:
+return watchLikedTemplates();case _StopPolling() when stopPolling != null:
+return stopPolling();case _:
   return null;
 
 }
@@ -415,6 +421,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'ProfileEvent.watchLikedTemplates()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _StopPolling implements ProfileEvent {
+  const _StopPolling();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StopPolling);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProfileEvent.stopPolling()';
 }
 
 

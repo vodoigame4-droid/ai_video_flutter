@@ -32,11 +32,51 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         deleteVideo: (id) => _onDeleteVideo(id, emit),
         tickProgress: () => _onTickProgress(emit),
         watchLikedTemplates: () => _onWatchLikedTemplates(emit),
+        stopPolling: () => _onStopPolling(),
       );
     });
   }
 
   Future<void> _onInit(Emitter<ProfileState> emit) async {
+    final isAlreadyInitialized = state.maybeMap(
+      ready: (_) => true,
+      orElse: () => false,
+    );
+
+    if (isAlreadyInitialized) {
+      await state.mapOrNull(
+        ready: (readyState) async {
+          emit(readyState.copyWith(
+            videosState: const Resource.loading(),
+          ));
+
+          final result = await getHistoryUseCase(GetHistoryParams(page: 1, take: 50));
+          result.when(
+            initial: () {},
+            loading: () {},
+            empty: () {
+              emit(readyState.copyWith(
+                videosState: const Resource.success([]),
+              ));
+            },
+            success: (paginated) {
+              final videos = paginated.data.map((e) => _mapMediaToUserVideo(e)).toList();
+              emit(readyState.copyWith(
+                videosState: Resource.success(videos),
+              ));
+              _startProgressTimerIfNeeded(videos);
+            },
+            error: (message) {
+              emit(readyState.copyWith(
+                videosState: Resource.error(message: message),
+              ));
+            },
+          );
+        },
+      );
+      return;
+    }
+
     emit(const ProfileState.loading());
     
     add(const ProfileEvent.watchLikedTemplates());
@@ -94,34 +134,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ready: (readyState) async {
         emit(readyState.copyWith(
           subTabIndex: subTabIndex,
-          videosState: const Resource.loading(),
         ));
 
-        final result = await getHistoryUseCase(GetHistoryParams(page: 1, take: 50));
-        result.when(
-          initial: () {},
-          loading: () {},
-          empty: () {
-            emit(readyState.copyWith(
-              subTabIndex: subTabIndex,
-              videosState: const Resource.success([]),
-            ));
-          },
-          success: (paginated) {
-            final videos = paginated.data.map((e) => _mapMediaToUserVideo(e)).toList();
-            emit(readyState.copyWith(
-              subTabIndex: subTabIndex,
-              videosState: Resource.success(videos),
-            ));
-            _startProgressTimerIfNeeded(videos);
-          },
-          error: (message) {
-            emit(readyState.copyWith(
-              subTabIndex: subTabIndex,
-              videosState: Resource.error(message: message),
-            ));
-          },
+        final videos = readyState.videosState.maybeWhen(
+          success: (data) => data,
+          orElse: () => null,
         );
+        if (videos != null) {
+          _startProgressTimerIfNeeded(videos);
+        }
       },
     );
   }
@@ -272,12 +293,29 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     );
   }
 
+  Future<void> _onStopPolling() async {
+    _progressTimer?.cancel();
+    _progressTimer = null;
+    LogUtils.d('ProfileBloc: Polling stopped via event');
+  }
+
   void _startProgressTimerIfNeeded(List<UserVideoEntity> videos) {
     _progressTimer?.cancel();
     _progressTimer = null;
 
+    final subTabIndex = state.maybeMap(
+      ready: (s) => s.subTabIndex,
+      orElse: () => -1,
+    );
+
+    if (subTabIndex != 0) {
+      LogUtils.d('ProfileBloc: Polling not started because subTabIndex is $subTabIndex (not My Video)');
+      return;
+    }
+
     final hasGenerating = videos.any((v) => v.status == 'generating');
     if (hasGenerating) {
+      LogUtils.d('ProfileBloc: Starting progress timer');
       _progressTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
         add(const ProfileEvent.tickProgress());
       });
@@ -285,8 +323,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   UserVideoEntity _mapMediaToUserVideo(MediaEntity media) {
-    final isDone = media.status.toLowerCase() == 'completed' ||
-        media.status.toLowerCase() == 'done' ||
+    final statusLower = media.status.toLowerCase();
+    final isDone = statusLower == 'completed' ||
+        statusLower == 'done' ||
+        statusLower == 'failed' ||
         media.resultUrl != null;
     
     return UserVideoEntity(

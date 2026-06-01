@@ -9,4 +9,5 @@ abstract class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.deleteVideo(String id) = _DeleteVideo;
   const factory ProfileEvent.tickProgress() = _TickProgress;
   const factory ProfileEvent.watchLikedTemplates() = _WatchLikedTemplates;
+  const factory ProfileEvent.stopPolling() = _StopPolling;
 }
