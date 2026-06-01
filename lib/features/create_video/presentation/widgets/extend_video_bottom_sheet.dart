@@ -31,7 +31,8 @@ class ExtendVideoBottomSheet extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             ready: (videoId, title, imageUrl, videoUrl, createdAt, isPlaying, isMuted, isBuffering,
-                extendPrompt, extendQuality, extendDuration, inspireMeCount, isGeneratingExtended, isDeleted) {
+                extendPrompt, extendQuality, extendDuration, inspireMeCount, isGeneratingExtended, isDeleted,
+                isDownloading, isSharing, downloadErrorMessage, shareErrorMessage, downloadSuccess, shareSuccess) {
               return Padding(
                 padding: EdgeInsets.only(
                   left: 16.0,

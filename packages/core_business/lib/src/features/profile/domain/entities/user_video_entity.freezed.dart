@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserVideoEntity {
 
- String get id; String get title; String get imageUrl; String get status;// 'generating' or 'done'
+ String get id; String get title; String get imageUrl; String get videoUrl; String get status;// 'generating' or 'done'
  double get progress;// 0.0 to 1.0
  String get createdAt; bool get isLiked;
 /// Create a copy of UserVideoEntity
@@ -27,16 +27,16 @@ $UserVideoEntityCopyWith<UserVideoEntity> get copyWith => _$UserVideoEntityCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserVideoEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserVideoEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,imageUrl,status,progress,createdAt,isLiked);
+int get hashCode => Object.hash(runtimeType,id,title,imageUrl,videoUrl,status,progress,createdAt,isLiked);
 
 @override
 String toString() {
-  return 'UserVideoEntity(id: $id, title: $title, imageUrl: $imageUrl, status: $status, progress: $progress, createdAt: $createdAt, isLiked: $isLiked)';
+  return 'UserVideoEntity(id: $id, title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, status: $status, progress: $progress, createdAt: $createdAt, isLiked: $isLiked)';
 }
 
 
@@ -47,7 +47,7 @@ abstract mixin class $UserVideoEntityCopyWith<$Res>  {
   factory $UserVideoEntityCopyWith(UserVideoEntity value, $Res Function(UserVideoEntity) _then) = _$UserVideoEntityCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String imageUrl, String status, double progress, String createdAt, bool isLiked
+ String id, String title, String imageUrl, String videoUrl, String status, double progress, String createdAt, bool isLiked
 });
 
 
@@ -64,11 +64,12 @@ class _$UserVideoEntityCopyWithImpl<$Res>
 
 /// Create a copy of UserVideoEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? status = null,Object? progress = null,Object? createdAt = null,Object? isLiked = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? videoUrl = null,Object? status = null,Object? progress = null,Object? createdAt = null,Object? isLiked = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,videoUrl: null == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
 as double,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String imageUrl,  String status,  double progress,  String createdAt,  bool isLiked)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String imageUrl,  String videoUrl,  String status,  double progress,  String createdAt,  bool isLiked)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserVideoEntity() when $default != null:
-return $default(_that.id,_that.title,_that.imageUrl,_that.status,_that.progress,_that.createdAt,_that.isLiked);case _:
+return $default(_that.id,_that.title,_that.imageUrl,_that.videoUrl,_that.status,_that.progress,_that.createdAt,_that.isLiked);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.title,_that.imageUrl,_that.status,_that.progress,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String imageUrl,  String status,  double progress,  String createdAt,  bool isLiked)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String imageUrl,  String videoUrl,  String status,  double progress,  String createdAt,  bool isLiked)  $default,) {final _that = this;
 switch (_that) {
 case _UserVideoEntity():
-return $default(_that.id,_that.title,_that.imageUrl,_that.status,_that.progress,_that.createdAt,_that.isLiked);case _:
+return $default(_that.id,_that.title,_that.imageUrl,_that.videoUrl,_that.status,_that.progress,_that.createdAt,_that.isLiked);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.title,_that.imageUrl,_that.status,_that.progress,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String imageUrl,  String status,  double progress,  String createdAt,  bool isLiked)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String imageUrl,  String videoUrl,  String status,  double progress,  String createdAt,  bool isLiked)?  $default,) {final _that = this;
 switch (_that) {
 case _UserVideoEntity() when $default != null:
-return $default(_that.id,_that.title,_that.imageUrl,_that.status,_that.progress,_that.createdAt,_that.isLiked);case _:
+return $default(_that.id,_that.title,_that.imageUrl,_that.videoUrl,_that.status,_that.progress,_that.createdAt,_that.isLiked);case _:
   return null;
 
 }
@@ -214,12 +215,13 @@ return $default(_that.id,_that.title,_that.imageUrl,_that.status,_that.progress,
 
 
 class _UserVideoEntity implements UserVideoEntity {
-  const _UserVideoEntity({required this.id, required this.title, required this.imageUrl, required this.status, required this.progress, required this.createdAt, required this.isLiked});
+  const _UserVideoEntity({required this.id, required this.title, required this.imageUrl, required this.videoUrl, required this.status, required this.progress, required this.createdAt, required this.isLiked});
   
 
 @override final  String id;
 @override final  String title;
 @override final  String imageUrl;
+@override final  String videoUrl;
 @override final  String status;
 // 'generating' or 'done'
 @override final  double progress;
@@ -237,16 +239,16 @@ _$UserVideoEntityCopyWith<_UserVideoEntity> get copyWith => __$UserVideoEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserVideoEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserVideoEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,imageUrl,status,progress,createdAt,isLiked);
+int get hashCode => Object.hash(runtimeType,id,title,imageUrl,videoUrl,status,progress,createdAt,isLiked);
 
 @override
 String toString() {
-  return 'UserVideoEntity(id: $id, title: $title, imageUrl: $imageUrl, status: $status, progress: $progress, createdAt: $createdAt, isLiked: $isLiked)';
+  return 'UserVideoEntity(id: $id, title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, status: $status, progress: $progress, createdAt: $createdAt, isLiked: $isLiked)';
 }
 
 
@@ -257,7 +259,7 @@ abstract mixin class _$UserVideoEntityCopyWith<$Res> implements $UserVideoEntity
   factory _$UserVideoEntityCopyWith(_UserVideoEntity value, $Res Function(_UserVideoEntity) _then) = __$UserVideoEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String imageUrl, String status, double progress, String createdAt, bool isLiked
+ String id, String title, String imageUrl, String videoUrl, String status, double progress, String createdAt, bool isLiked
 });
 
 
@@ -274,11 +276,12 @@ class __$UserVideoEntityCopyWithImpl<$Res>
 
 /// Create a copy of UserVideoEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? status = null,Object? progress = null,Object? createdAt = null,Object? isLiked = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? imageUrl = null,Object? videoUrl = null,Object? status = null,Object? progress = null,Object? createdAt = null,Object? isLiked = null,}) {
   return _then(_UserVideoEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,videoUrl: null == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
 as double,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable

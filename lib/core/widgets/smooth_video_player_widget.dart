@@ -97,14 +97,14 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
     if (_isLocalPlayer) {
       try {
         final cachedPath = await _cacheManager.getCachedOrDownload(widget.videoUrl);
-        final mediaPath = cachedPath ?? widget.videoUrl;
+        final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : widget.videoUrl;
 
         if (widget.loop) {
           _player.setPlaylistMode(PlaylistMode.single);
         }
         
         _player.setVolume(widget.showMuteButton ? 0.0 : 100.0);
-        await _player.open(Media(mediaPath), play: widget.autoPlay);
+        await _player.open(Media(mediaSource), play: widget.autoPlay);
 
         // Trigger background download if not cached
         if (cachedPath == null) {

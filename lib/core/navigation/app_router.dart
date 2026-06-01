@@ -4,6 +4,8 @@ import 'package:core_business/core_business.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/profile/presentation/pages/profile_page.dart';
 import '../../features/templates/presentation/pages/templates_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/settings/presentation/pages/language_page.dart';
@@ -55,13 +57,36 @@ final GoRouter appRouter = GoRouter(
         child: const OnboardingPage(),
       ),
     ),
-    GoRoute(
-      path: DashboardPage.path,
-      name: DashboardPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const DashboardPage(),
-      ),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return DashboardPage(navigationShell: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: HomePage.path,
+              name: HomePage.name,
+              pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+                state: state,
+                child: const HomePage(),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: ProfilePage.path,
+              name: ProfilePage.name,
+              pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+                state: state,
+                child: const ProfilePage(),
+              ),
+            ),
+          ],
+        ),
+      ],
     ),
     GoRoute(
       path: TemplatesPage.path,
@@ -165,11 +190,17 @@ final GoRouter appRouter = GoRouter(
       path: ResultPage.path,
       name: ResultPage.name,
       pageBuilder: (context, state) {
-        final videoId = state.uri.queryParameters['videoId'] ?? '';
-        final title = state.uri.queryParameters['title'] ?? 'Image Generation';
-        final imageUrl = state.uri.queryParameters['imageUrl'] ?? '';
-        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        final createdAt = state.uri.queryParameters['createdAt'] ?? '';
+        final extraArgs = state.extra as ResultPageArgs?;
+        final videoId = extraArgs?.videoId ?? state.uri.queryParameters['videoId'] ?? '';
+        final title = extraArgs?.title ?? state.uri.queryParameters['title'] ?? 'Image Generation';
+        
+        final rawImageUrl = state.uri.queryParameters['imageUrl'] ?? '';
+        final imageUrl = extraArgs?.imageUrl ?? (rawImageUrl.isNotEmpty ? Uri.decodeComponent(rawImageUrl) : '');
+        
+        final rawVideoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        final videoUrl = extraArgs?.videoUrl ?? (rawVideoUrl.isNotEmpty ? Uri.decodeComponent(rawVideoUrl) : '');
+        
+        final createdAt = extraArgs?.createdAt ?? state.uri.queryParameters['createdAt'] ?? '';
         return AppRoutePage.cupertino<void>(
           state: state,
           child: ResultPage(
@@ -185,26 +216,35 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: PaywallVideoPage.path,
       name: PaywallVideoPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const PaywallVideoPage(),
-      ),
+      pageBuilder: (context, state) {
+        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: PaywallVideoPage(videoUrl: videoUrl),
+        );
+      },
     ),
     GoRoute(
       path: IapPage.path,
       name: IapPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const IapPage(),
-      ),
+      pageBuilder: (context, state) {
+        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: IapPage(videoUrl: videoUrl),
+        );
+      },
     ),
     GoRoute(
       path: BuyCreditsPage.path,
       name: BuyCreditsPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const BuyCreditsPage(),
-      ),
+      pageBuilder: (context, state) {
+        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: BuyCreditsPage(videoUrl: videoUrl),
+        );
+      },
     ),
     GoRoute(
       path: VideoPlayerPage.path,

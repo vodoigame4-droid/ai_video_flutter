@@ -25,7 +25,7 @@ Future<void> initDependencies() async {
   );
 
   // Features - Onboarding
-  sl.registerFactory(() => OnboardingBloc());
+  sl.registerFactory(() => OnboardingBloc(sharedPreferences: sl()));
 
   // Features - Dashboard
   sl.registerFactory(() => DashboardBloc());

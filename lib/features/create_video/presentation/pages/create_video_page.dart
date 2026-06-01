@@ -105,7 +105,8 @@ class CreateVideoView extends StatelessWidget {
                                   );
                                 },
                                 onHistoryPressed: () {
-                                  context.pushNamed(ProfilePage.name);
+                                  sl<ProfileBloc>().add(const ProfileEvent.init());
+                                  context.goNamed(ProfilePage.name);
                                 },
                               ),
                             ),

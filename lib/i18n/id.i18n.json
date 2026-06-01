@@ -6,7 +6,8 @@
     "leave": "Keluar",
     "camera": "Kamera",
     "gallery": "Galeri",
-    "generate": "Hasilkan"
+    "generate": "Hasilkan",
+    "processing": "Sedang memproses..."
   },
   "home": {
     "title": "Video AI",

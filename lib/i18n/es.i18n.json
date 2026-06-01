@@ -6,7 +6,8 @@
     "leave": "Salir",
     "camera": "Cámara",
     "gallery": "Galería",
-    "generate": "Generar"
+    "generate": "Generar",
+    "processing": "Procesando..."
   },
   "home": {
     "title": "Video IA",

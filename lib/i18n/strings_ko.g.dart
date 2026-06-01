@@ -74,6 +74,7 @@ class _Translations$common$ko extends Translations$common$en {
 	@override String get camera => '카메라';
 	@override String get gallery => '갤러리';
 	@override String get generate => '생성하기';
+	@override String get processing => '처리 중...';
 }
 
 // Path: home
@@ -579,6 +580,7 @@ extension on TranslationsKo {
 			'common.camera' => '카메라',
 			'common.gallery' => '갤러리',
 			'common.generate' => '생성하기',
+			'common.processing' => '처리 중...',
 			'home.title' => '비디오 AI',
 			'home.trending' => '트렌딩',
 			'home.new_section' => '새로운',

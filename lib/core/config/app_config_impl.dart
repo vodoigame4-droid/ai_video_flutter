@@ -13,5 +13,5 @@ class AppConfigImpl implements AppConfig {
   String get appVersion => _appVersion;
 
   @override
-  String get appTypeName => 'ai_video_swap_and_generator';
+  String get appTypeName => 'video_tgv';
 }

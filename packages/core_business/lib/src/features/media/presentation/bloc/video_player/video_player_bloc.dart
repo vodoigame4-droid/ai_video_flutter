@@ -37,6 +37,7 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
       // 1. Check offline cache
       final cachedPath = await _cacheManager.getCachedOrDownload(url);
       final mediaPath = cachedPath ?? url;
+      final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : url;
 
       // 2. Setup listeners
       _positionSub = player.stream.position.listen((pos) {
@@ -50,7 +51,7 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
       });
       
       // Open and auto-play
-      await player.open(Media(mediaPath));
+      await player.open(Media(mediaSource));
       player.setPlaylistMode(PlaylistMode.loop);
       
       emit(VideoPlayerState.ready(

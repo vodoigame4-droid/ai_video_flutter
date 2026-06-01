@@ -90,6 +90,9 @@ class Translations$common$en {
 
 	/// en: 'Generate'
 	String get generate => 'Generate';
+
+	/// en: 'Processing...'
+	String get processing => 'Processing...';
 }
 
 // Path: home
@@ -1171,6 +1174,7 @@ extension on Translations {
 			'common.camera' => 'Camera',
 			'common.gallery' => 'Gallery',
 			'common.generate' => 'Generate',
+			'common.processing' => 'Processing...',
 			'home.title' => 'Video AI',
 			'home.trending' => 'Trending',
 			'home.new_section' => 'New',

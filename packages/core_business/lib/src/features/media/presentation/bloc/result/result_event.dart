@@ -22,4 +22,7 @@ abstract class ResultEvent with _$ResultEvent {
   const factory ResultEvent.changeExtendQuality(String quality) = _ChangeExtendQuality;
   const factory ResultEvent.changeExtendDuration(String duration) = _ChangeExtendDuration;
   const factory ResultEvent.deleteVideo() = _DeleteVideo;
+  const factory ResultEvent.downloadVideo() = _DownloadVideo;
+  const factory ResultEvent.shareVideo() = _ShareVideo;
+  const factory ResultEvent.resetDownloadShareStatus() = _ResetDownloadShareStatus;
 }

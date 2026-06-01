@@ -122,10 +122,10 @@ return changeTab(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int index)?  changeTab,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? initialTab)?  init,TResult Function( int index)?  changeTab,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _ChangeTab() when changeTab != null:
+return init(_that.initialTab);case _ChangeTab() when changeTab != null:
 return changeTab(_that.index);case _:
   return orElse();
 
@@ -144,10 +144,10 @@ return changeTab(_that.index);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int index)  changeTab,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? initialTab)  init,required TResult Function( int index)  changeTab,}) {final _that = this;
 switch (_that) {
 case _Init():
-return init();case _ChangeTab():
+return init(_that.initialTab);case _ChangeTab():
 return changeTab(_that.index);case _:
   throw StateError('Unexpected subclass');
 
@@ -165,10 +165,10 @@ return changeTab(_that.index);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int index)?  changeTab,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? initialTab)?  init,TResult? Function( int index)?  changeTab,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _ChangeTab() when changeTab != null:
+return init(_that.initialTab);case _ChangeTab() when changeTab != null:
 return changeTab(_that.index);case _:
   return null;
 
@@ -181,33 +181,67 @@ return changeTab(_that.index);case _:
 
 
 class _Init implements DashboardEvent {
-  const _Init();
+  const _Init({this.initialTab});
   
 
+ final  int? initialTab;
 
-
+/// Create a copy of DashboardEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$InitCopyWith<_Init> get copyWith => __$InitCopyWithImpl<_Init>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init&&(identical(other.initialTab, initialTab) || other.initialTab == initialTab));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,initialTab);
 
 @override
 String toString() {
-  return 'DashboardEvent.init()';
+  return 'DashboardEvent.init(initialTab: $initialTab)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$InitCopyWith<$Res> implements $DashboardEventCopyWith<$Res> {
+  factory _$InitCopyWith(_Init value, $Res Function(_Init) _then) = __$InitCopyWithImpl;
+@useResult
+$Res call({
+ int? initialTab
+});
 
 
+
+
+}
+/// @nodoc
+class __$InitCopyWithImpl<$Res>
+    implements _$InitCopyWith<$Res> {
+  __$InitCopyWithImpl(this._self, this._then);
+
+  final _Init _self;
+  final $Res Function(_Init) _then;
+
+/// Create a copy of DashboardEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? initialTab = freezed,}) {
+  return _then(_Init(
+initialTab: freezed == initialTab ? _self.initialTab : initialTab // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

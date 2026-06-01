@@ -26,10 +26,20 @@ class VideoCacheManager {
       final filename = '${url.hashCode}.$extension';
       final localFile = File('${cacheDir.path}/video_cache/$filename');
 
-      // 1. If file already exists locally, return its path
+      // 1. If file already exists locally and is not empty, return its path
       if (await localFile.exists()) {
-        LogUtils.d('VideoCacheManager: Cache hit for $url -> ${localFile.path}');
-        return localFile.path;
+        final length = await localFile.length();
+        if (length > 0) {
+          LogUtils.d('VideoCacheManager: Cache hit for $url -> ${localFile.path}');
+          return localFile.path;
+        } else {
+          LogUtils.w('VideoCacheManager: Cache file exists but is empty (0 bytes). Deleting: ${localFile.path}');
+          try {
+            await localFile.delete();
+          } catch (e) {
+            LogUtils.e('VideoCacheManager: Failed to delete empty cache file', error: e);
+          }
+        }
       }
 
       // 2. If already downloading, manage queue

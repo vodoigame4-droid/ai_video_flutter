@@ -6,7 +6,8 @@
     "leave": "Quitter",
     "camera": "Appareil photo",
     "gallery": "Galerie",
-    "generate": "Générer"
+    "generate": "Générer",
+    "processing": "Traitement en cours..."
   },
   "home": {
     "title": "Vidéo IA",

@@ -7,12 +7,10 @@ import '../../../../../core/theme/app_theme.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../templates/presentation/pages/templates_page.dart';
-import '../widgets/category_selector.dart';
 import '../widgets/home_banner_widget.dart';
 import '../widgets/home_features_grid_widget.dart';
 import '../widgets/home_templates_section_widget.dart';
 import '../../../../core/widgets/credit_badge_widget.dart';
-import '../../../../core/widgets/app_background.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';

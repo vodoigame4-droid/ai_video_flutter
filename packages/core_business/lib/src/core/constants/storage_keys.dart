@@ -6,4 +6,5 @@ abstract class StorageKeys {
   static const String deviceId = 'device_id';
   static const String selectedLocale = 'selected_locale';
   static const String refCode = 'ref_code';
+  static const String isOnboardingCompleted = 'is_onboarding_completed';
 }

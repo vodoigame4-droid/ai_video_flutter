@@ -175,7 +175,16 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                               color: Colors.transparent,
                               shape: const CircleBorder(),
                               child: InkWell(
-                                onTap: () => context.push(PaywallVideoPage.path),
+                                onTap: () {
+                                  final videosList = videosState.maybeWhen(
+                                    success: (list) => list,
+                                    orElse: () => const [],
+                                  );
+                                  final videoUrl = videosList.isNotEmpty
+                                      ? videosList.first.videoUrl
+                                      : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
+                                  context.push('${PaywallVideoPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
+                                },
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),
@@ -194,9 +203,14 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                         // Premium Upgrade Banner
                         PremiumBannerWidget(
                           onTap: () {
-                            // context.push(PaywallVideoPage.path);
-                            // context.push(BuyCreditsPage.path);
-                            context.push(IapPage.path);
+                            final videosList = videosState.maybeWhen(
+                              success: (list) => list,
+                              orElse: () => const [],
+                            );
+                            final videoUrl = videosList.isNotEmpty
+                                ? videosList.first.videoUrl
+                                : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
+                            context.push('${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
                           },
                         ),
 
@@ -269,15 +283,15 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                         return MyVideoItemWidget(
                                           video: video,
                                           onPlayTap: () {
-                                            const mockVideoUrl =
-                                                'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
                                             ResultPage.push(
                                               context,
-                                              videoId: video.id,
-                                              title: video.title,
-                                              imageUrl: video.imageUrl,
-                                              videoUrl: mockVideoUrl,
-                                              createdAt: video.createdAt,
+                                              ResultPageArgs(
+                                                videoId: video.id,
+                                                title: video.title,
+                                                imageUrl: video.imageUrl,
+                                                videoUrl: video.videoUrl,
+                                                createdAt: video.createdAt,
+                                              ),
                                             );
                                           },
                                           onDeleteTap: () =>

@@ -74,6 +74,7 @@ class _Translations$common$hi extends Translations$common$en {
 	@override String get camera => 'कैमरा';
 	@override String get gallery => 'गैलरी';
 	@override String get generate => 'उत्पन्न करें';
+	@override String get processing => 'प्रक्रिया जारी है...';
 }
 
 // Path: home
@@ -579,6 +580,7 @@ extension on TranslationsHi {
 			'common.camera' => 'कैमरा',
 			'common.gallery' => 'गैलरी',
 			'common.generate' => 'उत्पन्न करें',
+			'common.processing' => 'प्रक्रिया जारी है...',
 			'home.title' => 'वीडियो एआई',
 			'home.trending' => 'ट्रेंडिंग',
 			'home.new_section' => 'नया',

@@ -6,7 +6,8 @@
     "leave": "Leave",
     "camera": "Camera",
     "gallery": "Gallery",
-    "generate": "Generate"
+    "generate": "Generate",
+    "processing": "Processing..."
   },
   "home": {
     "title": "Video AI",

@@ -29,6 +29,8 @@ import '../../features/media/domain/usecases/get_media_detail_usecase.dart';
 import '../../features/media/domain/usecases/get_history_usecase.dart';
 import '../../features/media/domain/usecases/get_media_statuses_usecase.dart';
 import '../../features/media/domain/usecases/delete_media_usecase.dart';
+import '../../features/media/domain/usecases/download_video_usecase.dart';
+import '../../features/media/domain/usecases/share_video_usecase.dart';
 
 // Liked Templates / Local DB
 import '../../core/database/app_database.dart';
@@ -105,6 +107,8 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => GetHistoryUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => GetMediaStatusesUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => DeleteMediaUseCase(mediaRepository: sl()));
+  sl.registerLazySingleton(() => DownloadVideoUseCase());
+  sl.registerLazySingleton(() => ShareVideoUseCase());
 
   // Drift Database & Liked Templates Local Storage
   sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
@@ -166,10 +170,12 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerFactory(
     () => ResultBloc(
       deleteMediaUseCase: sl(),
+      downloadVideoUseCase: sl(),
+      shareVideoUseCase: sl(),
     ),
   );
   sl.registerFactory(() => VideoPlayerBloc());
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => ProfileBloc(
       getHistoryUseCase: sl(),
       deleteMediaUseCase: sl(),

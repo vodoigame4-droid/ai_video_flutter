@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/injection/injection_container.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../onboarding/presentation/pages/onboarding_page.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
@@ -33,8 +34,12 @@ class SplashView extends StatelessWidget {
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           state.mapOrNull(
-            success: (_) {
-              OnboardingPage.go(context);
+            success: (successState) {
+              if (successState.isOnboardingCompleted) {
+                DashboardPage.go(context);
+              } else {
+                OnboardingPage.go(context);
+              }
             },
           );
         },
@@ -65,7 +70,7 @@ class SplashView extends StatelessWidget {
                   builder: (context, state) {
                     final percent = state.maybeWhen(
                       loading: (percent) => percent,
-                      success: () => 100,
+                      success: (_) => 100,
                       orElse: () => 0,
                     );
                     return ProgressSectionWidget(percent: percent);

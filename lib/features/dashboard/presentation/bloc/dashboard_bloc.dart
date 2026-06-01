@@ -6,8 +6,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   DashboardBloc() : super(const DashboardState.initial()) {
     on<DashboardEvent>((event, emit) {
       event.when(
-        init: () {
-          emit(const DashboardState.currentTab(0));
+        init: (initialTab) {
+          emit(DashboardState.currentTab(initialTab ?? 0));
         },
         changeTab: (index) {
           emit(DashboardState.currentTab(index));

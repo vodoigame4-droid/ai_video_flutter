@@ -175,5 +175,7 @@
 	<string>This app requires access to your camera to capture and upload photos for AI video generation.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires access to your microphone when capturing videos for AI video generation.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app requires permission to save generated videos to your photo library.</string>
 </dict>
 </plist>

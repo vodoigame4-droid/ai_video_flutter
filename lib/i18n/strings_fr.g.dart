@@ -74,6 +74,7 @@ class _Translations$common$fr extends Translations$common$en {
 	@override String get camera => 'Appareil photo';
 	@override String get gallery => 'Galerie';
 	@override String get generate => 'Générer';
+	@override String get processing => 'Traitement en cours...';
 }
 
 // Path: home
@@ -579,6 +580,7 @@ extension on TranslationsFr {
 			'common.camera' => 'Appareil photo',
 			'common.gallery' => 'Galerie',
 			'common.generate' => 'Générer',
+			'common.processing' => 'Traitement en cours...',
 			'home.title' => 'Vidéo IA',
 			'home.trending' => 'Tendances',
 			'home.new_section' => 'Nouveau',

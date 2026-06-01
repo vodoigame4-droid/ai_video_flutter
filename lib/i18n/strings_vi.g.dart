@@ -75,6 +75,7 @@ class _Translations$common$vi extends Translations$common$en {
 	@override String get camera => 'Máy ảnh';
 	@override String get gallery => 'Thư viện';
 	@override String get generate => 'Tạo video';
+	@override String get processing => 'Đang xử lý...';
 }
 
 // Path: home
@@ -594,6 +595,7 @@ extension on TranslationsVi {
 			'common.camera' => 'Máy ảnh',
 			'common.gallery' => 'Thư viện',
 			'common.generate' => 'Tạo video',
+			'common.processing' => 'Đang xử lý...',
 			'home.title' => 'Video AI',
 			'home.trending' => 'Xu hướng',
 			'home.new_section' => 'Mới',

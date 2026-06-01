@@ -671,6 +671,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_udid:
+    dependency: "direct main"
+    description:
+      name: flutter_udid
+      sha256: fc599671cbe8b328e509c961ec121880406ed994dde659cc9ece9c7503cd31c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -700,6 +708,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  gal:
+    dependency: "direct main"
+    description:
+      name: gal
+      sha256: "969598f986789127fd407a750413249e1352116d4c2be66e81837ffeeaafdfee"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
   get_it:
     dependency: "direct main"
     description:
@@ -1379,6 +1395,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.2"
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      sha256: "223873d106614442ea6f20db5a038685cc5b32a2fba81cdecaefbbae0523f7fa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "12.0.2"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "88023e53a13429bd65d8e85e11a9b484f49d4c190abbd96c7932b74d6927cc9a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1477,14 +1509,6 @@ packages:
     description:
       name: slang
       sha256: "46e929158c2f563994c4d1fce5819cfa13e18b164941473d2553bcddcf387c31"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.15.0"
-  slang_build_runner:
-    dependency: "direct dev"
-    description:
-      name: slang_build_runner
-      sha256: "7da604c926c15435543a4a7088133bd4b9d027a55257e516474811534701e676"
       url: "https://pub.dev"
     source: hosted
     version: "4.15.0"

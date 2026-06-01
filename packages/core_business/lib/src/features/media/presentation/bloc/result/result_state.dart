@@ -21,6 +21,12 @@ abstract class ResultState with _$ResultState {
     @Default(3) int inspireMeCount,
     @Default(false) bool isGeneratingExtended,
     @Default(false) bool isDeleted,
+    @Default(false) bool isDownloading,
+    @Default(false) bool isSharing,
+    String? downloadErrorMessage,
+    String? shareErrorMessage,
+    @Default(false) bool downloadSuccess,
+    @Default(false) bool shareSuccess,
   }) = _Ready;
   const factory ResultState.error({required String message}) = _Error;
 }

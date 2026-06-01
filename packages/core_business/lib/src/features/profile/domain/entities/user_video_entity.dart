@@ -8,6 +8,7 @@ abstract class UserVideoEntity with _$UserVideoEntity {
     required String id,
     required String title,
     required String imageUrl,
+    required String videoUrl,
     required String status, // 'generating' or 'done'
     required double progress, // 0.0 to 1.0
     required String createdAt,

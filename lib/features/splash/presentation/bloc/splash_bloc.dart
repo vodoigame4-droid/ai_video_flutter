@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_udid/flutter_udid.dart';
 import 'package:core_business/core_business.dart';
 import 'splash_event.dart';
 import 'splash_state.dart';
@@ -51,7 +52,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         },
         progressUpdated: (percent) {
           if (percent >= 100) {
-            emit(const SplashState.success());
+            final isOnboardingCompleted = sharedPreferences.getBool(StorageKeys.isOnboardingCompleted) ?? false;
+            emit(SplashState.success(isOnboardingCompleted: isOnboardingCompleted));
           } else {
             emit(SplashState.loading(percent));
           }
@@ -63,10 +65,24 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _performBackgroundLogin() async {
     String? deviceId;
     try {
+      final storedDeviceId = sharedPreferences.getString(StorageKeys.deviceId);
+      String? freshUdid;
+      try {
+        freshUdid = await FlutterUdid.udid;
+      } catch (e) {
+        freshUdid = 'ERROR: $e';
+      }
+      LogUtils.i('UDID Check - Stored in SharedPreferences: $storedDeviceId | Fresh from FlutterUdid: $freshUdid');
+
       final token = sharedPreferences.getString(StorageKeys.authAccessToken);
-      deviceId = sharedPreferences.getString(StorageKeys.deviceId);
+      deviceId = storedDeviceId;
       if (deviceId == null || deviceId.isEmpty) {
-        deviceId = const Uuid().v4();
+        try {
+          deviceId = await FlutterUdid.udid;
+        } catch (e, stack) {
+          LogUtils.e('SplashBloc: Failed to get UDID, falling back to UUID', error: e, stackTrace: stack);
+          deviceId = const Uuid().v4();
+        }
         await sharedPreferences.setString(StorageKeys.deviceId, deviceId);
       }
       

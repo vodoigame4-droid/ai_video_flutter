@@ -6,7 +6,8 @@
     "leave": "退出",
     "camera": "カメラ",
     "gallery": "ギャラリー",
-    "generate": "生成する"
+    "generate": "生成する",
+    "processing": "処理中..."
   },
   "home": {
     "title": "ビデオAI",

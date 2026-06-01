@@ -131,13 +131,13 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                   if (status == 'completed' || status == 'done' || mediaEntity.resultUrl != null) {
                     _timer?.cancel();
                     _timer = null;
-                    emit(GeneratingState.success(
-                      videoId: mediaEntity.id,
-                      title: generatingState.title,
-                      imageUrl: generatingState.imageUrl,
-                      videoUrl: mediaEntity.resultUrl ?? 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-                      createdAt: _formatCurrentDate(),
-                    ));
+                     emit(GeneratingState.success(
+                       videoId: mediaEntity.id,
+                       title: generatingState.title,
+                       imageUrl: generatingState.imageUrl,
+                       videoUrl: mediaEntity.resultUrl ?? '',
+                       createdAt: _formatCurrentDate(),
+                     ));
                   } else if (status == 'failed') {
                     _timer?.cancel();
                     _timer = null;

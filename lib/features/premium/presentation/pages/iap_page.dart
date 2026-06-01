@@ -15,25 +15,26 @@ class IapPage extends StatelessWidget {
   static const String path = '/iap';
   static const String name = 'iap';
 
-  const IapPage({super.key});
+  final String videoUrl;
+
+  const IapPage({super.key, this.videoUrl = ''});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
-      child: const IapView(),
+      child: IapView(videoUrl: videoUrl),
     );
   }
 }
 
 class IapView extends StatelessWidget {
-  const IapView({super.key});
+  final String videoUrl;
+  const IapView({super.key, required this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
-    final videoUrl =
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
 
     return Scaffold(
       body: BlocConsumer<IapBloc, IapState>(
@@ -60,12 +61,11 @@ class IapView extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Stack(
+            loading: () => Stack(
               children: [
                 Positioned.fill(
                   child: PremiumVideoBackground(
-                    videoUrl:
-                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+                    videoUrl: videoUrl,
                     isBlurred: true,
                   ),
                 ),
@@ -76,8 +76,8 @@ class IapView extends StatelessWidget {
                       CircularProgressIndicator(),
                       SizedBox(height: 16),
                       Text(
-                        'Processing...',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        t.common.processing,
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ],
                   ),
@@ -323,7 +323,7 @@ class IapView extends StatelessWidget {
                                                 color: Colors.transparent,
                                                 child: InkWell(
                                                   onTap: () => context.push(
-                                                    BuyCreditsPage.path,
+                                                    '${BuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
                                                   ),
                                                   borderRadius:
                                                       const BorderRadius.all(

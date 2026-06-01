@@ -74,6 +74,7 @@ class _Translations$common$zh extends Translations$common$en {
 	@override String get camera => '相机';
 	@override String get gallery => '相册';
 	@override String get generate => '生成';
+	@override String get processing => '处理中...';
 }
 
 // Path: home
@@ -579,6 +580,7 @@ extension on TranslationsZh {
 			'common.camera' => '相机',
 			'common.gallery' => '相册',
 			'common.generate' => '生成',
+			'common.processing' => '处理中...',
 			'home.title' => '视频 AI',
 			'home.trending' => '热门',
 			'home.new_section' => '最新',

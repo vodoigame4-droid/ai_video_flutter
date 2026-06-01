@@ -6,7 +6,8 @@
     "leave": "离开",
     "camera": "相机",
     "gallery": "相册",
-    "generate": "生成"
+    "generate": "生成",
+    "processing": "处理中..."
   },
   "home": {
     "title": "视频 AI",

@@ -12,30 +12,44 @@ import 'package:core_business/core_business.dart';
 import '../widgets/extend_video_bottom_sheet.dart';
 import 'generating_page.dart';
 
+class ResultPageArgs {
+  final String videoId;
+  final String title;
+  final String imageUrl;
+  final String videoUrl;
+  final String createdAt;
+
+  const ResultPageArgs({
+    required this.videoId,
+    required this.title,
+    required this.imageUrl,
+    required this.videoUrl,
+    required this.createdAt,
+  });
+}
+
 class ResultPage extends StatefulWidget {
   static const String path = '/result';
   static const String name = 'result';
 
   static void push(
-    BuildContext context, {
-    required String videoId,
-    required String title,
-    required String imageUrl,
-    required String videoUrl,
-    required String createdAt,
+    BuildContext context,
+    ResultPageArgs args, {
     bool replace = false,
   }) {
+    final encodedImageUrl = Uri.encodeComponent(args.imageUrl);
+    final encodedVideoUrl = Uri.encodeComponent(args.videoUrl);
     final params = {
-      'videoId': videoId,
-      'title': title,
-      'imageUrl': imageUrl,
-      'videoUrl': videoUrl,
-      'createdAt': createdAt,
+      'videoId': args.videoId,
+      'title': args.title,
+      'imageUrl': encodedImageUrl,
+      'videoUrl': encodedVideoUrl,
+      'createdAt': args.createdAt,
     };
     if (replace) {
-      context.replaceNamed(name, queryParameters: params);
+      context.replaceNamed(name, queryParameters: params, extra: args);
     } else {
-      context.pushNamed(name, queryParameters: params);
+      context.pushNamed(name, queryParameters: params, extra: args);
     }
   }
 
@@ -95,22 +109,53 @@ class _ResultPageState extends State<ResultPage> {
     return BlocProvider.value(
       value: _bloc,
       child: BlocListener<ResultBloc, ResultState>(
-        listenWhen: (previous, current) =>
-            current.maybeMap(ready: (s) => s.isDeleted, orElse: () => false),
+        listenWhen: (previous, current) => current.maybeMap(
+          ready: (s) => true,
+          orElse: () => false,
+        ),
         listener: (context, state) {
           state.mapOrNull(
             ready: (s) {
               if (s.isDeleted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(
-                      t.report_dialog.success,
-                    ), // Reuse reported/deleted success message or general success
+                    content: Text(t.report_dialog.success),
                     duration: const Duration(seconds: 2),
                   ),
                 );
-                // Pop back to home/profile
                 context.pop();
+              } else if (s.downloadSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(t.result.download_success),
+                    backgroundColor: AppColors.primary,
+                  ),
+                );
+                _bloc.add(const ResultEvent.resetDownloadShareStatus());
+              } else if (s.shareSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(t.result.share_success),
+                    backgroundColor: AppColors.primary,
+                  ),
+                );
+                _bloc.add(const ResultEvent.resetDownloadShareStatus());
+              } else if (s.downloadErrorMessage != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(s.downloadErrorMessage!),
+                    backgroundColor: AppColors.heart,
+                  ),
+                );
+                _bloc.add(const ResultEvent.resetDownloadShareStatus());
+              } else if (s.shareErrorMessage != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(s.shareErrorMessage!),
+                    backgroundColor: AppColors.heart,
+                  ),
+                );
+                _bloc.add(const ResultEvent.resetDownloadShareStatus());
               }
             },
           );
@@ -257,6 +302,12 @@ class _ResultPageState extends State<ResultPage> {
                                 inspireMeCount,
                                 isGeneratingExtended,
                                 isDeleted,
+                                isDownloading,
+                                isSharing,
+                                downloadErrorMessage,
+                                shareErrorMessage,
+                                downloadSuccess,
+                                shareSuccess,
                               ) {
                                 return ClipRRect(
                                   borderRadius: const BorderRadius.all(
@@ -449,32 +500,33 @@ class _ResultPageState extends State<ResultPage> {
                                                         shape:
                                                             const CircleBorder(),
                                                         child: InkWell(
-                                                          onTap: () {
-                                                            ScaffoldMessenger.of(
-                                                              context,
-                                                            ).showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  t.result.share_success,
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
+                                                          onTap: isSharing
+                                                              ? null
+                                                              : () {
+                                                                  _bloc.add(const ResultEvent.shareVideo());
+                                                                },
                                                           borderRadius:
                                                               const BorderRadius.all(
                                                                 Radius.circular(
                                                                   100,
                                                                 ),
                                                               ),
-                                                          child: const SizedBox(
+                                                          child: SizedBox(
                                                             width: 42,
                                                             height: 42,
-                                                            child: Icon(
-                                                              Icons.share_rounded,
-                                                              color:
-                                                                  AppColors.white,
-                                                              size: 20,
-                                                            ),
+                                                            child: isSharing
+                                                                ? const Padding(
+                                                                    padding: EdgeInsets.all(11),
+                                                                    child: CircularProgressIndicator(
+                                                                      strokeWidth: 2,
+                                                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                                                    ),
+                                                                  )
+                                                                : const Icon(
+                                                                    Icons.share_rounded,
+                                                                    color: AppColors.white,
+                                                                    size: 20,
+                                                                  ),
                                                           ),
                                                         ),
                                                       ),
@@ -516,33 +568,33 @@ class _ResultPageState extends State<ResultPage> {
                                                         shape:
                                                             const CircleBorder(),
                                                         child: InkWell(
-                                                          onTap: () {
-                                                            ScaffoldMessenger.of(
-                                                              context,
-                                                            ).showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  t.result.download_success,
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
+                                                          onTap: isDownloading
+                                                              ? null
+                                                              : () {
+                                                                  _bloc.add(const ResultEvent.downloadVideo());
+                                                                },
                                                           borderRadius:
                                                               const BorderRadius.all(
                                                                 Radius.circular(
                                                                   100,
                                                                 ),
                                                               ),
-                                                          child: const SizedBox(
+                                                          child: SizedBox(
                                                             width: 42,
                                                             height: 42,
-                                                            child: Icon(
-                                                              Icons
-                                                                  .download_rounded,
-                                                              color:
-                                                                  AppColors.white,
-                                                              size: 20,
-                                                            ),
+                                                            child: isDownloading
+                                                                ? const Padding(
+                                                                    padding: EdgeInsets.all(11),
+                                                                    child: CircularProgressIndicator(
+                                                                      strokeWidth: 2,
+                                                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                                                    ),
+                                                                  )
+                                                                : const Icon(
+                                                                    Icons.download_rounded,
+                                                                    color: AppColors.white,
+                                                                    size: 20,
+                                                                  ),
                                                           ),
                                                         ),
                                                       ),

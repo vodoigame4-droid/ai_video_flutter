@@ -45,13 +45,22 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   }
 
   Future<void> _initializeVideo() async {
+    if (widget.videoUrl.isEmpty) {
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+      return;
+    }
+
     try {
       // 1. Check local cache or download in background
       final cachedPath = await _cacheManager.getCachedOrDownload(widget.videoUrl);
-      final mediaPath = cachedPath ?? widget.videoUrl;
+      final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : widget.videoUrl;
 
       // 2. Open media source
-      await _player.open(Media(mediaPath));
+      await _player.open(Media(mediaSource));
       _player.setPlaylistMode(PlaylistMode.loop);
       _player.setVolume(0.0); // Keep silent
 
@@ -114,7 +123,9 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
     if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
       _player.pause();
     } else if (state == AppLifecycleState.resumed && _isInitialized && !_hasError && _isCurrentlyVisible) {
-      _player.play();
+      if (widget.videoUrl.isNotEmpty) {
+        _player.play();
+      }
     }
   }
 
@@ -130,7 +141,7 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   void didPopNext() {
     // Resumed when the top route is popped, revealing this screen again
     _isCurrentlyVisible = true;
-    if (_isInitialized && !_hasError) {
+    if (_isInitialized && !_hasError && widget.videoUrl.isNotEmpty) {
       _player.play();
       LogUtils.d('PremiumVideoBackground: Route revealed. Resumed video.');
     }
@@ -148,15 +159,13 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   Widget build(BuildContext context) {
     Widget background;
 
-    if (_hasError) {
-      // Fallback solid background if loading video fails
+    if (_hasError || widget.videoUrl.isEmpty) {
+      // Fallback premium background image if video url is empty or loading fails
       background = Container(
-        color: const Color(0xFF000200),
-        child: const Center(
-          child: Icon(
-            Icons.broken_image_outlined,
-            color: Colors.white24,
-            size: 48,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg_splash.png'),
+            fit: BoxFit.cover,
           ),
         ),
       );

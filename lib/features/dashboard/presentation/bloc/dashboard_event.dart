@@ -4,6 +4,6 @@ part 'dashboard_event.freezed.dart';
 
 @freezed
 abstract class DashboardEvent with _$DashboardEvent {
-  const factory DashboardEvent.init() = _Init;
+  const factory DashboardEvent.init({int? initialTab}) = _Init;
   const factory DashboardEvent.changeTab(int index) = _ChangeTab;
 }

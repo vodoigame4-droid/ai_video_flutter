@@ -14,25 +14,26 @@ class BuyCreditsPage extends StatelessWidget {
   static const String path = '/buy_credits';
   static const String name = 'buy_credits';
 
-  const BuyCreditsPage({super.key});
+  final String videoUrl;
+
+  const BuyCreditsPage({super.key, this.videoUrl = ''});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
-      child: const BuyCreditsView(),
+      child: BuyCreditsView(videoUrl: videoUrl),
     );
   }
 }
 
 class BuyCreditsView extends StatelessWidget {
-  const BuyCreditsView({super.key});
+  final String videoUrl;
+  const BuyCreditsView({super.key, required this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
-    final videoUrl =
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
 
     return Scaffold(
       body: BlocConsumer<IapBloc, IapState>(
@@ -59,12 +60,11 @@ class BuyCreditsView extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Stack(
+            loading: () => Stack(
               children: [
                 Positioned.fill(
                   child: PremiumVideoBackground(
-                    videoUrl:
-                        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+                    videoUrl: videoUrl,
                     isBlurred: true,
                   ),
                 ),
@@ -75,8 +75,8 @@ class BuyCreditsView extends StatelessWidget {
                       CircularProgressIndicator(),
                       SizedBox(height: 16),
                       Text(
-                        'Processing...',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        t.common.processing,
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ],
                   ),

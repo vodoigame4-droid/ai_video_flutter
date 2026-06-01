@@ -14,26 +14,27 @@ class PaywallVideoPage extends StatelessWidget {
   static const String path = '/paywall_video';
   static const String name = 'paywall_video';
 
-  const PaywallVideoPage({super.key});
+  final String videoUrl;
+
+  const PaywallVideoPage({super.key, this.videoUrl = ''});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           sl<IapBloc>()..add(const IapEvent.init()),
-      child: const PaywallVideoView(),
+      child: PaywallVideoView(videoUrl: videoUrl),
     );
   }
 }
 
 class PaywallVideoView extends StatelessWidget {
-  const PaywallVideoView({super.key});
+  final String videoUrl;
+  const PaywallVideoView({super.key, required this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
-    final videoUrl =
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
 
     return Scaffold(
       body: BlocConsumer<IapBloc, IapState>(
@@ -60,7 +61,7 @@ class PaywallVideoView extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Stack(
+            loading: () => Stack(
               children: [
                 Positioned.fill(
                   child: ImageFiltered(
@@ -75,8 +76,8 @@ class PaywallVideoView extends StatelessWidget {
                       CircularProgressIndicator(),
                       SizedBox(height: 16),
                       Text(
-                        'Processing...',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        t.common.processing,
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ],
                   ),
@@ -265,7 +266,9 @@ class PaywallVideoView extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () => context.push(BuyCreditsPage.path),
+                              onTap: () => context.push(
+                                '${BuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
+                              ),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(100),
                               ),

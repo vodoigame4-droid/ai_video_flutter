@@ -332,7 +332,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     return UserVideoEntity(
       id: media.id,
       title: media.name,
-      imageUrl: media.imageUrl.isNotEmpty ? media.imageUrl : 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+      imageUrl: media.imageUrl,
+      videoUrl: media.resultUrl ?? '',
       status: isDone ? 'done' : 'generating',
       progress: isDone ? 1.0 : 0.1,
       createdAt: _formatDate(media.createdAt),

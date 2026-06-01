@@ -197,12 +197,9 @@ class TemplatesView extends StatelessWidget {
                                       showPlayButton: false,
                                       showVolumeIcon: false,
                                       onTap: () {
-                                        const mockVideoUrl = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
                                         final videoUrl = template.resultUrl.isNotEmpty
                                             ? template.resultUrl
-                                            : (template.sourceUrl.isNotEmpty
-                                                ? template.sourceUrl
-                                                : mockVideoUrl);
+                                            : template.sourceUrl;
                                         context.pushNamed(
                                           CreateFromTemplatePage.name,
                                           queryParameters: {

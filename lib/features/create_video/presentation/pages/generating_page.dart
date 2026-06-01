@@ -9,6 +9,7 @@ import '../../../../core/widgets/gradient_border_container.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../core/errors/backend_error_handler.dart';
 import 'package:core_business/core_business.dart';
+import '../../../profile/presentation/pages/profile_page.dart';
 import 'result_page.dart';
 
 class GeneratingPage extends StatelessWidget {
@@ -68,11 +69,13 @@ class GeneratingView extends StatelessWidget {
               // Replace screen with ResultPage so back button doesn't go back to Generating
               ResultPage.push(
                 context,
-                videoId: successState.videoId,
-                title: successState.title,
-                imageUrl: successState.imageUrl ?? '',
-                videoUrl: successState.videoUrl,
-                createdAt: successState.createdAt,
+                ResultPageArgs(
+                  videoId: successState.videoId,
+                  title: successState.title,
+                  imageUrl: successState.imageUrl ?? '',
+                  videoUrl: successState.videoUrl,
+                  createdAt: successState.createdAt,
+                ),
                 replace: true,
               );
             },
@@ -86,7 +89,8 @@ class GeneratingView extends StatelessWidget {
                   duration: const Duration(seconds: 2),
                 ),
               );
-              context.pop();
+              sl<ProfileBloc>().add(const ProfileEvent.init());
+              context.goNamed(ProfilePage.name);
             },
             failure: (failureState) {
               final message = BackendErrorHelper.getErrorMessage(context, failureState.message);

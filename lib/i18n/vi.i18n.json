@@ -6,7 +6,8 @@
     "leave": "Rời đi",
     "camera": "Máy ảnh",
     "gallery": "Thư viện",
-    "generate": "Tạo video"
+    "generate": "Tạo video",
+    "processing": "Đang xử lý..."
   },
   "home": {
     "title": "Video AI",

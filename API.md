@@ -21,7 +21,7 @@ Error: `{ "statusCode": 400, "message": "...", "error": "ER00XXX" }`
   "app": "android",
   "appVersion": "1.0.5",
   "refCode": "ABC123",
-  "appType": "ai_video_swap_and_generator"
+  "appType": "video_tgv"
 }
 ```
 - `app`: `"android"` | `"ios"`
