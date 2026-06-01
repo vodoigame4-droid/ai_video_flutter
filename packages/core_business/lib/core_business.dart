@@ -15,6 +15,8 @@ export 'src/features/settings/presentation/bloc/settings_event.dart';
 export 'src/features/settings/presentation/bloc/settings_state.dart';
 export 'src/features/settings/domain/usecases/get_settings_usecase.dart';
 export 'src/features/settings/domain/usecases/save_settings_usecase.dart';
+export 'src/features/settings/domain/usecases/get_onboarding_status_usecase.dart';
+export 'src/features/settings/domain/usecases/complete_onboarding_usecase.dart';
 
 // Auth
 export 'src/features/auth/domain/entities/user_entity.dart';
@@ -26,6 +28,7 @@ export 'src/features/auth/data/datasources/auth_api_client.dart';
 export 'src/features/auth/data/repositories/auth_repository_impl.dart';
 export 'src/features/auth/domain/usecases/login_usecase.dart';
 export 'src/features/auth/domain/usecases/get_profile_usecase.dart';
+export 'src/features/auth/domain/usecases/auto_login_usecase.dart';
 
 // Media Domain & Data
 export 'src/features/media/domain/entities/media_entities.dart';
@@ -46,6 +49,8 @@ export 'src/features/media/domain/usecases/get_media_detail_usecase.dart';
 export 'src/features/media/domain/usecases/get_history_usecase.dart';
 export 'src/features/media/domain/usecases/get_media_statuses_usecase.dart';
 export 'src/features/media/domain/usecases/delete_media_usecase.dart';
+export 'src/features/media/domain/usecases/request_notification_permission_usecase.dart';
+export 'src/features/media/domain/usecases/subscribe_notification_topic_usecase.dart';
 
 // Media Presentation Blocs
 export 'src/features/media/presentation/bloc/home/home_bloc.dart';

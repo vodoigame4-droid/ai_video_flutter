@@ -3,11 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:network/network.dart';
 import 'package:core_business/core_business.dart';
-import '../utils/log_utils.dart';
 import '../config/app_config_impl.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../notification/notification_repository_impl.dart';
-
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import '../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
@@ -18,14 +16,13 @@ Future<void> initDependencies() async {
   // Features - Splash
   sl.registerFactory(
     () => SplashBloc(
-      loginUseCase: sl(),
-      sharedPreferences: sl(),
-      notificationRepository: sl(),
+      autoLoginUseCase: sl(),
+      getOnboardingStatusUseCase: sl(),
     ),
   );
 
   // Features - Onboarding
-  sl.registerFactory(() => OnboardingBloc(sharedPreferences: sl()));
+  sl.registerFactory(() => OnboardingBloc(completeOnboardingUseCase: sl()));
 
   // Features - Dashboard
   sl.registerFactory(() => DashboardBloc());

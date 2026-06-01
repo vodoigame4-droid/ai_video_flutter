@@ -6,6 +6,8 @@ import 'package:network/network.dart';
 import '../../features/settings/presentation/bloc/settings_bloc.dart';
 import '../../features/settings/domain/usecases/get_settings_usecase.dart';
 import '../../features/settings/domain/usecases/save_settings_usecase.dart';
+import '../../features/settings/domain/usecases/get_onboarding_status_usecase.dart';
+import '../../features/settings/domain/usecases/complete_onboarding_usecase.dart';
 
 // Auth
 import '../../features/auth/data/datasources/auth_api_client.dart';
@@ -14,6 +16,7 @@ import '../../features/auth/domain/repositories/auth_repository.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/get_profile_usecase.dart';
+import '../../features/auth/domain/usecases/auto_login_usecase.dart';
 
 // Media
 import '../../features/media/data/datasources/media_api_client.dart';
@@ -31,6 +34,8 @@ import '../../features/media/domain/usecases/get_media_statuses_usecase.dart';
 import '../../features/media/domain/usecases/delete_media_usecase.dart';
 import '../../features/media/domain/usecases/download_video_usecase.dart';
 import '../../features/media/domain/usecases/share_video_usecase.dart';
+import '../../features/media/domain/usecases/request_notification_permission_usecase.dart';
+import '../../features/media/domain/usecases/subscribe_notification_topic_usecase.dart';
 
 // Liked Templates / Local DB
 import '../../core/database/app_database.dart';
@@ -63,6 +68,8 @@ void initBusinessDependencies(GetIt sl) {
   // Settings UseCases & Bloc
   sl.registerLazySingleton(() => GetSettingsUseCase(sharedPreferences: sl()));
   sl.registerLazySingleton(() => SaveSettingsUseCase(sharedPreferences: sl()));
+  sl.registerLazySingleton(() => GetOnboardingStatusUseCase(sharedPreferences: sl()));
+  sl.registerLazySingleton(() => CompleteOnboardingUseCase(sharedPreferences: sl()));
   sl.registerFactory(
     () => SettingsBloc(
       getSettingsUseCase: sl(),
@@ -84,6 +91,11 @@ void initBusinessDependencies(GetIt sl) {
   );
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => GetProfileUseCase(authRepository: sl()));
+  sl.registerLazySingleton(() => AutoLoginUseCase(
+        authRepository: sl(),
+        notificationRepository: sl(),
+        sharedPreferences: sl(),
+      ));
 
   // Media
   sl.registerLazySingleton(() => MediaApiClient(sl<ApiClient>().dio));
@@ -109,6 +121,8 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => DeleteMediaUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => DownloadVideoUseCase());
   sl.registerLazySingleton(() => ShareVideoUseCase());
+  sl.registerLazySingleton(() => RequestNotificationPermissionUseCase(notificationRepository: sl()));
+  sl.registerLazySingleton(() => SubscribeNotificationTopicUseCase(notificationRepository: sl()));
 
   // Drift Database & Liked Templates Local Storage
   sl.registerLazySingleton<AppDatabase>(() => AppDatabase());

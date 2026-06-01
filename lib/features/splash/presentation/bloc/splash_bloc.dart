@@ -1,24 +1,19 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
-import 'package:flutter_udid/flutter_udid.dart';
 import 'package:core_business/core_business.dart';
 import 'splash_event.dart';
 import 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  final LoginUseCase loginUseCase;
-  final SharedPreferences sharedPreferences;
-  final NotificationRepository notificationRepository;
+  final AutoLoginUseCase autoLoginUseCase;
+  final GetOnboardingStatusUseCase getOnboardingStatusUseCase;
   Timer? _timer;
   bool _isLoginCompleted = false;
   int _progress = 0;
 
   SplashBloc({
-    required this.loginUseCase,
-    required this.sharedPreferences,
-    required this.notificationRepository,
+    required this.autoLoginUseCase,
+    required this.getOnboardingStatusUseCase,
   }) : super(const SplashState.initial()) {
     on<SplashEvent>((event, emit) async {
       await event.when(
@@ -50,9 +45,13 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
             }
           });
         },
-        progressUpdated: (percent) {
+        progressUpdated: (percent) async {
           if (percent >= 100) {
-            final isOnboardingCompleted = sharedPreferences.getBool(StorageKeys.isOnboardingCompleted) ?? false;
+            final onboardingResult = await getOnboardingStatusUseCase(NoParams());
+            final isOnboardingCompleted = onboardingResult.maybeWhen(
+              success: (data) => data,
+              orElse: () => false,
+            );
             emit(SplashState.success(isOnboardingCompleted: isOnboardingCompleted));
           } else {
             emit(SplashState.loading(percent));
@@ -63,51 +62,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Future<void> _performBackgroundLogin() async {
-    String? deviceId;
     try {
-      final storedDeviceId = sharedPreferences.getString(StorageKeys.deviceId);
-      String? freshUdid;
-      try {
-        freshUdid = await FlutterUdid.udid;
-      } catch (e) {
-        freshUdid = 'ERROR: $e';
-      }
-      LogUtils.i('UDID Check - Stored in SharedPreferences: $storedDeviceId | Fresh from FlutterUdid: $freshUdid');
-
-      final token = sharedPreferences.getString(StorageKeys.authAccessToken);
-      deviceId = storedDeviceId;
-      if (deviceId == null || deviceId.isEmpty) {
-        try {
-          deviceId = await FlutterUdid.udid;
-        } catch (e, stack) {
-          LogUtils.e('SplashBloc: Failed to get UDID, falling back to UUID', error: e, stackTrace: stack);
-          deviceId = const Uuid().v4();
-        }
-      }
-
-      if (!deviceId.endsWith('-tgv')) {
-        deviceId = '$deviceId-tgv';
-        await sharedPreferences.setString(StorageKeys.deviceId, deviceId);
-      }
-      
-      if (token == null || token.isEmpty) {
-        await loginUseCase(LoginParams(deviceId: deviceId));
-      }
+      await autoLoginUseCase(NoParams());
     } catch (e, stack) {
       LogUtils.e('SplashBloc: Background login failed', error: e, stackTrace: stack);
-    }
-
-    try {
-      deviceId ??= sharedPreferences.getString(StorageKeys.deviceId);
-      if (deviceId != null && deviceId.isNotEmpty) {
-        final isGranted = await notificationRepository.requestPermission();
-        if (isGranted) {
-          await notificationRepository.subscribeToTopic('all');
-          await notificationRepository.subscribeToTopic(deviceId);
-        }
-      }
-    } catch (e, stack) {
-      LogUtils.e('SplashBloc: Notification setup failed', error: e, stackTrace: stack);
     } finally {
       _isLoginCompleted = true;
       if (_progress >= 99) {
