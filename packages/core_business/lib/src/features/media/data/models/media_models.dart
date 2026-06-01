@@ -23,16 +23,40 @@ Object? _readPageCount(Map json, String key) {
   return json['pageCount'] ?? json['totalPage'] ?? 0;
 }
 
+Object? _readImageUrl(Map json, String key) => json['imageUrl'] ?? json['image_url'];
+Object? _readImageUrls(Map json, String key) => json['imageUrls'] ?? json['image_urls'];
+Object? _readImageQuantity(Map json, String key) => json['imageQuantity'] ?? json['image_quantity'];
+Object? _readRequestId(Map json, String key) => json['requestId'] ?? json['request_id'];
+Object? _readResultUrl(Map json, String key) => json['resultUrl'] ?? json['result_url'];
+Object? _readFinishedTime(Map json, String key) => json['finishedTime'] ?? json['finished_time'];
+Object? _readThemeId(Map json, String key) => json['themeId'] ?? json['theme_id'];
+Object? _readThumbnailUrl(Map json, String key) => json['thumbnailUrl'] ?? json['thumbnail_url'];
+Object? _readCreatedAt(Map json, String key) => json['createdAt'] ?? json['created_at'];
+Object? _readSourceUrl(Map json, String key) => json['sourceUrl'] ?? json['source_url'];
+Object? _readSourceUrls(Map json, String key) => json['sourceUrls'] ?? json['source_urls'];
+Object? _readIsHd(Map json, String key) {
+  final val = json['isHd'] ?? json['is_hd'];
+  if (val is bool) return val;
+  if (val is String) return val.toLowerCase() == 'true';
+  return false;
+}
+Object? _readIsLongTime(Map json, String key) {
+  final val = json['isLongTime'] ?? json['is_long_time'];
+  if (val is bool) return val;
+  if (val is String) return val.toLowerCase() == 'true';
+  return false;
+}
+
 @freezed
 abstract class ThemeModel with _$ThemeModel {
   const factory ThemeModel({
     required String id,
     required String name,
     required String? description,
-    required String? resultUrl,
-    required String? sourceUrl,
-    required List<String>? sourceUrls,
-    required String? thumbnailUrl,
+    @JsonKey(readValue: _readResultUrl) required String? resultUrl,
+    @JsonKey(readValue: _readSourceUrl) required String? sourceUrl,
+    @JsonKey(readValue: _readSourceUrls) required List<String>? sourceUrls,
+    @JsonKey(readValue: _readThumbnailUrl) required String? thumbnailUrl,
     required String? prompt,
     required String? type,
     @JsonKey(readValue: _readOrgId) required int orgId,
@@ -103,19 +127,19 @@ abstract class MediaModel with _$MediaModel {
   const factory MediaModel({
     required String id,
     required String name,
-    required String? imageUrl,
-    required List<String>? imageUrls,
-    @Default(1) int imageQuantity,
-    @Default('') String requestId,
-    required String? resultUrl,
-    required String? finishedTime,
+    @JsonKey(readValue: _readImageUrl) required String? imageUrl,
+    @JsonKey(readValue: _readImageUrls) required List<String>? imageUrls,
+    @JsonKey(readValue: _readImageQuantity) @Default(1) int imageQuantity,
+    @JsonKey(readValue: _readRequestId) @Default('') String requestId,
+    @JsonKey(readValue: _readResultUrl) required String? resultUrl,
+    @JsonKey(readValue: _readFinishedTime) required String? finishedTime,
     required String prompt,
-    @Default(false) bool isHd,
-    @Default(false) bool isLongTime,
-    required String themeId,
-    required String? thumbnailUrl,
+    @JsonKey(readValue: _readIsHd) @Default(false) bool isHd,
+    @JsonKey(readValue: _readIsLongTime) @Default(false) bool isLongTime,
+    @JsonKey(readValue: _readThemeId) required String themeId,
+    @JsonKey(readValue: _readThumbnailUrl) required String? thumbnailUrl,
     required String status,
-    required String createdAt,
+    @JsonKey(readValue: _readCreatedAt) required String createdAt,
   }) = _MediaModel;
 
   factory MediaModel.fromJson(Map<String, dynamic> json) =>
@@ -147,8 +171,8 @@ abstract class MediaStatusModel with _$MediaStatusModel {
   const factory MediaStatusModel({
     required String id,
     required String status,
-    required String? resultUrl,
-    required String? finishedTime,
+    @JsonKey(readValue: _readResultUrl) required String? resultUrl,
+    @JsonKey(readValue: _readFinishedTime) required String? finishedTime,
   }) = _MediaStatusModel;
 
   factory MediaStatusModel.fromJson(Map<String, dynamic> json) =>

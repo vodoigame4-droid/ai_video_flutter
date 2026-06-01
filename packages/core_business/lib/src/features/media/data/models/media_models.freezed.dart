@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ThemeModel {
 
- String get id; String get name; String? get description; String? get resultUrl; String? get sourceUrl; List<String>? get sourceUrls; String? get thumbnailUrl; String? get prompt; String? get type;@JsonKey(readValue: _readOrgId) int get orgId;
+ String get id; String get name; String? get description;@JsonKey(readValue: _readResultUrl) String? get resultUrl;@JsonKey(readValue: _readSourceUrl) String? get sourceUrl;@JsonKey(readValue: _readSourceUrls) List<String>? get sourceUrls;@JsonKey(readValue: _readThumbnailUrl) String? get thumbnailUrl; String? get prompt; String? get type;@JsonKey(readValue: _readOrgId) int get orgId;
 /// Create a copy of ThemeModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ThemeModelCopyWith<$Res>  {
   factory $ThemeModelCopyWith(ThemeModel value, $Res Function(ThemeModel) _then) = _$ThemeModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String? description, String? resultUrl, String? sourceUrl, List<String>? sourceUrls, String? thumbnailUrl, String? prompt, String? type,@JsonKey(readValue: _readOrgId) int orgId
+ String id, String name, String? description,@JsonKey(readValue: _readResultUrl) String? resultUrl,@JsonKey(readValue: _readSourceUrl) String? sourceUrl,@JsonKey(readValue: _readSourceUrls) List<String>? sourceUrls,@JsonKey(readValue: _readThumbnailUrl) String? thumbnailUrl, String? prompt, String? type,@JsonKey(readValue: _readOrgId) int orgId
 });
 
 
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? description,  String? resultUrl,  String? sourceUrl,  List<String>? sourceUrls,  String? thumbnailUrl,  String? prompt,  String? type, @JsonKey(readValue: _readOrgId)  int orgId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? description, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readSourceUrl)  String? sourceUrl, @JsonKey(readValue: _readSourceUrls)  List<String>? sourceUrls, @JsonKey(readValue: _readThumbnailUrl)  String? thumbnailUrl,  String? prompt,  String? type, @JsonKey(readValue: _readOrgId)  int orgId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ThemeModel() when $default != null:
 return $default(_that.id,_that.name,_that.description,_that.resultUrl,_that.sourceUrl,_that.sourceUrls,_that.thumbnailUrl,_that.prompt,_that.type,_that.orgId);case _:
@@ -183,7 +183,7 @@ return $default(_that.id,_that.name,_that.description,_that.resultUrl,_that.sour
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? description,  String? resultUrl,  String? sourceUrl,  List<String>? sourceUrls,  String? thumbnailUrl,  String? prompt,  String? type, @JsonKey(readValue: _readOrgId)  int orgId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? description, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readSourceUrl)  String? sourceUrl, @JsonKey(readValue: _readSourceUrls)  List<String>? sourceUrls, @JsonKey(readValue: _readThumbnailUrl)  String? thumbnailUrl,  String? prompt,  String? type, @JsonKey(readValue: _readOrgId)  int orgId)  $default,) {final _that = this;
 switch (_that) {
 case _ThemeModel():
 return $default(_that.id,_that.name,_that.description,_that.resultUrl,_that.sourceUrl,_that.sourceUrls,_that.thumbnailUrl,_that.prompt,_that.type,_that.orgId);case _:
@@ -203,7 +203,7 @@ return $default(_that.id,_that.name,_that.description,_that.resultUrl,_that.sour
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? description,  String? resultUrl,  String? sourceUrl,  List<String>? sourceUrls,  String? thumbnailUrl,  String? prompt,  String? type, @JsonKey(readValue: _readOrgId)  int orgId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? description, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readSourceUrl)  String? sourceUrl, @JsonKey(readValue: _readSourceUrls)  List<String>? sourceUrls, @JsonKey(readValue: _readThumbnailUrl)  String? thumbnailUrl,  String? prompt,  String? type, @JsonKey(readValue: _readOrgId)  int orgId)?  $default,) {final _that = this;
 switch (_that) {
 case _ThemeModel() when $default != null:
 return $default(_that.id,_that.name,_that.description,_that.resultUrl,_that.sourceUrl,_that.sourceUrls,_that.thumbnailUrl,_that.prompt,_that.type,_that.orgId);case _:
@@ -218,16 +218,16 @@ return $default(_that.id,_that.name,_that.description,_that.resultUrl,_that.sour
 @JsonSerializable()
 
 class _ThemeModel implements ThemeModel {
-  const _ThemeModel({required this.id, required this.name, required this.description, required this.resultUrl, required this.sourceUrl, required final  List<String>? sourceUrls, required this.thumbnailUrl, required this.prompt, required this.type, @JsonKey(readValue: _readOrgId) required this.orgId}): _sourceUrls = sourceUrls;
+  const _ThemeModel({required this.id, required this.name, required this.description, @JsonKey(readValue: _readResultUrl) required this.resultUrl, @JsonKey(readValue: _readSourceUrl) required this.sourceUrl, @JsonKey(readValue: _readSourceUrls) required final  List<String>? sourceUrls, @JsonKey(readValue: _readThumbnailUrl) required this.thumbnailUrl, required this.prompt, required this.type, @JsonKey(readValue: _readOrgId) required this.orgId}): _sourceUrls = sourceUrls;
   factory _ThemeModel.fromJson(Map<String, dynamic> json) => _$ThemeModelFromJson(json);
 
 @override final  String id;
 @override final  String name;
 @override final  String? description;
-@override final  String? resultUrl;
-@override final  String? sourceUrl;
+@override@JsonKey(readValue: _readResultUrl) final  String? resultUrl;
+@override@JsonKey(readValue: _readSourceUrl) final  String? sourceUrl;
  final  List<String>? _sourceUrls;
-@override List<String>? get sourceUrls {
+@override@JsonKey(readValue: _readSourceUrls) List<String>? get sourceUrls {
   final value = _sourceUrls;
   if (value == null) return null;
   if (_sourceUrls is EqualUnmodifiableListView) return _sourceUrls;
@@ -235,7 +235,7 @@ class _ThemeModel implements ThemeModel {
   return EqualUnmodifiableListView(value);
 }
 
-@override final  String? thumbnailUrl;
+@override@JsonKey(readValue: _readThumbnailUrl) final  String? thumbnailUrl;
 @override final  String? prompt;
 @override final  String? type;
 @override@JsonKey(readValue: _readOrgId) final  int orgId;
@@ -273,7 +273,7 @@ abstract mixin class _$ThemeModelCopyWith<$Res> implements $ThemeModelCopyWith<$
   factory _$ThemeModelCopyWith(_ThemeModel value, $Res Function(_ThemeModel) _then) = __$ThemeModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String? description, String? resultUrl, String? sourceUrl, List<String>? sourceUrls, String? thumbnailUrl, String? prompt, String? type,@JsonKey(readValue: _readOrgId) int orgId
+ String id, String name, String? description,@JsonKey(readValue: _readResultUrl) String? resultUrl,@JsonKey(readValue: _readSourceUrl) String? sourceUrl,@JsonKey(readValue: _readSourceUrls) List<String>? sourceUrls,@JsonKey(readValue: _readThumbnailUrl) String? thumbnailUrl, String? prompt, String? type,@JsonKey(readValue: _readOrgId) int orgId
 });
 
 
@@ -877,7 +877,7 @@ as String,
 /// @nodoc
 mixin _$MediaModel {
 
- String get id; String get name; String? get imageUrl; List<String>? get imageUrls; int get imageQuantity; String get requestId; String? get resultUrl; String? get finishedTime; String get prompt; bool get isHd; bool get isLongTime; String get themeId; String? get thumbnailUrl; String get status; String get createdAt;
+ String get id; String get name;@JsonKey(readValue: _readImageUrl) String? get imageUrl;@JsonKey(readValue: _readImageUrls) List<String>? get imageUrls;@JsonKey(readValue: _readImageQuantity) int get imageQuantity;@JsonKey(readValue: _readRequestId) String get requestId;@JsonKey(readValue: _readResultUrl) String? get resultUrl;@JsonKey(readValue: _readFinishedTime) String? get finishedTime; String get prompt;@JsonKey(readValue: _readIsHd) bool get isHd;@JsonKey(readValue: _readIsLongTime) bool get isLongTime;@JsonKey(readValue: _readThemeId) String get themeId;@JsonKey(readValue: _readThumbnailUrl) String? get thumbnailUrl; String get status;@JsonKey(readValue: _readCreatedAt) String get createdAt;
 /// Create a copy of MediaModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -910,7 +910,7 @@ abstract mixin class $MediaModelCopyWith<$Res>  {
   factory $MediaModelCopyWith(MediaModel value, $Res Function(MediaModel) _then) = _$MediaModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String? imageUrl, List<String>? imageUrls, int imageQuantity, String requestId, String? resultUrl, String? finishedTime, String prompt, bool isHd, bool isLongTime, String themeId, String? thumbnailUrl, String status, String createdAt
+ String id, String name,@JsonKey(readValue: _readImageUrl) String? imageUrl,@JsonKey(readValue: _readImageUrls) List<String>? imageUrls,@JsonKey(readValue: _readImageQuantity) int imageQuantity,@JsonKey(readValue: _readRequestId) String requestId,@JsonKey(readValue: _readResultUrl) String? resultUrl,@JsonKey(readValue: _readFinishedTime) String? finishedTime, String prompt,@JsonKey(readValue: _readIsHd) bool isHd,@JsonKey(readValue: _readIsLongTime) bool isLongTime,@JsonKey(readValue: _readThemeId) String themeId,@JsonKey(readValue: _readThumbnailUrl) String? thumbnailUrl, String status,@JsonKey(readValue: _readCreatedAt) String createdAt
 });
 
 
@@ -1029,7 +1029,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? imageUrl,  List<String>? imageUrls,  int imageQuantity,  String requestId,  String? resultUrl,  String? finishedTime,  String prompt,  bool isHd,  bool isLongTime,  String themeId,  String? thumbnailUrl,  String status,  String createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name, @JsonKey(readValue: _readImageUrl)  String? imageUrl, @JsonKey(readValue: _readImageUrls)  List<String>? imageUrls, @JsonKey(readValue: _readImageQuantity)  int imageQuantity, @JsonKey(readValue: _readRequestId)  String requestId, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readFinishedTime)  String? finishedTime,  String prompt, @JsonKey(readValue: _readIsHd)  bool isHd, @JsonKey(readValue: _readIsLongTime)  bool isLongTime, @JsonKey(readValue: _readThemeId)  String themeId, @JsonKey(readValue: _readThumbnailUrl)  String? thumbnailUrl,  String status, @JsonKey(readValue: _readCreatedAt)  String createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MediaModel() when $default != null:
 return $default(_that.id,_that.name,_that.imageUrl,_that.imageUrls,_that.imageQuantity,_that.requestId,_that.resultUrl,_that.finishedTime,_that.prompt,_that.isHd,_that.isLongTime,_that.themeId,_that.thumbnailUrl,_that.status,_that.createdAt);case _:
@@ -1050,7 +1050,7 @@ return $default(_that.id,_that.name,_that.imageUrl,_that.imageUrls,_that.imageQu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? imageUrl,  List<String>? imageUrls,  int imageQuantity,  String requestId,  String? resultUrl,  String? finishedTime,  String prompt,  bool isHd,  bool isLongTime,  String themeId,  String? thumbnailUrl,  String status,  String createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name, @JsonKey(readValue: _readImageUrl)  String? imageUrl, @JsonKey(readValue: _readImageUrls)  List<String>? imageUrls, @JsonKey(readValue: _readImageQuantity)  int imageQuantity, @JsonKey(readValue: _readRequestId)  String requestId, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readFinishedTime)  String? finishedTime,  String prompt, @JsonKey(readValue: _readIsHd)  bool isHd, @JsonKey(readValue: _readIsLongTime)  bool isLongTime, @JsonKey(readValue: _readThemeId)  String themeId, @JsonKey(readValue: _readThumbnailUrl)  String? thumbnailUrl,  String status, @JsonKey(readValue: _readCreatedAt)  String createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _MediaModel():
 return $default(_that.id,_that.name,_that.imageUrl,_that.imageUrls,_that.imageQuantity,_that.requestId,_that.resultUrl,_that.finishedTime,_that.prompt,_that.isHd,_that.isLongTime,_that.themeId,_that.thumbnailUrl,_that.status,_that.createdAt);case _:
@@ -1070,7 +1070,7 @@ return $default(_that.id,_that.name,_that.imageUrl,_that.imageUrls,_that.imageQu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? imageUrl,  List<String>? imageUrls,  int imageQuantity,  String requestId,  String? resultUrl,  String? finishedTime,  String prompt,  bool isHd,  bool isLongTime,  String themeId,  String? thumbnailUrl,  String status,  String createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name, @JsonKey(readValue: _readImageUrl)  String? imageUrl, @JsonKey(readValue: _readImageUrls)  List<String>? imageUrls, @JsonKey(readValue: _readImageQuantity)  int imageQuantity, @JsonKey(readValue: _readRequestId)  String requestId, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readFinishedTime)  String? finishedTime,  String prompt, @JsonKey(readValue: _readIsHd)  bool isHd, @JsonKey(readValue: _readIsLongTime)  bool isLongTime, @JsonKey(readValue: _readThemeId)  String themeId, @JsonKey(readValue: _readThumbnailUrl)  String? thumbnailUrl,  String status, @JsonKey(readValue: _readCreatedAt)  String createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _MediaModel() when $default != null:
 return $default(_that.id,_that.name,_that.imageUrl,_that.imageUrls,_that.imageQuantity,_that.requestId,_that.resultUrl,_that.finishedTime,_that.prompt,_that.isHd,_that.isLongTime,_that.themeId,_that.thumbnailUrl,_that.status,_that.createdAt);case _:
@@ -1085,14 +1085,14 @@ return $default(_that.id,_that.name,_that.imageUrl,_that.imageUrls,_that.imageQu
 @JsonSerializable()
 
 class _MediaModel implements MediaModel {
-  const _MediaModel({required this.id, required this.name, required this.imageUrl, required final  List<String>? imageUrls, this.imageQuantity = 1, this.requestId = '', required this.resultUrl, required this.finishedTime, required this.prompt, this.isHd = false, this.isLongTime = false, required this.themeId, required this.thumbnailUrl, required this.status, required this.createdAt}): _imageUrls = imageUrls;
+  const _MediaModel({required this.id, required this.name, @JsonKey(readValue: _readImageUrl) required this.imageUrl, @JsonKey(readValue: _readImageUrls) required final  List<String>? imageUrls, @JsonKey(readValue: _readImageQuantity) this.imageQuantity = 1, @JsonKey(readValue: _readRequestId) this.requestId = '', @JsonKey(readValue: _readResultUrl) required this.resultUrl, @JsonKey(readValue: _readFinishedTime) required this.finishedTime, required this.prompt, @JsonKey(readValue: _readIsHd) this.isHd = false, @JsonKey(readValue: _readIsLongTime) this.isLongTime = false, @JsonKey(readValue: _readThemeId) required this.themeId, @JsonKey(readValue: _readThumbnailUrl) required this.thumbnailUrl, required this.status, @JsonKey(readValue: _readCreatedAt) required this.createdAt}): _imageUrls = imageUrls;
   factory _MediaModel.fromJson(Map<String, dynamic> json) => _$MediaModelFromJson(json);
 
 @override final  String id;
 @override final  String name;
-@override final  String? imageUrl;
+@override@JsonKey(readValue: _readImageUrl) final  String? imageUrl;
  final  List<String>? _imageUrls;
-@override List<String>? get imageUrls {
+@override@JsonKey(readValue: _readImageUrls) List<String>? get imageUrls {
   final value = _imageUrls;
   if (value == null) return null;
   if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
@@ -1100,17 +1100,17 @@ class _MediaModel implements MediaModel {
   return EqualUnmodifiableListView(value);
 }
 
-@override@JsonKey() final  int imageQuantity;
-@override@JsonKey() final  String requestId;
-@override final  String? resultUrl;
-@override final  String? finishedTime;
+@override@JsonKey(readValue: _readImageQuantity) final  int imageQuantity;
+@override@JsonKey(readValue: _readRequestId) final  String requestId;
+@override@JsonKey(readValue: _readResultUrl) final  String? resultUrl;
+@override@JsonKey(readValue: _readFinishedTime) final  String? finishedTime;
 @override final  String prompt;
-@override@JsonKey() final  bool isHd;
-@override@JsonKey() final  bool isLongTime;
-@override final  String themeId;
-@override final  String? thumbnailUrl;
+@override@JsonKey(readValue: _readIsHd) final  bool isHd;
+@override@JsonKey(readValue: _readIsLongTime) final  bool isLongTime;
+@override@JsonKey(readValue: _readThemeId) final  String themeId;
+@override@JsonKey(readValue: _readThumbnailUrl) final  String? thumbnailUrl;
 @override final  String status;
-@override final  String createdAt;
+@override@JsonKey(readValue: _readCreatedAt) final  String createdAt;
 
 /// Create a copy of MediaModel
 /// with the given fields replaced by the non-null parameter values.
@@ -1145,7 +1145,7 @@ abstract mixin class _$MediaModelCopyWith<$Res> implements $MediaModelCopyWith<$
   factory _$MediaModelCopyWith(_MediaModel value, $Res Function(_MediaModel) _then) = __$MediaModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String? imageUrl, List<String>? imageUrls, int imageQuantity, String requestId, String? resultUrl, String? finishedTime, String prompt, bool isHd, bool isLongTime, String themeId, String? thumbnailUrl, String status, String createdAt
+ String id, String name,@JsonKey(readValue: _readImageUrl) String? imageUrl,@JsonKey(readValue: _readImageUrls) List<String>? imageUrls,@JsonKey(readValue: _readImageQuantity) int imageQuantity,@JsonKey(readValue: _readRequestId) String requestId,@JsonKey(readValue: _readResultUrl) String? resultUrl,@JsonKey(readValue: _readFinishedTime) String? finishedTime, String prompt,@JsonKey(readValue: _readIsHd) bool isHd,@JsonKey(readValue: _readIsLongTime) bool isLongTime,@JsonKey(readValue: _readThemeId) String themeId,@JsonKey(readValue: _readThumbnailUrl) String? thumbnailUrl, String status,@JsonKey(readValue: _readCreatedAt) String createdAt
 });
 
 
@@ -1190,7 +1190,7 @@ as String,
 /// @nodoc
 mixin _$MediaStatusModel {
 
- String get id; String get status; String? get resultUrl; String? get finishedTime;
+ String get id; String get status;@JsonKey(readValue: _readResultUrl) String? get resultUrl;@JsonKey(readValue: _readFinishedTime) String? get finishedTime;
 /// Create a copy of MediaStatusModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1223,7 +1223,7 @@ abstract mixin class $MediaStatusModelCopyWith<$Res>  {
   factory $MediaStatusModelCopyWith(MediaStatusModel value, $Res Function(MediaStatusModel) _then) = _$MediaStatusModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String status, String? resultUrl, String? finishedTime
+ String id, String status,@JsonKey(readValue: _readResultUrl) String? resultUrl,@JsonKey(readValue: _readFinishedTime) String? finishedTime
 });
 
 
@@ -1331,7 +1331,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String status,  String? resultUrl,  String? finishedTime)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String status, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readFinishedTime)  String? finishedTime)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MediaStatusModel() when $default != null:
 return $default(_that.id,_that.status,_that.resultUrl,_that.finishedTime);case _:
@@ -1352,7 +1352,7 @@ return $default(_that.id,_that.status,_that.resultUrl,_that.finishedTime);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String status,  String? resultUrl,  String? finishedTime)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String status, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readFinishedTime)  String? finishedTime)  $default,) {final _that = this;
 switch (_that) {
 case _MediaStatusModel():
 return $default(_that.id,_that.status,_that.resultUrl,_that.finishedTime);case _:
@@ -1372,7 +1372,7 @@ return $default(_that.id,_that.status,_that.resultUrl,_that.finishedTime);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String status,  String? resultUrl,  String? finishedTime)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String status, @JsonKey(readValue: _readResultUrl)  String? resultUrl, @JsonKey(readValue: _readFinishedTime)  String? finishedTime)?  $default,) {final _that = this;
 switch (_that) {
 case _MediaStatusModel() when $default != null:
 return $default(_that.id,_that.status,_that.resultUrl,_that.finishedTime);case _:
@@ -1387,13 +1387,13 @@ return $default(_that.id,_that.status,_that.resultUrl,_that.finishedTime);case _
 @JsonSerializable()
 
 class _MediaStatusModel implements MediaStatusModel {
-  const _MediaStatusModel({required this.id, required this.status, required this.resultUrl, required this.finishedTime});
+  const _MediaStatusModel({required this.id, required this.status, @JsonKey(readValue: _readResultUrl) required this.resultUrl, @JsonKey(readValue: _readFinishedTime) required this.finishedTime});
   factory _MediaStatusModel.fromJson(Map<String, dynamic> json) => _$MediaStatusModelFromJson(json);
 
 @override final  String id;
 @override final  String status;
-@override final  String? resultUrl;
-@override final  String? finishedTime;
+@override@JsonKey(readValue: _readResultUrl) final  String? resultUrl;
+@override@JsonKey(readValue: _readFinishedTime) final  String? finishedTime;
 
 /// Create a copy of MediaStatusModel
 /// with the given fields replaced by the non-null parameter values.
@@ -1428,7 +1428,7 @@ abstract mixin class _$MediaStatusModelCopyWith<$Res> implements $MediaStatusMod
   factory _$MediaStatusModelCopyWith(_MediaStatusModel value, $Res Function(_MediaStatusModel) _then) = __$MediaStatusModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String status, String? resultUrl, String? finishedTime
+ String id, String status,@JsonKey(readValue: _readResultUrl) String? resultUrl,@JsonKey(readValue: _readFinishedTime) String? finishedTime
 });
 
 

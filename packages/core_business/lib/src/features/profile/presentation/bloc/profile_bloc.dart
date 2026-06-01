@@ -219,6 +219,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           empty: () async {},
           success: (statuses) async {
             bool updatedAny = false;
+            bool shouldReloadList = false;
             for (int i = 0; i < videos.length; i++) {
               final video = videos[i];
               if (video.status == 'generating') {
@@ -230,17 +231,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
                 if (matchedStatus.id.isNotEmpty) {
                   final statusStr = matchedStatus.status.toLowerCase();
                   if (statusStr == 'completed' || statusStr == 'done' || matchedStatus.resultUrl != null) {
-                    videos[i] = video.copyWith(
-                      status: 'done',
-                      progress: 1.0,
-                    );
-                    updatedAny = true;
+                    shouldReloadList = true;
                   } else if (statusStr == 'failed') {
-                    videos[i] = video.copyWith(
-                      status: 'done', // fail -> fallback done with mock video
-                      progress: 1.0,
-                    );
-                    updatedAny = true;
+                    shouldReloadList = true;
                   } else {
                     // Still generating on server, increment mock progress value visually
                     final newProgress = (video.progress + 0.1).clamp(0.0, 0.95);
@@ -260,7 +253,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               }
             }
 
-            if (updatedAny) {
+            if (shouldReloadList) {
+              add(const ProfileEvent.init());
+            } else if (updatedAny) {
               emit(readyState.copyWith(
                 videosState: Resource.success(videos),
               ));

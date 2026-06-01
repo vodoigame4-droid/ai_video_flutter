@@ -24,6 +24,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
 
   StreamSubscription? _bufferingSub;
   StreamSubscription? _playingSub;
+  StreamSubscription? _logSub;
+  StreamSubscription? _errorSub;
   Timer? _bufferingTimer;
 
   static const List<String> _presetPrompts = [
@@ -130,10 +132,10 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
       LogUtils.d('ResultBloc: Opening media source: $mediaSource');
 
       // Setup log & error listeners for debugging
-      player.stream.log.listen((event) {
+      _logSub = player.stream.log.listen((event) {
         LogUtils.d('media_kit debug log: [${event.prefix}] ${event.text}');
       });
-      player.stream.error.listen((err) {
+      _errorSub = player.stream.error.listen((err) {
         LogUtils.e('media_kit error stream: $err');
       });
 
@@ -352,6 +354,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     _bufferingTimer?.cancel();
     _bufferingSub?.cancel();
     _playingSub?.cancel();
+    _logSub?.cancel();
+    _errorSub?.cancel();
     player.dispose();
     return super.close();
   }

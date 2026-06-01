@@ -28,12 +28,12 @@ _ThemeModel _$ThemeModelFromJson(Map<String, dynamic> json) => _ThemeModel(
   id: json['id'] as String,
   name: json['name'] as String,
   description: json['description'] as String?,
-  resultUrl: json['resultUrl'] as String?,
-  sourceUrl: json['sourceUrl'] as String?,
-  sourceUrls: (json['sourceUrls'] as List<dynamic>?)
+  resultUrl: _readResultUrl(json, 'resultUrl') as String?,
+  sourceUrl: _readSourceUrl(json, 'sourceUrl') as String?,
+  sourceUrls: (_readSourceUrls(json, 'sourceUrls') as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  thumbnailUrl: json['thumbnailUrl'] as String?,
+  thumbnailUrl: _readThumbnailUrl(json, 'thumbnailUrl') as String?,
   prompt: json['prompt'] as String?,
   type: json['type'] as String?,
   orgId: (_readOrgId(json, 'orgId') as num).toInt(),
@@ -100,21 +100,22 @@ Map<String, dynamic> _$CreateTgvRequestModelToJson(
 _MediaModel _$MediaModelFromJson(Map<String, dynamic> json) => _MediaModel(
   id: json['id'] as String,
   name: json['name'] as String,
-  imageUrl: json['imageUrl'] as String?,
-  imageUrls: (json['imageUrls'] as List<dynamic>?)
+  imageUrl: _readImageUrl(json, 'imageUrl') as String?,
+  imageUrls: (_readImageUrls(json, 'imageUrls') as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  imageQuantity: (json['imageQuantity'] as num?)?.toInt() ?? 1,
-  requestId: json['requestId'] as String? ?? '',
-  resultUrl: json['resultUrl'] as String?,
-  finishedTime: json['finishedTime'] as String?,
+  imageQuantity:
+      (_readImageQuantity(json, 'imageQuantity') as num?)?.toInt() ?? 1,
+  requestId: _readRequestId(json, 'requestId') as String? ?? '',
+  resultUrl: _readResultUrl(json, 'resultUrl') as String?,
+  finishedTime: _readFinishedTime(json, 'finishedTime') as String?,
   prompt: json['prompt'] as String,
-  isHd: json['isHd'] as bool? ?? false,
-  isLongTime: json['isLongTime'] as bool? ?? false,
-  themeId: json['themeId'] as String,
-  thumbnailUrl: json['thumbnailUrl'] as String?,
+  isHd: _readIsHd(json, 'isHd') as bool? ?? false,
+  isLongTime: _readIsLongTime(json, 'isLongTime') as bool? ?? false,
+  themeId: _readThemeId(json, 'themeId') as String,
+  thumbnailUrl: _readThumbnailUrl(json, 'thumbnailUrl') as String?,
   status: json['status'] as String,
-  createdAt: json['createdAt'] as String,
+  createdAt: _readCreatedAt(json, 'createdAt') as String,
 );
 
 Map<String, dynamic> _$MediaModelToJson(_MediaModel instance) =>
@@ -140,8 +141,8 @@ _MediaStatusModel _$MediaStatusModelFromJson(Map<String, dynamic> json) =>
     _MediaStatusModel(
       id: json['id'] as String,
       status: json['status'] as String,
-      resultUrl: json['resultUrl'] as String?,
-      finishedTime: json['finishedTime'] as String?,
+      resultUrl: _readResultUrl(json, 'resultUrl') as String?,
+      finishedTime: _readFinishedTime(json, 'finishedTime') as String?,
     );
 
 Map<String, dynamic> _$MediaStatusModelToJson(_MediaStatusModel instance) =>

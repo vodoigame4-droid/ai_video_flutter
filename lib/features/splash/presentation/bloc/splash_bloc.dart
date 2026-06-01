@@ -83,6 +83,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           LogUtils.e('SplashBloc: Failed to get UDID, falling back to UUID', error: e, stackTrace: stack);
           deviceId = const Uuid().v4();
         }
+      }
+
+      if (!deviceId.endsWith('-tgv')) {
+        deviceId = '$deviceId-tgv';
         await sharedPreferences.setString(StorageKeys.deviceId, deviceId);
       }
       
