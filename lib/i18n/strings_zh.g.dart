@@ -76,6 +76,7 @@ class _Translations$common$zh extends Translations$common$en {
 	@override String get gallery => '相册';
 	@override String get generate => '生成';
 	@override String get processing => '处理中...';
+	@override String get ok => '确定';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$zh extends Translations$create$en {
 	@override String get trim_title => '剪辑视频';
 	@override String get trim_save => '保存';
 	@override String get trimming_loading => '正在剪辑视频...';
+	@override String get please_add_image_first => '请先添加图片';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsZh {
 			'common.gallery' => '相册',
 			'common.generate' => '生成',
 			'common.processing' => '处理中...',
+			'common.ok' => '确定',
 			'home.title' => '视频 AI',
 			'home.trending' => '热门',
 			'home.new_section' => '最新',
@@ -654,6 +657,7 @@ extension on TranslationsZh {
 			'create.trim_title' => '剪辑视频',
 			'create.trim_save' => '保存',
 			'create.trimming_loading' => '正在剪辑视频...',
+			'create.please_add_image_first' => '请先添加图片',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
 			'splash.appName' => '视频AI',

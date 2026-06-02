@@ -76,6 +76,7 @@ class _Translations$common$pt extends Translations$common$en {
 	@override String get gallery => 'Galeria';
 	@override String get generate => 'Gerar';
 	@override String get processing => 'Processando...';
+	@override String get ok => 'OK';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$pt extends Translations$create$en {
 	@override String get trim_title => 'Cortar vídeo';
 	@override String get trim_save => 'Salvar';
 	@override String get trimming_loading => 'Cortando vídeo...';
+	@override String get please_add_image_first => 'Por favor, adicione uma imagem primeiro';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsPt {
 			'common.gallery' => 'Galeria',
 			'common.generate' => 'Gerar',
 			'common.processing' => 'Processando...',
+			'common.ok' => 'OK',
 			'home.title' => 'Vídeo IA',
 			'home.trending' => 'Tendências',
 			'home.new_section' => 'Novo',
@@ -654,6 +657,7 @@ extension on TranslationsPt {
 			'create.trim_title' => 'Cortar vídeo',
 			'create.trim_save' => 'Salvar',
 			'create.trimming_loading' => 'Cortando vídeo...',
+			'create.please_add_image_first' => 'Por favor, adicione uma imagem primeiro',
 			'leave_dialog.title' => 'Sair sem salvar?',
 			'leave_dialog.desc' => 'Deseja continuar editando ou sair agora?',
 			'splash.appName' => 'Video AI',

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserEntity {
 
- String get id; String get deviceId; String get name; String get email; String get avatarUrl; String get inviteCode; String get status; int get credits; int get extraCredits; int get subscribeCredits; bool get isRated; bool get isVip; String? get activeSubId; int get refUsersCount; DateTime get createdAt;
+ String get id; String get deviceId; String get name; String get email; String get avatarUrl; String get inviteCode; String get status; int get credits; int get extraCredits; int get subscribeCredits; bool get isRated; bool get isVip; int get freeSuggestions; String? get activeSubId; int get refUsersCount; DateTime get createdAt;
 /// Create a copy of UserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $UserEntityCopyWith<UserEntity> get copyWith => _$UserEntityCopyWithImpl<UserEnt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.deviceId, deviceId) || other.deviceId == deviceId)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.inviteCode, inviteCode) || other.inviteCode == inviteCode)&&(identical(other.status, status) || other.status == status)&&(identical(other.credits, credits) || other.credits == credits)&&(identical(other.extraCredits, extraCredits) || other.extraCredits == extraCredits)&&(identical(other.subscribeCredits, subscribeCredits) || other.subscribeCredits == subscribeCredits)&&(identical(other.isRated, isRated) || other.isRated == isRated)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&(identical(other.activeSubId, activeSubId) || other.activeSubId == activeSubId)&&(identical(other.refUsersCount, refUsersCount) || other.refUsersCount == refUsersCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.deviceId, deviceId) || other.deviceId == deviceId)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.inviteCode, inviteCode) || other.inviteCode == inviteCode)&&(identical(other.status, status) || other.status == status)&&(identical(other.credits, credits) || other.credits == credits)&&(identical(other.extraCredits, extraCredits) || other.extraCredits == extraCredits)&&(identical(other.subscribeCredits, subscribeCredits) || other.subscribeCredits == subscribeCredits)&&(identical(other.isRated, isRated) || other.isRated == isRated)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&(identical(other.freeSuggestions, freeSuggestions) || other.freeSuggestions == freeSuggestions)&&(identical(other.activeSubId, activeSubId) || other.activeSubId == activeSubId)&&(identical(other.refUsersCount, refUsersCount) || other.refUsersCount == refUsersCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,deviceId,name,email,avatarUrl,inviteCode,status,credits,extraCredits,subscribeCredits,isRated,isVip,activeSubId,refUsersCount,createdAt);
+int get hashCode => Object.hash(runtimeType,id,deviceId,name,email,avatarUrl,inviteCode,status,credits,extraCredits,subscribeCredits,isRated,isVip,freeSuggestions,activeSubId,refUsersCount,createdAt);
 
 @override
 String toString() {
-  return 'UserEntity(id: $id, deviceId: $deviceId, name: $name, email: $email, avatarUrl: $avatarUrl, inviteCode: $inviteCode, status: $status, credits: $credits, extraCredits: $extraCredits, subscribeCredits: $subscribeCredits, isRated: $isRated, isVip: $isVip, activeSubId: $activeSubId, refUsersCount: $refUsersCount, createdAt: $createdAt)';
+  return 'UserEntity(id: $id, deviceId: $deviceId, name: $name, email: $email, avatarUrl: $avatarUrl, inviteCode: $inviteCode, status: $status, credits: $credits, extraCredits: $extraCredits, subscribeCredits: $subscribeCredits, isRated: $isRated, isVip: $isVip, freeSuggestions: $freeSuggestions, activeSubId: $activeSubId, refUsersCount: $refUsersCount, createdAt: $createdAt)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $UserEntityCopyWith<$Res>  {
   factory $UserEntityCopyWith(UserEntity value, $Res Function(UserEntity) _then) = _$UserEntityCopyWithImpl;
 @useResult
 $Res call({
- String id, String deviceId, String name, String email, String avatarUrl, String inviteCode, String status, int credits, int extraCredits, int subscribeCredits, bool isRated, bool isVip, String? activeSubId, int refUsersCount, DateTime createdAt
+ String id, String deviceId, String name, String email, String avatarUrl, String inviteCode, String status, int credits, int extraCredits, int subscribeCredits, bool isRated, bool isVip, int freeSuggestions, String? activeSubId, int refUsersCount, DateTime createdAt
 });
 
 
@@ -62,7 +62,7 @@ class _$UserEntityCopyWithImpl<$Res>
 
 /// Create a copy of UserEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? deviceId = null,Object? name = null,Object? email = null,Object? avatarUrl = null,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? deviceId = null,Object? name = null,Object? email = null,Object? avatarUrl = null,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? freeSuggestions = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,deviceId: null == deviceId ? _self.deviceId : deviceId // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,8 @@ as int,extraCredits: null == extraCredits ? _self.extraCredits : extraCredits //
 as int,subscribeCredits: null == subscribeCredits ? _self.subscribeCredits : subscribeCredits // ignore: cast_nullable_to_non_nullable
 as int,isRated: null == isRated ? _self.isRated : isRated // ignore: cast_nullable_to_non_nullable
 as bool,isVip: null == isVip ? _self.isVip : isVip // ignore: cast_nullable_to_non_nullable
-as bool,activeSubId: freezed == activeSubId ? _self.activeSubId : activeSubId // ignore: cast_nullable_to_non_nullable
+as bool,freeSuggestions: null == freeSuggestions ? _self.freeSuggestions : freeSuggestions // ignore: cast_nullable_to_non_nullable
+as int,activeSubId: freezed == activeSubId ? _self.activeSubId : activeSubId // ignore: cast_nullable_to_non_nullable
 as String?,refUsersCount: null == refUsersCount ? _self.refUsersCount : refUsersCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
@@ -164,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  String? activeSubId,  int refUsersCount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  int freeSuggestions,  String? activeSubId,  int refUsersCount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserEntity() when $default != null:
-return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
+return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.freeSuggestions,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
   return orElse();
 
 }
@@ -185,10 +186,10 @@ return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  String? activeSubId,  int refUsersCount,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  int freeSuggestions,  String? activeSubId,  int refUsersCount,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _UserEntity():
-return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
+return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.freeSuggestions,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +206,10 @@ return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  String? activeSubId,  int refUsersCount,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String deviceId,  String name,  String email,  String avatarUrl,  String inviteCode,  String status,  int credits,  int extraCredits,  int subscribeCredits,  bool isRated,  bool isVip,  int freeSuggestions,  String? activeSubId,  int refUsersCount,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _UserEntity() when $default != null:
-return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
+return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_that.inviteCode,_that.status,_that.credits,_that.extraCredits,_that.subscribeCredits,_that.isRated,_that.isVip,_that.freeSuggestions,_that.activeSubId,_that.refUsersCount,_that.createdAt);case _:
   return null;
 
 }
@@ -220,7 +221,7 @@ return $default(_that.id,_that.deviceId,_that.name,_that.email,_that.avatarUrl,_
 
 
 class _UserEntity implements UserEntity {
-  const _UserEntity({required this.id, required this.deviceId, required this.name, required this.email, required this.avatarUrl, required this.inviteCode, required this.status, required this.credits, required this.extraCredits, required this.subscribeCredits, required this.isRated, required this.isVip, required this.activeSubId, required this.refUsersCount, required this.createdAt});
+  const _UserEntity({required this.id, required this.deviceId, required this.name, required this.email, required this.avatarUrl, required this.inviteCode, required this.status, required this.credits, required this.extraCredits, required this.subscribeCredits, required this.isRated, required this.isVip, required this.freeSuggestions, required this.activeSubId, required this.refUsersCount, required this.createdAt});
   
 
 @override final  String id;
@@ -235,6 +236,7 @@ class _UserEntity implements UserEntity {
 @override final  int subscribeCredits;
 @override final  bool isRated;
 @override final  bool isVip;
+@override final  int freeSuggestions;
 @override final  String? activeSubId;
 @override final  int refUsersCount;
 @override final  DateTime createdAt;
@@ -249,16 +251,16 @@ _$UserEntityCopyWith<_UserEntity> get copyWith => __$UserEntityCopyWithImpl<_Use
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.deviceId, deviceId) || other.deviceId == deviceId)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.inviteCode, inviteCode) || other.inviteCode == inviteCode)&&(identical(other.status, status) || other.status == status)&&(identical(other.credits, credits) || other.credits == credits)&&(identical(other.extraCredits, extraCredits) || other.extraCredits == extraCredits)&&(identical(other.subscribeCredits, subscribeCredits) || other.subscribeCredits == subscribeCredits)&&(identical(other.isRated, isRated) || other.isRated == isRated)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&(identical(other.activeSubId, activeSubId) || other.activeSubId == activeSubId)&&(identical(other.refUsersCount, refUsersCount) || other.refUsersCount == refUsersCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.deviceId, deviceId) || other.deviceId == deviceId)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl)&&(identical(other.inviteCode, inviteCode) || other.inviteCode == inviteCode)&&(identical(other.status, status) || other.status == status)&&(identical(other.credits, credits) || other.credits == credits)&&(identical(other.extraCredits, extraCredits) || other.extraCredits == extraCredits)&&(identical(other.subscribeCredits, subscribeCredits) || other.subscribeCredits == subscribeCredits)&&(identical(other.isRated, isRated) || other.isRated == isRated)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&(identical(other.freeSuggestions, freeSuggestions) || other.freeSuggestions == freeSuggestions)&&(identical(other.activeSubId, activeSubId) || other.activeSubId == activeSubId)&&(identical(other.refUsersCount, refUsersCount) || other.refUsersCount == refUsersCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,deviceId,name,email,avatarUrl,inviteCode,status,credits,extraCredits,subscribeCredits,isRated,isVip,activeSubId,refUsersCount,createdAt);
+int get hashCode => Object.hash(runtimeType,id,deviceId,name,email,avatarUrl,inviteCode,status,credits,extraCredits,subscribeCredits,isRated,isVip,freeSuggestions,activeSubId,refUsersCount,createdAt);
 
 @override
 String toString() {
-  return 'UserEntity(id: $id, deviceId: $deviceId, name: $name, email: $email, avatarUrl: $avatarUrl, inviteCode: $inviteCode, status: $status, credits: $credits, extraCredits: $extraCredits, subscribeCredits: $subscribeCredits, isRated: $isRated, isVip: $isVip, activeSubId: $activeSubId, refUsersCount: $refUsersCount, createdAt: $createdAt)';
+  return 'UserEntity(id: $id, deviceId: $deviceId, name: $name, email: $email, avatarUrl: $avatarUrl, inviteCode: $inviteCode, status: $status, credits: $credits, extraCredits: $extraCredits, subscribeCredits: $subscribeCredits, isRated: $isRated, isVip: $isVip, freeSuggestions: $freeSuggestions, activeSubId: $activeSubId, refUsersCount: $refUsersCount, createdAt: $createdAt)';
 }
 
 
@@ -269,7 +271,7 @@ abstract mixin class _$UserEntityCopyWith<$Res> implements $UserEntityCopyWith<$
   factory _$UserEntityCopyWith(_UserEntity value, $Res Function(_UserEntity) _then) = __$UserEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String deviceId, String name, String email, String avatarUrl, String inviteCode, String status, int credits, int extraCredits, int subscribeCredits, bool isRated, bool isVip, String? activeSubId, int refUsersCount, DateTime createdAt
+ String id, String deviceId, String name, String email, String avatarUrl, String inviteCode, String status, int credits, int extraCredits, int subscribeCredits, bool isRated, bool isVip, int freeSuggestions, String? activeSubId, int refUsersCount, DateTime createdAt
 });
 
 
@@ -286,7 +288,7 @@ class __$UserEntityCopyWithImpl<$Res>
 
 /// Create a copy of UserEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? deviceId = null,Object? name = null,Object? email = null,Object? avatarUrl = null,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? deviceId = null,Object? name = null,Object? email = null,Object? avatarUrl = null,Object? inviteCode = null,Object? status = null,Object? credits = null,Object? extraCredits = null,Object? subscribeCredits = null,Object? isRated = null,Object? isVip = null,Object? freeSuggestions = null,Object? activeSubId = freezed,Object? refUsersCount = null,Object? createdAt = null,}) {
   return _then(_UserEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,deviceId: null == deviceId ? _self.deviceId : deviceId // ignore: cast_nullable_to_non_nullable
@@ -300,7 +302,8 @@ as int,extraCredits: null == extraCredits ? _self.extraCredits : extraCredits //
 as int,subscribeCredits: null == subscribeCredits ? _self.subscribeCredits : subscribeCredits // ignore: cast_nullable_to_non_nullable
 as int,isRated: null == isRated ? _self.isRated : isRated // ignore: cast_nullable_to_non_nullable
 as bool,isVip: null == isVip ? _self.isVip : isVip // ignore: cast_nullable_to_non_nullable
-as bool,activeSubId: freezed == activeSubId ? _self.activeSubId : activeSubId // ignore: cast_nullable_to_non_nullable
+as bool,freeSuggestions: null == freeSuggestions ? _self.freeSuggestions : freeSuggestions // ignore: cast_nullable_to_non_nullable
+as int,activeSubId: freezed == activeSubId ? _self.activeSubId : activeSubId // ignore: cast_nullable_to_non_nullable
 as String?,refUsersCount: null == refUsersCount ? _self.refUsersCount : refUsersCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,

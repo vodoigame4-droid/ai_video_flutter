@@ -7,7 +7,8 @@
     "camera": "Cámara",
     "gallery": "Galería",
     "generate": "Generar",
-    "processing": "Procesando..."
+    "processing": "Procesando...",
+    "ok": "Aceptar"
   },
   "home": {
     "title": "Video IA",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "Inspirarme (PRO)",
     "trim_title": "Cortar video",
     "trim_save": "Guardar",
-    "trimming_loading": "Cortando video..."
+    "trimming_loading": "Cortando video...",
+    "please_add_image_first": "Por favor, agrega una imagen primero"
   },
   "leave_dialog": {
     "title": "¿Salir sin guardar?",

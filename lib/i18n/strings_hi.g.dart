@@ -76,6 +76,7 @@ class _Translations$common$hi extends Translations$common$en {
 	@override String get gallery => 'गैलरी';
 	@override String get generate => 'उत्पन्न करें';
 	@override String get processing => 'प्रक्रिया जारी है...';
+	@override String get ok => 'ठीक है';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$hi extends Translations$create$en {
 	@override String get trim_title => 'वीडियो काटें';
 	@override String get trim_save => 'सहेजें';
 	@override String get trimming_loading => 'वीडियो काटा जा रहा है...';
+	@override String get please_add_image_first => 'कृपया पहले एक छवि जोड़ें';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsHi {
 			'common.gallery' => 'गैलरी',
 			'common.generate' => 'उत्पन्न करें',
 			'common.processing' => 'प्रक्रिया जारी है...',
+			'common.ok' => 'ठीक है',
 			'home.title' => 'वीडियो एआई',
 			'home.trending' => 'ट्रेंडिंग',
 			'home.new_section' => 'नया',
@@ -654,6 +657,7 @@ extension on TranslationsHi {
 			'create.trim_title' => 'वीडियो काटें',
 			'create.trim_save' => 'सहेजें',
 			'create.trimming_loading' => 'वीडियो काटा जा रहा है...',
+			'create.please_add_image_first' => 'कृपया पहले एक छवि जोड़ें',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'वीडियो एआई',

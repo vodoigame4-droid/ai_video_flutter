@@ -55,7 +55,7 @@ extension CreateVideoEventPatterns on CreateVideoEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ChangeTab value)?  changeTab,TResult Function( _UpdatePrompt value)?  updatePrompt,TResult Function( _InspireMe value)?  inspireMe,TResult Function( _ClearPrompt value)?  clearPrompt,TResult Function( _SelectMedia value)?  selectMedia,TResult Function( _RemoveMedia value)?  removeMedia,TResult Function( _SelectQuality value)?  selectQuality,TResult Function( _SelectDuration value)?  selectDuration,TResult Function( _GenerateVideo value)?  generateVideo,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ChangeTab value)?  changeTab,TResult Function( _UpdatePrompt value)?  updatePrompt,TResult Function( _InspireMe value)?  inspireMe,TResult Function( _ClearPrompt value)?  clearPrompt,TResult Function( _SelectMedia value)?  selectMedia,TResult Function( _RemoveMedia value)?  removeMedia,TResult Function( _SelectQuality value)?  selectQuality,TResult Function( _SelectDuration value)?  selectDuration,TResult Function( _GenerateVideo value)?  generateVideo,TResult Function( _ProfileUpdated value)?  profileUpdated,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -68,7 +68,8 @@ return selectMedia(_that);case _RemoveMedia() when removeMedia != null:
 return removeMedia(_that);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that);case _GenerateVideo() when generateVideo != null:
-return generateVideo(_that);case _:
+return generateVideo(_that);case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that);case _:
   return orElse();
 
 }
@@ -86,7 +87,7 @@ return generateVideo(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ChangeTab value)  changeTab,required TResult Function( _UpdatePrompt value)  updatePrompt,required TResult Function( _InspireMe value)  inspireMe,required TResult Function( _ClearPrompt value)  clearPrompt,required TResult Function( _SelectMedia value)  selectMedia,required TResult Function( _RemoveMedia value)  removeMedia,required TResult Function( _SelectQuality value)  selectQuality,required TResult Function( _SelectDuration value)  selectDuration,required TResult Function( _GenerateVideo value)  generateVideo,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ChangeTab value)  changeTab,required TResult Function( _UpdatePrompt value)  updatePrompt,required TResult Function( _InspireMe value)  inspireMe,required TResult Function( _ClearPrompt value)  clearPrompt,required TResult Function( _SelectMedia value)  selectMedia,required TResult Function( _RemoveMedia value)  removeMedia,required TResult Function( _SelectQuality value)  selectQuality,required TResult Function( _SelectDuration value)  selectDuration,required TResult Function( _GenerateVideo value)  generateVideo,required TResult Function( _ProfileUpdated value)  profileUpdated,}){
 final _that = this;
 switch (_that) {
 case _Init():
@@ -99,7 +100,8 @@ return selectMedia(_that);case _RemoveMedia():
 return removeMedia(_that);case _SelectQuality():
 return selectQuality(_that);case _SelectDuration():
 return selectDuration(_that);case _GenerateVideo():
-return generateVideo(_that);case _:
+return generateVideo(_that);case _ProfileUpdated():
+return profileUpdated(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -116,7 +118,7 @@ return generateVideo(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ChangeTab value)?  changeTab,TResult? Function( _UpdatePrompt value)?  updatePrompt,TResult? Function( _InspireMe value)?  inspireMe,TResult? Function( _ClearPrompt value)?  clearPrompt,TResult? Function( _SelectMedia value)?  selectMedia,TResult? Function( _RemoveMedia value)?  removeMedia,TResult? Function( _SelectQuality value)?  selectQuality,TResult? Function( _SelectDuration value)?  selectDuration,TResult? Function( _GenerateVideo value)?  generateVideo,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ChangeTab value)?  changeTab,TResult? Function( _UpdatePrompt value)?  updatePrompt,TResult? Function( _InspireMe value)?  inspireMe,TResult? Function( _ClearPrompt value)?  clearPrompt,TResult? Function( _SelectMedia value)?  selectMedia,TResult? Function( _RemoveMedia value)?  removeMedia,TResult? Function( _SelectQuality value)?  selectQuality,TResult? Function( _SelectDuration value)?  selectDuration,TResult? Function( _GenerateVideo value)?  generateVideo,TResult? Function( _ProfileUpdated value)?  profileUpdated,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -129,7 +131,8 @@ return selectMedia(_that);case _RemoveMedia() when removeMedia != null:
 return removeMedia(_that);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that);case _GenerateVideo() when generateVideo != null:
-return generateVideo(_that);case _:
+return generateVideo(_that);case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that);case _:
   return null;
 
 }
@@ -146,7 +149,7 @@ return generateVideo(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int initialTab)?  init,TResult Function( int tabIndex)?  changeTab,TResult Function( String prompt)?  updatePrompt,TResult Function()?  inspireMe,TResult Function()?  clearPrompt,TResult Function( int slotIndex,  String mediaPath)?  selectMedia,TResult Function( int slotIndex)?  removeMedia,TResult Function( String quality)?  selectQuality,TResult Function( String duration)?  selectDuration,TResult Function()?  generateVideo,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int initialTab)?  init,TResult Function( int tabIndex)?  changeTab,TResult Function( String prompt)?  updatePrompt,TResult Function()?  inspireMe,TResult Function()?  clearPrompt,TResult Function( int slotIndex,  String mediaPath)?  selectMedia,TResult Function( int slotIndex)?  removeMedia,TResult Function( String quality)?  selectQuality,TResult Function( String duration)?  selectDuration,TResult Function()?  generateVideo,TResult Function( UserEntity user)?  profileUpdated,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.initialTab);case _ChangeTab() when changeTab != null:
@@ -158,7 +161,8 @@ return selectMedia(_that.slotIndex,_that.mediaPath);case _RemoveMedia() when rem
 return removeMedia(_that.slotIndex);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that.quality);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that.duration);case _GenerateVideo() when generateVideo != null:
-return generateVideo();case _:
+return generateVideo();case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that.user);case _:
   return orElse();
 
 }
@@ -176,7 +180,7 @@ return generateVideo();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int initialTab)  init,required TResult Function( int tabIndex)  changeTab,required TResult Function( String prompt)  updatePrompt,required TResult Function()  inspireMe,required TResult Function()  clearPrompt,required TResult Function( int slotIndex,  String mediaPath)  selectMedia,required TResult Function( int slotIndex)  removeMedia,required TResult Function( String quality)  selectQuality,required TResult Function( String duration)  selectDuration,required TResult Function()  generateVideo,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int initialTab)  init,required TResult Function( int tabIndex)  changeTab,required TResult Function( String prompt)  updatePrompt,required TResult Function()  inspireMe,required TResult Function()  clearPrompt,required TResult Function( int slotIndex,  String mediaPath)  selectMedia,required TResult Function( int slotIndex)  removeMedia,required TResult Function( String quality)  selectQuality,required TResult Function( String duration)  selectDuration,required TResult Function()  generateVideo,required TResult Function( UserEntity user)  profileUpdated,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init(_that.initialTab);case _ChangeTab():
@@ -188,7 +192,8 @@ return selectMedia(_that.slotIndex,_that.mediaPath);case _RemoveMedia():
 return removeMedia(_that.slotIndex);case _SelectQuality():
 return selectQuality(_that.quality);case _SelectDuration():
 return selectDuration(_that.duration);case _GenerateVideo():
-return generateVideo();case _:
+return generateVideo();case _ProfileUpdated():
+return profileUpdated(_that.user);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,7 +210,7 @@ return generateVideo();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int initialTab)?  init,TResult? Function( int tabIndex)?  changeTab,TResult? Function( String prompt)?  updatePrompt,TResult? Function()?  inspireMe,TResult? Function()?  clearPrompt,TResult? Function( int slotIndex,  String mediaPath)?  selectMedia,TResult? Function( int slotIndex)?  removeMedia,TResult? Function( String quality)?  selectQuality,TResult? Function( String duration)?  selectDuration,TResult? Function()?  generateVideo,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int initialTab)?  init,TResult? Function( int tabIndex)?  changeTab,TResult? Function( String prompt)?  updatePrompt,TResult? Function()?  inspireMe,TResult? Function()?  clearPrompt,TResult? Function( int slotIndex,  String mediaPath)?  selectMedia,TResult? Function( int slotIndex)?  removeMedia,TResult? Function( String quality)?  selectQuality,TResult? Function( String duration)?  selectDuration,TResult? Function()?  generateVideo,TResult? Function( UserEntity user)?  profileUpdated,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.initialTab);case _ChangeTab() when changeTab != null:
@@ -217,7 +222,8 @@ return selectMedia(_that.slotIndex,_that.mediaPath);case _RemoveMedia() when rem
 return removeMedia(_that.slotIndex);case _SelectQuality() when selectQuality != null:
 return selectQuality(_that.quality);case _SelectDuration() when selectDuration != null:
 return selectDuration(_that.duration);case _GenerateVideo() when generateVideo != null:
-return generateVideo();case _:
+return generateVideo();case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that.user);case _:
   return null;
 
 }
@@ -784,5 +790,80 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _ProfileUpdated implements CreateVideoEvent {
+  const _ProfileUpdated(this.user);
+  
+
+ final  UserEntity user;
+
+/// Create a copy of CreateVideoEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProfileUpdatedCopyWith<_ProfileUpdated> get copyWith => __$ProfileUpdatedCopyWithImpl<_ProfileUpdated>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileUpdated&&(identical(other.user, user) || other.user == user));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,user);
+
+@override
+String toString() {
+  return 'CreateVideoEvent.profileUpdated(user: $user)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ProfileUpdatedCopyWith<$Res> implements $CreateVideoEventCopyWith<$Res> {
+  factory _$ProfileUpdatedCopyWith(_ProfileUpdated value, $Res Function(_ProfileUpdated) _then) = __$ProfileUpdatedCopyWithImpl;
+@useResult
+$Res call({
+ UserEntity user
+});
+
+
+$UserEntityCopyWith<$Res> get user;
+
+}
+/// @nodoc
+class __$ProfileUpdatedCopyWithImpl<$Res>
+    implements _$ProfileUpdatedCopyWith<$Res> {
+  __$ProfileUpdatedCopyWithImpl(this._self, this._then);
+
+  final _ProfileUpdated _self;
+  final $Res Function(_ProfileUpdated) _then;
+
+/// Create a copy of CreateVideoEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
+  return _then(_ProfileUpdated(
+null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as UserEntity,
+  ));
+}
+
+/// Create a copy of CreateVideoEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserEntityCopyWith<$Res> get user {
+  
+  return $UserEntityCopyWith<$Res>(_self.user, (value) {
+    return _then(_self.copyWith(user: value));
+  });
+}
+}
 
 // dart format on

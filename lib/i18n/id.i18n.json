@@ -7,7 +7,8 @@
     "camera": "Kamera",
     "gallery": "Galeri",
     "generate": "Hasilkan",
-    "processing": "Sedang memproses..."
+    "processing": "Sedang memproses...",
+    "ok": "OK"
   },
   "home": {
     "title": "Video AI",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "Inspirasi Saya (PRO)",
     "trim_title": "Potong Video",
     "trim_save": "Simpan",
-    "trimming_loading": "Memotong video..."
+    "trimming_loading": "Memotong video...",
+    "please_add_image_first": "Silakan tambahkan gambar terlebih dahulu"
   },
   "leave_dialog": {
     "title": "Keluar tanpa menyimpan?",

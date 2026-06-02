@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/injection/injection_container.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../pages/generating_page.dart';
@@ -116,18 +117,25 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
 
-                      // Custom Prompt Card
-                      CustomPromptCardWidget(
-                        promptText: extendPrompt,
-                        inspireMeCount: inspireMeCount,
-                        onPromptChanged: (val) {
-                          resultBloc.add(ResultEvent.changeExtendPrompt(val));
-                        },
-                        onInspireMePressed: () {
-                          resultBloc.add(const ResultEvent.useInspireMe());
-                        },
-                        onClearPressed: () {
-                          resultBloc.add(const ResultEvent.clearExtendPrompt());
+                      // Custom Prompt Card wrapped in StreamBuilder
+                      StreamBuilder<UserEntity>(
+                        stream: sl<WatchProfileUseCase>()(),
+                        builder: (context, snapshot) {
+                          final isVip = snapshot.data?.isVip ?? false;
+                          return CustomPromptCardWidget(
+                            promptText: extendPrompt,
+                            inspireMeCount: inspireMeCount,
+                            isVip: isVip,
+                            onPromptChanged: (val) {
+                              resultBloc.add(ResultEvent.changeExtendPrompt(val));
+                            },
+                            onInspireMePressed: () {
+                              resultBloc.add(const ResultEvent.useInspireMe());
+                            },
+                            onClearPressed: () {
+                              resultBloc.add(const ResultEvent.clearExtendPrompt());
+                            },
+                          );
                         },
                       ),
                       const SizedBox(height: 24),

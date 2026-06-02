@@ -14,6 +14,8 @@ class MockMediaRepository extends Mock implements MediaRepository {}
 class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
 class MockNotificationSettings extends Mock implements NotificationSettings {}
 class MockAutoLoginUseCase extends Mock implements AutoLoginUseCase {}
+class MockGetProfileUseCase extends Mock implements GetProfileUseCase {}
+class MockWatchProfileUseCase extends Mock implements WatchProfileUseCase {}
 
 void main() {
   // Disable Google Fonts HTTP fetching during tests
@@ -29,6 +31,27 @@ void main() {
     final mockFirebaseMessaging = MockFirebaseMessaging();
     final mockNotificationSettings = MockNotificationSettings();
     final mockAutoLoginUseCase = MockAutoLoginUseCase();
+    final mockGetProfileUseCase = MockGetProfileUseCase();
+    final mockWatchProfileUseCase = MockWatchProfileUseCase();
+
+    final mockUser = UserEntity(
+      id: 'mock_user_id',
+      deviceId: 'mock-device-id-tgv',
+      name: 'Mock User',
+      email: 'mock@example.com',
+      avatarUrl: '',
+      inviteCode: '',
+      status: 'active',
+      credits: 100,
+      extraCredits: 0,
+      subscribeCredits: 0,
+      isRated: false,
+      isVip: false,
+      freeSuggestions: 3,
+      activeSubId: null,
+      refUsersCount: 0,
+      createdAt: DateTime.now(),
+    );
 
     when(() => mockNotificationSettings.authorizationStatus)
         .thenReturn(AuthorizationStatus.authorized);
@@ -51,23 +74,15 @@ void main() {
         )).thenAnswer((_) async => mockNotificationSettings);
 
     when(() => mockAutoLoginUseCase(any())).thenAnswer(
-      (_) async => Resource.success(UserEntity(
-        id: 'mock_user_id',
-        deviceId: 'mock-device-id-tgv',
-        name: 'Mock User',
-        email: 'mock@example.com',
-        avatarUrl: '',
-        inviteCode: '',
-        status: 'active',
-        credits: 100,
-        extraCredits: 0,
-        subscribeCredits: 0,
-        isRated: false,
-        isVip: false,
-        activeSubId: null,
-        refUsersCount: 0,
-        createdAt: DateTime.now(),
-      )),
+      (_) async => Resource.success(mockUser),
+    );
+
+    when(() => mockGetProfileUseCase(any())).thenAnswer(
+      (_) async => Resource.success(mockUser),
+    );
+
+    when(() => mockWatchProfileUseCase()).thenAnswer(
+      (_) => Stream.value(mockUser),
     );
 
     sl.unregister<FirebaseMessaging>();
@@ -75,6 +90,12 @@ void main() {
 
     sl.unregister<AutoLoginUseCase>();
     sl.registerLazySingleton<AutoLoginUseCase>(() => mockAutoLoginUseCase);
+
+    sl.unregister<GetProfileUseCase>();
+    sl.registerLazySingleton<GetProfileUseCase>(() => mockGetProfileUseCase);
+
+    sl.unregister<WatchProfileUseCase>();
+    sl.registerLazySingleton<WatchProfileUseCase>(() => mockWatchProfileUseCase);
 
     final mockMediaRepository = MockMediaRepository();
 

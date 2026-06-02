@@ -76,6 +76,7 @@ class _Translations$common$ar extends Translations$common$en {
 	@override String get gallery => 'المعرض';
 	@override String get generate => 'توليد';
 	@override String get processing => 'جارٍ المعالجة...';
+	@override String get ok => 'موافق';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$ar extends Translations$create$en {
 	@override String get trim_title => 'قص الفيديو';
 	@override String get trim_save => 'حفظ';
 	@override String get trimming_loading => 'جاري قص الفيديو...';
+	@override String get please_add_image_first => 'يرجى إضافة صورة أولاً';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsAr {
 			'common.gallery' => 'المعرض',
 			'common.generate' => 'توليد',
 			'common.processing' => 'جارٍ المعالجة...',
+			'common.ok' => 'موافق',
 			'home.title' => 'فيديو الذكاء الاصطناعي',
 			'home.trending' => 'شائع',
 			'home.new_section' => 'جديد',
@@ -654,6 +657,7 @@ extension on TranslationsAr {
 			'create.trim_title' => 'قص الفيديو',
 			'create.trim_save' => 'حفظ',
 			'create.trimming_loading' => 'جاري قص الفيديو...',
+			'create.please_add_image_first' => 'يرجى إضافة صورة أولاً',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
 			'splash.appName' => 'فيديو ذكاء اصطناعي',

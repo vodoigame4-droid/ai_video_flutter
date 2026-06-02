@@ -76,6 +76,7 @@ class _Translations$common$ko extends Translations$common$en {
 	@override String get gallery => '갤러리';
 	@override String get generate => '생성하기';
 	@override String get processing => '처리 중...';
+	@override String get ok => '확인';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$ko extends Translations$create$en {
 	@override String get trim_title => '동영상 자르기';
 	@override String get trim_save => '저장';
 	@override String get trimming_loading => '동영상 자르는 중...';
+	@override String get please_add_image_first => '먼저 이미지를 추가해 주세요';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsKo {
 			'common.gallery' => '갤러리',
 			'common.generate' => '생성하기',
 			'common.processing' => '처리 중...',
+			'common.ok' => '확인',
 			'home.title' => '비디오 AI',
 			'home.trending' => '트렌딩',
 			'home.new_section' => '새로운',
@@ -654,6 +657,7 @@ extension on TranslationsKo {
 			'create.trim_title' => '동영상 자르기',
 			'create.trim_save' => '저장',
 			'create.trimming_loading' => '동영상 자르는 중...',
+			'create.please_add_image_first' => '먼저 이미지를 추가해 주세요',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => '비디오 AI',

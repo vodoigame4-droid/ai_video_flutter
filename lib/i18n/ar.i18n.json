@@ -7,7 +7,8 @@
     "camera": "الكاميرا",
     "gallery": "المعرض",
     "generate": "توليد",
-    "processing": "جارٍ المعالجة..."
+    "processing": "جارٍ المعالجة...",
+    "ok": "موافق"
   },
   "home": {
     "title": "فيديو الذكاء الاصطناعي",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "ألهمني (PRO)",
     "trim_title": "قص الفيديو",
     "trim_save": "حفظ",
-    "trimming_loading": "جاري قص الفيديو..."
+    "trimming_loading": "جاري قص الفيديو...",
+    "please_add_image_first": "يرجى إضافة صورة أولاً"
   },
   "leave_dialog": {
     "title": "هل تريد المغادرة دون حفظ؟",

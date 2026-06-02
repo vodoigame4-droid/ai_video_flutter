@@ -17,6 +17,7 @@ abstract class CreateVideoState with _$CreateVideoState {
     required bool isGenerating,
     @Default(false) bool isSuccess,
     @Default(false) bool isInspiring,
+    @Default(false) bool isVip,
   }) = _Ready;
   const factory CreateVideoState.error({required String message}) = _Error;
 }

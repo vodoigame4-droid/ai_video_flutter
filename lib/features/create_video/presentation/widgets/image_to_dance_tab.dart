@@ -32,6 +32,7 @@ class ImageToDanceTab extends StatelessWidget {
                 isGenerating,
                 isSuccess,
                 isInspiring,
+                isVip,
               ) {
                 final isGenerateEnabled =
                     slotsPaths[0] != null &&
@@ -101,6 +102,7 @@ class ImageToDanceTab extends StatelessWidget {
                               inspireMeCount: inspireMeCount,
                               isInspiring: isInspiring,
                               hasImage: slotsPaths[1] != null,
+                              isVip: isVip,
                               onPromptChanged: (val) {
                                 context.read<CreateVideoBloc>().add(
                                   CreateVideoEvent.updatePrompt(val),

@@ -20,6 +20,8 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
       .toInt(),
   isRated: _readIsRated(json, 'isRated') as bool,
   isVip: _readIsVip(json, 'isVip') as bool,
+  freeSuggestions: (_readFreeSuggestions(json, 'freeSuggestions') as num)
+      .toInt(),
   activeSubId: _readActiveSubId(json, 'activeSubId') as String?,
   refUsersCount: (_readRefUsersCount(json, 'refUsersCount') as num).toInt(),
   createdAt: _readCreatedAt(json, 'createdAt') as String,
@@ -39,6 +41,7 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'subscribeCredits': instance.subscribeCredits,
       'isRated': instance.isRated,
       'isVip': instance.isVip,
+      'freeSuggestions': instance.freeSuggestions,
       'activeSubId': instance.activeSubId,
       'refUsersCount': instance.refUsersCount,
       'createdAt': instance.createdAt,

@@ -7,7 +7,8 @@
     "camera": "카메라",
     "gallery": "갤러리",
     "generate": "생성하기",
-    "processing": "처리 중..."
+    "processing": "처리 중...",
+    "ok": "확인"
   },
   "home": {
     "title": "비디오 AI",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "아이디어 얻기 (PRO)",
     "trim_title": "동영상 자르기",
     "trim_save": "저장",
-    "trimming_loading": "동영상 자르는 중..."
+    "trimming_loading": "동영상 자르는 중...",
+    "please_add_image_first": "먼저 이미지를 추가해 주세요"
   },
   "leave_dialog": {
     "title": "저장하지 않고 나갈까요?",

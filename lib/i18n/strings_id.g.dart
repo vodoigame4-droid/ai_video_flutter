@@ -76,6 +76,7 @@ class _Translations$common$id extends Translations$common$en {
 	@override String get gallery => 'Galeri';
 	@override String get generate => 'Hasilkan';
 	@override String get processing => 'Sedang memproses...';
+	@override String get ok => 'OK';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$id extends Translations$create$en {
 	@override String get trim_title => 'Potong Video';
 	@override String get trim_save => 'Simpan';
 	@override String get trimming_loading => 'Memotong video...';
+	@override String get please_add_image_first => 'Silakan tambahkan gambar terlebih dahulu';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsId {
 			'common.gallery' => 'Galeri',
 			'common.generate' => 'Hasilkan',
 			'common.processing' => 'Sedang memproses...',
+			'common.ok' => 'OK',
 			'home.title' => 'Video AI',
 			'home.trending' => 'Tren',
 			'home.new_section' => 'Baru',
@@ -654,6 +657,7 @@ extension on TranslationsId {
 			'create.trim_title' => 'Potong Video',
 			'create.trim_save' => 'Simpan',
 			'create.trimming_loading' => 'Memotong video...',
+			'create.please_add_image_first' => 'Silakan tambahkan gambar terlebih dahulu',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Video AI',

@@ -185,6 +185,8 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerFactory(() => CreateVideoBloc(
         getSuggestionPromptUseCase: sl(),
         uploadImageUseCase: sl(),
+        watchProfileUseCase: sl(),
+        getProfileUseCase: sl(),
       ));
   sl.registerFactory(
     () => CreateFromTemplateBloc(

@@ -7,7 +7,8 @@
     "camera": "相机",
     "gallery": "相册",
     "generate": "生成",
-    "processing": "处理中..."
+    "processing": "处理中...",
+    "ok": "确定"
   },
   "home": {
     "title": "视频 AI",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "灵感推荐 (PRO)",
     "trim_title": "剪辑视频",
     "trim_save": "保存",
-    "trimming_loading": "正在剪辑视频..."
+    "trimming_loading": "正在剪辑视频...",
+    "please_add_image_first": "请先添加图片"
   },
   "leave_dialog": {
     "title": "不保存直接离开？",

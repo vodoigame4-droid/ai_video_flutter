@@ -62,6 +62,10 @@ Object? _readRefUsersCount(Map json, String key) {
   return json['refUsersCount'] ?? json['ref_users_count'] ?? 0;
 }
 
+Object? _readFreeSuggestions(Map json, String key) {
+  return json['freeSuggestions'] ?? json['free_suggestions'] ?? 0;
+}
+
 @freezed
 abstract class UserModel with _$UserModel {
   const factory UserModel({
@@ -77,6 +81,7 @@ abstract class UserModel with _$UserModel {
     @JsonKey(readValue: _readSubscribeCredits) required int subscribeCredits,
     @JsonKey(readValue: _readIsRated) required bool isRated,
     @JsonKey(readValue: _readIsVip) required bool isVip,
+    @JsonKey(readValue: _readFreeSuggestions) required int freeSuggestions,
     @JsonKey(readValue: _readActiveSubId) required String? activeSubId,
     @JsonKey(readValue: _readRefUsersCount) required int refUsersCount,
     @JsonKey(readValue: _readCreatedAt) required String createdAt,
@@ -100,6 +105,7 @@ extension UserModelX on UserModel {
         subscribeCredits: subscribeCredits,
         isRated: isRated,
         isVip: isVip,
+        freeSuggestions: freeSuggestions,
         activeSubId: activeSubId,
         refUsersCount: refUsersCount,
         createdAt: DateTime.tryParse(createdAt) ?? DateTime.now(),

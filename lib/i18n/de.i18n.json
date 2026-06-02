@@ -7,7 +7,8 @@
     "camera": "Kamera",
     "gallery": "Galerie",
     "generate": "Generieren",
-    "processing": "Wird bearbeitet..."
+    "processing": "Wird bearbeitet...",
+    "ok": "OK"
   },
   "home": {
     "title": "Video KI",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "Inspiriere mich (PRO)",
     "trim_title": "Video schneiden",
     "trim_save": "Speichern",
-    "trimming_loading": "Video wird geschnitten..."
+    "trimming_loading": "Video wird geschnitten...",
+    "please_add_image_first": "Bitte fügen Sie zuerst ein Bild hinzu"
   },
   "leave_dialog": {
     "title": "Verlassen ohne zu speichern?",

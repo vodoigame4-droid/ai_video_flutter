@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../../auth/domain/entities/user_entity.dart';
 
 part 'create_video_event.freezed.dart';
 
@@ -14,4 +15,5 @@ abstract class CreateVideoEvent with _$CreateVideoEvent {
   const factory CreateVideoEvent.selectQuality(String quality) = _SelectQuality;
   const factory CreateVideoEvent.selectDuration(String duration) = _SelectDuration;
   const factory CreateVideoEvent.generateVideo() = _GenerateVideo;
+  const factory CreateVideoEvent.profileUpdated(UserEntity user) = _ProfileUpdated;
 }

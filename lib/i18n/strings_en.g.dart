@@ -94,6 +94,9 @@ class Translations$common$en {
 
 	/// en: 'Processing...'
 	String get processing => 'Processing...';
+
+	/// en: 'OK'
+	String get ok => 'OK';
 }
 
 // Path: home
@@ -247,6 +250,9 @@ class Translations$create$en {
 
 	/// en: 'Inspire me (PRO)'
 	String get inspire_me_pro => 'Inspire me (PRO)';
+
+	/// en: 'Please add an image first'
+	String get please_add_image_first => 'Please add an image first';
 
 	/// en: 'Trim Video'
 	String get trim_title => 'Trim Video';
@@ -1230,6 +1236,7 @@ extension on Translations {
 			'common.gallery' => 'Gallery',
 			'common.generate' => 'Generate',
 			'common.processing' => 'Processing...',
+			'common.ok' => 'OK',
 			'home.title' => 'Video AI',
 			'home.trending' => 'Trending',
 			'home.new_section' => 'New',
@@ -1275,6 +1282,7 @@ extension on Translations {
 			'create.limit_dialog_btn' => 'Upgrade to VIP',
 			'create.limit_dialog_cancel' => 'Maybe Later',
 			'create.inspire_me_pro' => 'Inspire me (PRO)',
+			'create.please_add_image_first' => 'Please add an image first',
 			'create.trim_title' => 'Trim Video',
 			'create.trim_save' => 'Save',
 			'create.trimming_loading' => 'Trimming video...',

@@ -7,7 +7,8 @@
     "camera": "कैमरा",
     "gallery": "गैलरी",
     "generate": "उत्पन्न करें",
-    "processing": "प्रक्रिया जारी है..."
+    "processing": "प्रक्रिया जारी है...",
+    "ok": "ठीक है"
   },
   "home": {
     "title": "वीडियो एआई",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "मुझे प्रेरित करें (PRO)",
     "trim_title": "वीडियो काटें",
     "trim_save": "सहेजें",
-    "trimming_loading": "वीडियो काटा जा रहा है..."
+    "trimming_loading": "वीडियो काटा जा रहा है...",
+    "please_add_image_first": "कृपया पहले एक छवि जोड़ें"
   },
   "leave_dialog": {
     "title": "बिना सहेजे छोड़ें?",

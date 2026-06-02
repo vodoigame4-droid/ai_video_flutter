@@ -76,6 +76,7 @@ class _Translations$common$de extends Translations$common$en {
 	@override String get gallery => 'Galerie';
 	@override String get generate => 'Generieren';
 	@override String get processing => 'Wird bearbeitet...';
+	@override String get ok => 'OK';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$de extends Translations$create$en {
 	@override String get trim_title => 'Video schneiden';
 	@override String get trim_save => 'Speichern';
 	@override String get trimming_loading => 'Video wird geschnitten...';
+	@override String get please_add_image_first => 'Bitte fügen Sie zuerst ein Bild hinzu';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsDe {
 			'common.gallery' => 'Galerie',
 			'common.generate' => 'Generieren',
 			'common.processing' => 'Wird bearbeitet...',
+			'common.ok' => 'OK',
 			'home.title' => 'Video KI',
 			'home.trending' => 'Angesagt',
 			'home.new_section' => 'Neu',
@@ -654,6 +657,7 @@ extension on TranslationsDe {
 			'create.trim_title' => 'Video schneiden',
 			'create.trim_save' => 'Speichern',
 			'create.trimming_loading' => 'Video wird geschnitten...',
+			'create.please_add_image_first' => 'Bitte fügen Sie zuerst ein Bild hinzu',
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
 			'splash.appName' => 'Video AI',

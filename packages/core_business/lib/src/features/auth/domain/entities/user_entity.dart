@@ -17,6 +17,7 @@ abstract class UserEntity with _$UserEntity {
     required int subscribeCredits,
     required bool isRated,
     required bool isVip,
+    required int freeSuggestions,
     required String? activeSubId,
     required int refUsersCount,
     required DateTime createdAt,

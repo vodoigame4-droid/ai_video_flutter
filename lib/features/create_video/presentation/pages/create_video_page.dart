@@ -141,6 +141,7 @@ class CreateVideoView extends StatelessWidget {
                       isGenerating,
                       isSuccess,
                       isInspiring,
+                      isVip,
                     ) {
                       return SafeArea(
                         child: Column(

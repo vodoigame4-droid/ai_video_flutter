@@ -7,7 +7,8 @@
     "camera": "カメラ",
     "gallery": "ギャラリー",
     "generate": "生成する",
-    "processing": "処理中..."
+    "processing": "処理中...",
+    "ok": "OK"
   },
   "home": {
     "title": "ビデオAI",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "ひらめきを得る (PRO)",
     "trim_title": "動画をカット",
     "trim_save": "保存",
-    "trimming_loading": "動画をカット中..."
+    "trimming_loading": "動画をカット中...",
+    "please_add_image_first": "最初に画像を追加してください"
   },
   "leave_dialog": {
     "title": "保存せずに終了しますか？",

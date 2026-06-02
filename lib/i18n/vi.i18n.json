@@ -7,7 +7,8 @@
     "camera": "Máy ảnh",
     "gallery": "Thư viện",
     "generate": "Tạo video",
-    "processing": "Đang xử lý..."
+    "processing": "Đang xử lý...",
+    "ok": "OK"
   },
   "home": {
     "title": "Video AI",
@@ -59,7 +60,8 @@
     "inspire_me_pro": "Gợi ý cho tôi (PRO)",
     "trim_title": "Cắt video",
     "trim_save": "Lưu",
-    "trimming_loading": "Đang cắt video..."
+    "trimming_loading": "Đang cắt video...",
+    "please_add_image_first": "Vui lòng thêm ảnh vào trước"
   },
   "leave_dialog": {
     "title": "Rời đi không lưu?",

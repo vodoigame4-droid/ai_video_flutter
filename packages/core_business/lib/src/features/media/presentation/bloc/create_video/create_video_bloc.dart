@@ -1,14 +1,22 @@
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import '../../../domain/usecases/get_suggestion_prompt_usecase.dart';
 import '../../../domain/usecases/upload_image_usecase.dart';
 import '../../../../../core/resources/resource.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../../../../auth/domain/usecases/watch_profile_usecase.dart';
+import '../../../../auth/domain/usecases/get_profile_usecase.dart';
+import '../../../../auth/domain/entities/user_entity.dart';
 import 'create_video_event.dart';
 import 'create_video_state.dart';
 
 class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
   final GetSuggestionPromptUseCase getSuggestionPromptUseCase;
   final UploadImageUseCase uploadImageUseCase;
+  final WatchProfileUseCase watchProfileUseCase;
+  final GetProfileUseCase getProfileUseCase;
+  StreamSubscription? _profileSubscription;
 
   static const List<String> _presetPrompts = [
     "Realistic female portrait, close-up, looking at camera, blinking naturally, blue studio lighting, cinematic, ultra detailed",
@@ -20,6 +28,8 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
   CreateVideoBloc({
     required this.getSuggestionPromptUseCase,
     required this.uploadImageUseCase,
+    required this.watchProfileUseCase,
+    required this.getProfileUseCase,
   }) : super(const CreateVideoState.initial()) {
     on<CreateVideoEvent>((event, emit) async {
       await event.when(
@@ -28,10 +38,18 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
           emit(const CreateVideoState.loading());
           await Future.delayed(const Duration(milliseconds: 100));
 
+          _profileSubscription?.cancel();
+          _profileSubscription = watchProfileUseCase().listen(
+            (user) => add(CreateVideoEvent.profileUpdated(user)),
+          );
+
+          getProfileUseCase(NoParams());
+
           emit(CreateVideoState.ready(
             selectedTab: initialTab,
             customPrompt: "",
             inspireMeCount: 3,
+            isVip: false,
             slotsPaths: List<String?>.filled(3, null),
             uploadedSlotsPaths: List<String?>.filled(3, null),
             quality: 'Full HD',
@@ -66,7 +84,8 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
         inspireMe: () async {
           await state.mapOrNull(
             ready: (readyState) async {
-              if (readyState.inspireMeCount <= 0 || readyState.isInspiring) return;
+              final cannotInspire = !readyState.isVip && readyState.inspireMeCount <= 0;
+              if (cannotInspire || readyState.isInspiring) return;
 
               // 1. Collect all non-null images in slotsPaths
               final selectedLocalPaths = readyState.slotsPaths
@@ -83,7 +102,7 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
                 LogUtils.d("No image selected, falling back to preset prompt index $promptIndex");
                 emit(readyState.copyWith(
                   customPrompt: selectedPrompt,
-                  inspireMeCount: currentCount - 1,
+                  inspireMeCount: readyState.isVip ? currentCount : currentCount - 1,
                   isSuccess: false,
                 ));
                 return;
@@ -150,10 +169,14 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
                       success: (prompt) {
                         emit(latestState.copyWith(
                           customPrompt: prompt,
-                          inspireMeCount: latestState.inspireMeCount - 1,
+                          inspireMeCount: latestState.isVip
+                              ? latestState.inspireMeCount
+                              : latestState.inspireMeCount - 1,
                           isInspiring: false,
                           isSuccess: true,
                         ));
+
+                        getProfileUseCase(NoParams());
                       },
                       error: (message) {
                         LogUtils.e("Failed to get prompt suggestion: $message");
@@ -249,7 +272,24 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
             },
           );
         },
+        profileUpdated: (user) {
+          state.mapOrNull(
+            ready: (readyState) {
+              LogUtils.d("Profile updated in CreateVideoBloc: VIP=${user.isVip}, suggestions=${user.freeSuggestions}");
+              emit(readyState.copyWith(
+                inspireMeCount: user.freeSuggestions,
+                isVip: user.isVip,
+              ));
+            },
+          );
+        },
       );
     });
+  }
+
+  @override
+  Future<void> close() {
+    _profileSubscription?.cancel();
+    return super.close();
   }
 }

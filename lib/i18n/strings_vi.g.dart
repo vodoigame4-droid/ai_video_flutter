@@ -77,6 +77,7 @@ class _Translations$common$vi extends Translations$common$en {
 	@override String get gallery => 'Thư viện';
 	@override String get generate => 'Tạo video';
 	@override String get processing => 'Đang xử lý...';
+	@override String get ok => 'OK';
 }
 
 // Path: home
@@ -143,6 +144,7 @@ class _Translations$create$vi extends Translations$create$en {
 	@override String get trim_title => 'Cắt video';
 	@override String get trim_save => 'Lưu';
 	@override String get trimming_loading => 'Đang cắt video...';
+	@override String get please_add_image_first => 'Vui lòng thêm ảnh vào trước';
 }
 
 // Path: leave_dialog
@@ -621,6 +623,7 @@ extension on TranslationsVi {
 			'common.gallery' => 'Thư viện',
 			'common.generate' => 'Tạo video',
 			'common.processing' => 'Đang xử lý...',
+			'common.ok' => 'OK',
 			'home.title' => 'Video AI',
 			'home.trending' => 'Xu hướng',
 			'home.new_section' => 'Mới',
@@ -669,6 +672,7 @@ extension on TranslationsVi {
 			'create.trim_title' => 'Cắt video',
 			'create.trim_save' => 'Lưu',
 			'create.trimming_loading' => 'Đang cắt video...',
+			'create.please_add_image_first' => 'Vui lòng thêm ảnh vào trước',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
 			'splash.appName' => 'Video AI',

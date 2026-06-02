@@ -329,9 +329,7 @@ class _MediaApiClient implements MediaApiClient {
   }
 
   @override
-  Future<BaseResponse<dynamic>> uploadImage(
-    MultipartFile file,
-  ) async {
+  Future<BaseResponse<dynamic>> uploadImage(MultipartFile file) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -357,7 +355,7 @@ class _MediaApiClient implements MediaApiClient {
     try {
       _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
-        (json) => json,
+        (json) => json as dynamic,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
@@ -395,7 +393,9 @@ class _MediaApiClient implements MediaApiClient {
     try {
       _value = BaseResponse<List<dynamic>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic> ? json : List.empty(),
+        (json) => json is List<dynamic>
+            ? json.map<dynamic>((i) => i).toList()
+            : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
@@ -405,9 +405,7 @@ class _MediaApiClient implements MediaApiClient {
   }
 
   @override
-  Future<BaseResponse<dynamic>> uploadVideo(
-    MultipartFile file,
-  ) async {
+  Future<BaseResponse<dynamic>> uploadVideo(MultipartFile file) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -433,7 +431,7 @@ class _MediaApiClient implements MediaApiClient {
     try {
       _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
-        (json) => json,
+        (json) => json as dynamic,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);

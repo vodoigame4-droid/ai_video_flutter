@@ -76,6 +76,7 @@ class _Translations$common$ja extends Translations$common$en {
 	@override String get gallery => 'ギャラリー';
 	@override String get generate => '生成する';
 	@override String get processing => '処理中...';
+	@override String get ok => 'OK';
 }
 
 // Path: home
@@ -142,6 +143,7 @@ class _Translations$create$ja extends Translations$create$en {
 	@override String get trim_title => '動画をカット';
 	@override String get trim_save => '保存';
 	@override String get trimming_loading => '動画をカット中...';
+	@override String get please_add_image_first => '最初に画像を追加してください';
 }
 
 // Path: leave_dialog
@@ -606,6 +608,7 @@ extension on TranslationsJa {
 			'common.gallery' => 'ギャラリー',
 			'common.generate' => '生成する',
 			'common.processing' => '処理中...',
+			'common.ok' => 'OK',
 			'home.title' => 'ビデオAI',
 			'home.trending' => 'トレンド',
 			'home.new_section' => '新規',
@@ -654,6 +657,7 @@ extension on TranslationsJa {
 			'create.trim_title' => '動画をカット',
 			'create.trim_save' => '保存',
 			'create.trimming_loading' => '動画をカット中...',
+			'create.please_add_image_first' => '最初に画像を追加してください',
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
 			'splash.appName' => 'ビデオAI',
