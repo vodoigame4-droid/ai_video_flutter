@@ -59,19 +59,19 @@ abstract class MediaApiClient {
 
   @POST('/file/upload/image')
   @MultiPart()
-  Future<BaseResponse<UploadResponseModel>> uploadImage(
+  Future<BaseResponse<dynamic>> uploadImage(
     @Part() MultipartFile file,
   );
 
   @POST('/file/upload/images')
   @MultiPart()
-  Future<BaseResponse<List<UploadResponseModel>>> uploadImages(
+  Future<BaseResponse<List<dynamic>>> uploadImages(
     @Part() List<MultipartFile> files,
   );
 
   @POST('/file/upload/video')
   @MultiPart()
-  Future<BaseResponse<UploadResponseModel>> uploadVideo(
+  Future<BaseResponse<dynamic>> uploadVideo(
     @Part() MultipartFile file,
   );
 

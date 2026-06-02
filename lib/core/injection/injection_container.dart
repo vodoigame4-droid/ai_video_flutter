@@ -6,6 +6,7 @@ import 'package:core_business/core_business.dart';
 import '../config/app_config_impl.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../notification/notification_repository_impl.dart';
+import '../network/payment_required_interceptor.dart';
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import '../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
@@ -60,6 +61,7 @@ Future<void> initDependencies() async {
           sharedPreferences: sl(),
           appConfig: sl(),
         ),
+        PaymentRequiredInterceptor(),
       ],
     ),
   );

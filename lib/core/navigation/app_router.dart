@@ -18,6 +18,7 @@ import '../../features/premium/presentation/pages/buy_credits_page.dart';
 import '../../features/create_video/presentation/pages/create_from_template_page.dart';
 import '../../features/create_video/presentation/pages/create_template_settings_page.dart';
 import '../../features/video_player/presentation/pages/video_player_page.dart';
+import '../../features/create_video/presentation/pages/video_trim_page.dart';
 
 abstract class AppRoutePage {
   const AppRoutePage._();
@@ -280,6 +281,17 @@ final GoRouter appRouter = GoRouter(
         return AppRoutePage.cupertino<void>(
           state: state,
           child: VideoPlayerPage(videoUrl: videoUrl, title: title),
+        );
+      },
+    ),
+    GoRoute(
+      path: VideoTrimPage.path,
+      name: VideoTrimPage.name,
+      pageBuilder: (context, state) {
+        final videoPath = state.uri.queryParameters['videoPath'] ?? '';
+        return AppRoutePage.cupertino<String?>(
+          state: state,
+          child: VideoTrimPage(videoPath: videoPath),
         );
       },
     ),

@@ -139,6 +139,9 @@ class _Translations$create$id extends Translations$create$en {
 	@override String get limit_dialog_btn => 'Tingkatkan ke VIP';
 	@override String get limit_dialog_cancel => 'Mungkin Nanti';
 	@override String get inspire_me_pro => 'Inspirasi Saya (PRO)';
+	@override String get trim_title => 'Potong Video';
+	@override String get trim_save => 'Simpan';
+	@override String get trimming_loading => 'Memotong video...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$id extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => 'Video harus di bawah 10 detik.';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsId {
 			'create.limit_dialog_btn' => 'Tingkatkan ke VIP',
 			'create.limit_dialog_cancel' => 'Mungkin Nanti',
 			'create.inspire_me_pro' => 'Inspirasi Saya (PRO)',
+			'create.trim_title' => 'Potong Video',
+			'create.trim_save' => 'Simpan',
+			'create.trimming_loading' => 'Memotong video...',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Video AI',
@@ -885,6 +892,7 @@ extension on TranslationsId {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => 'Video harus di bawah 10 detik.',
 			'guide.step_1' => 'Langkah 1',
 			'guide.step_2' => 'Langkah 2',
 			'guide.upload_photo' => 'Unggah Foto',

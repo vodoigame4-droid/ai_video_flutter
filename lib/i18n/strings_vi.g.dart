@@ -140,6 +140,9 @@ class _Translations$create$vi extends Translations$create$en {
 	@override String get limit_dialog_btn => 'Nâng cấp VIP';
 	@override String get limit_dialog_cancel => 'Để sau';
 	@override String get inspire_me_pro => 'Gợi ý cho tôi (PRO)';
+	@override String get trim_title => 'Cắt video';
+	@override String get trim_save => 'Lưu';
+	@override String get trimming_loading => 'Đang cắt video...';
 }
 
 // Path: leave_dialog
@@ -526,6 +529,7 @@ class _Translations$errors$vi extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Không thể tải danh sách giá credit.';
 	@override String get iap_receipt_not_found => 'Không tìm thấy hóa đơn mua hàng.';
 	@override String get iap_subscription_not_found => 'Không tìm thấy thông tin gói đăng ký.';
+	@override String get video_too_long => 'Video phải ngắn hơn 10 giây.';
 }
 
 // Path: guide
@@ -662,6 +666,9 @@ extension on TranslationsVi {
 			'create.limit_dialog_btn' => 'Nâng cấp VIP',
 			'create.limit_dialog_cancel' => 'Để sau',
 			'create.inspire_me_pro' => 'Gợi ý cho tôi (PRO)',
+			'create.trim_title' => 'Cắt video',
+			'create.trim_save' => 'Lưu',
+			'create.trimming_loading' => 'Đang cắt video...',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
 			'splash.appName' => 'Video AI',
@@ -905,6 +912,7 @@ extension on TranslationsVi {
 			'errors.get_price_list_failed' => 'Không thể tải danh sách giá credit.',
 			'errors.iap_receipt_not_found' => 'Không tìm thấy hóa đơn mua hàng.',
 			'errors.iap_subscription_not_found' => 'Không tìm thấy thông tin gói đăng ký.',
+			'errors.video_too_long' => 'Video phải ngắn hơn 10 giây.',
 			'guide.step_1' => 'Bước 1',
 			'guide.step_2' => 'Bước 2',
 			'guide.upload_photo' => 'Tải ảnh lên',

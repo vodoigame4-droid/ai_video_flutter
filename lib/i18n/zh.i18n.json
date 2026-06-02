@@ -56,7 +56,10 @@
     "limit_dialog_desc": "您已用完所有 3 次免费建议。请升级至 VIP 以享受无限建议！",
     "limit_dialog_btn": "升级至 VIP",
     "limit_dialog_cancel": "稍后再说",
-    "inspire_me_pro": "灵感推荐 (PRO)"
+    "inspire_me_pro": "灵感推荐 (PRO)",
+    "trim_title": "剪辑视频",
+    "trim_save": "保存",
+    "trimming_loading": "正在剪辑视频..."
   },
   "leave_dialog": {
     "title": "不保存直接离开？",
@@ -336,7 +339,8 @@
     "subscription_not_active_for_refill": "Subscription is not active for credit refill.",
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
-    "iap_subscription_not_found": "Subscription not found."
+    "iap_subscription_not_found": "Subscription not found.",
+    "video_too_long": "视频长度必须在10秒以内。"
   },
   "guide": {
     "step_1": "第1步",

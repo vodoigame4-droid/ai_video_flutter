@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 import '../utils/log_utils.dart';
 import 'package:ai_video_flutter/features/create_video/presentation/widgets/upload_bottom_sheet_widget.dart';
+import 'package:ai_video_flutter/features/create_video/presentation/pages/video_trim_page.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
@@ -169,11 +172,13 @@ class UploadSlotWidget extends StatelessWidget {
     final path = mediaPath!;
     final isLocalAsset = path.startsWith('assets/');
 
-    Widget imageWidget;
-    if (isLocalAsset) {
-      imageWidget = Image.asset(path, fit: BoxFit.cover);
+    Widget previewWidget;
+    if (isVideoSlot) {
+      previewWidget = _VideoPreviewWidget(key: ValueKey(path), videoPath: path);
+    } else if (isLocalAsset) {
+      previewWidget = Image.asset(path, fit: BoxFit.cover);
     } else {
-      imageWidget = Image.file(
+      previewWidget = Image.file(
         File(path),
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
@@ -185,7 +190,7 @@ class UploadSlotWidget extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        imageWidget,
+        previewWidget,
         // Gradient overlay for visual aesthetics
         Container(
           decoration: BoxDecoration(
@@ -219,9 +224,45 @@ class UploadSlotWidget extends StatelessWidget {
       final ImagePicker picker = ImagePicker();
       if (isVideoSlot) {
         LogUtils.d('UploadSlotWidget: Picking video...');
-        final XFile? video = await picker.pickVideo(source: source);
+        final XFile? video = await picker.pickVideo(
+          source: source,
+          maxDuration: const Duration(seconds: 10),
+        );
         if (video != null) {
           LogUtils.i('UploadSlotWidget: Video picked successfully: ${video.path}');
+          
+          // Verify duration using media_kit to handle Android and custom picker edge cases
+          final player = Player();
+          try {
+            await player.open(Media(Uri.file(video.path).toString()), play: false);
+            final duration = await player.stream.duration
+                .firstWhere((d) => d > Duration.zero)
+                .timeout(const Duration(milliseconds: 1500), onTimeout: () => Duration.zero);
+            
+            LogUtils.d('UploadSlotWidget: Checked video duration: ${duration.inMilliseconds} ms');
+            
+            // Allow up to 10.5 seconds to account for minor frame calculations/offsets
+            if (duration > const Duration(milliseconds: 10500)) {
+              LogUtils.i('UploadSlotWidget: Video duration ${duration.inSeconds}s exceeds 10s. Opening trimmer...');
+              if (context.mounted) {
+                final trimmedPath = await Navigator.push<String?>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (routeContext) => VideoTrimPage(videoPath: video.path),
+                  ),
+                );
+                if (trimmedPath != null && trimmedPath.isNotEmpty) {
+                  onMediaSelected(trimmedPath);
+                }
+              }
+              return;
+            }
+          } catch (e, stack) {
+            LogUtils.e('UploadSlotWidget: Error checking video duration', error: e, stackTrace: stack);
+          } finally {
+            await player.dispose();
+          }
+
           onMediaSelected(video.path);
         } else {
           LogUtils.w('UploadSlotWidget: Video picking cancelled or returned null');
@@ -315,6 +356,38 @@ class UploadSlotWidget extends StatelessWidget {
       },
     );
   }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.6),
+      builder: (dialogContext) {
+        return AlertDialog(
+          backgroundColor: AppColors.onSurface,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          title: Text(
+            context.t.errors.validation_error,
+            style: const TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
+          ),
+          content: Text(
+            message,
+            style: const TextStyle(color: AppColors.subText),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(
+                context.t.tips_sheet.button_got_it,
+                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 
@@ -380,4 +453,91 @@ class _DashedBorderPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class _VideoPreviewWidget extends StatefulWidget {
+  final String videoPath;
+  const _VideoPreviewWidget({super.key, required this.videoPath});
+
+  @override
+  State<_VideoPreviewWidget> createState() => _VideoPreviewWidgetState();
+}
+
+class _VideoPreviewWidgetState extends State<_VideoPreviewWidget> with WidgetsBindingObserver {
+  late final Player _player;
+  late final VideoController _controller;
+  late final Future<void> _initializeVideoFuture;
+  bool _isInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _player = Player();
+    _controller = VideoController(_player);
+    _initializeVideoFuture = _initPlayer();
+  }
+
+  Future<void> _initPlayer() async {
+    try {
+      _player.setPlaylistMode(PlaylistMode.single);
+      await _player.setVolume(0.0);
+      await _player.open(Media(Uri.file(widget.videoPath).toString()), play: true);
+      _isInitialized = true;
+    } catch (e, stack) {
+      LogUtils.e(
+        '_VideoPreviewWidget: Error initializing video player',
+        error: e,
+        stackTrace: stack,
+      );
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant _VideoPreviewWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoPath != widget.videoPath) {
+      _player.open(Media(Uri.file(widget.videoPath).toString()), play: true);
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_isInitialized) return;
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      _player.pause();
+    } else if (state == AppLifecycleState.resumed) {
+      _player.play();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _player.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<void>(
+      future: _initializeVideoFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Video(
+            controller: _controller,
+            fill: AppColors.black,
+            fit: BoxFit.cover,
+            controls: NoVideoControls,
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+            ),
+          );
+        }
+      },
+    );
+  }
 }

@@ -247,6 +247,15 @@ class Translations$create$en {
 
 	/// en: 'Inspire me (PRO)'
 	String get inspire_me_pro => 'Inspire me (PRO)';
+
+	/// en: 'Trim Video'
+	String get trim_title => 'Trim Video';
+
+	/// en: 'Save'
+	String get trim_save => 'Save';
+
+	/// en: 'Trimming video...'
+	String get trimming_loading => 'Trimming video...';
 }
 
 // Path: leave_dialog
@@ -1089,6 +1098,9 @@ class Translations$errors$en {
 
 	/// en: 'Subscription not found.'
 	String get iap_subscription_not_found => 'Subscription not found.';
+
+	/// en: 'Video must be under 10 seconds.'
+	String get video_too_long => 'Video must be under 10 seconds.';
 }
 
 // Path: guide
@@ -1263,6 +1275,9 @@ extension on Translations {
 			'create.limit_dialog_btn' => 'Upgrade to VIP',
 			'create.limit_dialog_cancel' => 'Maybe Later',
 			'create.inspire_me_pro' => 'Inspire me (PRO)',
+			'create.trim_title' => 'Trim Video',
+			'create.trim_save' => 'Save',
+			'create.trimming_loading' => 'Trimming video...',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Video AI',
@@ -1506,6 +1521,7 @@ extension on Translations {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => 'Video must be under 10 seconds.',
 			'guide.step_1' => 'Step 1',
 			'guide.step_2' => 'Step 2',
 			'guide.upload_photo' => 'Upload Photo',

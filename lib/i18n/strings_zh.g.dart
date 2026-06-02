@@ -139,6 +139,9 @@ class _Translations$create$zh extends Translations$create$en {
 	@override String get limit_dialog_btn => '升级至 VIP';
 	@override String get limit_dialog_cancel => '稍后再说';
 	@override String get inspire_me_pro => '灵感推荐 (PRO)';
+	@override String get trim_title => '剪辑视频';
+	@override String get trim_save => '保存';
+	@override String get trimming_loading => '正在剪辑视频...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$zh extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => '视频长度必须在10秒以内。';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsZh {
 			'create.limit_dialog_btn' => '升级至 VIP',
 			'create.limit_dialog_cancel' => '稍后再说',
 			'create.inspire_me_pro' => '灵感推荐 (PRO)',
+			'create.trim_title' => '剪辑视频',
+			'create.trim_save' => '保存',
+			'create.trimming_loading' => '正在剪辑视频...',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
 			'splash.appName' => '视频AI',
@@ -885,6 +892,7 @@ extension on TranslationsZh {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => '视频长度必须在10秒以内。',
 			'guide.step_1' => '第1步',
 			'guide.step_2' => '第2步',
 			'guide.upload_photo' => '上传图片',

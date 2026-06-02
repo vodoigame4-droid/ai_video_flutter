@@ -139,6 +139,9 @@ class _Translations$create$hi extends Translations$create$en {
 	@override String get limit_dialog_btn => 'VIP में अपग्रेड करें';
 	@override String get limit_dialog_cancel => 'बाद में';
 	@override String get inspire_me_pro => 'मुझे प्रेरित करें (PRO)';
+	@override String get trim_title => 'वीडियो काटें';
+	@override String get trim_save => 'सहेजें';
+	@override String get trimming_loading => 'वीडियो काटा जा रहा है...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$hi extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => 'वीडियो 10 सेकंड से कम का होना चाहिए।';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsHi {
 			'create.limit_dialog_btn' => 'VIP में अपग्रेड करें',
 			'create.limit_dialog_cancel' => 'बाद में',
 			'create.inspire_me_pro' => 'मुझे प्रेरित करें (PRO)',
+			'create.trim_title' => 'वीडियो काटें',
+			'create.trim_save' => 'सहेजें',
+			'create.trimming_loading' => 'वीडियो काटा जा रहा है...',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'वीडियो एआई',
@@ -885,6 +892,7 @@ extension on TranslationsHi {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => 'वीडियो 10 सेकंड से कम का होना चाहिए।',
 			'guide.step_1' => 'चरण 1',
 			'guide.step_2' => 'चरण 2',
 			'guide.upload_photo' => 'फोटो अपलोड करें',

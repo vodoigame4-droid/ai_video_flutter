@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 import 'core/injection/injection_container.dart';
 import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'core/widgets/payment_listener_wrapper.dart';
 import 'gen/assets.gen.dart';
 import 'i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
@@ -60,7 +61,9 @@ class MyApp extends StatelessWidget {
             ],
             routerConfig: appRouter,
             builder: (context, child) {
-              return child ?? const SizedBox.shrink();
+              return PaymentListenerWrapper(
+                child: child ?? const SizedBox.shrink(),
+              );
             },
           );
         },

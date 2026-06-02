@@ -139,6 +139,9 @@ class _Translations$create$ko extends Translations$create$en {
 	@override String get limit_dialog_btn => 'VIP로 업그레이드';
 	@override String get limit_dialog_cancel => '나중에';
 	@override String get inspire_me_pro => '아이디어 얻기 (PRO)';
+	@override String get trim_title => '동영상 자르기';
+	@override String get trim_save => '저장';
+	@override String get trimming_loading => '동영상 자르는 중...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$ko extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => '동영상은 10초 미만이어야 합니다.';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsKo {
 			'create.limit_dialog_btn' => 'VIP로 업그레이드',
 			'create.limit_dialog_cancel' => '나중에',
 			'create.inspire_me_pro' => '아이디어 얻기 (PRO)',
+			'create.trim_title' => '동영상 자르기',
+			'create.trim_save' => '저장',
+			'create.trimming_loading' => '동영상 자르는 중...',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => '비디오 AI',
@@ -885,6 +892,7 @@ extension on TranslationsKo {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => '동영상은 10초 미만이어야 합니다.',
 			'guide.step_1' => '1단계',
 			'guide.step_2' => '2단계',
 			'guide.upload_photo' => '사진 업로드',

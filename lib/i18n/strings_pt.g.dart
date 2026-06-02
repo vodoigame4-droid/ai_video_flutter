@@ -139,6 +139,9 @@ class _Translations$create$pt extends Translations$create$en {
 	@override String get limit_dialog_btn => 'Atualizar para VIP';
 	@override String get limit_dialog_cancel => 'Talvez mais tarde';
 	@override String get inspire_me_pro => 'Inspirar-me (PRO)';
+	@override String get trim_title => 'Cortar vídeo';
+	@override String get trim_save => 'Salvar';
+	@override String get trimming_loading => 'Cortando vídeo...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$pt extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => 'O vídeo deve ter menos de 10 segundos.';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsPt {
 			'create.limit_dialog_btn' => 'Atualizar para VIP',
 			'create.limit_dialog_cancel' => 'Talvez mais tarde',
 			'create.inspire_me_pro' => 'Inspirar-me (PRO)',
+			'create.trim_title' => 'Cortar vídeo',
+			'create.trim_save' => 'Salvar',
+			'create.trimming_loading' => 'Cortando vídeo...',
 			'leave_dialog.title' => 'Sair sem salvar?',
 			'leave_dialog.desc' => 'Deseja continuar editando ou sair agora?',
 			'splash.appName' => 'Video AI',
@@ -885,6 +892,7 @@ extension on TranslationsPt {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => 'O vídeo deve ter menos de 10 segundos.',
 			'guide.step_1' => 'Passo 1',
 			'guide.step_2' => 'Passo 2',
 			'guide.upload_photo' => 'Enviar foto',

@@ -139,6 +139,9 @@ class _Translations$create$ar extends Translations$create$en {
 	@override String get limit_dialog_btn => 'الترقية إلى VIP';
 	@override String get limit_dialog_cancel => 'ربما لاحقًا';
 	@override String get inspire_me_pro => 'ألهمني (PRO)';
+	@override String get trim_title => 'قص الفيديو';
+	@override String get trim_save => 'حفظ';
+	@override String get trimming_loading => 'جاري قص الفيديو...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$ar extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => 'يجب أن يكون الفيديو أقل من 10 ثوانٍ.';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsAr {
 			'create.limit_dialog_btn' => 'الترقية إلى VIP',
 			'create.limit_dialog_cancel' => 'ربما لاحقًا',
 			'create.inspire_me_pro' => 'ألهمني (PRO)',
+			'create.trim_title' => 'قص الفيديو',
+			'create.trim_save' => 'حفظ',
+			'create.trimming_loading' => 'جاري قص الفيديو...',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
 			'splash.appName' => 'فيديو ذكاء اصطناعي',
@@ -885,6 +892,7 @@ extension on TranslationsAr {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => 'يجب أن يكون الفيديو أقل من 10 ثوانٍ.',
 			'guide.step_1' => 'الخطوة 1',
 			'guide.step_2' => 'الخطوة 2',
 			'guide.upload_photo' => 'تحميل الصورة',

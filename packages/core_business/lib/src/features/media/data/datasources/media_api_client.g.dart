@@ -329,7 +329,7 @@ class _MediaApiClient implements MediaApiClient {
   }
 
   @override
-  Future<BaseResponse<UploadResponseModel>> uploadImage(
+  Future<BaseResponse<dynamic>> uploadImage(
     MultipartFile file,
   ) async {
     final _extra = <String, dynamic>{};
@@ -337,7 +337,7 @@ class _MediaApiClient implements MediaApiClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.add(MapEntry('file', file));
-    final _options = _setStreamType<BaseResponse<UploadResponseModel>>(
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -353,11 +353,11 @@ class _MediaApiClient implements MediaApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<UploadResponseModel> _value;
+    late BaseResponse<dynamic> _value;
     try {
-      _value = BaseResponse<UploadResponseModel>.fromJson(
+      _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
-        (json) => UploadResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => json,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
@@ -367,7 +367,7 @@ class _MediaApiClient implements MediaApiClient {
   }
 
   @override
-  Future<BaseResponse<List<UploadResponseModel>>> uploadImages(
+  Future<BaseResponse<List<dynamic>>> uploadImages(
     List<MultipartFile> files,
   ) async {
     final _extra = <String, dynamic>{};
@@ -375,7 +375,7 @@ class _MediaApiClient implements MediaApiClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.addAll(files.map((i) => MapEntry('files', i)));
-    final _options = _setStreamType<BaseResponse<List<UploadResponseModel>>>(
+    final _options = _setStreamType<BaseResponse<List<dynamic>>>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -391,18 +391,11 @@ class _MediaApiClient implements MediaApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<List<UploadResponseModel>> _value;
+    late BaseResponse<List<dynamic>> _value;
     try {
-      _value = BaseResponse<List<UploadResponseModel>>.fromJson(
+      _value = BaseResponse<List<dynamic>>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<UploadResponseModel>(
-                    (i) =>
-                        UploadResponseModel.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) => json is List<dynamic> ? json : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
@@ -412,7 +405,7 @@ class _MediaApiClient implements MediaApiClient {
   }
 
   @override
-  Future<BaseResponse<UploadResponseModel>> uploadVideo(
+  Future<BaseResponse<dynamic>> uploadVideo(
     MultipartFile file,
   ) async {
     final _extra = <String, dynamic>{};
@@ -420,7 +413,7 @@ class _MediaApiClient implements MediaApiClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.add(MapEntry('file', file));
-    final _options = _setStreamType<BaseResponse<UploadResponseModel>>(
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -436,11 +429,11 @@ class _MediaApiClient implements MediaApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<UploadResponseModel> _value;
+    late BaseResponse<dynamic> _value;
     try {
-      _value = BaseResponse<UploadResponseModel>.fromJson(
+      _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
-        (json) => UploadResponseModel.fromJson(json as Map<String, dynamic>),
+        (json) => json,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);

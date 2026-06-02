@@ -56,7 +56,10 @@
     "limit_dialog_desc": "3回の無料提案をすべて使用しました。無制限の提案を楽しむためにVIPにアップグレードしてください！",
     "limit_dialog_btn": "VIPにアップグレード",
     "limit_dialog_cancel": "後で",
-    "inspire_me_pro": "ひらめきを得る (PRO)"
+    "inspire_me_pro": "ひらめきを得る (PRO)",
+    "trim_title": "動画をカット",
+    "trim_save": "保存",
+    "trimming_loading": "動画をカット中..."
   },
   "leave_dialog": {
     "title": "保存せずに終了しますか？",
@@ -336,7 +339,8 @@
     "subscription_not_active_for_refill": "Subscription is not active for credit refill.",
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
-    "iap_subscription_not_found": "Subscription not found."
+    "iap_subscription_not_found": "Subscription not found.",
+    "video_too_long": "動画は10秒未満である必要があります。"
   },
   "guide": {
     "step_1": "ステップ1",

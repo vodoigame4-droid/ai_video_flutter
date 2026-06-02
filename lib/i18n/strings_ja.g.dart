@@ -139,6 +139,9 @@ class _Translations$create$ja extends Translations$create$en {
 	@override String get limit_dialog_btn => 'VIPにアップグレード';
 	@override String get limit_dialog_cancel => '後で';
 	@override String get inspire_me_pro => 'ひらめきを得る (PRO)';
+	@override String get trim_title => '動画をカット';
+	@override String get trim_save => '保存';
+	@override String get trimming_loading => '動画をカット中...';
 }
 
 // Path: leave_dialog
@@ -511,6 +514,7 @@ class _Translations$errors$ja extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Failed to retrieve credit price list.';
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
+	@override String get video_too_long => '動画は10秒未満である必要があります。';
 }
 
 // Path: guide
@@ -647,6 +651,9 @@ extension on TranslationsJa {
 			'create.limit_dialog_btn' => 'VIPにアップグレード',
 			'create.limit_dialog_cancel' => '後で',
 			'create.inspire_me_pro' => 'ひらめきを得る (PRO)',
+			'create.trim_title' => '動画をカット',
+			'create.trim_save' => '保存',
+			'create.trimming_loading' => '動画をカット中...',
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
 			'splash.appName' => 'ビデオAI',
@@ -885,6 +892,7 @@ extension on TranslationsJa {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.video_too_long' => '動画は10秒未満である必要があります。',
 			'guide.step_1' => 'ステップ1',
 			'guide.step_2' => 'ステップ2',
 			'guide.upload_photo' => '写真をアップロード',

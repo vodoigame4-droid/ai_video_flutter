@@ -120,7 +120,7 @@ class UploadBottomSheetWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 12),
           InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -160,7 +160,6 @@ class UploadBottomSheetWidget extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import '../models/media_models.dart';
 import 'media_api_client.dart';
@@ -116,6 +117,16 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
     await _apiClient.deleteMedia(id);
   }
 
+  UploadResponseModel _parseUploadResponse(dynamic data) {
+    if (data is String) {
+      return UploadResponseModel(url: data);
+    } else if (data is Map<String, dynamic>) {
+      return UploadResponseModel.fromJson(data);
+    } else {
+      throw Exception('Unexpected upload response format: $data');
+    }
+  }
+
   @override
   Future<UploadResponseModel> uploadImage(String filePath) async {
     final file = await MultipartFile.fromFile(
@@ -123,7 +134,7 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
       filename: p.basename(filePath),
     );
     final response = await _apiClient.uploadImage(file);
-    return response.data;
+    return _parseUploadResponse(response.data);
   }
 
   @override
@@ -136,20 +147,43 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
       ));
     }
     final response = await _apiClient.uploadImages(files);
-    return response.data;
+    return response.data.map((item) => _parseUploadResponse(item)).toList();
   }
 
   @override
   Future<UploadResponseModel> uploadVideo(String filePath) async {
     try {
+      final localFile = File(filePath);
+      if (await localFile.exists()) {
+        final bytes = await localFile.length();
+        final mb = bytes / (1024 * 1024);
+        LogUtils.i('MediaRemoteDataSourceImpl: Uploading video file at $filePath. Size: ${mb.toStringAsFixed(2)} MB');
+      } else {
+        LogUtils.w('MediaRemoteDataSourceImpl: Video file does not exist at path: $filePath');
+      }
+
       final file = await MultipartFile.fromFile(
         filePath,
         filename: p.basename(filePath),
       );
       final response = await _apiClient.uploadVideo(file);
-      return response.data;
-    } catch (e) {
-      LogUtils.w('MediaRemoteDataSourceImpl: uploadVideo failed (fallback to mock): $e');
+      final model = _parseUploadResponse(response.data);
+      LogUtils.i('MediaRemoteDataSourceImpl: uploadVideo API response URL: ${model.url}');
+      return model;
+    } catch (e, stack) {
+      if (e is DioException) {
+        LogUtils.e(
+          'MediaRemoteDataSourceImpl: uploadVideo DioException status: ${e.response?.statusCode}, data: ${e.response?.data}, message: ${e.message}',
+          error: e,
+          stackTrace: stack,
+        );
+      } else {
+        LogUtils.e(
+          'MediaRemoteDataSourceImpl: uploadVideo failed',
+          error: e,
+          stackTrace: stack,
+        );
+      }
       return const UploadResponseModel(url: 'https://cdn.example.com/mock_video.mp4');
     }
   }

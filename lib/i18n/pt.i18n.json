@@ -56,7 +56,10 @@
     "limit_dialog_desc": "Você usou todas as 3 sugestões gratuitas. Atualize para VIP para desfrutar de sugestões ilimitadas!",
     "limit_dialog_btn": "Atualizar para VIP",
     "limit_dialog_cancel": "Talvez mais tarde",
-    "inspire_me_pro": "Inspirar-me (PRO)"
+    "inspire_me_pro": "Inspirar-me (PRO)",
+    "trim_title": "Cortar vídeo",
+    "trim_save": "Salvar",
+    "trimming_loading": "Cortando vídeo..."
   },
   "leave_dialog": {
     "title": "Sair sem salvar?",
@@ -336,7 +339,8 @@
     "subscription_not_active_for_refill": "Subscription is not active for credit refill.",
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
-    "iap_subscription_not_found": "Subscription not found."
+    "iap_subscription_not_found": "Subscription not found.",
+    "video_too_long": "O vídeo deve ter menos de 10 segundos."
   },
   "guide": {
     "step_1": "Passo 1",
