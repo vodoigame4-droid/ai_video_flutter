@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "동영상 생성 중...",
     "select_mock_media": "모크 미디어 선택",
-    "select_media_desc": "업로드를 시뮬레이션할 모크 파일 선택"
+    "select_media_desc": "업로드를 시뮬레이션할 모크 파일 선택",
+    "inspiring": "AI가 생각 중..."
   },
   "leave_dialog": {
     "title": "저장하지 않고 나갈까요?",

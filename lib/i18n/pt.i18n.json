@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Gerando seu vídeo...",
     "select_mock_media": "Selecionar mídia simulada",
-    "select_media_desc": "Selecione um arquivo simulado para simular o upload"
+    "select_media_desc": "Selecione um arquivo simulado para simular o upload",
+    "inspiring": "A IA está pensando..."
   },
   "leave_dialog": {
     "title": "Sair sem salvar?",

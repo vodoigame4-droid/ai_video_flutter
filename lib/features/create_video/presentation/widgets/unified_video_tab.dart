@@ -24,10 +24,12 @@ class UnifiedVideoTab extends StatelessWidget {
             customPrompt,
             inspireMeCount,
             slotsPaths,
+            uploadedSlotsPaths,
             quality,
             duration,
             isGenerating,
             isSuccess,
+            isInspiring,
           ) {
             final isGenerateEnabled = slotsPaths[0] != null &&
                 slotsPaths[1] != null &&
@@ -105,6 +107,8 @@ class UnifiedVideoTab extends StatelessWidget {
                         CustomPromptCardWidget(
                           promptText: customPrompt,
                           inspireMeCount: inspireMeCount,
+                          isInspiring: isInspiring,
+                          hasImage: slotsPaths[0] != null || slotsPaths[1] != null || slotsPaths[2] != null,
                           onPromptChanged: (val) {
                             context.read<CreateVideoBloc>().add(
                                   CreateVideoEvent.updatePrompt(val),

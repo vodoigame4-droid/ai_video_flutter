@@ -133,6 +133,7 @@ class _Translations$create$id extends Translations$create$en {
 	@override String get generating_video => 'Sedang menghasilkan video Anda...';
 	@override String get select_mock_media => 'Pilih Media Simulasi';
 	@override String get select_media_desc => 'Pilih file simulasi untuk mensimulasikan unggahan';
+	@override String get inspiring => 'AI sedang berpikir...';
 }
 
 // Path: leave_dialog
@@ -634,6 +635,7 @@ extension on TranslationsId {
 			'create.generating_video' => 'Sedang menghasilkan video Anda...',
 			'create.select_mock_media' => 'Pilih Media Simulasi',
 			'create.select_media_desc' => 'Pilih file simulasi untuk mensimulasikan unggahan',
+			'create.inspiring' => 'AI sedang berpikir...',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Video AI',

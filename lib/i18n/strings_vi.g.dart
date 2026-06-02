@@ -134,6 +134,7 @@ class _Translations$create$vi extends Translations$create$en {
 	@override String get generating_video => 'Đang tạo video của bạn...';
 	@override String get select_mock_media => 'Chọn file mẫu';
 	@override String get select_media_desc => 'Chọn một file mẫu để mô phỏng tải lên';
+	@override String get inspiring => 'AI đang suy nghĩ...';
 }
 
 // Path: leave_dialog
@@ -649,6 +650,7 @@ extension on TranslationsVi {
 			'create.generating_video' => 'Đang tạo video của bạn...',
 			'create.select_mock_media' => 'Chọn file mẫu',
 			'create.select_media_desc' => 'Chọn một file mẫu để mô phỏng tải lên',
+			'create.inspiring' => 'AI đang suy nghĩ...',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
 			'splash.appName' => 'Video AI',

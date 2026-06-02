@@ -11,10 +11,12 @@ abstract class CreateVideoState with _$CreateVideoState {
     required String customPrompt,
     required int inspireMeCount,
     required List<String?> slotsPaths,
+    required List<String?> uploadedSlotsPaths,
     required String quality,
     required String duration,
     required bool isGenerating,
     @Default(false) bool isSuccess,
+    @Default(false) bool isInspiring,
   }) = _Ready;
   const factory CreateVideoState.error({required String message}) = _Error;
 }

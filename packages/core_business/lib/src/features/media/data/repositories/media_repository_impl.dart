@@ -185,4 +185,16 @@ class MediaRepositoryImpl implements MediaRepository {
       return Resource.error(message: parseRepositoryError(e));
     }
   }
+
+  @override
+  Future<Resource<String>> getSuggestionPrompt(String imageUrl) async {
+    try {
+      final model = await _remoteDataSource.getSuggestionPrompt(imageUrl);
+      return Resource.success(model.prompt);
+    } catch (e, stack) {
+      LogUtils.e('MediaRepositoryImpl: getSuggestionPrompt failed',
+          error: e, stackTrace: stack);
+      return Resource.error(message: parseRepositoryError(e));
+    }
+  }
 }

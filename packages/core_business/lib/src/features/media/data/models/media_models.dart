@@ -235,3 +235,26 @@ abstract class UploadResponseModel with _$UploadResponseModel {
   factory UploadResponseModel.fromJson(Map<String, dynamic> json) =>
       _$UploadResponseModelFromJson(json);
 }
+
+@freezed
+abstract class SuggestionRequestModel with _$SuggestionRequestModel {
+  const factory SuggestionRequestModel({
+    required String imageUrl,
+  }) = _SuggestionRequestModel;
+
+  factory SuggestionRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$SuggestionRequestModelFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson();
+}
+
+@freezed
+abstract class SuggestionResponseModel with _$SuggestionResponseModel {
+  const factory SuggestionResponseModel({
+    required String prompt,
+  }) = _SuggestionResponseModel;
+
+  factory SuggestionResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$SuggestionResponseModelFromJson(json);
+}

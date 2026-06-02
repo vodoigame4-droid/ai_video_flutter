@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "動画を生成中...",
     "select_mock_media": "モックメディアを選択",
-    "select_media_desc": "アップロードをシミュレートするモックファイルを選択"
+    "select_media_desc": "アップロードをシミュレートするモックファイルを選択",
+    "inspiring": "AIが考えています..."
   },
   "leave_dialog": {
     "title": "保存せずに終了しますか？",

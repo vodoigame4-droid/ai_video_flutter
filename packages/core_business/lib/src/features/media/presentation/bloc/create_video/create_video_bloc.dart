@@ -1,9 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
+import '../../../domain/usecases/get_suggestion_prompt_usecase.dart';
+import '../../../domain/usecases/upload_image_usecase.dart';
+import '../../../../../core/resources/resource.dart';
 import 'create_video_event.dart';
 import 'create_video_state.dart';
 
 class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
+  final GetSuggestionPromptUseCase getSuggestionPromptUseCase;
+  final UploadImageUseCase uploadImageUseCase;
+
   static const List<String> _presetPrompts = [
     "Realistic female portrait, close-up, looking at camera, blinking naturally, blue studio lighting, cinematic, ultra detailed",
     "Neon lit cyberpunk street, rainy night, reflections on puddles, drone shot flying through skyscrapers, futuristic city vibe",
@@ -11,7 +17,10 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
     "Cute fluffy orange cat wearing spacesuit on the moon, looking at Earth, cartoon 3d style, highly detailed"
   ];
 
-  CreateVideoBloc() : super(const CreateVideoState.initial()) {
+  CreateVideoBloc({
+    required this.getSuggestionPromptUseCase,
+    required this.uploadImageUseCase,
+  }) : super(const CreateVideoState.initial()) {
     on<CreateVideoEvent>((event, emit) async {
       await event.when(
         init: (initialTab) async {
@@ -24,10 +33,12 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
             customPrompt: "",
             inspireMeCount: 3,
             slotsPaths: List<String?>.filled(3, null),
+            uploadedSlotsPaths: List<String?>.filled(3, null),
             quality: 'Full HD',
             duration: '5s',
             isGenerating: false,
             isSuccess: false,
+            isInspiring: false,
           ));
         },
         changeTab: (tabIndex) {
@@ -39,6 +50,7 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
               emit(readyState.copyWith(
                 selectedTab: tabIndex,
                 slotsPaths: List<String?>.filled(3, null),
+                uploadedSlotsPaths: List<String?>.filled(3, null),
                 isSuccess: false,
               ));
             },
@@ -51,21 +63,116 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
             },
           );
         },
-        inspireMe: () {
-          state.mapOrNull(
-            ready: (readyState) {
-              if (readyState.inspireMeCount <= 0) return;
+        inspireMe: () async {
+          await state.mapOrNull(
+            ready: (readyState) async {
+              if (readyState.inspireMeCount <= 0 || readyState.isInspiring) return;
 
-              final currentCount = readyState.inspireMeCount;
-              final promptIndex = (3 - currentCount) % _presetPrompts.length;
-              final selectedPrompt = _presetPrompts[promptIndex];
+              // 1. Collect all non-null images in slotsPaths
+              final selectedLocalPaths = readyState.slotsPaths
+                  .where((path) => path != null && path.isNotEmpty)
+                  .cast<String>()
+                  .toList();
 
-              LogUtils.d("Inspiring user prompt: index $promptIndex");
-              emit(readyState.copyWith(
-                customPrompt: selectedPrompt,
-                inspireMeCount: currentCount - 1,
-                isSuccess: false,
-              ));
+              if (selectedLocalPaths.isEmpty) {
+                // Fallback to preset prompts if no image is selected
+                final currentCount = readyState.inspireMeCount;
+                final promptIndex = (3 - currentCount) % _presetPrompts.length;
+                final selectedPrompt = _presetPrompts[promptIndex];
+
+                LogUtils.d("No image selected, falling back to preset prompt index $promptIndex");
+                emit(readyState.copyWith(
+                  customPrompt: selectedPrompt,
+                  inspireMeCount: currentCount - 1,
+                  isSuccess: false,
+                ));
+                return;
+              }
+
+              // 2. Emit state with isInspiring: true
+              emit(readyState.copyWith(isInspiring: true, isSuccess: false));
+
+              try {
+                // 3. Upload images that are not yet cached
+                final updatedUploadedPaths = List<String?>.from(readyState.uploadedSlotsPaths);
+                
+                for (int i = 0; i < readyState.slotsPaths.length; i++) {
+                  final localPath = readyState.slotsPaths[i];
+                  if (localPath != null && localPath.isNotEmpty) {
+                    // Check if already has a cached remote URL
+                    final cachedUrl = readyState.uploadedSlotsPaths[i];
+                    if (cachedUrl == null || !cachedUrl.startsWith('http')) {
+                      LogUtils.d("Uploading image at slot $i: $localPath");
+                      final uploadResult = await uploadImageUseCase(localPath);
+                      
+                      String? remoteUrl;
+                      uploadResult.whenOrNull(
+                        success: (url) {
+                          remoteUrl = url;
+                        },
+                      );
+
+                      if (remoteUrl != null) {
+                        updatedUploadedPaths[i] = remoteUrl;
+                        LogUtils.d("Cached remote URL for slot $i: $remoteUrl");
+                      } else {
+                        throw Exception('Failed to upload image at slot $i');
+                      }
+                    }
+                  }
+                }
+
+                // Update state with newly uploaded paths, preserving the loading status
+                state.mapOrNull(
+                  ready: (latestState) {
+                    emit(latestState.copyWith(
+                      uploadedSlotsPaths: updatedUploadedPaths,
+                      isInspiring: true,
+                    ));
+                  },
+                );
+
+                // 4. Construct comma-separated remote URL string
+                final remoteUrls = updatedUploadedPaths
+                    .where((url) => url != null && url.isNotEmpty)
+                    .cast<String>()
+                    .toList();
+
+                final joinedUrls = remoteUrls.join(',');
+                LogUtils.d("Requesting prompt suggestion for: $joinedUrls");
+
+                // 5. Call suggestion UseCase
+                final suggestionResult = await getSuggestionPromptUseCase(joinedUrls);
+
+                state.mapOrNull(
+                  ready: (latestState) {
+                    suggestionResult.maybeWhen(
+                      success: (prompt) {
+                        emit(latestState.copyWith(
+                          customPrompt: prompt,
+                          inspireMeCount: latestState.inspireMeCount - 1,
+                          isInspiring: false,
+                          isSuccess: true,
+                        ));
+                      },
+                      error: (message) {
+                        LogUtils.e("Failed to get prompt suggestion: $message");
+                        emit(latestState.copyWith(isInspiring: false));
+                      },
+                      orElse: () {
+                        emit(latestState.copyWith(isInspiring: false));
+                      },
+                    );
+                  },
+                );
+              } catch (e) {
+                LogUtils.e("Error during prompt suggestion process: $e");
+                state.mapOrNull(
+                  ready: (latestState) {
+                    emit(latestState.copyWith(isInspiring: false));
+                  },
+                );
+              }
             },
           );
         },
@@ -82,10 +189,16 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
             ready: (readyState) {
               LogUtils.d("Selecting media for slot $slotIndex: $mediaPath");
               final updatedPaths = List<String?>.from(readyState.slotsPaths);
+              final updatedUploadedPaths = List<String?>.from(readyState.uploadedSlotsPaths);
               if (slotIndex >= 0 && slotIndex < updatedPaths.length) {
                 updatedPaths[slotIndex] = mediaPath;
+                updatedUploadedPaths[slotIndex] = null;
               }
-              emit(readyState.copyWith(slotsPaths: updatedPaths, isSuccess: false));
+              emit(readyState.copyWith(
+                slotsPaths: updatedPaths,
+                uploadedSlotsPaths: updatedUploadedPaths,
+                isSuccess: false,
+              ));
             },
           );
         },
@@ -94,10 +207,16 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
             ready: (readyState) {
               LogUtils.d("Removing media for slot $slotIndex");
               final updatedPaths = List<String?>.from(readyState.slotsPaths);
+              final updatedUploadedPaths = List<String?>.from(readyState.uploadedSlotsPaths);
               if (slotIndex >= 0 && slotIndex < updatedPaths.length) {
                 updatedPaths[slotIndex] = null;
+                updatedUploadedPaths[slotIndex] = null;
               }
-              emit(readyState.copyWith(slotsPaths: updatedPaths, isSuccess: false));
+              emit(readyState.copyWith(
+                slotsPaths: updatedPaths,
+                uploadedSlotsPaths: updatedUploadedPaths,
+                isSuccess: false,
+              ));
             },
           );
         },

@@ -133,6 +133,7 @@ class _Translations$create$es extends Translations$create$en {
 	@override String get generating_video => 'Generando tu video...';
 	@override String get select_mock_media => 'Seleccionar medio simulado';
 	@override String get select_media_desc => 'Seleccione un archivo simulado para simular la carga';
+	@override String get inspiring => 'La IA está pensando...';
 }
 
 // Path: leave_dialog
@@ -634,6 +635,7 @@ extension on TranslationsEs {
 			'create.generating_video' => 'Generando tu video...',
 			'create.select_mock_media' => 'Seleccionar medio simulado',
 			'create.select_media_desc' => 'Seleccione un archivo simulado para simular la carga',
+			'create.inspiring' => 'La IA está pensando...',
 			'leave_dialog.title' => '¿Salir sin guardar?',
 			'leave_dialog.desc' => '¿Desea continuar editando o salir ahora?',
 			'splash.appName' => 'Video AI',

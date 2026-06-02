@@ -59,33 +59,48 @@ class CreateVideoView extends StatelessWidget {
             child: BlocListener<CreateVideoBloc, CreateVideoState>(
           listener: (context, state) {
             state.mapOrNull(
-              ready: (readyState) {
+            ready: (readyState) {
                 if (readyState.isGenerating) {
                   final String serviceType;
                   final String imageUrl;
                   String? videoUrl;
 
+                  String getPathOrUrl(int index) {
+                    final cachedRemoteUrl = readyState.uploadedSlotsPaths.length > index
+                        ? readyState.uploadedSlotsPaths[index]
+                        : null;
+                    if (cachedRemoteUrl != null && cachedRemoteUrl.isNotEmpty) {
+                      return cachedRemoteUrl;
+                    }
+                    return readyState.slotsPaths.length > index
+                        ? (readyState.slotsPaths[index] ?? '')
+                        : '';
+                  }
+
                   switch (readyState.selectedTab) {
                     case 0:
                       serviceType = 'ITV_SINGLE_SOURCE';
-                      imageUrl = readyState.slotsPaths[0] ?? '';
+                      imageUrl = getPathOrUrl(0);
                       break;
                     case 1:
                       serviceType = 'TRANSITION_VIDEO';
-                      imageUrl = '${readyState.slotsPaths[0] ?? ''},${readyState.slotsPaths[1] ?? ''}';
+                      imageUrl = '${getPathOrUrl(0)},${getPathOrUrl(1)}';
                       break;
                     case 2:
                       serviceType = 'DANCING_IMAGE';
-                      imageUrl = readyState.slotsPaths[1] ?? '';
-                      videoUrl = readyState.slotsPaths[0] ?? '';
+                      imageUrl = getPathOrUrl(1);
+                      videoUrl = getPathOrUrl(0);
                       break;
                     case 3:
                       serviceType = 'ITV_DUAL_SOURCE';
-                      imageUrl = readyState.slotsPaths.where((p) => p != null).join(',');
+                      imageUrl = [getPathOrUrl(0), getPathOrUrl(1), getPathOrUrl(2)]
+                          .where((p) => p.isNotEmpty)
+                          .join(',');
                       break;
                     default:
                       serviceType = 'IMAGE_TO_VIDEO';
-                      imageUrl = readyState.slotsPaths.firstWhere((p) => p != null, orElse: () => '') ?? '';
+                      final resolvedPaths = List.generate(readyState.slotsPaths.length, getPathOrUrl);
+                      imageUrl = resolvedPaths.firstWhere((p) => p.isNotEmpty, orElse: () => '');
                   }
 
                   context.pushNamed(
@@ -120,10 +135,12 @@ class CreateVideoView extends StatelessWidget {
                       customPrompt,
                       inspireMeCount,
                       slotsPaths,
+                      uploadedSlotsPaths,
                       quality,
                       duration,
                       isGenerating,
                       isSuccess,
+                      isInspiring,
                     ) {
                       return SafeArea(
                         child: Column(

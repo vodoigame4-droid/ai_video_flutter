@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "正在生成您的视频...",
     "select_mock_media": "选择模拟媒体",
-    "select_media_desc": "选择一个模拟文件以模拟上传"
+    "select_media_desc": "选择一个模拟文件以模拟上传",
+    "inspiring": "AI 正在思考..."
   },
   "leave_dialog": {
     "title": "不保存直接离开？",

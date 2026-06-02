@@ -133,6 +133,7 @@ class _Translations$create$ko extends Translations$create$en {
 	@override String get generating_video => '동영상 생성 중...';
 	@override String get select_mock_media => '모크 미디어 선택';
 	@override String get select_media_desc => '업로드를 시뮬레이션할 모크 파일 선택';
+	@override String get inspiring => 'AI가 생각 중...';
 }
 
 // Path: leave_dialog
@@ -634,6 +635,7 @@ extension on TranslationsKo {
 			'create.generating_video' => '동영상 생성 중...',
 			'create.select_mock_media' => '모크 미디어 선택',
 			'create.select_media_desc' => '업로드를 시뮬레이션할 모크 파일 선택',
+			'create.inspiring' => 'AI가 생각 중...',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => '비디오 AI',

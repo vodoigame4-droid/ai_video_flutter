@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Video wird generiert...",
     "select_mock_media": "Mock-Medien auswählen",
-    "select_media_desc": "Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren"
+    "select_media_desc": "Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren",
+    "inspiring": "KI denkt nach..."
   },
   "leave_dialog": {
     "title": "Verlassen ohne zu speichern?",

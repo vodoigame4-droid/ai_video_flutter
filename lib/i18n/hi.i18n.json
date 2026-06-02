@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "आपका वीडियो बनाया जा रहा है...",
     "select_mock_media": "नकली मीडिया चुनें",
-    "select_media_desc": "अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें"
+    "select_media_desc": "अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें",
+    "inspiring": "एआई सोच रहा है..."
   },
   "leave_dialog": {
     "title": "बिना सहेजे छोड़ें?",

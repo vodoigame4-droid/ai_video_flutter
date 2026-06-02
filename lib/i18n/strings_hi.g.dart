@@ -133,6 +133,7 @@ class _Translations$create$hi extends Translations$create$en {
 	@override String get generating_video => 'आपका वीडियो बनाया जा रहा है...';
 	@override String get select_mock_media => 'नकली मीडिया चुनें';
 	@override String get select_media_desc => 'अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें';
+	@override String get inspiring => 'एआई सोच रहा है...';
 }
 
 // Path: leave_dialog
@@ -634,6 +635,7 @@ extension on TranslationsHi {
 			'create.generating_video' => 'आपका वीडियो बनाया जा रहा है...',
 			'create.select_mock_media' => 'नकली मीडिया चुनें',
 			'create.select_media_desc' => 'अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें',
+			'create.inspiring' => 'एआई सोच रहा है...',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'वीडियो एआई',

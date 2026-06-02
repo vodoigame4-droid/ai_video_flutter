@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( int selectedTab,  String customPrompt,  int inspireMeCount,  List<String?> slotsPaths,  String quality,  String duration,  bool isGenerating,  bool isSuccess)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( int selectedTab,  String customPrompt,  int inspireMeCount,  List<String?> slotsPaths,  List<String?> uploadedSlotsPaths,  String quality,  String duration,  bool isGenerating,  bool isSuccess,  bool isInspiring)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.selectedTab,_that.customPrompt,_that.inspireMeCount,_that.slotsPaths,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error() when error != null:
+return ready(_that.selectedTab,_that.customPrompt,_that.inspireMeCount,_that.slotsPaths,_that.uploadedSlotsPaths,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess,_that.isInspiring);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( int selectedTab,  String customPrompt,  int inspireMeCount,  List<String?> slotsPaths,  String quality,  String duration,  bool isGenerating,  bool isSuccess)  ready,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( int selectedTab,  String customPrompt,  int inspireMeCount,  List<String?> slotsPaths,  List<String?> uploadedSlotsPaths,  String quality,  String duration,  bool isGenerating,  bool isSuccess,  bool isInspiring)  ready,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.selectedTab,_that.customPrompt,_that.inspireMeCount,_that.slotsPaths,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error():
+return ready(_that.selectedTab,_that.customPrompt,_that.inspireMeCount,_that.slotsPaths,_that.uploadedSlotsPaths,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess,_that.isInspiring);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( int selectedTab,  String customPrompt,  int inspireMeCount,  List<String?> slotsPaths,  String quality,  String duration,  bool isGenerating,  bool isSuccess)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( int selectedTab,  String customPrompt,  int inspireMeCount,  List<String?> slotsPaths,  List<String?> uploadedSlotsPaths,  String quality,  String duration,  bool isGenerating,  bool isSuccess,  bool isInspiring)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.selectedTab,_that.customPrompt,_that.inspireMeCount,_that.slotsPaths,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess);case _Error() when error != null:
+return ready(_that.selectedTab,_that.customPrompt,_that.inspireMeCount,_that.slotsPaths,_that.uploadedSlotsPaths,_that.quality,_that.duration,_that.isGenerating,_that.isSuccess,_that.isInspiring);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -257,7 +257,7 @@ String toString() {
 
 
 class _Ready implements CreateVideoState {
-  const _Ready({required this.selectedTab, required this.customPrompt, required this.inspireMeCount, required final  List<String?> slotsPaths, required this.quality, required this.duration, required this.isGenerating, this.isSuccess = false}): _slotsPaths = slotsPaths;
+  const _Ready({required this.selectedTab, required this.customPrompt, required this.inspireMeCount, required final  List<String?> slotsPaths, required final  List<String?> uploadedSlotsPaths, required this.quality, required this.duration, required this.isGenerating, this.isSuccess = false, this.isInspiring = false}): _slotsPaths = slotsPaths,_uploadedSlotsPaths = uploadedSlotsPaths;
   
 
  final  int selectedTab;
@@ -270,10 +270,18 @@ class _Ready implements CreateVideoState {
   return EqualUnmodifiableListView(_slotsPaths);
 }
 
+ final  List<String?> _uploadedSlotsPaths;
+ List<String?> get uploadedSlotsPaths {
+  if (_uploadedSlotsPaths is EqualUnmodifiableListView) return _uploadedSlotsPaths;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_uploadedSlotsPaths);
+}
+
  final  String quality;
  final  String duration;
  final  bool isGenerating;
 @JsonKey() final  bool isSuccess;
+@JsonKey() final  bool isInspiring;
 
 /// Create a copy of CreateVideoState
 /// with the given fields replaced by the non-null parameter values.
@@ -285,16 +293,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.selectedTab, selectedTab) || other.selectedTab == selectedTab)&&(identical(other.customPrompt, customPrompt) || other.customPrompt == customPrompt)&&(identical(other.inspireMeCount, inspireMeCount) || other.inspireMeCount == inspireMeCount)&&const DeepCollectionEquality().equals(other._slotsPaths, _slotsPaths)&&(identical(other.quality, quality) || other.quality == quality)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.selectedTab, selectedTab) || other.selectedTab == selectedTab)&&(identical(other.customPrompt, customPrompt) || other.customPrompt == customPrompt)&&(identical(other.inspireMeCount, inspireMeCount) || other.inspireMeCount == inspireMeCount)&&const DeepCollectionEquality().equals(other._slotsPaths, _slotsPaths)&&const DeepCollectionEquality().equals(other._uploadedSlotsPaths, _uploadedSlotsPaths)&&(identical(other.quality, quality) || other.quality == quality)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess)&&(identical(other.isInspiring, isInspiring) || other.isInspiring == isInspiring));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedTab,customPrompt,inspireMeCount,const DeepCollectionEquality().hash(_slotsPaths),quality,duration,isGenerating,isSuccess);
+int get hashCode => Object.hash(runtimeType,selectedTab,customPrompt,inspireMeCount,const DeepCollectionEquality().hash(_slotsPaths),const DeepCollectionEquality().hash(_uploadedSlotsPaths),quality,duration,isGenerating,isSuccess,isInspiring);
 
 @override
 String toString() {
-  return 'CreateVideoState.ready(selectedTab: $selectedTab, customPrompt: $customPrompt, inspireMeCount: $inspireMeCount, slotsPaths: $slotsPaths, quality: $quality, duration: $duration, isGenerating: $isGenerating, isSuccess: $isSuccess)';
+  return 'CreateVideoState.ready(selectedTab: $selectedTab, customPrompt: $customPrompt, inspireMeCount: $inspireMeCount, slotsPaths: $slotsPaths, uploadedSlotsPaths: $uploadedSlotsPaths, quality: $quality, duration: $duration, isGenerating: $isGenerating, isSuccess: $isSuccess, isInspiring: $isInspiring)';
 }
 
 
@@ -305,7 +313,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $CreateVideoStateCopyWith<
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- int selectedTab, String customPrompt, int inspireMeCount, List<String?> slotsPaths, String quality, String duration, bool isGenerating, bool isSuccess
+ int selectedTab, String customPrompt, int inspireMeCount, List<String?> slotsPaths, List<String?> uploadedSlotsPaths, String quality, String duration, bool isGenerating, bool isSuccess, bool isInspiring
 });
 
 
@@ -322,16 +330,18 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of CreateVideoState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? selectedTab = null,Object? customPrompt = null,Object? inspireMeCount = null,Object? slotsPaths = null,Object? quality = null,Object? duration = null,Object? isGenerating = null,Object? isSuccess = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? selectedTab = null,Object? customPrompt = null,Object? inspireMeCount = null,Object? slotsPaths = null,Object? uploadedSlotsPaths = null,Object? quality = null,Object? duration = null,Object? isGenerating = null,Object? isSuccess = null,Object? isInspiring = null,}) {
   return _then(_Ready(
 selectedTab: null == selectedTab ? _self.selectedTab : selectedTab // ignore: cast_nullable_to_non_nullable
 as int,customPrompt: null == customPrompt ? _self.customPrompt : customPrompt // ignore: cast_nullable_to_non_nullable
 as String,inspireMeCount: null == inspireMeCount ? _self.inspireMeCount : inspireMeCount // ignore: cast_nullable_to_non_nullable
 as int,slotsPaths: null == slotsPaths ? _self._slotsPaths : slotsPaths // ignore: cast_nullable_to_non_nullable
+as List<String?>,uploadedSlotsPaths: null == uploadedSlotsPaths ? _self._uploadedSlotsPaths : uploadedSlotsPaths // ignore: cast_nullable_to_non_nullable
 as List<String?>,quality: null == quality ? _self.quality : quality // ignore: cast_nullable_to_non_nullable
 as String,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
 as String,isGenerating: null == isGenerating ? _self.isGenerating : isGenerating // ignore: cast_nullable_to_non_nullable
 as bool,isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool,isInspiring: null == isInspiring ? _self.isInspiring : isInspiring // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

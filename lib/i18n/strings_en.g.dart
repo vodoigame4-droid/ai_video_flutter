@@ -229,6 +229,9 @@ class Translations$create$en {
 
 	/// en: 'Select a mock file to simulate upload'
 	String get select_media_desc => 'Select a mock file to simulate upload';
+
+	/// en: 'AI is thinking...'
+	String get inspiring => 'AI is thinking...';
 }
 
 // Path: leave_dialog
@@ -1236,6 +1239,7 @@ extension on Translations {
 			'create.generating_video' => 'Generating your video...',
 			'create.select_mock_media' => 'Select Mock Media',
 			'create.select_media_desc' => 'Select a mock file to simulate upload',
+			'create.inspiring' => 'AI is thinking...',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Video AI',

@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "جاري إنشاء الفيديو الخاص بك...",
     "select_mock_media": "حدد وسائط وهمية",
-    "select_media_desc": "حدد ملفًا وهميًا لمحاكاة التحميل"
+    "select_media_desc": "حدد ملفًا وهميًا لمحاكاة التحميل",
+    "inspiring": "الذكاء الاصطناعي يفكر..."
   },
   "leave_dialog": {
     "title": "هل تريد المغادرة دون حفظ؟",

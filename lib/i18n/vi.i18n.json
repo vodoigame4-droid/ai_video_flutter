@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Đang tạo video của bạn...",
     "select_mock_media": "Chọn file mẫu",
-    "select_media_desc": "Chọn một file mẫu để mô phỏng tải lên"
+    "select_media_desc": "Chọn một file mẫu để mô phỏng tải lên",
+    "inspiring": "AI đang suy nghĩ..."
   },
   "leave_dialog": {
     "title": "Rời đi không lưu?",

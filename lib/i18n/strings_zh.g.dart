@@ -133,6 +133,7 @@ class _Translations$create$zh extends Translations$create$en {
 	@override String get generating_video => '正在生成您的视频...';
 	@override String get select_mock_media => '选择模拟媒体';
 	@override String get select_media_desc => '选择一个模拟文件以模拟上传';
+	@override String get inspiring => 'AI 正在思考...';
 }
 
 // Path: leave_dialog
@@ -634,6 +635,7 @@ extension on TranslationsZh {
 			'create.generating_video' => '正在生成您的视频...',
 			'create.select_mock_media' => '选择模拟媒体',
 			'create.select_media_desc' => '选择一个模拟文件以模拟上传',
+			'create.inspiring' => 'AI 正在思考...',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
 			'splash.appName' => '视频AI',

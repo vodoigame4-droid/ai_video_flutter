@@ -39,6 +39,8 @@ abstract class MediaRemoteDataSource {
   Future<List<UploadResponseModel>> uploadImages(List<String> filePaths);
 
   Future<UploadResponseModel> uploadVideo(String filePath);
+
+  Future<SuggestionResponseModel> getSuggestionPrompt(String imageUrl);
 }
 
 class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
@@ -150,5 +152,13 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
       LogUtils.w('MediaRemoteDataSourceImpl: uploadVideo failed (fallback to mock): $e');
       return const UploadResponseModel(url: 'https://cdn.example.com/mock_video.mp4');
     }
+  }
+
+  @override
+  Future<SuggestionResponseModel> getSuggestionPrompt(String imageUrl) async {
+    final response = await _apiClient.getSuggestionPrompt(
+      SuggestionRequestModel(imageUrl: imageUrl),
+    );
+    return response.data;
   }
 }

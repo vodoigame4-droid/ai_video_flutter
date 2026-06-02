@@ -74,4 +74,9 @@ abstract class MediaApiClient {
   Future<BaseResponse<UploadResponseModel>> uploadVideo(
     @Part() MultipartFile file,
   );
+
+  @POST('/media/suggestion')
+  Future<BaseResponse<SuggestionResponseModel>> getSuggestionPrompt(
+    @Body() SuggestionRequestModel request,
+  );
 }

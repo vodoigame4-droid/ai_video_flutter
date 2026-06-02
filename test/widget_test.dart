@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,16 +8,73 @@ import 'package:ai_video_flutter/i18n/strings.g.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:core_business/core_business.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 class MockMediaRepository extends Mock implements MediaRepository {}
+class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
+class MockNotificationSettings extends Mock implements NotificationSettings {}
+class MockAutoLoginUseCase extends Mock implements AutoLoginUseCase {}
 
 void main() {
   // Disable Google Fonts HTTP fetching during tests
   GoogleFonts.config.allowRuntimeFetching = false;
 
   setUp(() async {
+    registerFallbackValue(NoParams());
+
     SharedPreferences.setMockInitialValues({});
     await sl.reset();
     await initDependencies();
+
+    final mockFirebaseMessaging = MockFirebaseMessaging();
+    final mockNotificationSettings = MockNotificationSettings();
+    final mockAutoLoginUseCase = MockAutoLoginUseCase();
+
+    when(() => mockNotificationSettings.authorizationStatus)
+        .thenReturn(AuthorizationStatus.authorized);
+
+    when(() => mockFirebaseMessaging.setForegroundNotificationPresentationOptions(
+          alert: any(named: 'alert'),
+          badge: any(named: 'badge'),
+          sound: any(named: 'sound'),
+        )).thenAnswer((_) async {});
+    when(() => mockFirebaseMessaging.getToken()).thenAnswer((_) async => 'mock_token');
+    when(() => mockFirebaseMessaging.getInitialMessage()).thenAnswer((_) async => null);
+    when(() => mockFirebaseMessaging.requestPermission(
+          alert: any(named: 'alert'),
+          announcement: any(named: 'announcement'),
+          badge: any(named: 'badge'),
+          carPlay: any(named: 'carPlay'),
+          criticalAlert: any(named: 'criticalAlert'),
+          provisional: any(named: 'provisional'),
+          sound: any(named: 'sound'),
+        )).thenAnswer((_) async => mockNotificationSettings);
+
+    when(() => mockAutoLoginUseCase(any())).thenAnswer(
+      (_) async => Resource.success(UserEntity(
+        id: 'mock_user_id',
+        deviceId: 'mock-device-id-tgv',
+        name: 'Mock User',
+        email: 'mock@example.com',
+        avatarUrl: '',
+        inviteCode: '',
+        status: 'active',
+        credits: 100,
+        extraCredits: 0,
+        subscribeCredits: 0,
+        isRated: false,
+        isVip: false,
+        activeSubId: null,
+        refUsersCount: 0,
+        createdAt: DateTime.now(),
+      )),
+    );
+
+    sl.unregister<FirebaseMessaging>();
+    sl.registerLazySingleton<FirebaseMessaging>(() => mockFirebaseMessaging);
+
+    sl.unregister<AutoLoginUseCase>();
+    sl.registerLazySingleton<AutoLoginUseCase>(() => mockAutoLoginUseCase);
 
     final mockMediaRepository = MockMediaRepository();
 
@@ -86,7 +144,7 @@ void main() {
 
   testWidgets('Video AI app renders successfully', (WidgetTester tester) async {
     // Initialize slang for testing
-    LocaleSettings.useDeviceLocaleSync();
+    LocaleSettings.setLocale(AppLocale.en);
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());

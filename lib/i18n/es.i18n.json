@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Generando tu video...",
     "select_mock_media": "Seleccionar medio simulado",
-    "select_media_desc": "Seleccione un archivo simulado para simular la carga"
+    "select_media_desc": "Seleccione un archivo simulado para simular la carga",
+    "inspiring": "La IA está pensando..."
   },
   "leave_dialog": {
     "title": "¿Salir sin guardar?",

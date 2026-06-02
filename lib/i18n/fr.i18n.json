@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Génération de votre vidéo...",
     "select_mock_media": "Sélectionner un média fictif",
-    "select_media_desc": "Sélectionnez un fichier fictif pour simuler le téléchargement"
+    "select_media_desc": "Sélectionnez un fichier fictif pour simuler le téléchargement",
+    "inspiring": "L'IA réfléchit..."
   },
   "leave_dialog": {
     "title": "Quitter sans sauvegarder ?",

@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Generating your video...",
     "select_mock_media": "Select Mock Media",
-    "select_media_desc": "Select a mock file to simulate upload"
+    "select_media_desc": "Select a mock file to simulate upload",
+    "inspiring": "AI is thinking..."
   },
   "leave_dialog": {
     "title": "Leave without saving?",

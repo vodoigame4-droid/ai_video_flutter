@@ -178,3 +178,19 @@ _UploadResponseModel _$UploadResponseModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$UploadResponseModelToJson(
   _UploadResponseModel instance,
 ) => <String, dynamic>{'url': instance.url};
+
+_SuggestionRequestModel _$SuggestionRequestModelFromJson(
+  Map<String, dynamic> json,
+) => _SuggestionRequestModel(imageUrl: json['imageUrl'] as String);
+
+Map<String, dynamic> _$SuggestionRequestModelToJson(
+  _SuggestionRequestModel instance,
+) => <String, dynamic>{'imageUrl': instance.imageUrl};
+
+_SuggestionResponseModel _$SuggestionResponseModelFromJson(
+  Map<String, dynamic> json,
+) => _SuggestionResponseModel(prompt: json['prompt'] as String);
+
+Map<String, dynamic> _$SuggestionResponseModelToJson(
+  _SuggestionResponseModel instance,
+) => <String, dynamic>{'prompt': instance.prompt};

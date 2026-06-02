@@ -41,6 +41,7 @@ import '../../features/media/domain/usecases/download_video_usecase.dart';
 import '../../features/media/domain/usecases/share_video_usecase.dart';
 import '../../features/media/domain/usecases/request_notification_permission_usecase.dart';
 import '../../features/media/domain/usecases/subscribe_notification_topic_usecase.dart';
+import '../../features/media/domain/usecases/get_suggestion_prompt_usecase.dart';
 
 // Liked Templates / Local DB
 import '../../core/database/app_database.dart';
@@ -134,6 +135,7 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => ShareVideoUseCase());
   sl.registerLazySingleton(() => RequestNotificationPermissionUseCase(notificationRepository: sl()));
   sl.registerLazySingleton(() => SubscribeNotificationTopicUseCase(notificationRepository: sl()));
+  sl.registerLazySingleton(() => GetSuggestionPromptUseCase(mediaRepository: sl()));
 
   // Drift Database & Liked Templates Local Storage
   sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
@@ -177,7 +179,10 @@ void initBusinessDependencies(GetIt sl) {
       getThemesUseCase: sl(),
     ),
   );
-  sl.registerFactory(() => CreateVideoBloc());
+  sl.registerFactory(() => CreateVideoBloc(
+        getSuggestionPromptUseCase: sl(),
+        uploadImageUseCase: sl(),
+      ));
   sl.registerFactory(
     () => CreateFromTemplateBloc(
       isTemplateLikedUseCase: sl(),

@@ -50,7 +50,8 @@
     "character_count": "{current}/1000",
     "generating_video": "Sedang menghasilkan video Anda...",
     "select_mock_media": "Pilih Media Simulasi",
-    "select_media_desc": "Pilih file simulasi untuk mensimulasikan unggahan"
+    "select_media_desc": "Pilih file simulasi untuk mensimulasikan unggahan",
+    "inspiring": "AI sedang berpikir..."
   },
   "leave_dialog": {
     "title": "Keluar tanpa menyimpan?",

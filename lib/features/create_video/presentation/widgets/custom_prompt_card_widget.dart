@@ -12,6 +12,8 @@ class CustomPromptCardWidget extends StatefulWidget {
   final ValueChanged<String> onPromptChanged;
   final VoidCallback onInspireMePressed;
   final VoidCallback onClearPressed;
+  final bool isInspiring;
+  final bool hasImage;
 
   const CustomPromptCardWidget({
     super.key,
@@ -20,6 +22,8 @@ class CustomPromptCardWidget extends StatefulWidget {
     required this.onPromptChanged,
     required this.onInspireMePressed,
     required this.onClearPressed,
+    this.isInspiring = false,
+    this.hasImage = true,
   });
 
   @override
@@ -127,7 +131,8 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
 
   Widget _buildInspireMeButton(BuildContext context) {
     final t = context.t;
-    final hasUsesLeft = widget.inspireMeCount > 0;
+    final hasUsesLeft =
+        widget.inspireMeCount > 0 && !widget.isInspiring && widget.hasImage;
 
     return Container(
       decoration: BoxDecoration(
@@ -138,10 +143,7 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
                 gradient: context.appTheme.primaryGradient,
                 width: 1,
               )
-            : Border.all(
-                color: context.appTheme.borderColor,
-                width: 1,
-              ),
+            : Border.all(color: context.appTheme.borderColor, width: 1),
       ),
       child: Material(
         color: Colors.transparent,
@@ -153,16 +155,34 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                AppSvgIcon(
-                  assetName: Assets.icons.icInspireMe,
-                  gradient: hasUsesLeft ? context.appTheme.primaryGradient : null,
-                  color: hasUsesLeft ? null : AppColors.white.withValues(alpha: 0.4),
-                  width: 14,
-                  height: 14,
-                ),
+                if (widget.isInspiring)
+                  const SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.white,
+                      ),
+                    ),
+                  )
+                else
+                  AppSvgIcon(
+                    assetName: Assets.icons.icInspireMe,
+                    gradient: hasUsesLeft
+                        ? context.appTheme.primaryGradient
+                        : null,
+                    color: hasUsesLeft
+                        ? null
+                        : AppColors.white.withValues(alpha: 0.4),
+                    width: 14,
+                    height: 14,
+                  ),
                 const SizedBox(width: 8),
                 Text(
-                  t.create.inspire_me_count(count: widget.inspireMeCount),
+                  widget.isInspiring
+                      ? t.create.inspiring
+                      : t.create.inspire_me_count(count: widget.inspireMeCount),
                   style: hasUsesLeft
                       ? context.appTheme.navLabelActiveStyle
                       : context.appTheme.navLabelInactiveStyle,

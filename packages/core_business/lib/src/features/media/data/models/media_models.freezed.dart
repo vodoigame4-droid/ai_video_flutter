@@ -1996,4 +1996,530 @@ as String,
 
 }
 
+
+/// @nodoc
+mixin _$SuggestionRequestModel {
+
+ String get imageUrl;
+/// Create a copy of SuggestionRequestModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SuggestionRequestModelCopyWith<SuggestionRequestModel> get copyWith => _$SuggestionRequestModelCopyWithImpl<SuggestionRequestModel>(this as SuggestionRequestModel, _$identity);
+
+  /// Serializes this SuggestionRequestModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuggestionRequestModel&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,imageUrl);
+
+@override
+String toString() {
+  return 'SuggestionRequestModel(imageUrl: $imageUrl)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SuggestionRequestModelCopyWith<$Res>  {
+  factory $SuggestionRequestModelCopyWith(SuggestionRequestModel value, $Res Function(SuggestionRequestModel) _then) = _$SuggestionRequestModelCopyWithImpl;
+@useResult
+$Res call({
+ String imageUrl
+});
+
+
+
+
+}
+/// @nodoc
+class _$SuggestionRequestModelCopyWithImpl<$Res>
+    implements $SuggestionRequestModelCopyWith<$Res> {
+  _$SuggestionRequestModelCopyWithImpl(this._self, this._then);
+
+  final SuggestionRequestModel _self;
+  final $Res Function(SuggestionRequestModel) _then;
+
+/// Create a copy of SuggestionRequestModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? imageUrl = null,}) {
+  return _then(_self.copyWith(
+imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SuggestionRequestModel].
+extension SuggestionRequestModelPatterns on SuggestionRequestModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SuggestionRequestModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SuggestionRequestModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SuggestionRequestModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _SuggestionRequestModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SuggestionRequestModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SuggestionRequestModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String imageUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SuggestionRequestModel() when $default != null:
+return $default(_that.imageUrl);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String imageUrl)  $default,) {final _that = this;
+switch (_that) {
+case _SuggestionRequestModel():
+return $default(_that.imageUrl);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String imageUrl)?  $default,) {final _that = this;
+switch (_that) {
+case _SuggestionRequestModel() when $default != null:
+return $default(_that.imageUrl);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SuggestionRequestModel implements SuggestionRequestModel {
+  const _SuggestionRequestModel({required this.imageUrl});
+  factory _SuggestionRequestModel.fromJson(Map<String, dynamic> json) => _$SuggestionRequestModelFromJson(json);
+
+@override final  String imageUrl;
+
+/// Create a copy of SuggestionRequestModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SuggestionRequestModelCopyWith<_SuggestionRequestModel> get copyWith => __$SuggestionRequestModelCopyWithImpl<_SuggestionRequestModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SuggestionRequestModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SuggestionRequestModel&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,imageUrl);
+
+@override
+String toString() {
+  return 'SuggestionRequestModel(imageUrl: $imageUrl)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SuggestionRequestModelCopyWith<$Res> implements $SuggestionRequestModelCopyWith<$Res> {
+  factory _$SuggestionRequestModelCopyWith(_SuggestionRequestModel value, $Res Function(_SuggestionRequestModel) _then) = __$SuggestionRequestModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String imageUrl
+});
+
+
+
+
+}
+/// @nodoc
+class __$SuggestionRequestModelCopyWithImpl<$Res>
+    implements _$SuggestionRequestModelCopyWith<$Res> {
+  __$SuggestionRequestModelCopyWithImpl(this._self, this._then);
+
+  final _SuggestionRequestModel _self;
+  final $Res Function(_SuggestionRequestModel) _then;
+
+/// Create a copy of SuggestionRequestModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? imageUrl = null,}) {
+  return _then(_SuggestionRequestModel(
+imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$SuggestionResponseModel {
+
+ String get prompt;
+/// Create a copy of SuggestionResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SuggestionResponseModelCopyWith<SuggestionResponseModel> get copyWith => _$SuggestionResponseModelCopyWithImpl<SuggestionResponseModel>(this as SuggestionResponseModel, _$identity);
+
+  /// Serializes this SuggestionResponseModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuggestionResponseModel&&(identical(other.prompt, prompt) || other.prompt == prompt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,prompt);
+
+@override
+String toString() {
+  return 'SuggestionResponseModel(prompt: $prompt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SuggestionResponseModelCopyWith<$Res>  {
+  factory $SuggestionResponseModelCopyWith(SuggestionResponseModel value, $Res Function(SuggestionResponseModel) _then) = _$SuggestionResponseModelCopyWithImpl;
+@useResult
+$Res call({
+ String prompt
+});
+
+
+
+
+}
+/// @nodoc
+class _$SuggestionResponseModelCopyWithImpl<$Res>
+    implements $SuggestionResponseModelCopyWith<$Res> {
+  _$SuggestionResponseModelCopyWithImpl(this._self, this._then);
+
+  final SuggestionResponseModel _self;
+  final $Res Function(SuggestionResponseModel) _then;
+
+/// Create a copy of SuggestionResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? prompt = null,}) {
+  return _then(_self.copyWith(
+prompt: null == prompt ? _self.prompt : prompt // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SuggestionResponseModel].
+extension SuggestionResponseModelPatterns on SuggestionResponseModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SuggestionResponseModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SuggestionResponseModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SuggestionResponseModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _SuggestionResponseModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SuggestionResponseModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SuggestionResponseModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String prompt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SuggestionResponseModel() when $default != null:
+return $default(_that.prompt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String prompt)  $default,) {final _that = this;
+switch (_that) {
+case _SuggestionResponseModel():
+return $default(_that.prompt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String prompt)?  $default,) {final _that = this;
+switch (_that) {
+case _SuggestionResponseModel() when $default != null:
+return $default(_that.prompt);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SuggestionResponseModel implements SuggestionResponseModel {
+  const _SuggestionResponseModel({required this.prompt});
+  factory _SuggestionResponseModel.fromJson(Map<String, dynamic> json) => _$SuggestionResponseModelFromJson(json);
+
+@override final  String prompt;
+
+/// Create a copy of SuggestionResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SuggestionResponseModelCopyWith<_SuggestionResponseModel> get copyWith => __$SuggestionResponseModelCopyWithImpl<_SuggestionResponseModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SuggestionResponseModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SuggestionResponseModel&&(identical(other.prompt, prompt) || other.prompt == prompt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,prompt);
+
+@override
+String toString() {
+  return 'SuggestionResponseModel(prompt: $prompt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SuggestionResponseModelCopyWith<$Res> implements $SuggestionResponseModelCopyWith<$Res> {
+  factory _$SuggestionResponseModelCopyWith(_SuggestionResponseModel value, $Res Function(_SuggestionResponseModel) _then) = __$SuggestionResponseModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String prompt
+});
+
+
+
+
+}
+/// @nodoc
+class __$SuggestionResponseModelCopyWithImpl<$Res>
+    implements _$SuggestionResponseModelCopyWith<$Res> {
+  __$SuggestionResponseModelCopyWithImpl(this._self, this._then);
+
+  final _SuggestionResponseModel _self;
+  final $Res Function(_SuggestionResponseModel) _then;
+
+/// Create a copy of SuggestionResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? prompt = null,}) {
+  return _then(_SuggestionResponseModel(
+prompt: null == prompt ? _self.prompt : prompt // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 // dart format on

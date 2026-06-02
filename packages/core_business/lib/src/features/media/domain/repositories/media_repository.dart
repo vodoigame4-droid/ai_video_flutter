@@ -32,4 +32,6 @@ abstract class MediaRepository {
   Future<Resource<List<String>>> uploadImages(List<String> filePaths);
 
   Future<Resource<String>> uploadVideo(String filePath);
+
+  Future<Resource<String>> getSuggestionPrompt(String imageUrl);
 }

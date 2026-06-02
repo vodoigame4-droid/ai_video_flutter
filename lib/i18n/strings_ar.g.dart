@@ -133,6 +133,7 @@ class _Translations$create$ar extends Translations$create$en {
 	@override String get generating_video => 'جاري إنشاء الفيديو الخاص بك...';
 	@override String get select_mock_media => 'حدد وسائط وهمية';
 	@override String get select_media_desc => 'حدد ملفًا وهميًا لمحاكاة التحميل';
+	@override String get inspiring => 'الذكاء الاصطناعي يفكر...';
 }
 
 // Path: leave_dialog
@@ -634,6 +635,7 @@ extension on TranslationsAr {
 			'create.generating_video' => 'جاري إنشاء الفيديو الخاص بك...',
 			'create.select_mock_media' => 'حدد وسائط وهمية',
 			'create.select_media_desc' => 'حدد ملفًا وهميًا لمحاكاة التحميل',
+			'create.inspiring' => 'الذكاء الاصطناعي يفكر...',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
 			'splash.appName' => 'فيديو ذكاء اصطناعي',
