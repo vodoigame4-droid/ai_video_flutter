@@ -51,7 +51,12 @@
     "generating_video": "正在生成您的视频...",
     "select_mock_media": "选择模拟媒体",
     "select_media_desc": "选择一个模拟文件以模拟上传",
-    "inspiring": "AI 正在思考..."
+    "inspiring": "AI 正在思考...",
+    "limit_dialog_title": "免费建议已用完",
+    "limit_dialog_desc": "您已用完所有 3 次免费建议。请升级至 VIP 以享受无限建议！",
+    "limit_dialog_btn": "升级至 VIP",
+    "limit_dialog_cancel": "稍后再说",
+    "inspire_me_pro": "灵感推荐 (PRO)"
   },
   "leave_dialog": {
     "title": "不保存直接离开？",

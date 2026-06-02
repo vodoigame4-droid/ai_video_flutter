@@ -51,7 +51,12 @@
     "generating_video": "Video wird generiert...",
     "select_mock_media": "Mock-Medien auswählen",
     "select_media_desc": "Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren",
-    "inspiring": "KI denkt nach..."
+    "inspiring": "KI denkt nach...",
+    "limit_dialog_title": "Keine kostenlosen Vorschläge mehr",
+    "limit_dialog_desc": "Sie haben alle 3 kostenlosen Vorschläge aufgebraucht. Bitte aktualisieren Sie auf VIP, um unbegrenzte Vorschläge zu erhalten!",
+    "limit_dialog_btn": "Auf VIP upgraden",
+    "limit_dialog_cancel": "Vielleicht später",
+    "inspire_me_pro": "Inspiriere mich (PRO)"
   },
   "leave_dialog": {
     "title": "Verlassen ohne zu speichern?",

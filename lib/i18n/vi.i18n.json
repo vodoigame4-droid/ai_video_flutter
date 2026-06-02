@@ -51,7 +51,12 @@
     "generating_video": "Đang tạo video của bạn...",
     "select_mock_media": "Chọn file mẫu",
     "select_media_desc": "Chọn một file mẫu để mô phỏng tải lên",
-    "inspiring": "AI đang suy nghĩ..."
+    "inspiring": "AI đang suy nghĩ...",
+    "limit_dialog_title": "Hết lượt gợi ý miễn phí",
+    "limit_dialog_desc": "Bạn đã sử dụng hết 3 lượt gợi ý miễn phí. Vui lòng nâng cấp lên VIP để nhận gợi ý không giới hạn!",
+    "limit_dialog_btn": "Nâng cấp VIP",
+    "limit_dialog_cancel": "Để sau",
+    "inspire_me_pro": "Gợi ý cho tôi (PRO)"
   },
   "leave_dialog": {
     "title": "Rời đi không lưu?",

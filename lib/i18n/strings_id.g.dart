@@ -134,6 +134,11 @@ class _Translations$create$id extends Translations$create$en {
 	@override String get select_mock_media => 'Pilih Media Simulasi';
 	@override String get select_media_desc => 'Pilih file simulasi untuk mensimulasikan unggahan';
 	@override String get inspiring => 'AI sedang berpikir...';
+	@override String get limit_dialog_title => 'Saran Gratis Habis';
+	@override String get limit_dialog_desc => 'Anda telah menggunakan semua 3 saran gratis. Silakan tingkatkan ke VIP untuk menikmati saran tanpa batas!';
+	@override String get limit_dialog_btn => 'Tingkatkan ke VIP';
+	@override String get limit_dialog_cancel => 'Mungkin Nanti';
+	@override String get inspire_me_pro => 'Inspirasi Saya (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsId {
 			'create.select_mock_media' => 'Pilih Media Simulasi',
 			'create.select_media_desc' => 'Pilih file simulasi untuk mensimulasikan unggahan',
 			'create.inspiring' => 'AI sedang berpikir...',
+			'create.limit_dialog_title' => 'Saran Gratis Habis',
+			'create.limit_dialog_desc' => 'Anda telah menggunakan semua 3 saran gratis. Silakan tingkatkan ke VIP untuk menikmati saran tanpa batas!',
+			'create.limit_dialog_btn' => 'Tingkatkan ke VIP',
+			'create.limit_dialog_cancel' => 'Mungkin Nanti',
+			'create.inspire_me_pro' => 'Inspirasi Saya (PRO)',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Video AI',

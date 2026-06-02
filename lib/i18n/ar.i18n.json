@@ -51,7 +51,12 @@
     "generating_video": "جاري إنشاء الفيديو الخاص بك...",
     "select_mock_media": "حدد وسائط وهمية",
     "select_media_desc": "حدد ملفًا وهميًا لمحاكاة التحميل",
-    "inspiring": "الذكاء الاصطناعي يفكر..."
+    "inspiring": "الذكاء الاصطناعي يفكر...",
+    "limit_dialog_title": "نفدت الاقتراحات المجانية",
+    "limit_dialog_desc": "لقد استخدمت جميع الاقتراحات المجانية الثلاثة. يرجى الترقية إلى VIP للاستمتاع باقتراحات غير محدودة!",
+    "limit_dialog_btn": "الترقية إلى VIP",
+    "limit_dialog_cancel": "ربما لاحقًا",
+    "inspire_me_pro": "ألهمني (PRO)"
   },
   "leave_dialog": {
     "title": "هل تريد المغادرة دون حفظ؟",

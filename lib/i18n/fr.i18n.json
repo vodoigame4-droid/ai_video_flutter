@@ -51,7 +51,12 @@
     "generating_video": "Génération de votre vidéo...",
     "select_mock_media": "Sélectionner un média fictif",
     "select_media_desc": "Sélectionnez un fichier fictif pour simuler le téléchargement",
-    "inspiring": "L'IA réfléchit..."
+    "inspiring": "L'IA réfléchit...",
+    "limit_dialog_title": "Plus de suggestions gratuites",
+    "limit_dialog_desc": "Vous avez utilisé les 3 suggestions gratuites. Veuillez passer à VIP pour profiter de suggestions illimitées !",
+    "limit_dialog_btn": "Passer à VIP",
+    "limit_dialog_cancel": "Plus tard",
+    "inspire_me_pro": "Inspirez-moi (PRO)"
   },
   "leave_dialog": {
     "title": "Quitter sans sauvegarder ?",

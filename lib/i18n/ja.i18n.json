@@ -51,7 +51,12 @@
     "generating_video": "動画を生成中...",
     "select_mock_media": "モックメディアを選択",
     "select_media_desc": "アップロードをシミュレートするモックファイルを選択",
-    "inspiring": "AIが考えています..."
+    "inspiring": "AIが考えています...",
+    "limit_dialog_title": "無料提案の終了",
+    "limit_dialog_desc": "3回の無料提案をすべて使用しました。無制限の提案を楽しむためにVIPにアップグレードしてください！",
+    "limit_dialog_btn": "VIPにアップグレード",
+    "limit_dialog_cancel": "後で",
+    "inspire_me_pro": "ひらめきを得る (PRO)"
   },
   "leave_dialog": {
     "title": "保存せずに終了しますか？",

@@ -134,6 +134,11 @@ class _Translations$create$ar extends Translations$create$en {
 	@override String get select_mock_media => 'حدد وسائط وهمية';
 	@override String get select_media_desc => 'حدد ملفًا وهميًا لمحاكاة التحميل';
 	@override String get inspiring => 'الذكاء الاصطناعي يفكر...';
+	@override String get limit_dialog_title => 'نفدت الاقتراحات المجانية';
+	@override String get limit_dialog_desc => 'لقد استخدمت جميع الاقتراحات المجانية الثلاثة. يرجى الترقية إلى VIP للاستمتاع باقتراحات غير محدودة!';
+	@override String get limit_dialog_btn => 'الترقية إلى VIP';
+	@override String get limit_dialog_cancel => 'ربما لاحقًا';
+	@override String get inspire_me_pro => 'ألهمني (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsAr {
 			'create.select_mock_media' => 'حدد وسائط وهمية',
 			'create.select_media_desc' => 'حدد ملفًا وهميًا لمحاكاة التحميل',
 			'create.inspiring' => 'الذكاء الاصطناعي يفكر...',
+			'create.limit_dialog_title' => 'نفدت الاقتراحات المجانية',
+			'create.limit_dialog_desc' => 'لقد استخدمت جميع الاقتراحات المجانية الثلاثة. يرجى الترقية إلى VIP للاستمتاع باقتراحات غير محدودة!',
+			'create.limit_dialog_btn' => 'الترقية إلى VIP',
+			'create.limit_dialog_cancel' => 'ربما لاحقًا',
+			'create.inspire_me_pro' => 'ألهمني (PRO)',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
 			'splash.appName' => 'فيديو ذكاء اصطناعي',

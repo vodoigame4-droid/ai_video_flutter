@@ -134,6 +134,11 @@ class _Translations$create$hi extends Translations$create$en {
 	@override String get select_mock_media => 'नकली मीडिया चुनें';
 	@override String get select_media_desc => 'अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें';
 	@override String get inspiring => 'एआई सोच रहा है...';
+	@override String get limit_dialog_title => 'मुफ़्त सुझाव समाप्त';
+	@override String get limit_dialog_desc => 'आपने सभी 3 मुफ़्त सुझावों का उपयोग कर लिया है। कृपया असीमित सुझावों का आनंद लेने के लिए VIP में अपग्रेड करें!';
+	@override String get limit_dialog_btn => 'VIP में अपग्रेड करें';
+	@override String get limit_dialog_cancel => 'बाद में';
+	@override String get inspire_me_pro => 'मुझे प्रेरित करें (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsHi {
 			'create.select_mock_media' => 'नकली मीडिया चुनें',
 			'create.select_media_desc' => 'अपलोड अनुकरण करने के लिए एक नकली फ़ाइल चुनें',
 			'create.inspiring' => 'एआई सोच रहा है...',
+			'create.limit_dialog_title' => 'मुफ़्त सुझाव समाप्त',
+			'create.limit_dialog_desc' => 'आपने सभी 3 मुफ़्त सुझावों का उपयोग कर लिया है। कृपया असीमित सुझावों का आनंद लेने के लिए VIP में अपग्रेड करें!',
+			'create.limit_dialog_btn' => 'VIP में अपग्रेड करें',
+			'create.limit_dialog_cancel' => 'बाद में',
+			'create.inspire_me_pro' => 'मुझे प्रेरित करें (PRO)',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'वीडियो एआई',

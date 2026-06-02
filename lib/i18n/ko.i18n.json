@@ -51,7 +51,12 @@
     "generating_video": "동영상 생성 중...",
     "select_mock_media": "모크 미디어 선택",
     "select_media_desc": "업로드를 시뮬레이션할 모크 파일 선택",
-    "inspiring": "AI가 생각 중..."
+    "inspiring": "AI가 생각 중...",
+    "limit_dialog_title": "무료 제안 소진",
+    "limit_dialog_desc": "무료 제안 3회를 모두 사용하셨습니다. 무제한 제안을 이용하려면 VIP로 업그레이드하세요!",
+    "limit_dialog_btn": "VIP로 업그레이드",
+    "limit_dialog_cancel": "나중에",
+    "inspire_me_pro": "아이디어 얻기 (PRO)"
   },
   "leave_dialog": {
     "title": "저장하지 않고 나갈까요?",

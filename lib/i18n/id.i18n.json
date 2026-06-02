@@ -51,7 +51,12 @@
     "generating_video": "Sedang menghasilkan video Anda...",
     "select_mock_media": "Pilih Media Simulasi",
     "select_media_desc": "Pilih file simulasi untuk mensimulasikan unggahan",
-    "inspiring": "AI sedang berpikir..."
+    "inspiring": "AI sedang berpikir...",
+    "limit_dialog_title": "Saran Gratis Habis",
+    "limit_dialog_desc": "Anda telah menggunakan semua 3 saran gratis. Silakan tingkatkan ke VIP untuk menikmati saran tanpa batas!",
+    "limit_dialog_btn": "Tingkatkan ke VIP",
+    "limit_dialog_cancel": "Mungkin Nanti",
+    "inspire_me_pro": "Inspirasi Saya (PRO)"
   },
   "leave_dialog": {
     "title": "Keluar tanpa menyimpan?",

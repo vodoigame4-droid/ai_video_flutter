@@ -135,6 +135,11 @@ class _Translations$create$vi extends Translations$create$en {
 	@override String get select_mock_media => 'Chọn file mẫu';
 	@override String get select_media_desc => 'Chọn một file mẫu để mô phỏng tải lên';
 	@override String get inspiring => 'AI đang suy nghĩ...';
+	@override String get limit_dialog_title => 'Hết lượt gợi ý miễn phí';
+	@override String get limit_dialog_desc => 'Bạn đã sử dụng hết 3 lượt gợi ý miễn phí. Vui lòng nâng cấp lên VIP để nhận gợi ý không giới hạn!';
+	@override String get limit_dialog_btn => 'Nâng cấp VIP';
+	@override String get limit_dialog_cancel => 'Để sau';
+	@override String get inspire_me_pro => 'Gợi ý cho tôi (PRO)';
 }
 
 // Path: leave_dialog
@@ -652,6 +657,11 @@ extension on TranslationsVi {
 			'create.select_mock_media' => 'Chọn file mẫu',
 			'create.select_media_desc' => 'Chọn một file mẫu để mô phỏng tải lên',
 			'create.inspiring' => 'AI đang suy nghĩ...',
+			'create.limit_dialog_title' => 'Hết lượt gợi ý miễn phí',
+			'create.limit_dialog_desc' => 'Bạn đã sử dụng hết 3 lượt gợi ý miễn phí. Vui lòng nâng cấp lên VIP để nhận gợi ý không giới hạn!',
+			'create.limit_dialog_btn' => 'Nâng cấp VIP',
+			'create.limit_dialog_cancel' => 'Để sau',
+			'create.inspire_me_pro' => 'Gợi ý cho tôi (PRO)',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
 			'splash.appName' => 'Video AI',

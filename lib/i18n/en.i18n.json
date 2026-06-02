@@ -51,7 +51,12 @@
     "generating_video": "Generating your video...",
     "select_mock_media": "Select Mock Media",
     "select_media_desc": "Select a mock file to simulate upload",
-    "inspiring": "AI is thinking..."
+    "inspiring": "AI is thinking...",
+    "limit_dialog_title": "Out of Free Suggestions",
+    "limit_dialog_desc": "You have used all 3 free suggestions. Please upgrade to VIP to enjoy unlimited suggestions!",
+    "limit_dialog_btn": "Upgrade to VIP",
+    "limit_dialog_cancel": "Maybe Later",
+    "inspire_me_pro": "Inspire me (PRO)"
   },
   "leave_dialog": {
     "title": "Leave without saving?",

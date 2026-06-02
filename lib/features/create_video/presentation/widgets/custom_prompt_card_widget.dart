@@ -5,6 +5,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_svg_icon.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
+import 'premium_suggestion_bottom_sheet.dart';
 
 class CustomPromptCardWidget extends StatefulWidget {
   final String promptText;
@@ -131,16 +132,26 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
 
   Widget _buildInspireMeButton(BuildContext context) {
     final t = context.t;
-    final hasUsesLeft =
-        widget.inspireMeCount > 0 && !widget.isInspiring && widget.hasImage;
+    final isPremiumState = widget.inspireMeCount <= 0;
+    
+    // Nút có thể bấm được khi có ảnh và không ở trạng thái đang gợi ý
+    final canTap = !widget.isInspiring && widget.hasImage;
+
+    // Định nghĩa Gold Gradient dùng riêng cho style PRO
+    const goldGradient = LinearGradient(
+      colors: [
+        Color(0xFFFFD700), // Gold
+        Color(0xFFFFA500), // Orange
+      ],
+    );
 
     return Container(
       decoration: BoxDecoration(
         color: AppColors.black.withValues(alpha: 0.2),
         borderRadius: const BorderRadius.all(Radius.circular(100)),
-        border: hasUsesLeft
+        border: canTap
             ? GradientBoxBorder(
-                gradient: context.appTheme.primaryGradient,
+                gradient: isPremiumState ? goldGradient : context.appTheme.primaryGradient,
                 width: 1,
               )
             : Border.all(color: context.appTheme.borderColor, width: 1),
@@ -148,7 +159,11 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: hasUsesLeft ? widget.onInspireMePressed : null,
+          onTap: canTap
+              ? (isPremiumState
+                  ? () => PremiumSuggestionBottomSheet.show(context)
+                  : widget.onInspireMePressed)
+              : null,
           borderRadius: const BorderRadius.all(Radius.circular(100)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -166,13 +181,24 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
                       ),
                     ),
                   )
+                else if (isPremiumState)
+                  ShaderMask(
+                    shaderCallback: (bounds) => goldGradient.createShader(
+                      Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                    ),
+                    child: const Icon(
+                      Icons.workspace_premium_rounded,
+                      color: Colors.white,
+                      size: 14,
+                    ),
+                  )
                 else
                   AppSvgIcon(
                     assetName: Assets.icons.icInspireMe,
-                    gradient: hasUsesLeft
+                    gradient: canTap
                         ? context.appTheme.primaryGradient
                         : null,
-                    color: hasUsesLeft
+                    color: canTap
                         ? null
                         : AppColors.white.withValues(alpha: 0.4),
                     width: 14,
@@ -182,9 +208,16 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
                 Text(
                   widget.isInspiring
                       ? t.create.inspiring
-                      : t.create.inspire_me_count(count: widget.inspireMeCount),
-                  style: hasUsesLeft
-                      ? context.appTheme.navLabelActiveStyle
+                      : (isPremiumState
+                          ? t.create.inspire_me_pro
+                          : t.create.inspire_me_count(count: widget.inspireMeCount)),
+                  style: canTap
+                      ? (isPremiumState
+                          ? context.appTheme.navLabelActiveStyle.copyWith(
+                              color: const Color(0xFFFFD700),
+                              fontWeight: FontWeight.bold,
+                            )
+                          : context.appTheme.navLabelActiveStyle)
                       : context.appTheme.navLabelInactiveStyle,
                 ),
               ],

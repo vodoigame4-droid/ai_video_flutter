@@ -134,6 +134,11 @@ class _Translations$create$de extends Translations$create$en {
 	@override String get select_mock_media => 'Mock-Medien auswählen';
 	@override String get select_media_desc => 'Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren';
 	@override String get inspiring => 'KI denkt nach...';
+	@override String get limit_dialog_title => 'Keine kostenlosen Vorschläge mehr';
+	@override String get limit_dialog_desc => 'Sie haben alle 3 kostenlosen Vorschläge aufgebraucht. Bitte aktualisieren Sie auf VIP, um unbegrenzte Vorschläge zu erhalten!';
+	@override String get limit_dialog_btn => 'Auf VIP upgraden';
+	@override String get limit_dialog_cancel => 'Vielleicht später';
+	@override String get inspire_me_pro => 'Inspiriere mich (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsDe {
 			'create.select_mock_media' => 'Mock-Medien auswählen',
 			'create.select_media_desc' => 'Wählen Sie eine Mock-Datei aus, um den Upload zu simulieren',
 			'create.inspiring' => 'KI denkt nach...',
+			'create.limit_dialog_title' => 'Keine kostenlosen Vorschläge mehr',
+			'create.limit_dialog_desc' => 'Sie haben alle 3 kostenlosen Vorschläge aufgebraucht. Bitte aktualisieren Sie auf VIP, um unbegrenzte Vorschläge zu erhalten!',
+			'create.limit_dialog_btn' => 'Auf VIP upgraden',
+			'create.limit_dialog_cancel' => 'Vielleicht später',
+			'create.inspire_me_pro' => 'Inspiriere mich (PRO)',
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
 			'splash.appName' => 'Video AI',

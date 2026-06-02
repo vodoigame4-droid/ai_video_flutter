@@ -232,6 +232,21 @@ class Translations$create$en {
 
 	/// en: 'AI is thinking...'
 	String get inspiring => 'AI is thinking...';
+
+	/// en: 'Out of Free Suggestions'
+	String get limit_dialog_title => 'Out of Free Suggestions';
+
+	/// en: 'You have used all 3 free suggestions. Please upgrade to VIP to enjoy unlimited suggestions!'
+	String get limit_dialog_desc => 'You have used all 3 free suggestions. Please upgrade to VIP to enjoy unlimited suggestions!';
+
+	/// en: 'Upgrade to VIP'
+	String get limit_dialog_btn => 'Upgrade to VIP';
+
+	/// en: 'Maybe Later'
+	String get limit_dialog_cancel => 'Maybe Later';
+
+	/// en: 'Inspire me (PRO)'
+	String get inspire_me_pro => 'Inspire me (PRO)';
 }
 
 // Path: leave_dialog
@@ -1243,6 +1258,11 @@ extension on Translations {
 			'create.select_mock_media' => 'Select Mock Media',
 			'create.select_media_desc' => 'Select a mock file to simulate upload',
 			'create.inspiring' => 'AI is thinking...',
+			'create.limit_dialog_title' => 'Out of Free Suggestions',
+			'create.limit_dialog_desc' => 'You have used all 3 free suggestions. Please upgrade to VIP to enjoy unlimited suggestions!',
+			'create.limit_dialog_btn' => 'Upgrade to VIP',
+			'create.limit_dialog_cancel' => 'Maybe Later',
+			'create.inspire_me_pro' => 'Inspire me (PRO)',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Video AI',

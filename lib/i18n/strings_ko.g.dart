@@ -134,6 +134,11 @@ class _Translations$create$ko extends Translations$create$en {
 	@override String get select_mock_media => '모크 미디어 선택';
 	@override String get select_media_desc => '업로드를 시뮬레이션할 모크 파일 선택';
 	@override String get inspiring => 'AI가 생각 중...';
+	@override String get limit_dialog_title => '무료 제안 소진';
+	@override String get limit_dialog_desc => '무료 제안 3회를 모두 사용하셨습니다. 무제한 제안을 이용하려면 VIP로 업그레이드하세요!';
+	@override String get limit_dialog_btn => 'VIP로 업그레이드';
+	@override String get limit_dialog_cancel => '나중에';
+	@override String get inspire_me_pro => '아이디어 얻기 (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsKo {
 			'create.select_mock_media' => '모크 미디어 선택',
 			'create.select_media_desc' => '업로드를 시뮬레이션할 모크 파일 선택',
 			'create.inspiring' => 'AI가 생각 중...',
+			'create.limit_dialog_title' => '무료 제안 소진',
+			'create.limit_dialog_desc' => '무료 제안 3회를 모두 사용하셨습니다. 무제한 제안을 이용하려면 VIP로 업그레이드하세요!',
+			'create.limit_dialog_btn' => 'VIP로 업그레이드',
+			'create.limit_dialog_cancel' => '나중에',
+			'create.inspire_me_pro' => '아이디어 얻기 (PRO)',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => '비디오 AI',

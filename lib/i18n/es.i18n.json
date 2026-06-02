@@ -51,7 +51,12 @@
     "generating_video": "Generando tu video...",
     "select_mock_media": "Seleccionar medio simulado",
     "select_media_desc": "Seleccione un archivo simulado para simular la carga",
-    "inspiring": "La IA está pensando..."
+    "inspiring": "La IA está pensando...",
+    "limit_dialog_title": "Sin sugerencias gratuitas",
+    "limit_dialog_desc": "Ha utilizado las 3 sugerencias gratuitas. ¡Actualice a VIP para disfrutar de sugerencias ilimitadas!",
+    "limit_dialog_btn": "Actualizar a VIP",
+    "limit_dialog_cancel": "Quizás más tarde",
+    "inspire_me_pro": "Inspirarme (PRO)"
   },
   "leave_dialog": {
     "title": "¿Salir sin guardar?",

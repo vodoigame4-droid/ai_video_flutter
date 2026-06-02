@@ -134,6 +134,11 @@ class _Translations$create$zh extends Translations$create$en {
 	@override String get select_mock_media => '选择模拟媒体';
 	@override String get select_media_desc => '选择一个模拟文件以模拟上传';
 	@override String get inspiring => 'AI 正在思考...';
+	@override String get limit_dialog_title => '免费建议已用完';
+	@override String get limit_dialog_desc => '您已用完所有 3 次免费建议。请升级至 VIP 以享受无限建议！';
+	@override String get limit_dialog_btn => '升级至 VIP';
+	@override String get limit_dialog_cancel => '稍后再说';
+	@override String get inspire_me_pro => '灵感推荐 (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsZh {
 			'create.select_mock_media' => '选择模拟媒体',
 			'create.select_media_desc' => '选择一个模拟文件以模拟上传',
 			'create.inspiring' => 'AI 正在思考...',
+			'create.limit_dialog_title' => '免费建议已用完',
+			'create.limit_dialog_desc' => '您已用完所有 3 次免费建议。请升级至 VIP 以享受无限建议！',
+			'create.limit_dialog_btn' => '升级至 VIP',
+			'create.limit_dialog_cancel' => '稍后再说',
+			'create.inspire_me_pro' => '灵感推荐 (PRO)',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
 			'splash.appName' => '视频AI',

@@ -134,6 +134,11 @@ class _Translations$create$es extends Translations$create$en {
 	@override String get select_mock_media => 'Seleccionar medio simulado';
 	@override String get select_media_desc => 'Seleccione un archivo simulado para simular la carga';
 	@override String get inspiring => 'La IA está pensando...';
+	@override String get limit_dialog_title => 'Sin sugerencias gratuitas';
+	@override String get limit_dialog_desc => 'Ha utilizado las 3 sugerencias gratuitas. ¡Actualice a VIP para disfrutar de sugerencias ilimitadas!';
+	@override String get limit_dialog_btn => 'Actualizar a VIP';
+	@override String get limit_dialog_cancel => 'Quizás más tarde';
+	@override String get inspire_me_pro => 'Inspirarme (PRO)';
 }
 
 // Path: leave_dialog
@@ -637,6 +642,11 @@ extension on TranslationsEs {
 			'create.select_mock_media' => 'Seleccionar medio simulado',
 			'create.select_media_desc' => 'Seleccione un archivo simulado para simular la carga',
 			'create.inspiring' => 'La IA está pensando...',
+			'create.limit_dialog_title' => 'Sin sugerencias gratuitas',
+			'create.limit_dialog_desc' => 'Ha utilizado las 3 sugerencias gratuitas. ¡Actualice a VIP para disfrutar de sugerencias ilimitadas!',
+			'create.limit_dialog_btn' => 'Actualizar a VIP',
+			'create.limit_dialog_cancel' => 'Quizás más tarde',
+			'create.inspire_me_pro' => 'Inspirarme (PRO)',
 			'leave_dialog.title' => '¿Salir sin guardar?',
 			'leave_dialog.desc' => '¿Desea continuar editando o salir ahora?',
 			'splash.appName' => 'Video AI',
