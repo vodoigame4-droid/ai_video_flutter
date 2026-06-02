@@ -303,6 +303,7 @@
     "create_photo_enhance_failed": "Photo enhancement failed.",
     "remove_object_failed": "Failed to remove object from photo.",
     "get_suggestion_prompt_failed": "Failed to suggest prompt.",
+    "not_enough_suggestion_free": "Nicht genügend kostenlose Vorschläge, bitte auf VIP upgraden",
     "get_tasks_failed": "Failed to load tasks.",
     "action_task_failed": "Failed to perform task action.",
     "task_not_found": "Task not found.",

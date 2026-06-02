@@ -7,4 +7,5 @@ abstract class AuthRepository {
   Future<Resource<UserEntity>> refresh(RefreshRequestModel request);
   Future<Resource<UserEntity>> getProfile();
   Future<Resource<UserEntity>> updateProfile(UpdateUserRequestModel request);
+  Stream<UserEntity> watchProfile();
 }

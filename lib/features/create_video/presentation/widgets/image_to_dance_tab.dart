@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -19,133 +20,145 @@ class ImageToDanceTab extends StatelessWidget {
     return BlocBuilder<CreateVideoBloc, CreateVideoState>(
       builder: (context, state) {
         return state.maybeWhen(
-          ready: (
-            selectedTab,
-            customPrompt,
-            inspireMeCount,
-            slotsPaths,
-            uploadedSlotsPaths,
-            quality,
-            duration,
-            isGenerating,
-            isSuccess,
-            isInspiring,
-          ) {
-            final isGenerateEnabled = slotsPaths[0] != null &&
-                slotsPaths[1] != null &&
-                customPrompt.trim().isNotEmpty;
+          ready:
+              (
+                selectedTab,
+                customPrompt,
+                inspireMeCount,
+                slotsPaths,
+                uploadedSlotsPaths,
+                quality,
+                duration,
+                isGenerating,
+                isSuccess,
+                isInspiring,
+              ) {
+                final isGenerateEnabled =
+                    slotsPaths[0] != null &&
+                    slotsPaths[1] != null &&
+                    customPrompt.trim().isNotEmpty;
 
-            return Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 16),
-                        _buildUploadSectionHeader(context),
-                        const SizedBox(height: 16),
-                        Row(
+                return Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: UploadSlotWidget(
-                                mediaPath: slotsPaths[0],
-                                labelText: t.create.upload_video_slot,
-                                placeholderIcon: Icons.play_circle_outline_rounded,
-                                isVideoSlot: true,
-                                onMediaRemoved: () {
-                                  context.read<CreateVideoBloc>().add(
+                            const SizedBox(height: 16),
+                            _buildUploadSectionHeader(context),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: UploadSlotWidget(
+                                    mediaPath: slotsPaths[0],
+                                    labelText: t.create.upload_video_slot,
+                                    placeholderIcon:
+                                        Icons.play_circle_outline_rounded,
+                                    placeholderSvg: Assets.icons.icUploadVideo,
+                                    isVideoSlot: true,
+                                    onMediaRemoved: () {
+                                      context.read<CreateVideoBloc>().add(
                                         const CreateVideoEvent.removeMedia(0),
                                       );
-                                },
-                                onMediaSelected: (path) {
-                                  context.read<CreateVideoBloc>().add(
+                                    },
+                                    onMediaSelected: (path) {
+                                      context.read<CreateVideoBloc>().add(
                                         CreateVideoEvent.selectMedia(0, path),
                                       );
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: UploadSlotWidget(
-                                mediaPath: slotsPaths[1],
-                                labelText: t.create.upload_photo_slot,
-                                onMediaRemoved: () {
-                                  context.read<CreateVideoBloc>().add(
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: UploadSlotWidget(
+                                    mediaPath: slotsPaths[1],
+                                    labelText: t.create.upload_photo_slot,
+                                    onMediaRemoved: () {
+                                      context.read<CreateVideoBloc>().add(
                                         const CreateVideoEvent.removeMedia(1),
                                       );
-                                },
-                                onMediaSelected: (path) {
-                                  context.read<CreateVideoBloc>().add(
+                                    },
+                                    onMediaSelected: (path) {
+                                      context.read<CreateVideoBloc>().add(
                                         CreateVideoEvent.selectMedia(1, path),
                                       );
-                                },
-                              ),
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 24),
-                        _buildPromptSectionHeader(context, isRequired: true),
-                        const SizedBox(height: 16),
-                        CustomPromptCardWidget(
-                          promptText: customPrompt,
-                          inspireMeCount: inspireMeCount,
-                          isInspiring: isInspiring,
-                          hasImage: slotsPaths[1] != null,
-                          onPromptChanged: (val) {
-                            context.read<CreateVideoBloc>().add(
+                            const SizedBox(height: 24),
+                            _buildPromptSectionHeader(
+                              context,
+                              isRequired: true,
+                            ),
+                            const SizedBox(height: 16),
+                            CustomPromptCardWidget(
+                              promptText: customPrompt,
+                              inspireMeCount: inspireMeCount,
+                              isInspiring: isInspiring,
+                              hasImage: slotsPaths[1] != null,
+                              onPromptChanged: (val) {
+                                context.read<CreateVideoBloc>().add(
                                   CreateVideoEvent.updatePrompt(val),
                                 );
-                          },
-                          onInspireMePressed: () {
-                            context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.inspireMe(),
-                                    );
-                          },
-                          onClearPressed: () {
-                            context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.clearPrompt(),
-                                    );
-                          },
-                        ),
-                        const SizedBox(height: 24),
-                        _buildSettingsSectionHeader(context),
-                        const SizedBox(height: 16),
-                        VideoSettingsCardWidget(
-                          selectedQuality: quality,
-                          selectedDuration: duration,
-                          onQualityChanged: (val) {
-                            context.read<CreateVideoBloc>().add(
+                              },
+                              onInspireMePressed: () {
+                                context.read<CreateVideoBloc>().add(
+                                  const CreateVideoEvent.inspireMe(),
+                                );
+                              },
+                              onClearPressed: () {
+                                context.read<CreateVideoBloc>().add(
+                                  const CreateVideoEvent.clearPrompt(),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 24),
+                            _buildSettingsSectionHeader(context),
+                            const SizedBox(height: 16),
+                            VideoSettingsCardWidget(
+                              selectedQuality: quality,
+                              selectedDuration: duration,
+                              onQualityChanged: (val) {
+                                context.read<CreateVideoBloc>().add(
                                   CreateVideoEvent.selectQuality(val),
                                 );
-                          },
-                          onDurationChanged: (val) {
-                            context.read<CreateVideoBloc>().add(
+                              },
+                              onDurationChanged: (val) {
+                                context.read<CreateVideoBloc>().add(
                                   CreateVideoEvent.selectDuration(val),
                                 );
-                          },
+                              },
+                            ),
+                            const SizedBox(height: 24),
+                          ],
                         ),
-                        const SizedBox(height: 24),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 8),
-                  child: CreateVideoButtonWidget(
-                    isEnabled: isGenerateEnabled && !isGenerating,
-                    isLoading: isGenerating,
-                    onPressed: () {
-                      context.read<CreateVideoBloc>().add(
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: 24,
+                        top: 8,
+                      ),
+                      child: CreateVideoButtonWidget(
+                        isEnabled: isGenerateEnabled && !isGenerating,
+                        isLoading: isGenerating,
+                        onPressed: () {
+                          context.read<CreateVideoBloc>().add(
                             const CreateVideoEvent.generateVideo(),
                           );
-                    },
-                  ),
-                ),
-              ],
-            );
-          },
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
           orElse: () => const SizedBox.shrink(),
         );
       },
@@ -160,10 +173,7 @@ class ImageToDanceTab extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              t.create.upload_image,
-              style: context.textTheme.titleMedium,
-            ),
+            Text(t.create.upload_image, style: context.textTheme.titleMedium),
             const SizedBox(width: 6),
             Text(
               "(${t.create.required_label})",
@@ -180,18 +190,22 @@ class ImageToDanceTab extends StatelessWidget {
     );
   }
 
-  Widget _buildPromptSectionHeader(BuildContext context, {required bool isRequired}) {
+  Widget _buildPromptSectionHeader(
+    BuildContext context, {
+    required bool isRequired,
+  }) {
     final t = context.t;
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
-        Text(
-          t.create.custom_prompt,
-          style: context.textTheme.titleMedium,
-        ),
+        Text(t.create.custom_prompt, style: context.textTheme.titleMedium),
         const SizedBox(width: 6),
         Text(
-          isRequired ? "(${t.create.required_label})" : "(${t.create.optional_label})",
+          isRequired
+              ? "(${t.create.required_label})"
+              : "(${t.create.optional_label})",
           style: context.textTheme.labelMedium,
         ),
       ],
@@ -203,10 +217,7 @@ class ImageToDanceTab extends StatelessWidget {
 
     return Row(
       children: [
-        Text(
-          t.create.video_settings,
-          style: context.textTheme.titleMedium,
-        ),
+        Text(t.create.video_settings, style: context.textTheme.titleMedium),
         const SizedBox(width: 6),
         Text(
           "(${t.create.optional_label})",

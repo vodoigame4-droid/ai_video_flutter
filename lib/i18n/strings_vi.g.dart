@@ -492,6 +492,7 @@ class _Translations$errors$vi extends Translations$errors$en {
 	@override String get create_photo_enhance_failed => 'Nâng cấp chất lượng ảnh thất bại.';
 	@override String get remove_object_failed => 'Xóa vật thể khỏi ảnh thất bại.';
 	@override String get get_suggestion_prompt_failed => 'Không thể tạo gợi ý mô tả.';
+	@override String get not_enough_suggestion_free => 'Không đủ lượt gợi ý miễn phí, vui lòng nâng cấp lên VIP';
 	@override String get get_tasks_failed => 'Không thể tải danh sách nhiệm vụ.';
 	@override String get action_task_failed => 'Thực hiện nhiệm vụ thất bại.';
 	@override String get task_not_found => 'Không tìm thấy nhiệm vụ.';
@@ -865,6 +866,7 @@ extension on TranslationsVi {
 			'errors.create_photo_enhance_failed' => 'Nâng cấp chất lượng ảnh thất bại.',
 			'errors.remove_object_failed' => 'Xóa vật thể khỏi ảnh thất bại.',
 			'errors.get_suggestion_prompt_failed' => 'Không thể tạo gợi ý mô tả.',
+			'errors.not_enough_suggestion_free' => 'Không đủ lượt gợi ý miễn phí, vui lòng nâng cấp lên VIP',
 			'errors.get_tasks_failed' => 'Không thể tải danh sách nhiệm vụ.',
 			'errors.action_task_failed' => 'Thực hiện nhiệm vụ thất bại.',
 			'errors.task_not_found' => 'Không tìm thấy nhiệm vụ.',

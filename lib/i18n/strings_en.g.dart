@@ -988,6 +988,9 @@ class Translations$errors$en {
 	/// en: 'Failed to suggest prompt.'
 	String get get_suggestion_prompt_failed => 'Failed to suggest prompt.';
 
+	/// en: 'Not enough free suggestion, please upgrade to VIP'
+	String get not_enough_suggestion_free => 'Not enough free suggestion, please upgrade to VIP';
+
 	/// en: 'Failed to load tasks.'
 	String get get_tasks_failed => 'Failed to load tasks.';
 
@@ -1454,6 +1457,7 @@ extension on Translations {
 			'errors.create_photo_enhance_failed' => 'Photo enhancement failed.',
 			'errors.remove_object_failed' => 'Failed to remove object from photo.',
 			'errors.get_suggestion_prompt_failed' => 'Failed to suggest prompt.',
+			'errors.not_enough_suggestion_free' => 'Not enough free suggestion, please upgrade to VIP',
 			'errors.get_tasks_failed' => 'Failed to load tasks.',
 			'errors.action_task_failed' => 'Failed to perform task action.',
 			'errors.task_not_found' => 'Task not found.',

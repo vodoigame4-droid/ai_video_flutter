@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
@@ -15,6 +16,9 @@ class AuthRepositoryImpl implements AuthRepository {
   final SharedPreferences _sharedPreferences;
   final AppConfig _appConfig;
 
+  final StreamController<UserEntity> _userController = StreamController<UserEntity>.broadcast();
+  UserEntity? _cachedUser;
+
   AuthRepositoryImpl({
     required AuthRemoteDataSource remoteDataSource,
     required SharedPreferences sharedPreferences,
@@ -22,6 +26,14 @@ class AuthRepositoryImpl implements AuthRepository {
   })  : _remoteDataSource = remoteDataSource,
         _sharedPreferences = sharedPreferences,
         _appConfig = appConfig;
+
+  @override
+  Stream<UserEntity> watchProfile() async* {
+    if (_cachedUser != null) {
+      yield _cachedUser!;
+    }
+    yield* _userController.stream;
+  }
 
   @override
   Future<Resource<UserEntity>> login(String deviceId, String? refCode) async {
@@ -35,7 +47,10 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       final response = await _remoteDataSource.login(request);
       await _saveTokens(response.accessToken, response.refreshToken);
-      return Resource.success(response.user.toEntity());
+      final user = response.user.toEntity();
+      _cachedUser = user;
+      _userController.add(user);
+      return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: login failed', error: e, stackTrace: stack);
       return Resource.error(message: parseRepositoryError(e));
@@ -47,7 +62,10 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final response = await _remoteDataSource.refresh(request);
       await _saveTokens(response.accessToken, response.refreshToken);
-      return Resource.success(response.user.toEntity());
+      final user = response.user.toEntity();
+      _cachedUser = user;
+      _userController.add(user);
+      return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: refresh failed', error: e, stackTrace: stack);
       return Resource.error(message: parseRepositoryError(e));
@@ -58,7 +76,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Resource<UserEntity>> getProfile() async {
     try {
       final userModel = await _remoteDataSource.getProfile();
-      return Resource.success(userModel.toEntity());
+      final user = userModel.toEntity();
+      _cachedUser = user;
+      _userController.add(user);
+      return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: getProfile failed', error: e, stackTrace: stack);
       return Resource.error(message: parseRepositoryError(e));
@@ -69,7 +90,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Resource<UserEntity>> updateProfile(UpdateUserRequestModel request) async {
     try {
       final userModel = await _remoteDataSource.updateProfile(request);
-      return Resource.success(userModel.toEntity());
+      final user = userModel.toEntity();
+      _cachedUser = user;
+      _userController.add(user);
+      return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: updateProfile failed', error: e, stackTrace: stack);
       return Resource.error(message: parseRepositoryError(e));

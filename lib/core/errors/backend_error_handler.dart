@@ -175,6 +175,8 @@ class BackendErrorHelper {
         return t.errors.remove_object_failed;
       case 'ER00622':
         return t.errors.get_suggestion_prompt_failed;
+      case 'ER00623':
+        return t.errors.not_enough_suggestion_free;
       case 'ER00701':
         return t.errors.get_tasks_failed;
       case 'ER00702':

@@ -131,7 +131,6 @@ class TemplatesView extends StatelessWidget {
 
                               // PRO badge button
                               CreditBadgeWidget(
-                                isPro: true,
                                 onTap: () {
                                   // Handle Upgrade Action
                                   showModalBottomSheet(

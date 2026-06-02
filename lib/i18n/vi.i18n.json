@@ -310,6 +310,7 @@
     "create_photo_enhance_failed": "Nâng cấp chất lượng ảnh thất bại.",
     "remove_object_failed": "Xóa vật thể khỏi ảnh thất bại.",
     "get_suggestion_prompt_failed": "Không thể tạo gợi ý mô tả.",
+    "not_enough_suggestion_free": "Không đủ lượt gợi ý miễn phí, vui lòng nâng cấp lên VIP",
     "get_tasks_failed": "Không thể tải danh sách nhiệm vụ.",
     "action_task_failed": "Thực hiện nhiệm vụ thất bại.",
     "task_not_found": "Không tìm thấy nhiệm vụ.",

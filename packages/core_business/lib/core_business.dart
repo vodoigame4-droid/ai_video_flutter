@@ -29,6 +29,10 @@ export 'src/features/auth/data/repositories/auth_repository_impl.dart';
 export 'src/features/auth/domain/usecases/login_usecase.dart';
 export 'src/features/auth/domain/usecases/get_profile_usecase.dart';
 export 'src/features/auth/domain/usecases/auto_login_usecase.dart';
+export 'src/features/auth/domain/usecases/watch_profile_usecase.dart';
+export 'src/features/auth/presentation/bloc/credit_badge/credit_badge_bloc.dart';
+export 'src/features/auth/presentation/bloc/credit_badge/credit_badge_event.dart';
+export 'src/features/auth/presentation/bloc/credit_badge/credit_badge_state.dart';
 
 // Media Domain & Data
 export 'src/features/media/domain/entities/media_entities.dart';

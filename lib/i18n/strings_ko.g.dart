@@ -477,6 +477,7 @@ class _Translations$errors$ko extends Translations$errors$en {
 	@override String get create_photo_enhance_failed => 'Photo enhancement failed.';
 	@override String get remove_object_failed => 'Failed to remove object from photo.';
 	@override String get get_suggestion_prompt_failed => 'Failed to suggest prompt.';
+	@override String get not_enough_suggestion_free => '무료 제안이 부족합니다. VIP로 업그레이드해 주세요';
 	@override String get get_tasks_failed => 'Failed to load tasks.';
 	@override String get action_task_failed => 'Failed to perform task action.';
 	@override String get task_not_found => 'Task not found.';
@@ -845,6 +846,7 @@ extension on TranslationsKo {
 			'errors.create_photo_enhance_failed' => 'Photo enhancement failed.',
 			'errors.remove_object_failed' => 'Failed to remove object from photo.',
 			'errors.get_suggestion_prompt_failed' => 'Failed to suggest prompt.',
+			'errors.not_enough_suggestion_free' => '무료 제안이 부족합니다. VIP로 업그레이드해 주세요',
 			'errors.get_tasks_failed' => 'Failed to load tasks.',
 			'errors.action_task_failed' => 'Failed to perform task action.',
 			'errors.task_not_found' => 'Task not found.',

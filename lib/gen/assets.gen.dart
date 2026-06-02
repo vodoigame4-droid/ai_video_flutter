@@ -93,6 +93,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_unifiled_video.svg
   String get icUnifiledVideo => 'assets/icons/ic_unifiled_video.svg';
 
+  /// File path: assets/icons/ic_upload_video.svg
+  String get icUploadVideo => 'assets/icons/ic_upload_video.svg';
+
   /// File path: assets/icons/ic_video_add.svg
   String get icVideoAdd => 'assets/icons/ic_video_add.svg';
 
@@ -124,6 +127,7 @@ class $AssetsIconsGen {
     icTranslateVideo,
     icTrash,
     icUnifiledVideo,
+    icUploadVideo,
     icVideoAdd,
     profile,
   ];

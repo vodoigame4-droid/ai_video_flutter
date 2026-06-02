@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_udid/flutter_udid.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,14 +25,22 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
   Future<Resource<UserEntity>> call(NoParams params) async {
     String? deviceId;
     try {
-      final storedDeviceId = sharedPreferences.getString(StorageKeys.deviceId);
+      String? storedDeviceId = sharedPreferences.getString(
+        StorageKeys.deviceId,
+      );
+      if (kDebugMode) {
+        storedDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
+      }
+
       String? freshUdid;
       try {
         freshUdid = await FlutterUdid.udid;
       } catch (e) {
         freshUdid = 'ERROR: $e';
       }
-      LogUtils.i('AutoLoginUseCase: Stored deviceId: $storedDeviceId | Fresh UDID: $freshUdid');
+      LogUtils.i(
+        'AutoLoginUseCase: Stored deviceId: $storedDeviceId | Fresh UDID: $freshUdid',
+      );
 
       final token = sharedPreferences.getString(StorageKeys.authAccessToken);
       deviceId = storedDeviceId;
@@ -39,7 +48,11 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
         try {
           deviceId = await FlutterUdid.udid;
         } catch (e, stack) {
-          LogUtils.e('AutoLoginUseCase: Failed to get UDID, falling back to UUID', error: e, stackTrace: stack);
+          LogUtils.e(
+            'AutoLoginUseCase: Failed to get UDID, falling back to UUID',
+            error: e,
+            stackTrace: stack,
+          );
           deviceId = const Uuid().v4();
         }
       }
@@ -48,7 +61,7 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
         deviceId = '$deviceId-tgv';
         await sharedPreferences.setString(StorageKeys.deviceId, deviceId);
       }
-      
+
       UserEntity? user;
       if (token == null || token.isEmpty) {
         final loginResult = await authRepository.login(deviceId, null);
@@ -83,16 +96,26 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
           await notificationRepository.subscribeToTopic(deviceId);
         }
       } catch (e, stack) {
-        LogUtils.e('AutoLoginUseCase: Notification setup failed', error: e, stackTrace: stack);
+        LogUtils.e(
+          'AutoLoginUseCase: Notification setup failed',
+          error: e,
+          stackTrace: stack,
+        );
       }
 
       if (user != null) {
         return Resource.success(user!);
       } else {
-        return const Resource.error(message: 'Auto login initialization failed');
+        return const Resource.error(
+          message: 'Auto login initialization failed',
+        );
       }
     } catch (e, stack) {
-      LogUtils.e('AutoLoginUseCase: Unexpected error', error: e, stackTrace: stack);
+      LogUtils.e(
+        'AutoLoginUseCase: Unexpected error',
+        error: e,
+        stackTrace: stack,
+      );
       return Resource.error(message: e.toString());
     }
   }
