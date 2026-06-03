@@ -105,7 +105,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
           _player.setPlaylistMode(PlaylistMode.single);
         }
         
-        _player.setVolume(widget.playMuted ? 0.0 : (widget.showMuteButton ? 0.0 : 100.0));
+        _player.setVolume(widget.playMuted ? 0.0 : 100.0);
         await _player.open(Media(mediaSource), play: widget.autoPlay);
 
         // Trigger background download if not cached
