@@ -237,7 +237,15 @@
     "desc": "報告を送信してもよろしいですか？",
     "cancel": "キャンセル",
     "submit": "送信",
-    "success": "動画が正常に報告されました"
+    "success": "動画が正常に報告されました",
+    "bottom_sheet_title": "動画を報告",
+    "option_offensive": "不適切または不快なコンテンツ",
+    "option_quality": "画質が悪い、または顔の歪み",
+    "option_copyright": "著作権侵害",
+    "option_bug": "動画生成エラーまたはクラッシュ",
+    "option_other": "その他の問題",
+    "thanks_msg": "ご報告ありがとうございます。内容を確認し、修正いたします।",
+    "hint_other": "問題の詳細を説明してください..."
   },
   "tips_sheet": {
     "title": "最良の結果を得るためのヒント",
@@ -349,5 +357,13 @@
     "step_2": "ステップ2",
     "upload_photo": "写真をアップロード",
     "got_it": "わかりました！"
+  },
+  "checkin": {
+    "title": "ログイン",
+    "subtitle": "毎日報酬をゲット！",
+    "today": "今日",
+    "day": "{n}日目",
+    "check_in_btn": "チェックイン",
+    "daily_bonus_notification": "毎日通知"
   }
 }

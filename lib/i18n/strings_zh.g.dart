@@ -59,6 +59,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$zh tips_sheet = _Translations$tips_sheet$zh._(_root);
 	@override late final _Translations$errors$zh errors = _Translations$errors$zh._(_root);
 	@override late final _Translations$guide$zh guide = _Translations$guide$zh._(_root);
+	@override late final _Translations$checkin$zh checkin = _Translations$checkin$zh._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$zh extends Translations$report_dialog$en {
 	@override String get cancel => '取消';
 	@override String get submit => '提交';
 	@override String get success => '视频举报成功';
+	@override String get bottom_sheet_title => '举报视频';
+	@override String get option_offensive => '令人反感或不当内容';
+	@override String get option_quality => '画质差或脸部畸变';
+	@override String get option_copyright => '侵犯版权';
+	@override String get option_bug => '视频生成错误或崩溃';
+	@override String get option_other => '其他问题';
+	@override String get thanks_msg => '感谢您的举报，我们将进行审查和修改।';
+	@override String get hint_other => '请详细描述该问题...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$zh extends Translations$guide$en {
 	@override String get step_2 => '第2步';
 	@override String get upload_photo => '上传图片';
 	@override String get got_it => '我知道了！';
+}
+
+// Path: checkin
+class _Translations$checkin$zh extends Translations$checkin$en {
+	_Translations$checkin$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '签到';
+	@override String get subtitle => '每日领福利!';
+	@override String get today => '今天';
+	@override String day({required Object n}) => '第${n}天';
+	@override String get check_in_btn => '签到';
+	@override String get daily_bonus_notification => '每日提醒';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsZh {
 			'report_dialog.cancel' => '取消',
 			'report_dialog.submit' => '提交',
 			'report_dialog.success' => '视频举报成功',
+			'report_dialog.bottom_sheet_title' => '举报视频',
+			'report_dialog.option_offensive' => '令人反感或不当内容',
+			'report_dialog.option_quality' => '画质差或脸部畸变',
+			'report_dialog.option_copyright' => '侵犯版权',
+			'report_dialog.option_bug' => '视频生成错误或崩溃',
+			'report_dialog.option_other' => '其他问题',
+			'report_dialog.thanks_msg' => '感谢您的举报，我们将进行审查和修改।',
+			'report_dialog.hint_other' => '请详细描述该问题...',
 			'tips_sheet.title' => '获得最佳效果的建议',
 			'tips_sheet.button_got_it' => '我知道了！',
 			'tips_sheet.use_photos' => '使用类似这样的照片',
@@ -901,6 +933,12 @@ extension on TranslationsZh {
 			'guide.step_2' => '第2步',
 			'guide.upload_photo' => '上传图片',
 			'guide.got_it' => '我知道了！',
+			'checkin.title' => '签到',
+			'checkin.subtitle' => '每日领福利!',
+			'checkin.today' => '今天',
+			'checkin.day' => ({required Object n}) => '第${n}天',
+			'checkin.check_in_btn' => '签到',
+			'checkin.daily_bonus_notification' => '每日提醒',
 			_ => null,
 		};
 	}

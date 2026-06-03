@@ -83,7 +83,7 @@ class PremiumBannerWidget extends StatelessWidget {
                     Radius.circular(100),
                   ),
                   borderWidth: 1.0,
-                  backgroundColor: Colors.white.withValues(alpha: 0.15),
+                  backgroundColor: Colors.white.withValues(alpha: 0.25),
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(

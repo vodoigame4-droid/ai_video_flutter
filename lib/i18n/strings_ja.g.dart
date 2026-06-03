@@ -59,6 +59,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$ja tips_sheet = _Translations$tips_sheet$ja._(_root);
 	@override late final _Translations$errors$ja errors = _Translations$errors$ja._(_root);
 	@override late final _Translations$guide$ja guide = _Translations$guide$ja._(_root);
+	@override late final _Translations$checkin$ja checkin = _Translations$checkin$ja._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$ja extends Translations$report_dialog$en {
 	@override String get cancel => 'キャンセル';
 	@override String get submit => '送信';
 	@override String get success => '動画が正常に報告されました';
+	@override String get bottom_sheet_title => '動画を報告';
+	@override String get option_offensive => '不適切または不快なコンテンツ';
+	@override String get option_quality => '画質が悪い、または顔の歪み';
+	@override String get option_copyright => '著作権侵害';
+	@override String get option_bug => '動画生成エラーまたはクラッシュ';
+	@override String get option_other => 'その他の問題';
+	@override String get thanks_msg => 'ご報告ありがとうございます。内容を確認し、修正いたします।';
+	@override String get hint_other => '問題の詳細を説明してください...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$ja extends Translations$guide$en {
 	@override String get step_2 => 'ステップ2';
 	@override String get upload_photo => '写真をアップロード';
 	@override String get got_it => 'わかりました！';
+}
+
+// Path: checkin
+class _Translations$checkin$ja extends Translations$checkin$en {
+	_Translations$checkin$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'ログイン';
+	@override String get subtitle => '毎日報酬をゲット！';
+	@override String get today => '今日';
+	@override String day({required Object n}) => '${n}日目';
+	@override String get check_in_btn => 'チェックイン';
+	@override String get daily_bonus_notification => '毎日通知';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsJa {
 			'report_dialog.cancel' => 'キャンセル',
 			'report_dialog.submit' => '送信',
 			'report_dialog.success' => '動画が正常に報告されました',
+			'report_dialog.bottom_sheet_title' => '動画を報告',
+			'report_dialog.option_offensive' => '不適切または不快なコンテンツ',
+			'report_dialog.option_quality' => '画質が悪い、または顔の歪み',
+			'report_dialog.option_copyright' => '著作権侵害',
+			'report_dialog.option_bug' => '動画生成エラーまたはクラッシュ',
+			'report_dialog.option_other' => 'その他の問題',
+			'report_dialog.thanks_msg' => 'ご報告ありがとうございます。内容を確認し、修正いたします।',
+			'report_dialog.hint_other' => '問題の詳細を説明してください...',
 			'tips_sheet.title' => '最良の結果を得るためのヒント',
 			'tips_sheet.button_got_it' => '了解しました！',
 			'tips_sheet.use_photos' => 'このような写真を使用してください',
@@ -901,6 +933,12 @@ extension on TranslationsJa {
 			'guide.step_2' => 'ステップ2',
 			'guide.upload_photo' => '写真をアップロード',
 			'guide.got_it' => 'わかりました！',
+			'checkin.title' => 'ログイン',
+			'checkin.subtitle' => '毎日報酬をゲット！',
+			'checkin.today' => '今日',
+			'checkin.day' => ({required Object n}) => '${n}日目',
+			'checkin.check_in_btn' => 'チェックイン',
+			'checkin.daily_bonus_notification' => '毎日通知',
 			_ => null,
 		};
 	}

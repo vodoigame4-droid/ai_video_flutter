@@ -1,0 +1,628 @@
+import 'dart:ui';
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:lottie/lottie.dart';
+import '../../gen/assets.gen.dart';
+import '../../i18n/strings.g.dart';
+
+enum DayState { claimed, today, upcoming }
+
+class CheckInWidget extends StatefulWidget {
+  const CheckInWidget({super.key});
+
+  @override
+  State<CheckInWidget> createState() => _CheckInWidgetState();
+}
+
+class _CheckInWidgetState extends State<CheckInWidget> {
+  bool _notificationEnabled = true;
+
+  void _showCheckInDialog() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.75),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return _CheckInDialogContent(
+              notificationEnabled: _notificationEnabled,
+              onNotificationChanged: (val) {
+                setState(() {
+                  _notificationEnabled = val;
+                });
+                setDialogState(() {
+                  _notificationEnabled = val;
+                });
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _showCheckInDialog,
+      behavior: HitTestBehavior.opaque,
+      child: Transform.scale(
+        scale: 1.8,
+        child: Lottie.asset(
+          Assets.raw.checkinBoxLottie,
+          height: 40,
+          width: 40,
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+}
+
+class _CheckInDialogContent extends StatelessWidget {
+  final bool notificationEnabled;
+  final ValueChanged<bool> onNotificationChanged;
+
+  const _CheckInDialogContent({
+    required this.notificationEnabled,
+    required this.onNotificationChanged,
+  });
+
+  Widget _buildTitle(BuildContext context) {
+    final String title = context.t.checkin.title;
+    final List<String> parts = title.split(' ');
+
+    if (parts.length >= 2) {
+      final String firstPart = parts[0];
+      final String secondPart = parts.sublist(1).join(' ');
+
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ShaderMask(
+            blendMode: BlendMode.srcIn,
+            shaderCallback: (bounds) => const LinearGradient(
+              colors: [
+                Color(0xFF007BFF),
+                Color(0xFF00C6FF),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ).createShader(bounds),
+            child: Text(
+              firstPart,
+              style: GoogleFonts.inter(
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          ShaderMask(
+            blendMode: BlendMode.srcIn,
+            shaderCallback: (bounds) => const LinearGradient(
+              colors: [
+                Color(0xFF24C780),
+                Color(0xFF2BC5C5),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ).createShader(bounds),
+            child: Text(
+              secondPart,
+              style: GoogleFonts.inter(
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return ShaderMask(
+        blendMode: BlendMode.srcIn,
+        shaderCallback: (bounds) => const LinearGradient(
+          colors: [
+            Color(0xFF007BFF),
+            Color(0xFF24C780),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ).createShader(bounds),
+        child: Text(
+          title,
+          style: GoogleFonts.inter(
+            fontSize: 24,
+            fontWeight: FontWeight.w900,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double day7Width = (screenWidth * 0.45).clamp(120.0, 160.0);
+    final double day7Height = day7Width * 0.6;
+
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      shape: const RoundedRectangleBorder(side: BorderSide.none),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // White Card Stack
+            Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.topCenter,
+              children: [
+                // White Card Body
+                Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(top: 50),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(28),
+                  ),
+                  padding: const EdgeInsets.fromLTRB(16, 75, 16, 24),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Sparkly Title
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            Assets.images.icLineCheckin.path,
+                            width: 40,
+                            height: 26,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(width: 4),
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: _buildTitle(context),
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Image.asset(
+                            Assets.images.icLineCheckin2.path,
+                            width: 40,
+                            height: 26,
+                            fit: BoxFit.contain,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      // Subtitle
+                      Text(
+                        context.t.checkin.subtitle,
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF4CAF50),
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Days Grid
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildDayCard(
+                            context: context,
+                            day: 1,
+                            reward: 'x05',
+                            state: DayState.claimed,
+                          ),
+                          _buildDayCard(
+                            context: context,
+                            day: 2,
+                            reward: 'x08',
+                            state: DayState.today,
+                          ),
+                          _buildDayCard(
+                            context: context,
+                            day: 3,
+                            reward: 'x10',
+                            state: DayState.upcoming,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _buildDayCard(
+                            context: context,
+                            day: 4,
+                            reward: 'x12',
+                            state: DayState.upcoming,
+                          ),
+                          _buildDayCard(
+                            context: context,
+                            day: 5,
+                            reward: 'x15',
+                            state: DayState.upcoming,
+                          ),
+                          _buildDayCard(
+                            context: context,
+                            day: 6,
+                            reward: 'x18',
+                            state: DayState.upcoming,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      // Day 7
+                      Center(
+                        child: _buildDay7Card(
+                          context: context,
+                          state: DayState.upcoming,
+                          width: day7Width,
+                          height: day7Height,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+
+                      // Check-in Button
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF00E5FF), Color(0xFF1DE9B6)],
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: InkWell(
+                          onTap: () => Navigator.pop(context),
+                          borderRadius: BorderRadius.circular(100),
+                          child: Center(
+                            child: Text(
+                              context.t.checkin.check_in_btn,
+                              style: GoogleFonts.inter(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Overlapping Illustration
+                Positioned(
+                  top: 0,
+                  child: Image.asset(
+                    Assets.images.bgCheckinHeader.path,
+                    height: 110,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                // Close Button
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: AppColors.activeTab.withValues(alpha: 0.6),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // Daily Bonus Notification switch tile below
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(15),
+                    border: const GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: [AppColors.primary, AppColors.secondary],
+                        ),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          context.t.checkin.daily_bonus_notification,
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Transform.scale(
+                        scale: 0.8,
+                        child: CupertinoSwitch(
+                          value: notificationEnabled,
+                          activeTrackColor: const Color(0xFF00E676),
+                          onChanged: onNotificationChanged,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDayCard({
+    required BuildContext context,
+    required int day,
+    required String reward,
+    required DayState state,
+  }) {
+    Color borderColor;
+    Color headerBgColor;
+    Color headerTextColor;
+    Widget centerIcon;
+    Color cardBgColor = Colors.white;
+
+    switch (state) {
+      case DayState.claimed:
+        borderColor = const Color(0xFFE0E0E0);
+        headerBgColor = const Color(0xFFF5F5F5);
+        headerTextColor = const Color(0xFF9E9E9E);
+        centerIcon = Stack(
+          alignment: Alignment.center,
+          children: [
+            Opacity(
+              opacity: 0.5,
+              child: Image.asset(
+                Assets.images.icCheckinCoin.path,
+                fit: BoxFit.contain,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: const BoxDecoration(
+                color: Colors.green,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.check, color: Colors.white, size: 12),
+            ),
+          ],
+        );
+        break;
+      case DayState.today:
+        borderColor = const Color(0xFF00D492);
+        headerBgColor = const Color(0xFF00D492);
+        headerTextColor = Colors.white;
+        centerIcon = Image.asset(
+          Assets.images.icCheckinCoin.path,
+          fit: BoxFit.contain,
+        );
+        cardBgColor = const Color(0xFFE8F5E9);
+        break;
+      case DayState.upcoming:
+        borderColor = const Color(0xFFBBDEFB);
+        headerBgColor = const Color(0xFFE3F2FD);
+        headerTextColor = const Color(0xFF0D47A1);
+        centerIcon = Image.asset(
+          Assets.images.icCheckinCoin.path,
+          fit: BoxFit.contain,
+        );
+        break;
+    }
+
+    return Expanded(
+      child: AspectRatio(
+        aspectRatio: 0.95,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          decoration: BoxDecoration(
+            color: cardBgColor,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: borderColor, width: 1.5),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Column(
+              children: [
+                // Header bar
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  color: headerBgColor,
+                  child: Text(
+                    state == DayState.today
+                        ? context.t.checkin.today
+                        : context.t.checkin.day(n: day),
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: headerTextColor,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                      horizontal: 4,
+                    ),
+                    child: Center(child: centerIcon),
+                  ),
+                ),
+                Text(
+                  reward,
+                  style: GoogleFonts.inter(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: state == DayState.claimed
+                        ? const Color(0xFF9E9E9E)
+                        : const Color(0xFF37474F),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDay7Card({
+    required BuildContext context,
+    required DayState state,
+    required double width,
+    required double height,
+  }) {
+    Color borderColor = const Color(0xFFBBDEFB);
+    Color headerBgColor = const Color(0xFF4FC3F7);
+    Color headerTextColor = const Color(0xFF0D47A1);
+    Widget centerIcon = Image.asset(
+      Assets.images.icCheckinBadgeCoin.path,
+      fit: BoxFit.contain,
+    );
+    Color cardBgColor = Colors.white;
+
+    if (state == DayState.claimed) {
+      borderColor = const Color(0xFFE0E0E0);
+      headerBgColor = const Color(0xFFF5F5F5);
+      headerTextColor = const Color(0xFF9E9E9E);
+      centerIcon = Stack(
+        alignment: Alignment.center,
+        children: [
+          Opacity(
+            opacity: 0.5,
+            child: Image.asset(
+              Assets.images.icCheckinBadgeCoin.path,
+              fit: BoxFit.contain,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: const BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.check, color: Colors.white, size: 12),
+          ),
+        ],
+      );
+    } else if (state == DayState.today) {
+      borderColor = const Color(0xFF00D492);
+      headerBgColor = const Color(0xFF00D492);
+      headerTextColor = Colors.white;
+      cardBgColor = const Color(0xFFE8F5E9);
+    }
+
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: cardBgColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: borderColor, width: 1.5),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Column(
+          children: [
+            // Header bar
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              width: double.infinity,
+              alignment: Alignment.center,
+              color: headerBgColor,
+              child: Text(
+                state == DayState.today
+                    ? context.t.checkin.today
+                    : context.t.checkin.day(n: 7),
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: headerTextColor,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.zero,
+                child: Center(
+                  child: Transform.scale(
+                    scale: 1.7,
+                    child: centerIcon,
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              'x25',
+              style: GoogleFonts.inter(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: state == DayState.claimed
+                    ? const Color(0xFF9E9E9E)
+                    : const Color(0xFF37474F),
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 4),
+          ],
+        ),
+      ),
+    );
+  }
+}

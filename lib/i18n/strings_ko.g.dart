@@ -59,6 +59,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$ko tips_sheet = _Translations$tips_sheet$ko._(_root);
 	@override late final _Translations$errors$ko errors = _Translations$errors$ko._(_root);
 	@override late final _Translations$guide$ko guide = _Translations$guide$ko._(_root);
+	@override late final _Translations$checkin$ko checkin = _Translations$checkin$ko._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$ko extends Translations$report_dialog$en {
 	@override String get cancel => '취소';
 	@override String get submit => '제출';
 	@override String get success => '동영상이 성공적으로 신고되었습니다';
+	@override String get bottom_sheet_title => '동영상 신고';
+	@override String get option_offensive => '불쾌하거나 부적절한 콘텐츠';
+	@override String get option_quality => '낮은 화질 또는 왜곡된 얼굴';
+	@override String get option_copyright => '저작권 침해';
+	@override String get option_bug => '동영상 생성 오류 또는 충dol';
+	@override String get option_other => '기타 문제';
+	@override String get thanks_msg => '신고해 주셔서 감사합니다. 검토 후 수정하도록 하겠습니다.';
+	@override String get hint_other => '문제를 자세히 설명해 주세요...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$ko extends Translations$guide$en {
 	@override String get step_2 => '2단계';
 	@override String get upload_photo => '사진 업로드';
 	@override String get got_it => '이해했습니다!';
+}
+
+// Path: checkin
+class _Translations$checkin$ko extends Translations$checkin$en {
+	_Translations$checkin$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '출석체크';
+	@override String get subtitle => '매일 보상 받기!';
+	@override String get today => '오늘';
+	@override String day({required Object n}) => '${n}일차';
+	@override String get check_in_btn => '출석하기';
+	@override String get daily_bonus_notification => '매일 알림';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsKo {
 			'report_dialog.cancel' => '취소',
 			'report_dialog.submit' => '제출',
 			'report_dialog.success' => '동영상이 성공적으로 신고되었습니다',
+			'report_dialog.bottom_sheet_title' => '동영상 신고',
+			'report_dialog.option_offensive' => '불쾌하거나 부적절한 콘텐츠',
+			'report_dialog.option_quality' => '낮은 화질 또는 왜곡된 얼굴',
+			'report_dialog.option_copyright' => '저작권 침해',
+			'report_dialog.option_bug' => '동영상 생성 오류 또는 충dol',
+			'report_dialog.option_other' => '기타 문제',
+			'report_dialog.thanks_msg' => '신고해 주셔서 감사합니다. 검토 후 수정하도록 하겠습니다.',
+			'report_dialog.hint_other' => '문제를 자세히 설명해 주세요...',
 			'tips_sheet.title' => '최상의 결과를 위한 팁',
 			'tips_sheet.button_got_it' => '알겠습니다!',
 			'tips_sheet.use_photos' => '이런 사진을 사용하세요',
@@ -901,6 +933,12 @@ extension on TranslationsKo {
 			'guide.step_2' => '2단계',
 			'guide.upload_photo' => '사진 업로드',
 			'guide.got_it' => '이해했습니다!',
+			'checkin.title' => '출석체크',
+			'checkin.subtitle' => '매일 보상 받기!',
+			'checkin.today' => '오늘',
+			'checkin.day' => ({required Object n}) => '${n}일차',
+			'checkin.check_in_btn' => '출석하기',
+			'checkin.daily_bonus_notification' => '매일 알림',
 			_ => null,
 		};
 	}

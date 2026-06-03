@@ -208,7 +208,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
                 height: 80,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.black.withValues(alpha: 0.25),
+                  color: AppColors.black.withValues(alpha: 0.1),
                 ),
                 child: _isBuffering
                     ? const Padding(
@@ -221,7 +221,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
                     : const Icon(
                         Icons.play_arrow_rounded,
                         color: AppColors.white,
-                        size: 40,
+                        size: 60,
                       ),
               ),
             ),

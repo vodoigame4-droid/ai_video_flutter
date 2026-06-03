@@ -59,6 +59,7 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$pt tips_sheet = _Translations$tips_sheet$pt._(_root);
 	@override late final _Translations$errors$pt errors = _Translations$errors$pt._(_root);
 	@override late final _Translations$guide$pt guide = _Translations$guide$pt._(_root);
+	@override late final _Translations$checkin$pt checkin = _Translations$checkin$pt._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$pt extends Translations$report_dialog$en {
 	@override String get cancel => 'Cancelar';
 	@override String get submit => 'Enviar';
 	@override String get success => 'Vídeo denunciado com sucesso';
+	@override String get bottom_sheet_title => 'Denunciar vídeo';
+	@override String get option_offensive => 'Conteúdo ofensivo ou inadequado';
+	@override String get option_quality => 'Qualidade ruim ou rostros distorcidos';
+	@override String get option_copyright => 'Violação de direitos autorais';
+	@override String get option_bug => 'Erro de geração de vídeo ou falha';
+	@override String get option_other => 'Outros problemas';
+	@override String get thanks_msg => 'Obrigado pela sua denúncia, iremos analisar e modificar.';
+	@override String get hint_other => 'Por favor, descreva o problema em detalhes...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$pt extends Translations$guide$en {
 	@override String get step_2 => 'Passo 2';
 	@override String get upload_photo => 'Enviar foto';
 	@override String get got_it => 'Entendi!';
+}
+
+// Path: checkin
+class _Translations$checkin$pt extends Translations$checkin$en {
+	_Translations$checkin$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Check-in';
+	@override String get subtitle => 'Prêmios diários!';
+	@override String get today => 'Hoje';
+	@override String day({required Object n}) => 'Dia ${n}';
+	@override String get check_in_btn => 'Fichar';
+	@override String get daily_bonus_notification => 'Notificação';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsPt {
 			'report_dialog.cancel' => 'Cancelar',
 			'report_dialog.submit' => 'Enviar',
 			'report_dialog.success' => 'Vídeo denunciado com sucesso',
+			'report_dialog.bottom_sheet_title' => 'Denunciar vídeo',
+			'report_dialog.option_offensive' => 'Conteúdo ofensivo ou inadequado',
+			'report_dialog.option_quality' => 'Qualidade ruim ou rostros distorcidos',
+			'report_dialog.option_copyright' => 'Violação de direitos autorais',
+			'report_dialog.option_bug' => 'Erro de geração de vídeo ou falha',
+			'report_dialog.option_other' => 'Outros problemas',
+			'report_dialog.thanks_msg' => 'Obrigado pela sua denúncia, iremos analisar e modificar.',
+			'report_dialog.hint_other' => 'Por favor, descreva o problema em detalhes...',
 			'tips_sheet.title' => 'Dicas para melhores resultados',
 			'tips_sheet.button_got_it' => 'Entendi!',
 			'tips_sheet.use_photos' => 'Use fotos como estas',
@@ -901,6 +933,12 @@ extension on TranslationsPt {
 			'guide.step_2' => 'Passo 2',
 			'guide.upload_photo' => 'Enviar foto',
 			'guide.got_it' => 'Entendi!',
+			'checkin.title' => 'Check-in',
+			'checkin.subtitle' => 'Prêmios diários!',
+			'checkin.today' => 'Hoje',
+			'checkin.day' => ({required Object n}) => 'Dia ${n}',
+			'checkin.check_in_btn' => 'Fichar',
+			'checkin.daily_bonus_notification' => 'Notificação',
 			_ => null,
 		};
 	}

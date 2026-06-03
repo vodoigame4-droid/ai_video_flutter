@@ -59,6 +59,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$hi tips_sheet = _Translations$tips_sheet$hi._(_root);
 	@override late final _Translations$errors$hi errors = _Translations$errors$hi._(_root);
 	@override late final _Translations$guide$hi guide = _Translations$guide$hi._(_root);
+	@override late final _Translations$checkin$hi checkin = _Translations$checkin$hi._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$hi extends Translations$report_dialog$en {
 	@override String get cancel => 'रद्द करें';
 	@override String get submit => 'सबमिट करें';
 	@override String get success => 'वीडियो की सफलतापूर्वक रिपोर्ट की गई';
+	@override String get bottom_sheet_title => 'वीडियो की रिपोर्ट करें';
+	@override String get option_offensive => 'आपत्तिजनक या अनुचित सामग्री';
+	@override String get option_quality => 'खराब गुणवत्ता या विकृत चेहरे';
+	@override String get option_copyright => 'कॉपीराइट का उल्लंघन';
+	@override String get option_bug => 'वीडियो निर्माण त्रुटि या क्रैश';
+	@override String get option_other => 'अन्य समस्याएं';
+	@override String get thanks_msg => 'आपकी रिपोर्ट के लिए धन्यवाद, हम इसकी समीक्षा करेंगे और सुधार करेंगे।';
+	@override String get hint_other => 'कृपया समस्या का विस्तार से वर्णन करें...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$hi extends Translations$guide$en {
 	@override String get step_2 => 'चरण 2';
 	@override String get upload_photo => 'फोटो अपलोड करें';
 	@override String get got_it => 'मुझे समझ आ गया!';
+}
+
+// Path: checkin
+class _Translations$checkin$hi extends Translations$checkin$en {
+	_Translations$checkin$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'दैनिक हाजिरी';
+	@override String get subtitle => 'रोजाना इनाम पाएं!';
+	@override String get today => 'आज';
+	@override String day({required Object n}) => 'दिन ${n}';
+	@override String get check_in_btn => 'हाजिri लगाएं';
+	@override String get daily_bonus_notification => 'दैनिक सूचना';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsHi {
 			'report_dialog.cancel' => 'रद्द करें',
 			'report_dialog.submit' => 'सबमिट करें',
 			'report_dialog.success' => 'वीडियो की सफलतापूर्वक रिपोर्ट की गई',
+			'report_dialog.bottom_sheet_title' => 'वीडियो की रिपोर्ट करें',
+			'report_dialog.option_offensive' => 'आपत्तिजनक या अनुचित सामग्री',
+			'report_dialog.option_quality' => 'खराब गुणवत्ता या विकृत चेहरे',
+			'report_dialog.option_copyright' => 'कॉपीराइट का उल्लंघन',
+			'report_dialog.option_bug' => 'वीडियो निर्माण त्रुटि या क्रैश',
+			'report_dialog.option_other' => 'अन्य समस्याएं',
+			'report_dialog.thanks_msg' => 'आपकी रिपोर्ट के लिए धन्यवाद, हम इसकी समीक्षा करेंगे और सुधार करेंगे।',
+			'report_dialog.hint_other' => 'कृपया समस्या का विस्तार से वर्णन करें...',
 			'tips_sheet.title' => 'सर्वोत्तम परिणामों के लिए सुझाव',
 			'tips_sheet.button_got_it' => 'समझ गया!',
 			'tips_sheet.use_photos' => 'इस तरह की तस्वीरों का उपयोग करें',
@@ -901,6 +933,12 @@ extension on TranslationsHi {
 			'guide.step_2' => 'चरण 2',
 			'guide.upload_photo' => 'फोटो अपलोड करें',
 			'guide.got_it' => 'मुझे समझ आ गया!',
+			'checkin.title' => 'दैनिक हाजिरी',
+			'checkin.subtitle' => 'रोजाना इनाम पाएं!',
+			'checkin.today' => 'आज',
+			'checkin.day' => ({required Object n}) => 'दिन ${n}',
+			'checkin.check_in_btn' => 'हाजिri लगाएं',
+			'checkin.daily_bonus_notification' => 'दैनिक सूचना',
 			_ => null,
 		};
 	}

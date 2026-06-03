@@ -13,7 +13,7 @@ class AppHeartButton extends StatelessWidget {
     required this.isLiked,
     required this.onTap,
     this.size = 42.0,
-    this.iconSize = 20.0,
+    this.iconSize = 22.0,
   });
 
   @override

@@ -237,7 +237,15 @@
     "desc": "您确定要提交举报吗？",
     "cancel": "取消",
     "submit": "提交",
-    "success": "视频举报成功"
+    "success": "视频举报成功",
+    "bottom_sheet_title": "举报视频",
+    "option_offensive": "令人反感或不当内容",
+    "option_quality": "画质差或脸部畸变",
+    "option_copyright": "侵犯版权",
+    "option_bug": "视频生成错误或崩溃",
+    "option_other": "其他问题",
+    "thanks_msg": "感谢您的举报，我们将进行审查和修改।",
+    "hint_other": "请详细描述该问题..."
   },
   "tips_sheet": {
     "title": "获得最佳效果的建议",
@@ -349,5 +357,13 @@
     "step_2": "第2步",
     "upload_photo": "上传图片",
     "got_it": "我知道了！"
+  },
+  "checkin": {
+    "title": "签到",
+    "subtitle": "每日领福利!",
+    "today": "今天",
+    "day": "第{n}天",
+    "check_in_btn": "签到",
+    "daily_bonus_notification": "每日提醒"
   }
 }
