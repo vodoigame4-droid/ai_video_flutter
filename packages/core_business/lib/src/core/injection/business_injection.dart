@@ -34,6 +34,7 @@ import '../../features/media/domain/usecases/create_image_to_video_usecase.dart'
 import '../../features/media/domain/usecases/create_itv_single_source_usecase.dart';
 import '../../features/media/domain/usecases/create_transition_video_usecase.dart';
 import '../../features/media/domain/usecases/create_dancing_image_usecase.dart';
+import '../../features/media/domain/usecases/create_extend_video_usecase.dart';
 import '../../features/media/domain/usecases/create_itv_dual_source_usecase.dart';
 import '../../features/media/domain/usecases/get_media_detail_usecase.dart';
 import '../../features/media/domain/usecases/get_history_usecase.dart';
@@ -129,6 +130,7 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => CreateItvSingleSourceUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => CreateTransitionVideoUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => CreateDancingImageUseCase(mediaRepository: sl()));
+  sl.registerLazySingleton(() => CreateExtendVideoUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => CreateItvDualSourceUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => GetMediaDetailUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => GetHistoryUseCase(mediaRepository: sl()));
@@ -203,6 +205,7 @@ void initBusinessDependencies(GetIt sl) {
       createItvSingleSourceUseCase: sl(),
       createTransitionVideoUseCase: sl(),
       createDancingImageUseCase: sl(),
+      createExtendVideoUseCase: sl(),
       createItvDualSourceUseCase: sl(),
       getMediaDetailUseCase: sl(),
       notificationRepository: sl(),

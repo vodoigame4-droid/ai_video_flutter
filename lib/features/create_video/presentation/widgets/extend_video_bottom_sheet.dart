@@ -187,6 +187,13 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                                   ? "$videoTitle Extended"
                                   : extendPrompt,
                               'imageUrl': videoImageUrl,
+                              'videoUrl': videoUrl,
+                              // Sử dụng serviceType 'EXTEND_VIDEO' cho nghiệp vụ Client.
+                              // Sẽ được CreateExtendVideoUseCase ánh xạ thành 'DANCING_IMAGE' khi gọi API.
+                              'serviceType': 'EXTEND_VIDEO',
+                              'isHd': (extendQuality == 'Full HD' || extendQuality == 'HD').toString(),
+                              'isLongTime': (extendDuration == '10s' || extendDuration == '15s').toString(),
+                              'prompt': extendPrompt,
                             },
                           );
                         },

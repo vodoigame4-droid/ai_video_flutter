@@ -9,6 +9,7 @@ import '../../../domain/usecases/create_image_to_video_usecase.dart';
 import '../../../domain/usecases/create_itv_single_source_usecase.dart';
 import '../../../domain/usecases/create_transition_video_usecase.dart';
 import '../../../domain/usecases/create_dancing_image_usecase.dart';
+import '../../../domain/usecases/create_extend_video_usecase.dart';
 import '../../../domain/usecases/create_itv_dual_source_usecase.dart';
 import '../../../domain/usecases/get_media_detail_usecase.dart';
 import '../../../data/models/media_models.dart';
@@ -25,6 +26,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
   final CreateItvSingleSourceUseCase createItvSingleSourceUseCase;
   final CreateTransitionVideoUseCase createTransitionVideoUseCase;
   final CreateDancingImageUseCase createDancingImageUseCase;
+  final CreateExtendVideoUseCase createExtendVideoUseCase;
   final CreateItvDualSourceUseCase createItvDualSourceUseCase;
   final GetMediaDetailUseCase getMediaDetailUseCase;
   final NotificationRepository notificationRepository;
@@ -40,6 +42,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
     required this.createItvSingleSourceUseCase,
     required this.createTransitionVideoUseCase,
     required this.createDancingImageUseCase,
+    required this.createExtendVideoUseCase,
     required this.createItvDualSourceUseCase,
     required this.getMediaDetailUseCase,
     required this.notificationRepository,
@@ -148,7 +151,21 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 ));
                 break;
               case 'DANCING_IMAGE':
+                // Image to Dance (Biến ảnh thành nhảy múa)
                 createResult = await createDancingImageUseCase(CreateDancingImageParams(
+                  imageUrl: finalImageUrl,
+                  videoUrl: finalVideoUrl,
+                  name: title,
+                  prompt: finalPrompt,
+                  isHd: isHd,
+                  isLongTime: isLongTime,
+                ));
+                break;
+              case 'EXTEND_VIDEO':
+                // Extend Video (Mở rộng video hiện tại)
+                // Phía client dùng CreateExtendVideoUseCase riêng để tách nghiệp vụ,
+                // bên trong UseCase sẽ ánh xạ sang serviceType DANCING_IMAGE của API.
+                createResult = await createExtendVideoUseCase(CreateExtendVideoParams(
                   imageUrl: finalImageUrl,
                   videoUrl: finalVideoUrl,
                   name: title,
