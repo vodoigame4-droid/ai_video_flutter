@@ -1,4 +1,5 @@
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +12,7 @@ import '../widgets/home_banner_widget.dart';
 import '../widgets/home_features_grid_widget.dart';
 import '../widgets/home_templates_section_widget.dart';
 import '../../../../core/widgets/credit_badge_widget.dart';
+import '../../../../core/widgets/checkin_widget.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';
@@ -250,19 +252,21 @@ class HomeView extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      t.home.title,
-                                      style: context.textTheme.displayMedium,
-                                    ),
-                                    const SizedBox(width: 8),
                                     Image.asset(
-                                      'assets/images/pro_badge_icon.png',
-                                      height: 22,
+                                      Assets.images.icLogoHome.path,
+                                      height: 42,
                                       fit: BoxFit.contain,
                                     ),
                                   ],
                                 ),
-                                const CreditBadgeWidget(),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const CheckInWidget(),
+                                    const SizedBox(width: 4),
+                                    const CreditBadgeWidget(),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

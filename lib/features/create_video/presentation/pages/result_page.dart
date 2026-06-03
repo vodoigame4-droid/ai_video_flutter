@@ -3,11 +3,14 @@ import 'package:ai_video_flutter/core/widgets/app_svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
+import '../../../../core/widgets/report_bottom_sheet.dart';
 import '../../../../i18n/strings.g.dart';
+import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
 import '../widgets/extend_video_bottom_sheet.dart';
 import 'generating_page.dart';
@@ -211,7 +214,7 @@ class _ResultPageState extends State<ResultPage> {
                     children: [
                       // Back button
                       Material(
-                        color: AppColors.white.withValues(alpha: 0.1),
+                        color: AppColors.white.withValues(alpha: 0.0),
                         shape: const CircleBorder(),
                         child: InkWell(
                           onTap: () => context.pop(),
@@ -247,21 +250,26 @@ class _ResultPageState extends State<ResultPage> {
                       ),
 
                       // Report/Flag button
-                      Material(
-                        color: Colors.transparent,
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () => _showReportDialog(context),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: const SizedBox(
-                            width: 36,
-                            height: 36,
-                            child: Icon(
-                              Icons.flag_outlined,
-                              color: AppColors.white,
-                              size: 22,
+                      ReportTriggerWidget(
+                        child: Material(
+                          color: Colors.transparent,
+                          shape: const CircleBorder(),
+                          child: InkWell(
+                            onTap: null,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                            child: SizedBox(
+                              width: 36,
+                              height: 36,
+                              child: Center(
+                                child: AppSvgIcon(
+                                  assetName: Assets.icons.icReport,
+                                  color: AppColors.white,
+                                  width: 16,
+                                  height: 16,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -294,21 +302,15 @@ class _ResultPageState extends State<ResultPage> {
                           ),
                         ),
                         TextSpan(text: prefix),
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.middle,
-                          child: ShaderMask(
-                            shaderCallback: (bounds) => AppColors
-                                .primaryGradient
-                                .createShader(bounds),
-                            blendMode: BlendMode.srcIn,
-                            child: Text(
-                              widget.title,
-                              style: context.textTheme.bodySmall?.copyWith(
-                                color: AppColors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                        TextSpan(
+                          text: widget.title,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()
+                              ..shader = AppColors.primaryGradient.createShader(
+                                const Rect.fromLTWH(0.0, 0.0, 300.0, 24.0),
                               ),
-                            ),
                           ),
                         ),
                         TextSpan(text: suffix),
@@ -559,11 +561,14 @@ class _ResultPageState extends State<ResultPage> {
                                                                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                                                     ),
                                                                   )
-                                                                : const Icon(
-                                                                    Icons.share_rounded,
-                                                                    color: AppColors.white,
-                                                                    size: 20,
-                                                                  ),
+                                                                  : Center(
+                                                                      child: AppSvgIcon(
+                                                                        assetName: Assets.icons.icShare,
+                                                                        color: AppColors.white,
+                                                                        width: 18,
+                                                                        height: 18,
+                                                                      ),
+                                                                    ),
                                                           ),
                                                         ),
                                                       ),
@@ -627,11 +632,14 @@ class _ResultPageState extends State<ResultPage> {
                                                                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                                                     ),
                                                                   )
-                                                                : const Icon(
-                                                                    Icons.download_rounded,
-                                                                    color: AppColors.white,
-                                                                    size: 20,
-                                                                  ),
+                                                                  : Center(
+                                                                      child: AppSvgIcon(
+                                                                        assetName: Assets.icons.icDownload,
+                                                                        color: AppColors.white,
+                                                                        width: 18,
+                                                                        height: 18,
+                                                                      ),
+                                                                    ),
                                                           ),
                                                         ),
                                                       ),
@@ -683,15 +691,16 @@ class _ResultPageState extends State<ResultPage> {
                                                                   100,
                                                                 ),
                                                               ),
-                                                          child: const SizedBox(
+                                                          child: SizedBox(
                                                             width: 42,
                                                             height: 42,
-                                                            child: Icon(
-                                                              Icons
-                                                                  .delete_outline_rounded,
-                                                              color:
-                                                                  AppColors.white,
-                                                              size: 20,
+                                                            child: Center(
+                                                              child: AppSvgIcon(
+                                                                assetName: Assets.icons.icDelete,
+                                                                color: AppColors.white,
+                                                                width: 18,
+                                                                height: 18,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -799,8 +808,8 @@ class _ResultPageState extends State<ResultPage> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(100),
                             ),
-                            border: Border.all(
-                              color: AppColors.secondary,
+                            border: GradientBoxBorder(
+                              gradient: context.appTheme.primaryGradient,
                               width: 1.2,
                             ),
                           ),
@@ -808,10 +817,12 @@ class _ResultPageState extends State<ResultPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(
-                                  Icons.open_in_full_rounded,
-                                  color: AppColors.white,
-                                  size: 22,
+                                 Center(
+                                  child: AppSvgIcon(
+                                    width: 22,
+                                    height: 22,
+                                    assetName: Assets.icons.icExtend,
+                                  ),
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
@@ -976,114 +987,4 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-  void _showReportDialog(BuildContext context) {
-    final t = context.t;
-    showDialog(
-      context: context,
-      barrierColor: AppColors.black.withValues(alpha: 0.5),
-      builder: (context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: Dialog(
-            backgroundColor: AppColors.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              side: BorderSide(color: AppColors.secondary, width: 1.2),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    t.report_dialog.title,
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    t.report_dialog.desc,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.subText,
-                      fontSize: 15,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Text(
-                              t.report_dialog.cancel,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(t.report_dialog.success),
-                                duration: const Duration(seconds: 2),
-                              ),
-                            );
-                          },
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Ink(
-                            height: 48,
-                            decoration: const BoxDecoration(
-                              gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                t.report_dialog.submit,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
 }

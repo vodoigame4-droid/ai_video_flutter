@@ -61,6 +61,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$tips_sheet$en tips_sheet = Translations$tips_sheet$en.internal(_root);
 	late final Translations$errors$en errors = Translations$errors$en.internal(_root);
 	late final Translations$guide$en guide = Translations$guide$en.internal(_root);
+	late final Translations$checkin$en checkin = Translations$checkin$en.internal(_root);
 }
 
 // Path: common
@@ -786,6 +787,30 @@ class Translations$report_dialog$en {
 
 	/// en: 'Video reported successfully'
 	String get success => 'Video reported successfully';
+
+	/// en: 'Report video'
+	String get bottom_sheet_title => 'Report video';
+
+	/// en: 'Offensive or inappropriate content'
+	String get option_offensive => 'Offensive or inappropriate content';
+
+	/// en: 'Poor quality or distorted faces'
+	String get option_quality => 'Poor quality or distorted faces';
+
+	/// en: 'Copyright violation'
+	String get option_copyright => 'Copyright violation';
+
+	/// en: 'Video generation error or crash'
+	String get option_bug => 'Video generation error or crash';
+
+	/// en: 'Other issues'
+	String get option_other => 'Other issues';
+
+	/// en: 'Thank you for your report, we will review and modify.'
+	String get thanks_msg => 'Thank you for your report, we will review and modify.';
+
+	/// en: 'Please describe the issue in detail...'
+	String get hint_other => 'Please describe the issue in detail...';
 }
 
 // Path: tips_sheet
@@ -1130,6 +1155,33 @@ class Translations$guide$en {
 	String get got_it => 'I got it!';
 }
 
+// Path: checkin
+class Translations$checkin$en {
+	Translations$checkin$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Daily Check-in'
+	String get title => 'Daily Check-in';
+
+	/// en: 'Check in every day and get amazing rewards!'
+	String get subtitle => 'Check in every day and get amazing rewards!';
+
+	/// en: 'Today'
+	String get today => 'Today';
+
+	/// en: 'Day {n}'
+	String day({required Object n}) => 'Day ${n}';
+
+	/// en: 'Check in'
+	String get check_in_btn => 'Check in';
+
+	/// en: 'Daily Bonus Notification'
+	String get daily_bonus_notification => 'Daily Bonus Notification';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -1429,6 +1481,14 @@ extension on Translations {
 			'report_dialog.cancel' => 'Cancel',
 			'report_dialog.submit' => 'Submit',
 			'report_dialog.success' => 'Video reported successfully',
+			'report_dialog.bottom_sheet_title' => 'Report video',
+			'report_dialog.option_offensive' => 'Offensive or inappropriate content',
+			'report_dialog.option_quality' => 'Poor quality or distorted faces',
+			'report_dialog.option_copyright' => 'Copyright violation',
+			'report_dialog.option_bug' => 'Video generation error or crash',
+			'report_dialog.option_other' => 'Other issues',
+			'report_dialog.thanks_msg' => 'Thank you for your report, we will review and modify.',
+			'report_dialog.hint_other' => 'Please describe the issue in detail...',
 			'tips_sheet.title' => 'Tips for best results',
 			'tips_sheet.button_got_it' => 'I got it!',
 			'tips_sheet.use_photos' => 'Use photos like these',
@@ -1534,6 +1594,12 @@ extension on Translations {
 			'guide.step_2' => 'Step 2',
 			'guide.upload_photo' => 'Upload Photo',
 			'guide.got_it' => 'I got it!',
+			'checkin.title' => 'Daily Check-in',
+			'checkin.subtitle' => 'Check in every day and get amazing rewards!',
+			'checkin.today' => 'Today',
+			'checkin.day' => ({required Object n}) => 'Day ${n}',
+			'checkin.check_in_btn' => 'Check in',
+			'checkin.daily_bonus_notification' => 'Daily Bonus Notification',
 			_ => null,
 		};
 	}

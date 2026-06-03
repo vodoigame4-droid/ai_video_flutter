@@ -237,7 +237,15 @@
     "desc": "Êtes-vous sûr de vouloir envoyer le signalement ?",
     "cancel": "Annuler",
     "submit": "Signaler",
-    "success": "Vidéo signalée avec succès"
+    "success": "Vidéo signalée avec succès",
+    "bottom_sheet_title": "Signaler la vidéo",
+    "option_offensive": "Contenu offensant ou inapproprié",
+    "option_quality": "Mauvaise qualité ou visages déformés",
+    "option_copyright": "Violation des droits d'auteur",
+    "option_bug": "Erreur de génération de vidéo ou crash",
+    "option_other": "Autres problèmes",
+    "thanks_msg": "Merci pour votre signalement, nous allons l'examiner et le corriger.",
+    "hint_other": "Veuillez décrire le problème en détail..."
   },
   "tips_sheet": {
     "title": "Conseils pour de meilleurs résultats",
@@ -349,5 +357,13 @@
     "step_2": "Étape 2",
     "upload_photo": "Télécharger la photo",
     "got_it": "J'ai compris!"
+  },
+  "checkin": {
+    "title": "Check-in",
+    "subtitle": "Récompenses quotidiennes!",
+    "today": "Auj.",
+    "day": "Jour {n}",
+    "check_in_btn": "Réclamer",
+    "daily_bonus_notification": "Notification"
   }
 }

@@ -237,7 +237,15 @@
     "desc": "Apakah Anda yakin ingin mengirimkan laporan?",
     "cancel": "Batal",
     "submit": "Kirim",
-    "success": "Video berhasil dilaporkan"
+    "success": "Video berhasil dilaporkan",
+    "bottom_sheet_title": "Laporkan video",
+    "option_offensive": "Konten ofensif atau tidak pantas",
+    "option_quality": "Kualitas buruk atau wajah terdistorsi",
+    "option_copyright": "Pelanggaran hak cipta",
+    "option_bug": "Kesalahan pembuatan video atau crash",
+    "option_other": "Masalah lain",
+    "thanks_msg": "Terima kasih atas laporan Anda, kami akan meninjau dan memodifikasinya.",
+    "hint_other": "Silakan jelaskan masalah ini secara detail..."
   },
   "tips_sheet": {
     "title": "Tips untuk hasil terbaik",
@@ -349,5 +357,13 @@
     "step_2": "Langkah 2",
     "upload_photo": "Unggah Foto",
     "got_it": "Saya mengerti!"
+  },
+  "checkin": {
+    "title": "Check-in",
+    "subtitle": "Hadiah harian!",
+    "today": "Hari ini",
+    "day": "Hari {n}",
+    "check_in_btn": "Check-in",
+    "daily_bonus_notification": "Notifikasi"
   }
 }

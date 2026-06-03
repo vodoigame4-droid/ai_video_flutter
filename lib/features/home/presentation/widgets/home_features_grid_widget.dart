@@ -1,3 +1,5 @@
+import 'package:ai_video_flutter/core/widgets/app_svg_icon.dart';
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -31,7 +33,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
         children: [
           _buildFeatureItem(
             context,
-            icon: Icons.movie_creation_outlined,
+            icon: Assets.icons.icImageHome,
             label: t.home_new.imageToVideo,
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
@@ -41,7 +43,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
           const SizedBox(width: 8),
           _buildFeatureItem(
             context,
-            icon: Icons.auto_awesome_motion_outlined,
+            icon: Assets.icons.icTransitionHome,
             label: t.home_new.transitionVideo,
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
@@ -51,7 +53,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
           const SizedBox(width: 8),
           _buildFeatureItem(
             context,
-            icon: Icons.directions_run_outlined,
+            icon: Assets.icons.icDanceHome,
             label: t.home_new.imageToDance,
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
@@ -61,7 +63,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
           const SizedBox(width: 8),
           _buildFeatureItem(
             context,
-            icon: Icons.grid_view_outlined,
+            icon: Assets.icons.icUnifiedHome,
             label: t.home_new.unifiedVideo,
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
@@ -75,7 +77,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
 
   Widget _buildFeatureItem(
     BuildContext context, {
-    required IconData icon,
+    required String icon,
     required String label,
     required VoidCallback onTap,
   }) {
@@ -92,7 +94,18 @@ class HomeFeaturesGridWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 24),
+                SizedBox(
+                  width: 26,
+                  height: 26,
+                  child: Center(
+                    child: AppSvgIcon(
+                      assetName: icon,
+                      color: AppColors.white,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),

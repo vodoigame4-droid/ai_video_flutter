@@ -237,7 +237,15 @@
     "desc": "¿Está seguro de que desea enviar el reporte?",
     "cancel": "Cancelar",
     "submit": "Enviar",
-    "success": "Video reportado con éxito"
+    "success": "Video reportado con éxito",
+    "bottom_sheet_title": "Reportar video",
+    "option_offensive": "Contenido ofensivo o inapropiado",
+    "option_quality": "Mala calidad o rostros distorsionados",
+    "option_copyright": "Violación de derechos de autor",
+    "option_bug": "Error de generación de video o caída",
+    "option_other": "Otros problemas",
+    "thanks_msg": "Gracias por su informe, lo revisaremos y modificaremos.",
+    "hint_other": "Por favor, describa el problema en detalle..."
   },
   "tips_sheet": {
     "title": "Consejos para mejores resultados",
@@ -349,5 +357,13 @@
     "step_2": "Paso 2",
     "upload_photo": "Subir foto",
     "got_it": "¡Lo tengo!"
+  },
+  "checkin": {
+    "title": "Check-in",
+    "subtitle": "¡Premios diarios!",
+    "today": "Hoy",
+    "day": "Día {n}",
+    "check_in_btn": "Fichar",
+    "daily_bonus_notification": "Notificación"
   }
 }

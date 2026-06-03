@@ -244,7 +244,15 @@
     "desc": "Bạn có chắc chắn muốn gửi báo cáo không?",
     "cancel": "Hủy bỏ",
     "submit": "Gửi",
-    "success": "Báo cáo video thành công"
+    "success": "Báo cáo video thành công",
+    "bottom_sheet_title": "Báo cáo video",
+    "option_offensive": "Nội dung phản cảm hoặc không phù hợp",
+    "option_quality": "Chất lượng kém hoặc biến dạng khuôn mặt",
+    "option_copyright": "Vi phạm bản quyền",
+    "option_bug": "Lỗi tạo video hoặc crash",
+    "option_other": "Vấn đề khác",
+    "thanks_msg": "Cảm ơn vì đã báo cáo, chúng tôi sẽ xem xét sửa đổi.",
+    "hint_other": "Vui lòng mô tả chi tiết vấn đề..."
   },
   "tips_sheet": {
     "title": "Mẹo để có kết quả tốt nhất",
@@ -356,5 +364,13 @@
     "step_2": "Bước 2",
     "upload_photo": "Tải ảnh lên",
     "got_it": "Đã hiểu!"
+  },
+  "checkin": {
+    "title": "Điểm danh",
+    "subtitle": "Nhận quà mỗi ngày!",
+    "today": "H.nay",
+    "day": "Ngày {n}",
+    "check_in_btn": "Nhận quà",
+    "daily_bonus_notification": "Thông báo hàng ngày"
   }
 }

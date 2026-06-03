@@ -60,6 +60,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$vi tips_sheet = _Translations$tips_sheet$vi._(_root);
 	@override late final _Translations$errors$vi errors = _Translations$errors$vi._(_root);
 	@override late final _Translations$guide$vi guide = _Translations$guide$vi._(_root);
+	@override late final _Translations$checkin$vi checkin = _Translations$checkin$vi._(_root);
 }
 
 // Path: common
@@ -413,6 +414,14 @@ class _Translations$report_dialog$vi extends Translations$report_dialog$en {
 	@override String get cancel => 'Hủy bỏ';
 	@override String get submit => 'Gửi';
 	@override String get success => 'Báo cáo video thành công';
+	@override String get bottom_sheet_title => 'Báo cáo video';
+	@override String get option_offensive => 'Nội dung phản cảm hoặc không phù hợp';
+	@override String get option_quality => 'Chất lượng kém hoặc biến dạng khuôn mặt';
+	@override String get option_copyright => 'Vi phạm bản quyền';
+	@override String get option_bug => 'Lỗi tạo video hoặc crash';
+	@override String get option_other => 'Vấn đề khác';
+	@override String get thanks_msg => 'Cảm ơn vì đã báo cáo, chúng tôi sẽ xem xét sửa đổi.';
+	@override String get hint_other => 'Vui lòng mô tả chi tiết vấn đề...';
 }
 
 // Path: tips_sheet
@@ -545,6 +554,21 @@ class _Translations$guide$vi extends Translations$guide$en {
 	@override String get step_2 => 'Bước 2';
 	@override String get upload_photo => 'Tải ảnh lên';
 	@override String get got_it => 'Đã hiểu!';
+}
+
+// Path: checkin
+class _Translations$checkin$vi extends Translations$checkin$en {
+	_Translations$checkin$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Điểm danh';
+	@override String get subtitle => 'Nhận quà mỗi ngày!';
+	@override String get today => 'H.nay';
+	@override String day({required Object n}) => 'Ngày ${n}';
+	@override String get check_in_btn => 'Nhận quà';
+	@override String get daily_bonus_notification => 'Thông báo hàng ngày';
 }
 
 // Path: onboarding.page1
@@ -816,6 +840,14 @@ extension on TranslationsVi {
 			'report_dialog.cancel' => 'Hủy bỏ',
 			'report_dialog.submit' => 'Gửi',
 			'report_dialog.success' => 'Báo cáo video thành công',
+			'report_dialog.bottom_sheet_title' => 'Báo cáo video',
+			'report_dialog.option_offensive' => 'Nội dung phản cảm hoặc không phù hợp',
+			'report_dialog.option_quality' => 'Chất lượng kém hoặc biến dạng khuôn mặt',
+			'report_dialog.option_copyright' => 'Vi phạm bản quyền',
+			'report_dialog.option_bug' => 'Lỗi tạo video hoặc crash',
+			'report_dialog.option_other' => 'Vấn đề khác',
+			'report_dialog.thanks_msg' => 'Cảm ơn vì đã báo cáo, chúng tôi sẽ xem xét sửa đổi.',
+			'report_dialog.hint_other' => 'Vui lòng mô tả chi tiết vấn đề...',
 			'tips_sheet.title' => 'Mẹo để có kết quả tốt nhất',
 			'tips_sheet.button_got_it' => 'Tôi đã hiểu!',
 			'tips_sheet.use_photos' => 'Nên dùng ảnh như thế này',
@@ -921,6 +953,12 @@ extension on TranslationsVi {
 			'guide.step_2' => 'Bước 2',
 			'guide.upload_photo' => 'Tải ảnh lên',
 			'guide.got_it' => 'Đã hiểu!',
+			'checkin.title' => 'Điểm danh',
+			'checkin.subtitle' => 'Nhận quà mỗi ngày!',
+			'checkin.today' => 'H.nay',
+			'checkin.day' => ({required Object n}) => 'Ngày ${n}',
+			'checkin.check_in_btn' => 'Nhận quà',
+			'checkin.daily_bonus_notification' => 'Thông báo hàng ngày',
 			_ => null,
 		};
 	}

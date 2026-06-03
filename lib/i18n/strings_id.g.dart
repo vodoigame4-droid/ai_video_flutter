@@ -59,6 +59,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$id tips_sheet = _Translations$tips_sheet$id._(_root);
 	@override late final _Translations$errors$id errors = _Translations$errors$id._(_root);
 	@override late final _Translations$guide$id guide = _Translations$guide$id._(_root);
+	@override late final _Translations$checkin$id checkin = _Translations$checkin$id._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$id extends Translations$report_dialog$en {
 	@override String get cancel => 'Batal';
 	@override String get submit => 'Kirim';
 	@override String get success => 'Video berhasil dilaporkan';
+	@override String get bottom_sheet_title => 'Laporkan video';
+	@override String get option_offensive => 'Konten ofensif atau tidak pantas';
+	@override String get option_quality => 'Kualitas buruk atau wajah terdistorsi';
+	@override String get option_copyright => 'Pelanggaran hak cipta';
+	@override String get option_bug => 'Kesalahan pembuatan video atau crash';
+	@override String get option_other => 'Masalah lain';
+	@override String get thanks_msg => 'Terima kasih atas laporan Anda, kami akan meninjau dan memodifikasinya.';
+	@override String get hint_other => 'Silakan jelaskan masalah ini secara detail...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$id extends Translations$guide$en {
 	@override String get step_2 => 'Langkah 2';
 	@override String get upload_photo => 'Unggah Foto';
 	@override String get got_it => 'Saya mengerti!';
+}
+
+// Path: checkin
+class _Translations$checkin$id extends Translations$checkin$en {
+	_Translations$checkin$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Check-in';
+	@override String get subtitle => 'Hadiah harian!';
+	@override String get today => 'Hari ini';
+	@override String day({required Object n}) => 'Hari ${n}';
+	@override String get check_in_btn => 'Check-in';
+	@override String get daily_bonus_notification => 'Notifikasi';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsId {
 			'report_dialog.cancel' => 'Batal',
 			'report_dialog.submit' => 'Kirim',
 			'report_dialog.success' => 'Video berhasil dilaporkan',
+			'report_dialog.bottom_sheet_title' => 'Laporkan video',
+			'report_dialog.option_offensive' => 'Konten ofensif atau tidak pantas',
+			'report_dialog.option_quality' => 'Kualitas buruk atau wajah terdistorsi',
+			'report_dialog.option_copyright' => 'Pelanggaran hak cipta',
+			'report_dialog.option_bug' => 'Kesalahan pembuatan video atau crash',
+			'report_dialog.option_other' => 'Masalah lain',
+			'report_dialog.thanks_msg' => 'Terima kasih atas laporan Anda, kami akan meninjau dan memodifikasinya.',
+			'report_dialog.hint_other' => 'Silakan jelaskan masalah ini secara detail...',
 			'tips_sheet.title' => 'Tips untuk hasil terbaik',
 			'tips_sheet.button_got_it' => 'Saya mengerti!',
 			'tips_sheet.use_photos' => 'Gunakan foto seperti ini',
@@ -901,6 +933,12 @@ extension on TranslationsId {
 			'guide.step_2' => 'Langkah 2',
 			'guide.upload_photo' => 'Unggah Foto',
 			'guide.got_it' => 'Saya mengerti!',
+			'checkin.title' => 'Check-in',
+			'checkin.subtitle' => 'Hadiah harian!',
+			'checkin.today' => 'Hari ini',
+			'checkin.day' => ({required Object n}) => 'Hari ${n}',
+			'checkin.check_in_btn' => 'Check-in',
+			'checkin.daily_bonus_notification' => 'Notifikasi',
 			_ => null,
 		};
 	}

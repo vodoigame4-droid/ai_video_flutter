@@ -237,7 +237,15 @@
     "desc": "신고를 제출하시겠습니까?",
     "cancel": "취소",
     "submit": "제출",
-    "success": "동영상이 성공적으로 신고되었습니다"
+    "success": "동영상이 성공적으로 신고되었습니다",
+    "bottom_sheet_title": "동영상 신고",
+    "option_offensive": "불쾌하거나 부적절한 콘텐츠",
+    "option_quality": "낮은 화질 또는 왜곡된 얼굴",
+    "option_copyright": "저작권 침해",
+    "option_bug": "동영상 생성 오류 또는 충dol",
+    "option_other": "기타 문제",
+    "thanks_msg": "신고해 주셔서 감사합니다. 검토 후 수정하도록 하겠습니다.",
+    "hint_other": "문제를 자세히 설명해 주세요..."
   },
   "tips_sheet": {
     "title": "최상의 결과를 위한 팁",
@@ -349,5 +357,13 @@
     "step_2": "2단계",
     "upload_photo": "사진 업로드",
     "got_it": "이해했습니다!"
+  },
+  "checkin": {
+    "title": "출석체크",
+    "subtitle": "매일 보상 받기!",
+    "today": "오늘",
+    "day": "{n}일차",
+    "check_in_btn": "출석하기",
+    "daily_bonus_notification": "매일 알림"
   }
 }

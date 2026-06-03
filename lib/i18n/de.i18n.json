@@ -237,7 +237,15 @@
     "desc": "Sind Sie sicher, dass Sie den Bericht senden möchten?",
     "cancel": "Abbrechen",
     "submit": "Senden",
-    "success": "Video erfolgreich gemeldet"
+    "success": "Video erfolgreich gemeldet",
+    "bottom_sheet_title": "Video melden",
+    "option_offensive": "Anstößiger oder unangemessener Inhalt",
+    "option_quality": "Schlechte Qualität oder verzerrte Gesichter",
+    "option_copyright": "Urheberrechtsverletzung",
+    "option_bug": "Fehler bei der Videoerstellung oder Absturz",
+    "option_other": "Andere Probleme",
+    "thanks_msg": "Vielen Dank für Ihre Meldung, wir werden sie prüfen und korrigieren.",
+    "hint_other": "Bitte beschreiben Sie das Problem im Detail..."
   },
   "tips_sheet": {
     "title": "Tipps für beste Ergebnisse",
@@ -349,5 +357,13 @@
     "step_2": "Schritt 2",
     "upload_photo": "Foto hochladen",
     "got_it": "Ich habe es verstanden!"
+  },
+  "checkin": {
+    "title": "Check-in",
+    "subtitle": "Tägliche Belohnungen!",
+    "today": "Heute",
+    "day": "Tag {n}",
+    "check_in_btn": "Einchecken",
+    "daily_bonus_notification": "Benachrichtigung"
   }
 }

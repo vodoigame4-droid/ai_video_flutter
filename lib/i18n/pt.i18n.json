@@ -237,7 +237,15 @@
     "desc": "Tem certeza de que deseja enviar a denúncia?",
     "cancel": "Cancelar",
     "submit": "Enviar",
-    "success": "Vídeo denunciado com sucesso"
+    "success": "Vídeo denunciado com sucesso",
+    "bottom_sheet_title": "Denunciar vídeo",
+    "option_offensive": "Conteúdo ofensivo ou inadequado",
+    "option_quality": "Qualidade ruim ou rostros distorcidos",
+    "option_copyright": "Violação de direitos autorais",
+    "option_bug": "Erro de geração de vídeo ou falha",
+    "option_other": "Outros problemas",
+    "thanks_msg": "Obrigado pela sua denúncia, iremos analisar e modificar.",
+    "hint_other": "Por favor, descreva o problema em detalhes..."
   },
   "tips_sheet": {
     "title": "Dicas para melhores resultados",
@@ -349,5 +357,13 @@
     "step_2": "Passo 2",
     "upload_photo": "Enviar foto",
     "got_it": "Entendi!"
+  },
+  "checkin": {
+    "title": "Check-in",
+    "subtitle": "Prêmios diários!",
+    "today": "Hoje",
+    "day": "Dia {n}",
+    "check_in_btn": "Fichar",
+    "daily_bonus_notification": "Notificação"
   }
 }

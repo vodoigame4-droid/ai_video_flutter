@@ -244,7 +244,15 @@
     "desc": "Are you sure you want to submit the report?",
     "cancel": "Cancel",
     "submit": "Submit",
-    "success": "Video reported successfully"
+    "success": "Video reported successfully",
+    "bottom_sheet_title": "Report video",
+    "option_offensive": "Offensive or inappropriate content",
+    "option_quality": "Poor quality or distorted faces",
+    "option_copyright": "Copyright violation",
+    "option_bug": "Video generation error or crash",
+    "option_other": "Other issues",
+    "thanks_msg": "Thank you for your report, we will review and modify.",
+    "hint_other": "Please describe the issue in detail..."
   },
   "tips_sheet": {
     "title": "Tips for best results",
@@ -356,5 +364,13 @@
     "step_2": "Step 2",
     "upload_photo": "Upload Photo",
     "got_it": "I got it!"
+  },
+  "checkin": {
+    "title": "Daily Check-in",
+    "subtitle": "Check in every day and get amazing rewards!",
+    "today": "Today",
+    "day": "Day {n}",
+    "check_in_btn": "Check in",
+    "daily_bonus_notification": "Daily Bonus Notification"
   }
 }

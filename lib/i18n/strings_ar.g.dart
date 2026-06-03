@@ -59,6 +59,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$tips_sheet$ar tips_sheet = _Translations$tips_sheet$ar._(_root);
 	@override late final _Translations$errors$ar errors = _Translations$errors$ar._(_root);
 	@override late final _Translations$guide$ar guide = _Translations$guide$ar._(_root);
+	@override late final _Translations$checkin$ar checkin = _Translations$checkin$ar._(_root);
 }
 
 // Path: common
@@ -398,6 +399,14 @@ class _Translations$report_dialog$ar extends Translations$report_dialog$en {
 	@override String get cancel => 'إلغاء';
 	@override String get submit => 'إرسال';
 	@override String get success => 'تم الإبلاغ عن الفيديو بنجاح';
+	@override String get bottom_sheet_title => 'الإبلاغ عن الفيديو';
+	@override String get option_offensive => 'محتوى مسيء أو غير لائق';
+	@override String get option_quality => 'جودة ضعيفة أو وجوه مشوهة';
+	@override String get option_copyright => 'انتهاك حقوق الطبع والنشر';
+	@override String get option_bug => 'خطأ في إنشاء الفيديو أو تعطل';
+	@override String get option_other => 'مشاكل أخرى';
+	@override String get thanks_msg => 'نشكرك على إبلاغك، وسنقوم بمراجعته وتعديله.';
+	@override String get hint_other => 'يرجى وصف المشكلة بالتفصيل...';
 }
 
 // Path: tips_sheet
@@ -530,6 +539,21 @@ class _Translations$guide$ar extends Translations$guide$en {
 	@override String get step_2 => 'الخطوة 2';
 	@override String get upload_photo => 'تحميل الصورة';
 	@override String get got_it => 'لقد فهمت!';
+}
+
+// Path: checkin
+class _Translations$checkin$ar extends Translations$checkin$en {
+	_Translations$checkin$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'حضور';
+	@override String get subtitle => 'احصل على مكافآت!';
+	@override String get today => 'اليوم';
+	@override String day({required Object n}) => 'يوم ${n}';
+	@override String get check_in_btn => 'تسجيل';
+	@override String get daily_bonus_notification => 'إشعار يومي';
 }
 
 // Path: onboarding.page1
@@ -796,6 +820,14 @@ extension on TranslationsAr {
 			'report_dialog.cancel' => 'إلغاء',
 			'report_dialog.submit' => 'إرسال',
 			'report_dialog.success' => 'تم الإبلاغ عن الفيديو بنجاح',
+			'report_dialog.bottom_sheet_title' => 'الإبلاغ عن الفيديو',
+			'report_dialog.option_offensive' => 'محتوى مسيء أو غير لائق',
+			'report_dialog.option_quality' => 'جودة ضعيفة أو وجوه مشوهة',
+			'report_dialog.option_copyright' => 'انتهاك حقوق الطبع والنشر',
+			'report_dialog.option_bug' => 'خطأ في إنشاء الفيديو أو تعطل',
+			'report_dialog.option_other' => 'مشاكل أخرى',
+			'report_dialog.thanks_msg' => 'نشكرك على إبلاغك، وسنقوم بمراجعته وتعديله.',
+			'report_dialog.hint_other' => 'يرجى وصف المشكلة بالتفصيل...',
 			'tips_sheet.title' => 'نصائح لأفضل النتائج',
 			'tips_sheet.button_got_it' => 'فهمت ذلك!',
 			'tips_sheet.use_photos' => 'استخدم صوراً مثل هذه',
@@ -901,6 +933,12 @@ extension on TranslationsAr {
 			'guide.step_2' => 'الخطوة 2',
 			'guide.upload_photo' => 'تحميل الصورة',
 			'guide.got_it' => 'لقد فهمت!',
+			'checkin.title' => 'حضور',
+			'checkin.subtitle' => 'احصل على مكافآت!',
+			'checkin.today' => 'اليوم',
+			'checkin.day' => ({required Object n}) => 'يوم ${n}',
+			'checkin.check_in_btn' => 'تسجيل',
+			'checkin.daily_bonus_notification' => 'إشعار يومي',
 			_ => null,
 		};
 	}
