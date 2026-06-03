@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
-    "tap_upload": "Hier tippen, um Foto hochzuladen.",
+    "tap_upload": "Lade dein Foto hoch und erstelle dein KI-Video in Sekundenschnelle.",
     "select_upload_title": "Auswählen, um Foto hochzuladen",
     "upload_image": "Bild hochladen",
     "custom_prompt": "Benutzerdefinierter Prompt",
@@ -202,7 +202,20 @@
     "buy_credit_now": "Jetzt Guthaben kaufen",
     "pro_title": "PRO",
     "discount_title": "50% RABATT",
-    "discount_subtitle": "GUTHABENPREISE"
+    "discount_subtitle": "GUTHABENPREISE",
+    "claim_discount": "Rabatt sichern",
+    "no_thanks": "Nein, danke",
+    "buy_now": "Jetzt kaufen",
+    "sub_discount_banner": "BIS ZU 50% RABATT MIT ABONNEMENT",
+    "unlock_premium_desc": "Schalten Sie alle Premium-Funktionen mit einem Sonderrabatt frei",
+    "credit_5000": "5.000 Guthaben",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "Wenn Sie sich abonnieren, wird die Zahlung nach Bestätigung des Kaufs Ihrem iTunes-Konto belastet. Ihr Abonnement wird automatisch verlängert, es sei denn, es wird mindestens 24 Stunden vor Ende des aktuellen Abrechnungszeitraums gekündigt. Die automatische Verlängerung kann jederzeit in Ihren iTunes Store-Kontoeinstellungen verwaltet werden.",
+    "buy_credit": "Guthaben kaufen",
+    "save_up_to": "Sparen Sie bis zu {percent}%",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/Jahr",
+    "billed_yearly": "799.000đ/Jahr abgerechnet - Jederzeit kündbar"
   },
   "generating": {
     "title": "Generieren",

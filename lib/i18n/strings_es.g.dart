@@ -105,7 +105,7 @@ class _Translations$create$es extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
-	@override String get tap_upload => 'Toque aquí para subir su foto.';
+	@override String get tap_upload => 'Sube tu foto y crea tu video de IA en segundos.';
 	@override String get select_upload_title => 'Seleccionar para subir su foto';
 	@override String get upload_image => 'Subir imagen';
 	@override String get custom_prompt => 'Indicación personalizada';
@@ -337,6 +337,19 @@ class _Translations$premium$es extends Translations$premium$en {
 	@override String get pro_title => 'PRO';
 	@override String get discount_title => '50% DE DESCUENTO';
 	@override String get discount_subtitle => 'PRECIOS DE CRÉDITOS';
+	@override String get claim_discount => 'Reclamar descuento';
+	@override String get no_thanks => 'No, gracias';
+	@override String get buy_now => 'Comprar ahora';
+	@override String get sub_discount_banner => 'HASTA 50% DE DESCUENTO CON SUSCRIPCIÓN';
+	@override String get unlock_premium_desc => 'Desbloquea todas las funciones premium con un descuento especial';
+	@override String get credit_5000 => '5.000 Créditos';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'Si se suscribe, el pago se cargará a su cuenta de iTunes una vez confirmada la compra. Su suscripción se renovará automáticamente a menos que se cancele al menos 24 horas antes del final del período de facturación actual. La renovación automática se puede gestionar en cualquier momento en la configuración de su cuenta de iTunes Store.';
+	@override String get buy_credit => 'Comprar créditos';
+	@override String save_up_to({required Object percent}) => 'Ahorra hasta un ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/año';
+	@override String get billed_yearly => 'Facturado 799.000đ/año - Cancela en cualquier momento';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsEs {
 			'home.anime' => 'Anime',
 			'home.discover' => 'Descubrir',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Toque aquí para subir su foto.',
+			'create.tap_upload' => 'Sube tu foto y crea tu video de IA en segundos.',
 			'create.select_upload_title' => 'Seleccionar para subir su foto',
 			'create.upload_image' => 'Subir imagen',
 			'create.custom_prompt' => 'Indicación personalizada',
@@ -806,6 +819,19 @@ extension on TranslationsEs {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => '50% DE DESCUENTO',
 			'premium.discount_subtitle' => 'PRECIOS DE CRÉDITOS',
+			'premium.claim_discount' => 'Reclamar descuento',
+			'premium.no_thanks' => 'No, gracias',
+			'premium.buy_now' => 'Comprar ahora',
+			'premium.sub_discount_banner' => 'HASTA 50% DE DESCUENTO CON SUSCRIPCIÓN',
+			'premium.unlock_premium_desc' => 'Desbloquea todas las funciones premium con un descuento especial',
+			'premium.credit_5000' => '5.000 Créditos',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'Si se suscribe, el pago se cargará a su cuenta de iTunes una vez confirmada la compra. Su suscripción se renovará automáticamente a menos que se cancele al menos 24 horas antes del final del período de facturación actual. La renovación automática se puede gestionar en cualquier momento en la configuración de su cuenta de iTunes Store.',
+			'premium.buy_credit' => 'Comprar créditos',
+			'premium.save_up_to' => ({required Object percent}) => 'Ahorra hasta un ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/año',
+			'premium.billed_yearly' => 'Facturado 799.000đ/año - Cancela en cualquier momento',
 			'generating.title' => 'Generando',
 			'generating.your_video' => 'tu video',
 			'generating.desc' => 'Esto puede tardar unos minutos.\nPor favor, espera...',

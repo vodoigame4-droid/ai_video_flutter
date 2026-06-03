@@ -93,7 +93,7 @@ class VideoCacheManager {
           await tempFile.delete();
         }
       } catch (_) {}
-      rethrow;
+      return '';
     } finally {
       // Remove from queue when finished
       _downloadQueue.remove(url);

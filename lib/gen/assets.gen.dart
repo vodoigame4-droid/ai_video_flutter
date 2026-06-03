@@ -24,8 +24,14 @@ class $AssetsAnimationsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_ai_yellow.svg
+  String get icAiYellow => 'assets/icons/ic_ai_yellow.svg';
+
   /// File path: assets/icons/ic_arrow_right.svg
   String get icArrowRight => 'assets/icons/ic_arrow_right.svg';
+
+  /// File path: assets/icons/ic_blue_mask.svg
+  String get icBlueMask => 'assets/icons/ic_blue_mask.svg';
 
   /// File path: assets/icons/ic_camera.svg
   String get icCamera => 'assets/icons/ic_camera.svg';
@@ -57,6 +63,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_generate.svg
   String get icGenerate => 'assets/icons/ic_generate.svg';
 
+  /// File path: assets/icons/ic_green_tick.svg
+  String get icGreenTick => 'assets/icons/ic_green_tick.svg';
+
   /// File path: assets/icons/ic_heart.svg
   String get icHeart => 'assets/icons/ic_heart.svg';
 
@@ -78,14 +87,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_inspire_me.svg
   String get icInspireMe => 'assets/icons/ic_inspire_me.svg';
 
+  /// File path: assets/icons/ic_layer_yellow.svg
+  String get icLayerYellow => 'assets/icons/ic_layer_yellow.svg';
+
   /// File path: assets/icons/ic_notice.svg
   String get icNotice => 'assets/icons/ic_notice.svg';
+
+  /// File path: assets/icons/ic_purple_box.svg
+  String get icPurpleBox => 'assets/icons/ic_purple_box.svg';
 
   /// File path: assets/icons/ic_quality.svg
   String get icQuality => 'assets/icons/ic_quality.svg';
 
   /// File path: assets/icons/ic_question.svg
   String get icQuestion => 'assets/icons/ic_question.svg';
+
+  /// File path: assets/icons/ic_red_tick.svg
+  String get icRedTick => 'assets/icons/ic_red_tick.svg';
 
   /// File path: assets/icons/ic_regenerate.svg
   String get icRegenerate => 'assets/icons/ic_regenerate.svg';
@@ -108,6 +126,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_trash.svg
   String get icTrash => 'assets/icons/ic_trash.svg';
 
+  /// File path: assets/icons/ic_trending.svg
+  String get icTrending => 'assets/icons/ic_trending.svg';
+
   /// File path: assets/icons/ic_unified_home.svg
   String get icUnifiedHome => 'assets/icons/ic_unified_home.svg';
 
@@ -125,7 +146,9 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    icAiYellow,
     icArrowRight,
+    icBlueMask,
     icCamera,
     icCreditIcon,
     icDanceHome,
@@ -136,6 +159,7 @@ class $AssetsIconsGen {
     icExtendVideo,
     icGallery,
     icGenerate,
+    icGreenTick,
     icHeart,
     icHome,
     icImageAdd,
@@ -143,9 +167,12 @@ class $AssetsIconsGen {
     icImageToDance,
     icImageToVideo,
     icInspireMe,
+    icLayerYellow,
     icNotice,
+    icPurpleBox,
     icQuality,
     icQuestion,
+    icRedTick,
     icRegenerate,
     icReport,
     icShare,
@@ -153,6 +180,7 @@ class $AssetsIconsGen {
     icTransitionHome,
     icTranslateVideo,
     icTrash,
+    icTrending,
     icUnifiedHome,
     icUnifiledVideo,
     icUploadVideo,
@@ -173,8 +201,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/bg_app.png
   AssetGenImage get bgApp => const AssetGenImage('assets/images/bg_app.png');
 
+  /// File path: assets/images/bg_banner_buy_credit.png
+  AssetGenImage get bgBannerBuyCredit =>
+      const AssetGenImage('assets/images/bg_banner_buy_credit.png');
+
   /// File path: assets/images/bg_checkin_header.png
   AssetGenImage get bgCheckinHeader => const AssetGenImage('assets/images/bg_checkin_header.png');
+
+  /// File path: assets/images/bg_iap.png
+  AssetGenImage get bgIap => const AssetGenImage('assets/images/bg_iap.png');
 
   /// File path: assets/images/bg_splash.png
   AssetGenImage get bgSplash => const AssetGenImage('assets/images/bg_splash.png');
@@ -206,6 +241,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/ic_checkin_coin.png
   AssetGenImage get icCheckinCoin => const AssetGenImage('assets/images/ic_checkin_coin.png');
+
+  /// File path: assets/images/ic_credit.png
+  AssetGenImage get icCredit => const AssetGenImage('assets/images/ic_credit.png');
 
   /// File path: assets/images/ic_line_checkin.png
   AssetGenImage get icLineCheckin => const AssetGenImage('assets/images/ic_line_checkin.png');
@@ -257,7 +295,9 @@ class $AssetsImagesGen {
     aiNavIcon,
     arrowRight,
     bgApp,
+    bgBannerBuyCredit,
     bgCheckinHeader,
+    bgIap,
     bgSplash,
     card1,
     card2,
@@ -268,6 +308,7 @@ class $AssetsImagesGen {
     homeBanner,
     icCheckinBadgeCoin,
     icCheckinCoin,
+    icCredit,
     icLineCheckin,
     icLineCheckin2,
     icLogoHome,
@@ -292,6 +333,9 @@ class $AssetsRawGen {
   /// File path: assets/raw/ai_animation.json
   String get aiAnimation => 'assets/raw/ai_animation.json';
 
+  /// File path: assets/raw/bg_discount_page.mp4
+  String get bgDiscountPage => 'assets/raw/bg_discount_page.mp4';
+
   /// File path: assets/raw/checkin_box_lottie.json
   String get checkinBoxLottie => 'assets/raw/checkin_box_lottie.json';
 
@@ -302,7 +346,13 @@ class $AssetsRawGen {
   String get handTabAnimation => 'assets/raw/hand_tab_animation.json';
 
   /// List of all assets
-  List<String> get values => [aiAnimation, checkinBoxLottie, guideBackground, handTabAnimation];
+  List<String> get values => [
+    aiAnimation,
+    bgDiscountPage,
+    checkinBoxLottie,
+    guideBackground,
+    handTabAnimation,
+  ];
 }
 
 class Assets {

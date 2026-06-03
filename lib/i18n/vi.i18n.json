@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "Ảnh tự sướng Aquaman",
-    "tap_upload": "Chạm vào đây để tải ảnh lên.",
+    "tap_upload": "Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.",
     "select_upload_title": "Chọn phương thức tải ảnh",
     "upload_image": "Tải ảnh lên",
     "custom_prompt": "Mô tả tùy chỉnh",
@@ -202,7 +202,20 @@
     "buy_credit_now": "Mua Tín dụng Ngay",
     "pro_title": "PRO",
     "discount_title": "GIẢM 50%",
-    "discount_subtitle": "GIÁ TÍN DỤNG"
+    "discount_subtitle": "GIÁ TÍN DỤNG",
+    "claim_discount": "Nhận ưu đãi",
+    "no_thanks": "Không, cảm ơn",
+    "buy_now": "Mua ngay",
+    "sub_discount_banner": "GIẢM ĐẾN 50% KHI ĐĂNG KÝ THÀNH VIÊN",
+    "unlock_premium_desc": "Mở khóa toàn bộ tính năng cao cấp với ưu đãi đặc biệt",
+    "credit_5000": "5.000 Tín dụng",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "Nếu bạn đăng ký, thanh toán sẽ được tính vào tài khoản iTunes của bạn sau khi xác nhận mua. Đăng ký của bạn sẽ tự động gia hạn trừ khi bị hủy ít nhất 24 giờ trước khi kết thúc kỳ thanh toán hiện tại. Tự động gia hạn có thể được quản lý bất kỳ lúc nào trong cài đặt tài khoản iTunes Store.",
+    "buy_credit": "Mua Tín dụng",
+    "save_up_to": "Tiết kiệm đến {percent}%",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/năm",
+    "billed_yearly": "Thanh toán 799.000đ/năm - Hủy bất cứ lúc nào"
   },
   "video_player": {
     "play": "Phát",

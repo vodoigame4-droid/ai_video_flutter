@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
-    "tap_upload": "Ketuk di sini untuk mengunggah foto Anda.",
+    "tap_upload": "Unggah foto Anda dan buat video AI Anda dalam hitungan detik.",
     "select_upload_title": "Pilih untuk Mengunggah Foto Anda",
     "upload_image": "Unggah Gambar",
     "custom_prompt": "Perintah Kustom",
@@ -202,7 +202,20 @@
     "buy_credit_now": "Beli Kredit Sekarang",
     "pro_title": "PRO",
     "discount_title": "DISKON 50%",
-    "discount_subtitle": "HARGA KREDIT"
+    "discount_subtitle": "HARGA KREDIT",
+    "claim_discount": "Klaim Diskon",
+    "no_thanks": "Tidak, terima kasih",
+    "buy_now": "Beli Sekarang",
+    "sub_discount_banner": "DISKON HINGGA 50% DENGAN LANGGANAN",
+    "unlock_premium_desc": "Buka semua fitur premium dengan diskon khusus",
+    "credit_5000": "5.000 Kredit",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "Jika Anda berlangganan, pembayaran akan dibebankan ke akun iTunes Anda setelah pembelian dikonfirmasi. Langganan Anda akan diperbarui secara otomatis kecuali dibatalkan setidaknya 24 jam sebelum periode penagihan saat ini berakhir. Pembaruan otomatis dapat dikelola kapan saja di pengaturan akun iTunes Store Anda.",
+    "buy_credit": "Beli Kredit",
+    "save_up_to": "Hemat Hingga {percent}%",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/tahun",
+    "billed_yearly": "Ditagih 799.000đ/tahun - Batalkan Kapan Saja"
   },
   "generating": {
     "title": "Membuat",

@@ -105,7 +105,7 @@ class _Translations$create$ja extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'セルフィーアクアマン';
-	@override String get tap_upload => 'タップして写真をアップロードします。';
+	@override String get tap_upload => '写真をアップロードして、数秒でAI動画を作成します。';
 	@override String get select_upload_title => '写真をアップロードする方法を選択';
 	@override String get upload_image => '画像をアップロード';
 	@override String get custom_prompt => 'カスタムプロンプト';
@@ -337,6 +337,19 @@ class _Translations$premium$ja extends Translations$premium$en {
 	@override String get pro_title => 'プロ';
 	@override String get discount_title => '50% OFF';
 	@override String get discount_subtitle => 'クレジット価格';
+	@override String get claim_discount => '割引を適用する';
+	@override String get no_thanks => 'いいえ、結構です';
+	@override String get buy_now => '今すぐ購入';
+	@override String get sub_discount_banner => 'サブスクリプションで最大50%OFF';
+	@override String get unlock_premium_desc => '特別割引ですべてのプレミアム機能を利用する';
+	@override String get credit_5000 => '5.000 クレジット';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'サブスクリプションに登録すると、購入確認後にiTunesアカウントに支払いが請求されます。現在の請求期間が終了する少なくとも24時間前にキャンセルしない限り、サブスクリプションは自動的に更新されます。自動更新はiTunes Storeアカウント設定でいつでも管理できます。';
+	@override String get buy_credit => 'クレジットを購入';
+	@override String save_up_to({required Object percent}) => '最大${percent}%オフ';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/年';
+	@override String get billed_yearly => '799.000đ/年で請求 - いつでもキャンセル可能';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsJa {
 			'home.anime' => 'アニメ',
 			'home.discover' => '発見',
 			'create.selfie_aquaman' => 'セルフィーアクアマン',
-			'create.tap_upload' => 'タップして写真をアップロードします。',
+			'create.tap_upload' => '写真をアップロードして、数秒でAI動画を作成します。',
 			'create.select_upload_title' => '写真をアップロードする方法を選択',
 			'create.upload_image' => '画像をアップロード',
 			'create.custom_prompt' => 'カスタムプロンプト',
@@ -806,6 +819,19 @@ extension on TranslationsJa {
 			'premium.pro_title' => 'プロ',
 			'premium.discount_title' => '50% OFF',
 			'premium.discount_subtitle' => 'クレジット価格',
+			'premium.claim_discount' => '割引を適用する',
+			'premium.no_thanks' => 'いいえ、結構です',
+			'premium.buy_now' => '今すぐ購入',
+			'premium.sub_discount_banner' => 'サブスクリプションで最大50%OFF',
+			'premium.unlock_premium_desc' => '特別割引ですべてのプレミアム機能を利用する',
+			'premium.credit_5000' => '5.000 クレジット',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'サブスクリプションに登録すると、購入確認後にiTunesアカウントに支払いが請求されます。現在の請求期間が終了する少なくとも24時間前にキャンセルしない限り、サブスクリプションは自動的に更新されます。自動更新はiTunes Storeアカウント設定でいつでも管理できます。',
+			'premium.buy_credit' => 'クレジットを購入',
+			'premium.save_up_to' => ({required Object percent}) => '最大${percent}%オフ',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/年',
+			'premium.billed_yearly' => '799.000đ/年で請求 - いつでもキャンセル可能',
 			'generating.title' => '生成中',
 			'generating.your_video' => '動画を作成しています',
 			'generating.desc' => '数分かかる場合があります。\n少々お待ちください...',

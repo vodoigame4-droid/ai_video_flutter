@@ -15,6 +15,7 @@ import '../../features/create_video/presentation/pages/result_page.dart';
 import '../../features/premium/presentation/pages/paywall_video_page.dart';
 import '../../features/premium/presentation/pages/iap_page.dart';
 import '../../features/premium/presentation/pages/buy_credits_page.dart';
+import '../../features/premium/presentation/pages/discount_page.dart';
 import '../../features/create_video/presentation/pages/create_from_template_page.dart';
 import '../../features/create_video/presentation/pages/create_template_settings_page.dart';
 import '../../features/video_player/presentation/pages/video_player_page.dart';
@@ -267,13 +268,18 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: BuyCreditsPage.path,
       name: BuyCreditsPage.name,
-      pageBuilder: (context, state) {
-        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.cupertino<void>(
-          state: state,
-          child: BuyCreditsPage(videoUrl: videoUrl),
-        );
-      },
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const BuyCreditsPage(),
+      ),
+    ),
+    GoRoute(
+      path: DiscountPage.path,
+      name: DiscountPage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const DiscountPage(),
+      ),
     ),
     GoRoute(
       path: VideoPlayerPage.path,

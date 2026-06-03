@@ -105,7 +105,7 @@ class _Translations$create$de extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
-	@override String get tap_upload => 'Hier tippen, um Foto hochzuladen.';
+	@override String get tap_upload => 'Lade dein Foto hoch und erstelle dein KI-Video in Sekundenschnelle.';
 	@override String get select_upload_title => 'Auswählen, um Foto hochzuladen';
 	@override String get upload_image => 'Bild hochladen';
 	@override String get custom_prompt => 'Benutzerdefinierter Prompt';
@@ -337,6 +337,19 @@ class _Translations$premium$de extends Translations$premium$en {
 	@override String get pro_title => 'PRO';
 	@override String get discount_title => '50% RABATT';
 	@override String get discount_subtitle => 'GUTHABENPREISE';
+	@override String get claim_discount => 'Rabatt sichern';
+	@override String get no_thanks => 'Nein, danke';
+	@override String get buy_now => 'Jetzt kaufen';
+	@override String get sub_discount_banner => 'BIS ZU 50% RABATT MIT ABONNEMENT';
+	@override String get unlock_premium_desc => 'Schalten Sie alle Premium-Funktionen mit einem Sonderrabatt frei';
+	@override String get credit_5000 => '5.000 Guthaben';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'Wenn Sie sich abonnieren, wird die Zahlung nach Bestätigung des Kaufs Ihrem iTunes-Konto belastet. Ihr Abonnement wird automatisch verlängert, es sei denn, es wird mindestens 24 Stunden vor Ende des aktuellen Abrechnungszeitraums gekündigt. Die automatische Verlängerung kann jederzeit in Ihren iTunes Store-Kontoeinstellungen verwaltet werden.';
+	@override String get buy_credit => 'Guthaben kaufen';
+	@override String save_up_to({required Object percent}) => 'Sparen Sie bis zu ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/Jahr';
+	@override String get billed_yearly => '799.000đ/Jahr abgerechnet - Jederzeit kündbar';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsDe {
 			'home.anime' => 'Anime',
 			'home.discover' => 'Entdecken',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Hier tippen, um Foto hochzuladen.',
+			'create.tap_upload' => 'Lade dein Foto hoch und erstelle dein KI-Video in Sekundenschnelle.',
 			'create.select_upload_title' => 'Auswählen, um Foto hochzuladen',
 			'create.upload_image' => 'Bild hochladen',
 			'create.custom_prompt' => 'Benutzerdefinierter Prompt',
@@ -806,6 +819,19 @@ extension on TranslationsDe {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => '50% RABATT',
 			'premium.discount_subtitle' => 'GUTHABENPREISE',
+			'premium.claim_discount' => 'Rabatt sichern',
+			'premium.no_thanks' => 'Nein, danke',
+			'premium.buy_now' => 'Jetzt kaufen',
+			'premium.sub_discount_banner' => 'BIS ZU 50% RABATT MIT ABONNEMENT',
+			'premium.unlock_premium_desc' => 'Schalten Sie alle Premium-Funktionen mit einem Sonderrabatt frei',
+			'premium.credit_5000' => '5.000 Guthaben',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'Wenn Sie sich abonnieren, wird die Zahlung nach Bestätigung des Kaufs Ihrem iTunes-Konto belastet. Ihr Abonnement wird automatisch verlängert, es sei denn, es wird mindestens 24 Stunden vor Ende des aktuellen Abrechnungszeitraums gekündigt. Die automatische Verlängerung kann jederzeit in Ihren iTunes Store-Kontoeinstellungen verwaltet werden.',
+			'premium.buy_credit' => 'Guthaben kaufen',
+			'premium.save_up_to' => ({required Object percent}) => 'Sparen Sie bis zu ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/Jahr',
+			'premium.billed_yearly' => '799.000đ/Jahr abgerechnet - Jederzeit kündbar',
 			'generating.title' => 'Generieren',
 			'generating.your_video' => 'deines Videos',
 			'generating.desc' => 'Dies kann einige Minuten dauern.\nBitte warten...',

@@ -105,7 +105,7 @@ class _Translations$create$hi extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'सेल्फी एक्वामैन';
-	@override String get tap_upload => 'अपनी फोटो अपलोड करने के लिए यहां टैप करें।';
+	@override String get tap_upload => 'अपनी फ़ोटो अपलोड करें और कुछ ही सेकंड में अपना एआई वीडियो बनाएं।';
 	@override String get select_upload_title => 'अपनी फोटो अपलोड करने के लिए चुनें';
 	@override String get upload_image => 'छवि अपलोड करें';
 	@override String get custom_prompt => 'कस्टम प्रॉम्प्ट';
@@ -337,6 +337,19 @@ class _Translations$premium$hi extends Translations$premium$en {
 	@override String get pro_title => 'प्रो';
 	@override String get discount_title => '50% छूट';
 	@override String get discount_subtitle => 'क्रेडिट की कीमतें';
+	@override String get claim_discount => 'छूट प्राप्त करें';
+	@override String get no_thanks => 'नहीं, धन्यवाद';
+	@override String get buy_now => 'अभी खरीदें';
+	@override String get sub_discount_banner => 'सदस्यता के साथ 50% तक की छूट';
+	@override String get unlock_premium_desc => 'विशेष छूट पर सभी प्रीमियम सुविधाओं को अनलॉक करें';
+	@override String get credit_5000 => '5.000 क्रेडिट';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'यदि आप सदस्यता लेते हैं, तो खरीदारी की पुष्टि होने पर आपके iTunes खाते में भुगतान चार्ज किया जाएगा। आपकी सदस्यता स्वचालित रूप से नवीनीकृत होगी जब तक कि वर्तमान बिलिंग अवधि समाप्त होने से कम से कम 24 घंटे पहले रद्द न कर दी जाए। ऑटो-नवीनीकरण को आपके iTunes Store खाता सेटिंग्स में कभी भी प्रबंधित किया जा सकता है।';
+	@override String get buy_credit => 'क्रेडिट खरीदें';
+	@override String save_up_to({required Object percent}) => '${percent}% तक बचाएं';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/वर्ष';
+	@override String get billed_yearly => '799.000đ/वर्ष बिल किया गया - कभी भी रद्द करें';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsHi {
 			'home.anime' => 'एनिमे',
 			'home.discover' => 'खोजें',
 			'create.selfie_aquaman' => 'सेल्फी एक्वामैन',
-			'create.tap_upload' => 'अपनी फोटो अपलोड करने के लिए यहां टैप करें।',
+			'create.tap_upload' => 'अपनी फ़ोटो अपलोड करें और कुछ ही सेकंड में अपना एआई वीडियो बनाएं।',
 			'create.select_upload_title' => 'अपनी फोटो अपलोड करने के लिए चुनें',
 			'create.upload_image' => 'छवि अपलोड करें',
 			'create.custom_prompt' => 'कस्टम प्रॉम्प्ट',
@@ -806,6 +819,19 @@ extension on TranslationsHi {
 			'premium.pro_title' => 'प्रो',
 			'premium.discount_title' => '50% छूट',
 			'premium.discount_subtitle' => 'क्रेडिट की कीमतें',
+			'premium.claim_discount' => 'छूट प्राप्त करें',
+			'premium.no_thanks' => 'नहीं, धन्यवाद',
+			'premium.buy_now' => 'अभी खरीदें',
+			'premium.sub_discount_banner' => 'सदस्यता के साथ 50% तक की छूट',
+			'premium.unlock_premium_desc' => 'विशेष छूट पर सभी प्रीमियम सुविधाओं को अनलॉक करें',
+			'premium.credit_5000' => '5.000 क्रेडिट',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'यदि आप सदस्यता लेते हैं, तो खरीदारी की पुष्टि होने पर आपके iTunes खाते में भुगतान चार्ज किया जाएगा। आपकी सदस्यता स्वचालित रूप से नवीनीकृत होगी जब तक कि वर्तमान बिलिंग अवधि समाप्त होने से कम से कम 24 घंटे पहले रद्द न कर दी जाए। ऑटो-नवीनीकरण को आपके iTunes Store खाता सेटिंग्स में कभी भी प्रबंधित किया जा सकता है।',
+			'premium.buy_credit' => 'क्रेडिट खरीदें',
+			'premium.save_up_to' => ({required Object percent}) => '${percent}% तक बचाएं',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/वर्ष',
+			'premium.billed_yearly' => '799.000đ/वर्ष बिल किया गया - कभी भी रद्द करें',
 			'generating.title' => 'बनाया जा रहा है',
 			'generating.your_video' => 'आपका वीडियो',
 			'generating.desc' => 'इसमें कुछ मिनट लग सकते हैं।\nकृपया प्रतीक्षा करें...',

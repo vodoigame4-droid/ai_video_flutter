@@ -105,7 +105,7 @@ class _Translations$create$fr extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
-	@override String get tap_upload => 'Appuyez ici pour télécharger votre photo.';
+	@override String get tap_upload => 'Téléchargez votre photo et créez votre vidéo IA en quelques secondes.';
 	@override String get select_upload_title => 'Sélectionnez pour télécharger votre photo';
 	@override String get upload_image => 'Télécharger l\'image';
 	@override String get custom_prompt => 'Invite personnalisée';
@@ -337,6 +337,19 @@ class _Translations$premium$fr extends Translations$premium$en {
 	@override String get pro_title => 'PRO';
 	@override String get discount_title => '50% DE RÉDUCTION';
 	@override String get discount_subtitle => 'PRIX DES CRÉDITS';
+	@override String get claim_discount => 'Réclamer la réduction';
+	@override String get no_thanks => 'Non, merci';
+	@override String get buy_now => 'Acheter maintenant';
+	@override String get sub_discount_banner => 'JUSQU\'À 50% DE RÉDUCTION AVEC L\'ABONNEMENT';
+	@override String get unlock_premium_desc => 'Débloquez toutes les fonctionnalités premium avec une réduction spéciale';
+	@override String get credit_5000 => '5.000 Crédits';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'Si vous vous abonnez, le paiement sera débité de votre compte iTunes une fois l\'achat confirmé. Votre abonnement se renouvellera automatiquement sauf annulation au moins 24 heures avant la fin de la période de facturation en cours. Le renouvellement automatique peut être géré à tout moment dans les paramètres de votre compte iTunes Store.';
+	@override String get buy_credit => 'Acheter des crédits';
+	@override String save_up_to({required Object percent}) => 'Économisez jusqu\'à ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/an';
+	@override String get billed_yearly => 'Facturé 799.000đ/an - Annulez à tout moment';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsFr {
 			'home.anime' => 'Animé',
 			'home.discover' => 'Découvrir',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Appuyez ici pour télécharger votre photo.',
+			'create.tap_upload' => 'Téléchargez votre photo et créez votre vidéo IA en quelques secondes.',
 			'create.select_upload_title' => 'Sélectionnez pour télécharger votre photo',
 			'create.upload_image' => 'Télécharger l\'image',
 			'create.custom_prompt' => 'Invite personnalisée',
@@ -806,6 +819,19 @@ extension on TranslationsFr {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => '50% DE RÉDUCTION',
 			'premium.discount_subtitle' => 'PRIX DES CRÉDITS',
+			'premium.claim_discount' => 'Réclamer la réduction',
+			'premium.no_thanks' => 'Non, merci',
+			'premium.buy_now' => 'Acheter maintenant',
+			'premium.sub_discount_banner' => 'JUSQU\'À 50% DE RÉDUCTION AVEC L\'ABONNEMENT',
+			'premium.unlock_premium_desc' => 'Débloquez toutes les fonctionnalités premium avec une réduction spéciale',
+			'premium.credit_5000' => '5.000 Crédits',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'Si vous vous abonnez, le paiement sera débité de votre compte iTunes une fois l\'achat confirmé. Votre abonnement se renouvellera automatiquement sauf annulation au moins 24 heures avant la fin de la période de facturation en cours. Le renouvellement automatique peut être géré à tout moment dans les paramètres de votre compte iTunes Store.',
+			'premium.buy_credit' => 'Acheter des crédits',
+			'premium.save_up_to' => ({required Object percent}) => 'Économisez jusqu\'à ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/an',
+			'premium.billed_yearly' => 'Facturé 799.000đ/an - Annulez à tout moment',
 			'generating.title' => 'Génération',
 			'generating.your_video' => 'de votre vidéo',
 			'generating.desc' => 'Cela peut prendre quelques minutes.\nVeuillez patienter...',

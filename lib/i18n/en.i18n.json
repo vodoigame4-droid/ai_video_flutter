@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
-    "tap_upload": "Tap here to upload your photo.",
+    "tap_upload": "Upload your photo and create your AI video in seconds.",
     "select_upload_title": "Select to Upload Your Photo",
     "upload_image": "Upload Image",
     "custom_prompt": "Custom Prompt",
@@ -202,7 +202,20 @@
     "buy_credit_now": "Buy Credit Now",
     "pro_title": "PRO",
     "discount_title": "50% OFF",
-    "discount_subtitle": "CREDIT PRICES"
+    "discount_subtitle": "CREDIT PRICES",
+    "claim_discount": "Claim Discount",
+    "no_thanks": "No, thanks",
+    "buy_now": "Buy Now",
+    "sub_discount_banner": "UP TO 50% OFF WITH SUBSCRIPTION",
+    "unlock_premium_desc": "Unlock all premium features at a special discount",
+    "credit_5000": "5.000 Credit",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "If you subscribe, payment will be charged to your iTunes account once the purchase is confirmed. Your subscription will renew automatically unless canceled at least 24 hours before the current billing period ends. Auto-renewal can be managed anytime in your iTunes Store account settings.",
+    "buy_credit": "Buy Credit",
+    "save_up_to": "Save Up To {percent}%",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/year",
+    "billed_yearly": "Billed 799.000đ/year - Cancel Anytime"
   },
   "video_player": {
     "play": "Play",
