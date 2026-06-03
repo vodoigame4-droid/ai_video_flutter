@@ -106,7 +106,7 @@ class _Translations$create$vi extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Ảnh tự sướng Aquaman';
-	@override String get tap_upload => 'Chạm vào đây để tải ảnh lên.';
+	@override String get tap_upload => 'Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.';
 	@override String get select_upload_title => 'Chọn phương thức tải ảnh';
 	@override String get upload_image => 'Tải ảnh lên';
 	@override String get custom_prompt => 'Mô tả tùy chỉnh';
@@ -338,6 +338,19 @@ class _Translations$premium$vi extends Translations$premium$en {
 	@override String get pro_title => 'PRO';
 	@override String get discount_title => 'GIẢM 50%';
 	@override String get discount_subtitle => 'GIÁ TÍN DỤNG';
+	@override String get claim_discount => 'Nhận ưu đãi';
+	@override String get no_thanks => 'Không, cảm ơn';
+	@override String get buy_now => 'Mua ngay';
+	@override String get sub_discount_banner => 'GIẢM ĐẾN 50% KHI ĐĂNG KÝ THÀNH VIÊN';
+	@override String get unlock_premium_desc => 'Mở khóa toàn bộ tính năng cao cấp với ưu đãi đặc biệt';
+	@override String get credit_5000 => '5.000 Tín dụng';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'Nếu bạn đăng ký, thanh toán sẽ được tính vào tài khoản iTunes của bạn sau khi xác nhận mua. Đăng ký của bạn sẽ tự động gia hạn trừ khi bị hủy ít nhất 24 giờ trước khi kết thúc kỳ thanh toán hiện tại. Tự động gia hạn có thể được quản lý bất kỳ lúc nào trong cài đặt tài khoản iTunes Store.';
+	@override String get buy_credit => 'Mua Tín dụng';
+	@override String save_up_to({required Object percent}) => 'Tiết kiệm đến ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/năm';
+	@override String get billed_yearly => 'Thanh toán 799.000đ/năm - Hủy bất cứ lúc nào';
 }
 
 // Path: video_player
@@ -669,7 +682,7 @@ extension on TranslationsVi {
 			'home.anime' => 'Hoạt hình',
 			'home.discover' => 'Khám phá',
 			'create.selfie_aquaman' => 'Ảnh tự sướng Aquaman',
-			'create.tap_upload' => 'Chạm vào đây để tải ảnh lên.',
+			'create.tap_upload' => 'Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.',
 			'create.select_upload_title' => 'Chọn phương thức tải ảnh',
 			'create.upload_image' => 'Tải ảnh lên',
 			'create.custom_prompt' => 'Mô tả tùy chỉnh',
@@ -821,6 +834,19 @@ extension on TranslationsVi {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => 'GIẢM 50%',
 			'premium.discount_subtitle' => 'GIÁ TÍN DỤNG',
+			'premium.claim_discount' => 'Nhận ưu đãi',
+			'premium.no_thanks' => 'Không, cảm ơn',
+			'premium.buy_now' => 'Mua ngay',
+			'premium.sub_discount_banner' => 'GIẢM ĐẾN 50% KHI ĐĂNG KÝ THÀNH VIÊN',
+			'premium.unlock_premium_desc' => 'Mở khóa toàn bộ tính năng cao cấp với ưu đãi đặc biệt',
+			'premium.credit_5000' => '5.000 Tín dụng',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'Nếu bạn đăng ký, thanh toán sẽ được tính vào tài khoản iTunes của bạn sau khi xác nhận mua. Đăng ký của bạn sẽ tự động gia hạn trừ khi bị hủy ít nhất 24 giờ trước khi kết thúc kỳ thanh toán hiện tại. Tự động gia hạn có thể được quản lý bất kỳ lúc nào trong cài đặt tài khoản iTunes Store.',
+			'premium.buy_credit' => 'Mua Tín dụng',
+			'premium.save_up_to' => ({required Object percent}) => 'Tiết kiệm đến ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/năm',
+			'premium.billed_yearly' => 'Thanh toán 799.000đ/năm - Hủy bất cứ lúc nào',
 			'video_player.play' => 'Phát',
 			'video_player.pause' => 'Tạm dừng',
 			'video_player.error_loading' => 'Không thể tải video.',

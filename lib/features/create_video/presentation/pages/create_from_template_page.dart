@@ -18,8 +18,6 @@ import '../../../../core/widgets/report_dialog.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
-import '../../../../core/extensions/context_failure_ext.dart';
-import '../../../../core/utils/app_toast.dart';
 import '../widgets/upload_bottom_sheet_widget.dart';
 import 'create_template_settings_page.dart';
 
@@ -308,16 +306,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                           Radius.circular(100),
                         ),
                         child: SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: Center(
-                              child: AppSvgIcon(
-                                assetName: Assets.icons.icNotice,
-                                width: 16,
-                                height: 16,
-                              ),
+                          width: 24,
+                          height: 24,
+                          child: Center(
+                            child: AppSvgIcon(
+                              assetName: Assets.icons.icNotice,
+                              width: 16,
+                              height: 16,
                             ),
                           ),
+                        ),
                       ),
                     ),
                   ],
@@ -473,8 +471,15 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Icon(
+                Icons.auto_awesome_rounded,
+                color: isEnabled ? AppColors.white : AppColors.subText,
+                size: 24,
+              ),
+              const SizedBox(width: 8),
+
               Text(
-                t.onboarding.page2.button, // "Continue" translated text
+                t.common.generate, // "Generate" translated text
                 style: context.textTheme.labelLarge?.copyWith(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -699,10 +704,21 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           builder: (context, scrollController) {
             return SingleChildScrollView(
               controller: scrollController,
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF3F3F3F),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -714,22 +730,32 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.close_rounded,
-                          color: AppColors.white,
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: AppColors.white.withValues(alpha: 0.15),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.close_rounded,
+                            color: AppColors.white,
+                            size: 14,
+                          ),
                         ),
-                        onPressed: () => Navigator.pop(context),
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.check_circle_rounded,
-                        color: AppColors.primary,
-                        size: 24,
+                      SvgPicture.asset(
+                        Assets.icons.icGreenTick,
+                        width: 24,
+                        height: 24,
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -792,10 +818,10 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.cancel_rounded,
-                        color: AppColors.heart,
-                        size: 24,
+                      SvgPicture.asset(
+                        Assets.icons.icRedTick,
+                        width: 24,
+                        height: 24,
                       ),
                       const SizedBox(width: 8),
                       Text(

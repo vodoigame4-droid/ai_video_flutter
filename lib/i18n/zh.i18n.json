@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "海王自拍",
-    "tap_upload": "点击此处上传您的照片。",
+    "tap_upload": "上传您的照片，在几秒钟内创建您的 AI 视频。",
     "select_upload_title": "选择上传照片的方式",
     "upload_image": "上传图片",
     "custom_prompt": "自定义提示词",
@@ -202,7 +202,20 @@
     "buy_credit_now": "立即购买点数",
     "pro_title": "专业版",
     "discount_title": "50% 优惠",
-    "discount_subtitle": "点数价格"
+    "discount_subtitle": "点数价格",
+    "claim_discount": "获取优惠",
+    "no_thanks": "不，谢谢",
+    "buy_now": "立即购买",
+    "sub_discount_banner": "订阅可享最高50%优惠",
+    "unlock_premium_desc": "以特别优惠解锁所有高级功能",
+    "credit_5000": "5.000 点数",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "如果您订阅，购买确认后将从您的iTunes账户扣款。除非在当前计费周期结束前至少24小时取消，否则您的订阅将自动续订。自动续订可以随时在iTunes Store账户设置中管理。",
+    "buy_credit": "购买点数",
+    "save_up_to": "节省高达 {percent}%",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/年",
+    "billed_yearly": "按799.000đ/年计费 - 随时取消"
   },
   "generating": {
     "title": "正在生成",

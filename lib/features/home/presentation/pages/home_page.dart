@@ -33,47 +33,6 @@ class HomePage extends StatelessWidget {
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
-  IconData _getIconForCategory(String name) {
-    switch (name.toLowerCase()) {
-      case 'trending':
-        return Icons.bolt_rounded;
-      case 'new':
-      case 'new_section':
-        return Icons.fiber_new_rounded;
-      case 'popular':
-        return Icons.star_rounded;
-      case 'toy box':
-      case 'toy figure box':
-        return Icons.smart_toy_rounded;
-      case 'epic morph':
-        return Icons.transform_rounded;
-      case 'anime':
-        return Icons.face_rounded;
-      default:
-        return Icons.movie_creation_outlined;
-    }
-  }
-
-  Color _getIconColorForCategory(String name, BuildContext context) {
-    switch (name.toLowerCase()) {
-      case 'trending':
-        return context.colorScheme.primary;
-      case 'new':
-      case 'new_section':
-        return context.colorScheme.secondary;
-      case 'popular':
-        return Colors.orangeAccent;
-      case 'toy box':
-      case 'toy figure box':
-        return Colors.purpleAccent;
-      case 'epic morph':
-        return Colors.lightBlueAccent;
-      case 'anime':
-        return Colors.pinkAccent;
-      default:
-        return Colors.white70;
-    }
-  }
 
   String _getTranslatedCategory(BuildContext context, String category) {
     final t = Translations.of(context);
@@ -98,8 +57,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = context.t;
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: BlocBuilder<HomeBloc, HomeState>(
@@ -173,10 +130,21 @@ class HomeView extends StatelessWidget {
                                           //   },
                                           // ),
                                           // const SizedBox(height: 24),
-                                          ...categories.map((category) {
+                                          ...categories.asMap().entries.map((entry) {
+                                            final index = entry.key;
+                                            final category = entry.value;
                                             final themes = category.theme ?? [];
                                             if (themes.isEmpty)
                                               return const SizedBox.shrink();
+
+                                            // Random/Diverse select from the 5 SVG icons shown in the picture
+                                            final iconAsset = [
+                                              Assets.icons.icLayerYellow,
+                                              Assets.icons.icBlueMask,
+                                              Assets.icons.icPurpleBox,
+                                              Assets.icons.icAiYellow,
+                                              Assets.icons.icTrending,
+                                            ][index % 5];
 
                                             return Padding(
                                               padding: const EdgeInsets.only(
@@ -187,14 +155,7 @@ class HomeView extends StatelessWidget {
                                                   context,
                                                   category.name,
                                                 ),
-                                                icon: _getIconForCategory(
-                                                  category.name,
-                                                ),
-                                                iconColor:
-                                                    _getIconColorForCategory(
-                                                      category.name,
-                                                      context,
-                                                    ),
+                                                iconAsset: iconAsset,
                                                 videosState: Resource.success(
                                                   themes,
                                                 ),

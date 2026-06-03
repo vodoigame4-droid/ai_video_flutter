@@ -259,7 +259,7 @@ class PaywallVideoView extends StatelessWidget {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () => context.push(
-                                '${BuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
+                                BuyCreditsPage.path,
                               ),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(100),

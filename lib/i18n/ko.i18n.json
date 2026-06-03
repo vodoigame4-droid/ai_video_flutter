@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "셀피 아쿠아맨",
-    "tap_upload": "여기를 눌러 사진을 업로드하세요.",
+    "tap_upload": "사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.",
     "select_upload_title": "사진 업로드 방식 선택",
     "upload_image": "이미지 업로드",
     "custom_prompt": "커스텀 프롬프트",
@@ -202,7 +202,20 @@
     "buy_credit_now": "지금 크레딧 구매",
     "pro_title": "프로",
     "discount_title": "50% 할인",
-    "discount_subtitle": "크레딧 가격"
+    "discount_subtitle": "크레딧 가격",
+    "claim_discount": "할인 받기",
+    "no_thanks": "괜찮습니다",
+    "buy_now": "지금 구매",
+    "sub_discount_banner": "구독 시 최대 50% 할인",
+    "unlock_premium_desc": "특별 할인가로 모든 프리미엄 기능 잠금 해제",
+    "credit_5000": "5.000 크레딧",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "구독하시면 구매 확인 후 iTunes 계정에 결제가 청구됩니다. 현재 청구 기간이 종료되기 최소 24시간 전에 취소하지 않으면 구독이 자동으로 갱신됩니다. 자동 갱신은 iTunes Store 계정 설정에서 언제든지 관리할 수 있습니다.",
+    "buy_credit": "크레딧 구매",
+    "save_up_to": "최대 {percent}% 절약",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/년",
+    "billed_yearly": "799.000đ/년 청구 - 언제든지 취소 가능"
   },
   "generating": {
     "title": "생성 중",

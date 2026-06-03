@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
-import '../widgets/premium_video_background.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
+import 'discount_page.dart';
 
 class IapPage extends StatelessWidget {
   static const String path = '/iap';
@@ -32,176 +33,91 @@ class IapPage extends StatelessWidget {
 
 class IapView extends StatelessWidget {
   final String videoUrl;
+
+  /// Placeholder video URL – will be replaced by BE-provided URL later.
+  static const String _placeholderVideoUrl =
+      'https://vjs.zencdn.net/v/oceans.mp4';
+
   const IapView({super.key, required this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Scaffold(
-      body: BlocConsumer<IapBloc, IapState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed) {
-              AppToast.showSuccess(message);
-            },
-            error: (message, isWeeklySelected, isVideoRevealed) {
-              context.handleFailure(Failure.business(code: message, message: ''));
-            },
-          );
-        },
-        builder: (context, state) {
-          return state.maybeWhen(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => Stack(
-              children: [
-                Positioned.fill(
-                  child: PremiumVideoBackground(
-                    videoUrl: videoUrl,
-                    isBlurred: true,
-                  ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
-                      Text(
-                        t.common.processing,
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            orElse: () {
-              bool isWeekly = false;
-              bool isRevealed = false;
-
-              state.mapOrNull(
-                ready: (s) {
-                  isWeekly = s.isWeeklySelected;
-                  isRevealed = s.isVideoRevealed;
-                },
-                success: (s) {
-                  isWeekly = s.isWeeklySelected;
-                  isRevealed = s.isVideoRevealed;
-                },
-                error: (s) {
-                  isWeekly = s.isWeeklySelected;
-                  isRevealed = s.isVideoRevealed;
-                },
-              );
-
-              return Stack(
+    return WillPopScope(
+      onWillPop: () async {
+        context.pushReplacementNamed(DiscountPage.name);
+        return false;
+      },
+      child: Scaffold(
+        body: BlocConsumer<IapBloc, IapState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              success: (message, isWeeklySelected, isVideoRevealed) {
+                AppToast.showSuccess(message);
+              },
+              error: (message, isWeeklySelected, isVideoRevealed) {
+                context.handleFailure(Failure.business(code: message, message: ''));
+              },
+            );
+          },
+          builder: (context, state) {
+            return state.maybeWhen(
+              initial: () => const Center(child: CircularProgressIndicator()),
+              loading: () => Stack(
                 children: [
-                  // 1. Looping video background
                   Positioned.fill(
-                    child: GestureDetector(
-                      onTap: () => context.read<IapBloc>().add(
-                        const IapEvent.toggleReveal(),
-                      ),
-                      child: PremiumVideoBackground(
-                        videoUrl: videoUrl,
-                        isBlurred: !isRevealed,
-                      ),
+                    child: Container(
+                      color: Colors.black,
                     ),
                   ),
-
-                  // 1.5. Bottom gradient fade overlay to black
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    height: 600,
-                    child: IgnorePointer(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withValues(alpha: 0.8),
-                              Colors.black,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  // 2. Glass-morphic Top Header Row: Close (Left), Restore (Right)
-                  Positioned(
-                    top: MediaQuery.of(context).padding.top + 16,
-                    left: 16,
-                    right: 16,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Back Close Button
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                            child: Material(
-                              color: Colors.black.withValues(alpha: 0.1),
-                              child: InkWell(
-                                onTap: () => context.pop(),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                child: const SizedBox(
-                                  width: 36,
-                                  height: 36,
-                                  child: Icon(
-                                    Icons.close,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        // Restore Pill Button
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                            child: Material(
-                              color: Colors.black.withValues(alpha: 0.1),
-                              child: InkWell(
-                                onTap: () {
-                                  AppToast.showSuccess(t.premium.restore);
-                                },
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 14,
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    t.premium.restore,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                        CircularProgressIndicator(),
+                        SizedBox(height: 16),
+                        Text(
+                          t.common.processing,
+                          style: const TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
                   ),
+                ],
+              ),
+              orElse: () {
+                bool isWeekly = false;
+  
+                state.mapOrNull(
+                  ready: (s) {
+                    isWeekly = s.isWeeklySelected;
+                  },
+                  success: (s) {
+                    isWeekly = s.isWeeklySelected;
+                  },
+                  error: (s) {
+                    isWeekly = s.isWeeklySelected;
+                  },
+                );
+  
+                return Stack(
+                  children: [
+                    // 1. Video background
+                    Positioned.fill(
+                      child: SmoothVideoPlayerWidget(
+                        videoUrl: videoUrl.isNotEmpty
+                            ? videoUrl
+                            : _placeholderVideoUrl,
+                        fit: BoxFit.cover,
+                        autoPlay: true,
+                        loop: true,
+                        showMuteButton: false,
+                        showPlayPauseButton: false,
+                        playMuted: true,
+                      ),
+                    ),
+
 
                   // 3. Main scrollable content
                   Positioned.fill(
@@ -223,10 +139,10 @@ class IapView extends StatelessWidget {
                                   Container(
                                     color: Colors.transparent,
                                     padding: const EdgeInsets.fromLTRB(
-                                      16,
+                                      8,
                                       0,
-                                      16,
-                                      24,
+                                      8,
+                                      12,
                                     ),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -267,6 +183,7 @@ class IapView extends StatelessWidget {
                                             fontWeight: FontWeight.w900,
                                             letterSpacing: 1.2,
                                             height: 1.1,
+                                            fontFamily: 'Inter',
                                           ),
                                         ),
                                         Text(
@@ -313,7 +230,7 @@ class IapView extends StatelessWidget {
                                                 color: Colors.transparent,
                                                 child: InkWell(
                                                   onTap: () => context.push(
-                                                    '${BuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
+                                                    BuyCreditsPage.path,
                                                   ),
                                                   borderRadius:
                                                       const BorderRadius.all(
@@ -376,51 +293,47 @@ class IapView extends StatelessWidget {
                                         const SizedBox(height: 30),
 
                                         // 2x2 Feature Checklist Grid (Row-Column layout)
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 8,
-                                          ),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    _buildCheckItem(
-                                                      t
-                                                          .premium
-                                                          .unlock_templates,
-                                                    ),
-                                                    const SizedBox(height: 12),
-                                                    _buildCheckItem(
-                                                      t.premium.discount_packs,
-                                                    ),
-                                                  ],
-                                                ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  _buildCheckItem(
+                                                    t
+                                                        .premium
+                                                        .unlock_templates,
+                                                  ),
+                                                  const SizedBox(height: 8),
+                                                  _buildCheckItem(
+                                                    t.premium.discount_packs,
+                                                  ),
+                                                ],
                                               ),
-                                              const SizedBox(width: 16),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    _buildCheckItem(
-                                                      t.premium.fast_generation,
-                                                    ),
-                                                    const SizedBox(height: 12),
-                                                    _buildCheckItem(
-                                                      t.premium.videos_per_year,
-                                                    ),
-                                                  ],
-                                                ),
+                                            ),
+                                            const SizedBox(width: 4),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  _buildCheckItem(
+                                                    t.premium.fast_generation,
+                                                  ),
+                                                  const SizedBox(height: 8),
+                                                  _buildCheckItem(
+                                                    t.premium.videos_per_year,
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(height: 30),
+                                        const SizedBox(height: 20),
 
                                         // Weekly Subscription Package (Unselected)
                                         SubscriptionPackageCard(
@@ -439,7 +352,7 @@ class IapView extends StatelessWidget {
                                                 const IapEvent.selectWeekly(),
                                               ),
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 8),
 
                                         // Annually Subscription Package (Selected)
                                         SubscriptionPackageCard(
@@ -521,7 +434,7 @@ class IapView extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 8),
 
                                         // Footer Links
                                         Text(
@@ -532,7 +445,6 @@ class IapView extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        const SizedBox(height: 8),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -601,8 +513,6 @@ class IapView extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  // Bottom safe area spacing
-                                  SizedBox(height: 16),
                                 ],
                               ),
                             ),
@@ -611,14 +521,72 @@ class IapView extends StatelessWidget {
                       },
                     ),
                   ),
+
+                    // 3. Top Header Row: Close (Left), Restore (Right)
+                    // LAST in Stack so it renders on top and receives touch events
+                    Positioned(
+                      top: MediaQuery.of(context).padding.top + 16,
+                      left: 8,
+                      right: 8,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Back Close Button
+                          GestureDetector(
+                            onTap: () {
+                              context.pushReplacementNamed(DiscountPage.name);
+                            },
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.3),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+
+                          // Restore Pill Button
+                          GestureDetector(
+                            onTap: () {
+                              AppToast.showSuccess(t.premium.restore);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.3),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Text(
+                                t.premium.restore,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
               );
             },
           );
         },
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildCheckItem(String label) {
     return Row(
@@ -626,12 +594,14 @@ class IapView extends StatelessWidget {
       children: [
         Transform.rotate(
           angle: -pi / 4,
-          child: Container(width: 6, height: 6, color: AppColors.primary),
+          child: Container(width: 5, height: 5, color: AppColors.primary),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 3),
         Expanded(
           child: Text(
             label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 14,

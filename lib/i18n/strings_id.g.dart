@@ -105,7 +105,7 @@ class _Translations$create$id extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
-	@override String get tap_upload => 'Ketuk di sini untuk mengunggah foto Anda.';
+	@override String get tap_upload => 'Unggah foto Anda dan buat video AI Anda dalam hitungan detik.';
 	@override String get select_upload_title => 'Pilih untuk Mengunggah Foto Anda';
 	@override String get upload_image => 'Unggah Gambar';
 	@override String get custom_prompt => 'Perintah Kustom';
@@ -337,6 +337,19 @@ class _Translations$premium$id extends Translations$premium$en {
 	@override String get pro_title => 'PRO';
 	@override String get discount_title => 'DISKON 50%';
 	@override String get discount_subtitle => 'HARGA KREDIT';
+	@override String get claim_discount => 'Klaim Diskon';
+	@override String get no_thanks => 'Tidak, terima kasih';
+	@override String get buy_now => 'Beli Sekarang';
+	@override String get sub_discount_banner => 'DISKON HINGGA 50% DENGAN LANGGANAN';
+	@override String get unlock_premium_desc => 'Buka semua fitur premium dengan diskon khusus';
+	@override String get credit_5000 => '5.000 Kredit';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'Jika Anda berlangganan, pembayaran akan dibebankan ke akun iTunes Anda setelah pembelian dikonfirmasi. Langganan Anda akan diperbarui secara otomatis kecuali dibatalkan setidaknya 24 jam sebelum periode penagihan saat ini berakhir. Pembaruan otomatis dapat dikelola kapan saja di pengaturan akun iTunes Store Anda.';
+	@override String get buy_credit => 'Beli Kredit';
+	@override String save_up_to({required Object percent}) => 'Hemat Hingga ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/tahun';
+	@override String get billed_yearly => 'Ditagih 799.000đ/tahun - Batalkan Kapan Saja';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsId {
 			'home.anime' => 'Anime',
 			'home.discover' => 'Jelajahi',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Ketuk di sini untuk mengunggah foto Anda.',
+			'create.tap_upload' => 'Unggah foto Anda dan buat video AI Anda dalam hitungan detik.',
 			'create.select_upload_title' => 'Pilih untuk Mengunggah Foto Anda',
 			'create.upload_image' => 'Unggah Gambar',
 			'create.custom_prompt' => 'Perintah Kustom',
@@ -806,6 +819,19 @@ extension on TranslationsId {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => 'DISKON 50%',
 			'premium.discount_subtitle' => 'HARGA KREDIT',
+			'premium.claim_discount' => 'Klaim Diskon',
+			'premium.no_thanks' => 'Tidak, terima kasih',
+			'premium.buy_now' => 'Beli Sekarang',
+			'premium.sub_discount_banner' => 'DISKON HINGGA 50% DENGAN LANGGANAN',
+			'premium.unlock_premium_desc' => 'Buka semua fitur premium dengan diskon khusus',
+			'premium.credit_5000' => '5.000 Kredit',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'Jika Anda berlangganan, pembayaran akan dibebankan ke akun iTunes Anda setelah pembelian dikonfirmasi. Langganan Anda akan diperbarui secara otomatis kecuali dibatalkan setidaknya 24 jam sebelum periode penagihan saat ini berakhir. Pembaruan otomatis dapat dikelola kapan saja di pengaturan akun iTunes Store Anda.',
+			'premium.buy_credit' => 'Beli Kredit',
+			'premium.save_up_to' => ({required Object percent}) => 'Hemat Hingga ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/tahun',
+			'premium.billed_yearly' => 'Ditagih 799.000đ/tahun - Batalkan Kapan Saja',
 			'generating.title' => 'Membuat',
 			'generating.your_video' => 'video Anda',
 			'generating.desc' => 'Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...',

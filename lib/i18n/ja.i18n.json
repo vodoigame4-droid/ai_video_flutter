@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "セルフィーアクアマン",
-    "tap_upload": "タップして写真をアップロードします。",
+    "tap_upload": "写真をアップロードして、数秒でAI動画を作成します。",
     "select_upload_title": "写真をアップロードする方法を選択",
     "upload_image": "画像をアップロード",
     "custom_prompt": "カスタムプロンプト",
@@ -202,7 +202,20 @@
     "buy_credit_now": "今すぐクレジットを購入",
     "pro_title": "プロ",
     "discount_title": "50% OFF",
-    "discount_subtitle": "クレジット価格"
+    "discount_subtitle": "クレジット価格",
+    "claim_discount": "割引を適用する",
+    "no_thanks": "いいえ、結構です",
+    "buy_now": "今すぐ購入",
+    "sub_discount_banner": "サブスクリプションで最大50%OFF",
+    "unlock_premium_desc": "特別割引ですべてのプレミアム機能を利用する",
+    "credit_5000": "5.000 クレジット",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "サブスクリプションに登録すると、購入確認後にiTunesアカウントに支払いが請求されます。現在の請求期間が終了する少なくとも24時間前にキャンセルしない限り、サブスクリプションは自動的に更新されます。自動更新はiTunes Storeアカウント設定でいつでも管理できます。",
+    "buy_credit": "クレジットを購入",
+    "save_up_to": "最大{percent}%オフ",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/年",
+    "billed_yearly": "799.000đ/年で請求 - いつでもキャンセル可能"
   },
   "generating": {
     "title": "生成中",

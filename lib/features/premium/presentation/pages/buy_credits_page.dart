@@ -1,43 +1,66 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lottie/lottie.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
-import '../widgets/premium_video_background.dart';
-import '../widgets/credit_pack_card.dart';
+import '../../../../gen/assets.gen.dart';
+import '../widgets/credit_pack_row.dart';
 
 class BuyCreditsPage extends StatelessWidget {
   static const String path = '/buy_credits';
   static const String name = 'buy_credits';
 
-  final String videoUrl;
-
-  const BuyCreditsPage({super.key, this.videoUrl = ''});
+  const BuyCreditsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
-      child: BuyCreditsView(videoUrl: videoUrl),
+      child: const BuyCreditsView(),
     );
   }
 }
 
-class BuyCreditsView extends StatelessWidget {
-  final String videoUrl;
-  const BuyCreditsView({super.key, required this.videoUrl});
+class BuyCreditsView extends StatefulWidget {
+  const BuyCreditsView({super.key});
+
+  @override
+  State<BuyCreditsView> createState() => _BuyCreditsViewState();
+}
+
+class _BuyCreditsViewState extends State<BuyCreditsView> {
+  int _selectedPackageIndex = 4; // Default to Most Popular (1000 Credits)
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
 
+    // Helper to get package info based on index
+    Map<String, dynamic> getPackageData(int index) {
+      switch (index) {
+        case 0:
+          return {'credits': 70, 'price': t.premium.price_70};
+        case 1:
+          return {'credits': 150, 'price': t.premium.price_150};
+        case 2:
+          return {'credits': 350, 'price': t.premium.price_350};
+        case 3:
+          return {'credits': 500, 'price': t.premium.price_500};
+        case 4:
+          return {'credits': 1000, 'price': t.premium.price_1000};
+        case 5:
+          return {'credits': 5000, 'price': t.premium.price_5000};
+        default:
+          return {'credits': 1000, 'price': t.premium.price_1000};
+      }
+    }
+
     return Scaffold(
+      backgroundColor: Colors.black,
       body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -45,30 +68,38 @@ class BuyCreditsView extends StatelessWidget {
               AppToast.showSuccess(message);
             },
             error: (message, isWeeklySelected, isVideoRevealed) {
-              context.handleFailure(Failure.business(code: message, message: ''));
+              context.handleFailure(
+                Failure.business(code: message, message: ''),
+              );
             },
           );
         },
         builder: (context, state) {
           return state.maybeWhen(
-            initial: () => const Center(child: CircularProgressIndicator()),
+            initial: () => const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+              ),
+            ),
             loading: () => Stack(
               children: [
-                Positioned.fill(
-                  child: PremiumVideoBackground(
-                    videoUrl: videoUrl,
-                    isBlurred: true,
-                  ),
-                ),
+                Positioned.fill(child: Container(color: Colors.black)),
                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 16),
+                      const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppColors.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
                       Text(
                         t.common.processing,
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),
@@ -76,293 +107,330 @@ class BuyCreditsView extends StatelessWidget {
               ],
             ),
             orElse: () {
-              bool isRevealed = false;
-
-              state.mapOrNull(
-                ready: (s) => isRevealed = s.isVideoRevealed,
-                success: (s) => isRevealed = s.isVideoRevealed,
-                error: (s) => isRevealed = s.isVideoRevealed,
-              );
-
-              return Stack(
+              return Column(
                 children: [
-                  // 1. Looping video background
-                  Positioned.fill(
-                    child: PremiumVideoBackground(
-                      videoUrl: videoUrl,
-                      isBlurred: !isRevealed,
-                    ),
-                  ),
-
-                  // 1.5. Bottom gradient fade overlay
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    height: 350,
-                    child: IgnorePointer(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withValues(alpha: 0.8),
-                              Colors.black,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  // 2. Glass-morphic Close Button top-left
-                  Positioned(
-                    top: MediaQuery.of(context).padding.top + 16,
-                    left: 16,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                        child: Material(
-                          color: Colors.black.withValues(alpha: 0.1),
-                          child: InkWell(
-                            onTap: () => context.pop(),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            child: const SizedBox(
-                              width: 36,
-                              height: 36,
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  // 3. Main scrollable content
-                  Positioned.fill(
+                  // Scrollable content
+                  Expanded(
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          // Padding to keep content below status bar and close button area
+                          // Status bar spacing
                           SizedBox(
-                            height: MediaQuery.of(context).padding.top + 90,
+                            height: MediaQuery.of(context).padding.top + 16,
                           ),
 
-                          // Reveal button (if not revealed)
-                          if (!isRevealed) ...[
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.15),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.3),
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () => context.read<IapBloc>().add(
-                                    const IapEvent.toggleReveal(),
-                                  ),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(100),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 24,
-                                      vertical: 12,
-                                    ),
-                                    child: Text(
-                                      t.premium.tap_to_reveal,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () => context.read<IapBloc>().add(
-                                const IapEvent.toggleReveal(),
-                              ),
-                              child: Lottie.asset(
-                                'assets/raw/hand_tab_animation.json',
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ] else ...[
-                            // Keep some space if revealed so the video preview is visible
-                            const SizedBox(height: 120),
-                          ],
-
-                          // Transparent container for credits packages
-                          Container(
-                            color: Colors.transparent,
-                            padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                          // Top bar: Close button + Title centered
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Stack(
+                              alignment: Alignment.center,
                               children: [
-                                // Header Title & Description
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
+                                // Title centered
+                                Text(
+                                  t.premium.buy_credit,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w800,
                                   ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        t.premium.buy_more_credit,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        t.premium.credit_desc,
-                                        style: const TextStyle(
-                                          color: AppColors.subText,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                const SizedBox(height: 24),
-
-                                // Grid of credit cards
-                                GridView.count(
-                                  crossAxisCount: 2,
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: const EdgeInsets.fromLTRB(
-                                    16,
-                                    0,
-                                    16,
-                                    0,
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GestureDetector(
+                                    onTap: () => context.pop(),
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: Colors.white,
+                                      size: 24,
+                                    ),
                                   ),
-                                  mainAxisSpacing: 12,
-                                  crossAxisSpacing: 12,
-                                  childAspectRatio: 173 / 152,
-                                  children: [
-                                    CreditPackCard(
-                                      title: t.premium.credit_70,
-                                      videoEstimate: t.premium.approx_videos(
-                                        count: 2,
-                                      ),
-                                      priceText: t.premium.price_70,
-                                      onTap: () => context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: 70,
-                                          priceText: t.premium.price_70,
-                                        ),
-                                      ),
-                                    ),
-                                    CreditPackCard(
-                                      title: t.premium.credit_150,
-                                      videoEstimate: t.premium.approx_videos(
-                                        count: 4,
-                                      ),
-                                      priceText: t.premium.price_150,
-                                      onTap: () => context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: 150,
-                                          priceText: t.premium.price_150,
-                                        ),
-                                      ),
-                                    ),
-                                    CreditPackCard(
-                                      title: t.premium.credit_350,
-                                      videoEstimate: t.premium.approx_videos(
-                                        count: 10,
-                                      ),
-                                      priceText: t.premium.price_350,
-                                      onTap: () => context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: 350,
-                                          priceText: t.premium.price_350,
-                                        ),
-                                      ),
-                                    ),
-                                    CreditPackCard(
-                                      title: t.premium.credit_500,
-                                      videoEstimate: t.premium.approx_videos(
-                                        count: 14,
-                                      ),
-                                      priceText: t.premium.price_500,
-                                      onTap: () => context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: 500,
-                                          priceText: t.premium.price_500,
-                                        ),
-                                      ),
-                                    ),
-                                    CreditPackCard(
-                                      title: t.premium.credit_1000,
-                                      videoEstimate: t.premium.approx_videos(
-                                        count: 27,
-                                      ),
-                                      priceText: t.premium.price_1000,
-                                      tagText: t.premium.most_popular,
-                                      tagColors: const [
-                                        Color(0xFFff6320),
-                                        Color(0xFFfae123),
-                                      ],
-                                      onTap: () => context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: 1000,
-                                          priceText: t.premium.price_1000,
-                                        ),
-                                      ),
-                                    ),
-                                    CreditPackCard(
-                                      title: t.premium.credit_6000,
-                                      videoEstimate: t.premium.approx_videos(
-                                        count: 142,
-                                      ),
-                                      priceText: t.premium.price_6000,
-                                      tagText: t.premium.best_value,
-                                      tagColors: const [
-                                        Color(0xFFff6320),
-                                        Color(0xFFfae123),
-                                      ],
-                                      onTap: () => context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: 6000,
-                                          priceText: t.premium.price_6000,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ],
                             ),
                           ),
-                          // Bottom safe area spacing
-                          SizedBox(height: 16),
+                          const SizedBox(height: 12),
+
+                          // Subtitle description
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: Text(
+                              t.premium.credit_desc,
+                              style: const TextStyle(
+                                color: AppColors.subText,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          // Subscription Discount Banner (green gradient)
+                          Padding(
+                            padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 4),
+                            child: Image.asset(
+                              Assets.images.bgBannerBuyCredit.path,
+                              width: double.infinity,
+                              height: 100,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+
+                          // Vertical selectable credit package list
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
+                              children: [
+                                CreditPackRow(
+                                  title: t.premium.credit_70,
+                                  videoEstimate: t.premium.approx_videos(
+                                    count: 2,
+                                  ),
+                                  priceText: t.premium.price_70,
+                                  isSelected: _selectedPackageIndex == 0,
+                                  onTap: () =>
+                                      setState(() => _selectedPackageIndex = 0),
+                                ),
+                                const SizedBox(height: 8),
+                                CreditPackRow(
+                                  title: t.premium.credit_150,
+                                  videoEstimate: t.premium.approx_videos(
+                                    count: 4,
+                                  ),
+                                  priceText: t.premium.price_150,
+                                  isSelected: _selectedPackageIndex == 1,
+                                  onTap: () =>
+                                      setState(() => _selectedPackageIndex = 1),
+                                ),
+                                const SizedBox(height: 8),
+                                CreditPackRow(
+                                  title: t.premium.credit_350,
+                                  videoEstimate: t.premium.approx_videos(
+                                    count: 10,
+                                  ),
+                                  priceText: t.premium.price_350,
+                                  isSelected: _selectedPackageIndex == 2,
+                                  onTap: () =>
+                                      setState(() => _selectedPackageIndex = 2),
+                                ),
+                                const SizedBox(height: 8),
+                                CreditPackRow(
+                                  title: t.premium.credit_500,
+                                  videoEstimate: t.premium.approx_videos(
+                                    count: 14,
+                                  ),
+                                  priceText: t.premium.price_500,
+                                  isSelected: _selectedPackageIndex == 3,
+                                  onTap: () =>
+                                      setState(() => _selectedPackageIndex = 3),
+                                ),
+                                const SizedBox(height: 8),
+                                CreditPackRow(
+                                  title: t.premium.credit_1000,
+                                  videoEstimate: t.premium.approx_videos(
+                                    count: 27,
+                                  ),
+                                  priceText: t.premium.price_1000,
+                                  tagText: t.premium.most_popular,
+                                  isSelected: _selectedPackageIndex == 4,
+                                  onTap: () =>
+                                      setState(() => _selectedPackageIndex = 4),
+                                ),
+                                const SizedBox(height: 8),
+                                CreditPackRow(
+                                  title: t.premium.credit_5000,
+                                  videoEstimate: t.premium.approx_videos(
+                                    count: 142,
+                                  ),
+                                  priceText: t.premium.price_5000,
+                                  tagText: t.premium.best_value,
+                                  tagColors: const [
+                                    Color(0xFF00C853),
+                                    Color(0xFF69F0AE),
+                                  ],
+                                  isSelected: _selectedPackageIndex == 5,
+                                  onTap: () =>
+                                      setState(() => _selectedPackageIndex = 5),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 24),
                         ],
                       ),
+                    ),
+                  ),
+
+                  // Sticky bottom: Buy Now + Footer
+                  Container(
+                    color: Colors.black,
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Buy Now Button
+                        Container(
+                          height: 56,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            gradient: AppColors.primaryGradient,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primary,
+                                blurRadius: 12,
+                                offset: Offset(0, 4),
+                                spreadRadius: -3,
+                              ),
+                            ],
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                final data = getPackageData(
+                                  _selectedPackageIndex,
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: data['credits'] as int,
+                                    priceText: data['price'] as String,
+                                  ),
+                                );
+                              },
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Spacer(),
+                                    Text(
+                                      t.premium.buy_now,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w800,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    const Icon(
+                                      Icons.arrow_forward_rounded,
+                                      color: Colors.white,
+                                      size: 22,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Auto-Renewable text
+                        Text(
+                          t.premium.auto_renewable,
+                          style: const TextStyle(
+                            color: AppColors.subText,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 6),
+
+                        // Privacy Policy | Term of Use | Restore
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                t.premium.privacy_policy,
+                                style: const TextStyle(
+                                  color: AppColors.subText,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 6),
+                              child: Text(
+                                '|',
+                                style: TextStyle(
+                                  color: AppColors.activeTab,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                t.premium.terms_of_use,
+                                style: const TextStyle(
+                                  color: AppColors.subText,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 6),
+                              child: Text(
+                                '|',
+                                style: TextStyle(
+                                  color: AppColors.activeTab,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                AppToast.showSuccess(t.premium.restore);
+                              },
+                              child: Text(
+                                t.premium.restore,
+                                style: const TextStyle(
+                                  color: AppColors.subText,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+
+                        // iTunes disclaimer
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            t.premium.itunes_disclaimer,
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.35),
+                              fontSize: 9,
+                              fontWeight: FontWeight.w400,
+                              height: 1.4,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.bottom + 12,
+                        ),
+                      ],
                     ),
                   ),
                 ],

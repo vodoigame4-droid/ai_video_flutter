@@ -142,8 +142,8 @@ class Translations$create$en {
 	/// en: 'Selfie Aquaman'
 	String get selfie_aquaman => 'Selfie Aquaman';
 
-	/// en: 'Tap here to upload your photo.'
-	String get tap_upload => 'Tap here to upload your photo.';
+	/// en: 'Upload your photo and create your AI video in seconds.'
+	String get tap_upload => 'Upload your photo and create your AI video in seconds.';
 
 	/// en: 'Select to Upload Your Photo'
 	String get select_upload_title => 'Select to Upload Your Photo';
@@ -647,6 +647,45 @@ class Translations$premium$en {
 
 	/// en: 'CREDIT PRICES'
 	String get discount_subtitle => 'CREDIT PRICES';
+
+	/// en: 'Claim Discount'
+	String get claim_discount => 'Claim Discount';
+
+	/// en: 'No, thanks'
+	String get no_thanks => 'No, thanks';
+
+	/// en: 'Buy Now'
+	String get buy_now => 'Buy Now';
+
+	/// en: 'UP TO 50% OFF WITH SUBSCRIPTION'
+	String get sub_discount_banner => 'UP TO 50% OFF WITH SUBSCRIPTION';
+
+	/// en: 'Unlock all premium features at a special discount'
+	String get unlock_premium_desc => 'Unlock all premium features at a special discount';
+
+	/// en: '5.000 Credit'
+	String get credit_5000 => '5.000 Credit';
+
+	/// en: '5.999.000 đ'
+	String get price_5000 => '5.999.000 đ';
+
+	/// en: 'If you subscribe, payment will be charged to your iTunes account once the purchase is confirmed. Your subscription will renew automatically unless canceled at least 24 hours before the current billing period ends. Auto-renewal can be managed anytime in your iTunes Store account settings.'
+	String get itunes_disclaimer => 'If you subscribe, payment will be charged to your iTunes account once the purchase is confirmed. Your subscription will renew automatically unless canceled at least 24 hours before the current billing period ends. Auto-renewal can be managed anytime in your iTunes Store account settings.';
+
+	/// en: 'Buy Credit'
+	String get buy_credit => 'Buy Credit';
+
+	/// en: 'Save Up To {percent}%'
+	String save_up_to({required Object percent}) => 'Save Up To ${percent}%';
+
+	/// en: '799.000'
+	String get discount_price => '799.000';
+
+	/// en: '/year'
+	String get discount_price_suffix => '/year';
+
+	/// en: 'Billed 799.000đ/year - Cancel Anytime'
+	String get billed_yearly => 'Billed 799.000đ/year - Cancel Anytime';
 }
 
 // Path: video_player
@@ -1316,7 +1355,7 @@ extension on Translations {
 			'home.anime' => 'Anime',
 			'home.discover' => 'Discover',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Tap here to upload your photo.',
+			'create.tap_upload' => 'Upload your photo and create your AI video in seconds.',
 			'create.select_upload_title' => 'Select to Upload Your Photo',
 			'create.upload_image' => 'Upload Image',
 			'create.custom_prompt' => 'Custom Prompt',
@@ -1468,6 +1507,19 @@ extension on Translations {
 			'premium.pro_title' => 'PRO',
 			'premium.discount_title' => '50% OFF',
 			'premium.discount_subtitle' => 'CREDIT PRICES',
+			'premium.claim_discount' => 'Claim Discount',
+			'premium.no_thanks' => 'No, thanks',
+			'premium.buy_now' => 'Buy Now',
+			'premium.sub_discount_banner' => 'UP TO 50% OFF WITH SUBSCRIPTION',
+			'premium.unlock_premium_desc' => 'Unlock all premium features at a special discount',
+			'premium.credit_5000' => '5.000 Credit',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'If you subscribe, payment will be charged to your iTunes account once the purchase is confirmed. Your subscription will renew automatically unless canceled at least 24 hours before the current billing period ends. Auto-renewal can be managed anytime in your iTunes Store account settings.',
+			'premium.buy_credit' => 'Buy Credit',
+			'premium.save_up_to' => ({required Object percent}) => 'Save Up To ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/year',
+			'premium.billed_yearly' => 'Billed 799.000đ/year - Cancel Anytime',
 			'video_player.play' => 'Play',
 			'video_player.pause' => 'Pause',
 			'video_player.error_loading' => 'Failed to load video.',

@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "سيلفي أكوامان",
-    "tap_upload": "اضغط هنا لتحميل صورتك.",
+    "tap_upload": "حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.",
     "select_upload_title": "حدد لتحميل صورتك",
     "upload_image": "تحميل الصورة",
     "custom_prompt": "موجّه مخصص",
@@ -202,7 +202,20 @@
     "buy_credit_now": "شراء رصيد الآن",
     "pro_title": "بريميوم",
     "discount_title": "خصم 50%",
-    "discount_subtitle": "أسعار الرصيد"
+    "discount_subtitle": "أسعار الرصيد",
+    "claim_discount": "طالب بالخصم",
+    "no_thanks": "لا، شكراً",
+    "buy_now": "اشترِ الآن",
+    "sub_discount_banner": "خصم يصل إلى 50٪ مع الاشتراك",
+    "unlock_premium_desc": "افتح جميع الميزات المميزة بخصم خاص",
+    "credit_5000": "5.000 رصيد",
+    "price_5000": "5.999.000 đ",
+    "itunes_disclaimer": "إذا اشتركت، سيتم خصم الدفع من حساب iTunes الخاص بك بمجرد تأكيد الشراء. سيتم تجديد اشتراكك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية فترة الفوترة الحالية. يمكن إدارة التجديد التلقائي في أي وقت في إعدادات حساب iTunes Store.",
+    "buy_credit": "شراء رصيد",
+    "save_up_to": "وفر حتى {percent}%",
+    "discount_price": "799.000",
+    "discount_price_suffix": "/سنة",
+    "billed_yearly": "يُفوتر 799.000đ/سنة - إلغاء في أي وقت"
   },
   "generating": {
     "title": "جاري الإنشاء",

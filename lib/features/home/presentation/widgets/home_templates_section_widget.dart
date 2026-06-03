@@ -6,21 +6,20 @@ import '../../../../core/widgets/video_card.dart';
 import '../../../../core/errors/backend_error_handler.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../create_video/presentation/pages/create_from_template_page.dart';
+import '../../../../core/widgets/app_svg_icon.dart';
 
 /// A reusable widget to represent a section containing a category header (title, icon, "See All" button)
 /// and a horizontal list of template video cards supporting all state configurations (loading, error, success).
 class HomeTemplatesSectionWidget extends StatelessWidget {
   final String title;
-  final IconData icon;
-  final Color iconColor;
+  final String iconAsset;
   final Resource<List<ThemeEntity>> videosState;
   final VoidCallback onSeeAllPressed;
 
   const HomeTemplatesSectionWidget({
     super.key,
     required this.title,
-    required this.icon,
-    required this.iconColor,
+    required this.iconAsset,
     required this.videosState,
     required this.onSeeAllPressed,
   });
@@ -40,7 +39,11 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(icon, color: iconColor, size: 20),
+                  AppSvgIcon(
+                    assetName: iconAsset,
+                    width: 20,
+                    height: 20,
+                  ),
                   const SizedBox(width: 6),
                   Text(title, style: context.textTheme.titleMedium),
                 ],

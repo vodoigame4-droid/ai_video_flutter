@@ -105,7 +105,7 @@ class _Translations$create$ko extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => '셀피 아쿠아맨';
-	@override String get tap_upload => '여기를 눌러 사진을 업로드하세요.';
+	@override String get tap_upload => '사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.';
 	@override String get select_upload_title => '사진 업로드 방식 선택';
 	@override String get upload_image => '이미지 업로드';
 	@override String get custom_prompt => '커스텀 프롬프트';
@@ -337,6 +337,19 @@ class _Translations$premium$ko extends Translations$premium$en {
 	@override String get pro_title => '프로';
 	@override String get discount_title => '50% 할인';
 	@override String get discount_subtitle => '크레딧 가격';
+	@override String get claim_discount => '할인 받기';
+	@override String get no_thanks => '괜찮습니다';
+	@override String get buy_now => '지금 구매';
+	@override String get sub_discount_banner => '구독 시 최대 50% 할인';
+	@override String get unlock_premium_desc => '특별 할인가로 모든 프리미엄 기능 잠금 해제';
+	@override String get credit_5000 => '5.000 크레딧';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => '구독하시면 구매 확인 후 iTunes 계정에 결제가 청구됩니다. 현재 청구 기간이 종료되기 최소 24시간 전에 취소하지 않으면 구독이 자동으로 갱신됩니다. 자동 갱신은 iTunes Store 계정 설정에서 언제든지 관리할 수 있습니다.';
+	@override String get buy_credit => '크레딧 구매';
+	@override String save_up_to({required Object percent}) => '최대 ${percent}% 절약';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/년';
+	@override String get billed_yearly => '799.000đ/년 청구 - 언제든지 취소 가능';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsKo {
 			'home.anime' => '애니메이션',
 			'home.discover' => '발견',
 			'create.selfie_aquaman' => '셀피 아쿠아맨',
-			'create.tap_upload' => '여기를 눌러 사진을 업로드하세요.',
+			'create.tap_upload' => '사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.',
 			'create.select_upload_title' => '사진 업로드 방식 선택',
 			'create.upload_image' => '이미지 업로드',
 			'create.custom_prompt' => '커스텀 프롬프트',
@@ -806,6 +819,19 @@ extension on TranslationsKo {
 			'premium.pro_title' => '프로',
 			'premium.discount_title' => '50% 할인',
 			'premium.discount_subtitle' => '크레딧 가격',
+			'premium.claim_discount' => '할인 받기',
+			'premium.no_thanks' => '괜찮습니다',
+			'premium.buy_now' => '지금 구매',
+			'premium.sub_discount_banner' => '구독 시 최대 50% 할인',
+			'premium.unlock_premium_desc' => '특별 할인가로 모든 프리미엄 기능 잠금 해제',
+			'premium.credit_5000' => '5.000 크레딧',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => '구독하시면 구매 확인 후 iTunes 계정에 결제가 청구됩니다. 현재 청구 기간이 종료되기 최소 24시간 전에 취소하지 않으면 구독이 자동으로 갱신됩니다. 자동 갱신은 iTunes Store 계정 설정에서 언제든지 관리할 수 있습니다.',
+			'premium.buy_credit' => '크레딧 구매',
+			'premium.save_up_to' => ({required Object percent}) => '최대 ${percent}% 절약',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/년',
+			'premium.billed_yearly' => '799.000đ/년 청구 - 언제든지 취소 가능',
 			'generating.title' => '생성 중',
 			'generating.your_video' => '동영상 생성',
 			'generating.desc' => '몇 분 정도 걸릴 수 있습니다.\n잠시만 기다려 주세요...',

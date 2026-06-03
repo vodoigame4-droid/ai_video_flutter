@@ -105,7 +105,7 @@ class _Translations$create$zh extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => '海王自拍';
-	@override String get tap_upload => '点击此处上传您的照片。';
+	@override String get tap_upload => '上传您的照片，在几秒钟内创建您的 AI 视频。';
 	@override String get select_upload_title => '选择上传照片的方式';
 	@override String get upload_image => '上传图片';
 	@override String get custom_prompt => '自定义提示词';
@@ -337,6 +337,19 @@ class _Translations$premium$zh extends Translations$premium$en {
 	@override String get pro_title => '专业版';
 	@override String get discount_title => '50% 优惠';
 	@override String get discount_subtitle => '点数价格';
+	@override String get claim_discount => '获取优惠';
+	@override String get no_thanks => '不，谢谢';
+	@override String get buy_now => '立即购买';
+	@override String get sub_discount_banner => '订阅可享最高50%优惠';
+	@override String get unlock_premium_desc => '以特别优惠解锁所有高级功能';
+	@override String get credit_5000 => '5.000 点数';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => '如果您订阅，购买确认后将从您的iTunes账户扣款。除非在当前计费周期结束前至少24小时取消，否则您的订阅将自动续订。自动续订可以随时在iTunes Store账户设置中管理。';
+	@override String get buy_credit => '购买点数';
+	@override String save_up_to({required Object percent}) => '节省高达 ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/年';
+	@override String get billed_yearly => '按799.000đ/年计费 - 随时取消';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsZh {
 			'home.anime' => '动漫',
 			'home.discover' => '发现',
 			'create.selfie_aquaman' => '海王自拍',
-			'create.tap_upload' => '点击此处上传您的照片。',
+			'create.tap_upload' => '上传您的照片，在几秒钟内创建您的 AI 视频。',
 			'create.select_upload_title' => '选择上传照片的方式',
 			'create.upload_image' => '上传图片',
 			'create.custom_prompt' => '自定义提示词',
@@ -806,6 +819,19 @@ extension on TranslationsZh {
 			'premium.pro_title' => '专业版',
 			'premium.discount_title' => '50% 优惠',
 			'premium.discount_subtitle' => '点数价格',
+			'premium.claim_discount' => '获取优惠',
+			'premium.no_thanks' => '不，谢谢',
+			'premium.buy_now' => '立即购买',
+			'premium.sub_discount_banner' => '订阅可享最高50%优惠',
+			'premium.unlock_premium_desc' => '以特别优惠解锁所有高级功能',
+			'premium.credit_5000' => '5.000 点数',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => '如果您订阅，购买确认后将从您的iTunes账户扣款。除非在当前计费周期结束前至少24小时取消，否则您的订阅将自动续订。自动续订可以随时在iTunes Store账户设置中管理。',
+			'premium.buy_credit' => '购买点数',
+			'premium.save_up_to' => ({required Object percent}) => '节省高达 ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/年',
+			'premium.billed_yearly' => '按799.000đ/年计费 - 随时取消',
 			'generating.title' => '正在生成',
 			'generating.your_video' => '您的视频',
 			'generating.desc' => '这可能需要几分钟时间。\n请稍候...',

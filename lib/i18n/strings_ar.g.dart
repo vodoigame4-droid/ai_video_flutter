@@ -105,7 +105,7 @@ class _Translations$create$ar extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'سيلفي أكوامان';
-	@override String get tap_upload => 'اضغط هنا لتحميل صورتك.';
+	@override String get tap_upload => 'حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.';
 	@override String get select_upload_title => 'حدد لتحميل صورتك';
 	@override String get upload_image => 'تحميل الصورة';
 	@override String get custom_prompt => 'موجّه مخصص';
@@ -337,6 +337,19 @@ class _Translations$premium$ar extends Translations$premium$en {
 	@override String get pro_title => 'بريميوم';
 	@override String get discount_title => 'خصم 50%';
 	@override String get discount_subtitle => 'أسعار الرصيد';
+	@override String get claim_discount => 'طالب بالخصم';
+	@override String get no_thanks => 'لا، شكراً';
+	@override String get buy_now => 'اشترِ الآن';
+	@override String get sub_discount_banner => 'خصم يصل إلى 50٪ مع الاشتراك';
+	@override String get unlock_premium_desc => 'افتح جميع الميزات المميزة بخصم خاص';
+	@override String get credit_5000 => '5.000 رصيد';
+	@override String get price_5000 => '5.999.000 đ';
+	@override String get itunes_disclaimer => 'إذا اشتركت، سيتم خصم الدفع من حساب iTunes الخاص بك بمجرد تأكيد الشراء. سيتم تجديد اشتراكك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية فترة الفوترة الحالية. يمكن إدارة التجديد التلقائي في أي وقت في إعدادات حساب iTunes Store.';
+	@override String get buy_credit => 'شراء رصيد';
+	@override String save_up_to({required Object percent}) => 'وفر حتى ${percent}%';
+	@override String get discount_price => '799.000';
+	@override String get discount_price_suffix => '/سنة';
+	@override String get billed_yearly => 'يُفوتر 799.000đ/سنة - إلغاء في أي وقت';
 }
 
 // Path: generating
@@ -654,7 +667,7 @@ extension on TranslationsAr {
 			'home.anime' => 'أنيمي',
 			'home.discover' => 'اكتشاف',
 			'create.selfie_aquaman' => 'سيلفي أكوامان',
-			'create.tap_upload' => 'اضغط هنا لتحميل صورتك.',
+			'create.tap_upload' => 'حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.',
 			'create.select_upload_title' => 'حدد لتحميل صورتك',
 			'create.upload_image' => 'تحميل الصورة',
 			'create.custom_prompt' => 'موجّه مخصص',
@@ -806,6 +819,19 @@ extension on TranslationsAr {
 			'premium.pro_title' => 'بريميوم',
 			'premium.discount_title' => 'خصم 50%',
 			'premium.discount_subtitle' => 'أسعار الرصيد',
+			'premium.claim_discount' => 'طالب بالخصم',
+			'premium.no_thanks' => 'لا، شكراً',
+			'premium.buy_now' => 'اشترِ الآن',
+			'premium.sub_discount_banner' => 'خصم يصل إلى 50٪ مع الاشتراك',
+			'premium.unlock_premium_desc' => 'افتح جميع الميزات المميزة بخصم خاص',
+			'premium.credit_5000' => '5.000 رصيد',
+			'premium.price_5000' => '5.999.000 đ',
+			'premium.itunes_disclaimer' => 'إذا اشتركت، سيتم خصم الدفع من حساب iTunes الخاص بك بمجرد تأكيد الشراء. سيتم تجديد اشتراكك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية فترة الفوترة الحالية. يمكن إدارة التجديد التلقائي في أي وقت في إعدادات حساب iTunes Store.',
+			'premium.buy_credit' => 'شراء رصيد',
+			'premium.save_up_to' => ({required Object percent}) => 'وفر حتى ${percent}%',
+			'premium.discount_price' => '799.000',
+			'premium.discount_price_suffix' => '/سنة',
+			'premium.billed_yearly' => 'يُفوتر 799.000đ/سنة - إلغاء في أي وقت',
 			'generating.title' => 'جاري الإنشاء',
 			'generating.your_video' => 'الفيديو الخاص بك',
 			'generating.desc' => 'قد يستغرق هذا بضع دقائق.\nيرجى الانتظار...',
