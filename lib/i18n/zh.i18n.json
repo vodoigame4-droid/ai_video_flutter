@@ -365,5 +365,10 @@
     "day": "第{n}天",
     "check_in_btn": "签到",
     "daily_bonus_notification": "每日提醒"
+  },
+  "connectivity": {
+    "no_internet_title": "无网络连接",
+    "no_internet_desc": "请检查您的网络连接以继续使用该应用程序。",
+    "retry_button": "重试连接"
   }
 }

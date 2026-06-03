@@ -60,6 +60,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$ja errors = _Translations$errors$ja._(_root);
 	@override late final _Translations$guide$ja guide = _Translations$guide$ja._(_root);
 	@override late final _Translations$checkin$ja checkin = _Translations$checkin$ja._(_root);
+	@override late final _Translations$connectivity$ja connectivity = _Translations$connectivity$ja._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$ja extends Translations$checkin$en {
 	@override String get daily_bonus_notification => '毎日通知';
 }
 
+// Path: connectivity
+class _Translations$connectivity$ja extends Translations$connectivity$en {
+	_Translations$connectivity$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => '接続がありません';
+	@override String get no_internet_desc => 'アプリを引き続き使用するには、インターネット接続を確認してください。';
+	@override String get retry_button => '接続を再試行';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsJa {
 			'checkin.day' => ({required Object n}) => '${n}日目',
 			'checkin.check_in_btn' => 'チェックイン',
 			'checkin.daily_bonus_notification' => '毎日通知',
+			'connectivity.no_internet_title' => '接続がありません',
+			'connectivity.no_internet_desc' => 'アプリを引き続き使用するには、インターネット接続を確認してください。',
+			'connectivity.retry_button' => '接続を再試行',
 			_ => null,
 		};
 	}

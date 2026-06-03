@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/errors/backend_error_handler.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../settings/presentation/pages/settings_page.dart';
@@ -300,9 +301,9 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                       },
                                     );
                                   },
-                                  error: (msg) => Center(
+                                  error: (failure) => Center(
                                     child: Text(
-                                      msg,
+                                      BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
                                       style: context.appTheme.errorTextStyle,
                                     ),
                                   ),

@@ -60,6 +60,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$hi errors = _Translations$errors$hi._(_root);
 	@override late final _Translations$guide$hi guide = _Translations$guide$hi._(_root);
 	@override late final _Translations$checkin$hi checkin = _Translations$checkin$hi._(_root);
+	@override late final _Translations$connectivity$hi connectivity = _Translations$connectivity$hi._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$hi extends Translations$checkin$en {
 	@override String get daily_bonus_notification => 'दैनिक सूचना';
 }
 
+// Path: connectivity
+class _Translations$connectivity$hi extends Translations$connectivity$en {
+	_Translations$connectivity$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => 'कोई कनेक्शन नहीं';
+	@override String get no_internet_desc => 'कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।';
+	@override String get retry_button => 'पुनः प्रयास करें';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsHi {
 			'checkin.day' => ({required Object n}) => 'दिन ${n}',
 			'checkin.check_in_btn' => 'हाजिri लगाएं',
 			'checkin.daily_bonus_notification' => 'दैनिक सूचना',
+			'connectivity.no_internet_title' => 'कोई कनेक्शन नहीं',
+			'connectivity.no_internet_desc' => 'कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।',
+			'connectivity.retry_button' => 'पुनः प्रयास करें',
 			_ => null,
 		};
 	}

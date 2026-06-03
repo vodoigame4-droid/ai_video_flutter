@@ -365,5 +365,10 @@
     "day": "{n}日目",
     "check_in_btn": "チェックイン",
     "daily_bonus_notification": "毎日通知"
+  },
+  "connectivity": {
+    "no_internet_title": "接続がありません",
+    "no_internet_desc": "アプリを引き続き使用するには、インターネット接続を確認してください。",
+    "retry_button": "接続を再試行"
   }
 }

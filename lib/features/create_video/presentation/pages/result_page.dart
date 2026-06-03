@@ -8,10 +8,12 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
-import '../../../../core/widgets/report_bottom_sheet.dart';
+import '../../../../core/widgets/report_dialog.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/extensions/context_failure_ext.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../widgets/extend_video_bottom_sheet.dart';
 import 'generating_page.dart';
 
@@ -156,44 +158,19 @@ class _ResultPageState extends State<ResultPage> {
           state.mapOrNull(
             ready: (s) {
               if (s.isDeleted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(t.report_dialog.success),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
+                AppToast.showSuccess(t.report_dialog.success);
                 context.pop();
               } else if (s.downloadSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(t.result.download_success),
-                    backgroundColor: AppColors.primary,
-                  ),
-                );
+                AppToast.showSuccess(t.result.download_success);
                 _bloc.add(const ResultEvent.resetDownloadShareStatus());
               } else if (s.shareSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(t.result.share_success),
-                    backgroundColor: AppColors.primary,
-                  ),
-                );
+                AppToast.showSuccess(t.result.share_success);
                 _bloc.add(const ResultEvent.resetDownloadShareStatus());
               } else if (s.downloadErrorMessage != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(s.downloadErrorMessage!),
-                    backgroundColor: AppColors.heart,
-                  ),
-                );
+                context.handleFailure(Failure.business(code: s.downloadErrorMessage!, message: ''));
                 _bloc.add(const ResultEvent.resetDownloadShareStatus());
               } else if (s.shareErrorMessage != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(s.shareErrorMessage!),
-                    backgroundColor: AppColors.heart,
-                  ),
-                );
+                context.handleFailure(Failure.business(code: s.shareErrorMessage!, message: ''));
                 _bloc.add(const ResultEvent.resetDownloadShareStatus());
               }
             },
@@ -250,25 +227,23 @@ class _ResultPageState extends State<ResultPage> {
                       ),
 
                       // Report/Flag button
-                      ReportTriggerWidget(
-                        child: Material(
-                          color: Colors.transparent,
-                          shape: const CircleBorder(),
-                          child: InkWell(
-                            onTap: null,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            child: SizedBox(
-                              width: 36,
-                              height: 36,
-                              child: Center(
-                                child: AppSvgIcon(
-                                  assetName: Assets.icons.icReport,
-                                  color: AppColors.white,
-                                  width: 16,
-                                  height: 16,
-                                ),
+                      Material(
+                        color: Colors.transparent,
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: () => showReportDialog(context),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          child: SizedBox(
+                            width: 36,
+                            height: 36,
+                            child: Center(
+                              child: AppSvgIcon(
+                                assetName: Assets.icons.icReport,
+                                color: AppColors.white,
+                                width: 16,
+                                height: 16,
                               ),
                             ),
                           ),
@@ -986,5 +961,4 @@ class _ResultPageState extends State<ResultPage> {
       },
     );
   }
-
 }

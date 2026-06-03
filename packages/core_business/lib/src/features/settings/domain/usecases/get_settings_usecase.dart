@@ -1,4 +1,5 @@
 import '../../../../core/resources/resource.dart';
+import '../../../../core/errors/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/storage_keys.dart';
@@ -14,7 +15,7 @@ class GetSettingsUseCase implements UseCase<String, NoParams> {
       final savedLocaleCode = sharedPreferences.getString(StorageKeys.selectedLocale) ?? 'en';
       return Resource.success(savedLocaleCode);
     } catch (e) {
-      return const Resource.error(message: 'Failed to get settings');
+      return const Resource.error(Failure.unknown('Failed to get settings'));
     }
   }
 }

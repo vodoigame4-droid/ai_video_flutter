@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/theme/app_theme.dart';
 import '../../../../../i18n/strings.g.dart';
+import '../../../../../core/utils/app_toast.dart';
 
 class VideoSettingsSheet extends StatefulWidget {
   const VideoSettingsSheet({super.key});
@@ -123,11 +124,7 @@ class _VideoSettingsSheetState extends State<VideoSettingsSheet> {
           InkWell(
             onTap: () {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('${t.common.generate}...'),
-                ),
-              );
+              AppToast.showSuccess('${t.common.generate}...');
             },
             borderRadius: const BorderRadius.all(Radius.circular(16)),
             child: Ink(

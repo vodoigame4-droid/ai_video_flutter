@@ -365,5 +365,10 @@
     "day": "{n}일차",
     "check_in_btn": "출석하기",
     "daily_bonus_notification": "매일 알림"
+  },
+  "connectivity": {
+    "no_internet_title": "연결 없음",
+    "no_internet_desc": "앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.",
+    "retry_button": "연결 재시도"
   }
 }

@@ -63,6 +63,7 @@ dependencies:
   gal: ^2.3.2
   image_cropper: ^12.2.1
   video_trimmer: ^5.0.0
+  connectivity_plus: ^7.1.1
 
 dev_dependencies:
   flutter_test:

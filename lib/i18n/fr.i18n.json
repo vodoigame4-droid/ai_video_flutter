@@ -365,5 +365,10 @@
     "day": "Jour {n}",
     "check_in_btn": "Réclamer",
     "daily_bonus_notification": "Notification"
+  },
+  "connectivity": {
+    "no_internet_title": "Pas de connexion",
+    "no_internet_desc": "Veuillez vérifier votre connexion Internet pour continuer à utiliser l'application.",
+    "retry_button": "Réessayer la connexion"
   }
 }

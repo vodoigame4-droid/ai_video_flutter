@@ -8,6 +8,8 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../core/errors/backend_error_handler.dart';
+import '../../../../core/extensions/context_failure_ext.dart';
+import '../../../../core/utils/app_toast.dart';
 import 'package:core_business/core_business.dart';
 import '../../../profile/presentation/pages/profile_page.dart';
 import 'result_page.dart';
@@ -124,23 +126,16 @@ class GeneratingView extends StatelessWidget {
               final message = state.isPermissionGranted
                   ? t.generating.notified
                   : t.generating.notification_denied;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  duration: const Duration(seconds: 2),
-                ),
-              );
+              if (state.isPermissionGranted) {
+                AppToast.showSuccess(message);
+              } else {
+                AppToast.showWarning(message);
+              }
               sl<ProfileBloc>().add(const ProfileEvent.init());
               context.goNamed(ProfilePage.name);
             },
             failure: (failureState) {
-              final message = BackendErrorHelper.getErrorMessage(context, failureState.message);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  duration: const Duration(seconds: 3),
-                ),
-              );
+              context.handleFailure(Failure.business(code: failureState.message, message: ''));
               context.pop();
             },
           );

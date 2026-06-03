@@ -7,6 +7,8 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/extensions/context_failure_ext.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
@@ -41,20 +43,10 @@ class IapView extends StatelessWidget {
         listener: (context, state) {
           state.whenOrNull(
             success: (message, isWeeklySelected, isVideoRevealed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: AppColors.primary,
-                ),
-              );
+              AppToast.showSuccess(message);
             },
             error: (message, isWeeklySelected, isVideoRevealed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: AppColors.heart,
-                ),
-              );
+              context.handleFailure(Failure.business(code: message, message: ''));
             },
           );
         },
@@ -184,9 +176,7 @@ class IapView extends StatelessWidget {
                               color: Colors.black.withValues(alpha: 0.1),
                               child: InkWell(
                                 onTap: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(t.premium.restore)),
-                                  );
+                                  AppToast.showSuccess(t.premium.restore);
                                 },
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
@@ -593,14 +583,8 @@ class IapView extends StatelessWidget {
                                             ),
                                             GestureDetector(
                                               onTap: () {
-                                                ScaffoldMessenger.of(
-                                                  context,
-                                                ).showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      t.premium.restore,
-                                                    ),
-                                                  ),
+                                                AppToast.showSuccess(
+                                                  t.premium.restore,
                                                 );
                                               },
                                               child: Text(

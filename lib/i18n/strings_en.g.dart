@@ -62,6 +62,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$errors$en errors = Translations$errors$en.internal(_root);
 	late final Translations$guide$en guide = Translations$guide$en.internal(_root);
 	late final Translations$checkin$en checkin = Translations$checkin$en.internal(_root);
+	late final Translations$connectivity$en connectivity = Translations$connectivity$en.internal(_root);
 }
 
 // Path: common
@@ -1182,6 +1183,24 @@ class Translations$checkin$en {
 	String get daily_bonus_notification => 'Daily Bonus Notification';
 }
 
+// Path: connectivity
+class Translations$connectivity$en {
+	Translations$connectivity$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'No Connection'
+	String get no_internet_title => 'No Connection';
+
+	/// en: 'Please check your internet connection to continue using the app.'
+	String get no_internet_desc => 'Please check your internet connection to continue using the app.';
+
+	/// en: 'Retry Connection'
+	String get retry_button => 'Retry Connection';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -1600,6 +1619,9 @@ extension on Translations {
 			'checkin.day' => ({required Object n}) => 'Day ${n}',
 			'checkin.check_in_btn' => 'Check in',
 			'checkin.daily_bonus_notification' => 'Daily Bonus Notification',
+			'connectivity.no_internet_title' => 'No Connection',
+			'connectivity.no_internet_desc' => 'Please check your internet connection to continue using the app.',
+			'connectivity.retry_button' => 'Retry Connection',
 			_ => null,
 		};
 	}

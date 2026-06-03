@@ -1,5 +1,6 @@
 import 'package:share_plus/share_plus.dart';
 import '../../../../core/resources/resource.dart';
+import '../../../../core/errors/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../../core/utils/video_cache_manager.dart';
 
@@ -20,7 +21,7 @@ class ShareVideoUseCase implements UseCase<void, ShareVideoParams> {
       final filePath = cachedPath ?? params.videoUrl;
 
       if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
-        return const Resource.error(message: 'Failed to download video file to local device cache for sharing');
+        return const Resource.error(Failure.unknown('Failed to download video file to local device cache for sharing'));
       }
 
       await SharePlus.instance.share(
@@ -31,7 +32,7 @@ class ShareVideoUseCase implements UseCase<void, ShareVideoParams> {
       );
       return const Resource.success(null);
     } catch (e) {
-      return Resource.error(message: e.toString());
+      return Resource.error(Failure.unknown(e.toString()));
     }
   }
 }

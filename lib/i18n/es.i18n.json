@@ -365,5 +365,10 @@
     "day": "Día {n}",
     "check_in_btn": "Fichar",
     "daily_bonus_notification": "Notificación"
+  },
+  "connectivity": {
+    "no_internet_title": "Sin conexión",
+    "no_internet_desc": "Por favor, comprueba tu conexão a Internet para seguir usando la aplicación.",
+    "retry_button": "Reintentar conexión"
   }
 }

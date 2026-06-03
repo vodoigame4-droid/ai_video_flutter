@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../../core/theme/app_theme.dart';
+import '../../../../core/errors/backend_error_handler.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../templates/presentation/pages/templates_page.dart';
@@ -211,13 +212,13 @@ class HomeView extends StatelessWidget {
                                         ],
                                       ),
                                       empty: () => const SizedBox.shrink(),
-                                      error: (message) => Center(
+                                      error: (failure) => Center(
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                             vertical: 40,
                                           ),
                                           child: Text(
-                                            message,
+                                            BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
                                             style:
                                                 context.appTheme.errorTextStyle,
                                           ),

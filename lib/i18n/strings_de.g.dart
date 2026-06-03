@@ -60,6 +60,7 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$de errors = _Translations$errors$de._(_root);
 	@override late final _Translations$guide$de guide = _Translations$guide$de._(_root);
 	@override late final _Translations$checkin$de checkin = _Translations$checkin$de._(_root);
+	@override late final _Translations$connectivity$de connectivity = _Translations$connectivity$de._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$de extends Translations$checkin$en {
 	@override String get daily_bonus_notification => 'Benachrichtigung';
 }
 
+// Path: connectivity
+class _Translations$connectivity$de extends Translations$connectivity$en {
+	_Translations$connectivity$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => 'Keine Verbindung';
+	@override String get no_internet_desc => 'Bitte überprüfen Sie Ihre Internetverbindung, um die App weiterhin zu nutzen.';
+	@override String get retry_button => 'Verbindung erneut versuchen';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsDe {
 			'checkin.day' => ({required Object n}) => 'Tag ${n}',
 			'checkin.check_in_btn' => 'Einchecken',
 			'checkin.daily_bonus_notification' => 'Benachrichtigung',
+			'connectivity.no_internet_title' => 'Keine Verbindung',
+			'connectivity.no_internet_desc' => 'Bitte überprüfen Sie Ihre Internetverbindung, um die App weiterhin zu nutzen.',
+			'connectivity.retry_button' => 'Verbindung erneut versuchen',
 			_ => null,
 		};
 	}

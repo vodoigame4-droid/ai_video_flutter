@@ -372,5 +372,10 @@
     "day": "Ngày {n}",
     "check_in_btn": "Nhận quà",
     "daily_bonus_notification": "Thông báo hàng ngày"
+  },
+  "connectivity": {
+    "no_internet_title": "Mất kết nối",
+    "no_internet_desc": "Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.",
+    "retry_button": "Thử lại kết nối"
   }
 }

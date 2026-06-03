@@ -365,5 +365,10 @@
     "day": "दिन {n}",
     "check_in_btn": "हाजिri लगाएं",
     "daily_bonus_notification": "दैनिक सूचना"
+  },
+  "connectivity": {
+    "no_internet_title": "कोई कनेक्शन नहीं",
+    "no_internet_desc": "कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।",
+    "retry_button": "पुनः प्रयास करें"
   }
 }

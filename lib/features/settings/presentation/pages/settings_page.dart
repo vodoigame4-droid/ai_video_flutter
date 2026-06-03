@@ -6,6 +6,7 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../../../profile/presentation/widgets/premium_banner_widget.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
 import '../../../premium/presentation/pages/buy_credits_page.dart';
@@ -134,11 +135,7 @@ class SettingsView extends StatelessWidget {
                               icon: Icons.mail_outline_rounded,
                               title: t.settings.contactUs,
                               onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(t.settings.contactUs),
-                                  ),
-                                );
+                                AppToast.showSuccess(t.settings.contactUs);
                               },
                             ),
 
@@ -147,11 +144,7 @@ class SettingsView extends StatelessWidget {
                               icon: Icons.star_outline_rounded,
                               title: t.settings.rateApp,
                               onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(t.settings.rateApp),
-                                  ),
-                                );
+                                AppToast.showSuccess(t.settings.rateApp);
                               },
                             ),
 
@@ -160,11 +153,7 @@ class SettingsView extends StatelessWidget {
                               icon: Icons.description_outlined,
                               title: t.settings.termsOfUse,
                               onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(t.settings.termsOfUse),
-                                  ),
-                                );
+                                AppToast.showSuccess(t.settings.termsOfUse);
                               },
                             ),
 
@@ -173,11 +162,7 @@ class SettingsView extends StatelessWidget {
                               icon: Icons.security_outlined,
                               title: t.settings.privacyPolicy,
                               onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(t.settings.privacyPolicy),
-                                  ),
-                                );
+                                AppToast.showSuccess(t.settings.privacyPolicy);
                               },
                             ),
 
@@ -212,12 +197,7 @@ class SettingsView extends StatelessWidget {
                                   ),
                                 ).then((_) {
                                   if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(t.settings.copied),
-                                        duration: const Duration(seconds: 2),
-                                      ),
-                                    );
+                                    AppToast.showSuccess(t.settings.copied);
                                   }
                                 });
                               },

@@ -1,6 +1,7 @@
 library core_business;
 
 export 'src/core/resources/resource.dart';
+export 'src/core/errors/failure.dart';
 export 'src/core/injection/business_injection.dart';
 export 'src/core/config/app_config.dart';
 export 'src/core/utils/video_cache_manager.dart';

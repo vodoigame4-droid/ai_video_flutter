@@ -372,5 +372,10 @@
     "day": "Day {n}",
     "check_in_btn": "Check in",
     "daily_bonus_notification": "Daily Bonus Notification"
+  },
+  "connectivity": {
+    "no_internet_title": "No Connection",
+    "no_internet_desc": "Please check your internet connection to continue using the app.",
+    "retry_button": "Retry Connection"
   }
 }

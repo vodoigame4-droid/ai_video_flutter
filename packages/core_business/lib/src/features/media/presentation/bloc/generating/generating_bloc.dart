@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
+import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import '../../../domain/usecases/upload_image_usecase.dart';
 import '../../../domain/usecases/upload_video_usecase.dart';
@@ -104,9 +105,10 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                   finalVideoUrl = url;
                   LogUtils.d('GeneratingBloc: Video upload success, remote url: $finalVideoUrl');
                 },
-                error: (message) {
-                  LogUtils.e('GeneratingBloc: Video upload failed: $message');
-                  throw Exception('Failed to upload video: $message');
+                error: (failure) {
+                  final errorMsg = failure.toErrorCodeOrMessage();
+                  LogUtils.e('GeneratingBloc: Video upload failed: $errorMsg');
+                  throw Exception('Failed to upload video: $errorMsg');
                 },
               );
             }
@@ -221,9 +223,9 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                   }
                 });
               },
-              error: (message) async {
-                LogUtils.e('GeneratingBloc: Create TGV failed: $message');
-                emit(GeneratingState.failure(message: message));
+              error: (failure) async {
+                LogUtils.e('GeneratingBloc: Create TGV failed: ${failure.toErrorCodeOrMessage()}');
+                emit(GeneratingState.failure(message: failure.toErrorCodeOrMessage()));
               },
             );
           } catch (e) {
@@ -266,8 +268,8 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                     emit(generatingState.copyWith(progress: _mockProgress));
                   }
                 },
-                error: (message) async {
-                  LogUtils.e('GeneratingBloc: Polling failed: $message');
+                error: (failure) async {
+                  LogUtils.e('GeneratingBloc: Polling failed: ${failure.toErrorCodeOrMessage()}');
                   _mockProgress = (_mockProgress + 0.1).clamp(0.0, 0.95);
                   emit(generatingState.copyWith(progress: _mockProgress));
                 },

@@ -60,6 +60,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$ar errors = _Translations$errors$ar._(_root);
 	@override late final _Translations$guide$ar guide = _Translations$guide$ar._(_root);
 	@override late final _Translations$checkin$ar checkin = _Translations$checkin$ar._(_root);
+	@override late final _Translations$connectivity$ar connectivity = _Translations$connectivity$ar._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$ar extends Translations$checkin$en {
 	@override String get daily_bonus_notification => 'إشعار يومي';
 }
 
+// Path: connectivity
+class _Translations$connectivity$ar extends Translations$connectivity$en {
+	_Translations$connectivity$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => 'لا يوجد اتصال';
+	@override String get no_internet_desc => 'يرجى التحقق من اتصالك بالإنترنت لمتابعة استخدام التطبيق.';
+	@override String get retry_button => 'إعادة محاولة الاتصال';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsAr {
 			'checkin.day' => ({required Object n}) => 'يوم ${n}',
 			'checkin.check_in_btn' => 'تسجيل',
 			'checkin.daily_bonus_notification' => 'إشعار يومي',
+			'connectivity.no_internet_title' => 'لا يوجد اتصال',
+			'connectivity.no_internet_desc' => 'يرجى التحقق من اتصالك بالإنترنت لمتابعة استخدام التطبيق.',
+			'connectivity.retry_button' => 'إعادة محاولة الاتصال',
 			_ => null,
 		};
 	}

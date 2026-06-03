@@ -60,6 +60,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$zh errors = _Translations$errors$zh._(_root);
 	@override late final _Translations$guide$zh guide = _Translations$guide$zh._(_root);
 	@override late final _Translations$checkin$zh checkin = _Translations$checkin$zh._(_root);
+	@override late final _Translations$connectivity$zh connectivity = _Translations$connectivity$zh._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$zh extends Translations$checkin$en {
 	@override String get daily_bonus_notification => '每日提醒';
 }
 
+// Path: connectivity
+class _Translations$connectivity$zh extends Translations$connectivity$en {
+	_Translations$connectivity$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => '无网络连接';
+	@override String get no_internet_desc => '请检查您的网络连接以继续使用该应用程序。';
+	@override String get retry_button => '重试连接';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsZh {
 			'checkin.day' => ({required Object n}) => '第${n}天',
 			'checkin.check_in_btn' => '签到',
 			'checkin.daily_bonus_notification' => '每日提醒',
+			'connectivity.no_internet_title' => '无网络连接',
+			'connectivity.no_internet_desc' => '请检查您的网络连接以继续使用该应用程序。',
+			'connectivity.retry_button' => '重试连接',
 			_ => null,
 		};
 	}

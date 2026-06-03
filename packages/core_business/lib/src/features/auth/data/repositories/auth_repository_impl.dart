@@ -53,7 +53,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: login failed', error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -68,7 +68,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: refresh failed', error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -82,7 +82,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: getProfile failed', error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -96,7 +96,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Resource.success(user);
     } catch (e, stack) {
       LogUtils.e('AuthRepositoryImpl: updateProfile failed', error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/core/resources/resource.dart';
+import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/video_cache_manager.dart';
 import '../../../domain/usecases/delete_media_usecase.dart';
 import '../../../domain/usecases/download_video_usecase.dart';
@@ -260,8 +261,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
           success: (_) {
             emit(s.copyWith(isDeleted: true));
           },
-          error: (message) {
-            LogUtils.e('ResultBloc: Failed to delete video: $message');
+          error: (failure) {
+            LogUtils.e('ResultBloc: Failed to delete video: ${failure.toErrorCodeOrMessage()}');
           },
         );
       },
@@ -289,10 +290,10 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
               downloadSuccess: true,
             ));
           },
-          error: (message) {
+          error: (failure) {
             emit(s.copyWith(
               isDownloading: false,
-              downloadErrorMessage: message,
+              downloadErrorMessage: failure.toErrorCodeOrMessage(),
               downloadSuccess: false,
             ));
           },
@@ -324,10 +325,10 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
               shareSuccess: true,
             ));
           },
-          error: (message) {
+          error: (failure) {
             emit(s.copyWith(
               isSharing: false,
-              shareErrorMessage: message,
+              shareErrorMessage: failure.toErrorCodeOrMessage(),
               shareSuccess: false,
             ));
           },

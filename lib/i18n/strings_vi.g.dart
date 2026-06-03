@@ -61,6 +61,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$vi errors = _Translations$errors$vi._(_root);
 	@override late final _Translations$guide$vi guide = _Translations$guide$vi._(_root);
 	@override late final _Translations$checkin$vi checkin = _Translations$checkin$vi._(_root);
+	@override late final _Translations$connectivity$vi connectivity = _Translations$connectivity$vi._(_root);
 }
 
 // Path: common
@@ -571,6 +572,18 @@ class _Translations$checkin$vi extends Translations$checkin$en {
 	@override String get daily_bonus_notification => 'Thông báo hàng ngày';
 }
 
+// Path: connectivity
+class _Translations$connectivity$vi extends Translations$connectivity$en {
+	_Translations$connectivity$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => 'Mất kết nối';
+	@override String get no_internet_desc => 'Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.';
+	@override String get retry_button => 'Thử lại kết nối';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -959,6 +972,9 @@ extension on TranslationsVi {
 			'checkin.day' => ({required Object n}) => 'Ngày ${n}',
 			'checkin.check_in_btn' => 'Nhận quà',
 			'checkin.daily_bonus_notification' => 'Thông báo hàng ngày',
+			'connectivity.no_internet_title' => 'Mất kết nối',
+			'connectivity.no_internet_desc' => 'Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.',
+			'connectivity.retry_button' => 'Thử lại kết nối',
 			_ => null,
 		};
 	}

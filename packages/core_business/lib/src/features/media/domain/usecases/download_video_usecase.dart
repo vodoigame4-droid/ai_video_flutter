@@ -1,5 +1,6 @@
 import 'package:gal/gal.dart';
 import '../../../../core/resources/resource.dart';
+import '../../../../core/errors/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../../core/utils/video_cache_manager.dart';
 
@@ -13,13 +14,13 @@ class DownloadVideoUseCase implements UseCase<void, String> {
       final filePath = cachedPath ?? url;
 
       if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
-        return const Resource.error(message: 'Failed to download video file to local device cache');
+        return const Resource.error(Failure.unknown('Failed to download video file to local device cache'));
       }
 
       await Gal.putVideo(filePath);
       return const Resource.success(null);
     } catch (e) {
-      return Resource.error(message: e.toString());
+      return Resource.error(Failure.unknown(e.toString()));
     }
   }
 }

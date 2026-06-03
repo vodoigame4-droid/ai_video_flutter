@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/errors/backend_error_handler.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../../i18n/strings.g.dart';
 import '../../../../core/widgets/video_card.dart';
@@ -161,8 +162,11 @@ class TemplatesView extends StatelessWidget {
                             },
                           ),
                           empty: () => const SizedBox.shrink(),
-                          error: (msg) => Center(
-                            child: Text(msg, style: context.appTheme.errorTextStyle),
+                          error: (failure) => Center(
+                            child: Text(
+                              BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
+                              style: context.appTheme.errorTextStyle,
+                            ),
                           ),
                         ),
 
@@ -221,9 +225,9 @@ class TemplatesView extends StatelessWidget {
                                   style: context.textTheme.bodyMedium,
                                 ),
                               ),
-                              error: (msg) => Center(
+                              error: (failure) => Center(
                                 child: Text(
-                                  msg,
+                                  BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
                                   style: context.appTheme.errorTextStyle,
                                 ),
                               ),

@@ -60,6 +60,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$id errors = _Translations$errors$id._(_root);
 	@override late final _Translations$guide$id guide = _Translations$guide$id._(_root);
 	@override late final _Translations$checkin$id checkin = _Translations$checkin$id._(_root);
+	@override late final _Translations$connectivity$id connectivity = _Translations$connectivity$id._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$id extends Translations$checkin$en {
 	@override String get daily_bonus_notification => 'Notifikasi';
 }
 
+// Path: connectivity
+class _Translations$connectivity$id extends Translations$connectivity$en {
+	_Translations$connectivity$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => 'Tidak Ada Koneksi';
+	@override String get no_internet_desc => 'Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.';
+	@override String get retry_button => 'Coba Lagi Koneksi';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsId {
 			'checkin.day' => ({required Object n}) => 'Hari ${n}',
 			'checkin.check_in_btn' => 'Check-in',
 			'checkin.daily_bonus_notification' => 'Notifikasi',
+			'connectivity.no_internet_title' => 'Tidak Ada Koneksi',
+			'connectivity.no_internet_desc' => 'Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.',
+			'connectivity.retry_button' => 'Coba Lagi Koneksi',
 			_ => null,
 		};
 	}

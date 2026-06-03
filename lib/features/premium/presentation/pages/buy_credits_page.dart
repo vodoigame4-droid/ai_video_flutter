@@ -7,6 +7,8 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/extensions/context_failure_ext.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/credit_pack_card.dart';
 
@@ -40,20 +42,10 @@ class BuyCreditsView extends StatelessWidget {
         listener: (context, state) {
           state.whenOrNull(
             success: (message, isWeeklySelected, isVideoRevealed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: AppColors.primary,
-                ),
-              );
+              AppToast.showSuccess(message);
             },
             error: (message, isWeeklySelected, isVideoRevealed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: AppColors.heart,
-                ),
-              );
+              context.handleFailure(Failure.business(code: message, message: ''));
             },
           );
         },

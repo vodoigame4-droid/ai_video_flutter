@@ -365,5 +365,10 @@
     "day": "يوم {n}",
     "check_in_btn": "تسجيل",
     "daily_bonus_notification": "إشعار يومي"
+  },
+  "connectivity": {
+    "no_internet_title": "لا يوجد اتصال",
+    "no_internet_desc": "يرجى التحقق من اتصالك بالإنترنت لمتابعة استخدام التطبيق.",
+    "retry_button": "إعادة محاولة الاتصال"
   }
 }

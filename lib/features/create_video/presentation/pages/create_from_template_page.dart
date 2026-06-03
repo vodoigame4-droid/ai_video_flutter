@@ -14,10 +14,12 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_heart_button.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
-import '../../../../core/widgets/report_bottom_sheet.dart';
+import '../../../../core/widgets/report_dialog.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/extensions/context_failure_ext.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../widgets/upload_bottom_sheet_widget.dart';
 import 'create_template_settings_page.dart';
 
@@ -210,23 +212,21 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        ReportTriggerWidget(
-          child: Material(
-            color: AppColors.white.withValues(alpha: 0.0),
-            shape: const CircleBorder(),
-            child: InkWell(
-              onTap: null,
-              borderRadius: const BorderRadius.all(Radius.circular(100)),
-              child: SizedBox(
-                width: 36,
-                height: 36,
-                child: Center(
-                  child: AppSvgIcon(
-                    assetName: Assets.icons.icReport,
-                    color: AppColors.white,
-                    width: 16,
-                    height: 16,
-                  ),
+        Material(
+          color: AppColors.white.withValues(alpha: 0.0),
+          shape: const CircleBorder(),
+          child: InkWell(
+            onTap: () => showReportDialog(context),
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+            child: SizedBox(
+              width: 36,
+              height: 36,
+              child: Center(
+                child: AppSvgIcon(
+                  assetName: Assets.icons.icReport,
+                  color: AppColors.white,
+                  width: 16,
+                  height: 16,
                 ),
               ),
             ),

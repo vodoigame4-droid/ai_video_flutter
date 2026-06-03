@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
+import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/features/media/domain/entities/media_entities.dart';
 import 'package:core_business/src/features/media/domain/usecases/get_history_usecase.dart';
@@ -66,9 +67,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               ));
               _startProgressTimerIfNeeded(videos);
             },
-            error: (message) {
+            error: (failure) {
               emit(readyState.copyWith(
-                videosState: Resource.error(message: message),
+                videosState: Resource.error(failure),
               ));
             },
           );
@@ -102,10 +103,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         ));
         _startProgressTimerIfNeeded(videos);
       },
-      error: (message) {
+      error: (failure) {
         emit(ProfileState.ready(
           subTabIndex: 0,
-          videosState: Resource.error(message: message),
+          videosState: Resource.error(failure),
           likedTemplates: _currentLikedTemplates,
         ));
       },
@@ -172,16 +173,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
                 ));
                 _startProgressTimerIfNeeded(videos);
               },
-              error: (message) {
+              error: (failure) {
                 emit(readyState.copyWith(
-                  videosState: Resource.error(message: message),
+                  videosState: Resource.error(failure),
                 ));
               },
             );
           },
-          error: (message) async {
+          error: (failure) async {
             emit(readyState.copyWith(
-              videosState: Resource.error(message: message),
+              videosState: Resource.error(failure),
             ));
           },
         );
@@ -267,8 +268,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               _progressTimer = null;
             }
           },
-          error: (message) async {
-            LogUtils.e('ProfileBloc: Status polling failed: $message');
+          error: (failure) async {
+            LogUtils.e('ProfileBloc: Status polling failed: ${failure.toErrorCodeOrMessage()}');
             // Just increment progress visually
             bool updatedAny = false;
             for (int i = 0; i < videos.length; i++) {

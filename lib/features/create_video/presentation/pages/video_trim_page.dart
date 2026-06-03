@@ -5,6 +5,9 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_button.dart';
 import '../../../../i18n/strings.g.dart';
+import 'package:core_business/core_business.dart';
+import '../../../../core/extensions/context_failure_ext.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../bloc/video_trim/video_trim_bloc.dart';
 import '../bloc/video_trim/video_trim_event.dart';
 import '../bloc/video_trim/video_trim_state.dart';
@@ -58,12 +61,7 @@ class _VideoTrimPageState extends State<VideoTrimPage> {
               Navigator.pop(context, outputPath);
             },
             failure: (message) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(message),
-                  backgroundColor: AppColors.heart,
-                ),
-              );
+              context.handleFailure(Failure.business(code: message, message: ''));
             },
           );
         },

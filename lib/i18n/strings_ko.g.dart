@@ -60,6 +60,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$errors$ko errors = _Translations$errors$ko._(_root);
 	@override late final _Translations$guide$ko guide = _Translations$guide$ko._(_root);
 	@override late final _Translations$checkin$ko checkin = _Translations$checkin$ko._(_root);
+	@override late final _Translations$connectivity$ko connectivity = _Translations$connectivity$ko._(_root);
 }
 
 // Path: common
@@ -556,6 +557,18 @@ class _Translations$checkin$ko extends Translations$checkin$en {
 	@override String get daily_bonus_notification => '매일 알림';
 }
 
+// Path: connectivity
+class _Translations$connectivity$ko extends Translations$connectivity$en {
+	_Translations$connectivity$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get no_internet_title => '연결 없음';
+	@override String get no_internet_desc => '앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.';
+	@override String get retry_button => '연결 재시도';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -939,6 +952,9 @@ extension on TranslationsKo {
 			'checkin.day' => ({required Object n}) => '${n}일차',
 			'checkin.check_in_btn' => '출석하기',
 			'checkin.daily_bonus_notification' => '매일 알림',
+			'connectivity.no_internet_title' => '연결 없음',
+			'connectivity.no_internet_desc' => '앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.',
+			'connectivity.retry_button' => '연결 재시도',
 			_ => null,
 		};
 	}

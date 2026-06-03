@@ -365,5 +365,10 @@
     "day": "Tag {n}",
     "check_in_btn": "Einchecken",
     "daily_bonus_notification": "Benachrichtigung"
+  },
+  "connectivity": {
+    "no_internet_title": "Keine Verbindung",
+    "no_internet_desc": "Bitte überprüfen Sie Ihre Internetverbindung, um die App weiterhin zu nutzen.",
+    "retry_button": "Verbindung erneut versuchen"
   }
 }

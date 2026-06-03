@@ -29,7 +29,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getHomeCategories failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -45,7 +45,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getCategories failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -73,7 +73,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getThemes failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -85,7 +85,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: createTgv failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -97,7 +97,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getMediaDetail failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -119,7 +119,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getHistory failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -133,7 +133,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getMediaStatuses failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -145,7 +145,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: deleteMedia failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -157,7 +157,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadImage failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -170,7 +170,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadImages failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -182,7 +182,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadVideo failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
@@ -194,7 +194,7 @@ class MediaRepositoryImpl implements MediaRepository {
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getSuggestionPrompt failed',
           error: e, stackTrace: stack);
-      return Resource.error(message: parseRepositoryError(e));
+      return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 }

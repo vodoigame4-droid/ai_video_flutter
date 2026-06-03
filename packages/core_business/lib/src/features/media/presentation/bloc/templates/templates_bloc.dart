@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
+import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/core/usecases/usecase.dart';
 import '../../../domain/entities/media_entities.dart';
@@ -52,12 +53,12 @@ class TemplatesBloc extends Bloc<TemplatesEvent, TemplatesState> {
                 selectedCategory: category,
                 templatesState: themesResult.maybeWhen(
                   success: (paginated) => Resource.success(paginated.data),
-                  orElse: () => Resource.error(message: 'Failed to load themes'),
+                  orElse: () => const Resource.error(Failure.unknown('Failed to load themes')),
                 ),
               ));
             },
-            error: (message) async {
-              emit(TemplatesState.error(message: message));
+            error: (failure) async {
+              emit(TemplatesState.error(message: failure.toErrorCodeOrMessage()));
             },
           );
         },
@@ -80,7 +81,7 @@ class TemplatesBloc extends Bloc<TemplatesEvent, TemplatesState> {
                 selectedCategory: category,
                 templatesState: themesResult.maybeWhen(
                   success: (paginated) => Resource.success(paginated.data),
-                  orElse: () => Resource.error(message: 'Failed to load themes'),
+                  orElse: () => const Resource.error(Failure.unknown('Failed to load themes')),
                 ),
               ));
             },

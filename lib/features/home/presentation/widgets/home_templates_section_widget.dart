@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/video_card.dart';
+import '../../../../core/errors/backend_error_handler.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../create_video/presentation/pages/create_from_template_page.dart';
 
@@ -99,8 +100,11 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
             ),
           ),
           empty: () => const SizedBox.shrink(),
-          error: (message) => Center(
-            child: Text(message, style: context.appTheme.errorTextStyle),
+          error: (failure) => Center(
+            child: Text(
+              BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
+              style: context.appTheme.errorTextStyle,
+            ),
           ),
         ),
       ],

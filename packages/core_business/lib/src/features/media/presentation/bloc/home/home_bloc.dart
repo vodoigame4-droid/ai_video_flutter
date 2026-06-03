@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/src/core/resources/resource.dart';
+import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/core/usecases/usecase.dart';
 import '../../../domain/entities/media_entities.dart';
@@ -58,9 +59,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 currentLocale: 'en',
               ));
             },
-            error: (message) {
-              LogUtils.e('HomeBloc: Fetch categories failed: $message');
-              emit(HomeState.error(message: message));
+            error: (failure) {
+              LogUtils.e('HomeBloc: Fetch categories failed: ${failure.toErrorCodeOrMessage()}');
+              emit(HomeState.error(message: failure.toErrorCodeOrMessage()));
             },
           );
         },

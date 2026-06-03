@@ -3,6 +3,7 @@ import 'package:flutter_udid/flutter_udid.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/resources/resource.dart';
+import '../../../../core/errors/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../../core/utils/log_utils.dart';
 import '../../../../core/constants/storage_keys.dart';
@@ -69,8 +70,8 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
           success: (data) {
             user = data;
           },
-          error: (message) {
-            LogUtils.e('AutoLoginUseCase: Login failed: $message');
+          error: (failure) {
+            LogUtils.e('AutoLoginUseCase: Login failed: ${failure.toErrorCodeOrMessage()}');
           },
           orElse: () {},
         );
@@ -81,8 +82,8 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
           success: (data) {
             user = data;
           },
-          error: (message) {
-            LogUtils.e('AutoLoginUseCase: GetProfile failed: $message');
+          error: (failure) {
+            LogUtils.e('AutoLoginUseCase: GetProfile failed: ${failure.toErrorCodeOrMessage()}');
           },
           orElse: () {},
         );
@@ -107,7 +108,7 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
         return Resource.success(user!);
       } else {
         return const Resource.error(
-          message: 'Auto login initialization failed',
+          Failure.unknown('Auto login initialization failed'),
         );
       }
     } catch (e, stack) {
@@ -116,7 +117,7 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
         error: e,
         stackTrace: stack,
       );
-      return Resource.error(message: e.toString());
+      return Resource.error(Failure.unknown(e.toString()));
     }
   }
 }
