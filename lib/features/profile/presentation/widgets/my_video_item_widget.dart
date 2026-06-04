@@ -2,6 +2,7 @@ import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_image.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 
@@ -35,10 +36,12 @@ class MyVideoItemWidget extends StatelessWidget {
           children: [
             // Background Image
             Positioned.fill(
-              child: Image.network(
-                video.imageUrl,
+              child: AppImage(
+                imageUrl: video.imageUrl,
+                width: 173,
+                height: 248,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Image.asset(
+                errorWidget: Image.asset(
                   'assets/images/home_banner.png',
                   fit: BoxFit.cover,
                 ),

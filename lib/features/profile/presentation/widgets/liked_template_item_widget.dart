@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_image.dart';
 import 'package:core_business/core_business.dart';
 
 class LikedTemplateItemWidget extends StatelessWidget {
@@ -28,10 +29,12 @@ class LikedTemplateItemWidget extends StatelessWidget {
           children: [
             // Background Image
             Positioned.fill(
-              child: Image.network(
-                template.thumbnailUrl.isNotEmpty ? template.thumbnailUrl : template.resultUrl,
+              child: AppImage(
+                imageUrl: template.thumbnailUrl.isNotEmpty ? template.thumbnailUrl : template.resultUrl,
+                width: 173,
+                height: 248,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Image.asset(
+                errorWidget: Image.asset(
                   'assets/images/home_banner.png',
                   fit: BoxFit.cover,
                 ),

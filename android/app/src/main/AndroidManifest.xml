@@ -6,7 +6,15 @@
     <application
         android:label="ai_video_flutter"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true">
+        
+        <!-- Explicitly enable Impeller rendering engine for smooth UI frames on Android -->
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -39,11 +39,7 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  AppSvgIcon(
-                    assetName: iconAsset,
-                    width: 20,
-                    height: 20,
-                  ),
+                  AppSvgIcon(assetName: iconAsset, width: 20, height: 20),
                   const SizedBox(width: 6),
                   Text(title, style: context.textTheme.titleMedium),
                 ],
@@ -76,6 +72,7 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final template = videos[index];
                 return VideoCard(
+                  key: ValueKey(template.id),
                   title: template.name,
                   imageUrl: template.thumbnailUrl,
                   showPlayButton: false,
@@ -105,7 +102,10 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
           empty: () => const SizedBox.shrink(),
           error: (failure) => Center(
             child: Text(
-              BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
+              BackendErrorHelper.getErrorMessage(
+                context,
+                failure.toErrorCodeOrMessage(),
+              ),
               style: context.appTheme.errorTextStyle,
             ),
           ),

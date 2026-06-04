@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import '../theme/app_theme.dart';
+import 'app_image.dart';
 
-class VideoCard extends StatelessWidget {
+class VideoCard extends StatefulWidget {
   final String title;
   final String? imageUrl;
   final String? viewsCount;
@@ -28,8 +30,23 @@ class VideoCard extends StatelessWidget {
   });
 
   @override
+  State<VideoCard> createState() => _VideoCardState();
+}
+
+class _VideoCardState extends State<VideoCard> {
+  bool _isPlayable = false;
+
+  @override
   Widget build(BuildContext context) {
-    final int hash = title.hashCode;
+    final int hash = widget.title.hashCode;
+
+    final double? pixelRatio = MediaQuery.maybeOf(context)?.devicePixelRatio;
+    final int? cacheWidth = (widget.width != null && pixelRatio != null)
+        ? (widget.width! * pixelRatio).round()
+        : null;
+    final int? cacheHeight = (widget.height != null && pixelRatio != null)
+        ? (widget.height! * pixelRatio).round()
+        : null;
 
     // Fallback deterministic logic for Home page if parameters are omitted
     final bool isEven = hash % 2 == 0;
@@ -39,24 +56,29 @@ class VideoCard extends StatelessWidget {
 
     final bool isTest = Platform.environment.containsKey('FLUTTER_TEST');
     final bool isNetworkImage =
-        imageUrl != null && imageUrl!.startsWith('http') && !isTest;
+        widget.imageUrl != null &&
+        widget.imageUrl!.startsWith('http') &&
+        !isTest;
 
     final String resolvedImageUrl =
-        (isTest && imageUrl != null && imageUrl!.startsWith('http'))
+        (isTest &&
+            widget.imageUrl != null &&
+            widget.imageUrl!.startsWith('http'))
         ? defaultImageAsset
-        : (imageUrl ?? defaultImageAsset);
+        : (widget.imageUrl ?? defaultImageAsset);
 
-    final bool resolvedIsHot = badgeType != null
-        ? badgeType == 'hot'
+    final bool resolvedIsHot = widget.badgeType != null
+        ? widget.badgeType == 'hot'
         : hash % 3 == 0;
 
-    final bool hasBadge = badgeType != null
-        ? badgeType!.isNotEmpty
+    final bool hasBadge = widget.badgeType != null
+        ? widget.badgeType!.isNotEmpty
         : true; // Default to true if badgeType is null (for Home page fallback)
 
     final String resolvedBadgeText = resolvedIsHot ? 'Hot' : 'New';
 
-    final String resolvedViews = viewsCount ?? '${((hash % 90) + 10) / 10}k';
+    final String resolvedViews =
+        widget.viewsCount ?? '${((hash % 90) + 10) / 10}k';
 
     // Styling configuration based on style type (Home vs Templates)
     final double cardRadius = isNetworkImage ? 10.0 : 16.0;
@@ -98,190 +120,216 @@ class VideoCard extends StatelessWidget {
             );
     }
 
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: BorderRadius.all(Radius.circular(cardRadius)),
-        border: Border.all(color: context.appTheme.borderColor, width: 1),
-        image: isNetworkImage
-            ? null
-            : DecorationImage(
-                image: AssetImage(resolvedImageUrl),
-                fit: BoxFit.cover,
+    return VisibilityDetector(
+      key: ValueKey('videocard_${widget.title}_${widget.imageUrl}'),
+      onVisibilityChanged: (visibilityInfo) {
+        final double visiblePercentage = visibilityInfo.visibleFraction * 100;
+        final bool shouldPlay = visiblePercentage > 20;
+        if (_isPlayable != shouldPlay) {
+          if (mounted) {
+            setState(() {
+              _isPlayable = shouldPlay;
+            });
+          }
+        }
+      },
+      child: RepaintBoundary(
+        child: Container(
+          width: widget.width,
+          height: widget.height,
+          decoration: BoxDecoration(
+            color: context.colorScheme.surface,
+            borderRadius: BorderRadius.all(Radius.circular(cardRadius)),
+            border: Border.all(color: context.appTheme.borderColor, width: 1),
+            image: isNetworkImage
+                ? null
+                : DecorationImage(
+                    image: AssetImage(resolvedImageUrl),
+                    fit: BoxFit.cover,
+                  ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.35),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
               ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.35),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+            ],
           ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(cardRadius)),
-        child: Stack(
-          children: [
-            // Network Image if available
-            if (isNetworkImage)
-              Positioned.fill(
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl!,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    color: Colors.white.withValues(alpha: 0.05),
-                    child: const Center(
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(cardRadius)),
+            child: Stack(
+              children: [
+                // Network Image if available
+                if (isNetworkImage)
+                  Positioned.fill(
+                    child: _isPlayable
+                        ? CachedNetworkImage(
+                            imageUrl: widget.imageUrl!,
+                            fit: BoxFit.cover,
+                            memCacheWidth: cacheWidth,
+                            memCacheHeight: cacheHeight,
+                            placeholder: (context, url) => Container(
+                              color: Colors.white.withValues(alpha: 0.05),
+                              child: const Center(
+                                child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              color: Colors.white.withValues(alpha: 0.05),
+                              child: const Icon(
+                                Icons.image_not_supported_outlined,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          )
+                        : AppImageShimmer(
+                            width: widget.width,
+                            height: widget.height,
+                            borderRadius: cardRadius,
+                          ),
+                  ),
+
+                // Dark gradient overlay to read texts easily
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.black.withValues(alpha: 0.1),
+                          Colors.black.withValues(alpha: 0.8),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
                     ),
                   ),
-                  errorWidget: (context, url, error) => Container(
-                    color: Colors.white.withValues(alpha: 0.05),
-                    child: const Icon(
-                      Icons.image_not_supported_outlined,
-                      color: Colors.grey,
+                ),
+
+                // Badge Tag (Top right)
+                if (hasBadge)
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: badgeGradient,
+                        borderRadius: badgeBorderRadius,
+                      ),
+                      child: Text(
+                        resolvedBadgeText,
+                        style:
+                            context.textTheme.labelSmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ) ??
+                            const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     ),
                   ),
-                ),
-              ),
 
-            // Dark gradient overlay to read texts easily
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black.withValues(alpha: 0.1),
-                      Colors.black.withValues(alpha: 0.8),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
-            ),
-
-            // Badge Tag (Top right)
-            if (hasBadge)
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    gradient: badgeGradient,
-                    borderRadius: badgeBorderRadius,
-                  ),
-                  child: Text(
-                    resolvedBadgeText,
-                    style:
-                        context.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ) ??
-                        const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
+                // Play indicator in the center
+                if (widget.showPlayButton)
+                  Center(
+                    child: Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.4),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          width: 1.5,
                         ),
-                  ),
-                ),
-              ),
-
-            // Play indicator in the center
-            if (showPlayButton)
-              Center(
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.4),
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      width: 1.5,
-                    ),
-                  ),
-                  child: const Icon(
-                    Icons.play_arrow_rounded,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                ),
-              ),
-
-            // Title and Views count at the bottom
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: context.appTheme.bodyNormalBold.copyWith(
-                        color: Colors.white,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      child: const Icon(
+                        Icons.play_arrow_rounded,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
-                    const SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+
+                // Title and Views count at the bottom
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
+                        Text(
+                          widget.title,
+                          style: context.appTheme.bodyNormalBold.copyWith(
+                            color: Colors.white,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              isNetworkImage
-                                  ? Icons.auto_awesome
-                                  : Icons.remove_red_eye_outlined,
-                              color: isNetworkImage
-                                  ? const Color(0xFF2BC5C5)
-                                  : const Color(0xFFB0B0B0),
-                              size: 14,
+                            Row(
+                              children: [
+                                Icon(
+                                  isNetworkImage
+                                      ? Icons.auto_awesome
+                                      : Icons.remove_red_eye_outlined,
+                                  color: isNetworkImage
+                                      ? const Color(0xFF2BC5C5)
+                                      : const Color(0xFFB0B0B0),
+                                  size: 14,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  resolvedViews,
+                                  style: context.appTheme.viewsCountTextStyle,
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: 4),
-                            Text(
-                              resolvedViews,
-                              style: context.appTheme.viewsCountTextStyle,
-                            ),
+                            if (widget.showVolumeIcon)
+                              const Icon(
+                                Icons.volume_up_rounded,
+                                color: Colors.white,
+                                size: 14,
+                              ),
                           ],
                         ),
-                        if (showVolumeIcon)
-                          const Icon(
-                            Icons.volume_up_rounded,
-                            color: Colors.white,
-                            size: 14,
-                          ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
 
-            // Interactive Inkwell Overlay
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  onTap: onTap,
+                // Interactive Inkwell Overlay
+                Positioned.fill(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                      onTap: widget.onTap,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
