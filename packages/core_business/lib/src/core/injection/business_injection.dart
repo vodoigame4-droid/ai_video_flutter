@@ -45,6 +45,7 @@ import '../../features/media/domain/usecases/share_video_usecase.dart';
 import '../../features/media/domain/usecases/request_notification_permission_usecase.dart';
 import '../../features/media/domain/usecases/subscribe_notification_topic_usecase.dart';
 import '../../features/media/domain/usecases/get_suggestion_prompt_usecase.dart';
+import '../../features/media/domain/usecases/get_onboarding_images_usecase.dart';
 
 // Liked Templates / Local DB
 import '../../core/database/app_database.dart';
@@ -62,6 +63,15 @@ import '../../features/premium/data/repositories/iap_repository_impl.dart';
 import '../../features/premium/presentation/bloc/iap_bloc.dart';
 import '../../features/premium/domain/usecases/verify_subscription_usecase.dart';
 import '../../features/premium/domain/usecases/verify_product_usecase.dart';
+
+// Daily Check-In
+import '../../features/daily_check_in/data/datasources/daily_login_api_client.dart';
+import '../../features/daily_check_in/data/datasources/daily_login_remote_datasource.dart';
+import '../../features/daily_check_in/domain/repositories/daily_login_repository.dart';
+import '../../features/daily_check_in/data/repositories/daily_login_repository_impl.dart';
+import '../../features/daily_check_in/domain/usecases/get_daily_login_status_usecase.dart';
+import '../../features/daily_check_in/domain/usecases/check_in_usecase.dart';
+import '../../features/daily_check_in/presentation/bloc/daily_check_in_bloc.dart';
 
 // Blocs
 import '../../features/media/presentation/bloc/home/home_bloc.dart';
@@ -141,6 +151,7 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => RequestNotificationPermissionUseCase(notificationRepository: sl()));
   sl.registerLazySingleton(() => SubscribeNotificationTopicUseCase(notificationRepository: sl()));
   sl.registerLazySingleton(() => GetSuggestionPromptUseCase(mediaRepository: sl()));
+  sl.registerLazySingleton(() => GetOnboardingImagesUseCase(mediaRepository: sl()));
 
   // Drift Database & Liked Templates Local Storage
   sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
@@ -230,6 +241,24 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerFactory(
     () => CreditBadgeBloc(
       watchProfileUseCase: sl(),
+      getProfileUseCase: sl(),
+    ),
+  );
+
+  // Daily Check-In
+  sl.registerLazySingleton(() => DailyLoginApiClient(sl<ApiClient>().dio));
+  sl.registerLazySingleton<DailyLoginRemoteDataSource>(
+    () => DailyLoginRemoteDataSourceImpl(apiClient: sl()),
+  );
+  sl.registerLazySingleton<DailyLoginRepository>(
+    () => DailyLoginRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton(() => GetDailyLoginStatusUseCase(dailyLoginRepository: sl()));
+  sl.registerLazySingleton(() => CheckInUseCase(dailyLoginRepository: sl()));
+  sl.registerFactory(
+    () => DailyCheckInBloc(
+      getDailyLoginStatusUseCase: sl(),
+      checkInUseCase: sl(),
       getProfileUseCase: sl(),
     ),
   );

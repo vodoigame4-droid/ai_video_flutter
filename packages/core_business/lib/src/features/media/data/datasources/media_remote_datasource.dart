@@ -11,6 +11,11 @@ abstract class MediaRemoteDataSource {
     required String version,
   });
 
+  Future<List<String>> getOnboardingImages({
+    required String appType,
+    required String version,
+  });
+
   Future<List<HomeCategoryModel>> getCategories({
     required String appType,
     required String version,
@@ -55,6 +60,15 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
     required String version,
   }) async {
     final response = await _apiClient.getHomeCategories(appType, version);
+    return response.data;
+  }
+
+  @override
+  Future<List<String>> getOnboardingImages({
+    required String appType,
+    required String version,
+  }) async {
+    final response = await _apiClient.getOnboardingImages(appType, version);
     return response.data;
   }
 

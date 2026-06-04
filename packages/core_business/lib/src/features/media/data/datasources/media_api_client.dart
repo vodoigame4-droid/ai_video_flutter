@@ -15,6 +15,12 @@ abstract class MediaApiClient {
     @Header('app-version') String version,
   );
 
+  @GET('/media/onboarding-screen')
+  Future<BaseResponse<List<String>>> getOnboardingImages(
+    @Header('app-type') String appType,
+    @Header('app-version') String version,
+  );
+
   @GET('/media/category')
   Future<BaseResponse<List<HomeCategoryModel>>> getCategories(
     @Header('app-type') String appType,

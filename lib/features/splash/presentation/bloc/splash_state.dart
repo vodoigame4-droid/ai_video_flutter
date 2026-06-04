@@ -6,6 +6,9 @@ part 'splash_state.freezed.dart';
 abstract class SplashState with _$SplashState {
   const factory SplashState.initial() = _Initial;
   const factory SplashState.loading(int percent) = _Loading;
-  const factory SplashState.success({required bool isOnboardingCompleted}) = _Success;
+  const factory SplashState.success({
+    required bool isOnboardingCompleted,
+    List<String>? preloadedUrls,
+  }) = _Success;
   const factory SplashState.error({required String message}) = _Error;
 }

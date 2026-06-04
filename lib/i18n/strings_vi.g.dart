@@ -583,6 +583,7 @@ class _Translations$checkin$vi extends Translations$checkin$en {
 	@override String get today => 'H.nay';
 	@override String day({required Object n}) => 'Ngày ${n}';
 	@override String get check_in_btn => 'Nhận quà';
+	@override String get checked_in => 'Đã nhận quà';
 	@override String get daily_bonus_notification => 'Thông báo hàng ngày';
 }
 
@@ -1009,6 +1010,7 @@ extension on TranslationsVi {
 			'checkin.today' => 'H.nay',
 			'checkin.day' => ({required Object n}) => 'Ngày ${n}',
 			'checkin.check_in_btn' => 'Nhận quà',
+			'checkin.checked_in' => 'Đã nhận quà',
 			'checkin.daily_bonus_notification' => 'Thông báo hàng ngày',
 			'connectivity.no_internet_title' => 'Mất kết nối',
 			'connectivity.no_internet_desc' => 'Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.',

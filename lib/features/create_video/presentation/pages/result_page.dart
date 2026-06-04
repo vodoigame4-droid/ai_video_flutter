@@ -8,7 +8,7 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
-import '../../../../core/widgets/report_dialog.dart';
+import '../../../../core/widgets/report_bottom_sheet.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
@@ -227,23 +227,25 @@ class _ResultPageState extends State<ResultPage> {
                       ),
 
                       // Report/Flag button
-                      Material(
-                        color: Colors.transparent,
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () => showReportDialog(context),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: SizedBox(
-                            width: 36,
-                            height: 36,
-                            child: Center(
-                              child: AppSvgIcon(
-                                assetName: Assets.icons.icReport,
-                                color: AppColors.white,
-                                width: 16,
-                                height: 16,
+                      ReportTriggerWidget(
+                        child: Material(
+                          color: Colors.transparent,
+                          shape: const CircleBorder(),
+                          child: InkWell(
+                            onTap: null,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                            child: SizedBox(
+                              width: 36,
+                              height: 36,
+                              child: Center(
+                                child: AppSvgIcon(
+                                  assetName: Assets.icons.icReport,
+                                  color: AppColors.white,
+                                  width: 16,
+                                  height: 16,
+                                ),
                               ),
                             ),
                           ),

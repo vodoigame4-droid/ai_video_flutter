@@ -55,12 +55,14 @@ extension OnboardingStatePatterns on OnboardingState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _CurrentPage value)?  currentPage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Ready value)?  ready,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _CurrentPage() when currentPage != null:
-return currentPage(_that);case _:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Ready() when ready != null:
+return ready(_that);case _Error() when error != null:
+return error(_that);case _:
   return orElse();
 
 }
@@ -78,12 +80,14 @@ return currentPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _CurrentPage value)  currentPage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Ready value)  ready,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return initial(_that);case _CurrentPage():
-return currentPage(_that);case _:
+return initial(_that);case _Loading():
+return loading(_that);case _Ready():
+return ready(_that);case _Error():
+return error(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +104,14 @@ return currentPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _CurrentPage value)?  currentPage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Ready value)?  ready,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _CurrentPage() when currentPage != null:
-return currentPage(_that);case _:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Ready() when ready != null:
+return ready(_that);case _Error() when error != null:
+return error(_that);case _:
   return null;
 
 }
@@ -122,11 +128,13 @@ return currentPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( int index,  bool isCompleted)?  currentPage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<String> images,  int index,  bool isCompleted)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _CurrentPage() when currentPage != null:
-return currentPage(_that.index,_that.isCompleted);case _:
+return initial();case _Loading() when loading != null:
+return loading();case _Ready() when ready != null:
+return ready(_that.images,_that.index,_that.isCompleted);case _Error() when error != null:
+return error(_that.message);case _:
   return orElse();
 
 }
@@ -144,11 +152,13 @@ return currentPage(_that.index,_that.isCompleted);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( int index,  bool isCompleted)  currentPage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<String> images,  int index,  bool isCompleted)  ready,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return initial();case _CurrentPage():
-return currentPage(_that.index,_that.isCompleted);case _:
+return initial();case _Loading():
+return loading();case _Ready():
+return ready(_that.images,_that.index,_that.isCompleted);case _Error():
+return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +175,13 @@ return currentPage(_that.index,_that.isCompleted);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( int index,  bool isCompleted)?  currentPage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<String> images,  int index,  bool isCompleted)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _CurrentPage() when currentPage != null:
-return currentPage(_that.index,_that.isCompleted);case _:
+return initial();case _Loading() when loading != null:
+return loading();case _Ready() when ready != null:
+return ready(_that.images,_that.index,_that.isCompleted);case _Error() when error != null:
+return error(_that.message);case _:
   return null;
 
 }
@@ -212,9 +224,48 @@ String toString() {
 /// @nodoc
 
 
-class _CurrentPage implements OnboardingState {
-  const _CurrentPage({required this.index, required this.isCompleted});
+class _Loading implements OnboardingState {
+  const _Loading();
   
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'OnboardingState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Ready implements OnboardingState {
+  const _Ready({required final  List<String> images, required this.index, required this.isCompleted}): _images = images;
+  
+
+ final  List<String> _images;
+ List<String> get images {
+  if (_images is EqualUnmodifiableListView) return _images;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_images);
+}
 
  final  int index;
  final  bool isCompleted;
@@ -223,33 +274,33 @@ class _CurrentPage implements OnboardingState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$CurrentPageCopyWith<_CurrentPage> get copyWith => __$CurrentPageCopyWithImpl<_CurrentPage>(this, _$identity);
+_$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentPage&&(identical(other.index, index) || other.index == index)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&const DeepCollectionEquality().equals(other._images, _images)&&(identical(other.index, index) || other.index == index)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,index,isCompleted);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_images),index,isCompleted);
 
 @override
 String toString() {
-  return 'OnboardingState.currentPage(index: $index, isCompleted: $isCompleted)';
+  return 'OnboardingState.ready(images: $images, index: $index, isCompleted: $isCompleted)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$CurrentPageCopyWith<$Res> implements $OnboardingStateCopyWith<$Res> {
-  factory _$CurrentPageCopyWith(_CurrentPage value, $Res Function(_CurrentPage) _then) = __$CurrentPageCopyWithImpl;
+abstract mixin class _$ReadyCopyWith<$Res> implements $OnboardingStateCopyWith<$Res> {
+  factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- int index, bool isCompleted
+ List<String> images, int index, bool isCompleted
 });
 
 
@@ -257,20 +308,87 @@ $Res call({
 
 }
 /// @nodoc
-class __$CurrentPageCopyWithImpl<$Res>
-    implements _$CurrentPageCopyWith<$Res> {
-  __$CurrentPageCopyWithImpl(this._self, this._then);
+class __$ReadyCopyWithImpl<$Res>
+    implements _$ReadyCopyWith<$Res> {
+  __$ReadyCopyWithImpl(this._self, this._then);
 
-  final _CurrentPage _self;
-  final $Res Function(_CurrentPage) _then;
+  final _Ready _self;
+  final $Res Function(_Ready) _then;
 
 /// Create a copy of OnboardingState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? index = null,Object? isCompleted = null,}) {
-  return _then(_CurrentPage(
-index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? images = null,Object? index = null,Object? isCompleted = null,}) {
+  return _then(_Ready(
+images: null == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
+as List<String>,index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,isCompleted: null == isCompleted ? _self.isCompleted : isCompleted // ignore: cast_nullable_to_non_nullable
 as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Error implements OnboardingState {
+  const _Error({required this.message});
+  
+
+ final  String message;
+
+/// Create a copy of OnboardingState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'OnboardingState.error(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ErrorCopyWith<$Res> implements $OnboardingStateCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(this._self, this._then);
+
+  final _Error _self;
+  final $Res Function(_Error) _then;
+
+/// Create a copy of OnboardingState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_Error(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

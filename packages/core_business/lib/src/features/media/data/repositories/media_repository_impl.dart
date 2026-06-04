@@ -34,6 +34,21 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
+  Future<Resource<List<String>>> getOnboardingImages() async {
+    try {
+      final urls = await _remoteDataSource.getOnboardingImages(
+        appType: _appConfig.appType,
+        version: _appConfig.appVersion,
+      );
+      return Resource.success(urls);
+    } catch (e, stack) {
+      LogUtils.e('MediaRepositoryImpl: getOnboardingImages failed',
+          error: e, stackTrace: stack);
+      return Resource.error(parseRepositoryErrorToFailure(e));
+    }
+  }
+
+  @override
   Future<Resource<List<HomeCategoryEntity>>> getCategories() async {
     try {
       final models = await _remoteDataSource.getCategories(

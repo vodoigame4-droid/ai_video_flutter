@@ -1219,6 +1219,9 @@ class Translations$checkin$en {
 	/// en: 'Check in'
 	String get check_in_btn => 'Check in';
 
+	/// en: 'Checked In'
+	String get checked_in => 'Checked In';
+
 	/// en: 'Daily Bonus Notification'
 	String get daily_bonus_notification => 'Daily Bonus Notification';
 }
@@ -1686,6 +1689,7 @@ extension on Translations {
 			'checkin.today' => 'Today',
 			'checkin.day' => ({required Object n}) => 'Day ${n}',
 			'checkin.check_in_btn' => 'Check in',
+			'checkin.checked_in' => 'Checked In',
 			'checkin.daily_bonus_notification' => 'Daily Bonus Notification',
 			'connectivity.no_internet_title' => 'No Connection',
 			'connectivity.no_internet_desc' => 'Please check your internet connection to continue using the app.',

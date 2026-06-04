@@ -19,11 +19,17 @@ Future<void> initDependencies() async {
     () => SplashBloc(
       autoLoginUseCase: sl(),
       getOnboardingStatusUseCase: sl(),
+      getOnboardingImagesUseCase: sl(),
     ),
   );
 
   // Features - Onboarding
-  sl.registerFactory(() => OnboardingBloc(completeOnboardingUseCase: sl()));
+  sl.registerFactory(
+    () => OnboardingBloc(
+      completeOnboardingUseCase: sl(),
+      getOnboardingImagesUseCase: sl(),
+    ),
+  );
 
   // Features - Dashboard
   sl.registerFactory(() => DashboardBloc());

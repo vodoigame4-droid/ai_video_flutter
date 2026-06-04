@@ -64,6 +64,45 @@ class _MediaApiClient implements MediaApiClient {
   }
 
   @override
+  Future<BaseResponse<List<String>>> getOnboardingImages(
+    String appType,
+    String version,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'app-type': appType,
+      r'app-version': version,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<BaseResponse<List<String>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/media/onboarding-screen',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<List<String>> _value;
+    try {
+      _value = BaseResponse<List<String>>.fromJson(
+        _result.data!,
+        (json) => json is List<dynamic>
+            ? json.map<String>((i) => i as String).toList()
+            : List.empty(),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<BaseResponse<List<HomeCategoryModel>>> getCategories(
     String appType,
     String version,

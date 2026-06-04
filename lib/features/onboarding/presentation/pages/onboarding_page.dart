@@ -16,14 +16,18 @@ class OnboardingPage extends StatelessWidget {
   static const String path = '/onboarding';
   static const String name = 'onboarding';
 
-  static void go(BuildContext context) => context.goNamed(name);
+  static void go(BuildContext context, {List<String>? preloadedImages}) =>
+      context.goNamed(name, extra: preloadedImages);
 
-  const OnboardingPage({super.key});
+  final List<String>? preloadedImages;
+
+  const OnboardingPage({super.key, this.preloadedImages});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OnboardingBloc>(
-      create: (context) => sl<OnboardingBloc>()..add(const OnboardingEvent.init()),
+      create: (context) => sl<OnboardingBloc>()
+        ..add(OnboardingEvent.init(preloadedImages: preloadedImages)),
       child: const OnboardingView(),
     );
   }
@@ -57,52 +61,74 @@ class _OnboardingViewState extends State<OnboardingView> {
       backgroundColor: Colors.black,
       body: BlocListener<OnboardingBloc, OnboardingState>(
         listener: (context, state) {
-          state.mapOrNull(
-            currentPage: (currentState) {
-              if (currentState.isCompleted) {
+          state.maybeWhen(
+            ready: (images, index, isCompleted) {
+              if (isCompleted) {
                 DashboardPage.go(context);
                 return;
               }
               if (_pageController.hasClients &&
-                  _pageController.page?.round() != currentState.index) {
+                  _pageController.page?.round() != index) {
                 _pageController.animateToPage(
-                  currentState.index,
+                  index,
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
                 );
               }
             },
+            orElse: () {},
           );
         },
         child: BlocBuilder<OnboardingBloc, OnboardingState>(
           builder: (context, state) {
-            return PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                context.read<OnboardingBloc>().add(OnboardingEvent.pageChanged(index));
+            return state.when(
+              initial: () => const SizedBox.shrink(),
+              loading: () => const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+              ready: (images, index, isCompleted) {
+                return PageView(
+                  controller: _pageController,
+                  onPageChanged: (newIndex) {
+                    context.read<OnboardingBloc>().add(OnboardingEvent.pageChanged(newIndex));
+                  },
+                  children: [
+                    ObPage1(
+                      backgroundImage: images[0],
+                      onButtonPressed: () =>
+                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
+                    ),
+                    ObPage2(
+                      backgroundImage: images[1],
+                      onButtonPressed: () =>
+                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
+                    ),
+                    ObPage3(
+                      backgroundImage: images[2],
+                      onButtonPressed: () =>
+                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
+                    ),
+                    ObPage4(
+                      backgroundImage: images[3],
+                      onButtonPressed: () =>
+                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
+                    ),
+                    ObPage5(
+                      backgroundImage: images[4],
+                      onButtonPressed: () =>
+                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
+                    ),
+                  ],
+                );
               },
-              children: [
-                ObPage1(
-                  onButtonPressed: () =>
-                      context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
+              error: (message) => Center(
+                child: Text(
+                  message,
+                  style: const TextStyle(color: Colors.white),
                 ),
-                ObPage2(
-                  onButtonPressed: () =>
-                      context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                ),
-                ObPage3(
-                  onButtonPressed: () =>
-                      context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                ),
-                ObPage4(
-                  onButtonPressed: () =>
-                      context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                ),
-                ObPage5(
-                  onButtonPressed: () =>
-                      context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                ),
-              ],
+              ),
             );
           },
         ),

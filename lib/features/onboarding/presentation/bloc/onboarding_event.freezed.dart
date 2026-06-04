@@ -125,10 +125,10 @@ return nextPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int index)?  pageChanged,TResult Function()?  nextPage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<String>? preloadedImages)?  init,TResult Function( int index)?  pageChanged,TResult Function()?  nextPage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _PageChanged() when pageChanged != null:
+return init(_that.preloadedImages);case _PageChanged() when pageChanged != null:
 return pageChanged(_that.index);case _NextPage() when nextPage != null:
 return nextPage();case _:
   return orElse();
@@ -148,10 +148,10 @@ return nextPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int index)  pageChanged,required TResult Function()  nextPage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<String>? preloadedImages)  init,required TResult Function( int index)  pageChanged,required TResult Function()  nextPage,}) {final _that = this;
 switch (_that) {
 case _Init():
-return init();case _PageChanged():
+return init(_that.preloadedImages);case _PageChanged():
 return pageChanged(_that.index);case _NextPage():
 return nextPage();case _:
   throw StateError('Unexpected subclass');
@@ -170,10 +170,10 @@ return nextPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int index)?  pageChanged,TResult? Function()?  nextPage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<String>? preloadedImages)?  init,TResult? Function( int index)?  pageChanged,TResult? Function()?  nextPage,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _PageChanged() when pageChanged != null:
+return init(_that.preloadedImages);case _PageChanged() when pageChanged != null:
 return pageChanged(_that.index);case _NextPage() when nextPage != null:
 return nextPage();case _:
   return null;
@@ -187,33 +187,75 @@ return nextPage();case _:
 
 
 class _Init implements OnboardingEvent {
-  const _Init();
+  const _Init({final  List<String>? preloadedImages}): _preloadedImages = preloadedImages;
   
 
+ final  List<String>? _preloadedImages;
+ List<String>? get preloadedImages {
+  final value = _preloadedImages;
+  if (value == null) return null;
+  if (_preloadedImages is EqualUnmodifiableListView) return _preloadedImages;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
 
 
+/// Create a copy of OnboardingEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$InitCopyWith<_Init> get copyWith => __$InitCopyWithImpl<_Init>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init&&const DeepCollectionEquality().equals(other._preloadedImages, _preloadedImages));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_preloadedImages));
 
 @override
 String toString() {
-  return 'OnboardingEvent.init()';
+  return 'OnboardingEvent.init(preloadedImages: $preloadedImages)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$InitCopyWith<$Res> implements $OnboardingEventCopyWith<$Res> {
+  factory _$InitCopyWith(_Init value, $Res Function(_Init) _then) = __$InitCopyWithImpl;
+@useResult
+$Res call({
+ List<String>? preloadedImages
+});
 
 
+
+
+}
+/// @nodoc
+class __$InitCopyWithImpl<$Res>
+    implements _$InitCopyWith<$Res> {
+  __$InitCopyWithImpl(this._self, this._then);
+
+  final _Init _self;
+  final $Res Function(_Init) _then;
+
+/// Create a copy of OnboardingEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? preloadedImages = freezed,}) {
+  return _then(_Init(
+preloadedImages: freezed == preloadedImages ? _self._preloadedImages : preloadedImages // ignore: cast_nullable_to_non_nullable
+as List<String>?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
