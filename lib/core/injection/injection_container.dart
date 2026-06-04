@@ -6,6 +6,7 @@ import 'package:core_business/core_business.dart';
 import '../config/app_config_impl.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../notification/notification_repository_impl.dart';
+import '../services/remote_config_service.dart';
 import '../network/payment_required_interceptor.dart';
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
@@ -96,4 +97,7 @@ Future<void> initDependencies() async {
 
   // Initialize Business Logic Package Dependencies (Settings, Auth, Media, etc.)
   initBusinessDependencies(sl);
+
+  // Remote Config
+  sl.registerLazySingleton<RemoteConfigService>(() => RemoteConfigService.instance);
 }

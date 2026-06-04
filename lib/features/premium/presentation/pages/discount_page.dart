@@ -8,6 +8,7 @@ import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/services/remote_config_service.dart';
 
 class DiscountPage extends StatelessWidget {
   static const String path = '/discount';
@@ -27,9 +28,10 @@ class DiscountPage extends StatelessWidget {
 class DiscountView extends StatelessWidget {
   const DiscountView({super.key});
 
-  /// Placeholder video URL – will be replaced by BE-provided URL later.
-  static const String _placeholderVideoUrl =
-      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/709be36f7bdb.mp4';
+  /// Video URL from Remote Config (preloaded during splash).
+  /// Falls back to default URL if Remote Config has no value.
+  static String get _placeholderVideoUrl =>
+      sl<RemoteConfigService>().getBgDiscountUrl();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,8 @@ class DiscountView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.black,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
@@ -90,7 +94,7 @@ class DiscountView extends StatelessWidget {
   Widget _buildContent(BuildContext context, Translations t) {
     return Stack(
       children: [
-        // Video background – contained, aligned flush to top (occupies 70% of screen height)
+        // Video background – fit full width, align to very top (extends behind status bar)
         Positioned(
           top: 0,
           left: 0,
@@ -99,11 +103,14 @@ class DiscountView extends StatelessWidget {
           child: SmoothVideoPlayerWidget(
             videoUrl: _placeholderVideoUrl,
             fit: BoxFit.fitWidth,
+            alignment: Alignment.topCenter,
             autoPlay: true,
             loop: true,
             showMuteButton: false,
             showPlayPauseButton: false,
             playMuted: true,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
           ),
         ),
 

@@ -21,6 +21,7 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
   final BorderRadius? borderRadius;
   final Player? externalPlayer;
   final bool playMuted;
+  final Alignment? alignment;
 
   const SmoothVideoPlayerWidget({
     super.key,
@@ -36,6 +37,7 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
     this.borderRadius,
     this.externalPlayer,
     this.playMuted = false,
+    this.alignment,
   });
 
   @override
@@ -156,6 +158,8 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
         controller: _controller,
         fill: AppColors.black,
         fit: widget.fit,
+        alignment: widget.alignment ?? Alignment.center,
+        controls: NoVideoControls,
       ),
     );
 

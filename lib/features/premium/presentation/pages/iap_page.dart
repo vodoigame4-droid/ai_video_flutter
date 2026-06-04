@@ -10,6 +10,7 @@ import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/services/remote_config_service.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
@@ -34,9 +35,10 @@ class IapPage extends StatelessWidget {
 class IapView extends StatelessWidget {
   final String videoUrl;
 
-  /// Placeholder video URL – will be replaced by BE-provided URL later.
-  static const String _placeholderVideoUrl =
-      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4';
+  /// Video URL from Remote Config (preloaded during splash).
+  /// Falls back to default URL if Remote Config has no value.
+  static String get _placeholderVideoUrl =>
+      sl<RemoteConfigService>().getBgIAPUrl();
 
   const IapView({super.key, required this.videoUrl});
 
