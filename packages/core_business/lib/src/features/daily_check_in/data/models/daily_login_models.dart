@@ -40,11 +40,45 @@ abstract class DailyLoginResponseModel with _$DailyLoginResponseModel {
 }
 
 extension DailyLoginResponseModelX on DailyLoginResponseModel {
-  DailyLoginEntity toEntity() => DailyLoginEntity(
-        currentStreak: currentStreak,
-        lastLoginAt: lastLoginAt?.toString(),
-        rewards: rewards.map((r) => r.toEntity()).toList(),
-      );
+  DailyLoginEntity toEntity() {
+    String? formattedLastLogin;
+    if (lastLoginAt != null) {
+      if (lastLoginAt is num) {
+        final val = lastLoginAt as num;
+        final seconds = val.toInt();
+        if (seconds < 9999999999) {
+          formattedLastLogin = DateTime.fromMillisecondsSinceEpoch(seconds * 1000).toUtc().toIso8601String();
+        } else {
+          formattedLastLogin = DateTime.fromMillisecondsSinceEpoch(seconds).toUtc().toIso8601String();
+        }
+      } else if (lastLoginAt is String) {
+        final valStr = lastLoginAt as String;
+        final parsedInt = int.tryParse(valStr);
+        if (parsedInt != null) {
+          if (parsedInt < 9999999999) {
+            formattedLastLogin = DateTime.fromMillisecondsSinceEpoch(parsedInt * 1000).toUtc().toIso8601String();
+          } else {
+            formattedLastLogin = DateTime.fromMillisecondsSinceEpoch(parsedInt).toUtc().toIso8601String();
+          }
+        } else {
+          final parsedDate = DateTime.tryParse(valStr);
+          if (parsedDate != null) {
+            formattedLastLogin = parsedDate.toUtc().toIso8601String();
+          } else {
+            formattedLastLogin = valStr; // Fallback
+          }
+        }
+      } else {
+        formattedLastLogin = lastLoginAt.toString();
+      }
+    }
+
+    return DailyLoginEntity(
+      currentStreak: currentStreak,
+      lastLoginAt: formattedLastLogin,
+      rewards: rewards.map((r) => r.toEntity()).toList(),
+    );
+  }
 }
 
 @freezed

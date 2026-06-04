@@ -196,6 +196,14 @@ class _CheckInDialogContent extends StatelessWidget {
     }
   }
 
+  bool _isTodayDay(int day, int currentStreak, bool isCheckedInToday) {
+    if (isCheckedInToday) {
+      return currentStreak == day;
+    } else {
+      return currentStreak + 1 == day;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DailyCheckInBloc, DailyCheckInState>(
@@ -376,6 +384,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                       currentStreak: dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
+                                    isToday: _isTodayDay(1, dailyLoginEntity.currentStreak, isCheckedInToday),
                                   ),
                                   _buildDayCard(
                                     context: context,
@@ -386,6 +395,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                       currentStreak: dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
+                                    isToday: _isTodayDay(2, dailyLoginEntity.currentStreak, isCheckedInToday),
                                   ),
                                   _buildDayCard(
                                     context: context,
@@ -396,6 +406,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                       currentStreak: dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
+                                    isToday: _isTodayDay(3, dailyLoginEntity.currentStreak, isCheckedInToday),
                                   ),
                                 ],
                               ),
@@ -412,6 +423,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                       currentStreak: dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
+                                    isToday: _isTodayDay(4, dailyLoginEntity.currentStreak, isCheckedInToday),
                                   ),
                                   _buildDayCard(
                                     context: context,
@@ -422,6 +434,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                       currentStreak: dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
+                                    isToday: _isTodayDay(5, dailyLoginEntity.currentStreak, isCheckedInToday),
                                   ),
                                   _buildDayCard(
                                     context: context,
@@ -432,6 +445,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                       currentStreak: dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
+                                    isToday: _isTodayDay(6, dailyLoginEntity.currentStreak, isCheckedInToday),
                                   ),
                                 ],
                               ),
@@ -448,6 +462,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                   ),
                                   width: day7Width,
                                   height: day7Height,
+                                  isToday: _isTodayDay(7, dailyLoginEntity.currentStreak, isCheckedInToday),
                                 ),
                               ),
                               const SizedBox(height: 24),
@@ -589,6 +604,7 @@ class _CheckInDialogContent extends StatelessWidget {
     required int day,
     required String reward,
     required DayState state,
+    bool isToday = false,
   }) {
     Color borderColor;
     Color headerBgColor;
@@ -664,7 +680,7 @@ class _CheckInDialogContent extends StatelessWidget {
                   alignment: Alignment.center,
                   color: headerBgColor,
                   child: Text(
-                    state == DayState.today
+                    isToday
                         ? context.t.checkin.today
                         : context.t.checkin.day(n: day),
                     style: GoogleFonts.inter(
@@ -712,6 +728,7 @@ class _CheckInDialogContent extends StatelessWidget {
     required DayState state,
     required double width,
     required double height,
+    bool isToday = false,
   }) {
     Color borderColor = const Color(0xFFBBDEFB);
     Color headerBgColor = const Color(0xFF4FC3F7);
@@ -772,7 +789,7 @@ class _CheckInDialogContent extends StatelessWidget {
               alignment: Alignment.center,
               color: headerBgColor,
               child: Text(
-                state == DayState.today
+                isToday
                     ? context.t.checkin.today
                     : context.t.checkin.day(n: 7),
                 style: GoogleFonts.inter(
