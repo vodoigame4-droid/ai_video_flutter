@@ -110,7 +110,19 @@ class DailyCheckInBloc extends Bloc<DailyCheckInEvent, DailyCheckInState> {
 
   bool _checkIsToday(String? lastLoginAtString) {
     if (lastLoginAtString == null) return false;
-    final lastLoginAt = DateTime.tryParse(lastLoginAtString);
+    
+    DateTime? lastLoginAt = DateTime.tryParse(lastLoginAtString);
+    if (lastLoginAt == null) {
+      final parsedInt = int.tryParse(lastLoginAtString);
+      if (parsedInt != null) {
+        if (parsedInt < 9999999999) {
+          lastLoginAt = DateTime.fromMillisecondsSinceEpoch(parsedInt * 1000);
+        } else {
+          lastLoginAt = DateTime.fromMillisecondsSinceEpoch(parsedInt);
+        }
+      }
+    }
+
     if (lastLoginAt == null) return false;
     final now = DateTime.now();
     final lastLoginLocal = lastLoginAt.toLocal();
