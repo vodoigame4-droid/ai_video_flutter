@@ -28,11 +28,17 @@ class AppImage extends StatelessWidget {
 
     Widget imageWidget;
     if (isNetworkImage) {
+      final double? pixelRatio = MediaQuery.maybeOf(context)?.devicePixelRatio;
+      final int? cacheWidth = (width != null && pixelRatio != null) ? (width! * pixelRatio).round() : null;
+      final int? cacheHeight = (height != null && pixelRatio != null) ? (height! * pixelRatio).round() : null;
+
       imageWidget = CachedNetworkImage(
         imageUrl: imageUrl,
         width: width,
         height: height,
         fit: fit,
+        memCacheWidth: cacheWidth,
+        memCacheHeight: cacheHeight,
         placeholder: (context, url) => AppImageShimmer(
           width: width,
           height: height,

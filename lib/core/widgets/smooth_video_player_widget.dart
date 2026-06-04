@@ -6,6 +6,7 @@ import 'package:media_kit_video/media_kit_video.dart';
 import '../theme/app_colors.dart';
 import '../utils/video_cache_manager.dart';
 import '../utils/log_utils.dart';
+import 'app_image.dart';
 
 class SmoothVideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
@@ -178,23 +179,21 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
           // 2. Poster/Thumbnail image if not playing, has not played yet, not buffering and imageUrl exists
           if (!_hasPlayed && !_isPlaying && widget.imageUrl != null && !_isBuffering)
             Positioned.fill(
-              child: ClipRRect(
-                borderRadius: widget.borderRadius ?? BorderRadius.zero,
-                child: Image.network(
-                  widget.imageUrl!,
-                  fit: widget.fit,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: AppColors.onSurface,
-                      child: const Center(
-                        child: Icon(
-                          Icons.image_not_supported_outlined,
-                          color: Colors.white24,
-                          size: 40,
-                        ),
-                      ),
-                    );
-                  },
+              child: AppImage(
+                imageUrl: widget.imageUrl!,
+                fit: widget.fit,
+                width: widget.width,
+                height: widget.height,
+                borderRadius: widget.borderRadius?.topLeft.x ?? 0.0,
+                errorWidget: Container(
+                  color: AppColors.onSurface,
+                  child: const Center(
+                    child: Icon(
+                      Icons.image_not_supported_outlined,
+                      color: Colors.white24,
+                      size: 40,
+                    ),
+                  ),
                 ),
               ),
             ),

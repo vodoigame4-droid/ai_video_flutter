@@ -1,3 +1,5 @@
+import 'dart:math' as Math;
+
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,6 @@ class HomePage extends StatelessWidget {
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
 
   String _getTranslatedCategory(BuildContext context, String category) {
     final t = Translations.of(context);
@@ -87,109 +88,119 @@ class HomeView extends StatelessWidget {
 
                       // Layer 2: Scrollable List (scrolls on top of the banner)
                       Positioned.fill(
-                        child: SingleChildScrollView(
-                          child: Column(
+                        child: categoriesState.when(
+                          initial: () => ListView(
+                            padding: EdgeInsets.zero,
+                            children: [
+                              Container(height: 250),
+                              const HomeFeaturesGridWidget(),
+                            ],
+                          ),
+                          loading: () => ListView(
+                            padding: EdgeInsets.zero,
                             children: [
                               Container(height: 250),
                               const HomeFeaturesGridWidget(),
                               Container(
-                                color: AppColors
-                                    .background, // Solid background color to cover the banner area as we scroll down
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 8),
+                                color: AppColors.background,
+                                height: 200,
+                                child: const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            ],
+                          ),
+                          success: (categories) {
+                            final validCategories = categories
+                                .where((c) => (c.theme ?? []).isNotEmpty)
+                                .toList();
+                            final int categoryCount = validCategories.length;
+                            final int totalItems =
+                                2 +
+                                categoryCount +
+                                1; // Spacing + Features + Categories + Bottom Spacing
 
-                                    // Category Selector Row & Dynamic Sections
-                                    categoriesState.when(
-                                      initial: () => const SizedBox.shrink(),
-                                      loading: () => const SizedBox(
-                                        height: 200,
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      ),
-                                      success: (categories) => Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // CategorySelector(
-                                          //   categories: categories.map((c) => c.name).toList(),
-                                          //   selectedCategory: selectedCategory,
-                                          //   onSelected: (category) {
-                                          //     context.read<HomeBloc>().add(
-                                          //       HomeEvent.selectCategory(category),
-                                          //     );
-                                          //     // Navigate directly to TemplatesPage with this category selected
-                                          //     context.pushNamed(
-                                          //       TemplatesPage.name,
-                                          //       queryParameters: {
-                                          //         'category': category,
-                                          //       },
-                                          //     );
-                                          //   },
-                                          // ),
-                                          // const SizedBox(height: 24),
-                                          ...categories.asMap().entries.map((entry) {
-                                            final index = entry.key;
-                                            final category = entry.value;
-                                            final themes = category.theme ?? [];
-                                            if (themes.isEmpty)
-                                              return const SizedBox.shrink();
+                            return ListView.builder(
+                              padding: const EdgeInsets.only(bottom: 150),
+                              itemCount: totalItems,
+                              cacheExtent: 350,
+                              physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics(),
+                              ),
+                              itemBuilder: (context, index) {
+                                if (index == 0) {
+                                  return Container(height: 250);
+                                }
+                                if (index == 1) {
+                                  return const HomeFeaturesGridWidget();
+                                }
+                                if (index == totalItems - 1) {
+                                  return Container(
+                                    color: AppColors.background,
+                                    height: 120,
+                                  );
+                                }
 
-                                            // Random/Diverse select from the 5 SVG icons shown in the picture
-                                            final iconAsset = [
-                                              Assets.icons.icLayerYellow,
-                                              Assets.icons.icBlueMask,
-                                              Assets.icons.icPurpleBox,
-                                              Assets.icons.icAiYellow,
-                                              Assets.icons.icTrending,
-                                            ][index % 5];
+                                final categoryIndex = index - 2;
+                                final category = validCategories[categoryIndex];
+                                final themes = category.theme ?? [];
 
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                bottom: 28,
-                                              ),
-                                              child: HomeTemplatesSectionWidget(
-                                                title: _getTranslatedCategory(
-                                                  context,
-                                                  category.name,
-                                                ),
-                                                iconAsset: iconAsset,
-                                                videosState: Resource.success(
-                                                  themes,
-                                                ),
-                                                onSeeAllPressed: () =>
-                                                    context.pushNamed(
-                                                      TemplatesPage.name,
-                                                      queryParameters: {
-                                                        'category':
-                                                            category.name,
-                                                      },
-                                                    ),
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ],
-                                      ),
-                                      empty: () => const SizedBox.shrink(),
-                                      error: (failure) => Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 40,
-                                          ),
-                                          child: Text(
-                                            BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
-                                            style:
-                                                context.appTheme.errorTextStyle,
-                                          ),
-                                        ),
-                                      ),
+                                // Random/Diverse select from the 5 SVG icons
+                                final iconAsset = [
+                                  Assets.icons.icLayerYellow,
+                                  Assets.icons.icBlueMask,
+                                  Assets.icons.icPurpleBox,
+                                  Assets.icons.icAiYellow,
+                                  Assets.icons.icTrending,
+                                ][categoryIndex % 5];
+
+                                return Container(
+                                  color: AppColors.background,
+                                  padding: const EdgeInsets.only(bottom: 28),
+                                  child: HomeTemplatesSectionWidget(
+                                    key: ValueKey(category.id),
+                                    title: _getTranslatedCategory(
+                                      context,
+                                      category.name,
                                     ),
-
-                                    // Spacing so the content scrolls fully past the floating navigation bar
-                                    const SizedBox(height: 120),
-                                  ],
+                                    iconAsset: iconAsset,
+                                    videosState: Resource.success(themes),
+                                    onSeeAllPressed: () => context.pushNamed(
+                                      TemplatesPage.name,
+                                      queryParameters: {
+                                        'category': category.name,
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          empty: () => ListView(
+                            padding: EdgeInsets.zero,
+                            children: [
+                              Container(height: 250),
+                              const HomeFeaturesGridWidget(),
+                            ],
+                          ),
+                          error: (failure) => ListView(
+                            padding: EdgeInsets.zero,
+                            children: [
+                              Container(height: 250),
+                              const HomeFeaturesGridWidget(),
+                              Container(
+                                color: AppColors.background,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 40,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    BackendErrorHelper.getErrorMessage(
+                                      context,
+                                      failure.toErrorCodeOrMessage(),
+                                    ),
+                                    style: context.appTheme.errorTextStyle,
+                                  ),
                                 ),
                               ),
                             ],

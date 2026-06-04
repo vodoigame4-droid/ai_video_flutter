@@ -16,13 +16,15 @@ class HomeBannerWidget extends StatelessWidget {
         children: [
           // Banner background image (Animated WebP loaded with cache and shimmer, falls back to asset on error)
           Positioned.fill(
-            child: AppImage(
-              imageUrl:
-                  'https://mathiasbynens.be/demo/animated-webp-supported.webp',
-              fit: BoxFit.cover,
-              errorWidget: Image.asset(
-                'assets/images/home_banner.png',
+            child: RepaintBoundary(
+              child: AppImage(
+                imageUrl:
+                    'https://mathiasbynens.be/demo/animated-webp-supported.webp',
                 fit: BoxFit.cover,
+                errorWidget: Image.asset(
+                  'assets/images/home_banner.png',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
