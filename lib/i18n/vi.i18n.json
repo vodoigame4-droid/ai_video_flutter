@@ -390,5 +390,9 @@
     "no_internet_title": "Mất kết nối",
     "no_internet_desc": "Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.",
     "retry_button": "Thử lại kết nối"
+  },
+  "notification": {
+    "channel_name": "Thông báo quan trọng",
+    "channel_description": "Kênh này được sử dụng cho các thông báo quan trọng."
   }
 }

@@ -383,5 +383,9 @@
     "no_internet_title": "无网络连接",
     "no_internet_desc": "请检查您的网络连接以继续使用该应用程序。",
     "retry_button": "重试连接"
+  },
+  "notification": {
+    "channel_name": "重要通知",
+    "channel_description": "此渠道用于重要通知。"
   }
 }

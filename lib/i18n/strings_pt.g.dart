@@ -61,6 +61,7 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$pt guide = _Translations$guide$pt._(_root);
 	@override late final _Translations$checkin$pt checkin = _Translations$checkin$pt._(_root);
 	@override late final _Translations$connectivity$pt connectivity = _Translations$connectivity$pt._(_root);
+	@override late final _Translations$notification$pt notification = _Translations$notification$pt._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$pt extends Translations$connectivity$en {
 	@override String get retry_button => 'Tentar novamente a conexão';
 }
 
+// Path: notification
+class _Translations$notification$pt extends Translations$notification$en {
+	_Translations$notification$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => 'Notificações importantes';
+	@override String get channel_description => 'Este canal é usado para notificações importantes.';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$pt extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$pt._(TranslationsPt root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsPt {
 			'connectivity.no_internet_title' => 'Sem conexão',
 			'connectivity.no_internet_desc' => 'Por favor, verifique sua conexão com a internet para continuar usando o aplicativo.',
 			'connectivity.retry_button' => 'Tentar novamente a conexão',
+			'notification.channel_name' => 'Notificações importantes',
+			'notification.channel_description' => 'Este canal é usado para notificações importantes.',
 			_ => null,
 		};
 	}

@@ -61,6 +61,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$ar guide = _Translations$guide$ar._(_root);
 	@override late final _Translations$checkin$ar checkin = _Translations$checkin$ar._(_root);
 	@override late final _Translations$connectivity$ar connectivity = _Translations$connectivity$ar._(_root);
+	@override late final _Translations$notification$ar notification = _Translations$notification$ar._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$ar extends Translations$connectivity$en {
 	@override String get retry_button => 'إعادة محاولة الاتصال';
 }
 
+// Path: notification
+class _Translations$notification$ar extends Translations$notification$en {
+	_Translations$notification$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => 'إشعارات ذات أهمية عالية';
+	@override String get channel_description => 'تُستخدم هذه القناة للإشعارات الهامة.';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsAr {
 			'connectivity.no_internet_title' => 'لا يوجد اتصال',
 			'connectivity.no_internet_desc' => 'يرجى التحقق من اتصالك بالإنترنت لمتابعة استخدام التطبيق.',
 			'connectivity.retry_button' => 'إعادة محاولة الاتصال',
+			'notification.channel_name' => 'إشعارات ذات أهمية عالية',
+			'notification.channel_description' => 'تُستخدم هذه القناة للإشعارات الهامة.',
 			_ => null,
 		};
 	}

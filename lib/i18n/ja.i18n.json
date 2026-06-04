@@ -383,5 +383,9 @@
     "no_internet_title": "接続がありません",
     "no_internet_desc": "アプリを引き続き使用するには、インターネット接続を確認してください。",
     "retry_button": "接続を再試行"
+  },
+  "notification": {
+    "channel_name": "重要度の高い通知",
+    "channel_description": "このチャネルは重要な通知に使用されます。"
   }
 }

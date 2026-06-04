@@ -85,7 +85,7 @@ Future<void> initDependencies() async {
   // Firebase Messaging
   sl.registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance);
   sl.registerLazySingleton<NotificationRepository>(
-    () => NotificationRepositoryImpl(sl()),
+    () => NotificationRepositoryImpl(sl(), sl()),
   );
 
   // Initialize Business Logic Package Dependencies (Settings, Auth, Media, etc.)

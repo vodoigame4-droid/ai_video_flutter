@@ -61,6 +61,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$ja guide = _Translations$guide$ja._(_root);
 	@override late final _Translations$checkin$ja checkin = _Translations$checkin$ja._(_root);
 	@override late final _Translations$connectivity$ja connectivity = _Translations$connectivity$ja._(_root);
+	@override late final _Translations$notification$ja notification = _Translations$notification$ja._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$ja extends Translations$connectivity$en {
 	@override String get retry_button => '接続を再試行';
 }
 
+// Path: notification
+class _Translations$notification$ja extends Translations$notification$en {
+	_Translations$notification$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => '重要度の高い通知';
+	@override String get channel_description => 'このチャネルは重要な通知に使用されます。';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsJa {
 			'connectivity.no_internet_title' => '接続がありません',
 			'connectivity.no_internet_desc' => 'アプリを引き続き使用するには、インターネット接続を確認してください。',
 			'connectivity.retry_button' => '接続を再試行',
+			'notification.channel_name' => '重要度の高い通知',
+			'notification.channel_description' => 'このチャネルは重要な通知に使用されます。',
 			_ => null,
 		};
 	}

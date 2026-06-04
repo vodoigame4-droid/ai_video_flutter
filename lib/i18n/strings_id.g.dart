@@ -61,6 +61,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$id guide = _Translations$guide$id._(_root);
 	@override late final _Translations$checkin$id checkin = _Translations$checkin$id._(_root);
 	@override late final _Translations$connectivity$id connectivity = _Translations$connectivity$id._(_root);
+	@override late final _Translations$notification$id notification = _Translations$notification$id._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$id extends Translations$connectivity$en {
 	@override String get retry_button => 'Coba Lagi Koneksi';
 }
 
+// Path: notification
+class _Translations$notification$id extends Translations$notification$en {
+	_Translations$notification$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => 'Notifikasi Penting';
+	@override String get channel_description => 'Saluran ini digunakan untuk notifikasi penting.';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsId {
 			'connectivity.no_internet_title' => 'Tidak Ada Koneksi',
 			'connectivity.no_internet_desc' => 'Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.',
 			'connectivity.retry_button' => 'Coba Lagi Koneksi',
+			'notification.channel_name' => 'Notifikasi Penting',
+			'notification.channel_description' => 'Saluran ini digunakan untuk notifikasi penting.',
 			_ => null,
 		};
 	}

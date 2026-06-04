@@ -61,6 +61,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$hi guide = _Translations$guide$hi._(_root);
 	@override late final _Translations$checkin$hi checkin = _Translations$checkin$hi._(_root);
 	@override late final _Translations$connectivity$hi connectivity = _Translations$connectivity$hi._(_root);
+	@override late final _Translations$notification$hi notification = _Translations$notification$hi._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$hi extends Translations$connectivity$en {
 	@override String get retry_button => 'पुनः प्रयास करें';
 }
 
+// Path: notification
+class _Translations$notification$hi extends Translations$notification$en {
+	_Translations$notification$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => 'महत्वपूर्ण सूचनाएं';
+	@override String get channel_description => 'इस चैनल का उपयोग महत्वपूर्ण सूचनाओं के लिए किया जाता है।';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsHi {
 			'connectivity.no_internet_title' => 'कोई कनेक्शन नहीं',
 			'connectivity.no_internet_desc' => 'कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।',
 			'connectivity.retry_button' => 'पुनः प्रयास करें',
+			'notification.channel_name' => 'महत्वपूर्ण सूचनाएं',
+			'notification.channel_description' => 'इस चैनल का उपयोग महत्वपूर्ण सूचनाओं के लिए किया जाता है।',
 			_ => null,
 		};
 	}

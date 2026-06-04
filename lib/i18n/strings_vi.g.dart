@@ -62,6 +62,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$vi guide = _Translations$guide$vi._(_root);
 	@override late final _Translations$checkin$vi checkin = _Translations$checkin$vi._(_root);
 	@override late final _Translations$connectivity$vi connectivity = _Translations$connectivity$vi._(_root);
+	@override late final _Translations$notification$vi notification = _Translations$notification$vi._(_root);
 }
 
 // Path: common
@@ -597,6 +598,17 @@ class _Translations$connectivity$vi extends Translations$connectivity$en {
 	@override String get retry_button => 'Thử lại kết nối';
 }
 
+// Path: notification
+class _Translations$notification$vi extends Translations$notification$en {
+	_Translations$notification$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => 'Thông báo quan trọng';
+	@override String get channel_description => 'Kênh này được sử dụng cho các thông báo quan trọng.';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -1001,6 +1013,8 @@ extension on TranslationsVi {
 			'connectivity.no_internet_title' => 'Mất kết nối',
 			'connectivity.no_internet_desc' => 'Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.',
 			'connectivity.retry_button' => 'Thử lại kết nối',
+			'notification.channel_name' => 'Thông báo quan trọng',
+			'notification.channel_description' => 'Kênh này được sử dụng cho các thông báo quan trọng.',
 			_ => null,
 		};
 	}

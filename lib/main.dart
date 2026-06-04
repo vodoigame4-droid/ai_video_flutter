@@ -13,6 +13,7 @@ import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/widgets/connectivity_listener_wrapper.dart';
 import 'core/widgets/payment_listener_wrapper.dart';
+import 'core/widgets/notification_listener_wrapper.dart';
 import 'i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 
@@ -21,6 +22,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   MediaKit.ensureInitialized();
   await initDependencies();
+  await sl<NotificationRepository>().initialize();
 
   // Load saved locale from SharedPreferences
   final prefs = sl<SharedPreferences>();
@@ -72,7 +74,9 @@ class MyApp extends StatelessWidget {
             builder: (context, child) {
               return ConnectivityListenerWrapper(
                 child: PaymentListenerWrapper(
-                  child: child ?? const SizedBox.shrink(),
+                  child: NotificationListenerWrapper(
+                    child: child ?? const SizedBox.shrink(),
+                  ),
                 ),
               );
             },

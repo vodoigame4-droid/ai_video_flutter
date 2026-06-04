@@ -383,5 +383,9 @@
     "no_internet_title": "Pas de connexion",
     "no_internet_desc": "Veuillez vérifier votre connexion Internet pour continuer à utiliser l'application.",
     "retry_button": "Réessayer la connexion"
+  },
+  "notification": {
+    "channel_name": "Notifications importantes",
+    "channel_description": "Ce canal est utilisé pour les notifications importantes."
   }
 }

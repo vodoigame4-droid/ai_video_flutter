@@ -390,5 +390,9 @@
     "no_internet_title": "No Connection",
     "no_internet_desc": "Please check your internet connection to continue using the app.",
     "retry_button": "Retry Connection"
+  },
+  "notification": {
+    "channel_name": "High Importance Notifications",
+    "channel_description": "This channel is used for important notifications."
   }
 }

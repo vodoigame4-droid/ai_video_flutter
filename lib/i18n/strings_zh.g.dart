@@ -61,6 +61,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$zh guide = _Translations$guide$zh._(_root);
 	@override late final _Translations$checkin$zh checkin = _Translations$checkin$zh._(_root);
 	@override late final _Translations$connectivity$zh connectivity = _Translations$connectivity$zh._(_root);
+	@override late final _Translations$notification$zh notification = _Translations$notification$zh._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$zh extends Translations$connectivity$en {
 	@override String get retry_button => '重试连接';
 }
 
+// Path: notification
+class _Translations$notification$zh extends Translations$notification$en {
+	_Translations$notification$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => '重要通知';
+	@override String get channel_description => '此渠道用于重要通知。';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsZh {
 			'connectivity.no_internet_title' => '无网络连接',
 			'connectivity.no_internet_desc' => '请检查您的网络连接以继续使用该应用程序。',
 			'connectivity.retry_button' => '重试连接',
+			'notification.channel_name' => '重要通知',
+			'notification.channel_description' => '此渠道用于重要通知。',
 			_ => null,
 		};
 	}

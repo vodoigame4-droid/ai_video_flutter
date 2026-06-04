@@ -1,16 +1,86 @@
-import 'dart:io';
+import 'dart:convert';
 import 'package:core_business/core_business.dart' as biz;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:ai_video_flutter/i18n/strings.g.dart';
 
 class NotificationRepositoryImpl implements biz.NotificationRepository {
   final FirebaseMessaging _firebaseMessaging;
+  final SharedPreferences _sharedPreferences;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  
+  final BehaviorSubject<Map<String, dynamic>> _notificationDataController =
+      BehaviorSubject<Map<String, dynamic>>();
 
-  NotificationRepositoryImpl(this._firebaseMessaging) {
-    _initForegroundPresentationOptions();
-    _initLocalNotifications();
+  @override
+  Stream<Map<String, dynamic>> get notificationDataStream =>
+      _notificationDataController.stream;
+
+  NotificationRepositoryImpl(this._firebaseMessaging, this._sharedPreferences);
+
+  @override
+  Future<void> initialize() async {
+    await _initForegroundPresentationOptions();
+    await _initLocalNotifications();
+
+    // Listen to foreground notifications
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      biz.LogUtils.d(
+        'NotificationRepositoryImpl: Foreground message received. '
+        'Notification: ${message.notification != null ? "Yes" : "No"}, '
+        'Title: "${message.notification?.title}", '
+        'Body: "${message.notification?.body}", '
+        'Data: ${message.data}',
+      );
+      _showLocalNotification(message);
+    });
+
+    // Listen to notification clicks when app is in foreground/background
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      biz.LogUtils.d(
+        'NotificationRepositoryImpl: User clicked notification to open app: title="${message.notification?.title}", data=${message.data}',
+      );
+      _handleNotificationClick(message);
+    });
+
+    // Check initial message if app opened from terminated state via notification
+    try {
+      final message = await _firebaseMessaging.getInitialMessage();
+      if (message != null) {
+        biz.LogUtils.d(
+          'NotificationRepositoryImpl: App opened from terminated state via notification: title="${message.notification?.title}", data=${message.data}',
+        );
+        _handleNotificationClick(message);
+      }
+    } catch (e, stackTrace) {
+      biz.LogUtils.e(
+        'NotificationRepositoryImpl: Failed to check initial message',
+        error: e,
+        stackTrace: stackTrace,
+      );
+    }
+
+    // Listen to FCM Token refresh to automatically re-subscribe to default topics
+    _firebaseMessaging.onTokenRefresh.listen((token) async {
+      biz.LogUtils.d('NotificationRepositoryImpl: FCM Token refreshed: $token');
+      await _subscribeToDefaultTopics();
+    });
+
+    // Check if deviceId is already stored, indicating the app has logged in before.
+    // If so, attempt to subscribe to default topics during initialization.
+    final deviceId = _sharedPreferences.getString(biz.StorageKeys.deviceId);
+    if (deviceId != null && deviceId.isNotEmpty) {
+      _subscribeToDefaultTopics();
+    }
+  }
+
+  void _handleNotificationClick(RemoteMessage message) {
+    if (message.data.isNotEmpty) {
+      _notificationDataController.add(message.data);
+    }
   }
 
   Future<void> _initForegroundPresentationOptions() async {
@@ -46,12 +116,34 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
         android: androidSettings,
         iOS: iosSettings,
       );
-      await _localNotificationsPlugin.initialize(initSettings);
+      
+      await _localNotificationsPlugin.initialize(
+        initSettings,
+        onDidReceiveNotificationResponse: (NotificationResponse response) {
+          final payload = response.payload;
+          biz.LogUtils.d(
+            'NotificationRepositoryImpl: Local notification clicked. Payload: $payload',
+          );
+          if (payload != null && payload.isNotEmpty) {
+            try {
+              final Map<String, dynamic> data =
+                  Map<String, dynamic>.from(jsonDecode(payload));
+              _notificationDataController.add(data);
+            } catch (e, stackTrace) {
+              biz.LogUtils.e(
+                'NotificationRepositoryImpl: Failed to parse local notification payload',
+                error: e,
+                stackTrace: stackTrace,
+              );
+            }
+          }
+        },
+      );
 
-      const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      final AndroidNotificationChannel channel = AndroidNotificationChannel(
         'high_importance_channel',
-        'High Importance Notifications',
-        description: 'This channel is used for important notifications.',
+        t.notification.channel_name,
+        description: t.notification.channel_description,
         importance: Importance.max,
       );
 
@@ -76,21 +168,6 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
             );
           });
 
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        biz.LogUtils.d(
-          'NotificationRepositoryImpl: User clicked notification to open app: title="${message.notification?.title}", data=${message.data}',
-        );
-      });
-
-      // Check initial message if app opened from terminated state via notification
-      _firebaseMessaging.getInitialMessage().then((message) {
-        if (message != null) {
-          biz.LogUtils.d(
-            'NotificationRepositoryImpl: App opened from terminated state via notification: title="${message.notification?.title}", data=${message.data}',
-          );
-        }
-      });
-
       biz.LogUtils.d(
         'NotificationRepositoryImpl: Local notifications initialized.',
       );
@@ -114,22 +191,22 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
           notification.hashCode,
           notification.title,
           notification.body,
-          const NotificationDetails(
+          NotificationDetails(
             android: AndroidNotificationDetails(
               'high_importance_channel',
-              'High Importance Notifications',
-              channelDescription:
-                  'This channel is used for important notifications.',
+              t.notification.channel_name,
+              channelDescription: t.notification.channel_description,
               importance: Importance.max,
               priority: Priority.high,
               icon: '@mipmap/ic_launcher',
             ),
-            iOS: DarwinNotificationDetails(
+            iOS: const DarwinNotificationDetails(
               presentAlert: true,
               presentBadge: true,
               presentSound: true,
             ),
           ),
+          payload: jsonEncode(message.data),
         );
         biz.LogUtils.d(
           'NotificationRepositoryImpl: Local notification displayed successfully.',
@@ -211,6 +288,38 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     } catch (e, stackTrace) {
       biz.LogUtils.e(
         'NotificationRepositoryImpl: Unsubscribe from topic $topic failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  Future<void> _subscribeToDefaultTopics() async {
+    try {
+      final permissionStatus = await _firebaseMessaging.getNotificationSettings();
+      final isGranted =
+          permissionStatus.authorizationStatus == AuthorizationStatus.authorized ||
+          permissionStatus.authorizationStatus == AuthorizationStatus.provisional;
+      
+      if (isGranted) {
+        biz.LogUtils.d('NotificationRepositoryImpl: Subscribing to default topics...');
+        await subscribeToTopic('all');
+        final deviceId = _sharedPreferences.getString(biz.StorageKeys.deviceId);
+        if (deviceId != null && deviceId.isNotEmpty) {
+          await subscribeToTopic(deviceId);
+        } else {
+          biz.LogUtils.w(
+            'NotificationRepositoryImpl: Cannot subscribe to deviceId topic because deviceId is null or empty in SharedPreferences',
+          );
+        }
+      } else {
+        biz.LogUtils.w(
+          'NotificationRepositoryImpl: Cannot subscribe to default topics because notification permissions are not granted.',
+        );
+      }
+    } catch (e, stackTrace) {
+      biz.LogUtils.e(
+        'NotificationRepositoryImpl: Failed to subscribe to default topics',
         error: e,
         stackTrace: stackTrace,
       );

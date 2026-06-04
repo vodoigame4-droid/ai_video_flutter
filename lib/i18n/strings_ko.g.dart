@@ -61,6 +61,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$guide$ko guide = _Translations$guide$ko._(_root);
 	@override late final _Translations$checkin$ko checkin = _Translations$checkin$ko._(_root);
 	@override late final _Translations$connectivity$ko connectivity = _Translations$connectivity$ko._(_root);
+	@override late final _Translations$notification$ko notification = _Translations$notification$ko._(_root);
 }
 
 // Path: common
@@ -582,6 +583,17 @@ class _Translations$connectivity$ko extends Translations$connectivity$en {
 	@override String get retry_button => '연결 재시도';
 }
 
+// Path: notification
+class _Translations$notification$ko extends Translations$notification$en {
+	_Translations$notification$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get channel_name => '중요 알림';
+	@override String get channel_description => '이 채널은 중요한 알림에 사용됩니다.';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -981,6 +993,8 @@ extension on TranslationsKo {
 			'connectivity.no_internet_title' => '연결 없음',
 			'connectivity.no_internet_desc' => '앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.',
 			'connectivity.retry_button' => '연결 재시도',
+			'notification.channel_name' => '중요 알림',
+			'notification.channel_description' => '이 채널은 중요한 알림에 사용됩니다.',
 			_ => null,
 		};
 	}

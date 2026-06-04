@@ -383,5 +383,9 @@
     "no_internet_title": "Tidak Ada Koneksi",
     "no_internet_desc": "Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.",
     "retry_button": "Coba Lagi Koneksi"
+  },
+  "notification": {
+    "channel_name": "Notifikasi Penting",
+    "channel_description": "Saluran ini digunakan untuk notifikasi penting."
   }
 }

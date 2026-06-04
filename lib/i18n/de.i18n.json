@@ -383,5 +383,9 @@
     "no_internet_title": "Keine Verbindung",
     "no_internet_desc": "Bitte überprüfen Sie Ihre Internetverbindung, um die App weiterhin zu nutzen.",
     "retry_button": "Verbindung erneut versuchen"
+  },
+  "notification": {
+    "channel_name": "Wichtige Benachrichtigungen",
+    "channel_description": "Dieser Kanal wird für wichtige Benachrichtigungen verwendet."
   }
 }

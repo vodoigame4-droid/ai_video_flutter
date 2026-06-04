@@ -40,12 +40,13 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStateMixin {
+class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(_onTabChanged);
   }
@@ -64,7 +65,19 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      LogUtils.d('ProfileView: App lifecycle changed to $state. Stopping status polling.');
+      context.read<ProfileBloc>().add(const ProfileEvent.stopPolling());
+    } else if (state == AppLifecycleState.resumed) {
+      LogUtils.d('ProfileView: App lifecycle changed to resumed. Restarting polling/refresh.');
+      context.read<ProfileBloc>().add(const ProfileEvent.init());
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _tabController.removeListener(_onTabChanged);
     _tabController.dispose();
     super.dispose();
