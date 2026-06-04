@@ -176,7 +176,7 @@ void initBusinessDependencies(GetIt sl) {
   );
   sl.registerLazySingleton(() => VerifySubscriptionUseCase(iapRepository: sl()));
   sl.registerLazySingleton(() => VerifyProductUseCase(iapRepository: sl()));
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => IapBloc(
       verifySubscriptionUseCase: sl(),
       verifyProductUseCase: sl(),

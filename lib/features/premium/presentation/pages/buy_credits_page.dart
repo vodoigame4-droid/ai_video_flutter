@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
@@ -18,10 +17,7 @@ class BuyCreditsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
-      child: const BuyCreditsView(),
-    );
+    return const BuyCreditsView();
   }
 }
 
@@ -34,6 +30,14 @@ class BuyCreditsView extends StatefulWidget {
 
 class _BuyCreditsViewState extends State<BuyCreditsView> {
   int _selectedPackageIndex = 4; // Default to Most Popular (1000 Credits)
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<IapBloc>().add(const IapEvent.init());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +68,10 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
       body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed) {
+            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
               AppToast.showSuccess(message);
             },
-            error: (message, isWeeklySelected, isVideoRevealed) {
+            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
               context.handleFailure(
                 Failure.business(code: message, message: ''),
               );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_business/core_business.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import 'splash_event.dart';
 import 'splash_state.dart';
 
@@ -13,6 +14,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Timer? _timer;
   bool _isLoginCompleted = false;
   bool _isOnboardingPreloadCompleted = false;
+  bool _isHavinSdkInitialized = false;
   bool _isOnboardingCompleted = false;
   List<String>? _preloadedUrls;
   int _progress = 0;
@@ -28,6 +30,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           _progress = 0;
           _isLoginCompleted = false;
           _isOnboardingPreloadCompleted = false;
+          _isHavinSdkInitialized = false;
           _isOnboardingCompleted = false;
           _preloadedUrls = null;
           emit(const SplashState.loading(0));
@@ -38,13 +41,18 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           // 2. Start preloading onboarding images/videos if not completed
           _performOnboardingPreload();
 
-          // 3. Start progress animation timer
+          // 3. Initialize Havin SDK with iOS store configurations
+          _initHavinSdk();
+
+          // 4. Start progress animation timer
           _timer?.cancel();
           _timer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
             _progress += 2;
-            
+
             if (_progress >= 100) {
-              if (_isLoginCompleted && _isOnboardingPreloadCompleted) {
+              if (_isLoginCompleted &&
+                  _isOnboardingPreloadCompleted &&
+                  _isHavinSdkInitialized) {
                 _progress = 100;
                 timer.cancel();
                 add(const SplashEvent.progressUpdated(100));
@@ -60,10 +68,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         },
         progressUpdated: (percent) async {
           if (percent >= 100) {
-            emit(SplashState.success(
-              isOnboardingCompleted: _isOnboardingCompleted,
-              preloadedUrls: _preloadedUrls,
-            ));
+            emit(
+              SplashState.success(
+                isOnboardingCompleted: _isOnboardingCompleted,
+                preloadedUrls: _preloadedUrls,
+              ),
+            );
           } else {
             emit(SplashState.loading(percent));
           }
@@ -76,7 +86,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     try {
       await autoLoginUseCase(NoParams());
     } catch (e, stack) {
-      LogUtils.e('SplashBloc: Background login failed', error: e, stackTrace: stack);
+      LogUtils.e(
+        'SplashBloc: Background login failed',
+        error: e,
+        stackTrace: stack,
+      );
     } finally {
       _isLoginCompleted = true;
       _checkAllInitializationCompleted();
@@ -102,7 +116,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
                 if (url.startsWith('http')) {
                   if (_isVideoUrl(url)) {
                     preloadFutures.add(
-                      VideoCacheManager().getCachedOrDownload(url, waitForDownload: true),
+                      VideoCacheManager().getCachedOrDownload(
+                        url,
+                        waitForDownload: true,
+                      ),
                     );
                   } else {
                     preloadFutures.add(_preloadImage(url));
@@ -110,10 +127,9 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
                 }
               }
               if (preloadFutures.isNotEmpty) {
-                await Future.wait(preloadFutures).timeout(
-                  const Duration(seconds: 5),
-                  onTimeout: () => [],
-                );
+                await Future.wait(
+                  preloadFutures,
+                ).timeout(const Duration(seconds: 5), onTimeout: () => []);
               }
             }
           },
@@ -121,15 +137,59 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         );
       }
     } catch (e, stack) {
-      LogUtils.e('SplashBloc: Onboarding preload failed', error: e, stackTrace: stack);
+      LogUtils.e(
+        'SplashBloc: Onboarding preload failed',
+        error: e,
+        stackTrace: stack,
+      );
     } finally {
       _isOnboardingPreloadCompleted = true;
       _checkAllInitializationCompleted();
     }
   }
 
+  Future<void> _initHavinSdk() async {
+    try {
+      final billingConfig = BillingConfig(
+        debugMode: false,
+        products: const [
+          // iOS App Store Connect Consumables
+          BillingProduct.consumable('70credits'),
+          BillingProduct.consumable('70creditsdis'),
+          BillingProduct.consumable('150credits'),
+          BillingProduct.consumable('150creditsdis'),
+          BillingProduct.consumable('350credits'),
+          BillingProduct.consumable('350creditsdis'),
+          BillingProduct.consumable('500credits'),
+          BillingProduct.consumable('500creditsdis'),
+          BillingProduct.consumable('1000creditsdis'),
+          BillingProduct.consumable('5000credits'),
+          BillingProduct.consumable('5000creditsdis'),
+
+          // iOS App Store Connect Subscriptions
+          BillingProduct.subscription('buy_weekly'),
+          BillingProduct.subscription('buy_annualy'),
+          BillingProduct.subscription('buy_annualy_discount'),
+        ],
+      );
+
+      await HavinSdk.instance.init(billingConfig: billingConfig);
+    } catch (e, stack) {
+      LogUtils.e(
+        'SplashBloc: HavinSdk initialization failed',
+        error: e,
+        stackTrace: stack,
+      );
+    } finally {
+      _isHavinSdkInitialized = true;
+      _checkAllInitializationCompleted();
+    }
+  }
+
   void _checkAllInitializationCompleted() {
-    if (_isLoginCompleted && _isOnboardingPreloadCompleted) {
+    if (_isLoginCompleted &&
+        _isOnboardingPreloadCompleted &&
+        _isHavinSdkInitialized) {
       if (_progress >= 99) {
         _timer?.cancel();
         _timer = null;

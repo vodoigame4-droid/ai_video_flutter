@@ -1,5 +1,3 @@
-import 'dart:math' as Math;
-
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';

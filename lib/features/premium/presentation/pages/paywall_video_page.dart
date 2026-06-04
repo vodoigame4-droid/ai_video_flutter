@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
 
-class PaywallVideoPage extends StatelessWidget {
+class PaywallVideoPage extends StatefulWidget {
   static const String path = '/paywall_video';
   static const String name = 'paywall_video';
 
@@ -21,12 +21,21 @@ class PaywallVideoPage extends StatelessWidget {
   const PaywallVideoPage({super.key, this.videoUrl = ''});
 
   @override
+  State<PaywallVideoPage> createState() => _PaywallVideoPageState();
+}
+
+class _PaywallVideoPageState extends State<PaywallVideoPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<IapBloc>().add(const IapEvent.init());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          sl<IapBloc>()..add(const IapEvent.init()),
-      child: PaywallVideoView(videoUrl: videoUrl),
-    );
+    return PaywallVideoView(videoUrl: widget.videoUrl);
   }
 }
 
@@ -42,10 +51,10 @@ class PaywallVideoView extends StatelessWidget {
       body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed) {
+            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
               AppToast.showSuccess(message);
             },
-            error: (message, isWeeklySelected, isVideoRevealed) {
+            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
               context.handleFailure(Failure.business(code: message, message: ''));
             },
           );
@@ -80,21 +89,32 @@ class PaywallVideoView extends StatelessWidget {
               // Extract current state properties
               bool isWeekly = true;
               bool isRevealed = false;
+              List<Product> weeklyProducts = [];
+              List<Product> yearlyProducts = [];
 
               state.mapOrNull(
                 ready: (s) {
                   isWeekly = s.isWeeklySelected;
                   isRevealed = s.isVideoRevealed;
+                  weeklyProducts = s.weeklyProducts;
+                  yearlyProducts = s.yearlyProducts;
                 },
                 success: (s) {
                   isWeekly = s.isWeeklySelected;
                   isRevealed = s.isVideoRevealed;
+                  weeklyProducts = s.weeklyProducts;
+                  yearlyProducts = s.yearlyProducts;
                 },
                 error: (s) {
                   isWeekly = s.isWeeklySelected;
                   isRevealed = s.isVideoRevealed;
+                  weeklyProducts = s.weeklyProducts;
+                  yearlyProducts = s.yearlyProducts;
                 },
               );
+
+              final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : t.premium.weekly_price;
+              final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : t.premium.annually_price;
 
               return Stack(
                 children: [
@@ -307,7 +327,7 @@ class PaywallVideoView extends StatelessWidget {
                           SubscriptionPackageCard(
                             title: t.premium.weekly,
                             description: t.premium.weekly_desc,
-                            price: t.premium.weekly_price,
+                            price: weeklyPrice,
                             suffix: t.premium.weekly_suffix,
                             tagText: t.premium.best_value,
                             tagColors: const [
@@ -315,9 +335,10 @@ class PaywallVideoView extends StatelessWidget {
                               Color(0xFF28c4b3),
                             ],
                             isSelected: isWeekly,
-                            onTap: () => context.read<IapBloc>().add(
-                              const IapEvent.selectWeekly(),
-                            ),
+                            onTap: () {
+                              context.read<IapBloc>().add(const IapEvent.selectWeekly());
+                              context.read<IapBloc>().add(const IapEvent.purchase());
+                            },
                           ),
                           const SizedBox(height: 16),
 
@@ -325,7 +346,7 @@ class PaywallVideoView extends StatelessWidget {
                           SubscriptionPackageCard(
                             title: t.premium.annually,
                             description: t.premium.annually_desc,
-                            price: t.premium.annually_price,
+                            price: yearlyPrice,
                             suffix: t.premium.annually_suffix,
                             tagText: t.premium.save_80,
                             tagColors: const [
@@ -333,9 +354,10 @@ class PaywallVideoView extends StatelessWidget {
                               Color(0xFFff6320),
                             ],
                             isSelected: !isWeekly,
-                            onTap: () => context.read<IapBloc>().add(
-                              const IapEvent.selectAnnually(),
-                            ),
+                            onTap: () {
+                              context.read<IapBloc>().add(const IapEvent.selectAnnually());
+                              context.read<IapBloc>().add(const IapEvent.purchase());
+                            },
                           ),
                           const SizedBox(height: 24),
 
