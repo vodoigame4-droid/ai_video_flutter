@@ -1,4 +1,5 @@
 import 'package:ai_video_flutter/core/extensions/animation_extensions.dart';
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -131,6 +132,7 @@ class ObPageTemplate extends StatelessWidget {
                 const SizedBox(height: 30),
                 // Gradient action button
                 GradientButton(
+                  gradient: AppColors.primaryGradient,
                   width: double.infinity,
                   label: buttonText,
                   onPressed: onButtonPressed,

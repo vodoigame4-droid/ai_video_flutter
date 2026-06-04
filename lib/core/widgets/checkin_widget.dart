@@ -123,7 +123,7 @@ class _CheckInDialogContent extends StatelessWidget {
             child: Text(
               firstPart,
               style: GoogleFonts.inter(
-                fontSize: 24,
+                fontSize: 28,
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
               ),
@@ -143,7 +143,7 @@ class _CheckInDialogContent extends StatelessWidget {
             child: Text(
               secondPart,
               style: GoogleFonts.inter(
-                fontSize: 24,
+                fontSize: 28,
                 fontWeight: FontWeight.w900,
                 color: Colors.white,
               ),
@@ -165,7 +165,7 @@ class _CheckInDialogContent extends StatelessWidget {
         child: Text(
           title,
           style: GoogleFonts.inter(
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: FontWeight.w900,
             color: Colors.white,
           ),
@@ -296,8 +296,8 @@ class _CheckInDialogContent extends StatelessWidget {
           ),
           ready: (dailyLoginEntity, isCheckedInToday, checkInStatus) {
             final double screenWidth = MediaQuery.of(context).size.width;
-            final double day7Width = (screenWidth * 0.45).clamp(120.0, 160.0);
-            final double day7Height = day7Width * 0.6;
+            final double day7Width = (screenWidth * 0.65).clamp(180.0, 240.0);
+            final double day7Height = (screenWidth * 0.45).clamp(120.0, 160.0) * 0.85;
 
             final rewardsMap = {
               for (var r in dailyLoginEntity.rewards) r.streakDay: r
@@ -475,7 +475,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                   gradient: isCheckedInToday
                                       ? null
                                       : const LinearGradient(
-                                          colors: [Color(0xFF00E5FF), Color(0xFF1DE9B6)],
+                                          colors: [AppColors.primary, AppColors.secondary],
                                         ),
                                   color: isCheckedInToday ? const Color(0xFFE0E0E0) : null,
                                   borderRadius: BorderRadius.circular(100),
@@ -511,10 +511,10 @@ class _CheckInDialogContent extends StatelessWidget {
                         ),
                         // Overlapping Illustration
                         Positioned(
-                          top: 0,
+                          top: -10,
                           child: Image.asset(
                             Assets.images.bgCheckinHeader.path,
-                            height: 110,
+                            height: 130,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -540,7 +540,7 @@ class _CheckInDialogContent extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     // Daily Bonus Notification switch tile below
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -570,7 +570,7 @@ class _CheckInDialogContent extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                                    fontSize: 20,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -607,16 +607,16 @@ class _CheckInDialogContent extends StatelessWidget {
     bool isToday = false,
   }) {
     Color borderColor;
-    Color headerBgColor;
+    Gradient? headerGradient;
     Color headerTextColor;
     Widget centerIcon;
     Color cardBgColor = Colors.white;
 
     switch (state) {
       case DayState.claimed:
-        borderColor = const Color(0xFFE0E0E0);
-        headerBgColor = const Color(0xFFF5F5F5);
-        headerTextColor = const Color(0xFF9E9E9E);
+        borderColor = const Color(0xFF0075E7).withValues(alpha: 0.5);
+        headerGradient = AppColors.primaryGradient.withOpacity(0.5);
+        headerTextColor = const Color(0xFFFFFFFF);
         centerIcon = Stack(
           alignment: Alignment.center,
           children: [
@@ -639,19 +639,19 @@ class _CheckInDialogContent extends StatelessWidget {
         );
         break;
       case DayState.today:
-        borderColor = const Color(0xFF00D492);
-        headerBgColor = const Color(0xFF00D492);
-        headerTextColor = Colors.white;
+        borderColor = const Color(0xFF0075E7).withValues(alpha: 0.5);
+        headerGradient = AppColors.primaryGradient;
+        headerTextColor = const Color(0xFFFFFFFF);
         centerIcon = Image.asset(
           Assets.images.icCheckinCoin.path,
           fit: BoxFit.contain,
         );
-        cardBgColor = const Color(0xFFE8F5E9);
+        cardBgColor = const Color(0xFFDFF5E4);
         break;
       case DayState.upcoming:
-        borderColor = const Color(0xFFBBDEFB);
-        headerBgColor = const Color(0xFFE3F2FD);
-        headerTextColor = const Color(0xFF0D47A1);
+        borderColor = const Color(0xFF0075E7).withValues(alpha: 0.5);
+        headerGradient = AppColors.primaryGradient.withOpacity(0.5);
+        headerTextColor = const Color(0xFFFFFFFF);
         centerIcon = Image.asset(
           Assets.images.icCheckinCoin.path,
           fit: BoxFit.contain,
@@ -668,6 +668,15 @@ class _CheckInDialogContent extends StatelessWidget {
             color: cardBgColor,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: borderColor, width: 1.5),
+            boxShadow: state != DayState.claimed
+                ? [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.25),
+                      offset: const Offset(0, 4),
+                      blurRadius: 4,
+                    ),
+                  ]
+                : null,
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -678,7 +687,10 @@ class _CheckInDialogContent extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 2),
                   width: double.infinity,
                   alignment: Alignment.center,
-                  color: headerBgColor,
+                  decoration: BoxDecoration(
+                    color: null,
+                    gradient: headerGradient,
+                  ),
                   child: Text(
                     isToday
                         ? context.t.checkin.today
@@ -707,8 +719,10 @@ class _CheckInDialogContent extends StatelessWidget {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: state == DayState.claimed
-                        ? const Color(0xFF9E9E9E)
-                        : const Color(0xFF37474F),
+                        ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
+                        : (state == DayState.today
+                            ? const Color(0xFF1E9320)
+                            : const Color(0xFF0A4F87)),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -731,8 +745,8 @@ class _CheckInDialogContent extends StatelessWidget {
     bool isToday = false,
   }) {
     Color borderColor = const Color(0xFFBBDEFB);
-    Color headerBgColor = const Color(0xFF4FC3F7);
-    Color headerTextColor = const Color(0xFF0D47A1);
+    Gradient? headerGradient = AppColors.primaryGradient.withOpacity(0.5);
+    Color headerTextColor = Colors.white;
     Widget centerIcon = Image.asset(
       Assets.images.icCheckinBadgeCoin.path,
       fit: BoxFit.contain,
@@ -741,7 +755,7 @@ class _CheckInDialogContent extends StatelessWidget {
 
     if (state == DayState.claimed) {
       borderColor = const Color(0xFFE0E0E0);
-      headerBgColor = const Color(0xFFF5F5F5);
+      headerGradient = AppColors.primaryGradient.withOpacity(0.5);
       headerTextColor = const Color(0xFF9E9E9E);
       centerIcon = Stack(
         alignment: Alignment.center,
@@ -765,7 +779,7 @@ class _CheckInDialogContent extends StatelessWidget {
       );
     } else if (state == DayState.today) {
       borderColor = const Color(0xFF00D492);
-      headerBgColor = const Color(0xFF00D492);
+      headerGradient = AppColors.primaryGradient;
       headerTextColor = Colors.white;
       cardBgColor = const Color(0xFFE8F5E9);
     }
@@ -777,6 +791,15 @@ class _CheckInDialogContent extends StatelessWidget {
         color: cardBgColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: borderColor, width: 1.5),
+        boxShadow: state != DayState.claimed
+            ? [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.25),
+                  offset: const Offset(0, 4),
+                  blurRadius: 4,
+                ),
+              ]
+            : null,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -787,7 +810,10 @@ class _CheckInDialogContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 2),
               width: double.infinity,
               alignment: Alignment.center,
-              color: headerBgColor,
+              decoration: BoxDecoration(
+                color: null,
+                gradient: headerGradient,
+              ),
               child: Text(
                 isToday
                     ? context.t.checkin.today
@@ -806,7 +832,7 @@ class _CheckInDialogContent extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 child: Center(
                   child: Transform.scale(
-                    scale: 1.7,
+                    scale: 2.0,
                     child: centerIcon,
                   ),
                 ),
@@ -818,8 +844,10 @@ class _CheckInDialogContent extends StatelessWidget {
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: state == DayState.claimed
-                    ? const Color(0xFF9E9E9E)
-                    : const Color(0xFF37474F),
+                    ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
+                    : (state == DayState.today
+                        ? const Color(0xFF1E9320)
+                        : const Color(0xFF0A4F87)),
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
