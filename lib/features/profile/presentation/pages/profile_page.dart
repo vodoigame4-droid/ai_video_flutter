@@ -1,6 +1,4 @@
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
-import 'package:ai_video_flutter/features/premium/presentation/pages/generation_iap_page.dart';
-import 'package:ai_video_flutter/features/premium/presentation/pages/generation_buy_credits_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -228,81 +226,6 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                 : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
                             context.push('${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
                           },
-                        ),
-
-                        const SizedBox(height: 16),
-
-                        // Debug buttons for Generation IAP and Buy Credits
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.redAccent.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.redAccent.withValues(alpha: 0.3)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'DEBUG CHEAT MENU',
-                                style: TextStyle(
-                                  color: Colors.redAccent,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xFF24C780),
-                                        foregroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        final videosList = videosState.maybeWhen(
-                                          success: (list) => list,
-                                          orElse: () => const [],
-                                        );
-                                        final videoUrl = videosList.isNotEmpty
-                                            ? videosList.first.videoUrl
-                                            : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                                        context.push('${GenerationIapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
-                                      },
-                                      child: const Text('Gen IAP (Unsub)'),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xFF2BC5C5),
-                                        foregroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        final videosList = videosState.maybeWhen(
-                                          success: (list) => list,
-                                          orElse: () => const [],
-                                        );
-                                        final videoUrl = videosList.isNotEmpty
-                                            ? videosList.first.videoUrl
-                                            : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                                        context.push('${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
-                                      },
-                                      child: const Text('Gen Credits (Sub)'),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
                         ),
 
                         const SizedBox(height: 16),
