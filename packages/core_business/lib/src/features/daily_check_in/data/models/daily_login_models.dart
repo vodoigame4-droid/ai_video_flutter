@@ -31,7 +31,7 @@ extension DailyRewardModelX on DailyRewardModel {
 abstract class DailyLoginResponseModel with _$DailyLoginResponseModel {
   const factory DailyLoginResponseModel({
     required int currentStreak,
-    required String? lastLoginAt,
+    required dynamic lastLoginAt,
     @JsonKey(name: 'reward') required List<DailyRewardModel> rewards,
   }) = _DailyLoginResponseModel;
 
@@ -42,7 +42,7 @@ abstract class DailyLoginResponseModel with _$DailyLoginResponseModel {
 extension DailyLoginResponseModelX on DailyLoginResponseModel {
   DailyLoginEntity toEntity() => DailyLoginEntity(
         currentStreak: currentStreak,
-        lastLoginAt: lastLoginAt,
+        lastLoginAt: lastLoginAt?.toString(),
         rewards: rewards.map((r) => r.toEntity()).toList(),
       );
 }

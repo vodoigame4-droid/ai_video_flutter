@@ -26,7 +26,7 @@ _DailyLoginResponseModel _$DailyLoginResponseModelFromJson(
   Map<String, dynamic> json,
 ) => _DailyLoginResponseModel(
   currentStreak: (json['currentStreak'] as num).toInt(),
-  lastLoginAt: json['lastLoginAt'] as String?,
+  lastLoginAt: json['lastLoginAt'],
   rewards: (json['reward'] as List<dynamic>)
       .map((e) => DailyRewardModel.fromJson(e as Map<String, dynamic>))
       .toList(),

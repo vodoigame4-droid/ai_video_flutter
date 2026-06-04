@@ -287,7 +287,7 @@ as bool,
 /// @nodoc
 mixin _$DailyLoginResponseModel {
 
- int get currentStreak; String? get lastLoginAt;@JsonKey(name: 'reward') List<DailyRewardModel> get rewards;
+ int get currentStreak; dynamic get lastLoginAt;@JsonKey(name: 'reward') List<DailyRewardModel> get rewards;
 /// Create a copy of DailyLoginResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -300,12 +300,12 @@ $DailyLoginResponseModelCopyWith<DailyLoginResponseModel> get copyWith => _$Dail
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DailyLoginResponseModel&&(identical(other.currentStreak, currentStreak) || other.currentStreak == currentStreak)&&(identical(other.lastLoginAt, lastLoginAt) || other.lastLoginAt == lastLoginAt)&&const DeepCollectionEquality().equals(other.rewards, rewards));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DailyLoginResponseModel&&(identical(other.currentStreak, currentStreak) || other.currentStreak == currentStreak)&&const DeepCollectionEquality().equals(other.lastLoginAt, lastLoginAt)&&const DeepCollectionEquality().equals(other.rewards, rewards));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,currentStreak,lastLoginAt,const DeepCollectionEquality().hash(rewards));
+int get hashCode => Object.hash(runtimeType,currentStreak,const DeepCollectionEquality().hash(lastLoginAt),const DeepCollectionEquality().hash(rewards));
 
 @override
 String toString() {
@@ -320,7 +320,7 @@ abstract mixin class $DailyLoginResponseModelCopyWith<$Res>  {
   factory $DailyLoginResponseModelCopyWith(DailyLoginResponseModel value, $Res Function(DailyLoginResponseModel) _then) = _$DailyLoginResponseModelCopyWithImpl;
 @useResult
 $Res call({
- int currentStreak, String? lastLoginAt,@JsonKey(name: 'reward') List<DailyRewardModel> rewards
+ int currentStreak, dynamic lastLoginAt,@JsonKey(name: 'reward') List<DailyRewardModel> rewards
 });
 
 
@@ -341,7 +341,7 @@ class _$DailyLoginResponseModelCopyWithImpl<$Res>
   return _then(_self.copyWith(
 currentStreak: null == currentStreak ? _self.currentStreak : currentStreak // ignore: cast_nullable_to_non_nullable
 as int,lastLoginAt: freezed == lastLoginAt ? _self.lastLoginAt : lastLoginAt // ignore: cast_nullable_to_non_nullable
-as String?,rewards: null == rewards ? _self.rewards : rewards // ignore: cast_nullable_to_non_nullable
+as dynamic,rewards: null == rewards ? _self.rewards : rewards // ignore: cast_nullable_to_non_nullable
 as List<DailyRewardModel>,
   ));
 }
@@ -427,7 +427,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int currentStreak,  String? lastLoginAt, @JsonKey(name: 'reward')  List<DailyRewardModel> rewards)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int currentStreak,  dynamic lastLoginAt, @JsonKey(name: 'reward')  List<DailyRewardModel> rewards)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DailyLoginResponseModel() when $default != null:
 return $default(_that.currentStreak,_that.lastLoginAt,_that.rewards);case _:
@@ -448,7 +448,7 @@ return $default(_that.currentStreak,_that.lastLoginAt,_that.rewards);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int currentStreak,  String? lastLoginAt, @JsonKey(name: 'reward')  List<DailyRewardModel> rewards)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int currentStreak,  dynamic lastLoginAt, @JsonKey(name: 'reward')  List<DailyRewardModel> rewards)  $default,) {final _that = this;
 switch (_that) {
 case _DailyLoginResponseModel():
 return $default(_that.currentStreak,_that.lastLoginAt,_that.rewards);case _:
@@ -468,7 +468,7 @@ return $default(_that.currentStreak,_that.lastLoginAt,_that.rewards);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int currentStreak,  String? lastLoginAt, @JsonKey(name: 'reward')  List<DailyRewardModel> rewards)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int currentStreak,  dynamic lastLoginAt, @JsonKey(name: 'reward')  List<DailyRewardModel> rewards)?  $default,) {final _that = this;
 switch (_that) {
 case _DailyLoginResponseModel() when $default != null:
 return $default(_that.currentStreak,_that.lastLoginAt,_that.rewards);case _:
@@ -487,7 +487,7 @@ class _DailyLoginResponseModel implements DailyLoginResponseModel {
   factory _DailyLoginResponseModel.fromJson(Map<String, dynamic> json) => _$DailyLoginResponseModelFromJson(json);
 
 @override final  int currentStreak;
-@override final  String? lastLoginAt;
+@override final  dynamic lastLoginAt;
  final  List<DailyRewardModel> _rewards;
 @override@JsonKey(name: 'reward') List<DailyRewardModel> get rewards {
   if (_rewards is EqualUnmodifiableListView) return _rewards;
@@ -509,12 +509,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DailyLoginResponseModel&&(identical(other.currentStreak, currentStreak) || other.currentStreak == currentStreak)&&(identical(other.lastLoginAt, lastLoginAt) || other.lastLoginAt == lastLoginAt)&&const DeepCollectionEquality().equals(other._rewards, _rewards));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DailyLoginResponseModel&&(identical(other.currentStreak, currentStreak) || other.currentStreak == currentStreak)&&const DeepCollectionEquality().equals(other.lastLoginAt, lastLoginAt)&&const DeepCollectionEquality().equals(other._rewards, _rewards));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,currentStreak,lastLoginAt,const DeepCollectionEquality().hash(_rewards));
+int get hashCode => Object.hash(runtimeType,currentStreak,const DeepCollectionEquality().hash(lastLoginAt),const DeepCollectionEquality().hash(_rewards));
 
 @override
 String toString() {
@@ -529,7 +529,7 @@ abstract mixin class _$DailyLoginResponseModelCopyWith<$Res> implements $DailyLo
   factory _$DailyLoginResponseModelCopyWith(_DailyLoginResponseModel value, $Res Function(_DailyLoginResponseModel) _then) = __$DailyLoginResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
- int currentStreak, String? lastLoginAt,@JsonKey(name: 'reward') List<DailyRewardModel> rewards
+ int currentStreak, dynamic lastLoginAt,@JsonKey(name: 'reward') List<DailyRewardModel> rewards
 });
 
 
@@ -550,7 +550,7 @@ class __$DailyLoginResponseModelCopyWithImpl<$Res>
   return _then(_DailyLoginResponseModel(
 currentStreak: null == currentStreak ? _self.currentStreak : currentStreak // ignore: cast_nullable_to_non_nullable
 as int,lastLoginAt: freezed == lastLoginAt ? _self.lastLoginAt : lastLoginAt // ignore: cast_nullable_to_non_nullable
-as String?,rewards: null == rewards ? _self._rewards : rewards // ignore: cast_nullable_to_non_nullable
+as dynamic,rewards: null == rewards ? _self._rewards : rewards // ignore: cast_nullable_to_non_nullable
 as List<DailyRewardModel>,
   ));
 }
