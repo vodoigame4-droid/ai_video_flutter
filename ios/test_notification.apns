@@ -1,5 +1,5 @@
 {
-  "Simulator Target Bundle": "com.tgv.aivideo",
+  "Simulator Target Bundle": "com.vidoai.videogenerator",
   "aps": {
     "alert": {
       "title": "Video AI",

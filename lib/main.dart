@@ -23,7 +23,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   MediaKit.ensureInitialized();
   await initDependencies();
-  await sl<NotificationRepository>().initialize();
+  sl<NotificationRepository>().initialize();
 
   // Initialize Remote Config (fetch + activate)
   final remoteConfigService = sl<RemoteConfigService>();
