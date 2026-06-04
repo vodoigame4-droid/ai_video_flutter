@@ -124,7 +124,7 @@ class _VideoCardState extends State<VideoCard> {
       key: ValueKey('videocard_${widget.title}_${widget.imageUrl}'),
       onVisibilityChanged: (visibilityInfo) {
         final double visiblePercentage = visibilityInfo.visibleFraction * 100;
-        final bool shouldPlay = visiblePercentage > 20;
+        final bool shouldPlay = visiblePercentage >= 20;
         if (_isPlayable != shouldPlay) {
           if (mounted) {
             setState(() {
@@ -162,37 +162,27 @@ class _VideoCardState extends State<VideoCard> {
                 // Network Image if available
                 if (isNetworkImage)
                   Positioned.fill(
-                    child: _isPlayable
-                        ? CachedNetworkImage(
-                            imageUrl: widget.imageUrl!,
-                            fit: BoxFit.cover,
-                            memCacheWidth: cacheWidth,
-                            memCacheHeight: cacheHeight,
-                            placeholder: (context, url) => Container(
-                              color: Colors.white.withValues(alpha: 0.05),
-                              child: const Center(
-                                child: SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                              color: Colors.white.withValues(alpha: 0.05),
-                              child: const Icon(
-                                Icons.image_not_supported_outlined,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          )
-                        : AppImageShimmer(
-                            width: widget.width,
-                            height: widget.height,
-                            borderRadius: cardRadius,
-                          ),
+                    child: _AnimatedImagePlayer(
+                      imageProvider: CachedNetworkImageProvider(
+                        widget.imageUrl!,
+                        maxWidth: cacheWidth,
+                        maxHeight: cacheHeight,
+                      ),
+                      isPlayable: _isPlayable,
+                      fit: BoxFit.cover,
+                      placeholder: AppImageShimmer(
+                        width: widget.width,
+                        height: widget.height,
+                        borderRadius: cardRadius,
+                      ),
+                      errorWidget: Container(
+                        color: Colors.white.withValues(alpha: 0.05),
+                        child: const Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
                   ),
 
                 // Dark gradient overlay to read texts easily
@@ -332,6 +322,144 @@ class _VideoCardState extends State<VideoCard> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _AnimatedImagePlayer extends StatefulWidget {
+  final ImageProvider imageProvider;
+  final bool isPlayable;
+  final BoxFit fit;
+  final Widget placeholder;
+  final Widget? errorWidget;
+
+  const _AnimatedImagePlayer({
+    required this.imageProvider,
+    required this.isPlayable,
+    required this.placeholder,
+    this.fit = BoxFit.cover,
+    this.errorWidget,
+  });
+
+  @override
+  State<_AnimatedImagePlayer> createState() => _AnimatedImagePlayerState();
+}
+
+class _AnimatedImagePlayerState extends State<_AnimatedImagePlayer> {
+  ImageStream? _imageStream;
+  ImageInfo? _imageInfo;
+  bool _isListening = false;
+  late final ImageStreamListener _listener;
+  Object? _exception;
+
+  @override
+  void initState() {
+    super.initState();
+    _listener = ImageStreamListener(
+      _handleImageFrame,
+      onError: _handleImageError,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _resolveImage();
+  }
+
+  @override
+  void didUpdateWidget(_AnimatedImagePlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.imageProvider != oldWidget.imageProvider) {
+      _resolveImage();
+    } else if (widget.isPlayable != oldWidget.isPlayable) {
+      _updateListener();
+    }
+  }
+
+  void _resolveImage() {
+    _stopListening();
+    _imageInfo = null;
+    _exception = null;
+    final ImageStream newStream = widget.imageProvider.resolve(
+      createLocalImageConfiguration(context),
+    );
+    _imageStream = newStream;
+    _updateListener();
+  }
+
+  void _updateListener() {
+    if (_imageStream == null) return;
+
+    if (widget.isPlayable) {
+      if (!_isListening) {
+        _imageStream!.addListener(_listener);
+        _isListening = true;
+      }
+    } else {
+      if (_imageInfo != null) {
+        _stopListening();
+      } else {
+        if (!_isListening) {
+          _imageStream!.addListener(_listener);
+          _isListening = true;
+        }
+      }
+    }
+  }
+
+  void _handleImageFrame(ImageInfo info, bool synchronousCall) {
+    if (mounted) {
+      setState(() {
+        _imageInfo = info;
+        _exception = null;
+      });
+      if (!widget.isPlayable) {
+        _stopListening();
+      }
+    }
+  }
+
+  void _handleImageError(dynamic exception, StackTrace? stackTrace) {
+    if (mounted) {
+      setState(() {
+        _exception = exception;
+      });
+    }
+  }
+
+  void _stopListening() {
+    if (_isListening && _imageStream != null) {
+      _imageStream!.removeListener(_listener);
+      _isListening = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    _stopListening();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_exception != null) {
+      return widget.errorWidget ??
+          Container(
+            color: Colors.white.withValues(alpha: 0.05),
+            child: const Icon(
+              Icons.image_not_supported_outlined,
+              color: Colors.grey,
+            ),
+          );
+    }
+    if (_imageInfo == null) {
+      return widget.placeholder;
+    }
+    return RawImage(
+      image: _imageInfo!.image,
+      scale: _imageInfo!.scale,
+      fit: widget.fit,
     );
   }
 }

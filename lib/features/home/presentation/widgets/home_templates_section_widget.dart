@@ -66,6 +66,9 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
             height: 236,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
               itemCount: videos.length,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               separatorBuilder: (context, index) => const SizedBox(width: 12),

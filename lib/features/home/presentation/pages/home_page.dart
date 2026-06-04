@@ -121,10 +121,12 @@ class HomeView extends StatelessWidget {
                                 1; // Spacing + Features + Categories + Bottom Spacing
 
                             return ListView.builder(
-                              padding: EdgeInsets.only(bottom: 150),
+                              padding: const EdgeInsets.only(bottom: 150),
                               itemCount: totalItems,
-                              cacheExtent: 1,
-
+                              cacheExtent: 350,
+                              physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics(),
+                              ),
                               itemBuilder: (context, index) {
                                 if (index == 0) {
                                   return Container(height: 250);
