@@ -14,7 +14,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_heart_button.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
-import '../../../../core/widgets/report_dialog.dart';
+import '../../../../core/widgets/report_bottom_sheet.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
@@ -210,21 +210,23 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        Material(
-          color: AppColors.white.withValues(alpha: 0.0),
-          shape: const CircleBorder(),
-          child: InkWell(
-            onTap: () => showReportDialog(context),
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
-            child: SizedBox(
-              width: 36,
-              height: 36,
-              child: Center(
-                child: AppSvgIcon(
-                  assetName: Assets.icons.icReport,
-                  color: AppColors.white,
-                  width: 16,
-                  height: 16,
+        ReportTriggerWidget(
+          child: Material(
+            color: AppColors.white.withValues(alpha: 0.0),
+            shape: const CircleBorder(),
+            child: InkWell(
+              onTap: null,
+              borderRadius: const BorderRadius.all(Radius.circular(100)),
+              child: SizedBox(
+                width: 36,
+                height: 36,
+                child: Center(
+                  child: AppSvgIcon(
+                    assetName: Assets.icons.icReport,
+                    color: AppColors.white,
+                    width: 16,
+                    height: 16,
+                  ),
                 ),
               ),
             ),
@@ -240,6 +242,11 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     bool isLiked,
   ) {
     final t = context.t;
+    final int hash = widget.title.hashCode;
+    final double views = ((hash % 90) + 10) / 10; // Matches resolvedViews in VideoCard
+    final double percentage = ((hash % 30) + 15) / 100.0; // 15% to 44% of views
+    final double baseLikes = views * percentage;
+    final String likesCountStr = '${baseLikes.toStringAsFixed(1)}K';
 
     return Container(
       height: 450,
@@ -334,9 +341,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                     },
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "11.0K",
-                    style: TextStyle(
+                  Text(
+                    likesCountStr,
+                    style: const TextStyle(
                       color: AppColors.white,
                       fontSize: 12,
                       fontWeight: FontWeight.normal,

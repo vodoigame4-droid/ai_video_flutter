@@ -384,6 +384,7 @@
     "today": "Today",
     "day": "Day {n}",
     "check_in_btn": "Check in",
+    "checked_in": "Checked In",
     "daily_bonus_notification": "Daily Bonus Notification"
   },
   "connectivity": {

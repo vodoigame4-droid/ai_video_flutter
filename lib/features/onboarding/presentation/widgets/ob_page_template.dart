@@ -2,8 +2,11 @@ import 'package:ai_video_flutter/core/extensions/animation_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_image.dart';
 import '../../../../core/widgets/glassmorphic_container.dart';
 import '../../../../core/widgets/gradient_button.dart';
+
+import '../../../../core/widgets/smooth_video_player_widget.dart';
 
 class ObPageTemplate extends StatelessWidget {
   final String backgroundImage;
@@ -21,23 +24,53 @@ class ObPageTemplate extends StatelessWidget {
     required this.onButtonPressed,
   });
 
+  bool _isVideo(String path) {
+    final p = path.toLowerCase();
+    return p.endsWith('.mp4') ||
+        p.endsWith('.mkv') ||
+        p.endsWith('.mov') ||
+        p.endsWith('.avi') ||
+        p.endsWith('.webm') ||
+        p.endsWith('.3gp') ||
+        p.endsWith('.flv');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Background image
-        Positioned.fill(child: Image.asset(backgroundImage, fit: BoxFit.cover)),
+        // Background image or video (loaded dynamically)
+        Positioned.fill(
+          child: _isVideo(backgroundImage)
+              ? SmoothVideoPlayerWidget(
+                  videoUrl: backgroundImage,
+                  fit: BoxFit.cover,
+                  autoPlay: true,
+                  loop: true,
+                  showMuteButton: false,
+                  showPlayPauseButton: false,
+                  playMuted: true,
+                )
+              : AppImage(
+                  imageUrl: backgroundImage,
+                  fit: BoxFit.cover,
+                ),
+        ),
         // Top shadow overlay
         Positioned(
           top: 0,
           left: 0,
           right: 0,
-          height: 80,
+          height: 60,
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Colors.black.withValues(alpha: 0.8),
+                  Colors.black.withValues(alpha: 0.6),
+                  Colors.black.withValues(alpha: 0.4),
+                  Colors.black.withValues(alpha: 0.2),
+                  Colors.black.withValues(alpha: 0.1),
                   Colors.transparent,
                 ],
                 begin: Alignment.topCenter,
@@ -58,8 +91,8 @@ class ObPageTemplate extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.5),
-                    Colors.black,
+                    Colors.black.withValues(alpha: 0.3),
+                    Colors.black.withValues(alpha: 0.6),
                   ],
                   stops: const [0.0, 0.4, 1.0],
                   begin: Alignment.topCenter,
@@ -76,6 +109,10 @@ class ObPageTemplate extends StatelessWidget {
           right: 24,
           child: GlassmorphicContainer(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+            blurSigmaX: 5.0,
+            blurSigmaY: 5.0,
+            borderRadius: 15.0,
+            backgroundColor: Colors.black.withValues(alpha: 0.1),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

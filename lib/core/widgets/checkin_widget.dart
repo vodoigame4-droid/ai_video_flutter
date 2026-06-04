@@ -2,9 +2,13 @@ import 'dart:ui';
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lottie/lottie.dart';
+import 'package:core_business/core_business.dart';
+import '../injection/injection_container.dart';
+import '../errors/backend_error_handler.dart';
 import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
 
@@ -19,26 +23,30 @@ class CheckInWidget extends StatefulWidget {
 
 class _CheckInWidgetState extends State<CheckInWidget> {
   bool _notificationEnabled = true;
+  bool _hasAutoShown = false;
 
-  void _showCheckInDialog() {
+  void _showCheckInDialog(BuildContext context) {
     showDialog(
       context: context,
       barrierColor: Colors.black.withValues(alpha: 0.75),
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setDialogState) {
-            return _CheckInDialogContent(
-              notificationEnabled: _notificationEnabled,
-              onNotificationChanged: (val) {
-                setState(() {
-                  _notificationEnabled = val;
-                });
-                setDialogState(() {
-                  _notificationEnabled = val;
-                });
-              },
-            );
-          },
+      builder: (dialogContext) {
+        return BlocProvider.value(
+          value: context.read<DailyCheckInBloc>(),
+          child: StatefulBuilder(
+            builder: (ctx, setDialogState) {
+              return _CheckInDialogContent(
+                notificationEnabled: _notificationEnabled,
+                onNotificationChanged: (val) {
+                  setState(() {
+                    _notificationEnabled = val;
+                  });
+                  setDialogState(() {
+                    _notificationEnabled = val;
+                  });
+                },
+              );
+            },
+          ),
         );
       },
     );
@@ -46,17 +54,36 @@ class _CheckInWidgetState extends State<CheckInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _showCheckInDialog,
-      behavior: HitTestBehavior.opaque,
-      child: Transform.scale(
-        scale: 1.8,
-        child: Lottie.asset(
-          Assets.raw.checkinBoxLottie,
-          height: 40,
-          width: 40,
-          fit: BoxFit.contain,
-        ),
+    return BlocProvider(
+      create: (context) => sl<DailyCheckInBloc>()..add(const DailyCheckInEvent.init()),
+      child: Builder(
+        builder: (context) {
+          return BlocListener<DailyCheckInBloc, DailyCheckInState>(
+            listener: (context, state) {
+              state.mapOrNull(
+                ready: (readyState) {
+                  if (!readyState.isCheckedInToday && !_hasAutoShown) {
+                    _hasAutoShown = true;
+                    _showCheckInDialog(context);
+                  }
+                },
+              );
+            },
+            child: GestureDetector(
+              onTap: () => _showCheckInDialog(context),
+              behavior: HitTestBehavior.opaque,
+              child: Transform.scale(
+                scale: 1.8,
+                child: Lottie.asset(
+                  Assets.raw.checkinBoxLottie,
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -147,253 +174,413 @@ class _CheckInDialogContent extends StatelessWidget {
     }
   }
 
+  DayState _getDayState({
+    required int streakDay,
+    required int currentStreak,
+    required bool isCheckedInToday,
+  }) {
+    if (isCheckedInToday) {
+      if (streakDay <= currentStreak) {
+        return DayState.claimed;
+      } else {
+        return DayState.upcoming;
+      }
+    } else {
+      if (streakDay <= currentStreak) {
+        return DayState.claimed;
+      } else if (streakDay == currentStreak + 1) {
+        return DayState.today;
+      } else {
+        return DayState.upcoming;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double day7Width = (screenWidth * 0.45).clamp(120.0, 160.0);
-    final double day7Height = day7Width * 0.6;
+    return BlocConsumer<DailyCheckInBloc, DailyCheckInState>(
+      listener: (context, state) {
+        state.mapOrNull(
+          ready: (readyState) {
+            readyState.checkInStatus.whenOrNull(
+              success: (credits) {
+                final isVi = Translations.of(context).$meta.locale.languageCode == 'vi';
+                final message = isVi
+                    ? '+$credits Điểm tín dụng! Điểm danh thành công.'
+                    : '+$credits Credits! Checked in successfully.';
+                
+                // Automatically dismiss check-in dialog
+                Navigator.of(context).pop();
 
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      shape: const RoundedRectangleBorder(side: BorderSide.none),
-      insetPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // White Card Stack
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.topCenter,
-              children: [
-                // White Card Body
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(top: 50),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(28),
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                    duration: const Duration(seconds: 3),
+                    backgroundColor: AppColors.primary,
                   ),
-                  padding: const EdgeInsets.fromLTRB(16, 75, 16, 24),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Sparkly Title
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            Assets.images.icLineCheckin.path,
-                            width: 40,
-                            height: 26,
-                            fit: BoxFit.contain,
-                          ),
-                          const SizedBox(width: 4),
-                          Flexible(
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: _buildTitle(context),
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Image.asset(
-                            Assets.images.icLineCheckin2.path,
-                            width: 40,
-                            height: 26,
-                            fit: BoxFit.contain,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      // Subtitle
-                      Text(
-                        context.t.checkin.subtitle,
-                        style: GoogleFonts.inter(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF4CAF50),
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Days Grid
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildDayCard(
-                            context: context,
-                            day: 1,
-                            reward: 'x05',
-                            state: DayState.claimed,
-                          ),
-                          _buildDayCard(
-                            context: context,
-                            day: 2,
-                            reward: 'x08',
-                            state: DayState.today,
-                          ),
-                          _buildDayCard(
-                            context: context,
-                            day: 3,
-                            reward: 'x10',
-                            state: DayState.upcoming,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildDayCard(
-                            context: context,
-                            day: 4,
-                            reward: 'x12',
-                            state: DayState.upcoming,
-                          ),
-                          _buildDayCard(
-                            context: context,
-                            day: 5,
-                            reward: 'x15',
-                            state: DayState.upcoming,
-                          ),
-                          _buildDayCard(
-                            context: context,
-                            day: 6,
-                            reward: 'x18',
-                            state: DayState.upcoming,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      // Day 7
-                      Center(
-                        child: _buildDay7Card(
-                          context: context,
-                          state: DayState.upcoming,
-                          width: day7Width,
-                          height: day7Height,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      // Check-in Button
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF00E5FF), Color(0xFF1DE9B6)],
-                          ),
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context),
-                          borderRadius: BorderRadius.circular(100),
-                          child: Center(
-                            child: Text(
-                              context.t.checkin.check_in_btn,
-                              style: GoogleFonts.inter(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Overlapping Illustration
-                Positioned(
-                  top: 0,
-                  child: Image.asset(
-                    Assets.images.bgCheckinHeader.path,
-                    height: 110,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                // Close Button
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: AppColors.activeTab.withValues(alpha: 0.6),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 20,
+                );
+              },
+              error: (failure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      BackendErrorHelper.getErrorMessage(
+                        context,
+                        failure.toErrorCodeOrMessage(),
                       ),
                     ),
+                    duration: const Duration(seconds: 3),
+                    backgroundColor: Colors.red,
                   ),
-                ),
-              ],
+                );
+              },
+            );
+          },
+        );
+      },
+      builder: (context, state) {
+        return state.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const Dialog(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
-            const SizedBox(height: 16),
-            // Daily Bonus Notification switch tile below
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
+          ),
+          error: (message) => Dialog(
+            backgroundColor: AppColors.onSurface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(color: AppColors.secondary, width: 1.2),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                  const SizedBox(height: 16),
+                  Text(
+                    BackendErrorHelper.getErrorMessage(context, message),
+                    style: const TextStyle(color: AppColors.white, fontSize: 16),
+                    textAlign: TextAlign.center,
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(15),
-                    border: const GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: [AppColors.primary, AppColors.secondary],
-                        ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<DailyCheckInBloc>().add(const DailyCheckInEvent.init());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                    child: Text(
+                      context.t.video_player.retry,
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          context.t.checkin.daily_bonus_notification,
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Transform.scale(
-                        scale: 0.8,
-                        child: CupertinoSwitch(
-                          value: notificationEnabled,
-                          activeTrackColor: const Color(0xFF00E676),
-                          onChanged: onNotificationChanged,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+          ready: (dailyLoginEntity, isCheckedInToday, checkInStatus) {
+            final double screenWidth = MediaQuery.of(context).size.width;
+            final double day7Width = (screenWidth * 0.45).clamp(120.0, 160.0);
+            final double day7Height = day7Width * 0.6;
+
+            final rewardsMap = {
+              for (var r in dailyLoginEntity.rewards) r.streakDay: r
+            };
+
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              shape: const RoundedRectangleBorder(side: BorderSide.none),
+              insetPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // White Card Stack
+                    Stack(
+                      clipBehavior: Clip.none,
+                      alignment: Alignment.topCenter,
+                      children: [
+                        // White Card Body
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(top: 50),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(16, 75, 16, 24),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Sparkly Title
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    Assets.images.icLineCheckin.path,
+                                    width: 40,
+                                    height: 26,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Flexible(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: _buildTitle(context),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Image.asset(
+                                    Assets.images.icLineCheckin2.path,
+                                    width: 40,
+                                    height: 26,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              // Subtitle
+                              Text(
+                                context.t.checkin.subtitle,
+                                style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFF4CAF50),
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 20),
+
+                              // Days Grid
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _buildDayCard(
+                                    context: context,
+                                    day: 1,
+                                    reward: 'x${(rewardsMap[1]?.rewardCredits ?? 5).toString().padLeft(2, '0')}',
+                                    state: _getDayState(
+                                      streakDay: 1,
+                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      isCheckedInToday: isCheckedInToday,
+                                    ),
+                                  ),
+                                  _buildDayCard(
+                                    context: context,
+                                    day: 2,
+                                    reward: 'x${(rewardsMap[2]?.rewardCredits ?? 8).toString().padLeft(2, '0')}',
+                                    state: _getDayState(
+                                      streakDay: 2,
+                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      isCheckedInToday: isCheckedInToday,
+                                    ),
+                                  ),
+                                  _buildDayCard(
+                                    context: context,
+                                    day: 3,
+                                    reward: 'x${(rewardsMap[3]?.rewardCredits ?? 10).toString().padLeft(2, '0')}',
+                                    state: _getDayState(
+                                      streakDay: 3,
+                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      isCheckedInToday: isCheckedInToday,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _buildDayCard(
+                                    context: context,
+                                    day: 4,
+                                    reward: 'x${(rewardsMap[4]?.rewardCredits ?? 12).toString().padLeft(2, '0')}',
+                                    state: _getDayState(
+                                      streakDay: 4,
+                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      isCheckedInToday: isCheckedInToday,
+                                    ),
+                                  ),
+                                  _buildDayCard(
+                                    context: context,
+                                    day: 5,
+                                    reward: 'x${(rewardsMap[5]?.rewardCredits ?? 15).toString().padLeft(2, '0')}',
+                                    state: _getDayState(
+                                      streakDay: 5,
+                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      isCheckedInToday: isCheckedInToday,
+                                    ),
+                                  ),
+                                  _buildDayCard(
+                                    context: context,
+                                    day: 6,
+                                    reward: 'x${(rewardsMap[6]?.rewardCredits ?? 18).toString().padLeft(2, '0')}',
+                                    state: _getDayState(
+                                      streakDay: 6,
+                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      isCheckedInToday: isCheckedInToday,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              // Day 7
+                              Center(
+                                child: _buildDay7Card(
+                                  context: context,
+                                  reward: 'x${(rewardsMap[7]?.rewardCredits ?? 25).toString()}',
+                                  state: _getDayState(
+                                    streakDay: 7,
+                                    currentStreak: dailyLoginEntity.currentStreak,
+                                    isCheckedInToday: isCheckedInToday,
+                                  ),
+                                  width: day7Width,
+                                  height: day7Height,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+
+                              // Check-in Button
+                              Container(
+                                width: double.infinity,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  gradient: isCheckedInToday
+                                      ? null
+                                      : const LinearGradient(
+                                          colors: [Color(0xFF00E5FF), Color(0xFF1DE9B6)],
+                                        ),
+                                  color: isCheckedInToday ? const Color(0xFFE0E0E0) : null,
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: InkWell(
+                                  onTap: isCheckedInToday || checkInStatus.maybeWhen(loading: () => true, orElse: () => false)
+                                      ? null
+                                      : () => context.read<DailyCheckInBloc>().add(
+                                            const DailyCheckInEvent.checkIn(ignoreReward: false),
+                                          ),
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Center(
+                                    child: checkInStatus.maybeWhen(
+                                      loading: () => const CupertinoActivityIndicator(color: Colors.white),
+                                      orElse: () => Text(
+                                        isCheckedInToday
+                                            ? context.t.checkin.checked_in
+                                            : context.t.checkin.check_in_btn,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: isCheckedInToday ? const Color(0xFF9E9E9E) : Colors.white,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Overlapping Illustration
+                        Positioned(
+                          top: 0,
+                          child: Image.asset(
+                            Assets.images.bgCheckinHeader.path,
+                            height: 110,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        // Close Button
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: AppColors.activeTab.withValues(alpha: 0.6),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    // Daily Bonus Notification switch tile below
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(15),
+                            border: const GradientBoxBorder(
+                              gradient: LinearGradient(
+                                colors: [AppColors.primary, AppColors.secondary],
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  context.t.checkin.daily_bonus_notification,
+                                  style: GoogleFonts.inter(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Transform.scale(
+                                scale: 0.8,
+                                child: CupertinoSwitch(
+                                  value: notificationEnabled,
+                                  activeTrackColor: const Color(0xFF00E676),
+                                  onChanged: onNotificationChanged,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -521,6 +708,7 @@ class _CheckInDialogContent extends StatelessWidget {
 
   Widget _buildDay7Card({
     required BuildContext context,
+    required String reward,
     required DayState state,
     required double width,
     required double height,
@@ -608,7 +796,7 @@ class _CheckInDialogContent extends StatelessWidget {
               ),
             ),
             Text(
-              'x25',
+              reward,
               style: GoogleFonts.inter(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,

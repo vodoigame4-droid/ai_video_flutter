@@ -38,7 +38,7 @@ class SplashView extends StatelessWidget {
               if (successState.isOnboardingCompleted) {
                 DashboardPage.go(context);
               } else {
-                OnboardingPage.go(context);
+                OnboardingPage.go(context, preloadedImages: successState.preloadedUrls);
               }
             },
           );
@@ -70,7 +70,7 @@ class SplashView extends StatelessWidget {
                   builder: (context, state) {
                     final percent = state.maybeWhen(
                       loading: (percent) => percent,
-                      success: (_) => 100,
+                      success: (completed, urls) => 100,
                       orElse: () => 0,
                     );
                     return ProgressSectionWidget(percent: percent);

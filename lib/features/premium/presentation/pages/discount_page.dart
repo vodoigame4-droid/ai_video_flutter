@@ -29,7 +29,7 @@ class DiscountView extends StatelessWidget {
 
   /// Placeholder video URL – will be replaced by BE-provided URL later.
   static const String _placeholderVideoUrl =
-      'https://vjs.zencdn.net/v/oceans.mp4';
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/709be36f7bdb.mp4';
 
   @override
   Widget build(BuildContext context) {
@@ -90,19 +90,20 @@ class DiscountView extends StatelessWidget {
   Widget _buildContent(BuildContext context, Translations t) {
     return Stack(
       children: [
-        // Video background – contain fit, aligned to top
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: SmoothVideoPlayerWidget(
-              videoUrl: _placeholderVideoUrl,
-              fit: BoxFit.contain,
-              autoPlay: true,
-              loop: true,
-              showMuteButton: false,
-              showPlayPauseButton: false,
-              playMuted: true,
-            ),
+        // Video background – contained, aligned flush to top (occupies 70% of screen height)
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          height: MediaQuery.of(context).size.height,
+          child: SmoothVideoPlayerWidget(
+            videoUrl: _placeholderVideoUrl,
+            fit: BoxFit.fitWidth,
+            autoPlay: true,
+            loop: true,
+            showMuteButton: false,
+            showPlayPauseButton: false,
+            playMuted: true,
           ),
         ),
 

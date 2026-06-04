@@ -36,7 +36,7 @@ class IapView extends StatelessWidget {
 
   /// Placeholder video URL – will be replaced by BE-provided URL later.
   static const String _placeholderVideoUrl =
-      'https://vjs.zencdn.net/v/oceans.mp4';
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4';
 
   const IapView({super.key, required this.videoUrl});
 
@@ -50,6 +50,7 @@ class IapView extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
             state.whenOrNull(
@@ -103,18 +104,43 @@ class IapView extends StatelessWidget {
   
                 return Stack(
                   children: [
-                    // 1. Video background
-                    Positioned.fill(
+                    // 1. Video background - top 50%
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: MediaQuery.of(context).size.height * 0.5,
                       child: SmoothVideoPlayerWidget(
-                        videoUrl: videoUrl.isNotEmpty
-                            ? videoUrl
-                            : _placeholderVideoUrl,
+                        videoUrl: _placeholderVideoUrl,
                         fit: BoxFit.cover,
                         autoPlay: true,
                         loop: true,
                         showMuteButton: false,
                         showPlayPauseButton: false,
                         playMuted: true,
+                      ),
+                    ),
+
+                    // 2. Black fade overlay (top 50% bottom transition)
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withValues(alpha: 0.0),
+                              Colors.black.withValues(alpha: 0.2),
+                              Colors.black.withValues(alpha: 0.6),
+                              Colors.black,
+                            ],
+                            stops: const [0.0, 0.5, 0.8, 1.0],
+                          ),
+                        ),
                       ),
                     ),
 

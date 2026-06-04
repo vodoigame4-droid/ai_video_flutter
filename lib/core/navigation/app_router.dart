@@ -57,10 +57,16 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: OnboardingPage.path,
       name: OnboardingPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const OnboardingPage(),
-      ),
+      pageBuilder: (context, state) {
+        final extra = state.extra;
+        final preloadedImages = extra is List
+            ? List<String>.from(extra.map((e) => e.toString()))
+            : null;
+        return AppRoutePage.cupertino<void>(
+          state: state,
+          child: OnboardingPage(preloadedImages: preloadedImages),
+        );
+      },
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

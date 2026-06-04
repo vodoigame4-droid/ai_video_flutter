@@ -5,6 +5,8 @@ import '../entities/media_entities.dart';
 abstract class MediaRepository {
   Future<Resource<List<HomeCategoryEntity>>> getHomeCategories();
 
+  Future<Resource<List<String>>> getOnboardingImages();
+
   Future<Resource<List<HomeCategoryEntity>>> getCategories();
 
   Future<Resource<PaginatedListEntity<ThemeEntity>>> getThemes({

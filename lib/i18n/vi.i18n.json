@@ -384,6 +384,7 @@
     "today": "H.nay",
     "day": "Ngày {n}",
     "check_in_btn": "Nhận quà",
+    "checked_in": "Đã nhận quà",
     "daily_bonus_notification": "Thông báo hàng ngày"
   },
   "connectivity": {

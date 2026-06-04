@@ -5,8 +5,11 @@ part 'onboarding_state.freezed.dart';
 @freezed
 abstract class OnboardingState with _$OnboardingState {
   const factory OnboardingState.initial() = _Initial;
-  const factory OnboardingState.currentPage({
+  const factory OnboardingState.loading() = _Loading;
+  const factory OnboardingState.ready({
+    required List<String> images,
     required int index,
     required bool isCompleted,
-  }) = _CurrentPage;
+  }) = _Ready;
+  const factory OnboardingState.error({required String message}) = _Error;
 }
