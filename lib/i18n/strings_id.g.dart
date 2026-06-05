@@ -599,6 +599,9 @@ class _Translations$notification$id extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Notifikasi Penting';
 	@override String get channel_description => 'Saluran ini digunakan untuk notifikasi penting.';
+	@override String get checkin_title => 'Pengingat Check-in Harian 🎁';
+	@override String get checkin_body => 'Saatnya mengklaim kredit gratis harian Anda! Buka aplikasi sekarang.';
+	@override String get test_notification => 'Uji';
 }
 
 // Path: rating_dialog
@@ -1022,6 +1025,9 @@ extension on TranslationsId {
 			'connectivity.retry_button' => 'Coba Lagi Koneksi',
 			'notification.channel_name' => 'Notifikasi Penting',
 			'notification.channel_description' => 'Saluran ini digunakan untuk notifikasi penting.',
+			'notification.checkin_title' => 'Pengingat Check-in Harian 🎁',
+			'notification.checkin_body' => 'Saatnya mengklaim kredit gratis harian Anda! Buka aplikasi sekarang.',
+			'notification.test_notification' => 'Uji',
 			'rating_dialog.title' => 'Menikmati Aplikasi Ini?',
 			'rating_dialog.desc' => 'Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!',
 			'rating_dialog.support_us' => 'Dukung Kami',

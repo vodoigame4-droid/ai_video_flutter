@@ -392,7 +392,10 @@
   },
   "notification": {
     "channel_name": "Notifikasi Penting",
-    "channel_description": "Saluran ini digunakan untuk notifikasi penting."
+    "channel_description": "Saluran ini digunakan untuk notifikasi penting.",
+    "checkin_title": "Pengingat Check-in Harian 🎁",
+    "checkin_body": "Saatnya mengklaim kredit gratis harian Anda! Buka aplikasi sekarang.",
+    "test_notification": "Uji"
   },
   "rating_dialog": {
     "title": "Menikmati Aplikasi Ini?",

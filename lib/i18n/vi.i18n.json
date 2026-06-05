@@ -400,7 +400,10 @@
   },
   "notification": {
     "channel_name": "Thông báo quan trọng",
-    "channel_description": "Kênh này được sử dụng cho các thông báo quan trọng."
+    "channel_description": "Kênh này được sử dụng cho các thông báo quan trọng.",
+    "checkin_title": "Nhắc nhở điểm danh hàng ngày 🎁",
+    "checkin_body": "Đến giờ nhận credit miễn phí hàng ngày rồi! Vào app ngay nào.",
+    "test_notification": "Thử"
   },
   "rating_dialog": {
     "title": "Bạn thích ứng dụng chứ?",

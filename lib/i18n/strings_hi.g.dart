@@ -599,6 +599,9 @@ class _Translations$notification$hi extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'महत्वपूर्ण सूचनाएं';
 	@override String get channel_description => 'इस चैनल का उपयोग महत्वपूर्ण सूचनाओं के लिए किया जाता है।';
+	@override String get checkin_title => 'दैनिक चेक-इन अनुस्मारक 🎁';
+	@override String get checkin_body => 'अपने दैनिक मुफ्त क्रेडिट का दावा करने का समय आ गया है! अभी ऐप खोलें।';
+	@override String get test_notification => 'परीक्षण';
 }
 
 // Path: rating_dialog
@@ -1022,6 +1025,9 @@ extension on TranslationsHi {
 			'connectivity.retry_button' => 'पुनः प्रयास करें',
 			'notification.channel_name' => 'महत्वपूर्ण सूचनाएं',
 			'notification.channel_description' => 'इस चैनल का उपयोग महत्वपूर्ण सूचनाओं के लिए किया जाता है।',
+			'notification.checkin_title' => 'दैनिक चेक-इन अनुस्मारक 🎁',
+			'notification.checkin_body' => 'अपने दैनिक मुफ्त क्रेडिट का दावा करने का समय आ गया है! अभी ऐप खोलें।',
+			'notification.test_notification' => 'परीक्षण',
 			'rating_dialog.title' => 'क्या आप ऐप का आनंद ले रहे हैं?',
 			'rating_dialog.desc' => 'कृपया हमें रेट करें और अपना अनुभव बेहतर बनाने में हमारी मदद करें। धन्यवाद!',
 			'rating_dialog.support_us' => 'हमारा समर्थन करें',

@@ -599,6 +599,9 @@ class _Translations$notification$ko extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => '중요 알림';
 	@override String get channel_description => '이 채널은 중요한 알림에 사용됩니다.';
+	@override String get checkin_title => '일일 출석 체크 알림 🎁';
+	@override String get checkin_body => '일일 무료 크레딧을 받을 시간입니다! 지금 앱을 열어보세요.';
+	@override String get test_notification => '테스트';
 }
 
 // Path: rating_dialog
@@ -1022,6 +1025,9 @@ extension on TranslationsKo {
 			'connectivity.retry_button' => '연결 재시도',
 			'notification.channel_name' => '중요 알림',
 			'notification.channel_description' => '이 채널은 중요한 알림에 사용됩니다.',
+			'notification.checkin_title' => '일일 출석 체크 알림 🎁',
+			'notification.checkin_body' => '일일 무료 크레딧을 받을 시간입니다! 지금 앱을 열어보세요.',
+			'notification.test_notification' => '테스트',
 			'rating_dialog.title' => '앱이 마음에 드시나요?',
 			'rating_dialog.desc' => '평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!',
 			'rating_dialog.support_us' => '지원하기',

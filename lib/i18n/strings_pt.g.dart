@@ -599,6 +599,9 @@ class _Translations$notification$pt extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Notificações importantes';
 	@override String get channel_description => 'Este canal é usado para notificações importantes.';
+	@override String get checkin_title => 'Lembrete de Check-in Diário 🎁';
+	@override String get checkin_body => 'É hora de resgatar seus créditos diários gratuitos! Abra o aplicativo agora.';
+	@override String get test_notification => 'Testar';
 }
 
 // Path: rating_dialog
@@ -1022,6 +1025,9 @@ extension on TranslationsPt {
 			'connectivity.retry_button' => 'Tentar novamente a conexão',
 			'notification.channel_name' => 'Notificações importantes',
 			'notification.channel_description' => 'Este canal é usado para notificações importantes.',
+			'notification.checkin_title' => 'Lembrete de Check-in Diário 🎁',
+			'notification.checkin_body' => 'É hora de resgatar seus créditos diários gratuitos! Abra o aplicativo agora.',
+			'notification.test_notification' => 'Testar',
 			'rating_dialog.title' => 'Está gostando do aplicativo?',
 			'rating_dialog.desc' => 'Avalie-nos e ajude-nos a melhorar a sua experiência. Obrigado!',
 			'rating_dialog.support_us' => 'Apoie-nos',

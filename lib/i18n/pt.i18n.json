@@ -392,7 +392,10 @@
   },
   "notification": {
     "channel_name": "Notificações importantes",
-    "channel_description": "Este canal é usado para notificações importantes."
+    "channel_description": "Este canal é usado para notificações importantes.",
+    "checkin_title": "Lembrete de Check-in Diário 🎁",
+    "checkin_body": "É hora de resgatar seus créditos diários gratuitos! Abra o aplicativo agora.",
+    "test_notification": "Testar"
   },
   "rating_dialog": {
     "title": "Está gostando do aplicativo?",

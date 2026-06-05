@@ -599,6 +599,9 @@ class _Translations$notification$zh extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => '重要通知';
 	@override String get channel_description => '此渠道用于重要通知。';
+	@override String get checkin_title => '每日签到提醒 🎁';
+	@override String get checkin_body => '是时候领取你的每日免费额度了！立即打开应用。';
+	@override String get test_notification => '测试';
 }
 
 // Path: rating_dialog
@@ -1022,6 +1025,9 @@ extension on TranslationsZh {
 			'connectivity.retry_button' => '重试连接',
 			'notification.channel_name' => '重要通知',
 			'notification.channel_description' => '此渠道用于重要通知。',
+			'notification.checkin_title' => '每日签到提醒 🎁',
+			'notification.checkin_body' => '是时候领取你的每日免费额度了！立即打开应用。',
+			'notification.test_notification' => '测试',
 			'rating_dialog.title' => '喜欢这个应用吗？',
 			'rating_dialog.desc' => '请给我们评分，帮助我们改善您的体验。谢谢！',
 			'rating_dialog.support_us' => '支持我们',

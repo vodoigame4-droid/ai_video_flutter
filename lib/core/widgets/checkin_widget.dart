@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:core_business/core_business.dart';
 import '../injection/injection_container.dart';
 import '../errors/backend_error_handler.dart';
+import '../notification/local_notification_service.dart';
 import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
 
@@ -17,6 +19,8 @@ enum DayState { claimed, today, upcoming }
 class CheckInWidget extends StatefulWidget {
   const CheckInWidget({super.key});
 
+  static final checkInTrigger = StreamController<void>.broadcast();
+
   @override
   State<CheckInWidget> createState() => _CheckInWidgetState();
 }
@@ -24,6 +28,24 @@ class CheckInWidget extends StatefulWidget {
 class _CheckInWidgetState extends State<CheckInWidget> {
   bool _notificationEnabled = true;
   bool _hasAutoShown = false;
+  StreamSubscription<void>? _triggerSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    _triggerSubscription = CheckInWidget.checkInTrigger.stream.listen((_) {
+      if (mounted) {
+        _showCheckInDialog(context);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _triggerSubscription?.cancel();
+    super.dispose();
+  }
 
   void _showCheckInDialog(BuildContext context) {
     showDialog(
@@ -36,13 +58,45 @@ class _CheckInWidgetState extends State<CheckInWidget> {
             builder: (ctx, setDialogState) {
               return _CheckInDialogContent(
                 notificationEnabled: _notificationEnabled,
-                onNotificationChanged: (val) {
-                  setState(() {
-                    _notificationEnabled = val;
-                  });
-                  setDialogState(() {
-                    _notificationEnabled = val;
-                  });
+                onNotificationChanged: (val) async {
+                  if (val) {
+                    final isGranted = await sl<NotificationRepository>().requestPermission();
+                    if (isGranted) {
+                      await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+                      await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
+                      setState(() {
+                        _notificationEnabled = true;
+                      });
+                      setDialogState(() {
+                        _notificationEnabled = true;
+                      });
+                    } else {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(context.t.generating.notification_denied),
+                            duration: const Duration(seconds: 3),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                      setState(() {
+                        _notificationEnabled = false;
+                      });
+                      setDialogState(() {
+                        _notificationEnabled = false;
+                      });
+                    }
+                  } else {
+                    await sl<LocalNotificationService>().setCheckInNotificationEnabled(false);
+                    await sl<LocalNotificationService>().cancelDailyCheckInNotification();
+                    setState(() {
+                      _notificationEnabled = false;
+                    });
+                    setDialogState(() {
+                      _notificationEnabled = false;
+                    });
+                  }
                 },
               );
             },
@@ -576,13 +630,45 @@ class _CheckInDialogContent extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              Transform.scale(
-                                scale: 0.8,
-                                child: CupertinoSwitch(
-                                  value: notificationEnabled,
-                                  activeTrackColor: const Color(0xFF00E676),
-                                  onChanged: onNotificationChanged,
-                                ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // TextButton(
+                                  //   style: TextButton.styleFrom(
+                                  //     padding: const EdgeInsets.symmetric(
+                                  //       horizontal: 12,
+                                  //       vertical: 4,
+                                  //     ),
+                                  //     minimumSize: Size.zero,
+                                  //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  //     backgroundColor: AppColors.secondary.withOpacity(0.2),
+                                  //     shape: RoundedRectangleBorder(
+                                  //       borderRadius: BorderRadius.circular(12),
+                                  //     ),
+                                  //   ),
+                                  //   onPressed: () async {
+                                  //     await sl<NotificationRepository>().requestPermission();
+                                  //     await sl<LocalNotificationService>().triggerTestCheckInNotification();
+                                  //   },
+                                  //   child: Text(
+                                  //     context.t.notification.test_notification,
+                                  //     style: GoogleFonts.inter(
+                                  //       color: AppColors.secondary,
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 14,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(width: 8),
+                                  Transform.scale(
+                                    scale: 0.8,
+                                    child: CupertinoSwitch(
+                                      value: notificationEnabled,
+                                      activeTrackColor: const Color(0xFF00E676),
+                                      onChanged: onNotificationChanged,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

@@ -400,7 +400,10 @@
   },
   "notification": {
     "channel_name": "High Importance Notifications",
-    "channel_description": "This channel is used for important notifications."
+    "channel_description": "This channel is used for important notifications.",
+    "checkin_title": "Daily Check-in Reminder 🎁",
+    "checkin_body": "It's time to claim your daily free credits! Open the app now.",
+    "test_notification": "Test"
   },
   "rating_dialog": {
     "title": "Enjoying the App?",

@@ -15,4 +15,11 @@ abstract class NotificationRepository {
     required String body,
     Map<String, dynamic>? data,
   });
+
+  // Daily check-in notification methods
+  Future<void> scheduleDailyCheckInNotification();
+  Future<void> cancelDailyCheckInNotification();
+  bool isCheckInNotificationEnabled();
+  Future<void> setCheckInNotificationEnabled(bool enabled);
+  Future<void> triggerTestCheckInNotification();
 }

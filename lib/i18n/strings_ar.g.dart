@@ -599,6 +599,9 @@ class _Translations$notification$ar extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'إشعارات ذات أهمية عالية';
 	@override String get channel_description => 'تُستخدم هذه القناة للإشعارات الهامة.';
+	@override String get checkin_title => 'تذكير بالحضور اليومي 🎁';
+	@override String get checkin_body => 'لقد حان الوقت للحصول على رصيدك المجاني اليومي! افتح التطبيق الآن.';
+	@override String get test_notification => 'تجربة';
 }
 
 // Path: rating_dialog
@@ -1022,6 +1025,9 @@ extension on TranslationsAr {
 			'connectivity.retry_button' => 'إعادة محاولة الاتصال',
 			'notification.channel_name' => 'إشعارات ذات أهمية عالية',
 			'notification.channel_description' => 'تُستخدم هذه القناة للإشعارات الهامة.',
+			'notification.checkin_title' => 'تذكير بالحضور اليومي 🎁',
+			'notification.checkin_body' => 'لقد حان الوقت للحصول على رصيدك المجاني اليومي! افتح التطبيق الآن.',
+			'notification.test_notification' => 'تجربة',
 			'rating_dialog.title' => 'هل تستمتع بالتطبيق؟',
 			'rating_dialog.desc' => 'يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!',
 			'rating_dialog.support_us' => 'ادعمنا',

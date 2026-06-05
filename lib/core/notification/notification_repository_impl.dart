@@ -1,18 +1,15 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:core_business/core_business.dart' as biz;
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:ai_video_flutter/i18n/strings.g.dart';
+import 'local_notification_service.dart';
 
 class NotificationRepositoryImpl implements biz.NotificationRepository {
   final FirebaseMessaging _firebaseMessaging;
   final SharedPreferences _sharedPreferences;
-  final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final LocalNotificationService _localNotificationService;
   
   final BehaviorSubject<Map<String, dynamic>> _notificationDataController =
       BehaviorSubject<Map<String, dynamic>>();
@@ -21,18 +18,26 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
   Stream<Map<String, dynamic>> get notificationDataStream =>
       _notificationDataController.stream;
 
-  NotificationRepositoryImpl(this._firebaseMessaging, this._sharedPreferences);
+  NotificationRepositoryImpl(
+    this._firebaseMessaging,
+    this._sharedPreferences,
+    this._localNotificationService,
+  );
 
   @override
   Future<void> initialize() async {
     await _initForegroundPresentationOptions();
-    await _initLocalNotifications();
+    await _localNotificationService.initialize();
 
+    // Listen to local notification clicks and forward to FCM controller
+    _localNotificationService.onClickStream.listen((data) {
+      _notificationDataController.add(data);
+    });
 
-    // Listen to notification clicks when app is in foreground/background
+    // Listen to remote notification clicks when app is in foreground/background
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       biz.LogUtils.d(
-        'NotificationRepositoryImpl: User clicked notification to open app: title="${message.notification?.title}", data=${message.data}',
+        'NotificationRepositoryImpl: User clicked remote notification to open app: title="${message.notification?.title}", data=${message.data}',
       );
       _handleNotificationClick(message);
     });
@@ -131,138 +136,42 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     }
   }
 
-  Future<void> _initLocalNotifications() async {
-    try {
-      const AndroidInitializationSettings androidSettings =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
-      const DarwinInitializationSettings iosSettings =
-          DarwinInitializationSettings(
-            requestAlertPermission: false,
-            requestBadgePermission: false,
-            requestSoundPermission: false,
-          );
-      const InitializationSettings initSettings = InitializationSettings(
-        android: androidSettings,
-        iOS: iosSettings,
-      );
-      
-      await _localNotificationsPlugin.initialize(
-        settings: initSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse response) {
-          final payload = response.payload;
-          biz.LogUtils.d(
-            'NotificationRepositoryImpl: Local notification clicked. Payload: $payload',
-          );
-          if (payload != null && payload.isNotEmpty) {
-            try {
-              final Map<String, dynamic> data =
-                  Map<String, dynamic>.from(jsonDecode(payload));
-              _notificationDataController.add(data);
-            } catch (e, stackTrace) {
-              biz.LogUtils.e(
-                'NotificationRepositoryImpl: Failed to parse local notification payload',
-                error: e,
-                stackTrace: stackTrace,
-              );
-            }
-          }
-        },
-      );
-
-      final AndroidNotificationChannel channel = AndroidNotificationChannel(
-        'high_importance_channel',
-        t.notification.channel_name,
-        description: t.notification.channel_description,
-        importance: Importance.max,
-      );
-
-      final androidPlugin = _localNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin
-          >();
-      if (androidPlugin != null) {
-        await androidPlugin.createNotificationChannel(channel);
-      }
-
-      // Print FCM Token for debugging asynchronously so it doesn't block listener initialization
-      () async {
-        try {
-          if (Platform.isIOS) {
-            final apnsToken = await _firebaseMessaging.getAPNSToken();
-            if (apnsToken == null) {
-              biz.LogUtils.d(
-                'NotificationRepositoryImpl: APNS token is not ready yet on launch. '
-                'FCM token will be automatically fetched and registered via onTokenRefresh once APNS registration completes.',
-              );
-              return;
-            }
-          }
-          final fcmToken = await _firebaseMessaging.getToken();
-          biz.LogUtils.d('NotificationRepositoryImpl: FCM Token: $fcmToken');
-        } catch (e, stackTrace) {
-          biz.LogUtils.e(
-            'NotificationRepositoryImpl: Failed to get FCM Token',
-            error: e,
-            stackTrace: stackTrace,
-          );
-        }
-      }();
-
-      biz.LogUtils.d(
-        'NotificationRepositoryImpl: Local notifications initialized.',
-      );
-    } catch (e, stackTrace) {
-      biz.LogUtils.e(
-        'NotificationRepositoryImpl: Failed to initialize local notifications',
-        error: e,
-        stackTrace: stackTrace,
-      );
-    }
-  }
-
   @override
   Future<void> showLocalNotification({
     required String title,
     required String body,
     Map<String, dynamic>? data,
   }) async {
-    biz.LogUtils.d(
-      'NotificationRepositoryImpl: Displaying local notification: title="$title", body="$body"',
+    await _localNotificationService.showLocalNotification(
+      title: title,
+      body: body,
+      data: data,
     );
-    try {
-      await _localNotificationsPlugin.show(
-        id: (title + body).hashCode,
-        title: title,
-        body: body,
-        notificationDetails: NotificationDetails(
-          android: AndroidNotificationDetails(
-            'high_importance_channel',
-            t.notification.channel_name,
-            channelDescription: t.notification.channel_description,
-            importance: Importance.max,
-            priority: Priority.high,
-            icon: '@mipmap/ic_launcher',
-          ),
-          iOS: const DarwinNotificationDetails(
-            presentAlert: true,
-            presentBadge: true,
-            presentSound: true,
-            presentBanner: true,
-            presentList: true,
-          ),
-        ),
-        payload: data != null ? jsonEncode(data) : null,
-      );
-      biz.LogUtils.d(
-        'NotificationRepositoryImpl: Local notification displayed successfully.',
-      );
-    } catch (e, stackTrace) {
-      biz.LogUtils.e(
-        'NotificationRepositoryImpl: Failed to show local notification',
-        error: e,
-        stackTrace: stackTrace,
-      );
-    }
+  }
+
+  @override
+  Future<void> scheduleDailyCheckInNotification() async {
+    await _localNotificationService.scheduleDailyCheckInNotification();
+  }
+
+  @override
+  Future<void> cancelDailyCheckInNotification() async {
+    await _localNotificationService.cancelDailyCheckInNotification();
+  }
+
+  @override
+  bool isCheckInNotificationEnabled() {
+    return _localNotificationService.isCheckInNotificationEnabled();
+  }
+
+  @override
+  Future<void> setCheckInNotificationEnabled(bool enabled) async {
+    await _localNotificationService.setCheckInNotificationEnabled(enabled);
+  }
+
+  @override
+  Future<void> triggerTestCheckInNotification() async {
+    await _localNotificationService.triggerTestCheckInNotification();
   }
 
   @override

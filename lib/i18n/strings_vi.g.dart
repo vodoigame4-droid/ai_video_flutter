@@ -615,6 +615,9 @@ class _Translations$notification$vi extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Thông báo quan trọng';
 	@override String get channel_description => 'Kênh này được sử dụng cho các thông báo quan trọng.';
+	@override String get checkin_title => 'Nhắc nhở điểm danh hàng ngày 🎁';
+	@override String get checkin_body => 'Đến giờ nhận credit miễn phí hàng ngày rồi! Vào app ngay nào.';
+	@override String get test_notification => 'Thử';
 }
 
 // Path: rating_dialog
@@ -1044,6 +1047,9 @@ extension on TranslationsVi {
 			'connectivity.retry_button' => 'Thử lại kết nối',
 			'notification.channel_name' => 'Thông báo quan trọng',
 			'notification.channel_description' => 'Kênh này được sử dụng cho các thông báo quan trọng.',
+			'notification.checkin_title' => 'Nhắc nhở điểm danh hàng ngày 🎁',
+			'notification.checkin_body' => 'Đến giờ nhận credit miễn phí hàng ngày rồi! Vào app ngay nào.',
+			'notification.test_notification' => 'Thử',
 			'rating_dialog.title' => 'Bạn thích ứng dụng chứ?',
 			'rating_dialog.desc' => 'Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!',
 			'rating_dialog.support_us' => 'Hỗ trợ chúng tôi',
