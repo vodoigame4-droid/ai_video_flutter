@@ -29,7 +29,7 @@ class CreateVideoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          sl<CreateVideoBloc>()..add(CreateVideoEvent.init(initialTab)),
+          sl<CreateVideoBloc>(param1: initialTab)..add(CreateVideoEvent.init(initialTab)),
       child: const CreateVideoView(),
     );
   }

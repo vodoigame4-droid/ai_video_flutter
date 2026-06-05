@@ -201,11 +201,12 @@ void initBusinessDependencies(GetIt sl) {
       getThemesUseCase: sl(),
     ),
   );
-  sl.registerFactory(() => CreateVideoBloc(
+  sl.registerFactoryParam<CreateVideoBloc, int, void>((initialTab, _) => CreateVideoBloc(
         getSuggestionPromptUseCase: sl(),
         uploadImageUseCase: sl(),
         watchProfileUseCase: sl(),
         getProfileUseCase: sl(),
+        initialTab: initialTab ?? 0,
       ));
   sl.registerFactory(
     () => CreateFromTemplateBloc(

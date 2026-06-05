@@ -36,6 +36,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
             context,
             icon: Assets.icons.icImageHome,
             label: t.home_new.imageToVideo,
+            heroTag: 'tab-hero-0',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '0'},
@@ -50,6 +51,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
             context,
             icon: Assets.icons.icTransitionHome,
             label: t.home_new.transitionVideo,
+            heroTag: 'tab-hero-1',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '1'},
@@ -64,6 +66,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
             context,
             icon: Assets.icons.icDanceHome,
             label: t.home_new.imageToDance,
+            heroTag: 'tab-hero-2',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '2'},
@@ -78,6 +81,7 @@ class HomeFeaturesGridWidget extends StatelessWidget {
             context,
             icon: Assets.icons.icUnifiedHome,
             label: t.home_new.unifiedVideo,
+            heroTag: 'tab-hero-3',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '3'},
@@ -96,45 +100,49 @@ class HomeFeaturesGridWidget extends StatelessWidget {
     BuildContext context, {
     required String icon,
     required String label,
+    required String heroTag,
     required VoidCallback onTap,
   }) {
     return Expanded(
-      child: GradientBorderContainer(
-        height: 90,
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-        backgroundColor: Colors.white.withValues(alpha: 0.08),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 26,
-                  height: 26,
-                  child: Center(
-                    child: AppSvgIcon(
-                      assetName: icon,
-                      color: AppColors.white,
-                      width: 24,
-                      height: 24,
+      child: Hero(
+        tag: heroTag,
+        child: GradientBorderContainer(
+          height: 90,
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          backgroundColor: Colors.white.withValues(alpha: 0.08),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onTap,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 26,
+                    height: 26,
+                    child: Center(
+                      child: AppSvgIcon(
+                        assetName: icon,
+                        color: AppColors.white,
+                        width: 24,
+                        height: 24,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Text(
-                    label,
-                    style: context.appTheme.navLabelCreateStyle,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Text(
+                      label,
+                      style: context.appTheme.navLabelCreateStyle,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

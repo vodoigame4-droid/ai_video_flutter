@@ -58,8 +58,8 @@ class CreateVideoTabBarWidget extends StatelessWidget {
                 final isSelected = selectedIndex == index;
                 final tab = tabs[index];
 
-                return Expanded(
-                  flex: isSelected ? 25 : 10,
+                final tabContent = Material(
+                  color: Colors.transparent,
                   child: InkWell(
                     onTap: () => onTabSelected(index),
                     borderRadius: const BorderRadius.all(Radius.circular(100)),
@@ -106,6 +106,16 @@ class CreateVideoTabBarWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                );
+
+                return Expanded(
+                  flex: isSelected ? 25 : 10,
+                  child: isSelected
+                      ? Hero(
+                          tag: 'tab-hero-$index',
+                          child: tabContent,
+                        )
+                      : tabContent,
                 );
               }),
             ),

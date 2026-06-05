@@ -95,7 +95,7 @@ class CreateTemplateSettingsPage extends StatelessWidget {
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    _buildTopCard(context, selectedPhotoPath),
+                                    _buildTopCard(context, selectedPhotoPath, templateId),
                                     const SizedBox(height: 16),
                                     _buildBottomCard(context, quality, duration),
                                     const SizedBox(height: 100),
@@ -161,28 +161,31 @@ class CreateTemplateSettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTopCard(BuildContext context, String? selectedPhotoPath) {
-    return Container(
-      height: 450,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.onSurface,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: selectedPhotoPath != null
-            ? (selectedPhotoPath.startsWith('assets/')
-                ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                : Image.file(
-                    File(selectedPhotoPath),
-                    fit: BoxFit.cover,
-                  ))
-            : const Icon(
-                Icons.image,
-                size: 80,
-                color: AppColors.subText,
-              ),
+  Widget _buildTopCard(BuildContext context, String? selectedPhotoPath, String templateId) {
+    return Hero(
+      tag: 'template-hero-$templateId',
+      child: Container(
+        height: 450,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.onSurface,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: selectedPhotoPath != null
+              ? (selectedPhotoPath.startsWith('assets/')
+                  ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
+                  : Image.file(
+                      File(selectedPhotoPath),
+                      fit: BoxFit.cover,
+                    ))
+              : const Icon(
+                  Icons.image,
+                  size: 80,
+                  color: AppColors.subText,
+                ),
+        ),
       ),
     );
   }
