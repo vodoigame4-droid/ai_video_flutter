@@ -45,6 +45,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_credit_icon.png
   AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
 
+  /// File path: assets/icons/ic_crown.svg
+  String get icCrown => 'assets/icons/ic_crown.svg';
+
   /// File path: assets/icons/ic_dance_home.svg
   String get icDanceHome => 'assets/icons/ic_dance_home.svg';
 
@@ -126,6 +129,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_report.svg
   String get icReport => 'assets/icons/ic_report.svg';
 
+  /// File path: assets/icons/ic_right_arrow.svg
+  String get icRightArrow => 'assets/icons/ic_right_arrow.svg';
+
   /// File path: assets/icons/ic_share.svg
   String get icShare => 'assets/icons/ic_share.svg';
 
@@ -152,6 +158,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_trending.svg
   String get icTrending => 'assets/icons/ic_trending.svg';
+
+  /// File path: assets/icons/ic_trending_down.svg
+  String get icTrendingDown => 'assets/icons/ic_trending_down.svg';
 
   /// File path: assets/icons/ic_unified_home.svg
   String get icUnifiedHome => 'assets/icons/ic_unified_home.svg';
@@ -180,6 +189,7 @@ class $AssetsIconsGen {
     icCamera,
     icContactUs,
     icCreditIcon,
+    icCrown,
     icDanceHome,
     icDelete,
     icDownload,
@@ -207,6 +217,7 @@ class $AssetsIconsGen {
     icRedTick,
     icRegenerate,
     icReport,
+    icRightArrow,
     icShare,
     icStarVip,
     icSupportUs,
@@ -216,6 +227,7 @@ class $AssetsIconsGen {
     icTranslateVideo,
     icTrash,
     icTrending,
+    icTrendingDown,
     icUnifiedHome,
     icUnifiledVideo,
     icUploadVideo,
@@ -383,6 +395,9 @@ class $AssetsRawGen {
   /// File path: assets/raw/checkin_box_lottie.json
   String get checkinBoxLottie => 'assets/raw/checkin_box_lottie.json';
 
+  /// File path: assets/raw/click_animation.json
+  String get clickAnimation => 'assets/raw/click_animation.json';
+
   /// File path: assets/raw/guide_background.mp4
   String get guideBackground => 'assets/raw/guide_background.mp4';
 
@@ -394,6 +409,7 @@ class $AssetsRawGen {
     aiAnimation,
     bgDiscountPage,
     checkinBoxLottie,
+    clickAnimation,
     guideBackground,
     handTabAnimation,
   ];

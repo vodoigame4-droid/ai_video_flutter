@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lottie/lottie.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -82,31 +82,35 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.15),
+              color: Colors.white.withValues(alpha: 0.20),
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
                 color: Colors.white.withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
-            child: const Text(
-              'Tap to Reveal',
-              style: TextStyle(
+            child: Text(
+              t.premium.tap_to_reveal,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 18,
               ),
             ),
           ),
           const SizedBox(height: 6),
-          const Icon(
-            Icons.touch_app_rounded,
-            color: Colors.white,
-            size: 28,
-          )
-              .animate(onPlay: (controller) => controller.repeat(reverse: true))
-              .scale(begin: const Offset(0.9, 0.9), end: const Offset(1.1, 1.1), duration: 800.milliseconds)
-              .moveY(begin: 0, end: 4, duration: 800.milliseconds),
+          Transform.translate(
+            offset: const Offset(0, -16),
+            child: Transform.rotate(
+              angle: 0.40,
+              child: Lottie.asset(
+                'assets/raw/click_animation.json',
+                width: 80,
+                height: 80,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -115,6 +119,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
   @override
   Widget build(BuildContext context) {
     final t = context.t;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double cardWidth = (screenWidth - 46) / 2;
+    final double childAspectRatio = cardWidth / 168;
 
     final iapBlocState = context.watch<IapBloc>().state;
     final List<Product> regularProducts = iapBlocState.mapOrNull(
@@ -271,10 +278,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              const SizedBox(height: 24),
                               // Centered Tap To Reveal Button
                               Center(child: _buildTapToReveal()),
-                              const SizedBox(height: 24),
-
                               // Titles
                               Text(
                                 t.premium.buy_credit,
@@ -299,14 +305,14 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              const SizedBox(height: 28),
+                              const SizedBox(height: 10),
 
                               // 3x2 Packages Grid
                               GridView.count(
                                 crossAxisCount: 2,
-                                mainAxisSpacing: 14,
-                                crossAxisSpacing: 14,
-                                childAspectRatio: 0.85,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: childAspectRatio,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 children: packages.map((pkg) {
@@ -342,7 +348,7 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
                           width: 36,
                           height: 36,
                           decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.4),
+                            color: Colors.black.withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
@@ -369,6 +375,7 @@ class GenerationCreditPackCard extends StatelessWidget {
   final String videoEstimate;
   final String priceText;
   final String? tagText;
+  final List<Color>? tagColors;
   final VoidCallback onTap;
 
   const GenerationCreditPackCard({
@@ -377,6 +384,7 @@ class GenerationCreditPackCard extends StatelessWidget {
     required this.videoEstimate,
     required this.priceText,
     this.tagText,
+    this.tagColors,
     required this.onTap,
   });
 
@@ -388,27 +396,26 @@ class GenerationCreditPackCard extends StatelessWidget {
         // Card Container
         Container(
           decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.55),
+            color: Colors.black.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.15),
+              color: const Color(0xFF778877).withValues(alpha: 0.53),
               width: 1.2,
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 4),
                 // Shiny Coin Icon
                 Image.asset(
-                  Assets.images.icCheckinCoin.path,
+                  Assets.images.icCredit.path,
                   width: 38,
                   height: 38,
                   fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
                 // Credit Title
                 Text(
                   title,
@@ -432,7 +439,7 @@ class GenerationCreditPackCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const Spacer(),
+                const SizedBox(height: 12),
                 // Price Button
                 GestureDetector(
                   onTap: onTap,
@@ -466,25 +473,38 @@ class GenerationCreditPackCard extends StatelessWidget {
           ),
         ),
 
-        // Optional badge overlay
+        // Corner Tag Badge on top-right
         if (tagText != null)
           Positioned(
-            top: -6,
-            right: 12,
+            top: 0,
+            right: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              width: 100,
+              height: 20,
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              alignment: Alignment.center,
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFFFB300), Color(0xFFFF8F00)],
+                gradient: LinearGradient(
+                  colors: tagColors ??
+                      [const Color(0xFFff6320), const Color(0xFFfae123)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
                 ),
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(12),
+                  topRight: Radius.circular(20),
+                ),
               ),
-              child: Text(
-                tagText!,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  tagText!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

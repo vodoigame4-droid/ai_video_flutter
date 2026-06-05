@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -373,12 +375,18 @@ class IapView extends StatelessWidget {
                                                                   shape: BoxShape
                                                                       .circle,
                                                                 ),
-                                                            child: const Icon(
-                                                              Icons
-                                                                  .arrow_forward_ios_rounded,
-                                                              color: AppColors
-                                                                  .primary,
-                                                              size: 10,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets.all(
+                                                                    2.0,
+                                                                  ),
+                                                              child: SvgPicture.asset(
+                                                                Assets
+                                                                    .icons
+                                                                    .icRightArrow,
+                                                                width: 14,
+                                                                height: 14,
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -393,16 +401,13 @@ class IapView extends StatelessWidget {
 
                                           // 2x2 Feature Checklist Grid (Row-Column layout)
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
-                                              Expanded(
+                                              Flexible(
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
                                                   children: [
                                                     _buildCheckItem(
                                                       t
@@ -416,8 +421,8 @@ class IapView extends StatelessWidget {
                                                   ],
                                                 ),
                                               ),
-                                              const SizedBox(width: 4),
-                                              Expanded(
+                                              const SizedBox(width: 16),
+                                              Flexible(
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -501,7 +506,16 @@ class IapView extends StatelessWidget {
 
                                           // Start My Subscription Button (Crown + Text + Arrow)
                                           GradientButton(
-                                            label: t.premium.start_my_subscription,
+                                            label: isWeekly
+                                                ? t.premium.start_free_trial
+                                                : t.premium.start_my_subscription,
+                                            leadingIcon: !isWeekly
+                                                ? SvgPicture.asset(
+                                                    Assets.icons.icCrown,
+                                                    width: 18,
+                                                    height: 18,
+                                                  )
+                                                : null,
                                             width: double.infinity,
                                             gradient: AppColors.primaryGradient,
                                             textStyle: const TextStyle(
@@ -517,15 +531,19 @@ class IapView extends StatelessWidget {
                                             onPressed: () {
                                               final productId = isWeekly
                                                   ? (weeklyProducts.isNotEmpty
-                                                      ? weeklyProducts.first.id
-                                                      : (Platform.isIOS
-                                                          ? 'buy_weekly'
-                                                          : 'com.vexa.ai.video.weekly'))
+                                                        ? weeklyProducts
+                                                              .first
+                                                              .id
+                                                        : (Platform.isIOS
+                                                              ? 'buy_weekly'
+                                                              : 'com.vexa.ai.video.weekly'))
                                                   : (yearlyProducts.isNotEmpty
-                                                      ? yearlyProducts.first.id
-                                                      : (Platform.isIOS
-                                                          ? 'buy_annualy'
-                                                          : 'com.vexa.ai.video.yearly'));
+                                                        ? yearlyProducts
+                                                              .first
+                                                              .id
+                                                        : (Platform.isIOS
+                                                              ? 'buy_annualy'
+                                                              : 'com.vexa.ai.video.yearly'));
                                               context.read<IapBloc>().add(
                                                 IapEvent.purchase(
                                                   productId: productId,
@@ -697,7 +715,7 @@ class IapView extends StatelessWidget {
           child: Container(width: 5, height: 5, color: AppColors.primary),
         ),
         const SizedBox(width: 3),
-        Expanded(
+        Flexible(
           child: Text(
             label,
             maxLines: 1,

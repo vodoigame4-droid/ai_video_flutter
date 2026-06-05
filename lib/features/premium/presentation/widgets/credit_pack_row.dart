@@ -122,13 +122,16 @@ class CreditPackRow extends StatelessWidget {
           ),
         ),
 
-        // Floating Tag Badge on top-right
+        // Corner Tag Badge on top-right
         if (tagText != null)
           Positioned(
-            top: -9,
-            right: 12,
+            top: 0,
+            right: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              width: 100,
+              height: 20,
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: tagColors ??
@@ -136,16 +139,22 @@ class CreditPackRow extends StatelessWidget {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-              ),
-              child: Text(
-                tagText!,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(12),
+                  topRight: Radius.circular(14),
                 ),
-                textAlign: TextAlign.center,
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  tagText!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),

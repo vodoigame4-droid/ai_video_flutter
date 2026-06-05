@@ -207,7 +207,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                               Assets.images.bgBannerBuyCredit.path,
                               width: double.infinity,
                               height: 100,
-                              fit: BoxFit.contain,
+                              fit: BoxFit.fill,
                             ),
                           ),
                           const SizedBox(height: 12),
@@ -217,15 +217,22 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Column(
                               children: [
-                                CreditPackRow(
+                                 CreditPackRow(
                                   title: t.premium.credit_70,
                                   videoEstimate: t.premium.approx_videos(
                                     count: 2,
                                   ),
                                   priceText: getProductPrice(70),
                                   isSelected: _selectedPackageIndex == 0,
-                                  onTap: () =>
-                                      setState(() => _selectedPackageIndex = 0),
+                                  onTap: () {
+                                    setState(() => _selectedPackageIndex = 0);
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 70,
+                                        priceText: getProductPrice(70),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 8),
                                 CreditPackRow(
@@ -235,8 +242,15 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   ),
                                   priceText: getProductPrice(150),
                                   isSelected: _selectedPackageIndex == 1,
-                                  onTap: () =>
-                                      setState(() => _selectedPackageIndex = 1),
+                                  onTap: () {
+                                    setState(() => _selectedPackageIndex = 1);
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 150,
+                                        priceText: getProductPrice(150),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 8),
                                 CreditPackRow(
@@ -246,8 +260,15 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   ),
                                   priceText: getProductPrice(350),
                                   isSelected: _selectedPackageIndex == 2,
-                                  onTap: () =>
-                                      setState(() => _selectedPackageIndex = 2),
+                                  onTap: () {
+                                    setState(() => _selectedPackageIndex = 2);
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 350,
+                                        priceText: getProductPrice(350),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 8),
                                 CreditPackRow(
@@ -257,8 +278,15 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   ),
                                   priceText: getProductPrice(500),
                                   isSelected: _selectedPackageIndex == 3,
-                                  onTap: () =>
-                                      setState(() => _selectedPackageIndex = 3),
+                                  onTap: () {
+                                    setState(() => _selectedPackageIndex = 3);
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 500,
+                                        priceText: getProductPrice(500),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 8),
                                 CreditPackRow(
@@ -269,8 +297,15 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   priceText: getProductPrice(1000),
                                   tagText: t.premium.most_popular,
                                   isSelected: _selectedPackageIndex == 4,
-                                  onTap: () =>
-                                      setState(() => _selectedPackageIndex = 4),
+                                  onTap: () {
+                                    setState(() => _selectedPackageIndex = 4);
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 1000,
+                                        priceText: getProductPrice(1000),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 8),
                                 CreditPackRow(
@@ -280,13 +315,16 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   ),
                                   priceText: getProductPrice(5000),
                                   tagText: t.premium.best_value,
-                                  tagColors: const [
-                                    Color(0xFF00C853),
-                                    Color(0xFF69F0AE),
-                                  ],
                                   isSelected: _selectedPackageIndex == 5,
-                                  onTap: () =>
-                                      setState(() => _selectedPackageIndex = 5),
+                                  onTap: () {
+                                    setState(() => _selectedPackageIndex = 5);
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 5000,
+                                        priceText: getProductPrice(5000),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),

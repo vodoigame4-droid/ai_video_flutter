@@ -1,5 +1,7 @@
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -138,10 +140,10 @@ class DiscountView extends StatelessWidget {
           ),
         ),
 
-        // Close button top-right
+        // Close button top-left
         Positioned(
           top: MediaQuery.of(context).padding.top + 12,
-          right: 16,
+          left: 16,
           child: Material(
             color: Colors.white.withValues(alpha: 0.12),
             shape: const CircleBorder(),
@@ -226,8 +228,8 @@ class DiscountView extends StatelessWidget {
               Text(
                 t.premium.billed_yearly,
                 style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.6),
-                  fontSize: 13,
+                  color: AppColors.subText,
+                  fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -241,7 +243,7 @@ class DiscountView extends StatelessWidget {
               Text(
                 t.premium.auto_renewable.split('.').first,
                 style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.5),
+                  color: AppColors.subText,
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
@@ -261,28 +263,29 @@ class DiscountView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF1A3A2A),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: const Color(0xFF2ECC71).withValues(alpha: 0.4),
-          width: 1,
-        ),
+        color: AppColors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(100),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.check_circle,
-            color: Color(0xFF2ECC71),
-            size: 18,
-          ),
+           SvgPicture.asset(
+                Assets.icons.icTrendingDown,
+                width: 14,
+                height: 14,
+              ),
           const SizedBox(width: 8),
-          Text(
-            t.premium.save_up_to(percent: '92'),
-            style: const TextStyle(
-              color: Color(0xFF2ECC71),
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
+          ShaderMask(
+            shaderCallback: (bounds) => AppColors.primaryGradient.createShader(
+              Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+            ),
+            child: Text(
+              t.premium.save_up_to(percent: '92'),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ],
@@ -322,7 +325,7 @@ class DiscountView extends StatelessWidget {
         Text(
           t.premium.discount_price_suffix,
           style: TextStyle(
-            color: Colors.white.withValues(alpha: 0.5),
+            color: AppColors.subText,
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
@@ -336,13 +339,13 @@ class DiscountView extends StatelessWidget {
       label: t.premium.start_my_subscription,
       width: double.infinity,
       gradient: const LinearGradient(
-        colors: [Color(0xFF1DB954), Color(0xFF1ED760)],
+        colors: [AppColors.primary, AppColors.secondary],
         begin: Alignment.centerLeft,
         end: Alignment.centerRight,
       ),
       textStyle: const TextStyle(
         color: Colors.white,
-        fontSize: 17,
+        fontSize: 18,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.3,
       ),
@@ -390,7 +393,7 @@ class DiscountView extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Colors.white.withValues(alpha: 0.4),
+          color: AppColors.subText,
           fontSize: 12,
           fontWeight: FontWeight.w400,
         ),

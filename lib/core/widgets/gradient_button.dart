@@ -11,6 +11,7 @@ class GradientButton extends StatelessWidget {
   final double height;
   final LinearGradient? gradient;
   final Widget? trailingIcon;
+  final Widget? leadingIcon;
   final TextStyle? textStyle;
   final bool isEnabled;
 
@@ -22,6 +23,7 @@ class GradientButton extends StatelessWidget {
     this.height = 56.0,
     this.gradient,
     this.trailingIcon,
+    this.leadingIcon,
     this.textStyle,
     this.isEnabled = true,
   });
@@ -61,16 +63,28 @@ class GradientButton extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                  child: Text(
-                    label,
-                    style: activeTextStyle.copyWith(
-                      color: isEnabled
-                          ? AppColors.white
-                          : AppColors.white.withValues(alpha: 0.4),
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (leadingIcon != null) ...[
+                        leadingIcon!,
+                        const SizedBox(width: 8),
+                      ],
+                      Flexible(
+                        child: Text(
+                          label,
+                          style: activeTextStyle.copyWith(
+                            color: isEnabled
+                                ? AppColors.white
+                                : AppColors.white.withValues(alpha: 0.4),
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -80,9 +94,7 @@ class GradientButton extends StatelessWidget {
                   right: 24,
                   top: 0,
                   bottom: 0,
-                  child: Center(
-                    child: trailingIcon!,
-                  ),
+                  child: Center(child: trailingIcon!),
                 ),
             ],
           ),
