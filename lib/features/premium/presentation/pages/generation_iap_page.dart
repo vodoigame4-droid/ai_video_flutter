@@ -394,7 +394,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                               context.read<IapBloc>().add(const IapEvent.selectWeekly());
                                               final productId = weeklyProducts.isNotEmpty 
                                                   ? weeklyProducts.first.id 
-                                                  : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly');
+                                                  : (Platform.isIOS ? 'buy_weekly' : 'buy_weekly.andr');
                                               context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
                                             },
                                           ),
@@ -416,7 +416,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                               context.read<IapBloc>().add(const IapEvent.selectAnnually());
                                               final productId = yearlyProducts.isNotEmpty 
                                                   ? yearlyProducts.first.id 
-                                                  : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly');
+                                                  : (Platform.isIOS ? 'buy_annualy' : 'buy_annualy.andr');
                                               context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
                                             },
                                           ),
@@ -450,10 +450,10 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                               final productId = isWeekly
                                                   ? (weeklyProducts.isNotEmpty
                                                       ? weeklyProducts.first.id
-                                                      : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly'))
+                                                      : (Platform.isIOS ? 'buy_weekly' : 'buy_weekly.andr'))
                                                   : (yearlyProducts.isNotEmpty
                                                       ? yearlyProducts.first.id
-                                                      : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly'));
+                                                      : (Platform.isIOS ? 'buy_annualy' : 'buy_annualy.andr'));
                                               context.read<IapBloc>().add(
                                                     IapEvent.purchase(productId: productId),
                                                   );

@@ -19,6 +19,9 @@ class VideoCacheManager {
   /// Otherwise, it returns null immediately, letting the caller fallback to network playback.
   Future<String?> getCachedOrDownload(String url, {bool waitForDownload = false}) async {
     if (url.isEmpty) return null;
+    if (!url.startsWith('http')) {
+      return url;
+    }
 
     try {
       final cacheDir = await getTemporaryDirectory();
@@ -105,7 +108,7 @@ class VideoCacheManager {
       if (dotIndex != -1 && dotIndex < path.length - 1) {
         final ext = path.substring(dotIndex + 1).toLowerCase();
         // Support typical video formats
-        if (['mp4', 'mkv', 'mov', 'avi', 'webm', '3gp', 'flv'].contains(ext)) {
+        if (['mp4', 'mkv', 'mov', 'avi', 'webm', 'webp', '3gp', 'flv'].contains(ext)) {
           return ext;
         }
       }

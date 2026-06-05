@@ -85,4 +85,7 @@ abstract class MediaApiClient {
   Future<BaseResponse<SuggestionResponseModel>> getSuggestionPrompt(
     @Body() SuggestionRequestModel request,
   );
+
+  @GET('/media/banners')
+  Future<BaseResponse<List<String>>> getBanners();
 }

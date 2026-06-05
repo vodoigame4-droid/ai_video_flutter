@@ -462,7 +462,7 @@ class IapView extends StatelessWidget {
                                                   ? weeklyProducts.first.id
                                                   : (Platform.isIOS
                                                         ? 'buy_weekly'
-                                                        : 'com.vexa.ai.video.weekly');
+                                                        : 'buy_weekly.andr');
                                               context.read<IapBloc>().add(
                                                 IapEvent.purchase(
                                                   productId: productId,
@@ -494,7 +494,7 @@ class IapView extends StatelessWidget {
                                                   ? yearlyProducts.first.id
                                                   : (Platform.isIOS
                                                         ? 'buy_annualy'
-                                                        : 'com.vexa.ai.video.yearly');
+                                                        : 'buy_annualy.andr');
                                               context.read<IapBloc>().add(
                                                 IapEvent.purchase(
                                                   productId: productId,
@@ -536,14 +536,14 @@ class IapView extends StatelessWidget {
                                                               .id
                                                         : (Platform.isIOS
                                                               ? 'buy_weekly'
-                                                              : 'com.vexa.ai.video.weekly'))
+                                                              : 'buy_weekly.andr'))
                                                   : (yearlyProducts.isNotEmpty
                                                         ? yearlyProducts
                                                               .first
                                                               .id
                                                         : (Platform.isIOS
                                                               ? 'buy_annualy'
-                                                              : 'com.vexa.ai.video.yearly'));
+                                                              : 'buy_annualy.andr'));
                                               context.read<IapBloc>().add(
                                                 IapEvent.purchase(
                                                   productId: productId,

@@ -22,7 +22,7 @@ Future<void> initDependencies() async {
     () => SplashBloc(
       autoLoginUseCase: sl(),
       getOnboardingStatusUseCase: sl(),
-      getOnboardingImagesUseCase: sl(),
+      getBannersUseCase: sl(),
     ),
   );
 
@@ -30,7 +30,6 @@ Future<void> initDependencies() async {
   sl.registerFactory(
     () => OnboardingBloc(
       completeOnboardingUseCase: sl(),
-      getOnboardingImagesUseCase: sl(),
     ),
   );
 

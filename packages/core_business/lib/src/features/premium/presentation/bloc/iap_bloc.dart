@@ -181,11 +181,11 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             if (isWeekly) {
               productId = weekly.isNotEmpty 
                   ? weekly.first.id 
-                  : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly');
+                  : (Platform.isIOS ? 'buy_weekly' : 'buy_weekly.andr');
             } else {
               productId = yearly.isNotEmpty 
                   ? yearly.first.id 
-                  : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly');
+                  : (Platform.isIOS ? 'buy_annualy' : 'buy_annualy.andr');
             }
           } else {
             final lowerId = productId.toLowerCase();
@@ -362,7 +362,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             productId = matchedProduct.id;
           } else {
             // Default fallback
-            productId = Platform.isIOS ? matchCredits : 'com.vexa.ai.video.$matchCredits';
+            productId = Platform.isIOS ? matchCredits : '$matchCredits.andr';
           }
 
           try {
