@@ -46,23 +46,6 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
       _handleNotificationClick(message);
     });
 
-    // Check initial message if app opened from terminated state via notification
-    try {
-      final message = await _firebaseMessaging.getInitialMessage();
-      if (message != null) {
-        biz.LogUtils.d(
-          'NotificationRepositoryImpl: App opened from terminated state via notification: title="${message.notification?.title}", data=${message.data}',
-        );
-        _handleNotificationClick(message);
-      }
-    } catch (e, stackTrace) {
-      biz.LogUtils.e(
-        'NotificationRepositoryImpl: Failed to check initial message',
-        error: e,
-        stackTrace: stackTrace,
-      );
-    }
-
     // Listen to FCM Token refresh to automatically re-subscribe to default topics
     _firebaseMessaging.onTokenRefresh.listen((token) async {
       biz.LogUtils.d('NotificationRepositoryImpl: FCM Token refreshed: $token');
@@ -75,11 +58,34 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     if (deviceId != null && deviceId.isNotEmpty) {
       _subscribeToDefaultTopics();
     }
+
+    // Check initial message asynchronously so it doesn't block the rest of the flow
+    _checkInitialMessage();
   }
 
   void _handleNotificationClick(RemoteMessage message) {
     if (message.data.isNotEmpty) {
       _notificationDataController.add(message.data);
+    }
+  }
+
+  Future<void> _checkInitialMessage() async {
+    try {
+      final message = await _firebaseMessaging.getInitialMessage().timeout(
+        const Duration(seconds: 3),
+      );
+      if (message != null) {
+        biz.LogUtils.d(
+          'NotificationRepositoryImpl: App opened from terminated state via notification: title="${message.notification?.title}", data=${message.data}',
+        );
+        _handleNotificationClick(message);
+      }
+    } catch (e, stackTrace) {
+      biz.LogUtils.e(
+        'NotificationRepositoryImpl: Failed to check initial message or timed out',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
   }
 

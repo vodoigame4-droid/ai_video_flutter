@@ -131,14 +131,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( bool isWeeklySelected,  bool isVideoRevealed)?  ready,TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  success,TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)?  ready,TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)?  success,TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.isWeeklySelected,_that.isVideoRevealed);case _Success() when success != null:
-return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _Error() when error != null:
-return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
+return ready(_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _Success() when success != null:
+return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _Error() when error != null:
+return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _:
   return orElse();
 
 }
@@ -156,14 +156,14 @@ return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( bool isWeeklySelected,  bool isVideoRevealed)  ready,required TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)  success,required TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)  ready,required TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)  success,required TResult Function( String message,  bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.isWeeklySelected,_that.isVideoRevealed);case _Success():
-return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _Error():
-return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
+return ready(_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _Success():
+return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _Error():
+return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +180,14 @@ return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( bool isWeeklySelected,  bool isVideoRevealed)?  ready,TResult? Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  success,TResult? Function( String message,  bool isWeeklySelected,  bool isVideoRevealed)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)?  ready,TResult? Function( String message,  bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)?  success,TResult? Function( String message,  bool isWeeklySelected,  bool isVideoRevealed,  List<Product> weeklyProducts,  List<Product> yearlyProducts,  List<Product> discountCreditProducts,  List<Product> regularCreditProducts)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.isWeeklySelected,_that.isVideoRevealed);case _Success() when success != null:
-return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _Error() when error != null:
-return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed);case _:
+return ready(_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _Success() when success != null:
+return success(_that.message,_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _Error() when error != null:
+return error(_that.message,_that.isWeeklySelected,_that.isVideoRevealed,_that.weeklyProducts,_that.yearlyProducts,_that.discountCreditProducts,_that.regularCreditProducts);case _:
   return null;
 
 }
@@ -263,11 +263,39 @@ String toString() {
 
 
 class _Ready implements IapState {
-  const _Ready({required this.isWeeklySelected, required this.isVideoRevealed});
+  const _Ready({required this.isWeeklySelected, required this.isVideoRevealed, final  List<Product> weeklyProducts = const [], final  List<Product> yearlyProducts = const [], final  List<Product> discountCreditProducts = const [], final  List<Product> regularCreditProducts = const []}): _weeklyProducts = weeklyProducts,_yearlyProducts = yearlyProducts,_discountCreditProducts = discountCreditProducts,_regularCreditProducts = regularCreditProducts;
   
 
  final  bool isWeeklySelected;
  final  bool isVideoRevealed;
+ final  List<Product> _weeklyProducts;
+@JsonKey() List<Product> get weeklyProducts {
+  if (_weeklyProducts is EqualUnmodifiableListView) return _weeklyProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_weeklyProducts);
+}
+
+ final  List<Product> _yearlyProducts;
+@JsonKey() List<Product> get yearlyProducts {
+  if (_yearlyProducts is EqualUnmodifiableListView) return _yearlyProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_yearlyProducts);
+}
+
+ final  List<Product> _discountCreditProducts;
+@JsonKey() List<Product> get discountCreditProducts {
+  if (_discountCreditProducts is EqualUnmodifiableListView) return _discountCreditProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_discountCreditProducts);
+}
+
+ final  List<Product> _regularCreditProducts;
+@JsonKey() List<Product> get regularCreditProducts {
+  if (_regularCreditProducts is EqualUnmodifiableListView) return _regularCreditProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_regularCreditProducts);
+}
+
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
@@ -279,16 +307,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed)&&const DeepCollectionEquality().equals(other._weeklyProducts, _weeklyProducts)&&const DeepCollectionEquality().equals(other._yearlyProducts, _yearlyProducts)&&const DeepCollectionEquality().equals(other._discountCreditProducts, _discountCreditProducts)&&const DeepCollectionEquality().equals(other._regularCreditProducts, _regularCreditProducts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isWeeklySelected,isVideoRevealed);
+int get hashCode => Object.hash(runtimeType,isWeeklySelected,isVideoRevealed,const DeepCollectionEquality().hash(_weeklyProducts),const DeepCollectionEquality().hash(_yearlyProducts),const DeepCollectionEquality().hash(_discountCreditProducts),const DeepCollectionEquality().hash(_regularCreditProducts));
 
 @override
 String toString() {
-  return 'IapState.ready(isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed)';
+  return 'IapState.ready(isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed, weeklyProducts: $weeklyProducts, yearlyProducts: $yearlyProducts, discountCreditProducts: $discountCreditProducts, regularCreditProducts: $regularCreditProducts)';
 }
 
 
@@ -299,7 +327,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $IapStateCopyWith<$Res> {
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- bool isWeeklySelected, bool isVideoRevealed
+ bool isWeeklySelected, bool isVideoRevealed, List<Product> weeklyProducts, List<Product> yearlyProducts, List<Product> discountCreditProducts, List<Product> regularCreditProducts
 });
 
 
@@ -316,11 +344,15 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? isWeeklySelected = null,Object? isVideoRevealed = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? isWeeklySelected = null,Object? isVideoRevealed = null,Object? weeklyProducts = null,Object? yearlyProducts = null,Object? discountCreditProducts = null,Object? regularCreditProducts = null,}) {
   return _then(_Ready(
 isWeeklySelected: null == isWeeklySelected ? _self.isWeeklySelected : isWeeklySelected // ignore: cast_nullable_to_non_nullable
 as bool,isVideoRevealed: null == isVideoRevealed ? _self.isVideoRevealed : isVideoRevealed // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,weeklyProducts: null == weeklyProducts ? _self._weeklyProducts : weeklyProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,yearlyProducts: null == yearlyProducts ? _self._yearlyProducts : yearlyProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,discountCreditProducts: null == discountCreditProducts ? _self._discountCreditProducts : discountCreditProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,regularCreditProducts: null == regularCreditProducts ? _self._regularCreditProducts : regularCreditProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,
   ));
 }
 
@@ -331,12 +363,40 @@ as bool,
 
 
 class _Success implements IapState {
-  const _Success({required this.message, required this.isWeeklySelected, required this.isVideoRevealed});
+  const _Success({required this.message, required this.isWeeklySelected, required this.isVideoRevealed, final  List<Product> weeklyProducts = const [], final  List<Product> yearlyProducts = const [], final  List<Product> discountCreditProducts = const [], final  List<Product> regularCreditProducts = const []}): _weeklyProducts = weeklyProducts,_yearlyProducts = yearlyProducts,_discountCreditProducts = discountCreditProducts,_regularCreditProducts = regularCreditProducts;
   
 
  final  String message;
  final  bool isWeeklySelected;
  final  bool isVideoRevealed;
+ final  List<Product> _weeklyProducts;
+@JsonKey() List<Product> get weeklyProducts {
+  if (_weeklyProducts is EqualUnmodifiableListView) return _weeklyProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_weeklyProducts);
+}
+
+ final  List<Product> _yearlyProducts;
+@JsonKey() List<Product> get yearlyProducts {
+  if (_yearlyProducts is EqualUnmodifiableListView) return _yearlyProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_yearlyProducts);
+}
+
+ final  List<Product> _discountCreditProducts;
+@JsonKey() List<Product> get discountCreditProducts {
+  if (_discountCreditProducts is EqualUnmodifiableListView) return _discountCreditProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_discountCreditProducts);
+}
+
+ final  List<Product> _regularCreditProducts;
+@JsonKey() List<Product> get regularCreditProducts {
+  if (_regularCreditProducts is EqualUnmodifiableListView) return _regularCreditProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_regularCreditProducts);
+}
+
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
@@ -348,16 +408,16 @@ _$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed)&&const DeepCollectionEquality().equals(other._weeklyProducts, _weeklyProducts)&&const DeepCollectionEquality().equals(other._yearlyProducts, _yearlyProducts)&&const DeepCollectionEquality().equals(other._discountCreditProducts, _discountCreditProducts)&&const DeepCollectionEquality().equals(other._regularCreditProducts, _regularCreditProducts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,isWeeklySelected,isVideoRevealed);
+int get hashCode => Object.hash(runtimeType,message,isWeeklySelected,isVideoRevealed,const DeepCollectionEquality().hash(_weeklyProducts),const DeepCollectionEquality().hash(_yearlyProducts),const DeepCollectionEquality().hash(_discountCreditProducts),const DeepCollectionEquality().hash(_regularCreditProducts));
 
 @override
 String toString() {
-  return 'IapState.success(message: $message, isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed)';
+  return 'IapState.success(message: $message, isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed, weeklyProducts: $weeklyProducts, yearlyProducts: $yearlyProducts, discountCreditProducts: $discountCreditProducts, regularCreditProducts: $regularCreditProducts)';
 }
 
 
@@ -368,7 +428,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $IapStateCopyWith<$Res> 
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- String message, bool isWeeklySelected, bool isVideoRevealed
+ String message, bool isWeeklySelected, bool isVideoRevealed, List<Product> weeklyProducts, List<Product> yearlyProducts, List<Product> discountCreditProducts, List<Product> regularCreditProducts
 });
 
 
@@ -385,12 +445,16 @@ class __$SuccessCopyWithImpl<$Res>
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,Object? isVideoRevealed = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,Object? isVideoRevealed = null,Object? weeklyProducts = null,Object? yearlyProducts = null,Object? discountCreditProducts = null,Object? regularCreditProducts = null,}) {
   return _then(_Success(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,isWeeklySelected: null == isWeeklySelected ? _self.isWeeklySelected : isWeeklySelected // ignore: cast_nullable_to_non_nullable
 as bool,isVideoRevealed: null == isVideoRevealed ? _self.isVideoRevealed : isVideoRevealed // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,weeklyProducts: null == weeklyProducts ? _self._weeklyProducts : weeklyProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,yearlyProducts: null == yearlyProducts ? _self._yearlyProducts : yearlyProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,discountCreditProducts: null == discountCreditProducts ? _self._discountCreditProducts : discountCreditProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,regularCreditProducts: null == regularCreditProducts ? _self._regularCreditProducts : regularCreditProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,
   ));
 }
 
@@ -401,12 +465,40 @@ as bool,
 
 
 class _Error implements IapState {
-  const _Error({required this.message, required this.isWeeklySelected, required this.isVideoRevealed});
+  const _Error({required this.message, required this.isWeeklySelected, required this.isVideoRevealed, final  List<Product> weeklyProducts = const [], final  List<Product> yearlyProducts = const [], final  List<Product> discountCreditProducts = const [], final  List<Product> regularCreditProducts = const []}): _weeklyProducts = weeklyProducts,_yearlyProducts = yearlyProducts,_discountCreditProducts = discountCreditProducts,_regularCreditProducts = regularCreditProducts;
   
 
  final  String message;
  final  bool isWeeklySelected;
  final  bool isVideoRevealed;
+ final  List<Product> _weeklyProducts;
+@JsonKey() List<Product> get weeklyProducts {
+  if (_weeklyProducts is EqualUnmodifiableListView) return _weeklyProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_weeklyProducts);
+}
+
+ final  List<Product> _yearlyProducts;
+@JsonKey() List<Product> get yearlyProducts {
+  if (_yearlyProducts is EqualUnmodifiableListView) return _yearlyProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_yearlyProducts);
+}
+
+ final  List<Product> _discountCreditProducts;
+@JsonKey() List<Product> get discountCreditProducts {
+  if (_discountCreditProducts is EqualUnmodifiableListView) return _discountCreditProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_discountCreditProducts);
+}
+
+ final  List<Product> _regularCreditProducts;
+@JsonKey() List<Product> get regularCreditProducts {
+  if (_regularCreditProducts is EqualUnmodifiableListView) return _regularCreditProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_regularCreditProducts);
+}
+
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
@@ -418,16 +510,16 @@ _$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message)&&(identical(other.isWeeklySelected, isWeeklySelected) || other.isWeeklySelected == isWeeklySelected)&&(identical(other.isVideoRevealed, isVideoRevealed) || other.isVideoRevealed == isVideoRevealed)&&const DeepCollectionEquality().equals(other._weeklyProducts, _weeklyProducts)&&const DeepCollectionEquality().equals(other._yearlyProducts, _yearlyProducts)&&const DeepCollectionEquality().equals(other._discountCreditProducts, _discountCreditProducts)&&const DeepCollectionEquality().equals(other._regularCreditProducts, _regularCreditProducts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message,isWeeklySelected,isVideoRevealed);
+int get hashCode => Object.hash(runtimeType,message,isWeeklySelected,isVideoRevealed,const DeepCollectionEquality().hash(_weeklyProducts),const DeepCollectionEquality().hash(_yearlyProducts),const DeepCollectionEquality().hash(_discountCreditProducts),const DeepCollectionEquality().hash(_regularCreditProducts));
 
 @override
 String toString() {
-  return 'IapState.error(message: $message, isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed)';
+  return 'IapState.error(message: $message, isWeeklySelected: $isWeeklySelected, isVideoRevealed: $isVideoRevealed, weeklyProducts: $weeklyProducts, yearlyProducts: $yearlyProducts, discountCreditProducts: $discountCreditProducts, regularCreditProducts: $regularCreditProducts)';
 }
 
 
@@ -438,7 +530,7 @@ abstract mixin class _$ErrorCopyWith<$Res> implements $IapStateCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
 @useResult
 $Res call({
- String message, bool isWeeklySelected, bool isVideoRevealed
+ String message, bool isWeeklySelected, bool isVideoRevealed, List<Product> weeklyProducts, List<Product> yearlyProducts, List<Product> discountCreditProducts, List<Product> regularCreditProducts
 });
 
 
@@ -455,12 +547,16 @@ class __$ErrorCopyWithImpl<$Res>
 
 /// Create a copy of IapState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,Object? isVideoRevealed = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = null,Object? isWeeklySelected = null,Object? isVideoRevealed = null,Object? weeklyProducts = null,Object? yearlyProducts = null,Object? discountCreditProducts = null,Object? regularCreditProducts = null,}) {
   return _then(_Error(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,isWeeklySelected: null == isWeeklySelected ? _self.isWeeklySelected : isWeeklySelected // ignore: cast_nullable_to_non_nullable
 as bool,isVideoRevealed: null == isVideoRevealed ? _self.isVideoRevealed : isVideoRevealed // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,weeklyProducts: null == weeklyProducts ? _self._weeklyProducts : weeklyProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,yearlyProducts: null == yearlyProducts ? _self._yearlyProducts : yearlyProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,discountCreditProducts: null == discountCreditProducts ? _self._discountCreditProducts : discountCreditProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,regularCreditProducts: null == regularCreditProducts ? _self._regularCreditProducts : regularCreditProducts // ignore: cast_nullable_to_non_nullable
+as List<Product>,
   ));
 }
 

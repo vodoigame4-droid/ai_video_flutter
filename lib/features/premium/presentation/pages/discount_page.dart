@@ -10,18 +10,28 @@ import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/services/remote_config_service.dart';
 
-class DiscountPage extends StatelessWidget {
+class DiscountPage extends StatefulWidget {
   static const String path = '/discount';
   static const String name = 'discount';
 
   const DiscountPage({super.key});
 
   @override
+  State<DiscountPage> createState() => _DiscountPageState();
+}
+
+class _DiscountPageState extends State<DiscountPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<IapBloc>().add(const IapEvent.init());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
-      child: const DiscountView(),
-    );
+    return const DiscountView();
   }
 }
 
@@ -44,13 +54,13 @@ class DiscountView extends StatelessWidget {
       body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed) {
+            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
               AppToast.showSuccess(message);
               if (context.mounted && Navigator.of(context).canPop()) {
                 context.pop();
               }
             },
-            error: (message, isWeeklySelected, isVideoRevealed) {
+            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
               context.handleFailure(
                 Failure.business(code: message, message: ''),
               );
@@ -315,7 +325,7 @@ class DiscountView extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            context.read<IapBloc>().add(const IapEvent.purchase());
+            context.read<IapBloc>().add(const IapEvent.purchase(productId: 'buy_annualy_discount'));
           },
           borderRadius: BorderRadius.circular(28),
           child: Padding(

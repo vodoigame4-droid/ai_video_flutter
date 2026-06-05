@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCfpuRT8oADtIM9DvabCqsaRCWJArBMG_M',
-    appId: '1:92781845692:ios:412ea9205c97f45da084b9',
+    appId: '1:92781845692:ios:f60be472e05e2a67a084b9',
     messagingSenderId: '92781845692',
     projectId: 'aivideo-tgv',
     storageBucket: 'aivideo-tgv.firebasestorage.app',
-    iosBundleId: 'com.tgv.aivideo',
+    iosBundleId: 'com.vidoai.videogenerator',
   );
 }

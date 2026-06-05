@@ -356,38 +356,6 @@ class UploadSlotWidget extends StatelessWidget {
       },
     );
   }
-
-  void _showErrorDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      barrierColor: Colors.black.withValues(alpha: 0.6),
-      builder: (dialogContext) {
-        return AlertDialog(
-          backgroundColor: AppColors.onSurface,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          title: Text(
-            context.t.errors.validation_error,
-            style: const TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
-          ),
-          content: Text(
-            message,
-            style: const TextStyle(color: AppColors.subText),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(
-                context.t.tips_sheet.button_got_it,
-                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
 
 

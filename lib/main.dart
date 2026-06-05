@@ -15,6 +15,7 @@ import 'core/services/remote_config_service.dart';
 import 'core/widgets/connectivity_listener_wrapper.dart';
 import 'core/widgets/payment_listener_wrapper.dart';
 import 'core/widgets/notification_listener_wrapper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 
@@ -23,7 +24,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   MediaKit.ensureInitialized();
   await initDependencies();
-  await sl<NotificationRepository>().initialize();
+  sl<NotificationRepository>().initialize();
 
   // Initialize Remote Config (fetch + activate)
   final remoteConfigService = sl<RemoteConfigService>();
@@ -64,32 +65,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TranslationProvider(
-      child: Builder(
-        builder: (context) {
-          return MaterialApp.router(
-            title: 'Video AI',
-            theme: AppTheme.darkTheme,
-            themeMode: ThemeMode.dark,
-            scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
-            locale: TranslationProvider.of(context).locale.flutterLocale,
-            supportedLocales: AppLocaleUtils.supportedLocales,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            routerConfig: appRouter,
-            builder: (context, child) {
-              return ConnectivityListenerWrapper(
-                child: PaymentListenerWrapper(
-                  child: NotificationListenerWrapper(
-                    child: child ?? const SizedBox.shrink(),
+      child: BlocProvider<IapBloc>(
+        create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
+        child: Builder(
+          builder: (context) {
+            return MaterialApp.router(
+              title: 'Video AI',
+              theme: AppTheme.darkTheme,
+              themeMode: ThemeMode.dark,
+              scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+              locale: TranslationProvider.of(context).locale.flutterLocale,
+              supportedLocales: AppLocaleUtils.supportedLocales,
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              routerConfig: appRouter,
+              builder: (context, child) {
+                return ConnectivityListenerWrapper(
+                  child: PaymentListenerWrapper(
+                    child: NotificationListenerWrapper(
+                      child: child ?? const SizedBox.shrink(),
+                    ),
                   ),
-                ),
-              );
-            },
-          );
-        },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -89,20 +89,19 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
         );
       }
 
-      // Setup Notification topics
-      try {
-        final isGranted = await notificationRepository.requestPermission();
-        if (isGranted) {
-          await notificationRepository.subscribeToTopic('all');
-          await notificationRepository.subscribeToTopic(deviceId);
+      // Setup Notification topics in the background without blocking the login/app startup flow
+      notificationRepository.requestPermission().then((isGranted) {
+        if (isGranted && deviceId != null) {
+          notificationRepository.subscribeToTopic('all');
+          notificationRepository.subscribeToTopic(deviceId);
         }
-      } catch (e, stack) {
+      }).catchError((e, stack) {
         LogUtils.e(
           'AutoLoginUseCase: Notification setup failed',
           error: e,
           stackTrace: stack,
         );
-      }
+      });
 
       if (user != null) {
         return Resource.success(user!);

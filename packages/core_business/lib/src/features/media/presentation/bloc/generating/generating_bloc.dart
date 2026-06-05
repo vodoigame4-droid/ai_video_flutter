@@ -278,10 +278,13 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
           );
         },
         notifyComplete: () async {
-          final isGranted = await notificationRepository.requestPermission();
+          final isGranted = await notificationRepository.requestPermission().timeout(
+            const Duration(seconds: 2),
+            onTimeout: () => false,
+          );
           if (isGranted && _mediaId != null) {
-            // Đăng ký FCM Topic nhận thông báo khi video này sinh xong
-            await notificationRepository.subscribeToTopic('aivideo_generation_$_mediaId');
+            // Đăng ký FCM Topic nhận thông báo khi video này sinh xong (không block UI)
+            unawaited(notificationRepository.subscribeToTopic('aivideo_generation_$_mediaId'));
           }
           _timer?.cancel();
           _timer = null;

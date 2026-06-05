@@ -8,6 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/services/remote_config_service.dart';
@@ -15,7 +16,7 @@ import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
 
-class IapPage extends StatelessWidget {
+class IapPage extends StatefulWidget {
   static const String path = '/iap';
   static const String name = 'iap';
 
@@ -24,11 +25,21 @@ class IapPage extends StatelessWidget {
   const IapPage({super.key, this.videoUrl = ''});
 
   @override
+  State<IapPage> createState() => _IapPageState();
+}
+
+class _IapPageState extends State<IapPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<IapBloc>().add(const IapEvent.init());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<IapBloc>()..add(const IapEvent.init()),
-      child: IapView(videoUrl: videoUrl),
-    );
+    return IapView(videoUrl: widget.videoUrl);
   }
 }
 
@@ -56,10 +67,10 @@ class IapView extends StatelessWidget {
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
             state.whenOrNull(
-              success: (message, isWeeklySelected, isVideoRevealed) {
+              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
                 AppToast.showSuccess(message);
               },
-              error: (message, isWeeklySelected, isVideoRevealed) {
+              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
                 context.handleFailure(Failure.business(code: message, message: ''));
               },
             );
@@ -91,18 +102,29 @@ class IapView extends StatelessWidget {
               ),
               orElse: () {
                 bool isWeekly = false;
+                List<Product> weeklyProducts = [];
+                List<Product> yearlyProducts = [];
   
                 state.mapOrNull(
                   ready: (s) {
                     isWeekly = s.isWeeklySelected;
+                    weeklyProducts = s.weeklyProducts;
+                    yearlyProducts = s.yearlyProducts;
                   },
                   success: (s) {
                     isWeekly = s.isWeeklySelected;
+                    weeklyProducts = s.weeklyProducts;
+                    yearlyProducts = s.yearlyProducts;
                   },
                   error: (s) {
                     isWeekly = s.isWeeklySelected;
+                    weeklyProducts = s.weeklyProducts;
+                    yearlyProducts = s.yearlyProducts;
                   },
                 );
+
+                final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : t.premium.weekly_price;
+                final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : t.premium.annually_price;
   
                 return Stack(
                   children: [
@@ -363,42 +385,50 @@ class IapView extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 20),
 
-                                        // Weekly Subscription Package (Unselected)
-                                        SubscriptionPackageCard(
-                                          title: t.premium.weekly,
-                                          description: t.premium.weekly_desc,
-                                          price: t.premium.weekly_price,
-                                          suffix: t.premium.weekly_suffix,
-                                          tagText: t.premium.best_value,
-                                          tagColors: const [
-                                            Color(0xFFff6320),
-                                            Color(0xFFfae123),
-                                          ],
-                                          isSelected: isWeekly,
-                                          onTap: () =>
-                                              context.read<IapBloc>().add(
-                                                const IapEvent.selectWeekly(),
-                                              ),
-                                        ),
-                                        const SizedBox(height: 8),
-
-                                        // Annually Subscription Package (Selected)
-                                        SubscriptionPackageCard(
-                                          title: t.premium.annually,
-                                          description: t.premium.annually_desc,
-                                          price: t.premium.annually_price,
-                                          suffix: t.premium.annually_suffix,
-                                          tagText: t.premium.save_80,
-                                          tagColors: const [
-                                            Color(0xFFff6320),
-                                            Color(0xFFfae123),
-                                          ],
-                                          isSelected: !isWeekly,
-                                          onTap: () =>
-                                              context.read<IapBloc>().add(
-                                                const IapEvent.selectAnnually(),
-                                              ),
-                                        ),
+                                         // Weekly Subscription Package (Unselected)
+                                         SubscriptionPackageCard(
+                                           title: t.premium.weekly,
+                                           description: t.premium.weekly_desc,
+                                           price: weeklyPrice,
+                                           suffix: t.premium.weekly_suffix,
+                                           tagText: t.premium.best_value,
+                                           tagColors: const [
+                                             Color(0xFFff6320),
+                                             Color(0xFFfae123),
+                                           ],
+                                           isSelected: isWeekly,
+                                           onTap: () {
+                                             context.read<IapBloc>().add(
+                                                   const IapEvent.selectWeekly(),
+                                                 );
+                                             context.read<IapBloc>().add(
+                                                   const IapEvent.purchase(),
+                                                 );
+                                           },
+                                         ),
+                                         const SizedBox(height: 8),
+ 
+                                         // Annually Subscription Package (Selected)
+                                         SubscriptionPackageCard(
+                                           title: t.premium.annually,
+                                           description: t.premium.annually_desc,
+                                           price: yearlyPrice,
+                                           suffix: t.premium.annually_suffix,
+                                           tagText: t.premium.save_80,
+                                           tagColors: const [
+                                             Color(0xFFff6320),
+                                             Color(0xFFfae123),
+                                           ],
+                                           isSelected: !isWeekly,
+                                           onTap: () {
+                                             context.read<IapBloc>().add(
+                                                   const IapEvent.selectAnnually(),
+                                                 );
+                                             context.read<IapBloc>().add(
+                                                   const IapEvent.purchase(),
+                                                 );
+                                           },
+                                         ),
                                         const SizedBox(height: 24),
 
                                         // Start My Subscription Button (Crown + Text + Arrow)

@@ -7,7 +7,6 @@ import '../../../../../core/resources/resource.dart';
 import '../../../../../core/usecases/usecase.dart';
 import '../../../../auth/domain/usecases/watch_profile_usecase.dart';
 import '../../../../auth/domain/usecases/get_profile_usecase.dart';
-import '../../../../auth/domain/entities/user_entity.dart';
 import 'create_video_event.dart';
 import 'create_video_state.dart';
 
