@@ -162,7 +162,6 @@ class SubscriptionPackageCard extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors:
-                      tagColors ??
                       [const Color(0xFFff6320), const Color(0xFFfae123)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -176,7 +175,7 @@ class SubscriptionPackageCard extends StatelessWidget {
                 tagText!,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,

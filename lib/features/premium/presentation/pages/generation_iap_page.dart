@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
@@ -18,6 +21,7 @@ import 'discount_page.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
+import '../../../../core/widgets/gradient_border_container.dart';
 
 class GenerationIapPage extends StatelessWidget {
   static const String path = '/generation-iap';
@@ -87,31 +91,35 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.15),
+              color: Colors.white.withValues(alpha: 0.20),
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
                 color: Colors.white.withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
-            child: const Text(
-              'Tap to Reveal',
-              style: TextStyle(
+            child: Text(
+              t.premium.tap_to_reveal,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 18,
               ),
             ),
           ),
           const SizedBox(height: 6),
-          const Icon(
-            Icons.touch_app_rounded,
-            color: Colors.white,
-            size: 28,
-          )
-              .animate(onPlay: (controller) => controller.repeat(reverse: true))
-              .scale(begin: const Offset(0.9, 0.9), end: const Offset(1.1, 1.1), duration: 800.milliseconds)
-              .moveY(begin: 0, end: 4, duration: 800.milliseconds),
+          Transform.translate(
+            offset: const Offset(0, -16),
+            child: Transform.rotate(
+              angle: 0.40,
+              child: Lottie.asset(
+                'assets/raw/click_animation.json',
+                width: 80,
+                height: 80,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -250,6 +258,8 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                   child: Column(
                                     children: [
                                       // Centered Tap To Reveal Button
+                                      const Spacer(),
+
                                       Center(child: _buildTapToReveal()),
                                       
                                       const Spacer(),
@@ -308,24 +318,27 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                           ClipRRect(
                                             borderRadius: BorderRadius.circular(100),
                                             child: BackdropFilter(
-                                              filter: ImageFilter.blur(sigmaX: 7.5, sigmaY: 7.5),
-                                              child: Container(
+                                              filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+                                              child: GradientBorderContainer(
                                                 height: 38,
+                                                borderRadius: BorderRadius.circular(100),
+                                                borderWidth: 1.2,
+                                                gradient: AppColors.primaryGradient,
+                                                padding: EdgeInsets.zero,
+                                                child: Container(
                                                 decoration: BoxDecoration(
                                                   gradient: LinearGradient(
                                                     colors: [
-                                                      const Color(0xFF24C780).withValues(alpha: 0.2),
-                                                      const Color(0xFF2BC5C5).withValues(alpha: 0.2),
+                                                        AppColors.primary.withValues(alpha: 0.3),
+                                                        AppColors.secondary.withValues(alpha: 0.3),
                                                     ],
+                                                      begin: Alignment.centerLeft,
+                                                      end: Alignment.centerRight,
                                                   ),
                                                   borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(
-                                                    color: const Color(0xFF24C780),
-                                                    width: 1.2,
-                                                  ),
                                                 ),
                                                 child: Material(
-                                                  color: Colors.transparent,
+                                                    color: Colors.transparent,
                                                   child: InkWell(
                                                     onTap: () => context.push(
                                                       '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
@@ -361,6 +374,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                                         ],
                                                       ),
                                                     ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -375,10 +389,6 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             price: weeklyPrice,
                                             suffix: t.premium.weekly_suffix,
                                             tagText: t.premium.best_value,
-                                            tagColors: const [
-                                              Color(0xFF24C780),
-                                              Color(0xFF2BC5C5),
-                                            ],
                                             isSelected: isWeekly,
                                             onTap: () {
                                               context.read<IapBloc>().add(const IapEvent.selectWeekly());
@@ -414,15 +424,22 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
 
                                           // Start Free Trial Button
                                           GradientButton(
-                                            label: t.premium.start_my_subscription,
+                                            label: isWeekly
+                                                ? t.premium.start_free_trial
+                                                : t.premium.start_my_subscription,
+                                            leadingIcon: !isWeekly
+                                                ? SvgPicture.asset(
+                                                    Assets.icons.icCrown,
+                                                    width: 18,
+                                                    height: 18,
+                                                  )
+                                                : null,
                                             width: double.infinity,
-                                            gradient: const LinearGradient(
-                                              colors: [Color(0xFF24C780), Color(0xFF2BC5C5)],
-                                            ),
+                                            gradient: AppColors.primaryGradient,
                                             textStyle: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                             trailingIcon: const Icon(
                                               Icons.arrow_forward_rounded,
@@ -447,8 +464,8 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                           // Footer Info
                                           Text(
                                             t.premium.auto_renewable,
-                                            style: const TextStyle(
-                                              color: Colors.white70,
+                                            style: TextStyle(
+                                              color: AppColors.subText,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -463,7 +480,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                                 child: Text(
                                                   t.premium.privacy_policy,
                                                   style: const TextStyle(
-                                                    color: Colors.white60,
+                                                    color: AppColors.subText,
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -471,14 +488,14 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                               ),
                                               const Padding(
                                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                                child: Text('|', style: TextStyle(color: Colors.white38)),
+                                                child: Text('|', style: TextStyle(color: AppColors.subText)),
                                               ),
                                               GestureDetector(
                                                 onTap: () => launchTermsOfUse(),
                                                 child: Text(
                                                   t.premium.terms_of_use,
                                                   style: const TextStyle(
-                                                    color: Colors.white60,
+                                                    color: AppColors.subText,
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -495,7 +512,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                                 child: Text(
                                                   t.premium.restore,
                                                   style: const TextStyle(
-                                                    color: Colors.white60,
+                                                    color: AppColors.subText,
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -535,33 +552,13 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                               width: 36,
                               height: 36,
                               decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.4),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(
                                 Icons.close,
                                 color: Colors.white,
                                 size: 20,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              AppToast.showSuccess(t.premium.restore);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.4),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: Text(
-                                t.premium.restore,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
                               ),
                             ),
                           ),
