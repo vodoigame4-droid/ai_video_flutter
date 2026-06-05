@@ -29,9 +29,11 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
       String? storedDeviceId = sharedPreferences.getString(
         StorageKeys.deviceId,
       );
-      if (kDebugMode) {
-        storedDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
-      }
+
+      // For debugging purposes, you can uncomment the following line to simulate a specific device ID
+      // if (kDebugMode) {
+      //   storedDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
+      // }
 
       String? freshUdid;
       try {
@@ -71,7 +73,9 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
             user = data;
           },
           error: (failure) {
-            LogUtils.e('AutoLoginUseCase: Login failed: ${failure.toErrorCodeOrMessage()}');
+            LogUtils.e(
+              'AutoLoginUseCase: Login failed: ${failure.toErrorCodeOrMessage()}',
+            );
           },
           orElse: () {},
         );
@@ -83,25 +87,30 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
             user = data;
           },
           error: (failure) {
-            LogUtils.e('AutoLoginUseCase: GetProfile failed: ${failure.toErrorCodeOrMessage()}');
+            LogUtils.e(
+              'AutoLoginUseCase: GetProfile failed: ${failure.toErrorCodeOrMessage()}',
+            );
           },
           orElse: () {},
         );
       }
 
       // Setup Notification topics in the background without blocking the login/app startup flow
-      notificationRepository.requestPermission().then((isGranted) {
-        if (isGranted && deviceId != null) {
-          notificationRepository.subscribeToTopic('all');
-          notificationRepository.subscribeToTopic(deviceId);
-        }
-      }).catchError((e, stack) {
-        LogUtils.e(
-          'AutoLoginUseCase: Notification setup failed',
-          error: e,
-          stackTrace: stack,
-        );
-      });
+      notificationRepository
+          .requestPermission()
+          .then((isGranted) {
+            if (isGranted && deviceId != null) {
+              notificationRepository.subscribeToTopic('all');
+              notificationRepository.subscribeToTopic(deviceId);
+            }
+          })
+          .catchError((e, stack) {
+            LogUtils.e(
+              'AutoLoginUseCase: Notification setup failed',
+              error: e,
+              stackTrace: stack,
+            );
+          });
 
       if (user != null) {
         return Resource.success(user!);

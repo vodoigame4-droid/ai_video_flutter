@@ -55,16 +55,15 @@ extension ProfileEventPatterns on ProfileEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ChangeSubTab value)?  changeSubTab,TResult Function( _DeleteVideo value)?  deleteVideo,TResult Function( _TickProgress value)?  tickProgress,TResult Function( _WatchLikedTemplates value)?  watchLikedTemplates,TResult Function( _StopPolling value)?  stopPolling,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ChangeSubTab value)?  changeSubTab,TResult Function( _DeleteVideo value)?  deleteVideo,TResult Function( _WatchLikedTemplates value)?  watchLikedTemplates,TResult Function( _WatchHistory value)?  watchHistory,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that);case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that);case _DeleteVideo() when deleteVideo != null:
-return deleteVideo(_that);case _TickProgress() when tickProgress != null:
-return tickProgress(_that);case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates(_that);case _StopPolling() when stopPolling != null:
-return stopPolling(_that);case _:
+return deleteVideo(_that);case _WatchLikedTemplates() when watchLikedTemplates != null:
+return watchLikedTemplates(_that);case _WatchHistory() when watchHistory != null:
+return watchHistory(_that);case _:
   return orElse();
 
 }
@@ -82,16 +81,15 @@ return stopPolling(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ChangeSubTab value)  changeSubTab,required TResult Function( _DeleteVideo value)  deleteVideo,required TResult Function( _TickProgress value)  tickProgress,required TResult Function( _WatchLikedTemplates value)  watchLikedTemplates,required TResult Function( _StopPolling value)  stopPolling,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ChangeSubTab value)  changeSubTab,required TResult Function( _DeleteVideo value)  deleteVideo,required TResult Function( _WatchLikedTemplates value)  watchLikedTemplates,required TResult Function( _WatchHistory value)  watchHistory,}){
 final _that = this;
 switch (_that) {
 case _Init():
 return init(_that);case _ChangeSubTab():
 return changeSubTab(_that);case _DeleteVideo():
-return deleteVideo(_that);case _TickProgress():
-return tickProgress(_that);case _WatchLikedTemplates():
-return watchLikedTemplates(_that);case _StopPolling():
-return stopPolling(_that);case _:
+return deleteVideo(_that);case _WatchLikedTemplates():
+return watchLikedTemplates(_that);case _WatchHistory():
+return watchHistory(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -108,16 +106,15 @@ return stopPolling(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ChangeSubTab value)?  changeSubTab,TResult? Function( _DeleteVideo value)?  deleteVideo,TResult? Function( _TickProgress value)?  tickProgress,TResult? Function( _WatchLikedTemplates value)?  watchLikedTemplates,TResult? Function( _StopPolling value)?  stopPolling,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ChangeSubTab value)?  changeSubTab,TResult? Function( _DeleteVideo value)?  deleteVideo,TResult? Function( _WatchLikedTemplates value)?  watchLikedTemplates,TResult? Function( _WatchHistory value)?  watchHistory,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that);case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that);case _DeleteVideo() when deleteVideo != null:
-return deleteVideo(_that);case _TickProgress() when tickProgress != null:
-return tickProgress(_that);case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates(_that);case _StopPolling() when stopPolling != null:
-return stopPolling(_that);case _:
+return deleteVideo(_that);case _WatchLikedTemplates() when watchLikedTemplates != null:
+return watchLikedTemplates(_that);case _WatchHistory() when watchHistory != null:
+return watchHistory(_that);case _:
   return null;
 
 }
@@ -134,15 +131,14 @@ return stopPolling(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int subTabIndex)?  changeSubTab,TResult Function( String id)?  deleteVideo,TResult Function()?  tickProgress,TResult Function()?  watchLikedTemplates,TResult Function()?  stopPolling,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Completer<void>? completer)?  init,TResult Function( int subTabIndex)?  changeSubTab,TResult Function( String id)?  deleteVideo,TResult Function()?  watchLikedTemplates,TResult Function()?  watchHistory,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _ChangeSubTab() when changeSubTab != null:
+return init(_that.completer);case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that.subTabIndex);case _DeleteVideo() when deleteVideo != null:
-return deleteVideo(_that.id);case _TickProgress() when tickProgress != null:
-return tickProgress();case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates();case _StopPolling() when stopPolling != null:
-return stopPolling();case _:
+return deleteVideo(_that.id);case _WatchLikedTemplates() when watchLikedTemplates != null:
+return watchLikedTemplates();case _WatchHistory() when watchHistory != null:
+return watchHistory();case _:
   return orElse();
 
 }
@@ -160,15 +156,14 @@ return stopPolling();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int subTabIndex)  changeSubTab,required TResult Function( String id)  deleteVideo,required TResult Function()  tickProgress,required TResult Function()  watchLikedTemplates,required TResult Function()  stopPolling,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Completer<void>? completer)  init,required TResult Function( int subTabIndex)  changeSubTab,required TResult Function( String id)  deleteVideo,required TResult Function()  watchLikedTemplates,required TResult Function()  watchHistory,}) {final _that = this;
 switch (_that) {
 case _Init():
-return init();case _ChangeSubTab():
+return init(_that.completer);case _ChangeSubTab():
 return changeSubTab(_that.subTabIndex);case _DeleteVideo():
-return deleteVideo(_that.id);case _TickProgress():
-return tickProgress();case _WatchLikedTemplates():
-return watchLikedTemplates();case _StopPolling():
-return stopPolling();case _:
+return deleteVideo(_that.id);case _WatchLikedTemplates():
+return watchLikedTemplates();case _WatchHistory():
+return watchHistory();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -185,15 +180,14 @@ return stopPolling();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int subTabIndex)?  changeSubTab,TResult? Function( String id)?  deleteVideo,TResult? Function()?  tickProgress,TResult? Function()?  watchLikedTemplates,TResult? Function()?  stopPolling,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Completer<void>? completer)?  init,TResult? Function( int subTabIndex)?  changeSubTab,TResult? Function( String id)?  deleteVideo,TResult? Function()?  watchLikedTemplates,TResult? Function()?  watchHistory,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _ChangeSubTab() when changeSubTab != null:
+return init(_that.completer);case _ChangeSubTab() when changeSubTab != null:
 return changeSubTab(_that.subTabIndex);case _DeleteVideo() when deleteVideo != null:
-return deleteVideo(_that.id);case _TickProgress() when tickProgress != null:
-return tickProgress();case _WatchLikedTemplates() when watchLikedTemplates != null:
-return watchLikedTemplates();case _StopPolling() when stopPolling != null:
-return stopPolling();case _:
+return deleteVideo(_that.id);case _WatchLikedTemplates() when watchLikedTemplates != null:
+return watchLikedTemplates();case _WatchHistory() when watchHistory != null:
+return watchHistory();case _:
   return null;
 
 }
@@ -205,33 +199,67 @@ return stopPolling();case _:
 
 
 class _Init implements ProfileEvent {
-  const _Init();
+  const _Init([this.completer]);
   
 
+ final  Completer<void>? completer;
 
-
+/// Create a copy of ProfileEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$InitCopyWith<_Init> get copyWith => __$InitCopyWithImpl<_Init>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Init&&(identical(other.completer, completer) || other.completer == completer));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,completer);
 
 @override
 String toString() {
-  return 'ProfileEvent.init()';
+  return 'ProfileEvent.init(completer: $completer)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$InitCopyWith<$Res> implements $ProfileEventCopyWith<$Res> {
+  factory _$InitCopyWith(_Init value, $Res Function(_Init) _then) = __$InitCopyWithImpl;
+@useResult
+$Res call({
+ Completer<void>? completer
+});
 
 
+
+
+}
+/// @nodoc
+class __$InitCopyWithImpl<$Res>
+    implements _$InitCopyWith<$Res> {
+  __$InitCopyWithImpl(this._self, this._then);
+
+  final _Init _self;
+  final $Res Function(_Init) _then;
+
+/// Create a copy of ProfileEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? completer = freezed,}) {
+  return _then(_Init(
+freezed == completer ? _self.completer : completer // ignore: cast_nullable_to_non_nullable
+as Completer<void>?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
@@ -368,38 +396,6 @@ as String,
 /// @nodoc
 
 
-class _TickProgress implements ProfileEvent {
-  const _TickProgress();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TickProgress);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ProfileEvent.tickProgress()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
 class _WatchLikedTemplates implements ProfileEvent {
   const _WatchLikedTemplates();
   
@@ -432,8 +428,8 @@ String toString() {
 /// @nodoc
 
 
-class _StopPolling implements ProfileEvent {
-  const _StopPolling();
+class _WatchHistory implements ProfileEvent {
+  const _WatchHistory();
   
 
 
@@ -443,7 +439,7 @@ class _StopPolling implements ProfileEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StopPolling);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WatchHistory);
 }
 
 
@@ -452,7 +448,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ProfileEvent.stopPolling()';
+  return 'ProfileEvent.watchHistory()';
 }
 
 

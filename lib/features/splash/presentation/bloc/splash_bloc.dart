@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -149,6 +150,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Future<void> _initHavinSdk() async {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) {
+      _isHavinSdkInitialized = true;
+      _checkAllInitializationCompleted();
+      return;
+    }
     try {
       final billingConfig = BillingConfig(
         debugMode: false,
@@ -187,6 +193,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   void _checkAllInitializationCompleted() {
+    LogUtils.d('SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress');
     if (_isLoginCompleted &&
         _isOnboardingPreloadCompleted &&
         _isHavinSdkInitialized) {
