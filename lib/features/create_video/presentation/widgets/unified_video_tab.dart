@@ -177,6 +177,8 @@ class UnifiedVideoTab extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
               t.create.upload_image,
@@ -202,6 +204,8 @@ class UnifiedVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
         Text(
           t.create.custom_prompt,
@@ -220,6 +224,8 @@ class UnifiedVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
         Text(
           t.create.video_settings,

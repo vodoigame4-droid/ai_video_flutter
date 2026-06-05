@@ -369,7 +369,13 @@
     "step_1": "ステップ1",
     "step_2": "ステップ2",
     "upload_photo": "写真をアップロード",
-    "got_it": "わかりました！"
+    "got_it": "わかりました！",
+    "write_prompt": "プロンプトを入力",
+    "upload_2_photos": "写真を2枚アップロード",
+    "generate": "生成する",
+    "upload_portrait": "ポートレートをアップロード",
+    "choose_style": "スタイルを選択",
+    "add_assets": "アセットを追加"
   },
   "checkin": {
     "title": "ログイン",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "重要度の高い通知",
     "channel_description": "このチャネルは重要な通知に使用されます。"
+  },
+  "rating_dialog": {
+    "title": "アプリを楽しんでいますか？",
+    "desc": "評価をお願いします。より良い体験の提供に努めます。ありがとうございます！",
+    "support_us": "応援する",
+    "maybe_later": "後で",
+    "success": "ご支援ありがとうございました！"
   }
 }

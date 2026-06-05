@@ -10,6 +10,7 @@ import '../../../../core/widgets/app_background.dart';
 import '../../../../i18n/strings.g.dart';
 import '../widgets/video_settings_card_widget.dart';
 import 'generating_page.dart';
+import '../../../../core/utils/credit_navigation_helper.dart';
 
 class CreateTemplateSettingsPage extends StatelessWidget {
   static const String path = '/create-template-settings';
@@ -31,10 +32,18 @@ class CreateTemplateSettingsPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: SafeArea(
             child: BlocListener<CreateFromTemplateBloc, CreateFromTemplateState>(
-              listener: (context, state) {
-                state.mapOrNull(
-                  ready: (readyState) {
+              listener: (context, state) async {
+                await state.mapOrNull(
+                  ready: (readyState) async {
                     if (readyState.isGenerating) {
+                      final hasInsufficient = await CreditNavigationHelper.checkInsufficientCreditsAndNavigate(
+                        context,
+                        videoUrl: readyState.videoUrl,
+                      );
+                      if (hasInsufficient) return;
+
+                      if (!context.mounted) return;
+
                       context.pushNamed(
                         GeneratingPage.name,
                         queryParameters: {

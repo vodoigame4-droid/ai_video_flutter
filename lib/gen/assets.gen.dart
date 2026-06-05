@@ -24,6 +24,9 @@ class $AssetsAnimationsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_ai_setting.svg
+  String get icAiSetting => 'assets/icons/ic_ai_setting.svg';
+
   /// File path: assets/icons/ic_ai_yellow.svg
   String get icAiYellow => 'assets/icons/ic_ai_yellow.svg';
 
@@ -35,6 +38,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_camera.svg
   String get icCamera => 'assets/icons/ic_camera.svg';
+
+  /// File path: assets/icons/ic_contact_us.svg
+  String get icContactUs => 'assets/icons/ic_contact_us.svg';
 
   /// File path: assets/icons/ic_credit_icon.png
   AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
@@ -87,11 +93,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_inspire_me.svg
   String get icInspireMe => 'assets/icons/ic_inspire_me.svg';
 
+  /// File path: assets/icons/ic_language.svg
+  String get icLanguage => 'assets/icons/ic_language.svg';
+
   /// File path: assets/icons/ic_layer_yellow.svg
   String get icLayerYellow => 'assets/icons/ic_layer_yellow.svg';
 
   /// File path: assets/icons/ic_notice.svg
   String get icNotice => 'assets/icons/ic_notice.svg';
+
+  /// File path: assets/icons/ic_privacy.svg
+  String get icPrivacy => 'assets/icons/ic_privacy.svg';
 
   /// File path: assets/icons/ic_purple_box.svg
   String get icPurpleBox => 'assets/icons/ic_purple_box.svg';
@@ -101,6 +113,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_question.svg
   String get icQuestion => 'assets/icons/ic_question.svg';
+
+  /// File path: assets/icons/ic_rate.svg
+  String get icRate => 'assets/icons/ic_rate.svg';
 
   /// File path: assets/icons/ic_red_tick.svg
   String get icRedTick => 'assets/icons/ic_red_tick.svg';
@@ -116,6 +131,15 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/ic_star_vip.png
   AssetGenImage get icStarVip => const AssetGenImage('assets/icons/ic_star_vip.png');
+
+  /// File path: assets/icons/ic_support_us.svg
+  String get icSupportUs => 'assets/icons/ic_support_us.svg';
+
+  /// File path: assets/icons/ic_term.svg
+  String get icTerm => 'assets/icons/ic_term.svg';
+
+  /// File path: assets/icons/ic_tick.svg
+  String get icTick => 'assets/icons/ic_tick.svg';
 
   /// File path: assets/icons/ic_transition_home.svg
   String get icTransitionHome => 'assets/icons/ic_transition_home.svg';
@@ -138,6 +162,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_upload_video.svg
   String get icUploadVideo => 'assets/icons/ic_upload_video.svg';
 
+  /// File path: assets/icons/ic_user_code.svg
+  String get icUserCode => 'assets/icons/ic_user_code.svg';
+
   /// File path: assets/icons/ic_video_add.svg
   String get icVideoAdd => 'assets/icons/ic_video_add.svg';
 
@@ -146,10 +173,12 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    icAiSetting,
     icAiYellow,
     icArrowRight,
     icBlueMask,
     icCamera,
+    icContactUs,
     icCreditIcon,
     icDanceHome,
     icDelete,
@@ -167,16 +196,22 @@ class $AssetsIconsGen {
     icImageToDance,
     icImageToVideo,
     icInspireMe,
+    icLanguage,
     icLayerYellow,
     icNotice,
+    icPrivacy,
     icPurpleBox,
     icQuality,
     icQuestion,
+    icRate,
     icRedTick,
     icRegenerate,
     icReport,
     icShare,
     icStarVip,
+    icSupportUs,
+    icTerm,
+    icTick,
     icTransitionHome,
     icTranslateVideo,
     icTrash,
@@ -184,6 +219,7 @@ class $AssetsIconsGen {
     icUnifiedHome,
     icUnifiledVideo,
     icUploadVideo,
+    icUserCode,
     icVideoAdd,
     profile,
   ];
@@ -260,6 +296,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_radio_inactive.svg
   String get icRadioInactive => 'assets/images/ic_radio_inactive.svg';
 
+  /// File path: assets/images/ic_rate_app.png
+  AssetGenImage get icRateApp => const AssetGenImage('assets/images/ic_rate_app.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -314,6 +353,7 @@ class $AssetsImagesGen {
     icLogoHome,
     icRadioActive,
     icRadioInactive,
+    icRateApp,
     logo,
     navHome,
     navUser,

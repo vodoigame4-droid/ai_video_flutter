@@ -62,6 +62,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$ja checkin = _Translations$checkin$ja._(_root);
 	@override late final _Translations$connectivity$ja connectivity = _Translations$connectivity$ja._(_root);
 	@override late final _Translations$notification$ja notification = _Translations$notification$ja._(_root);
+	@override late final _Translations$rating_dialog$ja rating_dialog = _Translations$rating_dialog$ja._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$ja extends Translations$guide$en {
 	@override String get step_2 => 'ステップ2';
 	@override String get upload_photo => '写真をアップロード';
 	@override String get got_it => 'わかりました！';
+	@override String get write_prompt => 'プロンプトを入力';
+	@override String get upload_2_photos => '写真を2枚アップロード';
+	@override String get generate => '生成する';
+	@override String get upload_portrait => 'ポートレートをアップロード';
+	@override String get choose_style => 'スタイルを選択';
+	@override String get add_assets => 'アセットを追加';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$ja extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => '重要度の高い通知';
 	@override String get channel_description => 'このチャネルは重要な通知に使用されます。';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$ja extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'アプリを楽しんでいますか？';
+	@override String get desc => '評価をお願いします。より良い体験の提供に努めます。ありがとうございます！';
+	@override String get support_us => '応援する';
+	@override String get maybe_later => '後で';
+	@override String get success => 'ご支援ありがとうございました！';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsJa {
 			'guide.step_2' => 'ステップ2',
 			'guide.upload_photo' => '写真をアップロード',
 			'guide.got_it' => 'わかりました！',
+			'guide.write_prompt' => 'プロンプトを入力',
+			'guide.upload_2_photos' => '写真を2枚アップロード',
+			'guide.generate' => '生成する',
+			'guide.upload_portrait' => 'ポートレートをアップロード',
+			'guide.choose_style' => 'スタイルを選択',
+			'guide.add_assets' => 'アセットを追加',
 			'checkin.title' => 'ログイン',
 			'checkin.subtitle' => '毎日報酬をゲット！',
 			'checkin.today' => '今日',
@@ -995,6 +1022,11 @@ extension on TranslationsJa {
 			'connectivity.retry_button' => '接続を再試行',
 			'notification.channel_name' => '重要度の高い通知',
 			'notification.channel_description' => 'このチャネルは重要な通知に使用されます。',
+			'rating_dialog.title' => 'アプリを楽しんでいますか？',
+			'rating_dialog.desc' => '評価をお願いします。より良い体験の提供に努めます。ありがとうございます！',
+			'rating_dialog.support_us' => '応援する',
+			'rating_dialog.maybe_later' => '後で',
+			'rating_dialog.success' => 'ご支援ありがとうございました！',
 			_ => null,
 		};
 	}

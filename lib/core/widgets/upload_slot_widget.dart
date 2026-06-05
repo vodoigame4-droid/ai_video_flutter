@@ -103,7 +103,7 @@ class UploadSlotWidget extends StatelessWidget {
     final activeBorderColor = borderColor ?? AppColors.primary;
 
     return Container(
-      color: AppColors.background,
+      color: AppColors.onSurface,
       child: CustomPaint(
         painter: _DashedBorderPainter(
           color: activeBorderColor,
@@ -113,7 +113,6 @@ class UploadSlotWidget extends StatelessWidget {
           dashGap: 8.0,
         ),
         child: Container(
-          color: Colors.transparent,
           padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

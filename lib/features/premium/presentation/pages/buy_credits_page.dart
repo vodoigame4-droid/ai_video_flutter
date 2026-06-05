@@ -6,8 +6,11 @@ import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/widgets/defer_init_widget.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../../../../gen/assets.gen.dart';
 import '../widgets/credit_pack_row.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 
 class BuyCreditsPage extends StatelessWidget {
   static const String path = '/buy_credits';
@@ -17,7 +20,17 @@ class BuyCreditsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BuyCreditsView();
+    return const DeferInitWidget(
+      placeholder: Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+          ),
+        ),
+      ),
+      child: BuyCreditsView(),
+    );
   }
 }
 
@@ -43,75 +56,90 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
   Widget build(BuildContext context) {
     final t = context.t;
 
+    final iapBlocState = context.watch<IapBloc>().state;
+    final List<Product> regularProducts = iapBlocState.maybeWhen(
+      ready: (isWeeklySelected, isVideoRevealed, weeklyProducts, yearlyProducts, discountCreditProducts, regularCreditProducts) => regularCreditProducts,
+      success: (message, isWeeklySelected, isVideoRevealed, weeklyProducts, yearlyProducts, discountCreditProducts, regularCreditProducts) => regularCreditProducts,
+      error: (message, isWeeklySelected, isVideoRevealed, weeklyProducts, yearlyProducts, discountCreditProducts, regularCreditProducts) => regularCreditProducts,
+      orElse: () => const [],
+    );
+
+    String getProductPrice(int credits) {
+      final matchCredits = '${credits}credits';
+      for (final p in regularProducts) {
+        final id = p.id.toLowerCase();
+        if (id == matchCredits || id == 'com.vexa.ai.video.$matchCredits' || id.endsWith(matchCredits)) {
+          return p.priceString;
+        }
+      }
+      return '0';
+    }
+
     // Helper to get package info based on index
     Map<String, dynamic> getPackageData(int index) {
       switch (index) {
         case 0:
-          return {'credits': 70, 'price': t.premium.price_70};
+          return {'credits': 70, 'price': getProductPrice(70)};
         case 1:
-          return {'credits': 150, 'price': t.premium.price_150};
+          return {'credits': 150, 'price': getProductPrice(150)};
         case 2:
-          return {'credits': 350, 'price': t.premium.price_350};
+          return {'credits': 350, 'price': getProductPrice(350)};
         case 3:
-          return {'credits': 500, 'price': t.premium.price_500};
+          return {'credits': 500, 'price': getProductPrice(500)};
         case 4:
-          return {'credits': 1000, 'price': t.premium.price_1000};
+          return {'credits': 1000, 'price': getProductPrice(1000)};
         case 5:
-          return {'credits': 5000, 'price': t.premium.price_5000};
+          return {'credits': 5000, 'price': getProductPrice(5000)};
         default:
-          return {'credits': 1000, 'price': t.premium.price_1000};
+          return {'credits': 1000, 'price': getProductPrice(1000)};
       }
     }
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: BlocConsumer<IapBloc, IapState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-              AppToast.showSuccess(message);
-            },
-            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-              context.handleFailure(
-                Failure.business(code: message, message: ''),
-              );
-            },
-          );
-        },
-        builder: (context, state) {
-          return state.maybeWhen(
-            initial: () => const Center(
+    return BlocConsumer<IapBloc, IapState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
+            AppToast.showSuccess(message);
+          },
+          error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
+            context.handleFailure(
+              Failure.business(code: message, message: ''),
+            );
+          },
+        );
+      },
+      builder: (context, state) {
+        final isInitial = state.maybeWhen(
+          initial: () => true,
+          orElse: () => false,
+        );
+
+        final isLoadingProducts = state.maybeWhen(
+          loading: () => regularProducts.isEmpty,
+          orElse: () => false,
+        );
+
+        final isPurchasing = state.maybeWhen(
+          loading: () => regularProducts.isNotEmpty,
+          orElse: () => false,
+        );
+
+        if (isInitial || isLoadingProducts) {
+          return const Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
               ),
             ),
-            loading: () => Stack(
-              children: [
-                Positioned.fill(child: Container(color: Colors.black)),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          AppColors.primary,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        t.common.processing,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            orElse: () {
-              return Column(
+          );
+        }
+
+        return Stack(
+          children: [
+            Scaffold(
+              backgroundColor: Colors.black,
+              body: Column(
                 children: [
                   // Scrollable content
                   Expanded(
@@ -174,7 +202,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
 
                           // Subscription Discount Banner (green gradient)
                           Padding(
-                            padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 4),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                             child: Image.asset(
                               Assets.images.bgBannerBuyCredit.path,
                               width: double.infinity,
@@ -194,7 +222,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   videoEstimate: t.premium.approx_videos(
                                     count: 2,
                                   ),
-                                  priceText: t.premium.price_70,
+                                  priceText: getProductPrice(70),
                                   isSelected: _selectedPackageIndex == 0,
                                   onTap: () =>
                                       setState(() => _selectedPackageIndex = 0),
@@ -205,7 +233,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   videoEstimate: t.premium.approx_videos(
                                     count: 4,
                                   ),
-                                  priceText: t.premium.price_150,
+                                  priceText: getProductPrice(150),
                                   isSelected: _selectedPackageIndex == 1,
                                   onTap: () =>
                                       setState(() => _selectedPackageIndex = 1),
@@ -216,7 +244,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   videoEstimate: t.premium.approx_videos(
                                     count: 10,
                                   ),
-                                  priceText: t.premium.price_350,
+                                  priceText: getProductPrice(350),
                                   isSelected: _selectedPackageIndex == 2,
                                   onTap: () =>
                                       setState(() => _selectedPackageIndex = 2),
@@ -227,7 +255,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   videoEstimate: t.premium.approx_videos(
                                     count: 14,
                                   ),
-                                  priceText: t.premium.price_500,
+                                  priceText: getProductPrice(500),
                                   isSelected: _selectedPackageIndex == 3,
                                   onTap: () =>
                                       setState(() => _selectedPackageIndex = 3),
@@ -238,7 +266,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   videoEstimate: t.premium.approx_videos(
                                     count: 27,
                                   ),
-                                  priceText: t.premium.price_1000,
+                                  priceText: getProductPrice(1000),
                                   tagText: t.premium.most_popular,
                                   isSelected: _selectedPackageIndex == 4,
                                   onTap: () =>
@@ -250,7 +278,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   videoEstimate: t.premium.approx_videos(
                                     count: 142,
                                   ),
-                                  priceText: t.premium.price_5000,
+                                  priceText: getProductPrice(5000),
                                   tagText: t.premium.best_value,
                                   tagColors: const [
                                     Color(0xFF00C853),
@@ -301,10 +329,12 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 final data = getPackageData(
                                   _selectedPackageIndex,
                                 );
+                                final credits = data['credits'] as int;
+                                final price = data['price'] as String;
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: data['credits'] as int,
-                                    priceText: data['price'] as String,
+                                    credits: credits,
+                                    priceText: price,
                                   ),
                                 );
                               },
@@ -359,7 +389,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () => launchPrivacyPolicy(),
                               child: Text(
                                 t.premium.privacy_policy,
                                 style: const TextStyle(
@@ -380,7 +410,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () => launchTermsOfUse(),
                               child: Text(
                                 t.premium.terms_of_use,
                                 style: const TextStyle(
@@ -438,11 +468,37 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                     ),
                   ),
                 ],
-              );
-            },
-          );
-        },
-      ),
+              ),
+            ),
+            if (isPurchasing)
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withValues(alpha: 0.7),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primary,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          t.common.processing,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

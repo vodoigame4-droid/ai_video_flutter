@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:core_business/core_business.dart';
 
@@ -11,6 +12,9 @@ class RemoteConfigService {
   static const String rcBannerHome = 'rcBannerHome';
   static const String rcBgIAP = 'rcBgIAP';
   static const String rcBgDiscount = 'rcBgDiscount';
+  static const String rcBgVideosJson = 'background_videos';
+  static const String rcVideoGenCost = 'video_gen_cost';
+  static const int defaultVideoGenCost = 35;
 
   /// Default fallback values
   static const String defaultBannerUrl =
@@ -19,6 +23,21 @@ class RemoteConfigService {
       'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4';
   static const String defaultBgDiscountUrl =
       'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/709be36f7bdb.mp4';
+  
+  static const String defaultBgVideosJson = '''
+{
+  "banner_home": "https://mathiasbynens.be/demo/animated-webp-supported.webp",
+  "iap": "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4",
+  "discount": "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/709be36f7bdb.mp4",
+  "guides": [
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp"
+  ],
+  "video_gen_cost": 35
+}
+''';
 
   final FirebaseRemoteConfig _remoteConfig;
 
@@ -42,6 +61,8 @@ class RemoteConfigService {
         rcBannerHome: defaultBannerUrl,
         rcBgIAP: defaultBgIAPUrl,
         rcBgDiscount: defaultBgDiscountUrl,
+        rcBgVideosJson: defaultBgVideosJson,
+        rcVideoGenCost: defaultVideoGenCost,
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
@@ -97,8 +118,28 @@ class RemoteConfigService {
 
   // ── Getters ──
 
+  Map<String, dynamic>? _getParsedBgVideosJson() {
+    try {
+      final value = _remoteConfig.getString(rcBgVideosJson);
+      if (value.isNotEmpty) {
+        final decoded = jsonDecode(value);
+        if (decoded is Map<String, dynamic>) {
+          return decoded;
+        }
+      }
+    } catch (e, stack) {
+      LogUtils.e('$_tag: Failed to parse $rcBgVideosJson', error: e, stackTrace: stack);
+    }
+    return null;
+  }
+
   /// Get the banner home image URL from Remote Config.
   String getBannerHomeUrl() {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['banner_home'] != null) {
+      final url = jsonMap['banner_home'].toString();
+      if (url.isNotEmpty) return url;
+    }
     final value = _remoteConfig.getString(rcBannerHome);
     if (value.isEmpty) return defaultBannerUrl;
     return value;
@@ -106,6 +147,11 @@ class RemoteConfigService {
 
   /// Get the IAP background video URL from Remote Config.
   String getBgIAPUrl() {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['iap'] != null) {
+      final url = jsonMap['iap'].toString();
+      if (url.isNotEmpty) return url;
+    }
     final value = _remoteConfig.getString(rcBgIAP);
     if (value.isEmpty) return defaultBgIAPUrl;
     return value;
@@ -113,8 +159,42 @@ class RemoteConfigService {
 
   /// Get the Discount background video URL from Remote Config.
   String getBgDiscountUrl() {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['discount'] != null) {
+      final url = jsonMap['discount'].toString();
+      if (url.isNotEmpty) return url;
+    }
     final value = _remoteConfig.getString(rcBgDiscount);
     if (value.isEmpty) return defaultBgDiscountUrl;
+    return value;
+  }
+
+  /// Get the guide image URLs list from Remote Config.
+  List<String> getGuideImageUrls() {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['guides'] != null) {
+      final guides = jsonMap['guides'];
+      if (guides is List && guides.isNotEmpty) {
+        return guides.map((e) => e.toString()).toList();
+      }
+    }
+    return const [
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp',
+    ];
+  }
+
+  /// Get the cost to generate a video (default 10 credits) from Remote Config.
+  int get videoGenCost {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['video_gen_cost'] != null) {
+      final cost = int.tryParse(jsonMap['video_gen_cost'].toString());
+      if (cost != null) return cost;
+    }
+    final value = _remoteConfig.getInt(rcVideoGenCost);
+    if (value == 0) return defaultVideoGenCost;
     return value;
   }
 }

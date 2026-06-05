@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
@@ -25,27 +26,34 @@ class PremiumVideoBackground extends StatefulWidget {
 }
 
 class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with WidgetsBindingObserver, RouteAware {
-  late final Player _player;
-  late final VideoController _controller;
+  Player? _player;
+  VideoController? _controller;
   final VideoCacheManager _cacheManager = VideoCacheManager();
   
   bool _isInitialized = false;
   bool _hasError = false;
   bool _isCurrentlyVisible = true;
+  Timer? _initTimer;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     
-    _player = Player();
-    _controller = VideoController(_player);
-    
-    _initializeVideo();
+    // Debounce player creation by 300ms to prevent resource leaks during quick screen pushes/pops
+    _initTimer = Timer(const Duration(milliseconds: 300), () {
+      if (!mounted) return;
+      setState(() {
+        _player = Player();
+        _controller = VideoController(_player!);
+      });
+      _initializeVideo();
+    });
   }
 
   Future<void> _initializeVideo() async {
-    if (widget.videoUrl.isEmpty) {
+    final player = _player;
+    if (player == null || widget.videoUrl.isEmpty) {
       if (mounted) {
         setState(() {
           _isInitialized = true;
@@ -59,15 +67,18 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
       final cachedPath = await _cacheManager.getCachedOrDownload(widget.videoUrl);
       final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : widget.videoUrl;
 
+      // Double check not disposed/null
+      if (!mounted || _player == null) return;
+
       // 2. Open media source
-      await _player.open(Media(mediaSource));
-      _player.setPlaylistMode(PlaylistMode.loop);
-      _player.setVolume(0.0); // Keep silent
+      await player.open(Media(mediaSource));
+      player.setPlaylistMode(PlaylistMode.loop);
+      player.setVolume(0.0); // Keep silent
 
       if (_isCurrentlyVisible) {
-        _player.play();
+        player.play();
       } else {
-        _player.pause();
+        player.pause();
       }
 
       if (mounted) {
@@ -113,7 +124,7 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
         _isInitialized = false;
         _hasError = false;
       });
-      _player.stop().then((_) => _initializeVideo());
+      _player?.stop().then((_) => _initializeVideo());
     }
   }
 
@@ -121,10 +132,10 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // Pause on backgrounding, resume when foregrounded if visible
     if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
-      _player.pause();
+      _player?.pause();
     } else if (state == AppLifecycleState.resumed && _isInitialized && !_hasError && _isCurrentlyVisible) {
       if (widget.videoUrl.isNotEmpty) {
-        _player.play();
+        _player?.play();
       }
     }
   }
@@ -133,7 +144,7 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   void didPushNext() {
     // Paused when another route covers this screen
     _isCurrentlyVisible = false;
-    _player.pause();
+    _player?.pause();
     LogUtils.d('PremiumVideoBackground: Route obscured. Paused video.');
   }
 
@@ -142,16 +153,17 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
     // Resumed when the top route is popped, revealing this screen again
     _isCurrentlyVisible = true;
     if (_isInitialized && !_hasError && widget.videoUrl.isNotEmpty) {
-      _player.play();
+      _player?.play();
       LogUtils.d('PremiumVideoBackground: Route revealed. Resumed video.');
     }
   }
 
   @override
   void dispose() {
+    _initTimer?.cancel();
     routeObserver.unsubscribe(this);
     WidgetsBinding.instance.removeObserver(this);
-    _player.dispose();
+    _player?.dispose();
     super.dispose();
   }
 
@@ -181,14 +193,16 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
       );
     } else {
       // Show Video inside full sized FitBox
-      background = SizedBox.expand(
-        child: Video(
-          controller: _controller,
-          controls: NoVideoControls,
-          fill: const Color(0xFF000200),
-          fit: BoxFit.cover,
-        ),
-      );
+      background = _controller != null 
+          ? SizedBox.expand(
+              child: Video(
+                controller: _controller!,
+                controls: NoVideoControls,
+                fill: const Color(0xFF000200),
+                fit: BoxFit.cover,
+              ),
+            )
+          : Container(color: const Color(0xFF000200));
     }
 
     return Stack(

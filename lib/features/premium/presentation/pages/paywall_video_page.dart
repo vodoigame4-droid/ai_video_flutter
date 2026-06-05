@@ -8,6 +8,7 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
@@ -409,7 +410,7 @@ class PaywallVideoView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () => launchPrivacyPolicy(),
                                 child: Text(
                                   t.premium.privacy_policy,
                                   style: const TextStyle(
@@ -427,7 +428,7 @@ class PaywallVideoView extends StatelessWidget {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () => launchTermsOfUse(),
                                 child: Text(
                                   t.premium.terms_of_use,
                                   style: const TextStyle(

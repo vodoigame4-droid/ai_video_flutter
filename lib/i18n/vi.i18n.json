@@ -376,7 +376,13 @@
     "step_1": "Bước 1",
     "step_2": "Bước 2",
     "upload_photo": "Tải ảnh lên",
-    "got_it": "Đã hiểu!"
+    "got_it": "Đã hiểu!",
+    "write_prompt": "Viết mô tả",
+    "upload_2_photos": "Tải lên 2 ảnh",
+    "generate": "Tạo video",
+    "upload_portrait": "Tải ảnh chân dung",
+    "choose_style": "Chọn phong cách",
+    "add_assets": "Thêm tài nguyên"
   },
   "checkin": {
     "title": "Điểm danh",
@@ -395,5 +401,12 @@
   "notification": {
     "channel_name": "Thông báo quan trọng",
     "channel_description": "Kênh này được sử dụng cho các thông báo quan trọng."
+  },
+  "rating_dialog": {
+    "title": "Bạn thích ứng dụng chứ?",
+    "desc": "Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!",
+    "support_us": "Hỗ trợ chúng tôi",
+    "maybe_later": "Để sau",
+    "success": "Cảm ơn bạn đã ủng hộ!"
   }
 }

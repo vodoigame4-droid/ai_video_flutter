@@ -62,6 +62,7 @@ class TranslationsEs extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$es checkin = _Translations$checkin$es._(_root);
 	@override late final _Translations$connectivity$es connectivity = _Translations$connectivity$es._(_root);
 	@override late final _Translations$notification$es notification = _Translations$notification$es._(_root);
+	@override late final _Translations$rating_dialog$es rating_dialog = _Translations$rating_dialog$es._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$es extends Translations$guide$en {
 	@override String get step_2 => 'Paso 2';
 	@override String get upload_photo => 'Subir foto';
 	@override String get got_it => '¡Lo tengo!';
+	@override String get write_prompt => 'Escribir prompt';
+	@override String get upload_2_photos => 'Subir 2 fotos';
+	@override String get generate => 'Generar';
+	@override String get upload_portrait => 'Subir retrato';
+	@override String get choose_style => 'Elegir estilo';
+	@override String get add_assets => 'Añadir recursos';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$es extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Notificaciones importantes';
 	@override String get channel_description => 'Este canal se utiliza para notificaciones importantes.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$es extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$es._(TranslationsEs root) : this._root = root, super.internal(root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '¿Te gusta la aplicación?';
+	@override String get desc => '¡Por favor, califícanos y ayúdanos a mejorar tu experiencia. ¡Gracias!';
+	@override String get support_us => 'Apóyanos';
+	@override String get maybe_later => 'Tal vez más tarde';
+	@override String get success => '¡Gracias por su apoyo!';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsEs {
 			'guide.step_2' => 'Paso 2',
 			'guide.upload_photo' => 'Subir foto',
 			'guide.got_it' => '¡Lo tengo!',
+			'guide.write_prompt' => 'Escribir prompt',
+			'guide.upload_2_photos' => 'Subir 2 fotos',
+			'guide.generate' => 'Generar',
+			'guide.upload_portrait' => 'Subir retrato',
+			'guide.choose_style' => 'Elegir estilo',
+			'guide.add_assets' => 'Añadir recursos',
 			'checkin.title' => 'Check-in',
 			'checkin.subtitle' => '¡Premios diarios!',
 			'checkin.today' => 'Hoy',
@@ -995,6 +1022,11 @@ extension on TranslationsEs {
 			'connectivity.retry_button' => 'Reintentar conexión',
 			'notification.channel_name' => 'Notificaciones importantes',
 			'notification.channel_description' => 'Este canal se utiliza para notificaciones importantes.',
+			'rating_dialog.title' => '¿Te gusta la aplicación?',
+			'rating_dialog.desc' => '¡Por favor, califícanos y ayúdanos a mejorar tu experiencia. ¡Gracias!',
+			'rating_dialog.support_us' => 'Apóyanos',
+			'rating_dialog.maybe_later' => 'Tal vez más tarde',
+			'rating_dialog.success' => '¡Gracias por su apoyo!',
 			_ => null,
 		};
 	}

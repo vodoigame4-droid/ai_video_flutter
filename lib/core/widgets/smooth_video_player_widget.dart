@@ -45,8 +45,8 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
 }
 
 class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
-  late final Player _player;
-  late final VideoController _controller;
+  Player? _player;
+  VideoController? _controller;
   final VideoCacheManager _cacheManager = VideoCacheManager();
 
   bool _isLocalPlayer = false;
@@ -59,20 +59,36 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
   StreamSubscription? _bufferingSub;
   StreamSubscription? _volumeSub;
   Timer? _bufferingTimer;
+  Timer? _initTimer;
 
   @override
   void initState() {
     super.initState();
     _isLocalPlayer = widget.externalPlayer == null;
-    _player = widget.externalPlayer ?? Player();
-    _controller = VideoController(_player);
 
-    _initPlayer();
+    if (widget.externalPlayer != null) {
+      _player = widget.externalPlayer;
+      _controller = VideoController(_player!);
+      _initPlayer();
+    } else {
+      // Debounce player creation by 300ms to prevent resource leaks during quick screen pushes/pops
+      _initTimer = Timer(const Duration(milliseconds: 300), () {
+        if (!mounted) return;
+        setState(() {
+          _player = Player();
+          _controller = VideoController(_player!);
+        });
+        _initPlayer();
+      });
+    }
   }
 
   Future<void> _initPlayer() async {
+    final player = _player;
+    if (player == null) return;
+
     // Listeners for sync state
-    _playingSub = _player.stream.playing.listen((playing) {
+    _playingSub = player.stream.playing.listen((playing) {
       if (mounted) {
         setState(() {
           _isPlaying = playing;
@@ -83,7 +99,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
       }
     });
 
-    _bufferingSub = _player.stream.buffering.listen((buffering) {
+    _bufferingSub = player.stream.buffering.listen((buffering) {
       _bufferingTimer?.cancel();
       if (buffering) {
         // Debounce showing loading indicator to prevent loop flicker
@@ -95,7 +111,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
       }
     });
 
-    _volumeSub = _player.stream.volume.listen((vol) {
+    _volumeSub = player.stream.volume.listen((vol) {
       if (mounted) setState(() => _isMuted = vol == 0);
     });
 
@@ -104,12 +120,15 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
         final cachedPath = await _cacheManager.getCachedOrDownload(widget.videoUrl);
         final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : widget.videoUrl;
 
+        // Double check not disposed/null
+        if (!mounted || _player == null) return;
+
         if (widget.loop) {
-          _player.setPlaylistMode(PlaylistMode.single);
+          player.setPlaylistMode(PlaylistMode.single);
         }
         
-        _player.setVolume(widget.playMuted ? 0.0 : 100.0);
-        await _player.open(Media(mediaSource), play: widget.autoPlay);
+        player.setVolume(widget.playMuted ? 0.0 : 100.0);
+        await player.open(Media(mediaSource), play: widget.autoPlay);
 
         // Trigger background download if not cached
         if (cachedPath == null) {
@@ -120,9 +139,9 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
       }
     } else {
       // Sync state from existing player
-      _isPlaying = _player.state.playing;
-      _isMuted = _player.state.volume == 0;
-      _isBuffering = _player.state.buffering;
+      _isPlaying = player.state.playing;
+      _isMuted = player.state.volume == 0;
+      _isBuffering = player.state.buffering;
       if (_isPlaying) {
         _hasPlayed = true;
       }
@@ -131,37 +150,43 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
 
   @override
   void dispose() {
+    _initTimer?.cancel();
     _bufferingTimer?.cancel();
     _playingSub?.cancel();
     _bufferingSub?.cancel();
     _volumeSub?.cancel();
     if (_isLocalPlayer) {
-      _player.dispose();
+      _player?.dispose();
     }
     super.dispose();
   }
 
   void _togglePlay() {
-    _player.playOrPause();
+    _player?.playOrPause();
   }
 
   void _toggleMute() {
-    final vol = _player.state.volume;
-    _player.setVolume(vol == 0 ? 100.0 : 0.0);
+    if (_player == null) return;
+    final vol = _player!.state.volume;
+    _player!.setVolume(vol == 0 ? 100.0 : 0.0);
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget playerWidget = Container(
-      color: AppColors.onSurface,
-      child: Video(
-        controller: _controller,
-        fill: AppColors.black,
-        fit: widget.fit,
-        alignment: widget.alignment ?? Alignment.center,
-        controls: NoVideoControls,
-      ),
-    );
+    Widget playerWidget = _controller != null
+        ? Container(
+            color: AppColors.onSurface,
+            child: Video(
+              controller: _controller!,
+              fill: AppColors.black,
+              fit: widget.fit,
+              alignment: widget.alignment ?? Alignment.center,
+              controls: NoVideoControls,
+            ),
+          )
+        : Container(
+            color: AppColors.onSurface,
+          );
 
     // Apply Border Radius if specified
     if (widget.borderRadius != null) {

@@ -62,6 +62,7 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$pt checkin = _Translations$checkin$pt._(_root);
 	@override late final _Translations$connectivity$pt connectivity = _Translations$connectivity$pt._(_root);
 	@override late final _Translations$notification$pt notification = _Translations$notification$pt._(_root);
+	@override late final _Translations$rating_dialog$pt rating_dialog = _Translations$rating_dialog$pt._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$pt extends Translations$guide$en {
 	@override String get step_2 => 'Passo 2';
 	@override String get upload_photo => 'Enviar foto';
 	@override String get got_it => 'Entendi!';
+	@override String get write_prompt => 'Escrever Prompt';
+	@override String get upload_2_photos => 'Carregar 2 fotos';
+	@override String get generate => 'Gerar';
+	@override String get upload_portrait => 'Carregar retrato';
+	@override String get choose_style => 'Escolher estilo';
+	@override String get add_assets => 'Adicionar recursos';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$pt extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Notificações importantes';
 	@override String get channel_description => 'Este canal é usado para notificações importantes.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$pt extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Está gostando do aplicativo?';
+	@override String get desc => 'Avalie-nos e ajude-nos a melhorar a sua experiência. Obrigado!';
+	@override String get support_us => 'Apoie-nos';
+	@override String get maybe_later => 'Mais tarde';
+	@override String get success => 'Obrigado pelo seu apoio!';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsPt {
 			'guide.step_2' => 'Passo 2',
 			'guide.upload_photo' => 'Enviar foto',
 			'guide.got_it' => 'Entendi!',
+			'guide.write_prompt' => 'Escrever Prompt',
+			'guide.upload_2_photos' => 'Carregar 2 fotos',
+			'guide.generate' => 'Gerar',
+			'guide.upload_portrait' => 'Carregar retrato',
+			'guide.choose_style' => 'Escolher estilo',
+			'guide.add_assets' => 'Adicionar recursos',
 			'checkin.title' => 'Check-in',
 			'checkin.subtitle' => 'Prêmios diários!',
 			'checkin.today' => 'Hoje',
@@ -995,6 +1022,11 @@ extension on TranslationsPt {
 			'connectivity.retry_button' => 'Tentar novamente a conexão',
 			'notification.channel_name' => 'Notificações importantes',
 			'notification.channel_description' => 'Este canal é usado para notificações importantes.',
+			'rating_dialog.title' => 'Está gostando do aplicativo?',
+			'rating_dialog.desc' => 'Avalie-nos e ajude-nos a melhorar a sua experiência. Obrigado!',
+			'rating_dialog.support_us' => 'Apoie-nos',
+			'rating_dialog.maybe_later' => 'Mais tarde',
+			'rating_dialog.success' => 'Obrigado pelo seu apoio!',
 			_ => null,
 		};
 	}

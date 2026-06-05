@@ -62,6 +62,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$fr checkin = _Translations$checkin$fr._(_root);
 	@override late final _Translations$connectivity$fr connectivity = _Translations$connectivity$fr._(_root);
 	@override late final _Translations$notification$fr notification = _Translations$notification$fr._(_root);
+	@override late final _Translations$rating_dialog$fr rating_dialog = _Translations$rating_dialog$fr._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$fr extends Translations$guide$en {
 	@override String get step_2 => 'Étape 2';
 	@override String get upload_photo => 'Télécharger la photo';
 	@override String get got_it => 'J\'ai compris!';
+	@override String get write_prompt => 'Écrire un prompt';
+	@override String get upload_2_photos => 'Télécharger 2 photos';
+	@override String get generate => 'Générer';
+	@override String get upload_portrait => 'Télécharger un portrait';
+	@override String get choose_style => 'Choisir le style';
+	@override String get add_assets => 'Ajouter des ressources';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$fr extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Notifications importantes';
 	@override String get channel_description => 'Ce canal est utilisé pour les notifications importantes.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$fr extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Vous aimez l\'application ?';
+	@override String get desc => 'Veuillez nous évaluer et nous aider à améliorer votre expérience. Merci !';
+	@override String get support_us => 'Soutenez-nous';
+	@override String get maybe_later => 'Plus tard';
+	@override String get success => 'Merci pour votre soutien !';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsFr {
 			'guide.step_2' => 'Étape 2',
 			'guide.upload_photo' => 'Télécharger la photo',
 			'guide.got_it' => 'J\'ai compris!',
+			'guide.write_prompt' => 'Écrire un prompt',
+			'guide.upload_2_photos' => 'Télécharger 2 photos',
+			'guide.generate' => 'Générer',
+			'guide.upload_portrait' => 'Télécharger un portrait',
+			'guide.choose_style' => 'Choisir le style',
+			'guide.add_assets' => 'Ajouter des ressources',
 			'checkin.title' => 'Check-in',
 			'checkin.subtitle' => 'Récompenses quotidiennes!',
 			'checkin.today' => 'Auj.',
@@ -995,6 +1022,11 @@ extension on TranslationsFr {
 			'connectivity.retry_button' => 'Réessayer la connexion',
 			'notification.channel_name' => 'Notifications importantes',
 			'notification.channel_description' => 'Ce canal est utilisé pour les notifications importantes.',
+			'rating_dialog.title' => 'Vous aimez l\'application ?',
+			'rating_dialog.desc' => 'Veuillez nous évaluer et nous aider à améliorer votre expérience. Merci !',
+			'rating_dialog.support_us' => 'Soutenez-nous',
+			'rating_dialog.maybe_later' => 'Plus tard',
+			'rating_dialog.success' => 'Merci pour votre soutien !',
 			_ => null,
 		};
 	}

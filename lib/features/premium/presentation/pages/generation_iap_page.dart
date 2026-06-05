@@ -9,9 +9,12 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
 import 'generation_buy_credits_page.dart';
 import 'discount_page.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/services/remote_config_service.dart';
 
 class GenerationIapPage extends StatelessWidget {
   static const String path = '/generation-iap';
@@ -37,8 +40,8 @@ class GenerationIapView extends StatefulWidget {
 }
 
 class _GenerationIapViewState extends State<GenerationIapView> with SingleTickerProviderStateMixin {
-  static const String _placeholderVideoUrl =
-      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4';
+  static String get _placeholderVideoUrl =>
+      sl<RemoteConfigService>().getBgIAPUrl();
 
   late AnimationController _revealController;
   late Animation<double> _blurAnimation;
@@ -466,7 +469,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               GestureDetector(
-                                                onTap: () {},
+                                                onTap: () => launchPrivacyPolicy(),
                                                 child: Text(
                                                   t.premium.privacy_policy,
                                                   style: const TextStyle(
@@ -481,7 +484,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                                 child: Text('|', style: TextStyle(color: Colors.white38)),
                                               ),
                                               GestureDetector(
-                                                onTap: () {},
+                                                onTap: () => launchTermsOfUse(),
                                                 child: Text(
                                                   t.premium.terms_of_use,
                                                   style: const TextStyle(

@@ -369,7 +369,13 @@
     "step_1": "1단계",
     "step_2": "2단계",
     "upload_photo": "사진 업로드",
-    "got_it": "이해했습니다!"
+    "got_it": "이해했습니다!",
+    "write_prompt": "프롬프트 작성",
+    "upload_2_photos": "사진 2장 업로드",
+    "generate": "생성하기",
+    "upload_portrait": "초상화 업로드",
+    "choose_style": "스타일 선택",
+    "add_assets": "에셋 추가"
   },
   "checkin": {
     "title": "출석체크",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "중요 알림",
     "channel_description": "이 채널은 중요한 알림에 사용됩니다."
+  },
+  "rating_dialog": {
+    "title": "앱이 마음에 드시나요?",
+    "desc": "평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!",
+    "support_us": "지원하기",
+    "maybe_later": "나중에",
+    "success": "지원해 주셔서 감사합니다!"
   }
 }

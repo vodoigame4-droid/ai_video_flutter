@@ -8,6 +8,8 @@ import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/widgets/defer_init_widget.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
 
 class DiscountPage extends StatefulWidget {
@@ -31,7 +33,17 @@ class _DiscountPageState extends State<DiscountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const DiscountView();
+    return const DeferInitWidget(
+      placeholder: Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+          ),
+        ),
+      ),
+      child: DiscountView(),
+    );
   }
 }
 
@@ -369,11 +381,11 @@ class DiscountView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildFooterLink(t.premium.privacy_policy, () {
-          // TODO: open privacy policy
+          launchPrivacyPolicy();
         }),
         _buildDivider(),
         _buildFooterLink(t.premium.terms_of_use, () {
-          // TODO: open terms of use
+          launchTermsOfUse();
         }),
         _buildDivider(),
         _buildFooterLink(t.premium.restore, () {

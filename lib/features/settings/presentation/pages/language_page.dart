@@ -1,10 +1,14 @@
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/widgets/defer_init_widget.dart';
+import '../../../../gen/assets.gen.dart';
 
 class LanguagePage extends StatelessWidget {
   static const String path = '/settings/language';
@@ -21,117 +25,219 @@ class LanguagePage extends StatelessWidget {
   }
 }
 
-class LanguageView extends StatelessWidget {
+class LanguageView extends StatefulWidget {
   const LanguageView({super.key});
+
+  @override
+  State<LanguageView> createState() => _LanguageViewState();
+}
+
+class _LanguageViewState extends State<LanguageView> {
+  String? _pendingLanguageCode;
+  bool _isApplying = false;
+
+  void _selectLanguage(String languageCode) {
+    if (_isApplying) return;
+
+    setState(() {
+      _pendingLanguageCode = languageCode;
+      _isApplying = true;
+    });
+
+    // Enforce 1.5 seconds delay, then apply the language change to SettingsBloc and LocaleSettings
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) {
+        context.read<SettingsBloc>().add(
+              SettingsEvent.changeLanguage(languageCode),
+            );
+        final locale = AppLocale.values.firstWhere(
+          (l) => l.languageCode == languageCode,
+          orElse: () => AppLocale.en,
+        );
+        LocaleSettings.setLocale(locale);
+
+        setState(() {
+          _isApplying = false;
+          // Check if bloc is already ready with the pending language
+          final blocState = context.read<SettingsBloc>().state;
+          blocState.maybeWhen(
+            ready: (currentLanguageCode) {
+              if (currentLanguageCode == _pendingLanguageCode) {
+                _pendingLanguageCode = null;
+              }
+            },
+            orElse: () {},
+          );
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Assets.images.bgApp.path),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
 
-              // Header Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Back Button
-                  Material(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    shape: const CircleBorder(),
-                    child: InkWell(
-                      onTap: () => context.pop(),
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
-                      child: const SizedBox(
-                        width: 36,
-                        height: 36,
-                        child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                          size: 18,
+                // Header Row matching Figma image
+                BlocBuilder<SettingsBloc, SettingsState>(
+                  builder: (context, state) {
+                    final isBlocLoading = state.maybeWhen(
+                      loading: () => true,
+                      orElse: () => false,
+                    );
+
+                    final isLoading = _isApplying || isBlocLoading;
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Back Button (with black 10% opacity background)
+                        GestureDetector(
+                          onTap: isLoading ? null : () => context.pop(),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
 
-                  // Title (matching size 24, font-semibold from Figma)
-                  Text(
-                    t.language.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                        // Title
+                        Text(
+                          t.language.title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
 
-                  // Spacer to balance
-                  const SizedBox(width: 36),
-                ],
-              ),
-
-              const SizedBox(height: 30),
-
-              // Language Items List
-              Expanded(
-                child: BlocListener<SettingsBloc, SettingsState>(
-                  listener: (context, state) {
-                    state.maybeWhen(
-                      ready: (currentLanguageCode) {
-                        final locale = AppLocale.values.firstWhere(
-                          (l) => l.languageCode == currentLanguageCode,
-                          orElse: () => AppLocale.en,
-                        );
-                        if (LocaleSettings.currentLocale != locale) {
-                          LocaleSettings.setLocale(locale);
-                        }
-                      },
-                      orElse: () {},
+                        // Confirm Checkmark Tick on the Top-Right
+                        GestureDetector(
+                          onTap: isLoading ? null : () => context.pop(),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            alignment: Alignment.centerRight,
+                            child: isLoading
+                                ? const SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Color(0xFF2BC5C5),
+                                      ),
+                                    ),
+                                  )
+                                : SvgPicture.asset(
+                                    Assets.icons.icTick,
+                                    width: 36,
+                                    height: 16,
+                                  ),
+                          ),
+                        ),
+                      ],
                     );
                   },
-                  child: BlocBuilder<SettingsBloc, SettingsState>(
-                    builder: (context, state) {
-                      return state.when(
-                        initial: () => const Center(child: CircularProgressIndicator()),
-                        loading: () => const Center(child: CircularProgressIndicator()),
-                        ready: (currentLanguageCode) {
-                          final currentLocale = AppLocale.values.firstWhere(
-                            (l) => l.languageCode == currentLanguageCode,
-                            orElse: () => AppLocale.en,
-                          );
-                          return ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: AppLocale.values.length,
-                            itemBuilder: (context, index) {
-                              final locale = AppLocale.values[index];
-                              final isSelected = locale == currentLocale;
-                              final nativeName = _getNativeLanguageName(locale);
+                ),
 
-                              return _buildLanguageItem(
-                                context: context,
-                                locale: locale,
-                                title: nativeName,
-                                isSelected: isSelected,
-                                onTap: () {
-                                  context.read<SettingsBloc>().add(
-                                        SettingsEvent.changeLanguage(locale.languageCode),
-                                      );
+                const SizedBox(height: 30),
+
+                // Language Items List
+                Expanded(
+                  child: DeferInitWidget(
+                    child: BlocListener<SettingsBloc, SettingsState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                          ready: (currentLanguageCode) {
+                            final locale = AppLocale.values.firstWhere(
+                              (l) => l.languageCode == currentLanguageCode,
+                              orElse: () => AppLocale.en,
+                            );
+                            if (LocaleSettings.currentLocale != locale) {
+                              LocaleSettings.setLocale(locale);
+                            }
+                            
+                            // If we are not currently applying (timer finished), clear pending code
+                            if (!_isApplying) {
+                              setState(() {
+                                _pendingLanguageCode = null;
+                              });
+                            }
+                          },
+                          orElse: () {},
+                        );
+                      },
+                      child: BlocBuilder<SettingsBloc, SettingsState>(
+                        builder: (context, state) {
+                          final isBlocLoading = state.maybeWhen(
+                            loading: () => true,
+                            orElse: () => false,
+                          );
+
+                          return state.maybeWhen(
+                            initial: () => const Center(child: CircularProgressIndicator()),
+                            orElse: () {
+                              final currentLanguageCode = state.maybeWhen(
+                                ready: (code) => code,
+                                orElse: () => 'en',
+                              );
+
+                              final selectedCode = _pendingLanguageCode ?? currentLanguageCode;
+                              final isLoading = _isApplying || isBlocLoading;
+
+                              return ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: AppLocale.values.length,
+                                itemBuilder: (context, index) {
+                                  final locale = AppLocale.values[index];
+                                  final isSelected = locale.languageCode == selectedCode;
+                                  final nativeName = _getNativeLanguageName(locale);
+
+                                  return _buildLanguageItem(
+                                    context: context,
+                                    locale: locale,
+                                    title: nativeName,
+                                    isSelected: isSelected,
+                                    onTap: isLoading
+                                        ? null
+                                        : () => _selectLanguage(locale.languageCode),
+                                  );
                                 },
                               );
                             },
                           );
                         },
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -218,19 +324,29 @@ class LanguageView extends StatelessWidget {
     required AppLocale locale,
     required String title,
     required bool isSelected,
-    required VoidCallback onTap,
+    required VoidCallback? onTap,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: const Color(0x80171717), // rgba(23, 23, 23, 0.5) from Figma
-        borderRadius: const BorderRadius.all(Radius.circular(20)), // radius 20 from Figma
-        border: Border.all(
-          color: isSelected
-              ? const Color(0xFF2BC5C5) // var(--secondary-color) from Figma
-              : const Color(0xFF1C362B), // var(--dark-green-border) from Figma
-          width: 1,
-        ),
+        color: const Color(0x80171717),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        border: isSelected
+        ? const GradientBoxBorder(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.primary,
+                AppColors.secondary,
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            width: 1,
+          )
+        : Border.all(
+            color: const Color(0xFF1C362B),
+            width: 1,
+          ),
       ),
       child: Material(
         color: Colors.transparent,
@@ -238,26 +354,21 @@ class LanguageView extends StatelessWidget {
           onTap: onTap,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: Padding(
-            padding: const EdgeInsets.all(16), // 16px padding from Figma
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                // Flag Container on the left
                 _buildFlag(locale),
-                const SizedBox(width: 12), // 12px gap from Figma
-                
-                // Native name
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     title,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500, // Medium for both from Figma
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                
-                // Radio button on the right
                 SvgPicture.asset(
                   isSelected
                       ? 'assets/images/ic_radio_active.svg'

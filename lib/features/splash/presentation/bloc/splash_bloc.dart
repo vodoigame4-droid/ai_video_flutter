@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/services/remote_config_service.dart';
 import 'splash_event.dart';
 import 'splash_state.dart';
 
@@ -15,6 +17,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Timer? _timer;
   bool _isLoginCompleted = false;
   bool _isOnboardingPreloadCompleted = false;
+  bool _isRemoteConfigInitialized = false;
   bool _isHavinSdkInitialized = false;
   bool _isOnboardingCompleted = false;
   List<String>? _preloadedUrls;
@@ -32,6 +35,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           _isLoginCompleted = false;
           _isOnboardingPreloadCompleted = false;
           _isHavinSdkInitialized = false;
+          _isRemoteConfigInitialized = false;
           _isOnboardingCompleted = false;
           _preloadedUrls = null;
           emit(const SplashState.loading(0));
@@ -45,7 +49,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           // 3. Initialize Havin SDK with iOS store configurations
           _initHavinSdk();
 
-          // 4. Start progress animation timer
+          // 4. Initialize Firebase Remote Config
+          _initRemoteConfig();
+
+          // 5. Start progress animation timer
           _timer?.cancel();
           _timer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
             _progress += 2;
@@ -53,7 +60,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
             if (_progress >= 100) {
               if (_isLoginCompleted &&
                   _isOnboardingPreloadCompleted &&
-                  _isHavinSdkInitialized) {
+                  _isHavinSdkInitialized &&
+                  _isRemoteConfigInitialized) {
                 _progress = 100;
                 timer.cancel();
                 add(const SplashEvent.progressUpdated(100));
@@ -192,11 +200,29 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     }
   }
 
+  Future<void> _initRemoteConfig() async {
+    try {
+      final remoteConfigService = sl<RemoteConfigService>();
+      await remoteConfigService.initialize();
+      await remoteConfigService.preloadVideos();
+    } catch (e, stack) {
+      LogUtils.e(
+        'SplashBloc: Remote Config initialization failed',
+        error: e,
+        stackTrace: stack,
+      );
+    } finally {
+      _isRemoteConfigInitialized = true;
+      _checkAllInitializationCompleted();
+    }
+  }
+
   void _checkAllInitializationCompleted() {
     LogUtils.d('SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress');
     if (_isLoginCompleted &&
         _isOnboardingPreloadCompleted &&
-        _isHavinSdkInitialized) {
+        _isHavinSdkInitialized &&
+        _isRemoteConfigInitialized) {
       if (_progress >= 99) {
         _timer?.cancel();
         _timer = null;

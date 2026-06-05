@@ -11,7 +11,6 @@ import 'firebase_options.dart';
 import 'core/injection/injection_container.dart';
 import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
-import 'core/services/remote_config_service.dart';
 import 'core/widgets/connectivity_listener_wrapper.dart';
 import 'core/widgets/payment_listener_wrapper.dart';
 import 'core/widgets/notification_listener_wrapper.dart';
@@ -25,13 +24,6 @@ void main() async {
   MediaKit.ensureInitialized();
   await initDependencies();
   sl<NotificationRepository>().initialize();
-
-  // Initialize Remote Config (fetch + activate)
-  final remoteConfigService = sl<RemoteConfigService>();
-  await remoteConfigService.initialize();
-
-  // Preload IAP & Discount background videos into cache (non-blocking)
-  remoteConfigService.preloadVideos();
 
   // Load saved locale from SharedPreferences
   final prefs = sl<SharedPreferences>();

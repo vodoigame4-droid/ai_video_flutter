@@ -62,6 +62,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$hi checkin = _Translations$checkin$hi._(_root);
 	@override late final _Translations$connectivity$hi connectivity = _Translations$connectivity$hi._(_root);
 	@override late final _Translations$notification$hi notification = _Translations$notification$hi._(_root);
+	@override late final _Translations$rating_dialog$hi rating_dialog = _Translations$rating_dialog$hi._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$hi extends Translations$guide$en {
 	@override String get step_2 => 'चरण 2';
 	@override String get upload_photo => 'फोटो अपलोड करें';
 	@override String get got_it => 'मुझे समझ आ गया!';
+	@override String get write_prompt => 'प्रॉम्ट लिखें';
+	@override String get upload_2_photos => '2 फ़ोटो अपलोड करें';
+	@override String get generate => 'बनाएं';
+	@override String get upload_portrait => 'पोर्ट्रेट अपलोड करें';
+	@override String get choose_style => 'शैली चुनें';
+	@override String get add_assets => 'एसेट जोड़ें';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$hi extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'महत्वपूर्ण सूचनाएं';
 	@override String get channel_description => 'इस चैनल का उपयोग महत्वपूर्ण सूचनाओं के लिए किया जाता है।';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$hi extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'क्या आप ऐप का आनंद ले रहे हैं?';
+	@override String get desc => 'कृपया हमें रेट करें और अपना अनुभव बेहतर बनाने में हमारी मदद करें। धन्यवाद!';
+	@override String get support_us => 'हमारा समर्थन करें';
+	@override String get maybe_later => 'शायद बाद में';
+	@override String get success => 'आपके समर्थन के लिए धन्यवाद!';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsHi {
 			'guide.step_2' => 'चरण 2',
 			'guide.upload_photo' => 'फोटो अपलोड करें',
 			'guide.got_it' => 'मुझे समझ आ गया!',
+			'guide.write_prompt' => 'प्रॉम्ट लिखें',
+			'guide.upload_2_photos' => '2 फ़ोटो अपलोड करें',
+			'guide.generate' => 'बनाएं',
+			'guide.upload_portrait' => 'पोर्ट्रेट अपलोड करें',
+			'guide.choose_style' => 'शैली चुनें',
+			'guide.add_assets' => 'एसेट जोड़ें',
 			'checkin.title' => 'दैनिक हाजिरी',
 			'checkin.subtitle' => 'रोजाना इनाम पाएं!',
 			'checkin.today' => 'आज',
@@ -995,6 +1022,11 @@ extension on TranslationsHi {
 			'connectivity.retry_button' => 'पुनः प्रयास करें',
 			'notification.channel_name' => 'महत्वपूर्ण सूचनाएं',
 			'notification.channel_description' => 'इस चैनल का उपयोग महत्वपूर्ण सूचनाओं के लिए किया जाता है।',
+			'rating_dialog.title' => 'क्या आप ऐप का आनंद ले रहे हैं?',
+			'rating_dialog.desc' => 'कृपया हमें रेट करें और अपना अनुभव बेहतर बनाने में हमारी मदद करें। धन्यवाद!',
+			'rating_dialog.support_us' => 'हमारा समर्थन करें',
+			'rating_dialog.maybe_later' => 'शायद बाद में',
+			'rating_dialog.success' => 'आपके समर्थन के लिए धन्यवाद!',
 			_ => null,
 		};
 	}
