@@ -8,4 +8,11 @@ abstract class NotificationRepository {
 
   // Initialize listeners and local notification plugins
   Future<void> initialize();
+
+  // Show a local notification banner
+  Future<void> showLocalNotification({
+    required String title,
+    required String body,
+    Map<String, dynamic>? data,
+  });
 }

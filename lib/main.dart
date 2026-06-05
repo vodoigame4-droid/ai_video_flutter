@@ -48,6 +48,14 @@ void main() async {
       'Body: "${message.notification?.body}", '
       'Data: ${message.data}',
     );
+    final notification = message.notification;
+    if (notification != null) {
+      sl<NotificationRepository>().showLocalNotification(
+        title: notification.title ?? '',
+        body: notification.body ?? '',
+        data: message.data,
+      );
+    }
   });
 
   if (Platform.isAndroid) {

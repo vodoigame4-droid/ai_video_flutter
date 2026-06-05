@@ -1,0 +1,19 @@
+{
+  "Simulator Target Bundle": "com.vidoai.videogenerator",
+  "aps": {
+    "alert": {
+      "title": "🎬 Video của bạn đã sẵn sàng!",
+      "body": "Video AI của bạn đã được tạo thành công. Nhấp vào đây để xem lịch sử video trong Profile!"
+    },
+    "badge": 1,
+    "sound": "default"
+  },
+  "click_action": "FLUTTER_NOTIFICATION_CLICK",
+  "gcm.message_id": "test_notification_id_12345",
+  "gcm.n.e": "1",
+  "google.c.a.e": "1",
+  "data": {
+    "type": "video_ready",
+    "video_id": "test_video_123"
+  }
+}

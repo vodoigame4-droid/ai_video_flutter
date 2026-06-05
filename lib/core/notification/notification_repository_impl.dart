@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:core_business/core_business.dart' as biz;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -26,17 +28,6 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     await _initForegroundPresentationOptions();
     await _initLocalNotifications();
 
-    // Listen to foreground notifications
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      biz.LogUtils.d(
-        'NotificationRepositoryImpl: Foreground message received. '
-        'Notification: ${message.notification != null ? "Yes" : "No"}, '
-        'Title: "${message.notification?.title}", '
-        'Body: "${message.notification?.body}", '
-        'Data: ${message.data}',
-      );
-      _showLocalNotification(message);
-    });
 
     // Listen to notification clicks when app is in foreground/background
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
@@ -47,16 +38,43 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     });
 
     // Listen to FCM Token refresh to automatically re-subscribe to default topics
-    _firebaseMessaging.onTokenRefresh.listen((token) async {
-      biz.LogUtils.d('NotificationRepositoryImpl: FCM Token refreshed: $token');
-      await _subscribeToDefaultTopics();
-    });
+    _firebaseMessaging.onTokenRefresh.listen(
+      (token) async {
+        biz.LogUtils.d('NotificationRepositoryImpl: FCM Token refreshed: $token');
+        if (Platform.isIOS) {
+          final apnsToken = await _firebaseMessaging.getAPNSToken();
+          biz.LogUtils.d('NotificationRepositoryImpl: APNS Token: $apnsToken');
+        }
+        await _subscribeToDefaultTopics();
+      },
+      onError: (error, stackTrace) {
+        biz.LogUtils.e(
+          'NotificationRepositoryImpl: Error in FCM Token refresh stream',
+          error: error,
+          stackTrace: stackTrace,
+        );
+      },
+    );
 
     // Check if deviceId is already stored, indicating the app has logged in before.
     // If so, attempt to subscribe to default topics during initialization.
     final deviceId = _sharedPreferences.getString(biz.StorageKeys.deviceId);
     if (deviceId != null && deviceId.isNotEmpty) {
-      _subscribeToDefaultTopics();
+      () async {
+        if (Platform.isIOS) {
+          final apnsToken = await _firebaseMessaging.getAPNSToken();
+          if (apnsToken == null) {
+            biz.LogUtils.d(
+              'NotificationRepositoryImpl: APNS token not ready on launch. '
+              'Topic subscription will be deferred until APNS is registered.',
+            );
+            return;
+          } else {
+            biz.LogUtils.d('NotificationRepositoryImpl: APNS Token ready on launch: $apnsToken');
+          }
+        }
+        await _subscribeToDefaultTopics();
+      }();
     }
 
     // Check initial message asynchronously so it doesn't block the rest of the flow
@@ -80,9 +98,14 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
         );
         _handleNotificationClick(message);
       }
+    } on TimeoutException {
+      biz.LogUtils.d(
+        'NotificationRepositoryImpl: getInitialMessage timed out. '
+        'This is normal when the app is not launched from a notification click.',
+      );
     } catch (e, stackTrace) {
       biz.LogUtils.e(
-        'NotificationRepositoryImpl: Failed to check initial message or timed out',
+        'NotificationRepositoryImpl: Failed to check initial message',
         error: e,
         stackTrace: stackTrace,
       );
@@ -162,17 +185,28 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
       }
 
       // Print FCM Token for debugging asynchronously so it doesn't block listener initialization
-      _firebaseMessaging
-          .getToken()
-          .then((fcmToken) {
-            biz.LogUtils.d('NotificationRepositoryImpl: FCM Token: $fcmToken');
-          })
-          .catchError((e) {
-            biz.LogUtils.e(
-              'NotificationRepositoryImpl: Failed to get FCM Token (Normal on simulators without APNs)',
-              error: e,
-            );
-          });
+      () async {
+        try {
+          if (Platform.isIOS) {
+            final apnsToken = await _firebaseMessaging.getAPNSToken();
+            if (apnsToken == null) {
+              biz.LogUtils.d(
+                'NotificationRepositoryImpl: APNS token is not ready yet on launch. '
+                'FCM token will be automatically fetched and registered via onTokenRefresh once APNS registration completes.',
+              );
+              return;
+            }
+          }
+          final fcmToken = await _firebaseMessaging.getToken();
+          biz.LogUtils.d('NotificationRepositoryImpl: FCM Token: $fcmToken');
+        } catch (e, stackTrace) {
+          biz.LogUtils.e(
+            'NotificationRepositoryImpl: Failed to get FCM Token',
+            error: e,
+            stackTrace: stackTrace,
+          );
+        }
+      }();
 
       biz.LogUtils.d(
         'NotificationRepositoryImpl: Local notifications initialized.',
@@ -186,47 +220,47 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     }
   }
 
-  void _showLocalNotification(RemoteMessage message) async {
-    final notification = message.notification;
-    if (notification != null) {
-      biz.LogUtils.d(
-        'NotificationRepositoryImpl: Displaying local notification: title="${notification.title}", body="${notification.body}"',
-      );
-      try {
-        await _localNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              'high_importance_channel',
-              t.notification.channel_name,
-              channelDescription: t.notification.channel_description,
-              importance: Importance.max,
-              priority: Priority.high,
-              icon: '@mipmap/ic_launcher',
-            ),
-            iOS: const DarwinNotificationDetails(
-              presentAlert: true,
-              presentBadge: true,
-              presentSound: true,
-            ),
+  @override
+  Future<void> showLocalNotification({
+    required String title,
+    required String body,
+    Map<String, dynamic>? data,
+  }) async {
+    biz.LogUtils.d(
+      'NotificationRepositoryImpl: Displaying local notification: title="$title", body="$body"',
+    );
+    try {
+      await _localNotificationsPlugin.show(
+        (title + body).hashCode,
+        title,
+        body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            'high_importance_channel',
+            t.notification.channel_name,
+            channelDescription: t.notification.channel_description,
+            importance: Importance.max,
+            priority: Priority.high,
+            icon: '@mipmap/ic_launcher',
           ),
-          payload: jsonEncode(message.data),
-        );
-        biz.LogUtils.d(
-          'NotificationRepositoryImpl: Local notification displayed successfully.',
-        );
-      } catch (e, stackTrace) {
-        biz.LogUtils.e(
-          'NotificationRepositoryImpl: Failed to show local notification',
-          error: e,
-          stackTrace: stackTrace,
-        );
-      }
-    } else {
+          iOS: const DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+            presentBanner: true,
+            presentList: true,
+          ),
+        ),
+        payload: data != null ? jsonEncode(data) : null,
+      );
       biz.LogUtils.d(
-        'NotificationRepositoryImpl: Message notification payload is null. Skipping local notification display.',
+        'NotificationRepositoryImpl: Local notification displayed successfully.',
+      );
+    } catch (e, stackTrace) {
+      biz.LogUtils.e(
+        'NotificationRepositoryImpl: Failed to show local notification',
+        error: e,
+        stackTrace: stackTrace,
       );
     }
   }
