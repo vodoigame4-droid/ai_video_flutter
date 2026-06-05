@@ -403,5 +403,14 @@
     "support_us": "Soutenez-nous",
     "maybe_later": "Plus tard",
     "success": "Merci pour votre soutien !"
+  },
+  "debug": {
+    "title": "Menu de débogage",
+    "iap_page": "Page IAP",
+    "buy_credits": "Acheter des crédits",
+    "generation_iap": "Génération IAP",
+    "generation_buy_credits": "Génération acheter des crédits",
+    "discount": "Page de réduction",
+    "paywall_video": "Page vidéo paywall"
   }
 }

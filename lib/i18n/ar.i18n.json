@@ -403,5 +403,14 @@
     "support_us": "ادعمنا",
     "maybe_later": "ربما لاحقًا",
     "success": "شكرا لك على دعمك!"
+  },
+  "debug": {
+    "title": "قائمة التصحيح",
+    "iap_page": "صفحة الشراء داخل التطبيق",
+    "buy_credits": "شراء رصيد",
+    "generation_iap": "الشراء داخل التطبيق للتوليد",
+    "generation_buy_credits": "شراء رصيد للتوليد",
+    "discount": "صفحة الخصم",
+    "paywall_video": "صفحة حظر الفيديو"
   }
 }

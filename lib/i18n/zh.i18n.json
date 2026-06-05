@@ -403,5 +403,14 @@
     "support_us": "支持我们",
     "maybe_later": "以后再说",
     "success": "感谢您的支持！"
+  },
+  "debug": {
+    "title": "调试菜单",
+    "iap_page": "内购页面",
+    "buy_credits": "购买积分",
+    "generation_iap": "生成内购",
+    "generation_buy_credits": "生成购买积分",
+    "discount": "折扣页面",
+    "paywall_video": "付费墙视频页面"
   }
 }

@@ -64,6 +64,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$vi connectivity = _Translations$connectivity$vi._(_root);
 	@override late final _Translations$notification$vi notification = _Translations$notification$vi._(_root);
 	@override late final _Translations$rating_dialog$vi rating_dialog = _Translations$rating_dialog$vi._(_root);
+	@override late final _Translations$debug$vi debug = _Translations$debug$vi._(_root);
 }
 
 // Path: common
@@ -634,6 +635,22 @@ class _Translations$rating_dialog$vi extends Translations$rating_dialog$en {
 	@override String get success => 'Cảm ơn bạn đã ủng hộ!';
 }
 
+// Path: debug
+class _Translations$debug$vi extends Translations$debug$en {
+	_Translations$debug$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Menu Debug';
+	@override String get iap_page => 'Trang IAP';
+	@override String get buy_credits => 'Mua Credit';
+	@override String get generation_iap => 'Trang Generation IAP';
+	@override String get generation_buy_credits => 'Trang Generation Mua Credit';
+	@override String get discount => 'Trang giảm giá';
+	@override String get paywall_video => 'Trang Paywall Video';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -1055,6 +1072,13 @@ extension on TranslationsVi {
 			'rating_dialog.support_us' => 'Hỗ trợ chúng tôi',
 			'rating_dialog.maybe_later' => 'Để sau',
 			'rating_dialog.success' => 'Cảm ơn bạn đã ủng hộ!',
+			'debug.title' => 'Menu Debug',
+			'debug.iap_page' => 'Trang IAP',
+			'debug.buy_credits' => 'Mua Credit',
+			'debug.generation_iap' => 'Trang Generation IAP',
+			'debug.generation_buy_credits' => 'Trang Generation Mua Credit',
+			'debug.discount' => 'Trang giảm giá',
+			'debug.paywall_video' => 'Trang Paywall Video',
 			_ => null,
 		};
 	}

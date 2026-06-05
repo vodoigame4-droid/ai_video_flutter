@@ -403,5 +403,14 @@
     "support_us": "Dukung Kami",
     "maybe_later": "Mungkin Nanti",
     "success": "Terima kasih atas dukungan Anda!"
+  },
+  "debug": {
+    "title": "Menu Debug",
+    "iap_page": "Halaman IAP",
+    "buy_credits": "Beli Kredit",
+    "generation_iap": "Generasi IAP",
+    "generation_buy_credits": "Generasi Beli Kredit",
+    "discount": "Halaman Diskon",
+    "paywall_video": "Halaman Video Paywall"
   }
 }

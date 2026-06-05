@@ -63,6 +63,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$id connectivity = _Translations$connectivity$id._(_root);
 	@override late final _Translations$notification$id notification = _Translations$notification$id._(_root);
 	@override late final _Translations$rating_dialog$id rating_dialog = _Translations$rating_dialog$id._(_root);
+	@override late final _Translations$debug$id debug = _Translations$debug$id._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$id extends Translations$rating_dialog$en {
 	@override String get success => 'Terima kasih atas dukungan Anda!';
 }
 
+// Path: debug
+class _Translations$debug$id extends Translations$debug$en {
+	_Translations$debug$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Menu Debug';
+	@override String get iap_page => 'Halaman IAP';
+	@override String get buy_credits => 'Beli Kredit';
+	@override String get generation_iap => 'Generasi IAP';
+	@override String get generation_buy_credits => 'Generasi Beli Kredit';
+	@override String get discount => 'Halaman Diskon';
+	@override String get paywall_video => 'Halaman Video Paywall';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsId {
 			'rating_dialog.support_us' => 'Dukung Kami',
 			'rating_dialog.maybe_later' => 'Mungkin Nanti',
 			'rating_dialog.success' => 'Terima kasih atas dukungan Anda!',
+			'debug.title' => 'Menu Debug',
+			'debug.iap_page' => 'Halaman IAP',
+			'debug.buy_credits' => 'Beli Kredit',
+			'debug.generation_iap' => 'Generasi IAP',
+			'debug.generation_buy_credits' => 'Generasi Beli Kredit',
+			'debug.discount' => 'Halaman Diskon',
+			'debug.paywall_video' => 'Halaman Video Paywall',
 			_ => null,
 		};
 	}

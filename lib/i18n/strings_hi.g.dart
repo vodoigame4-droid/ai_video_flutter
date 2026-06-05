@@ -63,6 +63,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$hi connectivity = _Translations$connectivity$hi._(_root);
 	@override late final _Translations$notification$hi notification = _Translations$notification$hi._(_root);
 	@override late final _Translations$rating_dialog$hi rating_dialog = _Translations$rating_dialog$hi._(_root);
+	@override late final _Translations$debug$hi debug = _Translations$debug$hi._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$hi extends Translations$rating_dialog$en {
 	@override String get success => 'आपके समर्थन के लिए धन्यवाद!';
 }
 
+// Path: debug
+class _Translations$debug$hi extends Translations$debug$en {
+	_Translations$debug$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'डीबग मेनू';
+	@override String get iap_page => 'आईएपी पेज';
+	@override String get buy_credits => 'क्रेडिट खरीदें';
+	@override String get generation_iap => 'जेनरेशन आईएपी';
+	@override String get generation_buy_credits => 'जेनरेशन क्रेडिट खरीदें';
+	@override String get discount => 'डिस्काउंट पेज';
+	@override String get paywall_video => 'पेवॉल वीडियो पेज';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsHi {
 			'rating_dialog.support_us' => 'हमारा समर्थन करें',
 			'rating_dialog.maybe_later' => 'शायद बाद में',
 			'rating_dialog.success' => 'आपके समर्थन के लिए धन्यवाद!',
+			'debug.title' => 'डीबग मेनू',
+			'debug.iap_page' => 'आईएपी पेज',
+			'debug.buy_credits' => 'क्रेडिट खरीदें',
+			'debug.generation_iap' => 'जेनरेशन आईएपी',
+			'debug.generation_buy_credits' => 'जेनरेशन क्रेडिट खरीदें',
+			'debug.discount' => 'डिस्काउंट पेज',
+			'debug.paywall_video' => 'पेवॉल वीडियो पेज',
 			_ => null,
 		};
 	}

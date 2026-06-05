@@ -63,6 +63,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$fr connectivity = _Translations$connectivity$fr._(_root);
 	@override late final _Translations$notification$fr notification = _Translations$notification$fr._(_root);
 	@override late final _Translations$rating_dialog$fr rating_dialog = _Translations$rating_dialog$fr._(_root);
+	@override late final _Translations$debug$fr debug = _Translations$debug$fr._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$fr extends Translations$rating_dialog$en {
 	@override String get success => 'Merci pour votre soutien !';
 }
 
+// Path: debug
+class _Translations$debug$fr extends Translations$debug$en {
+	_Translations$debug$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Menu de débogage';
+	@override String get iap_page => 'Page IAP';
+	@override String get buy_credits => 'Acheter des crédits';
+	@override String get generation_iap => 'Génération IAP';
+	@override String get generation_buy_credits => 'Génération acheter des crédits';
+	@override String get discount => 'Page de réduction';
+	@override String get paywall_video => 'Page vidéo paywall';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$fr extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$fr._(TranslationsFr root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsFr {
 			'rating_dialog.support_us' => 'Soutenez-nous',
 			'rating_dialog.maybe_later' => 'Plus tard',
 			'rating_dialog.success' => 'Merci pour votre soutien !',
+			'debug.title' => 'Menu de débogage',
+			'debug.iap_page' => 'Page IAP',
+			'debug.buy_credits' => 'Acheter des crédits',
+			'debug.generation_iap' => 'Génération IAP',
+			'debug.generation_buy_credits' => 'Génération acheter des crédits',
+			'debug.discount' => 'Page de réduction',
+			'debug.paywall_video' => 'Page vidéo paywall',
 			_ => null,
 		};
 	}

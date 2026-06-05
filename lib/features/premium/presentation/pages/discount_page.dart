@@ -6,11 +6,13 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
+import '../../../../core/widgets/gradient_button.dart';
 
 class DiscountPage extends StatefulWidget {
   static const String path = '/discount';
@@ -175,6 +177,22 @@ class DiscountView extends StatelessWidget {
   }
 
   Widget _buildBottomPanel(BuildContext context, Translations t) {
+    final iapBlocState = context.watch<IapBloc>().state;
+    final List<Product> yearlyProducts = iapBlocState.mapOrNull(
+      ready: (s) => s.yearlyProducts,
+      success: (s) => s.yearlyProducts,
+      error: (s) => s.yearlyProducts,
+    ) ?? const [];
+
+    String discountPrice = '...';
+    for (final p in yearlyProducts) {
+      final id = p.id.toLowerCase();
+      if (id.contains('discount') || id.contains('dis') || id == 'buy_annualy_discount') {
+        discountPrice = p.priceString;
+        break;
+      }
+    }
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -201,7 +219,7 @@ class DiscountView extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Price row: đ 799.000 /year
-              _buildPriceRow(t),
+              _buildPriceRow(discountPrice, t),
               const SizedBox(height: 8),
 
               // Billed info
@@ -272,25 +290,25 @@ class DiscountView extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceRow(Translations t) {
+  Widget _buildPriceRow(String discountPrice, Translations t) {
+    if (discountPrice == '...') {
+      return const Text(
+        '...',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 48,
+          fontWeight: FontWeight.w900,
+        ),
+      );
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: [
-        // Currency symbol
         Text(
-          'đ',
-          style: TextStyle(
-            color: Colors.white.withValues(alpha: 0.5),
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(width: 6),
-        // Price amount
-        Text(
-          t.premium.discount_price,
+          discountPrice,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 48,
@@ -314,65 +332,36 @@ class DiscountView extends StatelessWidget {
   }
 
   Widget _buildSubscriptionButton(BuildContext context, Translations t) {
-    return Container(
+    return GradientButton(
+      label: t.premium.start_my_subscription,
       width: double.infinity,
-      height: 56,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF1DB954), Color(0xFF1ED760)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-        borderRadius: BorderRadius.circular(28),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF1DB954).withValues(alpha: 0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
-            spreadRadius: -2,
-          ),
-        ],
+      gradient: const LinearGradient(
+        colors: [Color(0xFF1DB954), Color(0xFF1ED760)],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            context.read<IapBloc>().add(const IapEvent.purchase(productId: 'buy_annualy_discount'));
-          },
-          borderRadius: BorderRadius.circular(28),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  t.premium.start_my_subscription,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.3,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Container(
-                  width: 28,
-                  height: 28,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                    size: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 17,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 0.3,
       ),
+      trailingIcon: Container(
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.2),
+          shape: BoxShape.circle,
+        ),
+        child: const Icon(
+          Icons.arrow_forward,
+          color: Colors.white,
+          size: 16,
+                    ),
+                  ),
+      onPressed: () {
+        context.read<IapBloc>().add(const IapEvent.purchase(productId: 'buy_annualy_discount'));
+      },
     );
   }
 

@@ -12,6 +12,7 @@ import '../network/payment_required_interceptor.dart';
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
 import '../../features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import '../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import '../../features/settings/presentation/bloc/developer_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -35,6 +36,9 @@ Future<void> initDependencies() async {
 
   // Features - Dashboard
   sl.registerFactory(() => DashboardBloc());
+
+  // Features - Developer
+  sl.registerFactory(() => DeveloperBloc());
 
   // Network Client
   sl.registerLazySingleton<ApiClient>(

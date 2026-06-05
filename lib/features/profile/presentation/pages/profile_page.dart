@@ -381,7 +381,7 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
             constraints: BoxConstraints(
               minHeight: constraints.maxHeight,
             ),
-            alignment: Alignment.center,
+            alignment: const Alignment(0, -0.2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

@@ -63,6 +63,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$zh connectivity = _Translations$connectivity$zh._(_root);
 	@override late final _Translations$notification$zh notification = _Translations$notification$zh._(_root);
 	@override late final _Translations$rating_dialog$zh rating_dialog = _Translations$rating_dialog$zh._(_root);
+	@override late final _Translations$debug$zh debug = _Translations$debug$zh._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$zh extends Translations$rating_dialog$en {
 	@override String get success => '感谢您的支持！';
 }
 
+// Path: debug
+class _Translations$debug$zh extends Translations$debug$en {
+	_Translations$debug$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '调试菜单';
+	@override String get iap_page => '内购页面';
+	@override String get buy_credits => '购买积分';
+	@override String get generation_iap => '生成内购';
+	@override String get generation_buy_credits => '生成购买积分';
+	@override String get discount => '折扣页面';
+	@override String get paywall_video => '付费墙视频页面';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsZh {
 			'rating_dialog.support_us' => '支持我们',
 			'rating_dialog.maybe_later' => '以后再说',
 			'rating_dialog.success' => '感谢您的支持！',
+			'debug.title' => '调试菜单',
+			'debug.iap_page' => '内购页面',
+			'debug.buy_credits' => '购买积分',
+			'debug.generation_iap' => '生成内购',
+			'debug.generation_buy_credits' => '生成购买积分',
+			'debug.discount' => '折扣页面',
+			'debug.paywall_video' => '付费墙视频页面',
 			_ => null,
 		};
 	}

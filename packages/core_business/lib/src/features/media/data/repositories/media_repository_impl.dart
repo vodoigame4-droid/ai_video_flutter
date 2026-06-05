@@ -2,6 +2,8 @@ import 'package:rxdart/rxdart.dart';
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
 import '../../../../core/utils/log_utils.dart';
+import 'dart:io';
+import '../../../../core/utils/media_compressor.dart';
 import '../../../../core/utils/error_parser.dart';
 import '../../domain/entities/media_entities.dart';
 import '../../domain/repositories/media_repository.dart';
@@ -175,38 +177,94 @@ class MediaRepositoryImpl implements MediaRepository {
 
   @override
   Future<Resource<String>> uploadImage(String filePath) async {
+    File? compressedFile;
     try {
-      final model = await _remoteDataSource.uploadImage(filePath);
+      final originalFile = File(filePath);
+      compressedFile = await MediaCompressor.compressImage(originalFile);
+      
+      final model = await _remoteDataSource.uploadImage(compressedFile.path);
       return Resource.success(model.url);
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadImage failed',
           error: e, stackTrace: stack);
       return Resource.error(parseRepositoryErrorToFailure(e));
+    } finally {
+      // Clean up temporary compressed file if it was created
+      if (compressedFile != null && compressedFile.path != filePath) {
+        try {
+          if (await compressedFile.exists()) {
+            await compressedFile.delete();
+            LogUtils.d('MediaRepositoryImpl: Cleaned up temporary compressed image file: ${compressedFile.path}');
+          }
+        } catch (e) {
+          LogUtils.w('MediaRepositoryImpl: Failed to delete temporary compressed image file: $e');
+        }
+      }
     }
   }
 
   @override
   Future<Resource<List<String>>> uploadImages(List<String> filePaths) async {
+    final compressedFiles = <File>[];
     try {
-      final models = await _remoteDataSource.uploadImages(filePaths);
+      final pathsToUpload = <String>[];
+      for (final path in filePaths) {
+        final originalFile = File(path);
+        final compressed = await MediaCompressor.compressImage(originalFile);
+        compressedFiles.add(compressed);
+        pathsToUpload.add(compressed.path);
+      }
+      final models = await _remoteDataSource.uploadImages(pathsToUpload);
       final urls = models.map((e) => e.url).toList();
       return Resource.success(urls);
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadImages failed',
           error: e, stackTrace: stack);
       return Resource.error(parseRepositoryErrorToFailure(e));
+    } finally {
+      // Clean up temporary compressed files
+      for (int i = 0; i < compressedFiles.length; i++) {
+        final compFile = compressedFiles[i];
+        final origPath = filePaths[i];
+        if (compFile.path != origPath) {
+          try {
+            if (await compFile.exists()) {
+              await compFile.delete();
+              LogUtils.d('MediaRepositoryImpl: Cleaned up temporary compressed image file: ${compFile.path}');
+            }
+          } catch (e) {
+            LogUtils.w('MediaRepositoryImpl: Failed to delete temporary compressed image file: $e');
+          }
+        }
+      }
     }
   }
 
   @override
   Future<Resource<String>> uploadVideo(String filePath) async {
+    File? compressedFile;
     try {
-      final model = await _remoteDataSource.uploadVideo(filePath);
+      final originalFile = File(filePath);
+      compressedFile = await MediaCompressor.compressVideo(originalFile);
+      
+      final model = await _remoteDataSource.uploadVideo(compressedFile.path);
       return Resource.success(model.url);
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: uploadVideo failed',
           error: e, stackTrace: stack);
       return Resource.error(parseRepositoryErrorToFailure(e));
+    } finally {
+      // Clean up temporary compressed file if it was created
+      if (compressedFile != null && compressedFile.path != filePath) {
+        try {
+          if (await compressedFile.exists()) {
+            await compressedFile.delete();
+            LogUtils.d('MediaRepositoryImpl: Cleaned up temporary compressed video file: ${compressedFile.path}');
+          }
+        } catch (e) {
+          LogUtils.w('MediaRepositoryImpl: Failed to delete temporary compressed video file: $e');
+        }
+      }
     }
   }
 

@@ -65,6 +65,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$connectivity$en connectivity = Translations$connectivity$en.internal(_root);
 	late final Translations$notification$en notification = Translations$notification$en.internal(_root);
 	late final Translations$rating_dialog$en rating_dialog = Translations$rating_dialog$en.internal(_root);
+	late final Translations$debug$en debug = Translations$debug$en.internal(_root);
 }
 
 // Path: common
@@ -1311,6 +1312,36 @@ class Translations$rating_dialog$en {
 	String get success => 'Thank you for your support!';
 }
 
+// Path: debug
+class Translations$debug$en {
+	Translations$debug$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Debug Menu'
+	String get title => 'Debug Menu';
+
+	/// en: 'IAP Page'
+	String get iap_page => 'IAP Page';
+
+	/// en: 'Buy Credits'
+	String get buy_credits => 'Buy Credits';
+
+	/// en: 'Generation IAP'
+	String get generation_iap => 'Generation IAP';
+
+	/// en: 'Generation Buy Credits'
+	String get generation_buy_credits => 'Generation Buy Credits';
+
+	/// en: 'Discount Page'
+	String get discount => 'Discount Page';
+
+	/// en: 'Paywall Video Page'
+	String get paywall_video => 'Paywall Video Page';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -1762,6 +1793,13 @@ extension on Translations {
 			'rating_dialog.support_us' => 'Support Us',
 			'rating_dialog.maybe_later' => 'Maybe Later',
 			'rating_dialog.success' => 'Thank you for your support!',
+			'debug.title' => 'Debug Menu',
+			'debug.iap_page' => 'IAP Page',
+			'debug.buy_credits' => 'Buy Credits',
+			'debug.generation_iap' => 'Generation IAP',
+			'debug.generation_buy_credits' => 'Generation Buy Credits',
+			'debug.discount' => 'Discount Page',
+			'debug.paywall_video' => 'Paywall Video Page',
 			_ => null,
 		};
 	}
