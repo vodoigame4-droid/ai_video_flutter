@@ -68,7 +68,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
       final matchCredits = '${credits}credits';
       for (final p in regularProducts) {
         final id = p.id.toLowerCase();
-        if (id == matchCredits || id == 'com.vexa.ai.video.$matchCredits' || id.endsWith(matchCredits)) {
+        if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
           return p.priceString;
         }
       }

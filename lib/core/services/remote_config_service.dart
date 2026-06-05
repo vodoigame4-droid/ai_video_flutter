@@ -35,6 +35,13 @@ class RemoteConfigService {
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp",
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp"
   ],
+  "onboarding": [
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp"
+  ],
   "video_gen_cost": 35
 }
 ''';
@@ -196,5 +203,23 @@ class RemoteConfigService {
     final value = _remoteConfig.getInt(rcVideoGenCost);
     if (value == 0) return defaultVideoGenCost;
     return value;
+  }
+
+  /// Get the onboarding image URLs list from Remote Config.
+  List<String> getOnboardingUrls() {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['onboarding'] != null) {
+      final onboarding = jsonMap['onboarding'];
+      if (onboarding is List && onboarding.isNotEmpty) {
+        return onboarding.map((e) => e.toString()).toList();
+      }
+    }
+    return const [
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp',
+      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp',
+    ];
   }
 }

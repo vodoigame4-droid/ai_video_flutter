@@ -189,6 +189,11 @@ void main() {
       (_) async => const Resource.success([]),
     );
 
+    // Stub getBanners
+    when(() => mockMediaRepository.getBanners()).thenAnswer(
+      (_) async => const Resource.success(['https://example.com/banner.png']),
+    );
+
     sl.unregister<MediaRepository>();
     sl.registerLazySingleton<MediaRepository>(() => mockMediaRepository);
 
@@ -197,6 +202,7 @@ void main() {
     when(() => mockRemoteConfigService.preloadVideos()).thenAnswer((_) async {});
     when(() => mockRemoteConfigService.getBannerHomeUrl()).thenReturn('https://example.com/banner.png');
     when(() => mockRemoteConfigService.videoGenCost).thenReturn(35);
+    when(() => mockRemoteConfigService.getOnboardingUrls()).thenReturn([]);
 
     sl.unregister<RemoteConfigService>();
     sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfigService);

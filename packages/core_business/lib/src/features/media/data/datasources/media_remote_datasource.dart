@@ -47,6 +47,8 @@ abstract class MediaRemoteDataSource {
   Future<UploadResponseModel> uploadVideo(String filePath);
 
   Future<SuggestionResponseModel> getSuggestionPrompt(String imageUrl);
+
+  Future<List<String>> getBanners();
 }
 
 class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
@@ -207,6 +209,12 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
     final response = await _apiClient.getSuggestionPrompt(
       SuggestionRequestModel(imageUrl: imageUrl),
     );
+    return response.data;
+  }
+
+  @override
+  Future<List<String>> getBanners() async {
+    final response = await _apiClient.getBanners();
     return response.data;
   }
 }

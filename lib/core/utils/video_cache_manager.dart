@@ -22,6 +22,9 @@ class VideoCacheManager {
     if (url.startsWith('asset://') || url.startsWith('assets/')) {
       return null;
     }
+    if (!url.startsWith('http')) {
+      return url;
+    }
 
     try {
       final cacheDir = await getTemporaryDirectory();
@@ -108,7 +111,7 @@ class VideoCacheManager {
       if (dotIndex != -1 && dotIndex < path.length - 1) {
         final ext = path.substring(dotIndex + 1).toLowerCase();
         // Support typical video formats
-        if (['mp4', 'mkv', 'mov', 'avi', 'webm', '3gp', 'flv'].contains(ext)) {
+        if (['mp4', 'mkv', 'mov', 'avi', 'webm', 'webp', '3gp', 'flv'].contains(ext)) {
           return ext;
         }
       }

@@ -279,4 +279,16 @@ class MediaRepositoryImpl implements MediaRepository {
       return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
+
+  @override
+  Future<Resource<List<String>>> getBanners() async {
+    try {
+      final urls = await _remoteDataSource.getBanners();
+      return Resource.success(urls);
+    } catch (e, stack) {
+      LogUtils.e('MediaRepositoryImpl: getBanners failed',
+          error: e, stackTrace: stack);
+      return Resource.error(parseRepositoryErrorToFailure(e));
+    }
+  }
 }

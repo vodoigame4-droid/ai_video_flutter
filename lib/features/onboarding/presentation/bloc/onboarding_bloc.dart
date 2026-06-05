@@ -1,15 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/services/remote_config_service.dart';
 import 'onboarding_event.dart';
 import 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final CompleteOnboardingUseCase completeOnboardingUseCase;
-  final GetOnboardingImagesUseCase getOnboardingImagesUseCase;
 
   OnboardingBloc({
     required this.completeOnboardingUseCase,
-    required this.getOnboardingImagesUseCase,
   }) : super(const OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
       await event.when(
@@ -40,41 +40,20 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
           }
 
           emit(const OnboardingState.loading());
-          final result = await getOnboardingImagesUseCase(NoParams());
-          result.when(
-            initial: () {},
-            loading: () {},
-            success: (data) {
-              final List<String> images = [];
-              for (int i = 0; i < 5; i++) {
-                if (i < data.length && data[i].isNotEmpty) {
-                  images.add(data[i]);
-                } else {
-                  images.add(fallbackImages[i]);
-                }
-              }
-              emit(OnboardingState.ready(
-                images: images,
-                index: 0,
-                isCompleted: false,
-              ));
-            },
-            empty: () {
-              emit(OnboardingState.ready(
-                images: fallbackImages,
-                index: 0,
-                isCompleted: false,
-              ));
-            },
-            error: (failure) {
-              LogUtils.e('Failed to fetch onboarding images: ${failure.toString()}');
-              emit(OnboardingState.ready(
-                images: fallbackImages,
-                index: 0,
-                isCompleted: false,
-              ));
-            },
-          );
+          final urls = sl<RemoteConfigService>().getOnboardingUrls();
+          final List<String> images = [];
+          for (int i = 0; i < 5; i++) {
+            if (i < urls.length && urls[i].isNotEmpty) {
+              images.add(urls[i]);
+            } else {
+              images.add(fallbackImages[i]);
+            }
+          }
+          emit(OnboardingState.ready(
+            images: images,
+            index: 0,
+            isCompleted: false,
+          ));
         },
         pageChanged: (index) async {
           state.maybeWhen(
