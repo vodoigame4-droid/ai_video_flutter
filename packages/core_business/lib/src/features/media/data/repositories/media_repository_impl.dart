@@ -1,3 +1,4 @@
+import 'package:rxdart/rxdart.dart';
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
 import '../../../../core/utils/log_utils.dart';
@@ -10,12 +11,17 @@ import '../models/media_models.dart';
 class MediaRepositoryImpl implements MediaRepository {
   final MediaRemoteDataSource _remoteDataSource;
   final AppConfig _appConfig;
+  final BehaviorSubject<Resource<List<MediaEntity>>> _historySubject =
+      BehaviorSubject.seeded(const Resource.initial());
 
   MediaRepositoryImpl({
     required MediaRemoteDataSource remoteDataSource,
     required AppConfig appConfig,
   })  : _remoteDataSource = remoteDataSource,
         _appConfig = appConfig;
+
+  @override
+  Stream<Resource<List<MediaEntity>>> watchHistory() => _historySubject.stream;
 
   @override
   Future<Resource<List<HomeCategoryEntity>>> getHomeCategories() async {
@@ -130,11 +136,14 @@ class MediaRepositoryImpl implements MediaRepository {
         data: response.data.map((e) => e.toEntity()).toList(),
         meta: response.meta.toEntity(),
       );
+      _historySubject.add(Resource.success(entities.data));
       return Resource.success(entities);
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: getHistory failed',
           error: e, stackTrace: stack);
-      return Resource.error(parseRepositoryErrorToFailure(e));
+      final failure = parseRepositoryErrorToFailure(e);
+      _historySubject.add(Resource.error(failure));
+      return Resource.error(failure);
     }
   }
 

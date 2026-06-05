@@ -147,7 +147,7 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
       );
       
       await _localNotificationsPlugin.initialize(
-        initSettings,
+        settings: initSettings,
         onDidReceiveNotificationResponse: (NotificationResponse response) {
           final payload = response.payload;
           biz.LogUtils.d(
@@ -231,10 +231,10 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
     );
     try {
       await _localNotificationsPlugin.show(
-        (title + body).hashCode,
-        title,
-        body,
-        NotificationDetails(
+        id: (title + body).hashCode,
+        title: title,
+        body: body,
+        notificationDetails: NotificationDetails(
           android: AndroidNotificationDetails(
             'high_importance_channel',
             t.notification.channel_name,

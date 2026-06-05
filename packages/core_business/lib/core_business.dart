@@ -52,6 +52,7 @@ export 'src/features/media/domain/usecases/upload_image_usecase.dart';
 export 'src/features/media/domain/usecases/create_tgv_usecase.dart';
 export 'src/features/media/domain/usecases/get_media_detail_usecase.dart';
 export 'src/features/media/domain/usecases/get_history_usecase.dart';
+export 'src/features/media/domain/usecases/watch_history_usecase.dart';
 export 'src/features/media/domain/usecases/get_media_statuses_usecase.dart';
 export 'src/features/media/domain/usecases/delete_media_usecase.dart';
 export 'src/features/media/domain/usecases/request_notification_permission_usecase.dart';

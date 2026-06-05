@@ -56,6 +56,8 @@ void main() async {
         data: message.data,
       );
     }
+    // Refresh history stream when a notification is received in foreground
+    sl<GetHistoryUseCase>()(GetHistoryParams(page: 1, take: 50));
   });
 
   if (Platform.isAndroid) {

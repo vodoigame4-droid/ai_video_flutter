@@ -46,6 +46,7 @@ import '../../features/media/domain/usecases/request_notification_permission_use
 import '../../features/media/domain/usecases/subscribe_notification_topic_usecase.dart';
 import '../../features/media/domain/usecases/get_suggestion_prompt_usecase.dart';
 import '../../features/media/domain/usecases/get_onboarding_images_usecase.dart';
+import '../../features/media/domain/usecases/watch_history_usecase.dart';
 
 // Liked Templates / Local DB
 import '../../core/database/app_database.dart';
@@ -152,6 +153,7 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => SubscribeNotificationTopicUseCase(notificationRepository: sl()));
   sl.registerLazySingleton(() => GetSuggestionPromptUseCase(mediaRepository: sl()));
   sl.registerLazySingleton(() => GetOnboardingImagesUseCase(mediaRepository: sl()));
+  sl.registerLazySingleton(() => WatchHistoryUseCase(sl()));
 
   // Drift Database & Liked Templates Local Storage
   sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
@@ -234,7 +236,7 @@ void initBusinessDependencies(GetIt sl) {
     () => ProfileBloc(
       getHistoryUseCase: sl(),
       deleteMediaUseCase: sl(),
-      getMediaStatusesUseCase: sl(),
+      watchHistoryUseCase: sl(),
       watchLikedTemplatesUseCase: sl(),
     ),
   );

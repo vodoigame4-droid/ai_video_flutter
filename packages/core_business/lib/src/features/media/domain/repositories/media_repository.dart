@@ -25,6 +25,9 @@ abstract class MediaRepository {
     int? take,
   });
 
+  Stream<Resource<List<MediaEntity>>> watchHistory();
+
+
   Future<Resource<List<MediaStatusEntity>>> getMediaStatuses(List<String> ids);
 
   Future<Resource<void>> deleteMedia(String id);

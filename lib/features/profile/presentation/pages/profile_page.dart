@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,11 +67,8 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
-      LogUtils.d('ProfileView: App lifecycle changed to $state. Stopping status polling.');
-      context.read<ProfileBloc>().add(const ProfileEvent.stopPolling());
-    } else if (state == AppLifecycleState.resumed) {
-      LogUtils.d('ProfileView: App lifecycle changed to resumed. Restarting polling/refresh.');
+    if (state == AppLifecycleState.resumed) {
+      LogUtils.d('ProfileView: App lifecycle changed to resumed. Refreshing history.');
       context.read<ProfileBloc>().add(const ProfileEvent.init());
     }
   }
@@ -107,17 +105,6 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
       body: SafeArea(
         child: MultiBlocListener(
           listeners: [
-            BlocListener<DashboardBloc, DashboardState>(
-              listener: (context, dashboardState) {
-                dashboardState.mapOrNull(
-                  currentTab: (tabState) {
-                    if (tabState.index != 1) {
-                      context.read<ProfileBloc>().add(const ProfileEvent.stopPolling());
-                    }
-                  },
-                );
-              },
-            ),
             BlocListener<ProfileBloc, ProfileState>(
               listener: (context, profileState) {
                 profileState.mapOrNull(
@@ -262,12 +249,9 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                               // My Video Tab (with pull-to-refresh)
                               RefreshIndicator(
                                 onRefresh: () async {
-                                  final future = context.read<ProfileBloc>().stream.firstWhere((state) => state.maybeMap(
-                                    ready: (s) => s.videosState.maybeMap(loading: (_) => false, orElse: () => true),
-                                    orElse: () => false,
-                                  ));
-                                  context.read<ProfileBloc>().add(const ProfileEvent.init());
-                                  await future;
+                                  final completer = Completer<void>();
+                                  context.read<ProfileBloc>().add(ProfileEvent.init(completer));
+                                  await completer.future;
                                 },
                                 child: videosState.when(
                                   initial: () => const SizedBox.shrink(),
