@@ -120,8 +120,8 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
   Widget build(BuildContext context) {
     final t = context.t;
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double cardWidth = (screenWidth - 46) / 2;
-    final double childAspectRatio = cardWidth / 168;
+    final double cardWidth = (screenWidth - 32 - 10) / 2;
+    final double childAspectRatio = cardWidth / 152;
 
     final iapBlocState = context.watch<IapBloc>().state;
     final List<Product> regularProducts = iapBlocState.mapOrNull(
@@ -404,18 +404,18 @@ class GenerationCreditPackCard extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Shiny Coin Icon
                 Image.asset(
                   Assets.images.icCredit.path,
-                  width: 38,
-                  height: 38,
+                  width: 36,
+                  height: 36,
                   fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 6),
                 // Credit Title
                 Text(
                   title,
@@ -439,13 +439,13 @@ class GenerationCreditPackCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 10),
                 // Price Button
                 GestureDetector(
                   onTap: onTap,
                   child: Container(
                     width: double.infinity,
-                    height: 36,
+                    height: 32,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [Color(0xFF24C780), Color(0xFF2BC5C5)],
