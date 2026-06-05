@@ -33,7 +33,8 @@ class ImageToVideoTab extends StatelessWidget {
                 isInspiring,
                 isVip,
               ) {
-                final isGenerateEnabled = slotsPaths[0] != null;
+                final isGenerateEnabled = slotsPaths[0] != null &&
+                    customPrompt.trim().isNotEmpty;
 
                 return Column(
                   children: [
@@ -69,7 +70,7 @@ class ImageToVideoTab extends StatelessWidget {
                             const SizedBox(height: 24),
                             _buildPromptSectionHeader(
                               context,
-                              isRequired: false,
+                              isRequired: true,
                             ),
                             const SizedBox(height: 16),
                             CustomPromptCardWidget(
