@@ -11,6 +11,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../gen/assets.gen.dart';
 import '../widgets/credit_pack_row.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
+import '../../../../core/widgets/gradient_button.dart';
 
 class BuyCreditsPage extends StatelessWidget {
   static const String path = '/buy_credits';
@@ -304,70 +305,34 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // Buy Now Button
-                        Container(
-                          height: 56,
+                        GradientButton(
+                          label: t.premium.buy_now,
                           width: double.infinity,
-                          decoration: const BoxDecoration(
-                            gradient: AppColors.primaryGradient,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.primary,
-                                blurRadius: 12,
-                                offset: Offset(0, 4),
-                                spreadRadius: -3,
-                              ),
-                            ],
+                          gradient: AppColors.primaryGradient,
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.5,
                           ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                final data = getPackageData(
-                                  _selectedPackageIndex,
-                                );
-                                final credits = data['credits'] as int;
-                                final price = data['price'] as String;
-                                context.read<IapBloc>().add(
-                                  IapEvent.purchaseCredits(
-                                    credits: credits,
-                                    priceText: price,
-                                  ),
-                                );
-                              },
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Spacer(),
-                                    Text(
-                                      t.premium.buy_now,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w800,
-                                        letterSpacing: 0.5,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    const Icon(
-                                      Icons.arrow_forward_rounded,
-                                      color: Colors.white,
-                                      size: 22,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                          trailingIcon: const Icon(
+                            Icons.arrow_forward_rounded,
+                            color: Colors.white,
+                            size: 22,
                           ),
+                          onPressed: () {
+                            final data = getPackageData(
+                              _selectedPackageIndex,
+                            );
+                            final credits = data['credits'] as int;
+                            final price = data['price'] as String;
+                            context.read<IapBloc>().add(
+                              IapEvent.purchaseCredits(
+                                credits: credits,
+                                priceText: price,
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(height: 12),
 

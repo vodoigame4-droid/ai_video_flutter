@@ -12,6 +12,7 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
+import '../../../../core/widgets/gradient_button.dart';
 
 class DiscountPage extends StatefulWidget {
   static const String path = '/discount';
@@ -331,65 +332,36 @@ class DiscountView extends StatelessWidget {
   }
 
   Widget _buildSubscriptionButton(BuildContext context, Translations t) {
-    return Container(
+    return GradientButton(
+      label: t.premium.start_my_subscription,
       width: double.infinity,
-      height: 56,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF1DB954), Color(0xFF1ED760)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-        borderRadius: BorderRadius.circular(28),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF1DB954).withValues(alpha: 0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
-            spreadRadius: -2,
-          ),
-        ],
+      gradient: const LinearGradient(
+        colors: [Color(0xFF1DB954), Color(0xFF1ED760)],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            context.read<IapBloc>().add(const IapEvent.purchase(productId: 'buy_annualy_discount'));
-          },
-          borderRadius: BorderRadius.circular(28),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  t.premium.start_my_subscription,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.3,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Container(
-                  width: 28,
-                  height: 28,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                    size: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 17,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 0.3,
       ),
+      trailingIcon: Container(
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.2),
+          shape: BoxShape.circle,
+        ),
+        child: const Icon(
+          Icons.arrow_forward,
+          color: Colors.white,
+          size: 16,
+                    ),
+                  ),
+      onPressed: () {
+        context.read<IapBloc>().add(const IapEvent.purchase(productId: 'buy_annualy_discount'));
+      },
     );
   }
 

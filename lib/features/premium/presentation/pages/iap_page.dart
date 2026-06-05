@@ -15,6 +15,7 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/services/remote_config_service.dart';
+import '../../../../core/widgets/gradient_button.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
@@ -332,8 +333,11 @@ class IapView extends StatelessWidget {
                                                         ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.symmetric(
-                                                            horizontal: 18,
+                                                          const EdgeInsets.fromLTRB(
+                                                            18,
+                                                            0,
+                                                            6,
+                                                            0,
                                                           ),
                                                       child: Row(
                                                         mainAxisSize:
@@ -357,7 +361,7 @@ class IapView extends StatelessWidget {
                                                                 ),
                                                           ),
                                                           const SizedBox(
-                                                            width: 8,
+                                                            width: 12,
                                                           ),
                                                           Container(
                                                             width: 20,
@@ -372,8 +376,8 @@ class IapView extends StatelessWidget {
                                                             child: const Icon(
                                                               Icons
                                                                   .arrow_forward_ios_rounded,
-                                                              color:
-                                                                  Colors.black,
+                                                              color: AppColors
+                                                                  .primary,
                                                               size: 10,
                                                             ),
                                                           ),
@@ -440,8 +444,8 @@ class IapView extends StatelessWidget {
                                             suffix: t.premium.weekly_suffix,
                                             tagText: t.premium.best_value,
                                             tagColors: const [
-                                              Color(0xFFff6320),
-                                              Color(0xFFfae123),
+                                              Color(0xFF2AC5C4),
+                                              Color(0xFF28C4B3),
                                             ],
                                             isSelected: isWeekly,
                                             onTap: () {
@@ -496,86 +500,38 @@ class IapView extends StatelessWidget {
                                           const SizedBox(height: 24),
 
                                           // Start My Subscription Button (Crown + Text + Arrow)
-                                          Container(
-                                            height: 56,
+                                          GradientButton(
+                                            label: t.premium.start_my_subscription,
                                             width: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              gradient:
-                                                  AppColors.primaryGradient,
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(100),
-                                              ),
+                                            gradient: AppColors.primaryGradient,
+                                            textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  final productId = isWeekly
-                                                      ? (weeklyProducts
-                                                                .isNotEmpty
-                                                            ? weeklyProducts
-                                                                  .first
-                                                                  .id
-                                                            : (Platform.isIOS
-                                                                  ? 'buy_weekly'
-                                                                  : 'com.vexa.ai.video.weekly'))
-                                                      : (yearlyProducts
-                                                                .isNotEmpty
-                                                            ? yearlyProducts
-                                                                  .first
-                                                                  .id
-                                                            : (Platform.isIOS
-                                                                  ? 'buy_annualy'
-                                                                  : 'com.vexa.ai.video.yearly'));
-                                                  context.read<IapBloc>().add(
-                                                    IapEvent.purchase(
-                                                      productId: productId,
-                                                    ),
-                                                  );
-                                                },
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                      Radius.circular(100),
-                                                    ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                      ),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons
-                                                            .workspace_premium_rounded,
-                                                        color: Color(
-                                                          0xFFFFD700,
-                                                        ), // Gold
-                                                        size: 24,
-                                                      ),
-                                                      const Spacer(),
-                                                      Text(
-                                                        t
-                                                            .premium
-                                                            .start_my_subscription,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      const Spacer(),
-                                                      const Icon(
-                                                        Icons
-                                                            .arrow_forward_rounded,
-                                                        color: Colors.white,
-                                                        size: 24,
-                                                      ),
-                                                    ],
-                                                  ),
+                                            trailingIcon: const Icon(
+                                              Icons.arrow_forward_rounded,
+                                              color: Colors.white,
+                                              size: 24,
+                                            ),
+                                            onPressed: () {
+                                              final productId = isWeekly
+                                                  ? (weeklyProducts.isNotEmpty
+                                                      ? weeklyProducts.first.id
+                                                      : (Platform.isIOS
+                                                          ? 'buy_weekly'
+                                                          : 'com.vexa.ai.video.weekly'))
+                                                  : (yearlyProducts.isNotEmpty
+                                                      ? yearlyProducts.first.id
+                                                      : (Platform.isIOS
+                                                          ? 'buy_annualy'
+                                                          : 'com.vexa.ai.video.yearly'));
+                                              context.read<IapBloc>().add(
+                                                IapEvent.purchase(
+                                                  productId: productId,
                                                 ),
-                                              ),
-                                            ),
+                                              );
+                                            },
                                           ),
                                           const SizedBox(height: 8),
 
