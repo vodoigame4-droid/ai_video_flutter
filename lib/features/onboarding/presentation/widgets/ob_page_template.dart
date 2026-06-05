@@ -148,6 +148,9 @@ class ObPageTemplate extends StatelessWidget {
                 ).shake().shimmer(),
               ],
             ),
+          ).blurFadeIn(
+            duration: const Duration(milliseconds: 500),
+            delay: const Duration(milliseconds: 100),
           ),
         ),
       ],

@@ -12,14 +12,31 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
   CreateFromTemplateBloc({
     required IsTemplateLikedUseCase isTemplateLikedUseCase,
     required ToggleLikeTemplateUseCase toggleLikeTemplateUseCase,
+    String templateId = '',
+    String title = '',
+    String videoUrl = '',
+    String imageUrl = '',
+    String themeType = '',
+    int themeOrgId = 1,
   })  : _isTemplateLikedUseCase = isTemplateLikedUseCase,
         _toggleLikeTemplateUseCase = toggleLikeTemplateUseCase,
-        super(const CreateFromTemplateState.initial()) {
+        super(CreateFromTemplateState.ready(
+          templateId: templateId,
+          title: title,
+          videoUrl: videoUrl,
+          imageUrl: imageUrl,
+          themeType: themeType,
+          themeOrgId: themeOrgId,
+          selectedPhotoPath: null,
+          quality: 'Full HD',
+          duration: '5s',
+          isGenerating: false,
+          isLiked: false,
+        )) {
     on<CreateFromTemplateEvent>((event, emit) async {
       await event.when(
         init: (templateId, title, videoUrl, imageUrl, themeType, themeOrgId) async {
           LogUtils.d("Initializing CreateFromTemplateBloc for template: $title");
-          emit(const CreateFromTemplateState.loading());
           
           final isLiked = await _isTemplateLikedUseCase(templateId);
 
@@ -30,10 +47,22 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
             imageUrl: imageUrl,
             themeType: themeType,
             themeOrgId: themeOrgId,
-            selectedPhotoPath: null,
-            quality: 'Full HD',
-            duration: '5s',
-            isGenerating: false,
+            selectedPhotoPath: state.maybeMap(
+              ready: (r) => r.selectedPhotoPath,
+              orElse: () => null,
+            ),
+            quality: state.maybeMap(
+              ready: (r) => r.quality,
+              orElse: () => 'Full HD',
+            ),
+            duration: state.maybeMap(
+              ready: (r) => r.duration,
+              orElse: () => '5s',
+            ),
+            isGenerating: state.maybeMap(
+              ready: (r) => r.isGenerating,
+              orElse: () => false,
+            ),
             isLiked: isLiked,
           ));
         },

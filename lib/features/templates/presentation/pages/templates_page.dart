@@ -198,6 +198,7 @@ class TemplatesView extends StatelessWidget {
                                       imageUrl: template.thumbnailUrl,
                                       showPlayButton: false,
                                       showVolumeIcon: false,
+                                      heroTag: 'template-hero-${template.id}',
                                       onTap: () {
                                         final videoUrl = template.resultUrl.isNotEmpty
                                             ? template.resultUrl

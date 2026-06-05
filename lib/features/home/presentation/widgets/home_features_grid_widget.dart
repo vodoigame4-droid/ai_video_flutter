@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
+import '../../../../core/extensions/animation_extensions.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../create_video/presentation/pages/create_video_page.dart';
 
@@ -39,6 +40,10 @@ class HomeFeaturesGridWidget extends StatelessWidget {
               CreateVideoPage.name,
               queryParameters: {'tab': '0'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: Duration.zero,
+            duration: const Duration(milliseconds: 350),
           ),
           const SizedBox(width: 8),
           _buildFeatureItem(
@@ -49,6 +54,10 @@ class HomeFeaturesGridWidget extends StatelessWidget {
               CreateVideoPage.name,
               queryParameters: {'tab': '1'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: const Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 350),
           ),
           const SizedBox(width: 8),
           _buildFeatureItem(
@@ -59,6 +68,10 @@ class HomeFeaturesGridWidget extends StatelessWidget {
               CreateVideoPage.name,
               queryParameters: {'tab': '2'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 350),
           ),
           const SizedBox(width: 8),
           _buildFeatureItem(
@@ -69,6 +82,10 @@ class HomeFeaturesGridWidget extends StatelessWidget {
               CreateVideoPage.name,
               queryParameters: {'tab': '3'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 350),
           ),
         ],
       ),

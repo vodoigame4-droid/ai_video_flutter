@@ -29,14 +29,17 @@ class LikedTemplateItemWidget extends StatelessWidget {
           children: [
             // Background Image
             Positioned.fill(
-              child: AppImage(
-                imageUrl: template.thumbnailUrl.isNotEmpty ? template.thumbnailUrl : template.resultUrl,
-                width: 173,
-                height: 248,
-                fit: BoxFit.cover,
-                errorWidget: Image.asset(
-                  'assets/images/home_banner.png',
+              child: Hero(
+                tag: 'template-hero-${template.id}',
+                child: AppImage(
+                  imageUrl: template.thumbnailUrl.isNotEmpty ? template.thumbnailUrl : template.resultUrl,
+                  width: 173,
+                  height: 248,
                   fit: BoxFit.cover,
+                  errorWidget: Image.asset(
+                    'assets/images/home_banner.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

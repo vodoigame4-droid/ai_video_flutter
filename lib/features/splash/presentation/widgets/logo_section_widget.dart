@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/extensions/animation_extensions.dart';
 import '../../../../i18n/strings.g.dart';
 
 class LogoSectionWidget extends StatelessWidget {
@@ -28,12 +29,16 @@ class LogoSectionWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-        ),
+        ).bounceIn(delay: const Duration(milliseconds: 200)),
         const SizedBox(height: 50),
         // App title
         Text(
           t.splash.appName,
           style: context.textTheme.displayMedium,
+        ).slideAndFade(
+          begin: const Offset(0.0, 0.5),
+          delay: const Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 500),
         ),
       ],
     );

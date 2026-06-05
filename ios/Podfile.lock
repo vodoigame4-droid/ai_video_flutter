@@ -89,6 +89,8 @@ PODS:
   - flutter_secure_storage_darwin (10.0.0):
     - Flutter
     - FlutterMacOS
+  - flutter_timezone (0.0.1):
+    - Flutter
   - flutter_udid (0.0.1):
     - Flutter
     - KeychainAccess
@@ -268,6 +270,7 @@ DEPENDENCIES:
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_native_video_trimmer (from `.symlinks/plugins/flutter_native_video_trimmer/ios`)
   - flutter_secure_storage_darwin (from `.symlinks/plugins/flutter_secure_storage_darwin/darwin`)
+  - flutter_timezone (from `.symlinks/plugins/flutter_timezone/ios`)
   - flutter_udid (from `.symlinks/plugins/flutter_udid/ios`)
   - gal (from `.symlinks/plugins/gal/darwin`)
   - get_thumbnail_video (from `.symlinks/plugins/get_thumbnail_video/ios`)
@@ -341,6 +344,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_video_trimmer/ios"
   flutter_secure_storage_darwin:
     :path: ".symlinks/plugins/flutter_secure_storage_darwin/darwin"
+  flutter_timezone:
+    :path: ".symlinks/plugins/flutter_timezone/ios"
   flutter_udid:
     :path: ".symlinks/plugins/flutter_udid/ios"
   gal:
@@ -406,6 +411,7 @@ SPEC CHECKSUMS:
   flutter_local_notifications: 643a3eda1ce1c0599413ca31672536d423dee214
   flutter_native_video_trimmer: 11f6c679971dc3844519b485b9c878df8675ae3a
   flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
+  flutter_timezone: 7c838e17ffd4645d261e87037e5bebf6d38fe544
   flutter_udid: 92a5d31fe0526b7b6002a2318df702e12e7eb300
   gal: baecd024ebfd13c441269ca7404792a7152fde89
   get_thumbnail_video: 1a754d46b860dffefcc57b7290a43089cd5d7e58

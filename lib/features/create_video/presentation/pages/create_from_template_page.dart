@@ -52,8 +52,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   @override
   void initState() {
     super.initState();
-    _bloc = sl<CreateFromTemplateBloc>()
-      ..add(
+    _bloc = CreateFromTemplateBloc(
+      isTemplateLikedUseCase: sl(),
+      toggleLikeTemplateUseCase: sl(),
+      templateId: widget.templateId,
+      title: widget.title,
+      videoUrl: widget.videoUrl,
+      imageUrl: widget.imageUrl,
+      themeType: widget.themeType,
+      themeOrgId: widget.themeOrgId,
+    )..add(
         CreateFromTemplateEvent.init(
           templateId: widget.templateId,
           title: widget.title,
@@ -243,116 +251,120 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   ) {
     final t = context.t;
     final int hash = widget.title.hashCode;
-    final double views = ((hash % 90) + 10) / 10; // Matches resolvedViews in VideoCard
+    final double views =
+        ((hash % 90) + 10) / 10; // Matches resolvedViews in VideoCard
     final double percentage = ((hash % 30) + 15) / 100.0; // 15% to 44% of views
     final double baseLikes = views * percentage;
     final String likesCountStr = '${baseLikes.toStringAsFixed(1)}K';
 
-    return Container(
-      height: 450,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.onSurface,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned.fill(
-              child: SmoothVideoPlayerWidget(
-                videoUrl: widget.videoUrl,
-                imageUrl: widget.imageUrl,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 88,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                      AppColors.black.withValues(alpha: 0.8),
-                      AppColors.black.withValues(alpha: 0.0),
-                    ],
-                  ),
+    return Hero(
+      tag: 'template-hero-${widget.templateId}',
+      child: Container(
+        height: 450,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.onSurface,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned.fill(
+                child: SmoothVideoPlayerWidget(
+                  videoUrl: widget.videoUrl,
+                  imageUrl: widget.imageUrl,
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.auto_awesome_rounded,
-                      color: AppColors.white,
-                      size: 24,
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 88,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        AppColors.black.withValues(alpha: 0.8),
+                        AppColors.black.withValues(alpha: 0.0),
+                      ],
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Text(
-                        t.create.tap_upload,
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: AppColors.white,
-                          fontSize: 16,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                  ),
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.auto_awesome_rounded,
+                        color: AppColors.white,
+                        size: 24,
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    Material(
-                      color: Colors.transparent,
-                      shape: const CircleBorder(),
-                      child: InkWell(
-                        onTap: () => _showTipsBottomSheet(context),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(100),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          t.create.tap_upload,
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: AppColors.white,
+                            fontSize: 16,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        child: SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Center(
-                            child: AppSvgIcon(
-                              assetName: Assets.icons.icNotice,
-                              width: 16,
-                              height: 16,
+                      ),
+                      const SizedBox(width: 8),
+                      Material(
+                        color: Colors.transparent,
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: () => _showTipsBottomSheet(context),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          child: SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: Center(
+                              child: AppSvgIcon(
+                                assetName: Assets.icons.icNotice,
+                                width: 16,
+                                height: 16,
+                              ),
                             ),
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 88,
+                right: 16,
+                child: Column(
+                  children: [
+                    AppHeartButton(
+                      isLiked: isLiked,
+                      onTap: () {
+                        _bloc.add(const CreateFromTemplateEvent.toggleLike());
+                      },
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      likesCountStr,
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 88,
-              right: 16,
-              child: Column(
-                children: [
-                  AppHeartButton(
-                    isLiked: isLiked,
-                    onTap: () {
-                      _bloc.add(const CreateFromTemplateEvent.toggleLike());
-                    },
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    likesCountStr,
-                    style: const TextStyle(
-                      color: AppColors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

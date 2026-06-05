@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../theme/app_theme.dart';
+import '../theme/app_colors.dart';
 import 'app_image.dart';
 
 class VideoCard extends StatefulWidget {
@@ -15,6 +16,7 @@ class VideoCard extends StatefulWidget {
   final double? width;
   final double? height;
   final VoidCallback? onTap;
+  final String? heroTag;
 
   const VideoCard({
     super.key,
@@ -27,6 +29,7 @@ class VideoCard extends StatefulWidget {
     this.width,
     this.height,
     this.onTap,
+    this.heroTag,
   });
 
   @override
@@ -96,12 +99,12 @@ class _VideoCardState extends State<VideoCard> {
       // Figma Category List screen gradients
       badgeGradient = resolvedIsHot
           ? const LinearGradient(
-              colors: [Color(0xFFFAE123), Color(0xFFFF6320)],
+              colors: [AppColors.badgeYellow, AppColors.badgeOrange],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             )
           : const LinearGradient(
-              colors: [Color(0xFF31B8F2), Color(0xFF0FE28E)],
+              colors: [AppColors.badgeBlue, AppColors.badgeGreen],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             );
@@ -109,12 +112,12 @@ class _VideoCardState extends State<VideoCard> {
       // Home screen gradients
       badgeGradient = resolvedIsHot
           ? const LinearGradient(
-              colors: [Color(0xFFFF5E3A), Color(0xFFFF2A68)],
+              colors: [AppColors.badgePeach, AppColors.badgePink],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             )
           : const LinearGradient(
-              colors: [Color(0xFF00F5D4), Color(0xFF00BBF9)],
+              colors: [AppColors.badgeTeal, AppColors.badgeCyan],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             );
@@ -162,27 +165,32 @@ class _VideoCardState extends State<VideoCard> {
                 // Network Image if available
                 if (isNetworkImage)
                   Positioned.fill(
-                    child: _AnimatedImagePlayer(
-                      imageProvider: CachedNetworkImageProvider(
-                        widget.imageUrl!,
-                        maxWidth: cacheWidth,
-                        maxHeight: cacheHeight,
-                      ),
-                      isPlayable: _isPlayable,
-                      fit: BoxFit.cover,
-                      placeholder: AppImageShimmer(
-                        width: widget.width,
-                        height: widget.height,
-                        borderRadius: cardRadius,
-                      ),
-                      errorWidget: Container(
-                        color: Colors.white.withValues(alpha: 0.05),
-                        child: const Icon(
-                          Icons.image_not_supported_outlined,
-                          color: Colors.grey,
+                    child: () {
+                      final player = _AnimatedImagePlayer(
+                        imageProvider: CachedNetworkImageProvider(
+                          widget.imageUrl!,
+                          maxWidth: cacheWidth,
+                          maxHeight: cacheHeight,
                         ),
-                      ),
-                    ),
+                        isPlayable: _isPlayable,
+                        fit: BoxFit.cover,
+                        placeholder: AppImageShimmer(
+                          width: widget.width,
+                          height: widget.height,
+                          borderRadius: cardRadius,
+                        ),
+                        errorWidget: Container(
+                          color: Colors.white.withValues(alpha: 0.05),
+                          child: const Icon(
+                            Icons.image_not_supported_outlined,
+                            color: AppColors.grey,
+                          ),
+                        ),
+                      );
+                      return widget.heroTag != null
+                          ? Hero(tag: widget.heroTag!, child: player)
+                          : player;
+                    }(),
                   ),
 
                 // Dark gradient overlay to read texts easily
@@ -283,8 +291,8 @@ class _VideoCardState extends State<VideoCard> {
                                       ? Icons.auto_awesome
                                       : Icons.remove_red_eye_outlined,
                                   color: isNetworkImage
-                                      ? const Color(0xFF2BC5C5)
-                                      : const Color(0xFFB0B0B0),
+                                      ? AppColors.secondary
+                                      : AppColors.greyText,
                                   size: 14,
                                 ),
                                 const SizedBox(width: 4),
@@ -449,7 +457,7 @@ class _AnimatedImagePlayerState extends State<_AnimatedImagePlayer> {
             color: Colors.white.withValues(alpha: 0.05),
             child: const Icon(
               Icons.image_not_supported_outlined,
-              color: Colors.grey,
+              color: AppColors.grey,
             ),
           );
     }

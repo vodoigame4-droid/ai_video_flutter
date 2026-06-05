@@ -13,6 +13,8 @@ extension WidgetAnimationX on Widget {
     double end = 1.0,
     Curve curve = Curves.easeInOut,
   }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
     return animate().fade(
       begin: begin,
       end: end,
@@ -30,6 +32,8 @@ extension WidgetAnimationX on Widget {
     double end = 0.0,
     Curve curve = Curves.easeInOut,
   }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
     return animate().fade(
       begin: begin,
       end: end,
@@ -48,6 +52,8 @@ extension WidgetAnimationX on Widget {
     Duration delay = Duration.zero,
     Curve curve = Curves.easeOutQuad,
   }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
     return animate().slide(
       begin: begin,
       end: end,
@@ -65,6 +71,8 @@ extension WidgetAnimationX on Widget {
     Duration delay = Duration.zero,
     Curve curve = Curves.easeOutBack,
   }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
     return animate().scale(
       begin: Offset(begin, begin),
       end: Offset(end, end),
@@ -84,6 +92,8 @@ extension WidgetAnimationX on Widget {
     Duration delay = Duration.zero,
     Curve curve = Curves.easeOutBack,
   }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
     return animate()
         .fade(
           begin: beginOpacity,
@@ -145,7 +155,7 @@ extension WidgetAnimationX on Widget {
     bool loop = true, // Default to looping continuously
     Duration pauseDuration = const Duration(milliseconds: 1000), // Default 1s pause between loops
   }) {
-    if (Platform.environment.containsKey('FLUTTER_TEST') && loop) return this;
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
 
     final animation = loop
         ? animate(onPlay: (controller) => controller.repeat())
@@ -177,11 +187,122 @@ extension WidgetAnimationX on Widget {
     Duration duration = const Duration(seconds: 15),
     bool loop = true,
   }) {
-    if (Platform.environment.containsKey('FLUTTER_TEST') && loop) return this;
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
 
     final animation = loop
         ? animate(onPlay: (controller) => controller.repeat())
         : animate();
     return animation.rotate(begin: begin, end: end, duration: duration);
   }
+
+  /// Trôi nổi lên xuống chậm rãi liên tục (loop). Rất hợp với các Badge, Icon trang trí.
+  Widget float({
+    double distance = 6.0,
+    Duration duration = const Duration(seconds: 2),
+    Curve curve = Curves.easeInOut,
+  }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
+    return animate(
+      onPlay: (controller) => controller.repeat(reverse: true),
+    ).moveY(
+      begin: -distance,
+      end: distance,
+      duration: duration,
+      curve: curve,
+    );
+  }
+
+  /// Kết hợp Fade và Blur (làm mờ nhòe thành sắc nét). Tạo cảm giác Glassmorphism sang trọng.
+  Widget blurFadeIn({
+    double beginBlur = 15.0,
+    double endBlur = 0.0,
+    double beginOpacity = 0.0,
+    double endOpacity = 1.0,
+    Duration duration = const Duration(milliseconds: 400),
+    Duration delay = Duration.zero,
+    Curve curve = Curves.easeOutQuad,
+  }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
+    return animate()
+        .fade(
+          begin: beginOpacity,
+          end: endOpacity,
+          duration: duration,
+          delay: delay,
+          curve: curve,
+        )
+        .blur(
+          begin: Offset(beginBlur, beginBlur),
+          end: Offset(endBlur, endBlur),
+          duration: duration,
+          delay: delay,
+          curve: curve,
+        );
+  }
+
+  /// Lắc nghiêng nhẹ trái phải liên tục để gây sự chú ý (chất lượng cao cho nút CTA).
+  Widget wobble({
+    double angle = 0.04,
+    Duration duration = const Duration(milliseconds: 1200),
+    Curve curve = Curves.easeInOut,
+  }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
+    return animate(
+      onPlay: (controller) => controller.repeat(reverse: true),
+    ).rotate(
+      begin: -angle,
+      end: angle,
+      duration: duration,
+      curve: curve,
+    );
+  }
+
+  /// Hiệu ứng bật nảy (bouncy) đàn hồi khi xuất hiện.
+  Widget bounceIn({
+    double beginScale = 0.4,
+    Duration duration = const Duration(milliseconds: 600),
+    Duration delay = Duration.zero,
+  }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
+    return animate()
+        .fade(begin: 0.0, end: 1.0, duration: duration, delay: delay)
+        .scale(
+          begin: Offset(beginScale, beginScale),
+          end: const Offset(1.0, 1.0),
+          duration: duration,
+          delay: delay,
+          curve: Curves.elasticOut,
+        );
+  }
+
+  /// Kết hợp trượt và mờ dần vào, hỗ trợ hướng tùy biến linh hoạt.
+  Widget slideAndFade({
+    Offset begin = const Offset(0.0, 0.15),
+    Duration duration = const Duration(milliseconds: 350),
+    Duration delay = Duration.zero,
+    Curve curve = Curves.easeOutQuad,
+  }) {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return this;
+
+    return animate()
+        .fade(
+          begin: 0.0,
+          end: 1.0,
+          duration: duration,
+          delay: delay,
+          curve: curve,
+        )
+        .slide(
+          begin: begin,
+          end: Offset.zero,
+          duration: duration,
+          delay: delay,
+          curve: curve,
+        );
+  }
 }
+

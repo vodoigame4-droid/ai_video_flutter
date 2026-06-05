@@ -60,6 +60,7 @@ export 'src/features/media/domain/usecases/request_notification_permission_useca
 export 'src/features/media/domain/usecases/subscribe_notification_topic_usecase.dart';
 export 'src/features/media/domain/usecases/get_onboarding_images_usecase.dart';
 export 'src/features/media/domain/usecases/get_banners_usecase.dart';
+export 'src/features/media/domain/usecases/liked_templates_usecases.dart';
 
 // Media Presentation Blocs
 export 'src/features/media/presentation/bloc/home/home_bloc.dart';
