@@ -376,7 +376,13 @@
     "step_1": "Step 1",
     "step_2": "Step 2",
     "upload_photo": "Upload Photo",
-    "got_it": "I got it!"
+    "got_it": "I got it!",
+    "write_prompt": "Write Prompt",
+    "upload_2_photos": "Upload 2 Photos",
+    "generate": "Generate",
+    "upload_portrait": "Upload Portrait",
+    "choose_style": "Choose Style",
+    "add_assets": "Add Assets"
   },
   "checkin": {
     "title": "Daily Check-in",
@@ -395,5 +401,12 @@
   "notification": {
     "channel_name": "High Importance Notifications",
     "channel_description": "This channel is used for important notifications."
+  },
+  "rating_dialog": {
+    "title": "Enjoying the App?",
+    "desc": "Please rate us and help us improve your experience. Thank you!",
+    "support_us": "Support Us",
+    "maybe_later": "Maybe Later",
+    "success": "Thank you for your support!"
   }
 }

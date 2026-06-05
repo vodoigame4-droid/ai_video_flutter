@@ -369,7 +369,13 @@
     "step_1": "第1步",
     "step_2": "第2步",
     "upload_photo": "上传图片",
-    "got_it": "我知道了！"
+    "got_it": "我知道了！",
+    "write_prompt": "输入提示词",
+    "upload_2_photos": "上传2张照片",
+    "generate": "生成",
+    "upload_portrait": "上传肖像",
+    "choose_style": "选择风格",
+    "add_assets": "添加资源"
   },
   "checkin": {
     "title": "签到",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "重要通知",
     "channel_description": "此渠道用于重要通知。"
+  },
+  "rating_dialog": {
+    "title": "喜欢这个应用吗？",
+    "desc": "请给我们评分，帮助我们改善您的体验。谢谢！",
+    "support_us": "支持我们",
+    "maybe_later": "以后再说",
+    "success": "感谢您的支持！"
   }
 }

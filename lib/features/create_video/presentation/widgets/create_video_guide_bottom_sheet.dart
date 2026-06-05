@@ -8,15 +8,31 @@ import '../../../../i18n/strings.g.dart';
 
 class CreateVideoGuideBottomSheet extends StatelessWidget {
   final String imageUrl;
+  final String step1Text;
+  final String step2Text;
 
-  const CreateVideoGuideBottomSheet({super.key, required this.imageUrl});
+  const CreateVideoGuideBottomSheet({
+    super.key,
+    required this.imageUrl,
+    required this.step1Text,
+    required this.step2Text,
+  });
 
-  static void show(BuildContext context, {required String imageUrl}) {
+  static void show(
+    BuildContext context, {
+    required String imageUrl,
+    required String step1Text,
+    required String step2Text,
+  }) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => CreateVideoGuideBottomSheet(imageUrl: imageUrl),
+      builder: (context) => CreateVideoGuideBottomSheet(
+        imageUrl: imageUrl,
+        step1Text: step1Text,
+        step2Text: step2Text,
+      ),
     );
   }
 
@@ -74,18 +90,19 @@ class CreateVideoGuideBottomSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         GradientBorderContainer(
+                          gradient: AppColors.primaryGradient,
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
                           backgroundColor: Colors.black.withValues(alpha: 0.3),
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                             child: Container(
                               width: 125,
                               height: 40,
                               alignment: Alignment.center,
                               child: Text(
-                                t.guide.upload_photo,
+                                step1Text,
                                 style: const TextStyle(
                                   color: AppColors.white,
                                   fontSize: 12,
@@ -112,18 +129,19 @@ class CreateVideoGuideBottomSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         GradientBorderContainer(
+                          gradient: AppColors.primaryGradient,
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
                           backgroundColor: Colors.black.withValues(alpha: 0.3),
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                             child: Container(
                               width: 125,
                               height: 40,
                               alignment: Alignment.center,
                               child: Text(
-                                t.guide.upload_photo,
+                                step2Text,
                                 style: const TextStyle(
                                   color: AppColors.white,
                                   fontSize: 12,

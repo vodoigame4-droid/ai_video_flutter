@@ -118,7 +118,12 @@ class ImageToVideoTab extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: 24,
+                        top: 8,
+                      ),
                       child: CreateVideoButtonWidget(
                         isEnabled: isGenerateEnabled && !isGenerating,
                         isLoading: isGenerating,
@@ -145,6 +150,8 @@ class ImageToVideoTab extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: [
             Text(t.create.upload_image, style: context.textTheme.titleMedium),
             const SizedBox(width: 6),
@@ -170,6 +177,8 @@ class ImageToVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
         Text(t.create.custom_prompt, style: context.textTheme.titleMedium),
         const SizedBox(width: 6),
@@ -187,6 +196,8 @@ class ImageToVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
         Text(t.create.video_settings, style: context.textTheme.titleMedium),
         const SizedBox(width: 6),

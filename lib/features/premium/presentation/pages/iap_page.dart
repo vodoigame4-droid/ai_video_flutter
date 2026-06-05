@@ -11,6 +11,8 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
@@ -39,7 +41,17 @@ class _IapPageState extends State<IapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return IapView(videoUrl: widget.videoUrl);
+    return DeferInitWidget(
+      placeholder: const Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+          ),
+        ),
+      ),
+      child: IapView(videoUrl: widget.videoUrl),
+    );
   }
 }
 
@@ -508,7 +520,7 @@ class IapView extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             GestureDetector(
-                                              onTap: () {},
+                                              onTap: () => launchPrivacyPolicy(),
                                               child: Text(
                                                 t.premium.privacy_policy,
                                                 style: const TextStyle(
@@ -530,7 +542,7 @@ class IapView extends StatelessWidget {
                                               ),
                                             ),
                                             GestureDetector(
-                                              onTap: () {},
+                                              onTap: () => launchTermsOfUse(),
                                               child: Text(
                                                 t.premium.terms_of_use,
                                                 style: const TextStyle(

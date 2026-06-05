@@ -62,6 +62,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$ko checkin = _Translations$checkin$ko._(_root);
 	@override late final _Translations$connectivity$ko connectivity = _Translations$connectivity$ko._(_root);
 	@override late final _Translations$notification$ko notification = _Translations$notification$ko._(_root);
+	@override late final _Translations$rating_dialog$ko rating_dialog = _Translations$rating_dialog$ko._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$ko extends Translations$guide$en {
 	@override String get step_2 => '2단계';
 	@override String get upload_photo => '사진 업로드';
 	@override String get got_it => '이해했습니다!';
+	@override String get write_prompt => '프롬프트 작성';
+	@override String get upload_2_photos => '사진 2장 업로드';
+	@override String get generate => '생성하기';
+	@override String get upload_portrait => '초상화 업로드';
+	@override String get choose_style => '스타일 선택';
+	@override String get add_assets => '에셋 추가';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$ko extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => '중요 알림';
 	@override String get channel_description => '이 채널은 중요한 알림에 사용됩니다.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$ko extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '앱이 마음에 드시나요?';
+	@override String get desc => '평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!';
+	@override String get support_us => '지원하기';
+	@override String get maybe_later => '나중에';
+	@override String get success => '지원해 주셔서 감사합니다!';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsKo {
 			'guide.step_2' => '2단계',
 			'guide.upload_photo' => '사진 업로드',
 			'guide.got_it' => '이해했습니다!',
+			'guide.write_prompt' => '프롬프트 작성',
+			'guide.upload_2_photos' => '사진 2장 업로드',
+			'guide.generate' => '생성하기',
+			'guide.upload_portrait' => '초상화 업로드',
+			'guide.choose_style' => '스타일 선택',
+			'guide.add_assets' => '에셋 추가',
 			'checkin.title' => '출석체크',
 			'checkin.subtitle' => '매일 보상 받기!',
 			'checkin.today' => '오늘',
@@ -995,6 +1022,11 @@ extension on TranslationsKo {
 			'connectivity.retry_button' => '연결 재시도',
 			'notification.channel_name' => '중요 알림',
 			'notification.channel_description' => '이 채널은 중요한 알림에 사용됩니다.',
+			'rating_dialog.title' => '앱이 마음에 드시나요?',
+			'rating_dialog.desc' => '평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!',
+			'rating_dialog.support_us' => '지원하기',
+			'rating_dialog.maybe_later' => '나중에',
+			'rating_dialog.success' => '지원해 주셔서 감사합니다!',
 			_ => null,
 		};
 	}

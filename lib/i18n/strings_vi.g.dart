@@ -63,6 +63,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$vi checkin = _Translations$checkin$vi._(_root);
 	@override late final _Translations$connectivity$vi connectivity = _Translations$connectivity$vi._(_root);
 	@override late final _Translations$notification$vi notification = _Translations$notification$vi._(_root);
+	@override late final _Translations$rating_dialog$vi rating_dialog = _Translations$rating_dialog$vi._(_root);
 }
 
 // Path: common
@@ -569,6 +570,12 @@ class _Translations$guide$vi extends Translations$guide$en {
 	@override String get step_2 => 'Bước 2';
 	@override String get upload_photo => 'Tải ảnh lên';
 	@override String get got_it => 'Đã hiểu!';
+	@override String get write_prompt => 'Viết mô tả';
+	@override String get upload_2_photos => 'Tải lên 2 ảnh';
+	@override String get generate => 'Tạo video';
+	@override String get upload_portrait => 'Tải ảnh chân dung';
+	@override String get choose_style => 'Chọn phong cách';
+	@override String get add_assets => 'Thêm tài nguyên';
 }
 
 // Path: checkin
@@ -608,6 +615,20 @@ class _Translations$notification$vi extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Thông báo quan trọng';
 	@override String get channel_description => 'Kênh này được sử dụng cho các thông báo quan trọng.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$vi extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Bạn thích ứng dụng chứ?';
+	@override String get desc => 'Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!';
+	@override String get support_us => 'Hỗ trợ chúng tôi';
+	@override String get maybe_later => 'Để sau';
+	@override String get success => 'Cảm ơn bạn đã ủng hộ!';
 }
 
 // Path: onboarding.page1
@@ -1005,6 +1026,12 @@ extension on TranslationsVi {
 			'guide.step_2' => 'Bước 2',
 			'guide.upload_photo' => 'Tải ảnh lên',
 			'guide.got_it' => 'Đã hiểu!',
+			'guide.write_prompt' => 'Viết mô tả',
+			'guide.upload_2_photos' => 'Tải lên 2 ảnh',
+			'guide.generate' => 'Tạo video',
+			'guide.upload_portrait' => 'Tải ảnh chân dung',
+			'guide.choose_style' => 'Chọn phong cách',
+			'guide.add_assets' => 'Thêm tài nguyên',
 			'checkin.title' => 'Điểm danh',
 			'checkin.subtitle' => 'Nhận quà mỗi ngày!',
 			'checkin.today' => 'H.nay',
@@ -1017,6 +1044,11 @@ extension on TranslationsVi {
 			'connectivity.retry_button' => 'Thử lại kết nối',
 			'notification.channel_name' => 'Thông báo quan trọng',
 			'notification.channel_description' => 'Kênh này được sử dụng cho các thông báo quan trọng.',
+			'rating_dialog.title' => 'Bạn thích ứng dụng chứ?',
+			'rating_dialog.desc' => 'Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!',
+			'rating_dialog.support_us' => 'Hỗ trợ chúng tôi',
+			'rating_dialog.maybe_later' => 'Để sau',
+			'rating_dialog.success' => 'Cảm ơn bạn đã ủng hộ!',
 			_ => null,
 		};
 	}

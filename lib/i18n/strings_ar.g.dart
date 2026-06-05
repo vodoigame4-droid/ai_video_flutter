@@ -62,6 +62,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$ar checkin = _Translations$checkin$ar._(_root);
 	@override late final _Translations$connectivity$ar connectivity = _Translations$connectivity$ar._(_root);
 	@override late final _Translations$notification$ar notification = _Translations$notification$ar._(_root);
+	@override late final _Translations$rating_dialog$ar rating_dialog = _Translations$rating_dialog$ar._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$ar extends Translations$guide$en {
 	@override String get step_2 => 'الخطوة 2';
 	@override String get upload_photo => 'تحميل الصورة';
 	@override String get got_it => 'لقد فهمت!';
+	@override String get write_prompt => 'اكتب موجهًا';
+	@override String get upload_2_photos => 'تحميل صورتين';
+	@override String get generate => 'توليد';
+	@override String get upload_portrait => 'تحميل صورة شخصية';
+	@override String get choose_style => 'اختر النمط';
+	@override String get add_assets => 'إضافة أصول';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$ar extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'إشعارات ذات أهمية عالية';
 	@override String get channel_description => 'تُستخدم هذه القناة للإشعارات الهامة.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$ar extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'هل تستمتع بالتطبيق؟';
+	@override String get desc => 'يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!';
+	@override String get support_us => 'ادعمنا';
+	@override String get maybe_later => 'ربما لاحقًا';
+	@override String get success => 'شكرا لك على دعمك!';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsAr {
 			'guide.step_2' => 'الخطوة 2',
 			'guide.upload_photo' => 'تحميل الصورة',
 			'guide.got_it' => 'لقد فهمت!',
+			'guide.write_prompt' => 'اكتب موجهًا',
+			'guide.upload_2_photos' => 'تحميل صورتين',
+			'guide.generate' => 'توليد',
+			'guide.upload_portrait' => 'تحميل صورة شخصية',
+			'guide.choose_style' => 'اختر النمط',
+			'guide.add_assets' => 'إضافة أصول',
 			'checkin.title' => 'حضور',
 			'checkin.subtitle' => 'احصل على مكافآت!',
 			'checkin.today' => 'اليوم',
@@ -995,6 +1022,11 @@ extension on TranslationsAr {
 			'connectivity.retry_button' => 'إعادة محاولة الاتصال',
 			'notification.channel_name' => 'إشعارات ذات أهمية عالية',
 			'notification.channel_description' => 'تُستخدم هذه القناة للإشعارات الهامة.',
+			'rating_dialog.title' => 'هل تستمتع بالتطبيق؟',
+			'rating_dialog.desc' => 'يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!',
+			'rating_dialog.support_us' => 'ادعمنا',
+			'rating_dialog.maybe_later' => 'ربما لاحقًا',
+			'rating_dialog.success' => 'شكرا لك على دعمك!',
 			_ => null,
 		};
 	}

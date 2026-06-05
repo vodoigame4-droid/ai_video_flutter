@@ -10,6 +10,8 @@ import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/services/remote_config_service.dart';
 
 class GenerationBuyCreditsPage extends StatelessWidget {
   static const String path = '/generation-buy-credits';
@@ -35,8 +37,8 @@ class GenerationBuyCreditsView extends StatefulWidget {
 }
 
 class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> with SingleTickerProviderStateMixin {
-  static const String _placeholderVideoUrl =
-      'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4';
+  static String get _placeholderVideoUrl =>
+      sl<RemoteConfigService>().getBgIAPUrl();
 
   late AnimationController _revealController;
   late Animation<double> _blurAnimation;

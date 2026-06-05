@@ -24,14 +24,45 @@ class IapBloc extends Bloc<IapEvent, IapState> {
           
           bool isWeekly = false;
           bool isRevealed = false;
+          List<Product> weekly = const [];
+          List<Product> yearly = const [];
+          List<Product> discount = const [];
+          List<Product> regular = const [];
+
           state.mapOrNull(
             ready: (s) {
               isWeekly = s.isWeeklySelected;
               isRevealed = s.isVideoRevealed;
+              weekly = s.weeklyProducts;
+              yearly = s.yearlyProducts;
+              discount = s.discountCreditProducts;
+              regular = s.regularCreditProducts;
+            },
+            success: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+              weekly = s.weeklyProducts;
+              yearly = s.yearlyProducts;
+              discount = s.discountCreditProducts;
+              regular = s.regularCreditProducts;
+            },
+            error: (s) {
+              isWeekly = s.isWeeklySelected;
+              isRevealed = s.isVideoRevealed;
+              weekly = s.weeklyProducts;
+              yearly = s.yearlyProducts;
+              discount = s.discountCreditProducts;
+              regular = s.regularCreditProducts;
             },
           );
 
-          emit(const IapState.loading());
+          final isInitial = state.maybeWhen(
+            initial: () => true,
+            orElse: () => false,
+          );
+          if (isInitial) {
+            emit(const IapState.loading());
+          }
 
           try {
             final List<Product> products = await HavinBilling.instance.getProducts();
@@ -69,10 +100,10 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             emit(IapState.ready(
               isWeeklySelected: isWeekly,
               isVideoRevealed: isRevealed,
-              weeklyProducts: const [],
-              yearlyProducts: const [],
-              discountCreditProducts: const [],
-              regularCreditProducts: const [],
+              weeklyProducts: weekly,
+              yearlyProducts: yearly,
+              discountCreditProducts: discount,
+              regularCreditProducts: regular,
             ));
           }
         },

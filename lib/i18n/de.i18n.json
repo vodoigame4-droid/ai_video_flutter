@@ -369,7 +369,13 @@
     "step_1": "Schritt 1",
     "step_2": "Schritt 2",
     "upload_photo": "Foto hochladen",
-    "got_it": "Ich habe es verstanden!"
+    "got_it": "Ich habe es verstanden!",
+    "write_prompt": "Prompt schreiben",
+    "upload_2_photos": "2 Fotos hochladen",
+    "generate": "Generieren",
+    "upload_portrait": "Porträt hochladen",
+    "choose_style": "Stil wählen",
+    "add_assets": "Assets hinzufügen"
   },
   "checkin": {
     "title": "Check-in",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "Wichtige Benachrichtigungen",
     "channel_description": "Dieser Kanal wird für wichtige Benachrichtigungen verwendet."
+  },
+  "rating_dialog": {
+    "title": "Gefällt Ihnen die App?",
+    "desc": "Bitte bewerten Sie uns und helfen Sie uns, Ihre Erfahrung zu verbessern. Vielen Dank!",
+    "support_us": "Unterstütze uns",
+    "maybe_later": "Vielleicht später",
+    "success": "Vielen Dank für Ihre Unterstützung!"
   }
 }

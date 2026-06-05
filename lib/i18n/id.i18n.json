@@ -369,7 +369,13 @@
     "step_1": "Langkah 1",
     "step_2": "Langkah 2",
     "upload_photo": "Unggah Foto",
-    "got_it": "Saya mengerti!"
+    "got_it": "Saya mengerti!",
+    "write_prompt": "Tulis Prompt",
+    "upload_2_photos": "Unggah 2 Foto",
+    "generate": "Buat",
+    "upload_portrait": "Unggah Potret",
+    "choose_style": "Pilih Gaya",
+    "add_assets": "Tambah Aset"
   },
   "checkin": {
     "title": "Check-in",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "Notifikasi Penting",
     "channel_description": "Saluran ini digunakan untuk notifikasi penting."
+  },
+  "rating_dialog": {
+    "title": "Menikmati Aplikasi Ini?",
+    "desc": "Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!",
+    "support_us": "Dukung Kami",
+    "maybe_later": "Mungkin Nanti",
+    "success": "Terima kasih atas dukungan Anda!"
   }
 }

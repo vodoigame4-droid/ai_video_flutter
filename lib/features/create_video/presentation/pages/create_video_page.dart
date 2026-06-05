@@ -7,6 +7,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/utils/credit_navigation_helper.dart';
 import 'generating_page.dart';
 import '../widgets/create_video_tab_bar_widget.dart';
 import '../widgets/image_to_video_tab.dart';
@@ -14,13 +15,7 @@ import '../widgets/image_to_dance_tab.dart';
 import '../widgets/transition_video_tab.dart';
 import '../widgets/unified_video_tab.dart';
 import '../widgets/create_video_guide_bottom_sheet.dart';
-
-const List<String> _guideImageUrls = [
-  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp',
-  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp',
-  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp',
-  'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp',
-];
+import '../../../../core/services/remote_config_service.dart';
 
 class CreateVideoPage extends StatelessWidget {
   static const String path = '/create-video';
@@ -57,10 +52,28 @@ class CreateVideoView extends StatelessWidget {
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             behavior: HitTestBehavior.opaque,
             child: BlocListener<CreateVideoBloc, CreateVideoState>(
-          listener: (context, state) {
-            state.mapOrNull(
-            ready: (readyState) {
+          listener: (context, state) async {
+            await state.mapOrNull(
+              ready: (readyState) async {
                 if (readyState.isGenerating) {
+                  String resolvedVideoUrl = '';
+                  if (readyState.selectedTab == 2) {
+                    final cachedRemoteUrl = readyState.uploadedSlotsPaths.isNotEmpty
+                        ? readyState.uploadedSlotsPaths[0]
+                        : null;
+                    resolvedVideoUrl = (cachedRemoteUrl != null && cachedRemoteUrl.isNotEmpty)
+                        ? cachedRemoteUrl
+                        : (readyState.slotsPaths.isNotEmpty ? (readyState.slotsPaths[0] ?? '') : '');
+                  }
+
+                  final hasInsufficient = await CreditNavigationHelper.checkInsufficientCreditsAndNavigate(
+                    context,
+                    videoUrl: resolvedVideoUrl,
+                  );
+                  if (hasInsufficient) return;
+
+                  if (!context.mounted) return;
+
                   final String serviceType;
                   final String imageUrl;
                   String? videoUrl;
@@ -162,12 +175,43 @@ class CreateVideoView extends StatelessWidget {
                                     CreateVideoEvent.changeTab(index),
                                   );
                                 },
-                                onHelpPressed: () {
-                                  final imageUrl = selectedTab >= 0 && selectedTab < _guideImageUrls.length
-                                      ? _guideImageUrls[selectedTab]
-                                      : _guideImageUrls[0];
-                                  CreateVideoGuideBottomSheet.show(context, imageUrl: imageUrl);
-                                },
+                                 onHelpPressed: () {
+                                   final guideImageUrls = sl<RemoteConfigService>().getGuideImageUrls();
+                                   final imageUrl = selectedTab >= 0 && selectedTab < guideImageUrls.length
+                                       ? guideImageUrls[selectedTab]
+                                       : guideImageUrls[0];
+                                   
+                                   final String step1Text;
+                                   final String step2Text;
+                                   switch (selectedTab) {
+                                     case 0:
+                                       step1Text = t.guide.upload_photo;
+                                       step2Text = t.guide.write_prompt;
+                                       break;
+                                     case 1:
+                                       step1Text = t.guide.upload_2_photos;
+                                       step2Text = t.guide.generate;
+                                       break;
+                                     case 2:
+                                       step1Text = t.guide.upload_portrait;
+                                       step2Text = t.guide.choose_style;
+                                       break;
+                                     case 3:
+                                       step1Text = t.guide.add_assets;
+                                       step2Text = t.guide.write_prompt;
+                                       break;
+                                     default:
+                                       step1Text = t.guide.upload_photo;
+                                       step2Text = t.guide.write_prompt;
+                                   }
+
+                                   CreateVideoGuideBottomSheet.show(
+                                     context,
+                                     imageUrl: imageUrl,
+                                     step1Text: step1Text,
+                                     step2Text: step2Text,
+                                   );
+                                 },
                               ),
                             ),
 

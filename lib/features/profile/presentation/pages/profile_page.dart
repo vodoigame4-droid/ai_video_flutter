@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
+import 'dart:async';
+import '../../../../core/utils/credit_navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -9,7 +11,6 @@ import '../../../../core/errors/backend_error_handler.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../settings/presentation/pages/settings_page.dart';
-import '../../../premium/presentation/pages/paywall_video_page.dart';
 import '../../../create_video/presentation/pages/result_page.dart';
 import '../../../dashboard/presentation/bloc/dashboard_bloc.dart';
 import '../../../dashboard/presentation/bloc/dashboard_state.dart';
@@ -43,6 +44,8 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final TabController _tabController;
+  Timer? _settingsHoldTimer;
+  bool _isHoldTriggered = false;
 
   @override
   void initState() {
@@ -78,6 +81,7 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
     WidgetsBinding.instance.removeObserver(this);
     _tabController.removeListener(_onTabChanged);
     _tabController.dispose();
+    _settingsHoldTimer?.cancel();
     super.dispose();
   }
 
@@ -139,7 +143,27 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                               color: Colors.white.withValues(alpha: 0.1),
                               shape: const CircleBorder(),
                               child: InkWell(
-                                onTap: () => context.push(SettingsPage.path),
+                                onTap: () {
+                                  _settingsHoldTimer?.cancel();
+                                  if (_isHoldTriggered) {
+                                    _isHoldTriggered = false;
+                                    return;
+                                  }
+                                  context.push(SettingsPage.path);
+                                },
+                                onTapDown: (_) {
+                                  _isHoldTriggered = false;
+                                  _settingsHoldTimer?.cancel();
+                                  _settingsHoldTimer = Timer(const Duration(seconds: 5), () async {
+                                    _isHoldTriggered = true;
+                                    if (mounted) {
+                                      await CreditNavigationHelper.navigateToPaymentScreen(context);
+                                    }
+                                  });
+                                },
+                                onTapCancel: () {
+                                  _settingsHoldTimer?.cancel();
+                                },
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),
@@ -177,20 +201,13 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                               shape: const CircleBorder(),
                               child: InkWell(
                                 onTap: () {
-                                  final videosList = videosState.maybeWhen(
-                                    success: (list) => list,
-                                    orElse: () => const [],
-                                  );
-                                  final videoUrl = videosList.isNotEmpty
-                                      ? videosList.first.videoUrl
-                                      : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                                  context.push('${PaywallVideoPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
+                                  context.push(IapPage.path);
                                 },
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),
                                 child: Image.asset(
-                                  'assets/icons/ic_credit_icon.png',
+                                  'assets/images/ic_credit_setting.png',
                                   width: 36,
                                   height: 36,
                                 ),

@@ -369,7 +369,13 @@
     "step_1": "Paso 1",
     "step_2": "Paso 2",
     "upload_photo": "Subir foto",
-    "got_it": "¡Lo tengo!"
+    "got_it": "¡Lo tengo!",
+    "write_prompt": "Escribir prompt",
+    "upload_2_photos": "Subir 2 fotos",
+    "generate": "Generar",
+    "upload_portrait": "Subir retrato",
+    "choose_style": "Elegir estilo",
+    "add_assets": "Añadir recursos"
   },
   "checkin": {
     "title": "Check-in",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "Notificaciones importantes",
     "channel_description": "Este canal se utiliza para notificaciones importantes."
+  },
+  "rating_dialog": {
+    "title": "¿Te gusta la aplicación?",
+    "desc": "¡Por favor, califícanos y ayúdanos a mejorar tu experiencia. ¡Gracias!",
+    "support_us": "Apóyanos",
+    "maybe_later": "Tal vez más tarde",
+    "success": "¡Gracias por su apoyo!"
   }
 }

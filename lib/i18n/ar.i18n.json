@@ -369,7 +369,13 @@
     "step_1": "الخطوة 1",
     "step_2": "الخطوة 2",
     "upload_photo": "تحميل الصورة",
-    "got_it": "لقد فهمت!"
+    "got_it": "لقد فهمت!",
+    "write_prompt": "اكتب موجهًا",
+    "upload_2_photos": "تحميل صورتين",
+    "generate": "توليد",
+    "upload_portrait": "تحميل صورة شخصية",
+    "choose_style": "اختر النمط",
+    "add_assets": "إضافة أصول"
   },
   "checkin": {
     "title": "حضور",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "إشعارات ذات أهمية عالية",
     "channel_description": "تُستخدم هذه القناة للإشعارات الهامة."
+  },
+  "rating_dialog": {
+    "title": "هل تستمتع بالتطبيق؟",
+    "desc": "يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!",
+    "support_us": "ادعمنا",
+    "maybe_later": "ربما لاحقًا",
+    "success": "شكرا لك على دعمك!"
   }
 }

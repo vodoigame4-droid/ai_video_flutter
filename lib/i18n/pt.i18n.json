@@ -369,7 +369,13 @@
     "step_1": "Passo 1",
     "step_2": "Passo 2",
     "upload_photo": "Enviar foto",
-    "got_it": "Entendi!"
+    "got_it": "Entendi!",
+    "write_prompt": "Escrever Prompt",
+    "upload_2_photos": "Carregar 2 fotos",
+    "generate": "Gerar",
+    "upload_portrait": "Carregar retrato",
+    "choose_style": "Escolher estilo",
+    "add_assets": "Adicionar recursos"
   },
   "checkin": {
     "title": "Check-in",
@@ -387,5 +393,12 @@
   "notification": {
     "channel_name": "Notificações importantes",
     "channel_description": "Este canal é usado para notificações importantes."
+  },
+  "rating_dialog": {
+    "title": "Está gostando do aplicativo?",
+    "desc": "Avalie-nos e ajude-nos a melhorar a sua experiência. Obrigado!",
+    "support_us": "Apoie-nos",
+    "maybe_later": "Mais tarde",
+    "success": "Obrigado pelo seu apoio!"
   }
 }

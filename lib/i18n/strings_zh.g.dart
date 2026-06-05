@@ -62,6 +62,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$zh checkin = _Translations$checkin$zh._(_root);
 	@override late final _Translations$connectivity$zh connectivity = _Translations$connectivity$zh._(_root);
 	@override late final _Translations$notification$zh notification = _Translations$notification$zh._(_root);
+	@override late final _Translations$rating_dialog$zh rating_dialog = _Translations$rating_dialog$zh._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$zh extends Translations$guide$en {
 	@override String get step_2 => '第2步';
 	@override String get upload_photo => '上传图片';
 	@override String get got_it => '我知道了！';
+	@override String get write_prompt => '输入提示词';
+	@override String get upload_2_photos => '上传2张照片';
+	@override String get generate => '生成';
+	@override String get upload_portrait => '上传肖像';
+	@override String get choose_style => '选择风格';
+	@override String get add_assets => '添加资源';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$zh extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => '重要通知';
 	@override String get channel_description => '此渠道用于重要通知。';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$zh extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '喜欢这个应用吗？';
+	@override String get desc => '请给我们评分，帮助我们改善您的体验。谢谢！';
+	@override String get support_us => '支持我们';
+	@override String get maybe_later => '以后再说';
+	@override String get success => '感谢您的支持！';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsZh {
 			'guide.step_2' => '第2步',
 			'guide.upload_photo' => '上传图片',
 			'guide.got_it' => '我知道了！',
+			'guide.write_prompt' => '输入提示词',
+			'guide.upload_2_photos' => '上传2张照片',
+			'guide.generate' => '生成',
+			'guide.upload_portrait' => '上传肖像',
+			'guide.choose_style' => '选择风格',
+			'guide.add_assets' => '添加资源',
 			'checkin.title' => '签到',
 			'checkin.subtitle' => '每日领福利!',
 			'checkin.today' => '今天',
@@ -995,6 +1022,11 @@ extension on TranslationsZh {
 			'connectivity.retry_button' => '重试连接',
 			'notification.channel_name' => '重要通知',
 			'notification.channel_description' => '此渠道用于重要通知。',
+			'rating_dialog.title' => '喜欢这个应用吗？',
+			'rating_dialog.desc' => '请给我们评分，帮助我们改善您的体验。谢谢！',
+			'rating_dialog.support_us' => '支持我们',
+			'rating_dialog.maybe_later' => '以后再说',
+			'rating_dialog.success' => '感谢您的支持！',
 			_ => null,
 		};
 	}

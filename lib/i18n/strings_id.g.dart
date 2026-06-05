@@ -62,6 +62,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$checkin$id checkin = _Translations$checkin$id._(_root);
 	@override late final _Translations$connectivity$id connectivity = _Translations$connectivity$id._(_root);
 	@override late final _Translations$notification$id notification = _Translations$notification$id._(_root);
+	@override late final _Translations$rating_dialog$id rating_dialog = _Translations$rating_dialog$id._(_root);
 }
 
 // Path: common
@@ -554,6 +555,12 @@ class _Translations$guide$id extends Translations$guide$en {
 	@override String get step_2 => 'Langkah 2';
 	@override String get upload_photo => 'Unggah Foto';
 	@override String get got_it => 'Saya mengerti!';
+	@override String get write_prompt => 'Tulis Prompt';
+	@override String get upload_2_photos => 'Unggah 2 Foto';
+	@override String get generate => 'Buat';
+	@override String get upload_portrait => 'Unggah Potret';
+	@override String get choose_style => 'Pilih Gaya';
+	@override String get add_assets => 'Tambah Aset';
 }
 
 // Path: checkin
@@ -592,6 +599,20 @@ class _Translations$notification$id extends Translations$notification$en {
 	// Translations
 	@override String get channel_name => 'Notifikasi Penting';
 	@override String get channel_description => 'Saluran ini digunakan untuk notifikasi penting.';
+}
+
+// Path: rating_dialog
+class _Translations$rating_dialog$id extends Translations$rating_dialog$en {
+	_Translations$rating_dialog$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Menikmati Aplikasi Ini?';
+	@override String get desc => 'Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!';
+	@override String get support_us => 'Dukung Kami';
+	@override String get maybe_later => 'Mungkin Nanti';
+	@override String get success => 'Terima kasih atas dukungan Anda!';
 }
 
 // Path: onboarding.page1
@@ -984,6 +1005,12 @@ extension on TranslationsId {
 			'guide.step_2' => 'Langkah 2',
 			'guide.upload_photo' => 'Unggah Foto',
 			'guide.got_it' => 'Saya mengerti!',
+			'guide.write_prompt' => 'Tulis Prompt',
+			'guide.upload_2_photos' => 'Unggah 2 Foto',
+			'guide.generate' => 'Buat',
+			'guide.upload_portrait' => 'Unggah Potret',
+			'guide.choose_style' => 'Pilih Gaya',
+			'guide.add_assets' => 'Tambah Aset',
 			'checkin.title' => 'Check-in',
 			'checkin.subtitle' => 'Hadiah harian!',
 			'checkin.today' => 'Hari ini',
@@ -995,6 +1022,11 @@ extension on TranslationsId {
 			'connectivity.retry_button' => 'Coba Lagi Koneksi',
 			'notification.channel_name' => 'Notifikasi Penting',
 			'notification.channel_description' => 'Saluran ini digunakan untuk notifikasi penting.',
+			'rating_dialog.title' => 'Menikmati Aplikasi Ini?',
+			'rating_dialog.desc' => 'Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!',
+			'rating_dialog.support_us' => 'Dukung Kami',
+			'rating_dialog.maybe_later' => 'Mungkin Nanti',
+			'rating_dialog.success' => 'Terima kasih atas dukungan Anda!',
 			_ => null,
 		};
 	}

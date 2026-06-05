@@ -174,6 +174,8 @@ class ImageToDanceTab extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: [
             Text(t.create.upload_image, style: context.textTheme.titleMedium),
             const SizedBox(width: 6),
@@ -218,6 +220,8 @@ class ImageToDanceTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
         Text(t.create.video_settings, style: context.textTheme.titleMedium),
         const SizedBox(width: 6),

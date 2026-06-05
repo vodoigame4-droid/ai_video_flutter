@@ -14,6 +14,7 @@ import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/utils/rating_prompt_manager.dart';
 import '../widgets/extend_video_bottom_sheet.dart';
 import 'generating_page.dart';
 
@@ -129,6 +130,9 @@ class _ResultPageState extends State<ResultPage> {
           createdAt: widget.createdAt,
         ),
       );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      RatingPromptManager.recordActionAndPromptIfNeeded();
+    });
   }
 
   @override

@@ -64,6 +64,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$checkin$en checkin = Translations$checkin$en.internal(_root);
 	late final Translations$connectivity$en connectivity = Translations$connectivity$en.internal(_root);
 	late final Translations$notification$en notification = Translations$notification$en.internal(_root);
+	late final Translations$rating_dialog$en rating_dialog = Translations$rating_dialog$en.internal(_root);
 }
 
 // Path: common
@@ -1194,6 +1195,24 @@ class Translations$guide$en {
 
 	/// en: 'I got it!'
 	String get got_it => 'I got it!';
+
+	/// en: 'Write Prompt'
+	String get write_prompt => 'Write Prompt';
+
+	/// en: 'Upload 2 Photos'
+	String get upload_2_photos => 'Upload 2 Photos';
+
+	/// en: 'Generate'
+	String get generate => 'Generate';
+
+	/// en: 'Upload Portrait'
+	String get upload_portrait => 'Upload Portrait';
+
+	/// en: 'Choose Style'
+	String get choose_style => 'Choose Style';
+
+	/// en: 'Add Assets'
+	String get add_assets => 'Add Assets';
 }
 
 // Path: checkin
@@ -1257,6 +1276,30 @@ class Translations$notification$en {
 
 	/// en: 'This channel is used for important notifications.'
 	String get channel_description => 'This channel is used for important notifications.';
+}
+
+// Path: rating_dialog
+class Translations$rating_dialog$en {
+	Translations$rating_dialog$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Enjoying the App?'
+	String get title => 'Enjoying the App?';
+
+	/// en: 'Please rate us and help us improve your experience. Thank you!'
+	String get desc => 'Please rate us and help us improve your experience. Thank you!';
+
+	/// en: 'Support Us'
+	String get support_us => 'Support Us';
+
+	/// en: 'Maybe Later'
+	String get maybe_later => 'Maybe Later';
+
+	/// en: 'Thank you for your support!'
+	String get success => 'Thank you for your support!';
 }
 
 // Path: onboarding.page1
@@ -1684,6 +1727,12 @@ extension on Translations {
 			'guide.step_2' => 'Step 2',
 			'guide.upload_photo' => 'Upload Photo',
 			'guide.got_it' => 'I got it!',
+			'guide.write_prompt' => 'Write Prompt',
+			'guide.upload_2_photos' => 'Upload 2 Photos',
+			'guide.generate' => 'Generate',
+			'guide.upload_portrait' => 'Upload Portrait',
+			'guide.choose_style' => 'Choose Style',
+			'guide.add_assets' => 'Add Assets',
 			'checkin.title' => 'Daily Check-in',
 			'checkin.subtitle' => 'Check in every day and get amazing rewards!',
 			'checkin.today' => 'Today',
@@ -1696,6 +1745,11 @@ extension on Translations {
 			'connectivity.retry_button' => 'Retry Connection',
 			'notification.channel_name' => 'High Importance Notifications',
 			'notification.channel_description' => 'This channel is used for important notifications.',
+			'rating_dialog.title' => 'Enjoying the App?',
+			'rating_dialog.desc' => 'Please rate us and help us improve your experience. Thank you!',
+			'rating_dialog.support_us' => 'Support Us',
+			'rating_dialog.maybe_later' => 'Maybe Later',
+			'rating_dialog.success' => 'Thank you for your support!',
 			_ => null,
 		};
 	}
