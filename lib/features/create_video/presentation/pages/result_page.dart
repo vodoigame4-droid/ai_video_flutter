@@ -31,6 +31,7 @@ class ResultPageArgs {
   final int themeOrgId;
   final bool isHd;
   final bool isLongTime;
+  final bool fromGeneration;
 
   const ResultPageArgs({
     required this.videoId,
@@ -45,6 +46,7 @@ class ResultPageArgs {
     this.themeOrgId = 1,
     this.isHd = false,
     this.isLongTime = false,
+    this.fromGeneration = false,
   });
 }
 
@@ -73,6 +75,7 @@ class ResultPage extends StatefulWidget {
       'themeOrgId': args.themeOrgId.toString(),
       'isHd': args.isHd.toString(),
       'isLongTime': args.isLongTime.toString(),
+      'fromGeneration': args.fromGeneration.toString(),
     };
     if (replace) {
       context.replaceNamed(name, queryParameters: params, extra: args);
@@ -93,6 +96,7 @@ class ResultPage extends StatefulWidget {
   final int themeOrgId;
   final bool isHd;
   final bool isLongTime;
+  final bool fromGeneration;
 
   const ResultPage({
     super.key,
@@ -108,6 +112,7 @@ class ResultPage extends StatefulWidget {
     required this.themeOrgId,
     required this.isHd,
     required this.isLongTime,
+    this.fromGeneration = false,
   });
 
   @override
@@ -130,8 +135,18 @@ class _ResultPageState extends State<ResultPage> {
           createdAt: widget.createdAt,
         ),
       );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      RatingPromptManager.recordActionAndPromptIfNeeded();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      LogUtils.d('ResultPage: PostFrameCallback triggered. videoId=${widget.videoId}, fromGeneration=${widget.fromGeneration}');
+      final isPending = await RatingPromptManager.checkAndRemovePendingVideo(widget.videoId);
+      LogUtils.d('ResultPage: isPending=$isPending');
+      if (widget.fromGeneration || isPending) {
+        if (mounted) {
+          LogUtils.d('ResultPage: Triggering rating prompt...');
+          RatingPromptManager.checkAndPromptRating(context);
+        }
+      } else {
+        LogUtils.d('ResultPage: Rating prompt condition not met (fromGeneration=${widget.fromGeneration}, isPending=$isPending).');
+      }
     });
   }
 

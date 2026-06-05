@@ -2,93 +2,82 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core_business/core_business.dart';
 import '../injection/injection_container.dart';
-import '../navigation/app_router.dart';
 import '../widgets/rate_app_dialog.dart';
 
 class RatingPromptManager {
+  static const String _keyCountShowRating = 'countShowRating';
   static const String _keyHasRated = 'rating_has_rated';
-  static const String _keyActionCount = 'rating_action_count';
-  static const String _keyLastPromptedTime = 'rating_last_prompted_time';
+  static const String _keyGeneratedButUnviewed = 'generated_but_unviewed_video_ids';
 
-  // Config parameters
-  static const int _actionThreshold = 1;
-  static const Duration _cooldownDuration = Duration(hours: 4);
-
-  /// Increment action count in background.
-  static Future<void> incrementActionCount() async {
+  /// Check if the video is newly generated and has not been viewed yet.
+  /// If so, remove it from the list and return true.
+  static Future<bool> checkAndRemovePendingVideo(String videoId) async {
     try {
       final prefs = sl<SharedPreferences>();
-      final currentCount = prefs.getInt(_keyActionCount) ?? 0;
-      await prefs.setInt(_keyActionCount, currentCount + 1);
-      LogUtils.d('RatingPromptManager: Incremented action count to ${currentCount + 1}');
+      final list = prefs.getStringList(_keyGeneratedButUnviewed) ?? [];
+      LogUtils.d('RatingPromptManager: Checking videoId="$videoId" against pending list: $list');
+      if (list.contains(videoId)) {
+        list.remove(videoId);
+        await prefs.setStringList(_keyGeneratedButUnviewed, list);
+        LogUtils.d('RatingPromptManager: Video $videoId was pending. Removed. Remaining: $list');
+        return true;
+      }
     } catch (e, stack) {
-      LogUtils.e('RatingPromptManager: Failed to increment action count', error: e, stackTrace: stack);
+      LogUtils.e('RatingPromptManager: Error in checkAndRemovePendingVideo', error: e, stackTrace: stack);
     }
+    return false;
   }
 
-  /// Check if rating dialog should be prompted.
-  static Future<bool> shouldShowPrompt() async {
+  /// Check and prompt rating dialog if conditions are met.
+  /// This should be called when video generation is completed.
+  static Future<void> checkAndPromptRating(BuildContext context) async {
     try {
       final prefs = sl<SharedPreferences>();
 
-      // 1. Check if user already rated
-      final hasRated = prefs.getBool(_keyHasRated) ?? false;
-      if (hasRated) {
-        LogUtils.d('RatingPromptManager: User has already rated. Will not prompt.');
-        return false;
-      }
-
-      // 2. Check action counter
-      final actionCount = prefs.getInt(_keyActionCount) ?? 0;
-      if (actionCount < _actionThreshold) {
-        LogUtils.d('RatingPromptManager: Action count ($actionCount) < threshold ($_actionThreshold). Will not prompt.');
-        return false;
-      }
-
-      // 3. Check cooldown
-      final lastPromptedTimeMs = prefs.getInt(_keyLastPromptedTime) ?? 0;
-      if (lastPromptedTimeMs > 0) {
-        final lastPromptedTime = DateTime.fromMillisecondsSinceEpoch(lastPromptedTimeMs);
-        final timePassed = DateTime.now().difference(lastPromptedTime);
-        if (timePassed < _cooldownDuration) {
-          LogUtils.d('RatingPromptManager: Cooldown not met. Last prompted: $lastPromptedTime (${timePassed.inMinutes}m ago). Cooldown: ${_cooldownDuration.inHours}h. Will not prompt.');
-          return false;
-        }
-      }
-
-      return true;
-    } catch (e, stack) {
-      LogUtils.e('RatingPromptManager: Error checking shouldShowPrompt', error: e, stackTrace: stack);
-      return false;
-    }
-  }
-
-  /// Record a key action (e.g. video generated/viewed) and automatically trigger the prompt if conditions are met.
-  static Future<void> recordActionAndPromptIfNeeded() async {
-    await incrementActionCount();
-    final shouldShow = await shouldShowPrompt();
-    if (shouldShow) {
-      // Update last prompted time & reset action counter first (asynchronous operations)
+      // 1. Get user rating status from repository
+      bool isRated = false;
       try {
-        final prefs = sl<SharedPreferences>();
-        await prefs.setInt(_keyLastPromptedTime, DateTime.now().millisecondsSinceEpoch);
-        await prefs.setInt(_keyActionCount, 0);
-      } catch (e, stack) {
-        LogUtils.e('RatingPromptManager: Failed to save status on prompt show', error: e, stackTrace: stack);
+        LogUtils.d('RatingPromptManager: Fetching user profile from WatchProfileUseCase...');
+        final user = await sl<WatchProfileUseCase>()().first.timeout(const Duration(milliseconds: 500));
+        isRated = user.isRated;
+        LogUtils.d('RatingPromptManager: Profile fetched. user.isRated=$isRated');
+      } catch (e) {
+        LogUtils.w('RatingPromptManager: Failed to get isRated from WatchProfileUseCase, falling back to SharedPreferences: $e');
+        isRated = prefs.getBool(_keyHasRated) ?? false;
+        LogUtils.d('RatingPromptManager: Fallback checked. local isRated=$isRated');
       }
 
-      // Fetch context and show dialog (no async gap between fetching and using context)
-      final BuildContext? context = rootNavigatorKey.currentContext;
-      if (context != null && context.mounted) {
-        LogUtils.d('RatingPromptManager: Conditions met. Showing RateAppDialog.');
-        showRateAppDialog(context);
-      } else {
-        LogUtils.w('RatingPromptManager: Root context is null or unmounted. Cannot show dialog.');
+      if (isRated) {
+        LogUtils.d('RatingPromptManager: User has already rated. Will not prompt.');
+        return;
       }
+
+      // 2. Increment countShowRating
+      // Default to 2 so the first video completion makes it 3 and triggers prompt immediately
+      final count = prefs.getInt(_keyCountShowRating) ?? 2;
+      final newCount = count + 1;
+      await prefs.setInt(_keyCountShowRating, newCount);
+      LogUtils.d('RatingPromptManager: countShowRating: current=$count, new=$newCount');
+
+      // 3. Check if count reaches 3
+      if (newCount >= 3) {
+        LogUtils.d('RatingPromptManager: countShowRating reached $newCount >= 3. Resetting count to 0 and triggering showRateAppDialog.');
+        await prefs.setInt(_keyCountShowRating, 0); // Reset
+        if (context.mounted) {
+          LogUtils.d('RatingPromptManager: Showing RateAppDialog now.');
+          showRateAppDialog(context);
+        } else {
+          LogUtils.w('RatingPromptManager: Context not mounted when trying to show dialog.');
+        }
+      } else {
+        LogUtils.d('RatingPromptManager: countShowRating ($newCount) < 3. Will not show dialog yet.');
+      }
+    } catch (e, stack) {
+      LogUtils.e('RatingPromptManager: Error in checkAndPromptRating', error: e, stackTrace: stack);
     }
   }
 
-  /// Mark the user as having completed rating.
+  /// Mark local status as rated.
   static Future<void> markAsRated() async {
     try {
       final prefs = sl<SharedPreferences>();

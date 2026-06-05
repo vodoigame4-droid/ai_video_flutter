@@ -177,8 +177,8 @@ class _SettingsViewState extends State<SettingsView> {
                             _buildSettingsItem(
                               icon: SvgPicture.asset(
                                       Assets.icons.icLanguage,
-                                      width: 22,
-                                      height: 22,
+                                      width: 18,
+                                      height: 18,
                                     ),
                               title: t.settings.language,
                               trailingText: localeName,
@@ -189,8 +189,8 @@ class _SettingsViewState extends State<SettingsView> {
                             _buildSettingsItem(
                               icon: SvgPicture.asset(
                                 Assets.icons.icContactUs,
-                                width: 22,
-                                height: 22,
+                                width: 18,
+                                height: 18,
                               ),
                               title: t.settings.contactUs,
                               onTap: () {
@@ -198,20 +198,27 @@ class _SettingsViewState extends State<SettingsView> {
                               },
                             ),
 
-                            // 5. Rate App
-                            if (!_hasRated)
-                              _buildSettingsItem(
-                                icon: SvgPicture.asset(
-                                  Assets.icons.icRate,
-                                  width: 22,
-                                  height: 22,
-                                ),
-                                title: t.settings.rateApp,
-                                onTap: () async {
-                                  await showRateAppDialog(context);
-                                  _checkRatedStatus();
-                                },
-                              ),
+                             // 5. Rate App
+                             StreamBuilder<UserEntity>(
+                               stream: sl<WatchProfileUseCase>()(),
+                               builder: (context, snapshot) {
+                                 final isRated = snapshot.data?.isRated ?? false;
+                                 if (isRated || _hasRated) return const SizedBox.shrink();
+
+                                 return _buildSettingsItem(
+                                   icon: SvgPicture.asset(
+                                     Assets.icons.icRate,
+                                     width: 22,
+                                     height: 22,
+                                   ),
+                                   title: t.settings.rateApp,
+                                   onTap: () async {
+                                     await showRateAppDialog(context);
+                                     _checkRatedStatus();
+                                   },
+                                 );
+                               },
+                             ),
 
                             // 6. Terms of Use
                             _buildSettingsItem(

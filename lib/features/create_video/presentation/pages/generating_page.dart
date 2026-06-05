@@ -117,6 +117,7 @@ class GeneratingView extends StatelessWidget {
                   themeOrgId: themeOrgId,
                   isHd: isHd,
                   isLongTime: isLongTime,
+                  fromGeneration: true,
                 ),
                 replace: true,
               );

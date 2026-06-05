@@ -100,6 +100,22 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
+  Future<Resource<void>> rateApp() async {
+    try {
+      await _remoteDataSource.rateApp();
+      if (_cachedUser != null) {
+        final updatedUser = _cachedUser!.copyWith(isRated: true);
+        _cachedUser = updatedUser;
+        _userController.add(updatedUser);
+      }
+      return Resource.success(null);
+    } catch (e, stack) {
+      LogUtils.e('AuthRepositoryImpl: rateApp failed', error: e, stackTrace: stack);
+      return Resource.error(parseRepositoryErrorToFailure(e));
+    }
+  }
+
   Future<void> _saveTokens(String accessToken, String refreshToken) async {
     await _sharedPreferences.setString(StorageKeys.authAccessToken, accessToken);
     await _sharedPreferences.setString(StorageKeys.authRefreshToken, refreshToken);

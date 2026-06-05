@@ -7,7 +7,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
-import '../../../../core/utils/rating_prompt_manager.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   static const String path = '/video-player';
@@ -64,14 +63,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
     return BlocProvider.value(
       value: _bloc,
-      child: PopScope(
-        canPop: true,
-        onPopInvokedWithResult: (didPop, result) {
-          if (didPop) {
-            RatingPromptManager.recordActionAndPromptIfNeeded();
-          }
-        },
-        child: Scaffold(
+      child: Scaffold(
           backgroundColor: Colors.black,
         body: GestureDetector(
           onTap: _toggleControls,
@@ -365,7 +357,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           ),
         ),
       ),
-    ),
-  );
+    );
   }
 }
