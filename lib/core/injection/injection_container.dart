@@ -6,6 +6,7 @@ import 'package:core_business/core_business.dart';
 import '../config/app_config_impl.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../notification/notification_repository_impl.dart';
+import '../notification/local_notification_service.dart';
 import '../services/remote_config_service.dart';
 import '../network/payment_required_interceptor.dart';
 import '../../features/splash/presentation/bloc/splash_bloc.dart';
@@ -89,10 +90,15 @@ Future<void> initDependencies() async {
     () => AppConfigImpl(appVersion: version),
   );
 
+  // Local Notification Service
+  sl.registerLazySingleton<LocalNotificationService>(
+    () => LocalNotificationService(sl()),
+  );
+
   // Firebase Messaging
   sl.registerLazySingleton<FirebaseMessaging>(() => FirebaseMessaging.instance);
   sl.registerLazySingleton<NotificationRepository>(
-    () => NotificationRepositoryImpl(sl(), sl()),
+    () => NotificationRepositoryImpl(sl(), sl(), sl()),
   );
 
   // Initialize Business Logic Package Dependencies (Settings, Auth, Media, etc.)

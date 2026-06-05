@@ -392,7 +392,10 @@
   },
   "notification": {
     "channel_name": "重要通知",
-    "channel_description": "此渠道用于重要通知。"
+    "channel_description": "此渠道用于重要通知。",
+    "checkin_title": "每日签到提醒 🎁",
+    "checkin_body": "是时候领取你的每日免费额度了！立即打开应用。",
+    "test_notification": "测试"
   },
   "rating_dialog": {
     "title": "喜欢这个应用吗？",

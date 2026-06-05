@@ -27,4 +27,7 @@ abstract class AuthApiClient {
   Future<BaseResponse<UserModel>> updateProfile(
     @Body() UpdateUserRequestModel request,
   );
+
+  @POST('/task/rate-app')
+  Future<BaseResponse<void>> rateApp();
 }

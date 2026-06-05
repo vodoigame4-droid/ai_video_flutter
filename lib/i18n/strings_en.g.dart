@@ -1276,6 +1276,15 @@ class Translations$notification$en {
 
 	/// en: 'This channel is used for important notifications.'
 	String get channel_description => 'This channel is used for important notifications.';
+
+	/// en: 'Daily Check-in Reminder 🎁'
+	String get checkin_title => 'Daily Check-in Reminder 🎁';
+
+	/// en: 'It's time to claim your daily free credits! Open the app now.'
+	String get checkin_body => 'It\'s time to claim your daily free credits! Open the app now.';
+
+	/// en: 'Test'
+	String get test_notification => 'Test';
 }
 
 // Path: rating_dialog
@@ -1745,6 +1754,9 @@ extension on Translations {
 			'connectivity.retry_button' => 'Retry Connection',
 			'notification.channel_name' => 'High Importance Notifications',
 			'notification.channel_description' => 'This channel is used for important notifications.',
+			'notification.checkin_title' => 'Daily Check-in Reminder 🎁',
+			'notification.checkin_body' => 'It\'s time to claim your daily free credits! Open the app now.',
+			'notification.test_notification' => 'Test',
 			'rating_dialog.title' => 'Enjoying the App?',
 			'rating_dialog.desc' => 'Please rate us and help us improve your experience. Thank you!',
 			'rating_dialog.support_us' => 'Support Us',

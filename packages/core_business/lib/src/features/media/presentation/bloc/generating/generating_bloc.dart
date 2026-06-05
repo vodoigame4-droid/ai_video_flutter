@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/log_utils.dart';
+import '../../../../../core/usecases/usecase.dart';
 import '../../../domain/usecases/upload_image_usecase.dart';
 import '../../../domain/usecases/upload_video_usecase.dart';
 import '../../../domain/usecases/create_tgv_usecase.dart';
@@ -18,6 +20,7 @@ import '../../../domain/entities/media_entities.dart';
 import 'generating_event.dart';
 import 'generating_state.dart';
 import '../../../domain/repositories/notification_repository.dart';
+import '../../../../auth/domain/usecases/get_profile_usecase.dart';
 
 class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
   final UploadImageUseCase uploadImageUseCase;
@@ -31,6 +34,8 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
   final CreateItvDualSourceUseCase createItvDualSourceUseCase;
   final GetMediaDetailUseCase getMediaDetailUseCase;
   final NotificationRepository notificationRepository;
+  final GetProfileUseCase getProfileUseCase;
+  final SharedPreferences sharedPreferences;
   Timer? _timer;
   String? _mediaId;
   double _mockProgress = 0.0;
@@ -47,6 +52,8 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
     required this.createItvDualSourceUseCase,
     required this.getMediaDetailUseCase,
     required this.notificationRepository,
+    required this.getProfileUseCase,
+    required this.sharedPreferences,
   }) : super(const GeneratingState.initial()) {
     on<GeneratingEvent>((event, emit) async {
       await event.when(
@@ -214,6 +221,21 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                   title: title,
                   imageUrl: imageUrl,
                 ));
+
+                // Call /user/me immediately to refresh coins
+                unawaited(getProfileUseCase(NoParams()));
+
+                // Add video ID to generated_but_unviewed_video_ids in SharedPreferences
+                try {
+                  final list = sharedPreferences.getStringList('generated_but_unviewed_video_ids') ?? [];
+                  if (!list.contains(mediaEntity.id)) {
+                    list.add(mediaEntity.id);
+                    await sharedPreferences.setStringList('generated_but_unviewed_video_ids', list);
+                    LogUtils.d('GeneratingBloc: Added ${mediaEntity.id} to generated_but_unviewed_video_ids');
+                  }
+                } catch (e) {
+                  LogUtils.e('GeneratingBloc: Failed to save generated video ID to pending list', error: e);
+                }
 
                 // 4. Start Polling Status
                 _timer?.cancel();

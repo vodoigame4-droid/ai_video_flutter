@@ -231,6 +231,7 @@ final GoRouter appRouter = GoRouter(
         final themeOrgId = extraArgs?.themeOrgId ?? int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
         final isHd = extraArgs?.isHd ?? state.uri.queryParameters['isHd'] == 'true';
         final isLongTime = extraArgs?.isLongTime ?? state.uri.queryParameters['isLongTime'] == 'true';
+        final fromGeneration = extraArgs?.fromGeneration ?? state.uri.queryParameters['fromGeneration'] == 'true';
 
         return AppRoutePage.cupertino<void>(
           state: state,
@@ -247,6 +248,7 @@ final GoRouter appRouter = GoRouter(
             themeOrgId: themeOrgId,
             isHd: isHd,
             isLongTime: isLongTime,
+            fromGeneration: fromGeneration,
           ),
         );
       },

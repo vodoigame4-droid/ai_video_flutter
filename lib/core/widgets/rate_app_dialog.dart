@@ -10,6 +10,8 @@ import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
 import '../utils/app_toast.dart';
 import '../utils/rating_prompt_manager.dart';
+import '../constants/app_constants.dart';
+import '../injection/injection_container.dart';
 
 Future<void> showRateAppDialog(BuildContext context) {
   final t = context.t;
@@ -107,25 +109,28 @@ Future<void> showRateAppDialog(BuildContext context) {
                         // Dismiss dialog first
                         Navigator.pop(context);
 
+                        // Call backend API to mark as rated
+                        sl<RateAppUseCase>()(NoParams());
+
                         // Save persistent flag so they aren't prompted again in background
                         await RatingPromptManager.markAsRated();
 
-                        if (Platform.isIOS) {
-                          // iOS: Always open App Store, regardless of selected stars (avoid gating review violation)
-                          const String iosAppId = '6470000000'; // App Store ID placeholder
-                          final iosUri = Uri.parse('https://apps.apple.com/app/id$iosAppId?action=write-review');
-                          try {
-                            if (await canLaunchUrl(iosUri)) {
-                              await launchUrl(iosUri, mode: LaunchMode.externalApplication);
-                            } else {
-                              LogUtils.e('RateAppDialog: Could not launch iOS App Store URL: $iosUri');
+                        if (currentRating >= 4) {
+                          if (Platform.isIOS) {
+                            // iOS: Open App Store
+                            const String iosAppId = '6776543288';
+                            final iosUri = Uri.parse('https://apps.apple.com/app/id$iosAppId?action=write-review');
+                            try {
+                              if (await canLaunchUrl(iosUri)) {
+                                await launchUrl(iosUri, mode: LaunchMode.externalApplication);
+                              } else {
+                                LogUtils.e('RateAppDialog: Could not launch iOS App Store URL: $iosUri');
+                              }
+                            } catch (e, stack) {
+                              LogUtils.e('RateAppDialog: Error launching iOS App Store', error: e, stackTrace: stack);
                             }
-                          } catch (e, stack) {
-                            LogUtils.e('RateAppDialog: Error launching iOS App Store', error: e, stackTrace: stack);
-                          }
-                        } else if (Platform.isAndroid) {
-                          // Android: If 4 or 5 stars -> open Play Store. If 1-3 stars -> show thank you toast
-                          if (currentRating >= 4) {
+                          } else if (Platform.isAndroid) {
+                            // Android: Open Play Store
                             try {
                               final packageInfo = await PackageInfo.fromPlatform();
                               final packageName = packageInfo.packageName;
@@ -142,10 +147,11 @@ Future<void> showRateAppDialog(BuildContext context) {
                             } catch (e, stack) {
                               LogUtils.e('RateAppDialog: Error launching Android Play Store', error: e, stackTrace: stack);
                             }
-                          } else {
-                            // Show thank-you toast for lower rating
-                            AppToast.showSuccess(t.rating_dialog.success);
                           }
+                        } else {
+                          // Rating 3 stars or below: Open support email client
+                          await launchRatingFeedbackEmail(currentRating);
+                          AppToast.showSuccess(t.rating_dialog.success);
                         }
                       },
                       borderRadius: const BorderRadius.all(Radius.circular(100)),

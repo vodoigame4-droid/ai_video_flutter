@@ -392,7 +392,10 @@
   },
   "notification": {
     "channel_name": "중요 알림",
-    "channel_description": "이 채널은 중요한 알림에 사용됩니다."
+    "channel_description": "이 채널은 중요한 알림에 사용됩니다.",
+    "checkin_title": "일일 출석 체크 알림 🎁",
+    "checkin_body": "일일 무료 크레딧을 받을 시간입니다! 지금 앱을 열어보세요.",
+    "test_notification": "테스트"
   },
   "rating_dialog": {
     "title": "앱이 마음에 드시나요?",

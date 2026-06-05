@@ -17,6 +17,7 @@ import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/get_profile_usecase.dart';
 import '../../features/auth/domain/usecases/auto_login_usecase.dart';
 import '../../features/auth/domain/usecases/watch_profile_usecase.dart';
+import '../../features/auth/domain/usecases/rate_app_usecase.dart';
 import '../../features/auth/presentation/bloc/credit_badge/credit_badge_bloc.dart';
 
 // Media
@@ -112,6 +113,7 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => GetProfileUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => WatchProfileUseCase(sl()));
+  sl.registerLazySingleton(() => RateAppUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => AutoLoginUseCase(
         authRepository: sl(),
         notificationRepository: sl(),
@@ -222,6 +224,8 @@ void initBusinessDependencies(GetIt sl) {
       createItvDualSourceUseCase: sl(),
       getMediaDetailUseCase: sl(),
       notificationRepository: sl(),
+      getProfileUseCase: sl(),
+      sharedPreferences: sl(),
     ),
   );
   sl.registerFactory(

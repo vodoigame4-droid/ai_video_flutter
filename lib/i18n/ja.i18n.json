@@ -392,7 +392,10 @@
   },
   "notification": {
     "channel_name": "重要度の高い通知",
-    "channel_description": "このチャネルは重要な通知に使用されます。"
+    "channel_description": "このチャネルは重要な通知に使用されます。",
+    "checkin_title": "毎日のチェックインリマインダー 🎁",
+    "checkin_body": "毎日の無料クレジットを受け取る時間です！今すぐアプリを開きましょう。",
+    "test_notification": "テスト"
   },
   "rating_dialog": {
     "title": "アプリを楽しんでいますか？",

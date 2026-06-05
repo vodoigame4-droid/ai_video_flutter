@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:core_business/core_business.dart' as biz;
 import '../injection/injection_container.dart';
 import '../navigation/app_router.dart';
+import 'checkin_widget.dart';
 
 class NotificationListenerWrapper extends StatefulWidget {
   final Widget child;
@@ -73,6 +74,20 @@ class _NotificationListenerWrapperState extends State<NotificationListenerWrappe
 
   void _navigateForNotification(Map<String, dynamic> data) {
     try {
+      final String? type = data['type']?.toString();
+      if (type == 'checkin' || type == 'checkin_test') {
+        biz.LogUtils.d('NotificationListenerWrapper: Handling check-in notification click, navigating to home...');
+        
+        // Navigate to the Home Page (HomePage contains the CheckInWidget)
+        appRouter.go('/');
+        
+        // Wait for page rendering to complete, then trigger the check-in dialog
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          CheckInWidget.checkInTrigger.add(null);
+        });
+        return;
+      }
+
       biz.LogUtils.d('NotificationListenerWrapper: Handling notification click, navigating to profile screen...');
       
       // Navigate to the Profile Page
@@ -84,7 +99,7 @@ class _NotificationListenerWrapperState extends State<NotificationListenerWrappe
       
     } catch (e, stackTrace) {
       biz.LogUtils.e(
-        'NotificationListenerWrapper: Navigation to Profile failed',
+        'NotificationListenerWrapper: Navigation to destination failed',
         error: e,
         stackTrace: stackTrace,
       );

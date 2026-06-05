@@ -8,6 +8,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:core_business/core_business.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:ai_video_flutter/core/services/remote_config_service.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class MockMediaRepository extends Mock implements MediaRepository {}
 class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
@@ -15,10 +17,14 @@ class MockNotificationSettings extends Mock implements NotificationSettings {}
 class MockAutoLoginUseCase extends Mock implements AutoLoginUseCase {}
 class MockGetProfileUseCase extends Mock implements GetProfileUseCase {}
 class MockWatchProfileUseCase extends Mock implements WatchProfileUseCase {}
+class MockRemoteConfigService extends Mock implements RemoteConfigService {}
+class MockGetDailyLoginStatusUseCase extends Mock implements GetDailyLoginStatusUseCase {}
+class MockCheckInUseCase extends Mock implements CheckInUseCase {}
 
 void main() {
   // Disable Google Fonts HTTP fetching during tests
   GoogleFonts.config.allowRuntimeFetching = false;
+  VisibilityDetectorController.instance.updateInterval = Duration.zero;
 
   setUp(() async {
     registerFallbackValue(NoParams());
@@ -32,6 +38,8 @@ void main() {
     final mockAutoLoginUseCase = MockAutoLoginUseCase();
     final mockGetProfileUseCase = MockGetProfileUseCase();
     final mockWatchProfileUseCase = MockWatchProfileUseCase();
+    final mockGetDailyLoginStatusUseCase = MockGetDailyLoginStatusUseCase();
+    final mockCheckInUseCase = MockCheckInUseCase();
 
     final mockUser = UserEntity(
       id: 'mock_user_id',
@@ -84,6 +92,18 @@ void main() {
       (_) => Stream.value(mockUser),
     );
 
+    when(() => mockGetDailyLoginStatusUseCase(any())).thenAnswer(
+      (_) async => const Resource.success(DailyLoginEntity(
+        currentStreak: 0,
+        lastLoginAt: null,
+        rewards: [],
+      )),
+    );
+
+    when(() => mockCheckInUseCase(any())).thenAnswer(
+      (_) async => const Resource.success(10),
+    );
+
     sl.unregister<FirebaseMessaging>();
     sl.registerLazySingleton<FirebaseMessaging>(() => mockFirebaseMessaging);
 
@@ -95,6 +115,12 @@ void main() {
 
     sl.unregister<WatchProfileUseCase>();
     sl.registerLazySingleton<WatchProfileUseCase>(() => mockWatchProfileUseCase);
+
+    sl.unregister<GetDailyLoginStatusUseCase>();
+    sl.registerLazySingleton<GetDailyLoginStatusUseCase>(() => mockGetDailyLoginStatusUseCase);
+
+    sl.unregister<CheckInUseCase>();
+    sl.registerLazySingleton<CheckInUseCase>(() => mockCheckInUseCase);
 
     final mockMediaRepository = MockMediaRepository();
 
@@ -158,8 +184,22 @@ void main() {
       ),
     );
 
+    // Stub getOnboardingImages
+    when(() => mockMediaRepository.getOnboardingImages()).thenAnswer(
+      (_) async => const Resource.success([]),
+    );
+
     sl.unregister<MediaRepository>();
     sl.registerLazySingleton<MediaRepository>(() => mockMediaRepository);
+
+    final mockRemoteConfigService = MockRemoteConfigService();
+    when(() => mockRemoteConfigService.initialize()).thenAnswer((_) async {});
+    when(() => mockRemoteConfigService.preloadVideos()).thenAnswer((_) async {});
+    when(() => mockRemoteConfigService.getBannerHomeUrl()).thenReturn('https://example.com/banner.png');
+    when(() => mockRemoteConfigService.videoGenCost).thenReturn(35);
+
+    sl.unregister<RemoteConfigService>();
+    sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfigService);
   });
 
   testWidgets('Video AI app renders successfully', (WidgetTester tester) async {
@@ -195,7 +235,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    // Verify that the app title "Video AI" is rendered in the widget tree on HomePage.
-    expect(find.text('Video AI'), findsOneWidget);
+    // Verify that the dashboard create video label is rendered on HomePage.
+    expect(find.text(t.dashboard.createVideo), findsOneWidget);
   });
 }

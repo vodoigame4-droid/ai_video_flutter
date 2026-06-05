@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lottie/lottie.dart';
 import 'package:core_business/core_business.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../injection/injection_container.dart';
 import '../errors/backend_error_handler.dart';
+import '../notification/local_notification_service.dart';
 import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
 
@@ -17,6 +20,8 @@ enum DayState { claimed, today, upcoming }
 class CheckInWidget extends StatefulWidget {
   const CheckInWidget({super.key});
 
+  static final checkInTrigger = StreamController<void>.broadcast();
+
   @override
   State<CheckInWidget> createState() => _CheckInWidgetState();
 }
@@ -24,8 +29,72 @@ class CheckInWidget extends StatefulWidget {
 class _CheckInWidgetState extends State<CheckInWidget> {
   bool _notificationEnabled = true;
   bool _hasAutoShown = false;
+  StreamSubscription<void>? _triggerSubscription;
 
-  void _showCheckInDialog(BuildContext context) {
+  @override
+  void initState() {
+    super.initState();
+    _checkSystemNotificationPermission();
+    _triggerSubscription = CheckInWidget.checkInTrigger.stream.listen((_) {
+      if (mounted) {
+        _showCheckInDialog(context);
+      }
+    });
+  }
+
+  Future<void> _checkSystemNotificationPermission() async {
+    final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    if (!isEnabled) {
+      if (mounted) {
+        setState(() {
+          _notificationEnabled = false;
+        });
+      }
+      return;
+    }
+    try {
+      final settings = await sl<FirebaseMessaging>().getNotificationSettings();
+      final isGranted = settings.authorizationStatus == AuthorizationStatus.authorized ||
+                        settings.authorizationStatus == AuthorizationStatus.provisional;
+      if (mounted) {
+        setState(() {
+          _notificationEnabled = isGranted;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _notificationEnabled = isEnabled;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _triggerSubscription?.cancel();
+    super.dispose();
+  }
+
+  void _showCheckInDialog(BuildContext context) async {
+    final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    bool isPermissionGranted = false;
+    try {
+      final settings = await sl<FirebaseMessaging>().getNotificationSettings();
+      isPermissionGranted = settings.authorizationStatus == AuthorizationStatus.authorized ||
+                            settings.authorizationStatus == AuthorizationStatus.provisional;
+    } catch (_) {
+      isPermissionGranted = isEnabled;
+    }
+
+    if (mounted) {
+      setState(() {
+        _notificationEnabled = isEnabled && isPermissionGranted;
+      });
+    }
+
+    if (!context.mounted) return;
+
     showDialog(
       context: context,
       barrierColor: Colors.black.withValues(alpha: 0.75),
@@ -36,13 +105,52 @@ class _CheckInWidgetState extends State<CheckInWidget> {
             builder: (ctx, setDialogState) {
               return _CheckInDialogContent(
                 notificationEnabled: _notificationEnabled,
-                onNotificationChanged: (val) {
-                  setState(() {
-                    _notificationEnabled = val;
-                  });
-                  setDialogState(() {
-                    _notificationEnabled = val;
-                  });
+                onNotificationChanged: (val) async {
+                  if (val) {
+                    final isGranted = await sl<NotificationRepository>().requestPermission();
+                    if (isGranted) {
+                      await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+                      await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
+                      setState(() {
+                        _notificationEnabled = true;
+                      });
+                      setDialogState(() {
+                        _notificationEnabled = true;
+                      });
+                    } else {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(context.t.generating.notification_denied),
+                            duration: const Duration(seconds: 3),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                      setState(() {
+                        _notificationEnabled = false;
+                      });
+                      setDialogState(() {
+                        _notificationEnabled = false;
+                      });
+                    }
+                  } else {
+                    final shouldDisable = await _showDisableNotificationConfirmDialog(ctx);
+                    if (shouldDisable) {
+                      await sl<LocalNotificationService>().setCheckInNotificationEnabled(false);
+                      await sl<LocalNotificationService>().cancelDailyCheckInNotification();
+                      setState(() {
+                        _notificationEnabled = false;
+                      });
+                      setDialogState(() {
+                        _notificationEnabled = false;
+                      });
+                    } else {
+                      setDialogState(() {
+                        _notificationEnabled = true;
+                      });
+                    }
+                  }
                 },
               );
             },
@@ -50,6 +158,133 @@ class _CheckInWidgetState extends State<CheckInWidget> {
         );
       },
     );
+  }
+
+  Future<bool> _showDisableNotificationConfirmDialog(BuildContext context) async {
+    final t = context.t;
+    final isVi = t.$meta.locale.languageCode == 'vi';
+
+    final title = isVi ? 'Tắt thông báo điểm danh?' : 'Disable check-in notifications?';
+    final desc = isVi
+        ? 'Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?'
+        : 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?';
+    final cancelText = isVi ? 'Giữ lại' : 'Keep Enabled';
+    final confirmText = isVi ? 'Tắt' : 'Disable';
+
+    final result = await showDialog<bool>(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.5),
+      builder: (dialogContext) {
+        return Center(
+          child: Container(
+            width: 330,
+            margin: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+            decoration: BoxDecoration(
+              color: const Color(0xFF171717),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              border: Border.all(
+                color: const Color(0xFF2BC5C5),
+                width: 1,
+              ),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Title
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Description
+                  Text(
+                    desc,
+                    style: const TextStyle(
+                      color: Color(0xFFB1B1B1),
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Action Buttons Row
+                  Row(
+                    children: [
+                      // Cancel Button
+                      Expanded(
+                        child: InkWell(
+                          onTap: () => Navigator.pop(dialogContext, false),
+                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          child: Container(
+                            height: 48,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF979797),
+                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                cancelText,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+
+                      // Confirm Button
+                      Expanded(
+                        child: InkWell(
+                          onTap: () => Navigator.pop(dialogContext, true),
+                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          child: Container(
+                            height: 48,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color(0xFF007BFF),
+                                  Color(0xFF24C780),
+                                ],
+                              ),
+                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                confirmText,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    return result ?? false;
   }
 
   @override
@@ -576,13 +811,45 @@ class _CheckInDialogContent extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              Transform.scale(
-                                scale: 0.8,
-                                child: CupertinoSwitch(
-                                  value: notificationEnabled,
-                                  activeTrackColor: const Color(0xFF00E676),
-                                  onChanged: onNotificationChanged,
-                                ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // TextButton(
+                                  //   style: TextButton.styleFrom(
+                                  //     padding: const EdgeInsets.symmetric(
+                                  //       horizontal: 12,
+                                  //       vertical: 4,
+                                  //     ),
+                                  //     minimumSize: Size.zero,
+                                  //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  //     backgroundColor: AppColors.secondary.withOpacity(0.2),
+                                  //     shape: RoundedRectangleBorder(
+                                  //       borderRadius: BorderRadius.circular(12),
+                                  //     ),
+                                  //   ),
+                                  //   onPressed: () async {
+                                  //     await sl<NotificationRepository>().requestPermission();
+                                  //     await sl<LocalNotificationService>().triggerTestCheckInNotification();
+                                  //   },
+                                  //   child: Text(
+                                  //     context.t.notification.test_notification,
+                                  //     style: GoogleFonts.inter(
+                                  //       color: AppColors.secondary,
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 14,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(width: 8),
+                                  Transform.scale(
+                                    scale: 0.8,
+                                    child: CupertinoSwitch(
+                                      value: notificationEnabled,
+                                      activeTrackColor: const Color(0xFF00E676),
+                                      onChanged: onNotificationChanged,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

@@ -440,6 +440,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         const SizedBox(height: 12),
                         Text(
                           t.create.tap_upload,
+                          textAlign: TextAlign.center,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: AppColors.subText,
                           ),

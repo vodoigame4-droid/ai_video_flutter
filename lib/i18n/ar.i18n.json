@@ -392,7 +392,10 @@
   },
   "notification": {
     "channel_name": "إشعارات ذات أهمية عالية",
-    "channel_description": "تُستخدم هذه القناة للإشعارات الهامة."
+    "channel_description": "تُستخدم هذه القناة للإشعارات الهامة.",
+    "checkin_title": "تذكير بالحضور اليومي 🎁",
+    "checkin_body": "لقد حان الوقت للحصول على رصيدك المجاني اليومي! افتح التطبيق الآن.",
+    "test_notification": "تجربة"
   },
   "rating_dialog": {
     "title": "هل تستمتع بالتطبيق؟",
