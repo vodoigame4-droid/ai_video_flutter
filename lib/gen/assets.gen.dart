@@ -281,6 +281,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_credit.png
   AssetGenImage get icCredit => const AssetGenImage('assets/images/ic_credit.png');
 
+  /// File path: assets/images/ic_credit_setting.png
+  AssetGenImage get icCreditSetting => const AssetGenImage('assets/images/ic_credit_setting.png');
+
   /// File path: assets/images/ic_line_checkin.png
   AssetGenImage get icLineCheckin => const AssetGenImage('assets/images/ic_line_checkin.png');
 
@@ -348,6 +351,7 @@ class $AssetsImagesGen {
     icCheckinBadgeCoin,
     icCheckinCoin,
     icCredit,
+    icCreditSetting,
     icLineCheckin,
     icLineCheckin2,
     icLogoHome,

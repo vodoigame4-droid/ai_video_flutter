@@ -63,6 +63,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$ar connectivity = _Translations$connectivity$ar._(_root);
 	@override late final _Translations$notification$ar notification = _Translations$notification$ar._(_root);
 	@override late final _Translations$rating_dialog$ar rating_dialog = _Translations$rating_dialog$ar._(_root);
+	@override late final _Translations$debug$ar debug = _Translations$debug$ar._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$ar extends Translations$rating_dialog$en {
 	@override String get success => 'شكرا لك على دعمك!';
 }
 
+// Path: debug
+class _Translations$debug$ar extends Translations$debug$en {
+	_Translations$debug$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'قائمة التصحيح';
+	@override String get iap_page => 'صفحة الشراء داخل التطبيق';
+	@override String get buy_credits => 'شراء رصيد';
+	@override String get generation_iap => 'الشراء داخل التطبيق للتوليد';
+	@override String get generation_buy_credits => 'شراء رصيد للتوليد';
+	@override String get discount => 'صفحة الخصم';
+	@override String get paywall_video => 'صفحة حظر الفيديو';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsAr {
 			'rating_dialog.support_us' => 'ادعمنا',
 			'rating_dialog.maybe_later' => 'ربما لاحقًا',
 			'rating_dialog.success' => 'شكرا لك على دعمك!',
+			'debug.title' => 'قائمة التصحيح',
+			'debug.iap_page' => 'صفحة الشراء داخل التطبيق',
+			'debug.buy_credits' => 'شراء رصيد',
+			'debug.generation_iap' => 'الشراء داخل التطبيق للتوليد',
+			'debug.generation_buy_credits' => 'شراء رصيد للتوليد',
+			'debug.discount' => 'صفحة الخصم',
+			'debug.paywall_video' => 'صفحة حظر الفيديو',
 			_ => null,
 		};
 	}

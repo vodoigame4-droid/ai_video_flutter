@@ -411,5 +411,14 @@
     "support_us": "Hỗ trợ chúng tôi",
     "maybe_later": "Để sau",
     "success": "Cảm ơn bạn đã ủng hộ!"
+  },
+  "debug": {
+    "title": "Menu Debug",
+    "iap_page": "Trang IAP",
+    "buy_credits": "Mua Credit",
+    "generation_iap": "Trang Generation IAP",
+    "generation_buy_credits": "Trang Generation Mua Credit",
+    "discount": "Trang giảm giá",
+    "paywall_video": "Trang Paywall Video"
   }
 }

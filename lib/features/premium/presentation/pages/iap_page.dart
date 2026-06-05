@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -79,12 +80,32 @@ class IapView extends StatelessWidget {
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
             state.whenOrNull(
-              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-                AppToast.showSuccess(message);
-              },
-              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-                context.handleFailure(Failure.business(code: message, message: ''));
-              },
+              success:
+                  (
+                    message,
+                    isWeeklySelected,
+                    isVideoRevealed,
+                    _,
+                    __,
+                    ___,
+                    ____,
+                  ) {
+                    AppToast.showSuccess(message);
+                  },
+              error:
+                  (
+                    message,
+                    isWeeklySelected,
+                    isVideoRevealed,
+                    _,
+                    __,
+                    ___,
+                    ____,
+                  ) {
+                    context.handleFailure(
+                      Failure.business(code: message, message: ''),
+                    );
+                  },
             );
           },
           builder: (context, state) {
@@ -92,11 +113,7 @@ class IapView extends StatelessWidget {
               initial: () => const Center(child: CircularProgressIndicator()),
               loading: () => Stack(
                 children: [
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.black,
-                    ),
-                  ),
+                  Positioned.fill(child: Container(color: Colors.black)),
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +122,10 @@ class IapView extends StatelessWidget {
                         SizedBox(height: 16),
                         Text(
                           t.common.processing,
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                       ],
                     ),
@@ -116,7 +136,7 @@ class IapView extends StatelessWidget {
                 bool isWeekly = false;
                 List<Product> weeklyProducts = [];
                 List<Product> yearlyProducts = [];
-  
+
                 state.mapOrNull(
                   ready: (s) {
                     isWeekly = s.isWeeklySelected;
@@ -135,9 +155,16 @@ class IapView extends StatelessWidget {
                   },
                 );
 
-                final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : t.premium.weekly_price;
-                final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : t.premium.annually_price;
-  
+                final weeklyPrice = weeklyProducts.isNotEmpty
+                    ? weeklyProducts.first.priceString
+                    : '...';
+                final yearlyPrice = yearlyProducts.isNotEmpty
+                    ? yearlyProducts.first.priceString
+                    : '...';
+                LogUtils.d(
+                  'IapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})',
+                );
+
                 return Stack(
                   children: [
                     // 1. Video background - top 50%
@@ -180,417 +207,464 @@ class IapView extends StatelessWidget {
                       ),
                     ),
 
+                    // 3. Main scrollable content
+                    Positioned.fill(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: constraints.maxHeight,
+                              ),
+                              child: IntrinsicHeight(
+                                child: Column(
+                                  children: [
+                                    // Push all content to the bottom
+                                    const Spacer(),
 
-                  // 3. Main scrollable content
-                  Positioned.fill(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minHeight: constraints.maxHeight,
-                            ),
-                            child: IntrinsicHeight(
-                              child: Column(
-                                children: [
-                                  // Push all content to the bottom
-                                  const Spacer(),
-
-                                  // Transparent container for the subscription panels & elements
-                                  Container(
-                                    color: Colors.transparent,
-                                    padding: const EdgeInsets.fromLTRB(
-                                      8,
-                                      0,
-                                      8,
-                                      12,
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        // App Title PRO & Discount
-                                        RichText(
-                                          textAlign: TextAlign.center,
-                                          text: TextSpan(
+                                    // Transparent container for the subscription panels & elements
+                                    Container(
+                                      color: Colors.transparent,
+                                      padding: const EdgeInsets.fromLTRB(
+                                        8,
+                                        0,
+                                        8,
+                                        12,
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          // App Title PRO & Discount
+                                          RichText(
+                                            textAlign: TextAlign.center,
+                                            text: TextSpan(
+                                              style: const TextStyle(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.w900,
+                                                fontFamily: 'Inter',
+                                              ),
+                                              children: [
+                                                TextSpan(
+                                                  text:
+                                                      '${t.splash.appName.toUpperCase()} ',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: t.premium.pro_title
+                                                      .toUpperCase(),
+                                                  style: const TextStyle(
+                                                    color: AppColors.primary,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            t.premium.discount_title,
                                             style: const TextStyle(
-                                              fontSize: 30,
+                                              color: Colors.white,
+                                              fontSize: 50,
                                               fontWeight: FontWeight.w900,
+                                              letterSpacing: 1.2,
+                                              height: 1.1,
                                               fontFamily: 'Inter',
                                             ),
-                                            children: [
-                                              TextSpan(
-                                                text:
-                                                    '${t.splash.appName.toUpperCase()} ',
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                                          ),
+                                          Text(
+                                            t.premium.discount_subtitle,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+
+                                          // Glass-morphic Buy Credit Now Badge Button
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              100,
+                                            ),
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                sigmaX: 7.5,
+                                                sigmaY: 7.5,
+                                              ),
+                                              child: Container(
+                                                height: 38,
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      AppColors.secondary
+                                                          .withValues(
+                                                            alpha: 0.3,
+                                                          ),
+                                                      AppColors.primary
+                                                          .withValues(
+                                                            alpha: 0.3,
+                                                          ),
+                                                    ],
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        100,
+                                                      ),
+                                                  border: Border.all(
+                                                    color: AppColors.secondary,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: Material(
+                                                  color: Colors.transparent,
+                                                  child: InkWell(
+                                                    onTap: () => context.push(
+                                                      BuyCreditsPage.path,
+                                                    ),
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                          Radius.circular(100),
+                                                        ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.symmetric(
+                                                            horizontal: 18,
+                                                          ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            t
+                                                                .premium
+                                                                .buy_credit_now,
+                                                            style:
+                                                                const TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          Container(
+                                                            width: 20,
+                                                            height: 20,
+                                                            decoration:
+                                                                const BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                ),
+                                                            child: const Icon(
+                                                              Icons
+                                                                  .arrow_forward_ios_rounded,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 10,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                              TextSpan(
-                                                text: t.premium.pro_title
-                                                    .toUpperCase(),
-                                                style: const TextStyle(
-                                                  color: AppColors.primary,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 30),
+
+                                          // 2x2 Feature Checklist Grid (Row-Column layout)
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    _buildCheckItem(
+                                                      t
+                                                          .premium
+                                                          .unlock_templates,
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    _buildCheckItem(
+                                                      t.premium.discount_packs,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    _buildCheckItem(
+                                                      t.premium.fast_generation,
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    _buildCheckItem(
+                                                      t.premium.videos_per_year,
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          t.premium.discount_title,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 50,
-                                            fontWeight: FontWeight.w900,
-                                            letterSpacing: 1.2,
-                                            height: 1.1,
-                                            fontFamily: 'Inter',
-                                          ),
-                                        ),
-                                        Text(
-                                          t.premium.discount_subtitle,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 16),
+                                          const SizedBox(height: 20),
 
-                                        // Glass-morphic Buy Credit Now Badge Button
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            100,
-                                          ),
-                                          child: BackdropFilter(
-                                            filter: ImageFilter.blur(
-                                              sigmaX: 7.5,
-                                              sigmaY: 7.5,
-                                            ),
-                                            child: Container(
-                                              height: 38,
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    AppColors.secondary
-                                                        .withValues(alpha: 0.3),
-                                                    AppColors.primary
-                                                        .withValues(alpha: 0.3),
-                                                  ],
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
+                                          // Weekly Subscription Package (Unselected)
+                                          SubscriptionPackageCard(
+                                            title: t.premium.weekly,
+                                            description: t.premium.weekly_desc,
+                                            price: weeklyPrice,
+                                            suffix: t.premium.weekly_suffix,
+                                            tagText: t.premium.best_value,
+                                            tagColors: const [
+                                              Color(0xFFff6320),
+                                              Color(0xFFfae123),
+                                            ],
+                                            isSelected: isWeekly,
+                                            onTap: () {
+                                              context.read<IapBloc>().add(
+                                                const IapEvent.selectWeekly(),
+                                              );
+                                              final productId =
+                                                  weeklyProducts.isNotEmpty
+                                                  ? weeklyProducts.first.id
+                                                  : (Platform.isIOS
+                                                        ? 'buy_weekly'
+                                                        : 'com.vexa.ai.video.weekly');
+                                              context.read<IapBloc>().add(
+                                                IapEvent.purchase(
+                                                  productId: productId,
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                border: Border.all(
-                                                  color: AppColors.secondary,
-                                                  width: 1,
-                                                ),
-                                              ),
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                child: InkWell(
-                                                  onTap: () => context.push(
-                                                    BuyCreditsPage.path,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                        Radius.circular(100),
-                                                      ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                          horizontal: 18,
-                                                        ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          t
-                                                              .premium
-                                                              .buy_credit_now,
-                                                          style:
-                                                              const TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Container(
-                                                          width: 20,
-                                                          height: 20,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                              ),
-                                                          child: const Icon(
-                                                            Icons
-                                                                .arrow_forward_ios_rounded,
-                                                            color: Colors.black,
-                                                            size: 10,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
+                                              );
+                                            },
                                           ),
-                                        ),
-                                        const SizedBox(height: 30),
+                                          const SizedBox(height: 8),
 
-                                        // 2x2 Feature Checklist Grid (Row-Column layout)
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  _buildCheckItem(
-                                                    t
-                                                        .premium
-                                                        .unlock_templates,
-                                                  ),
-                                                  const SizedBox(height: 8),
-                                                  _buildCheckItem(
-                                                    t.premium.discount_packs,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  _buildCheckItem(
-                                                    t.premium.fast_generation,
-                                                  ),
-                                                  const SizedBox(height: 8),
-                                                  _buildCheckItem(
-                                                    t.premium.videos_per_year,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 20),
-
-                                         // Weekly Subscription Package (Unselected)
-                                         SubscriptionPackageCard(
-                                           title: t.premium.weekly,
-                                           description: t.premium.weekly_desc,
-                                           price: weeklyPrice,
-                                           suffix: t.premium.weekly_suffix,
-                                           tagText: t.premium.best_value,
-                                           tagColors: const [
-                                             Color(0xFFff6320),
-                                             Color(0xFFfae123),
-                                           ],
-                                           isSelected: isWeekly,
-                                           onTap: () {
-                                             context.read<IapBloc>().add(
-                                                   const IapEvent.selectWeekly(),
-                                                 );
-                                             context.read<IapBloc>().add(
-                                                   const IapEvent.purchase(),
-                                                 );
-                                           },
-                                         ),
-                                         const SizedBox(height: 8),
- 
-                                         // Annually Subscription Package (Selected)
-                                         SubscriptionPackageCard(
-                                           title: t.premium.annually,
-                                           description: t.premium.annually_desc,
-                                           price: yearlyPrice,
-                                           suffix: t.premium.annually_suffix,
-                                           tagText: t.premium.save_80,
-                                           tagColors: const [
-                                             Color(0xFFff6320),
-                                             Color(0xFFfae123),
-                                           ],
-                                           isSelected: !isWeekly,
-                                           onTap: () {
-                                             context.read<IapBloc>().add(
-                                                   const IapEvent.selectAnnually(),
-                                                 );
-                                             context.read<IapBloc>().add(
-                                                   const IapEvent.purchase(),
-                                                 );
-                                           },
-                                         ),
-                                        const SizedBox(height: 24),
-
-                                        // Start My Subscription Button (Crown + Text + Arrow)
-                                        Container(
-                                          height: 56,
-                                          width: double.infinity,
-                                          decoration: const BoxDecoration(
-                                            gradient: AppColors.primaryGradient,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(100),
-                                            ),
+                                          // Annually Subscription Package (Selected)
+                                          SubscriptionPackageCard(
+                                            title: t.premium.annually,
+                                            description:
+                                                t.premium.annually_desc,
+                                            price: yearlyPrice,
+                                            suffix: t.premium.annually_suffix,
+                                            tagText: t.premium.save_80,
+                                            tagColors: const [
+                                              Color(0xFFff6320),
+                                              Color(0xFFfae123),
+                                            ],
+                                            isSelected: !isWeekly,
+                                            onTap: () {
+                                              context.read<IapBloc>().add(
+                                                const IapEvent.selectAnnually(),
+                                              );
+                                              final productId =
+                                                  yearlyProducts.isNotEmpty
+                                                  ? yearlyProducts.first.id
+                                                  : (Platform.isIOS
+                                                        ? 'buy_annualy'
+                                                        : 'com.vexa.ai.video.yearly');
+                                              context.read<IapBloc>().add(
+                                                IapEvent.purchase(
+                                                  productId: productId,
+                                                ),
+                                              );
+                                            },
                                           ),
-                                          child: Material(
-                                            color: Colors.transparent,
-                                            child: InkWell(
-                                              onTap: () =>
+                                          const SizedBox(height: 24),
+
+                                          // Start My Subscription Button (Crown + Text + Arrow)
+                                          Container(
+                                            height: 56,
+                                            width: double.infinity,
+                                            decoration: const BoxDecoration(
+                                              gradient:
+                                                  AppColors.primaryGradient,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(100),
+                                              ),
+                                            ),
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  final productId = isWeekly
+                                                      ? (weeklyProducts
+                                                                .isNotEmpty
+                                                            ? weeklyProducts
+                                                                  .first
+                                                                  .id
+                                                            : (Platform.isIOS
+                                                                  ? 'buy_weekly'
+                                                                  : 'com.vexa.ai.video.weekly'))
+                                                      : (yearlyProducts
+                                                                .isNotEmpty
+                                                            ? yearlyProducts
+                                                                  .first
+                                                                  .id
+                                                            : (Platform.isIOS
+                                                                  ? 'buy_annualy'
+                                                                  : 'com.vexa.ai.video.yearly'));
                                                   context.read<IapBloc>().add(
-                                                    const IapEvent.purchase(),
-                                                  ),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                    Radius.circular(100),
-                                                  ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      horizontal: 20,
+                                                    IapEvent.purchase(
+                                                      productId: productId,
                                                     ),
-                                                child: Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons
-                                                          .workspace_premium_rounded,
-                                                      color: Color(
-                                                        0xFFFFD700,
-                                                      ), // Gold
-                                                      size: 24,
+                                                  );
+                                                },
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                      Radius.circular(100),
                                                     ),
-                                                    const Spacer(),
-                                                    Text(
-                                                      t
-                                                          .premium
-                                                          .start_my_subscription,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 20,
                                                       ),
-                                                    ),
-                                                    const Spacer(),
-                                                    const Icon(
-                                                      Icons
-                                                          .arrow_forward_rounded,
-                                                      color: Colors.white,
-                                                      size: 24,
-                                                    ),
-                                                  ],
+                                                  child: Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .workspace_premium_rounded,
+                                                        color: Color(
+                                                          0xFFFFD700,
+                                                        ), // Gold
+                                                        size: 24,
+                                                      ),
+                                                      const Spacer(),
+                                                      Text(
+                                                        t
+                                                            .premium
+                                                            .start_my_subscription,
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      const Spacer(),
+                                                      const Icon(
+                                                        Icons
+                                                            .arrow_forward_rounded,
+                                                        color: Colors.white,
+                                                        size: 24,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 8),
+                                          const SizedBox(height: 8),
 
-                                        // Footer Links
-                                        Text(
-                                          t.premium.auto_renewable,
-                                          style: const TextStyle(
-                                            color: AppColors.activeTab,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
+                                          // Footer Links
+                                          Text(
+                                            t.premium.auto_renewable,
+                                            style: const TextStyle(
+                                              color: AppColors.activeTab,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () => launchPrivacyPolicy(),
-                                              child: Text(
-                                                t.premium.privacy_policy,
-                                                style: const TextStyle(
-                                                  color: AppColors.subText,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () =>
+                                                    launchPrivacyPolicy(),
+                                                child: Text(
+                                                  t.premium.privacy_policy,
+                                                  style: const TextStyle(
+                                                    color: AppColors.subText,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 8,
-                                              ),
-                                              child: Text(
-                                                '|',
-                                                style: TextStyle(
-                                                  color: AppColors.activeTab,
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8,
+                                                ),
+                                                child: Text(
+                                                  '|',
+                                                  style: TextStyle(
+                                                    color: AppColors.activeTab,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () => launchTermsOfUse(),
-                                              child: Text(
-                                                t.premium.terms_of_use,
-                                                style: const TextStyle(
-                                                  color: AppColors.subText,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
+                                              GestureDetector(
+                                                onTap: () => launchTermsOfUse(),
+                                                child: Text(
+                                                  t.premium.terms_of_use,
+                                                  style: const TextStyle(
+                                                    color: AppColors.subText,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            const Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 8,
-                                              ),
-                                              child: Text(
-                                                '|',
-                                                style: TextStyle(
-                                                  color: AppColors.activeTab,
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8,
+                                                ),
+                                                child: Text(
+                                                  '|',
+                                                  style: TextStyle(
+                                                    color: AppColors.activeTab,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                AppToast.showSuccess(
+                                              GestureDetector(
+                                                onTap: () {
+                                                  AppToast.showSuccess(
+                                                    t.premium.restore,
+                                                  );
+                                                },
+                                                child: Text(
                                                   t.premium.restore,
-                                                );
-                                              },
-                                              child: Text(
-                                                t.premium.restore,
-                                                style: const TextStyle(
-                                                  color: AppColors.subText,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
+                                                  style: const TextStyle(
+                                                    color: AppColors.subText,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
-                  ),
 
                     // 3. Top Header Row: Close (Left), Restore (Right)
                     // LAST in Stack so it renders on top and receives touch events
@@ -648,15 +722,15 @@ class IapView extends StatelessWidget {
                         ],
                       ),
                     ),
-                ],
-              );
-            },
-          );
-        },
+                  ],
+                );
+              },
+            );
+          },
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildCheckItem(String label) {
     return Row(

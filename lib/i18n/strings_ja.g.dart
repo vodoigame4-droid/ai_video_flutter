@@ -63,6 +63,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$ja connectivity = _Translations$connectivity$ja._(_root);
 	@override late final _Translations$notification$ja notification = _Translations$notification$ja._(_root);
 	@override late final _Translations$rating_dialog$ja rating_dialog = _Translations$rating_dialog$ja._(_root);
+	@override late final _Translations$debug$ja debug = _Translations$debug$ja._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$ja extends Translations$rating_dialog$en {
 	@override String get success => 'ご支援ありがとうございました！';
 }
 
+// Path: debug
+class _Translations$debug$ja extends Translations$debug$en {
+	_Translations$debug$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'デバッグメニュー';
+	@override String get iap_page => 'IAPページ';
+	@override String get buy_credits => 'クレジット購入';
+	@override String get generation_iap => '生成IAP';
+	@override String get generation_buy_credits => '生成クレジット購入';
+	@override String get discount => '割引ページ';
+	@override String get paywall_video => 'ペイウォールビデオページ';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsJa {
 			'rating_dialog.support_us' => '応援する',
 			'rating_dialog.maybe_later' => '後で',
 			'rating_dialog.success' => 'ご支援ありがとうございました！',
+			'debug.title' => 'デバッグメニュー',
+			'debug.iap_page' => 'IAPページ',
+			'debug.buy_credits' => 'クレジット購入',
+			'debug.generation_iap' => '生成IAP',
+			'debug.generation_buy_credits' => '生成クレジット購入',
+			'debug.discount' => '割引ページ',
+			'debug.paywall_video' => 'ペイウォールビデオページ',
 			_ => null,
 		};
 	}

@@ -411,5 +411,14 @@
     "support_us": "Support Us",
     "maybe_later": "Maybe Later",
     "success": "Thank you for your support!"
+  },
+  "debug": {
+    "title": "Debug Menu",
+    "iap_page": "IAP Page",
+    "buy_credits": "Buy Credits",
+    "generation_iap": "Generation IAP",
+    "generation_buy_credits": "Generation Buy Credits",
+    "discount": "Discount Page",
+    "paywall_video": "Paywall Video Page"
   }
 }

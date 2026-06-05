@@ -403,5 +403,14 @@
     "support_us": "지원하기",
     "maybe_later": "나중에",
     "success": "지원해 주셔서 감사합니다!"
+  },
+  "debug": {
+    "title": "디버그 메뉴",
+    "iap_page": "IAP 페이지",
+    "buy_credits": "크레딧 구매",
+    "generation_iap": "생성 IAP",
+    "generation_buy_credits": "생성 크레딧 구매",
+    "discount": "할인 페이지",
+    "paywall_video": "페이월 비디오 페이지"
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -9,6 +10,7 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/utils/log_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
 import 'generation_buy_credits_page.dart';
@@ -189,8 +191,9 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                   },
                 );
 
-                final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : t.premium.weekly_price;
-                final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : t.premium.annually_price;
+                final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : '...';
+                final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : '...';
+                LogUtils.d('GenerationIapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})');
 
                 return Stack(
                   children: [
@@ -378,7 +381,10 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             isSelected: isWeekly,
                                             onTap: () {
                                               context.read<IapBloc>().add(const IapEvent.selectWeekly());
-                                              context.read<IapBloc>().add(const IapEvent.purchase());
+                                              final productId = weeklyProducts.isNotEmpty 
+                                                  ? weeklyProducts.first.id 
+                                                  : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly');
+                                              context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
                                             },
                                           ),
                                           const SizedBox(height: 10),
@@ -397,7 +403,10 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             isSelected: !isWeekly,
                                             onTap: () {
                                               context.read<IapBloc>().add(const IapEvent.selectAnnually());
-                                              context.read<IapBloc>().add(const IapEvent.purchase());
+                                              final productId = yearlyProducts.isNotEmpty 
+                                                  ? yearlyProducts.first.id 
+                                                  : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly');
+                                              context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
                                             },
                                           ),
                                           const SizedBox(height: 24),
@@ -422,9 +431,18 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             child: Material(
                                               color: Colors.transparent,
                                               child: InkWell(
-                                                onTap: () => context.read<IapBloc>().add(
-                                                      const IapEvent.purchase(),
-                                                    ),
+                                                onTap: () {
+                                                  final productId = isWeekly
+                                                      ? (weeklyProducts.isNotEmpty
+                                                          ? weeklyProducts.first.id
+                                                          : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly'))
+                                                      : (yearlyProducts.isNotEmpty
+                                                          ? yearlyProducts.first.id
+                                                          : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly'));
+                                                  context.read<IapBloc>().add(
+                                                        IapEvent.purchase(productId: productId),
+                                                      );
+                                                },
                                                 borderRadius: BorderRadius.circular(100),
                                                 child: Padding(
                                                   padding: const EdgeInsets.symmetric(horizontal: 24),

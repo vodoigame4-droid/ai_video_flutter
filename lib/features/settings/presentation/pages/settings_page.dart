@@ -12,6 +12,10 @@ import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../profile/presentation/widgets/premium_banner_widget.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
 import '../../../premium/presentation/pages/buy_credits_page.dart';
+import '../../../premium/presentation/pages/debug_page.dart';
+import '../bloc/developer_bloc.dart';
+import '../bloc/developer_event.dart';
+import '../bloc/developer_state.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/widgets/rate_app_dialog.dart';
 import '../../../../core/constants/app_constants.dart';
@@ -26,8 +30,15 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<SettingsBloc>()..add(const SettingsEvent.init()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<SettingsBloc>()..add(const SettingsEvent.init()),
+        ),
+        BlocProvider(
+          create: (context) => sl<DeveloperBloc>(),
+        ),
+      ],
       child: const SettingsView(),
     );
   }
@@ -67,7 +78,19 @@ class _SettingsViewState extends State<SettingsView> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Scaffold(
+      child: BlocListener<DeveloperBloc, DeveloperState>(
+        listener: (context, state) {
+          state.maybeWhen(
+            update: (count, navigateToDebug) {
+              if (navigateToDebug) {
+                context.read<DeveloperBloc>().add(const DeveloperEvent.reset());
+                context.push(DebugPage.path);
+              }
+            },
+            orElse: () {},
+          );
+        },
+        child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(
@@ -296,15 +319,21 @@ class _SettingsViewState extends State<SettingsView> {
                             const SizedBox(height: 24),
 
                             // Version Code
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 24),
-                                child: Text(
-                                  'v${sl<AppConfig>().appVersion}',
-                                  style: const TextStyle(
-                                    color: Color(0xFFB1B1B1),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
+                            GestureDetector(
+                              onTap: () {
+                                context.read<DeveloperBloc>().add(const DeveloperEvent.tap());
+                              },
+                              behavior: HitTestBehavior.opaque,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 24),
+                                  child: Text(
+                                    'v${sl<AppConfig>().appVersion}',
+                                    style: const TextStyle(
+                                      color: Color(0xFFB1B1B1),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -322,6 +351,7 @@ class _SettingsViewState extends State<SettingsView> {
       ),
     ),
   ),
+),
 );
 }
 

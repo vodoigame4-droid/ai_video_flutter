@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/utils/log_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../widgets/premium_video_background.dart';
 import '../widgets/subscription_package_card.dart';
@@ -114,8 +116,9 @@ class PaywallVideoView extends StatelessWidget {
                 },
               );
 
-              final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : t.premium.weekly_price;
-              final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : t.premium.annually_price;
+              final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : '...';
+              final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : '...';
+              LogUtils.d('PaywallVideoPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})');
 
               return Stack(
                 children: [
@@ -338,7 +341,10 @@ class PaywallVideoView extends StatelessWidget {
                             isSelected: isWeekly,
                             onTap: () {
                               context.read<IapBloc>().add(const IapEvent.selectWeekly());
-                              context.read<IapBloc>().add(const IapEvent.purchase());
+                              final productId = weeklyProducts.isNotEmpty 
+                                  ? weeklyProducts.first.id 
+                                  : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly');
+                              context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
                             },
                           ),
                           const SizedBox(height: 16),
@@ -357,7 +363,10 @@ class PaywallVideoView extends StatelessWidget {
                             isSelected: !isWeekly,
                             onTap: () {
                               context.read<IapBloc>().add(const IapEvent.selectAnnually());
-                              context.read<IapBloc>().add(const IapEvent.purchase());
+                              final productId = yearlyProducts.isNotEmpty 
+                                  ? yearlyProducts.first.id 
+                                  : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly');
+                              context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
                             },
                           ),
                           const SizedBox(height: 24),
@@ -375,9 +384,18 @@ class PaywallVideoView extends StatelessWidget {
                             child: Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: () => context
-                                    .read<IapBloc>()
-                                    .add(const IapEvent.purchase()),
+                                onTap: () {
+                                  final productId = isWeekly
+                                      ? (weeklyProducts.isNotEmpty
+                                          ? weeklyProducts.first.id
+                                          : (Platform.isIOS ? 'buy_weekly' : 'com.vexa.ai.video.weekly'))
+                                      : (yearlyProducts.isNotEmpty
+                                          ? yearlyProducts.first.id
+                                          : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly'));
+                                  context.read<IapBloc>().add(
+                                        IapEvent.purchase(productId: productId),
+                                      );
+                                },
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),

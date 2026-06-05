@@ -63,6 +63,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$connectivity$ko connectivity = _Translations$connectivity$ko._(_root);
 	@override late final _Translations$notification$ko notification = _Translations$notification$ko._(_root);
 	@override late final _Translations$rating_dialog$ko rating_dialog = _Translations$rating_dialog$ko._(_root);
+	@override late final _Translations$debug$ko debug = _Translations$debug$ko._(_root);
 }
 
 // Path: common
@@ -618,6 +619,22 @@ class _Translations$rating_dialog$ko extends Translations$rating_dialog$en {
 	@override String get success => '지원해 주셔서 감사합니다!';
 }
 
+// Path: debug
+class _Translations$debug$ko extends Translations$debug$en {
+	_Translations$debug$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '디버그 메뉴';
+	@override String get iap_page => 'IAP 페이지';
+	@override String get buy_credits => '크레딧 구매';
+	@override String get generation_iap => '생성 IAP';
+	@override String get generation_buy_credits => '생성 크레딧 구매';
+	@override String get discount => '할인 페이지';
+	@override String get paywall_video => '페이월 비디오 페이지';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -1033,6 +1050,13 @@ extension on TranslationsKo {
 			'rating_dialog.support_us' => '지원하기',
 			'rating_dialog.maybe_later' => '나중에',
 			'rating_dialog.success' => '지원해 주셔서 감사합니다!',
+			'debug.title' => '디버그 메뉴',
+			'debug.iap_page' => 'IAP 페이지',
+			'debug.buy_credits' => '크레딧 구매',
+			'debug.generation_iap' => '생성 IAP',
+			'debug.generation_buy_credits' => '생성 크레딧 구매',
+			'debug.discount' => '할인 페이지',
+			'debug.paywall_video' => '페이월 비디오 페이지',
 			_ => null,
 		};
 	}

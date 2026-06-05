@@ -403,5 +403,14 @@
     "support_us": "応援する",
     "maybe_later": "後で",
     "success": "ご支援ありがとうございました！"
+  },
+  "debug": {
+    "title": "デバッグメニュー",
+    "iap_page": "IAPページ",
+    "buy_credits": "クレジット購入",
+    "generation_iap": "生成IAP",
+    "generation_buy_credits": "生成クレジット購入",
+    "discount": "割引ページ",
+    "paywall_video": "ペイウォールビデオページ"
   }
 }

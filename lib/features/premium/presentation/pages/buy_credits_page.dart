@@ -57,12 +57,11 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
     final t = context.t;
 
     final iapBlocState = context.watch<IapBloc>().state;
-    final List<Product> regularProducts = iapBlocState.maybeWhen(
-      ready: (isWeeklySelected, isVideoRevealed, weeklyProducts, yearlyProducts, discountCreditProducts, regularCreditProducts) => regularCreditProducts,
-      success: (message, isWeeklySelected, isVideoRevealed, weeklyProducts, yearlyProducts, discountCreditProducts, regularCreditProducts) => regularCreditProducts,
-      error: (message, isWeeklySelected, isVideoRevealed, weeklyProducts, yearlyProducts, discountCreditProducts, regularCreditProducts) => regularCreditProducts,
-      orElse: () => const [],
-    );
+    final List<Product> regularProducts = iapBlocState.mapOrNull(
+      ready: (s) => s.regularCreditProducts,
+      success: (s) => s.regularCreditProducts,
+      error: (s) => s.regularCreditProducts,
+    ) ?? const [];
 
     String getProductPrice(int credits) {
       final matchCredits = '${credits}credits';
@@ -72,7 +71,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
           return p.priceString;
         }
       }
-      return '0';
+      return '...';
     }
 
     // Helper to get package info based on index

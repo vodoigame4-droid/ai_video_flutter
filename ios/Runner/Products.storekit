@@ -1,0 +1,269 @@
+{
+  "identifier" : "E2B72E31",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "70credits",
+      "localizations" : [
+        {
+          "description" : "70 Credits for video generation",
+          "displayName" : "70 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "70credits",
+      "referenceName" : "70 Credits",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "70creditsdis",
+      "localizations" : [
+        {
+          "description" : "70 Credits Discounted",
+          "displayName" : "70 Credits Discount",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "70creditsdis",
+      "referenceName" : "70 Credits Discount",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "150credits",
+      "localizations" : [
+        {
+          "description" : "150 Credits",
+          "displayName" : "150 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "150credits",
+      "referenceName" : "150 Credits",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "150creditsdis",
+      "localizations" : [
+        {
+          "description" : "150 Credits Discounted",
+          "displayName" : "150 Credits Discount",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "150creditsdis",
+      "referenceName" : "150 Credits Discount",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "350credits",
+      "localizations" : [
+        {
+          "description" : "350 Credits",
+          "displayName" : "350 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "350credits",
+      "referenceName" : "350 Credits",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "350creditsdis",
+      "localizations" : [
+        {
+          "description" : "350 Credits Discounted",
+          "displayName" : "350 Credits Discount",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "350creditsdis",
+      "referenceName" : "350 Credits Discount",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "500credits",
+      "localizations" : [
+        {
+          "description" : "500 Credits",
+          "displayName" : "500 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "500credits",
+      "referenceName" : "500 Credits",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "500creditsdis",
+      "localizations" : [
+        {
+          "description" : "500 Credits Discounted",
+          "displayName" : "500 Credits Discount",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "500creditsdis",
+      "referenceName" : "500 Credits Discount",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "1000creditsdis",
+      "localizations" : [
+        {
+          "description" : "1000 Credits Discounted",
+          "displayName" : "1000 Credits Discount",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "1000creditsdis",
+      "referenceName" : "1000 Credits Discount",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "5000credits",
+      "localizations" : [
+        {
+          "description" : "5000 Credits",
+          "displayName" : "5000 Credits",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "5000credits",
+      "referenceName" : "5000 Credits",
+      "type" : "Consumable"
+    },
+    {
+      "displayVersion" : 1,
+      "familyShareable" : false,
+      "internalID" : "5000creditsdis",
+      "localizations" : [
+        {
+          "description" : "5000 Credits Discounted",
+          "displayName" : "5000 Credits Discount",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "5000creditsdis",
+      "referenceName" : "5000 Credits Discount",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_timeZone" : "UTC"
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "premium_subs",
+      "localizations" : [
+
+      ],
+      "name" : "Premium Subscriptions",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayVersion" : 1,
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "buy_weekly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Weekly Premium Access",
+              "displayName" : "Weekly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "buy_weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly Premium",
+          "subscriptionGroupID" : "premium_subs",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayVersion" : 1,
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "buy_annualy",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Annual Premium Access",
+              "displayName" : "Annual Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "buy_annualy",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Annual Premium",
+          "subscriptionGroupID" : "premium_subs",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayVersion" : 1,
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "buy_annualy_discount",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Annual Premium Access Discount",
+              "displayName" : "Annual Premium Discount",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "buy_annualy_discount",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Annual Premium Discount",
+          "subscriptionGroupID" : "premium_subs",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

@@ -12,6 +12,7 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 
 class GenerationBuyCreditsPage extends StatelessWidget {
   static const String path = '/generation-buy-credits';
@@ -115,48 +116,66 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
   Widget build(BuildContext context) {
     final t = context.t;
 
+    final iapBlocState = context.watch<IapBloc>().state;
+    final List<Product> regularProducts = iapBlocState.mapOrNull(
+      ready: (s) => s.regularCreditProducts,
+      success: (s) => s.regularCreditProducts,
+      error: (s) => s.regularCreditProducts,
+    ) ?? const [];
+
+    String getProductPrice(int credits) {
+      final matchCredits = '${credits}credits';
+      for (final p in regularProducts) {
+        final id = p.id.toLowerCase();
+        if (id == matchCredits || id == 'com.vexa.ai.video.$matchCredits' || id.endsWith(matchCredits)) {
+          return p.priceString;
+        }
+      }
+      return '...';
+    }
+
     // Package details mapping
     List<Map<String, dynamic>> packages = [
       {
         'credits': 70,
         'title': t.premium.credit_70,
         'approx': t.premium.approx_videos(count: 2),
-        'price': t.premium.price_70,
+        'price': getProductPrice(70),
         'tag': null,
       },
       {
         'credits': 150,
         'title': t.premium.credit_150,
         'approx': t.premium.approx_videos(count: 4),
-        'price': t.premium.price_150,
+        'price': getProductPrice(150),
         'tag': null,
       },
       {
         'credits': 350,
         'title': t.premium.credit_350,
         'approx': t.premium.approx_videos(count: 10),
-        'price': t.premium.price_350,
+        'price': getProductPrice(350),
         'tag': null,
       },
       {
         'credits': 500,
         'title': t.premium.credit_500,
         'approx': t.premium.approx_videos(count: 14),
-        'price': t.premium.price_500,
+        'price': getProductPrice(500),
         'tag': null,
       },
       {
         'credits': 1000,
         'title': t.premium.credit_1000,
         'approx': t.premium.approx_videos(count: 27),
-        'price': t.premium.price_1000,
+        'price': getProductPrice(1000),
         'tag': t.premium.most_popular,
       },
       {
         'credits': 5000,
         'title': t.premium.credit_5000,
         'approx': t.premium.approx_videos(count: 142),
-        'price': t.premium.price_5000,
+        'price': getProductPrice(5000),
         'tag': t.premium.best_value,
       },
     ];

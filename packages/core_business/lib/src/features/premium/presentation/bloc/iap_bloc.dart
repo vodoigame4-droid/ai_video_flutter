@@ -65,7 +65,11 @@ class IapBloc extends Bloc<IapEvent, IapState> {
           }
 
           try {
+            final isBillingInitialized = HavinBilling.instance.isInitialized;
+            LogUtils.d('IapBloc: Initializing store products. HavinBilling.instance.isInitialized = $isBillingInitialized');
+
             final List<Product> products = await HavinBilling.instance.getProducts();
+            LogUtils.d('IapBloc: Loaded ${products.length} products from store: ${products.map((p) => '${p.id} (${p.priceString})').toList()}');
             
             final List<Product> weeklyProducts = [];
             final List<Product> yearlyProducts = [];
@@ -86,6 +90,8 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                 regularCreditProducts.add(p);
               }
             }
+
+            LogUtils.d('IapBloc: Sorted products count - weekly: ${weeklyProducts.length}, yearly: ${yearlyProducts.length}, discountCredits: ${discountCreditProducts.length}, regularCredits: ${regularCreditProducts.length}');
 
             emit(IapState.ready(
               isWeeklySelected: isWeekly,
@@ -181,6 +187,9 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                   ? yearly.first.id 
                   : (Platform.isIOS ? 'buy_annualy' : 'com.vexa.ai.video.yearly');
             }
+          } else {
+            final lowerId = productId.toLowerCase();
+            isWeekly = lowerId.contains('weekly') || lowerId == 'weekly';
           }
 
           try {

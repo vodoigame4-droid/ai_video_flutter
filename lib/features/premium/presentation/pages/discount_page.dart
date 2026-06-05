@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/widgets/defer_init_widget.dart';
@@ -175,6 +176,22 @@ class DiscountView extends StatelessWidget {
   }
 
   Widget _buildBottomPanel(BuildContext context, Translations t) {
+    final iapBlocState = context.watch<IapBloc>().state;
+    final List<Product> yearlyProducts = iapBlocState.mapOrNull(
+      ready: (s) => s.yearlyProducts,
+      success: (s) => s.yearlyProducts,
+      error: (s) => s.yearlyProducts,
+    ) ?? const [];
+
+    String discountPrice = '...';
+    for (final p in yearlyProducts) {
+      final id = p.id.toLowerCase();
+      if (id.contains('discount') || id.contains('dis') || id == 'buy_annualy_discount') {
+        discountPrice = p.priceString;
+        break;
+      }
+    }
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -201,7 +218,7 @@ class DiscountView extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Price row: đ 799.000 /year
-              _buildPriceRow(t),
+              _buildPriceRow(discountPrice, t),
               const SizedBox(height: 8),
 
               // Billed info
@@ -272,25 +289,25 @@ class DiscountView extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceRow(Translations t) {
+  Widget _buildPriceRow(String discountPrice, Translations t) {
+    if (discountPrice == '...') {
+      return const Text(
+        '...',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 48,
+          fontWeight: FontWeight.w900,
+        ),
+      );
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: [
-        // Currency symbol
         Text(
-          'đ',
-          style: TextStyle(
-            color: Colors.white.withValues(alpha: 0.5),
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(width: 6),
-        // Price amount
-        Text(
-          t.premium.discount_price,
+          discountPrice,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 48,

@@ -18,6 +18,7 @@ import '../../features/premium/presentation/pages/buy_credits_page.dart';
 import '../../features/premium/presentation/pages/generation_iap_page.dart';
 import '../../features/premium/presentation/pages/generation_buy_credits_page.dart';
 import '../../features/premium/presentation/pages/discount_page.dart';
+import '../../features/premium/presentation/pages/debug_page.dart';
 import '../../features/create_video/presentation/pages/create_from_template_page.dart';
 import '../../features/create_video/presentation/pages/create_template_settings_page.dart';
 import '../../features/video_player/presentation/pages/video_player_page.dart';
@@ -311,6 +312,14 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
         state: state,
         child: const DiscountPage(),
+      ),
+    ),
+    GoRoute(
+      path: DebugPage.path,
+      name: DebugPage.name,
+      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+        state: state,
+        child: const DebugPage(),
       ),
     ),
     GoRoute(
