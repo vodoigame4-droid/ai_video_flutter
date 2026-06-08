@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../../auth/domain/entities/user_entity.dart';
 
 part 'result_event.freezed.dart';
 
@@ -25,4 +26,5 @@ abstract class ResultEvent with _$ResultEvent {
   const factory ResultEvent.downloadVideo() = _DownloadVideo;
   const factory ResultEvent.shareVideo() = _ShareVideo;
   const factory ResultEvent.resetDownloadShareStatus() = _ResetDownloadShareStatus;
+  const factory ResultEvent.profileUpdated(UserEntity user) = _ProfileUpdated;
 }

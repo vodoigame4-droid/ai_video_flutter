@@ -33,7 +33,7 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
   }) : super(CreateVideoState.ready(
           selectedTab: initialTab,
           customPrompt: "",
-          inspireMeCount: 3,
+          inspireMeCount: watchProfileUseCase.cachedUser?.freeSuggestions ?? 3,
           slotsPaths: List<String?>.filled(3, null),
           uploadedSlotsPaths: List<String?>.filled(3, null),
           quality: 'Full HD',
@@ -41,7 +41,7 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
           isGenerating: false,
           isSuccess: false,
           isInspiring: false,
-          isVip: false,
+          isVip: watchProfileUseCase.cachedUser?.isVip ?? false,
         )) {
     on<CreateVideoEvent>((event, emit) async {
       await event.when(

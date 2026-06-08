@@ -198,6 +198,8 @@ void initBusinessDependencies(GetIt sl) {
       verifyProductIosUseCase: sl(),
       restoreSubscriptionAndroidUseCase: sl(),
       restoreSubscriptionIosUseCase: sl(),
+      getProfileUseCase: sl(),
+      watchProfileUseCase: sl(),
     ),
   );
 
@@ -248,6 +250,8 @@ void initBusinessDependencies(GetIt sl) {
       deleteMediaUseCase: sl(),
       downloadVideoUseCase: sl(),
       shareVideoUseCase: sl(),
+      watchProfileUseCase: sl(),
+      getProfileUseCase: sl(),
     ),
   );
   sl.registerFactory(() => VideoPlayerBloc());

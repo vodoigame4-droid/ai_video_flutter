@@ -117,7 +117,12 @@ class IapView extends StatelessWidget {
                     ____,
                     _____,
                   ) {
-                    AppToast.showSuccess(_translateSuccessMessage(context, message));
+                    if (message != 'already_vip') {
+                      AppToast.showSuccess(_translateSuccessMessage(context, message));
+                    }
+                    if (context.mounted && Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
                   },
               error:
                   (

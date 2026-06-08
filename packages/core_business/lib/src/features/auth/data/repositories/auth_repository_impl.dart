@@ -19,6 +19,9 @@ class AuthRepositoryImpl implements AuthRepository {
   final StreamController<UserEntity> _userController = StreamController<UserEntity>.broadcast();
   UserEntity? _cachedUser;
 
+  @override
+  UserEntity? get cachedUser => _cachedUser;
+
   AuthRepositoryImpl({
     required AuthRemoteDataSource remoteDataSource,
     required SharedPreferences sharedPreferences,

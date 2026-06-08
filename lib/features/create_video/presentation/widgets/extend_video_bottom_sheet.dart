@@ -53,6 +53,7 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                   shareErrorMessage,
                   downloadSuccess,
                   shareSuccess,
+                  isVip,
                 ) {
                   return GestureDetector(
                     onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -140,33 +141,27 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                           const SizedBox(height: 12),
 
                           // Custom Prompt Card wrapped in StreamBuilder
-                          StreamBuilder<UserEntity>(
-                            stream: sl<WatchProfileUseCase>()(),
-                            builder: (context, snapshot) {
-                              final isVip = snapshot.data?.isVip ?? false;
-                              return CustomPromptCardWidget(
-                                promptText: extendPrompt,
-                                inspireMeCount: inspireMeCount,
-                                isVip: isVip,
-                                onPromptChanged: (val) {
-                                  resultBloc.add(
-                                    ResultEvent.changeExtendPrompt(val),
-                                  );
-                                },
-                                onInspireMePressed: () {
-                                  resultBloc.add(
-                                    const ResultEvent.useInspireMe(),
-                                  );
-                                },
-                                onClearPressed: () {
-                                  resultBloc.add(
-                                    const ResultEvent.clearExtendPrompt(),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 24),
+                           CustomPromptCardWidget(
+                             promptText: extendPrompt,
+                             inspireMeCount: inspireMeCount,
+                             isVip: isVip,
+                             onPromptChanged: (val) {
+                               resultBloc.add(
+                                 ResultEvent.changeExtendPrompt(val),
+                               );
+                             },
+                             onInspireMePressed: () {
+                               resultBloc.add(
+                                 const ResultEvent.useInspireMe(),
+                               );
+                             },
+                             onClearPressed: () {
+                               resultBloc.add(
+                                 const ResultEvent.clearExtendPrompt(),
+                               );
+                             },
+                           ),
+                           const SizedBox(height: 24),
 
                           // Video Settings Label
                           Row(

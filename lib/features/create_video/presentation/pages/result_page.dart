@@ -343,6 +343,7 @@ class _ResultPageState extends State<ResultPage> {
                                 shareErrorMessage,
                                 downloadSuccess,
                                 shareSuccess,
+                                isVip,
                               ) {
                                 return ClipRRect(
                                   borderRadius: const BorderRadius.all(

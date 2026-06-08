@@ -12,6 +12,9 @@ import '../../domain/usecases/restore_subscription_ios_usecase.dart';
 import '../../data/models/iap_models.dart';
 import 'iap_event.dart';
 import 'iap_state.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../../../auth/domain/usecases/get_profile_usecase.dart';
+import '../../../auth/domain/usecases/watch_profile_usecase.dart';
 
 class IapBloc extends Bloc<IapEvent, IapState> {
   final VerifySubscriptionAndroidUseCase verifySubscriptionAndroidUseCase;
@@ -20,6 +23,8 @@ class IapBloc extends Bloc<IapEvent, IapState> {
   final VerifyProductIosUseCase verifyProductIosUseCase;
   final RestoreSubscriptionAndroidUseCase restoreSubscriptionAndroidUseCase;
   final RestoreSubscriptionIosUseCase restoreSubscriptionIosUseCase;
+  final GetProfileUseCase getProfileUseCase;
+  final WatchProfileUseCase watchProfileUseCase;
 
   IapBloc({
     required this.verifySubscriptionAndroidUseCase,
@@ -28,7 +33,12 @@ class IapBloc extends Bloc<IapEvent, IapState> {
     required this.verifyProductIosUseCase,
     required this.restoreSubscriptionAndroidUseCase,
     required this.restoreSubscriptionIosUseCase,
-  }) : super(const IapState.initial()) {
+    required this.getProfileUseCase,
+    required this.watchProfileUseCase,
+  }) : super(const IapState.ready(
+          isWeeklySelected: false,
+          isVideoRevealed: false,
+        )) {
     on<IapEvent>((event, emit) async {
       await event.when(
         init: () async {
@@ -72,12 +82,27 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             },
           );
 
-          final isInitial = state.maybeWhen(
-            initial: () => true,
-            orElse: () => false,
-          );
-          if (isInitial) {
-            emit(const IapState.loading());
+          // Check if already VIP
+          try {
+            final user = await watchProfileUseCase().first;
+            if (user.isVip) {
+              LogUtils.d('IapBloc: User is already VIP, emitting success already_vip');
+              emit(
+                IapState.success(
+                  message: 'already_vip',
+                  isWeeklySelected: isWeekly,
+                  isVideoRevealed: isRevealed,
+                  selectedCreditIndex: selectedIndex,
+                  weeklyProducts: weekly,
+                  yearlyProducts: yearly,
+                  discountCreditProducts: discount,
+                  regularCreditProducts: regular,
+                ),
+              );
+              return;
+            }
+          } catch (e) {
+            LogUtils.w('IapBloc: Failed to check VIP status in init: $e');
           }
 
           try {
@@ -260,12 +285,13 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                   result = await verifySubscriptionAndroidUseCase(request);
                 }
 
-                result.when(
-                  initial: () {},
-                  loading: () {},
-                  empty: () {},
-                  success: (_) {
-                    LogUtils.d('IapBloc: Subscription Purchase Success');
+                await result.when(
+                  initial: () async {},
+                  loading: () async {},
+                  empty: () async {},
+                  success: (_) async {
+                    LogUtils.d('IapBloc: Subscription Purchase Success, refreshing profile...');
+                    await getProfileUseCase(NoParams());
                     emit(
                       IapState.success(
                         message: isWeekly ? 'success_weekly' : 'success_yearly',
@@ -279,7 +305,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                       ),
                     );
                   },
-                  error: (message) {
+                  error: (message) async {
                     LogUtils.e(
                       'IapBloc: Purchase Verification Failed: $message',
                     );
@@ -480,12 +506,13 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                   result = await verifyProductAndroidUseCase(request);
                 }
 
-                result.when(
-                  initial: () {},
-                  loading: () {},
-                  empty: () {},
-                  success: (_) {
-                    LogUtils.d('IapBloc: Purchase Credits Success');
+                await result.when(
+                  initial: () async {},
+                  loading: () async {},
+                  empty: () async {},
+                  success: (_) async {
+                    LogUtils.d('IapBloc: Purchase Credits Success, refreshing profile...');
+                    await getProfileUseCase(NoParams());
                     emit(
                       IapState.success(
                         message: 'success_credits_$credits',
@@ -499,7 +526,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                       ),
                     );
                   },
-                  error: (message) {
+                  error: (message) async {
                     LogUtils.e(
                       'IapBloc: Purchase Credits Verification Failed: $message',
                     );
@@ -694,6 +721,8 @@ class IapBloc extends Bloc<IapEvent, IapState> {
               }
 
               if (anySuccess) {
+                LogUtils.d('IapBloc: Restore Purchase Success, refreshing profile...');
+                await getProfileUseCase(NoParams());
                 emit(
                   IapState.success(
                     message: 'restore_success',

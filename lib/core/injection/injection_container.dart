@@ -38,8 +38,8 @@ Future<void> initDependencies() async {
   // Network Client
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(
-      // baseUrl: 'https://video-effect-be.apihub.today/api/v1',
-      baseUrl: 'http://192.168.1.22:3000/api/v1',
+      baseUrl: 'https://video-effect-be.apihub.today/api/v1',
+      // baseUrl: 'http://192.168.1.22:3000/api/v1',
       logCallback: (msg) {
         final lines = msg.split('\n');
         if (msg.startsWith('📤') || msg.startsWith('-->')) {

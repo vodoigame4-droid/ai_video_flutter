@@ -95,7 +95,9 @@ class DiscountView extends StatelessWidget {
         listener: (context, state) {
           state.whenOrNull(
             success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
-              AppToast.showSuccess(_translateSuccessMessage(context, message));
+              if (message != 'already_vip') {
+                AppToast.showSuccess(_translateSuccessMessage(context, message));
+              }
               if (context.mounted && Navigator.of(context).canPop()) {
                 context.pop();
               }

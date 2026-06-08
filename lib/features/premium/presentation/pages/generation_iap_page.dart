@@ -179,7 +179,12 @@ class _GenerationIapViewState extends State<GenerationIapView>
                     ____,
                     _____,
                   ) {
-                    AppToast.showSuccess(_translateSuccessMessage(context, message));
+                    if (message != 'already_vip') {
+                      AppToast.showSuccess(_translateSuccessMessage(context, message));
+                    }
+                    if (context.mounted && Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
                   },
               error:
                   (
