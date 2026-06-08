@@ -12,43 +12,19 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
-import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
 
-class DiscountPage extends StatefulWidget {
+class DiscountPage extends StatelessWidget {
   static const String path = '/discount';
   static const String name = 'discount';
 
   const DiscountPage({super.key});
 
   @override
-  State<DiscountPage> createState() => _DiscountPageState();
-}
-
-class _DiscountPageState extends State<DiscountPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<IapBloc>().add(const IapEvent.init());
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return const DeferInitWidget(
-      placeholder: Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-          ),
-        ),
-      ),
-      child: DiscountView(),
-    );
+    return const DiscountView();
   }
 }
 

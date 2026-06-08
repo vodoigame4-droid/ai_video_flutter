@@ -58,9 +58,6 @@ class _GenerationIapViewState extends State<GenerationIapView>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<IapBloc>().add(const IapEvent.init());
-    });
     _revealController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),

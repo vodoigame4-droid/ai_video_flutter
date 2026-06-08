@@ -6,7 +6,6 @@ import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
-import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../gen/assets.gen.dart';
 import '../widgets/credit_pack_row.dart';
@@ -21,35 +20,12 @@ class BuyCreditsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DeferInitWidget(
-      placeholder: Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-          ),
-        ),
-      ),
-      child: BuyCreditsView(),
-    );
+    return const BuyCreditsView();
   }
 }
 
-class BuyCreditsView extends StatefulWidget {
+class BuyCreditsView extends StatelessWidget {
   const BuyCreditsView({super.key});
-
-  @override
-  State<BuyCreditsView> createState() => _BuyCreditsViewState();
-}
-
-class _BuyCreditsViewState extends State<BuyCreditsView> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<IapBloc>().add(const IapEvent.init());
-    });
-  }
 
   String _translateSuccessMessage(BuildContext context, String messageKey) {
     final t = context.t;

@@ -15,14 +15,13 @@ import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
 import '../widgets/subscription_package_card.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
 
-class IapPage extends StatefulWidget {
+class IapPage extends StatelessWidget {
   static const String path = '/iap';
   static const String name = 'iap';
 
@@ -31,31 +30,8 @@ class IapPage extends StatefulWidget {
   const IapPage({super.key, this.videoUrl = ''});
 
   @override
-  State<IapPage> createState() => _IapPageState();
-}
-
-class _IapPageState extends State<IapPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<IapBloc>().add(const IapEvent.init());
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return DeferInitWidget(
-      placeholder: const Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-          ),
-        ),
-      ),
-      child: IapView(videoUrl: widget.videoUrl),
-    );
+    return IapView(videoUrl: videoUrl);
   }
 }
 
