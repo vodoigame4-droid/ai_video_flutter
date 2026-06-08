@@ -543,6 +543,9 @@ class _Translations$errors$ko extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => '동영상은 10초 미만이어야 합니다.';
+	@override String get iap_purchase_cancelled => '구매가 취소되었습니다.';
+	@override String get iap_purchase_in_progress => '구매가 이미 진행 중입니다.';
+	@override String get iap_purchase_failed => '구매 실패.';
 }
 
 // Path: guide
@@ -1021,6 +1024,9 @@ extension on TranslationsKo {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => '동영상은 10초 미만이어야 합니다.',
+			'errors.iap_purchase_cancelled' => '구매가 취소되었습니다.',
+			'errors.iap_purchase_in_progress' => '구매가 이미 진행 중입니다.',
+			'errors.iap_purchase_failed' => '구매 실패.',
 			'guide.step_1' => '1단계',
 			'guide.step_2' => '2단계',
 			'guide.upload_photo' => '사진 업로드',

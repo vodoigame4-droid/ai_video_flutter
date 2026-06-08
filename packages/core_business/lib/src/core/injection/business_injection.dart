@@ -64,8 +64,12 @@ import '../../features/premium/data/datasources/iap_remote_datasource.dart';
 import '../../features/premium/domain/repositories/iap_repository.dart';
 import '../../features/premium/data/repositories/iap_repository_impl.dart';
 import '../../features/premium/presentation/bloc/iap_bloc.dart';
-import '../../features/premium/domain/usecases/verify_subscription_usecase.dart';
-import '../../features/premium/domain/usecases/verify_product_usecase.dart';
+import '../../features/premium/domain/usecases/verify_subscription_android_usecase.dart';
+import '../../features/premium/domain/usecases/verify_product_android_usecase.dart';
+import '../../features/premium/domain/usecases/verify_subscription_ios_usecase.dart';
+import '../../features/premium/domain/usecases/verify_product_ios_usecase.dart';
+import '../../features/premium/domain/usecases/restore_subscription_android_usecase.dart';
+import '../../features/premium/domain/usecases/restore_subscription_ios_usecase.dart';
 
 // Daily Check-In
 import '../../features/daily_check_in/data/datasources/daily_login_api_client.dart';
@@ -180,12 +184,20 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton<IapRepository>(
     () => IapRepositoryImpl(remoteDataSource: sl()),
   );
-  sl.registerLazySingleton(() => VerifySubscriptionUseCase(iapRepository: sl()));
-  sl.registerLazySingleton(() => VerifyProductUseCase(iapRepository: sl()));
+  sl.registerLazySingleton(() => VerifySubscriptionAndroidUseCase(iapRepository: sl()));
+  sl.registerLazySingleton(() => VerifyProductAndroidUseCase(iapRepository: sl()));
+  sl.registerLazySingleton(() => VerifySubscriptionIosUseCase(iapRepository: sl()));
+  sl.registerLazySingleton(() => VerifyProductIosUseCase(iapRepository: sl()));
+  sl.registerLazySingleton(() => RestoreSubscriptionAndroidUseCase(iapRepository: sl()));
+  sl.registerLazySingleton(() => RestoreSubscriptionIosUseCase(iapRepository: sl()));
   sl.registerLazySingleton(
     () => IapBloc(
-      verifySubscriptionUseCase: sl(),
-      verifyProductUseCase: sl(),
+      verifySubscriptionAndroidUseCase: sl(),
+      verifyProductAndroidUseCase: sl(),
+      verifySubscriptionIosUseCase: sl(),
+      verifyProductIosUseCase: sl(),
+      restoreSubscriptionAndroidUseCase: sl(),
+      restoreSubscriptionIosUseCase: sl(),
     ),
   );
 

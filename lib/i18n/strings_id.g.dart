@@ -543,6 +543,9 @@ class _Translations$errors$id extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => 'Video harus di bawah 10 detik.';
+	@override String get iap_purchase_cancelled => 'Pembelian dibatalkan.';
+	@override String get iap_purchase_in_progress => 'Pembelian sedang diproses.';
+	@override String get iap_purchase_failed => 'Pembelian gagal.';
 }
 
 // Path: guide
@@ -1021,6 +1024,9 @@ extension on TranslationsId {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => 'Video harus di bawah 10 detik.',
+			'errors.iap_purchase_cancelled' => 'Pembelian dibatalkan.',
+			'errors.iap_purchase_in_progress' => 'Pembelian sedang diproses.',
+			'errors.iap_purchase_failed' => 'Pembelian gagal.',
 			'guide.step_1' => 'Langkah 1',
 			'guide.step_2' => 'Langkah 2',
 			'guide.upload_photo' => 'Unggah Foto',

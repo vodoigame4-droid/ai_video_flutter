@@ -12,7 +12,6 @@ import '../../features/settings/presentation/pages/language_page.dart';
 import '../../features/create_video/presentation/pages/create_video_page.dart';
 import '../../features/create_video/presentation/pages/generating_page.dart';
 import '../../features/create_video/presentation/pages/result_page.dart';
-import '../../features/premium/presentation/pages/paywall_video_page.dart';
 import '../../features/premium/presentation/pages/iap_page.dart';
 import '../../features/premium/presentation/pages/buy_credits_page.dart';
 import '../../features/premium/presentation/pages/generation_iap_page.dart';
@@ -40,7 +39,8 @@ abstract class AppRoutePage {
   }
 }
 
-final RouteObserver<ModalRoute<dynamic>> routeObserver = RouteObserver<ModalRoute<dynamic>>();
+final RouteObserver<ModalRoute<dynamic>> routeObserver =
+    RouteObserver<ModalRoute<dynamic>>();
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -52,10 +52,8 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: SplashPage.path,
       name: SplashPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const SplashPage(),
-      ),
+      pageBuilder: (context, state) =>
+          AppRoutePage.cupertino<void>(state: state, child: const SplashPage()),
     ),
     GoRoute(
       path: OnboardingPage.path,
@@ -150,7 +148,8 @@ final GoRouter appRouter = GoRouter(
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
         final imageUrl = state.uri.queryParameters['imageUrl'] ?? '';
         final themeType = state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
-        final themeOrgId = int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
+        final themeOrgId =
+            int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
         return AppRoutePage.cupertino<void>(
           state: state,
           child: CreateFromTemplatePage(
@@ -183,10 +182,12 @@ final GoRouter appRouter = GoRouter(
         final imageUrl = state.uri.queryParameters['imageUrl'];
         final themeId = state.uri.queryParameters['themeId'] ?? '1';
         final themeType = state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
-        final themeOrgId = int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
+        final themeOrgId =
+            int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
         final isHd = state.uri.queryParameters['isHd'] == 'true';
         final isLongTime = state.uri.queryParameters['isLongTime'] == 'true';
-        final serviceType = state.uri.queryParameters['serviceType'] ?? 'IMAGE_TO_VIDEO';
+        final serviceType =
+            state.uri.queryParameters['serviceType'] ?? 'IMAGE_TO_VIDEO';
         final videoUrl = state.uri.queryParameters['videoUrl'];
         final prompt = state.uri.queryParameters['prompt'];
         return AppRoutePage.cupertino<void>(
@@ -211,28 +212,58 @@ final GoRouter appRouter = GoRouter(
       name: ResultPage.name,
       pageBuilder: (context, state) {
         final extraArgs = state.extra as ResultPageArgs?;
-        final videoId = extraArgs?.videoId ?? state.uri.queryParameters['videoId'] ?? '';
-        final title = extraArgs?.title ?? state.uri.queryParameters['title'] ?? 'Image Generation';
-        
+        final videoId =
+            extraArgs?.videoId ?? state.uri.queryParameters['videoId'] ?? '';
+        final title =
+            extraArgs?.title ??
+            state.uri.queryParameters['title'] ??
+            'Image Generation';
+
         final rawImageUrl = state.uri.queryParameters['imageUrl'] ?? '';
-        final imageUrl = extraArgs?.imageUrl ?? (rawImageUrl.isNotEmpty ? Uri.decodeComponent(rawImageUrl) : '');
-        
+        final imageUrl =
+            extraArgs?.imageUrl ??
+            (rawImageUrl.isNotEmpty ? Uri.decodeComponent(rawImageUrl) : '');
+
         final rawVideoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        final videoUrl = extraArgs?.videoUrl ?? (rawVideoUrl.isNotEmpty ? Uri.decodeComponent(rawVideoUrl) : '');
-        
-        final createdAt = extraArgs?.createdAt ?? state.uri.queryParameters['createdAt'] ?? '';
-        
-        final serviceType = extraArgs?.serviceType ?? state.uri.queryParameters['serviceType'] ?? 'IMAGE_TO_VIDEO';
-        
+        final videoUrl =
+            extraArgs?.videoUrl ??
+            (rawVideoUrl.isNotEmpty ? Uri.decodeComponent(rawVideoUrl) : '');
+
+        final createdAt =
+            extraArgs?.createdAt ??
+            state.uri.queryParameters['createdAt'] ??
+            '';
+
+        final serviceType =
+            extraArgs?.serviceType ??
+            state.uri.queryParameters['serviceType'] ??
+            'IMAGE_TO_VIDEO';
+
         final rawVideoUrlSrc = state.uri.queryParameters['videoUrlSrc'] ?? '';
-        final videoUrlSrc = extraArgs?.videoUrlSrc ?? (rawVideoUrlSrc.isNotEmpty ? Uri.decodeComponent(rawVideoUrlSrc) : null);
-        
-        final themeId = extraArgs?.themeId ?? state.uri.queryParameters['themeId'] ?? '1';
-        final themeType = extraArgs?.themeType ?? state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
-        final themeOrgId = extraArgs?.themeOrgId ?? int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ?? 1;
-        final isHd = extraArgs?.isHd ?? state.uri.queryParameters['isHd'] == 'true';
-        final isLongTime = extraArgs?.isLongTime ?? state.uri.queryParameters['isLongTime'] == 'true';
-        final fromGeneration = extraArgs?.fromGeneration ?? state.uri.queryParameters['fromGeneration'] == 'true';
+        final videoUrlSrc =
+            extraArgs?.videoUrlSrc ??
+            (rawVideoUrlSrc.isNotEmpty
+                ? Uri.decodeComponent(rawVideoUrlSrc)
+                : null);
+
+        final themeId =
+            extraArgs?.themeId ?? state.uri.queryParameters['themeId'] ?? '1';
+        final themeType =
+            extraArgs?.themeType ??
+            state.uri.queryParameters['themeType'] ??
+            'TEMPLATE';
+        final themeOrgId =
+            extraArgs?.themeOrgId ??
+            int.tryParse(state.uri.queryParameters['themeOrgId'] ?? '') ??
+            1;
+        final isHd =
+            extraArgs?.isHd ?? state.uri.queryParameters['isHd'] == 'true';
+        final isLongTime =
+            extraArgs?.isLongTime ??
+            state.uri.queryParameters['isLongTime'] == 'true';
+        final fromGeneration =
+            extraArgs?.fromGeneration ??
+            state.uri.queryParameters['fromGeneration'] == 'true';
 
         return AppRoutePage.cupertino<void>(
           state: state,
@@ -251,17 +282,6 @@ final GoRouter appRouter = GoRouter(
             isLongTime: isLongTime,
             fromGeneration: fromGeneration,
           ),
-        );
-      },
-    ),
-    GoRoute(
-      path: PaywallVideoPage.path,
-      name: PaywallVideoPage.name,
-      pageBuilder: (context, state) {
-        final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.cupertino<void>(
-          state: state,
-          child: PaywallVideoPage(videoUrl: videoUrl),
         );
       },
     ),
@@ -317,10 +337,8 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: DebugPage.path,
       name: DebugPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
-        state: state,
-        child: const DebugPage(),
-      ),
+      pageBuilder: (context, state) =>
+          AppRoutePage.cupertino<void>(state: state, child: const DebugPage()),
     ),
     GoRoute(
       path: VideoPlayerPage.path,

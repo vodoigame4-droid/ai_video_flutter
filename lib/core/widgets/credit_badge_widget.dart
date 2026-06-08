@@ -4,6 +4,7 @@ import 'package:core_business/core_business.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
 import '../injection/injection_container.dart';
+import 'rolling_counter.dart';
 
 class CreditBadgeWidget extends StatelessWidget {
   final VoidCallback? onTap;
@@ -53,19 +54,33 @@ class CreditBadgeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      isPro ? context.t.common.pro : creditsStr,
-                      style: context.textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ) ??
-                          const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                    isPro
+                        ? Text(
+                            context.t.common.pro,
+                            style: context.textTheme.bodyMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ) ??
+                                const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          )
+                        : RollingCounter(
+                            text: creditsStr,
+                            textStyle: context.textTheme.bodyMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ) ??
+                                const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
-                    ),
                     const SizedBox(width: 4),
                     Image.asset(
                       'assets/icons/ic_star_vip.png',

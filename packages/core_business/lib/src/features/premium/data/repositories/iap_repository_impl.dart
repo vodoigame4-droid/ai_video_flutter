@@ -12,34 +12,34 @@ class IapRepositoryImpl implements IapRepository {
       : _remoteDataSource = remoteDataSource;
 
   @override
-  Future<Resource<void>> verifyProduct(VerifyProductRequestModel request) async {
+  Future<Resource<void>> verifyProductAndroid(VerifyProductRequestModel request) async {
     try {
       await _remoteDataSource.verifyProduct(request);
       return const Resource.success(null);
     } catch (e, stack) {
-      LogUtils.e('IapRepositoryImpl: verifyProduct failed', error: e, stackTrace: stack);
+      LogUtils.e('IapRepositoryImpl: verifyProductAndroid failed', error: e, stackTrace: stack);
       return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
   @override
-  Future<Resource<void>> verifySubscription(VerifySubscriptionRequestModel request) async {
+  Future<Resource<void>> verifySubscriptionAndroid(VerifySubscriptionRequestModel request) async {
     try {
       await _remoteDataSource.verifySubscription(request);
       return const Resource.success(null);
     } catch (e, stack) {
-      LogUtils.e('IapRepositoryImpl: verifySubscription failed', error: e, stackTrace: stack);
+      LogUtils.e('IapRepositoryImpl: verifySubscriptionAndroid failed', error: e, stackTrace: stack);
       return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }
 
   @override
-  Future<Resource<void>> restoreSubscription(RestoreSubscriptionRequestModel request) async {
+  Future<Resource<void>> restoreSubscriptionAndroid(RestoreSubscriptionRequestModel request) async {
     try {
       await _remoteDataSource.restoreSubscription(request);
       return const Resource.success(null);
     } catch (e, stack) {
-      LogUtils.e('IapRepositoryImpl: restoreSubscription failed', error: e, stackTrace: stack);
+      LogUtils.e('IapRepositoryImpl: restoreSubscriptionAndroid failed', error: e, stackTrace: stack);
       return Resource.error(parseRepositoryErrorToFailure(e));
     }
   }

@@ -103,8 +103,12 @@ export 'src/features/premium/domain/repositories/iap_repository.dart';
 export 'src/features/premium/presentation/bloc/iap_bloc.dart';
 export 'src/features/premium/presentation/bloc/iap_event.dart';
 export 'src/features/premium/presentation/bloc/iap_state.dart';
-export 'src/features/premium/domain/usecases/verify_subscription_usecase.dart';
-export 'src/features/premium/domain/usecases/verify_product_usecase.dart';
+export 'src/features/premium/domain/usecases/verify_subscription_android_usecase.dart';
+export 'src/features/premium/domain/usecases/verify_product_android_usecase.dart';
+export 'src/features/premium/domain/usecases/verify_subscription_ios_usecase.dart';
+export 'src/features/premium/domain/usecases/verify_product_ios_usecase.dart';
+export 'src/features/premium/domain/usecases/restore_subscription_android_usecase.dart';
+export 'src/features/premium/domain/usecases/restore_subscription_ios_usecase.dart';
 
 // Daily Check-In
 export 'src/features/daily_check_in/domain/entities/daily_reward_entity.dart';

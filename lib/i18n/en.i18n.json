@@ -370,6 +370,9 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
+    "iap_purchase_cancelled": "Purchase cancelled.",
+    "iap_purchase_in_progress": "Purchase already in progress.",
+    "iap_purchase_failed": "Purchase failed.",
     "video_too_long": "Video must be under 10 seconds."
   },
   "guide": {

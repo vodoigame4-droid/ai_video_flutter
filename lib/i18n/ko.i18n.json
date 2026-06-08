@@ -363,7 +363,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "동영상은 10초 미만이어야 합니다."
+    "video_too_long": "동영상은 10초 미만이어야 합니다.",
+    "iap_purchase_cancelled": "구매가 취소되었습니다.",
+    "iap_purchase_in_progress": "구매가 이미 진행 중입니다.",
+    "iap_purchase_failed": "구매 실패."
   },
   "guide": {
     "step_1": "1단계",

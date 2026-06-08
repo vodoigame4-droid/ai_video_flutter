@@ -543,6 +543,9 @@ class _Translations$errors$zh extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => '视频长度必须在10秒以内。';
+	@override String get iap_purchase_cancelled => '购买已取消。';
+	@override String get iap_purchase_in_progress => '购买已在进行中。';
+	@override String get iap_purchase_failed => '购买失败。';
 }
 
 // Path: guide
@@ -1021,6 +1024,9 @@ extension on TranslationsZh {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => '视频长度必须在10秒以内。',
+			'errors.iap_purchase_cancelled' => '购买已取消。',
+			'errors.iap_purchase_in_progress' => '购买已在进行中。',
+			'errors.iap_purchase_failed' => '购买失败。',
 			'guide.step_1' => '第1步',
 			'guide.step_2' => '第2步',
 			'guide.upload_photo' => '上传图片',

@@ -15,15 +15,15 @@ class BackendErrorHelper {
 
     if (error is String) {
       final trimmed = error.trim();
-      if (trimmed.startsWith('ER')) {
+      if (trimmed.startsWith('ER') || trimmed.startsWith('iap_purchase_')) {
         errorCode = trimmed;
       } else {
         rawMessage = trimmed;
       }
     } else {
       final errorString = error.toString();
-      // Check if there is an ERXXXXX pattern in the exception string
-      final regExp = RegExp(r'ER\d{3,6}');
+      // Check if there is an ERXXXXX or iap_purchase_xxxxx pattern in the exception string
+      final regExp = RegExp(r'(ER\d{3,6}|iap_purchase_[a-z_]+)');
       final match = regExp.firstMatch(errorString);
       if (match != null) {
         errorCode = match.group(0);
@@ -233,6 +233,12 @@ class BackendErrorHelper {
         return t.errors.iap_receipt_not_found;
       case 'ER008017':
         return t.errors.iap_subscription_not_found;
+      case 'iap_purchase_cancelled':
+        return t.errors.iap_purchase_cancelled;
+      case 'iap_purchase_in_progress':
+        return t.errors.iap_purchase_in_progress;
+      case 'iap_purchase_failed':
+        return t.errors.iap_purchase_failed;
       default:
         return t.errors.unknown;
     }

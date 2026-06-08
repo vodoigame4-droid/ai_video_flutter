@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,6 +60,29 @@ class DiscountView extends StatelessWidget {
   static String get _placeholderVideoUrl =>
       sl<RemoteConfigService>().getBgDiscountUrl();
 
+  String _translateSuccessMessage(BuildContext context, String messageKey) {
+    final t = context.t;
+    if (messageKey == 'success_weekly') {
+      return t.premium.purchase_success(item: t.premium.weekly);
+    }
+    if (messageKey == 'success_yearly') {
+      return t.premium.purchase_success(item: t.premium.annually);
+    }
+    if (messageKey.startsWith('success_credits_')) {
+      final creditsStr = messageKey.replaceFirst('success_credits_', '');
+      String creditLabel = '$creditsStr Credits';
+      if (creditsStr == '70') creditLabel = t.premium.credit_70;
+      else if (creditsStr == '150') creditLabel = t.premium.credit_150;
+      else if (creditsStr == '350') creditLabel = t.premium.credit_350;
+      else if (creditsStr == '500') creditLabel = t.premium.credit_500;
+      else if (creditsStr == '1000') creditLabel = t.premium.credit_1000;
+      else if (creditsStr == '5000') creditLabel = t.premium.credit_5000;
+      
+      return t.premium.purchase_success(item: creditLabel);
+    }
+    return messageKey;
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = context.t;
@@ -70,13 +94,13 @@ class DiscountView extends StatelessWidget {
       body: BlocConsumer<IapBloc, IapState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-              AppToast.showSuccess(message);
+            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
+              AppToast.showSuccess(_translateSuccessMessage(context, message));
               if (context.mounted && Navigator.of(context).canPop()) {
                 context.pop();
               }
             },
-            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
+            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
               context.handleFailure(
                 Failure.business(code: message, message: ''),
               );
@@ -363,7 +387,8 @@ class DiscountView extends StatelessWidget {
                     ),
                   ),
       onPressed: () {
-        context.read<IapBloc>().add(const IapEvent.purchase(productId: 'buy_annualy_discount'));
+        final productId = Platform.isIOS ? 'buy_annualy_discount' : 'buy_annualy_discount.andr';
+        context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
       },
     );
   }
@@ -381,7 +406,7 @@ class DiscountView extends StatelessWidget {
         }),
         _buildDivider(),
         _buildFooterLink(t.premium.restore, () {
-          // TODO: restore purchase
+          context.read<IapBloc>().add(const IapEvent.restore());
         }),
       ],
     );

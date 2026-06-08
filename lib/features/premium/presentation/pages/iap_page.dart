@@ -69,6 +69,29 @@ class IapView extends StatelessWidget {
 
   const IapView({super.key, required this.videoUrl});
 
+  String _translateSuccessMessage(BuildContext context, String messageKey) {
+    final t = context.t;
+    if (messageKey == 'success_weekly') {
+      return t.premium.purchase_success(item: t.premium.weekly);
+    }
+    if (messageKey == 'success_yearly') {
+      return t.premium.purchase_success(item: t.premium.annually);
+    }
+    if (messageKey.startsWith('success_credits_')) {
+      final creditsStr = messageKey.replaceFirst('success_credits_', '');
+      String creditLabel = '$creditsStr Credits';
+      if (creditsStr == '70') creditLabel = t.premium.credit_70;
+      else if (creditsStr == '150') creditLabel = t.premium.credit_150;
+      else if (creditsStr == '350') creditLabel = t.premium.credit_350;
+      else if (creditsStr == '500') creditLabel = t.premium.credit_500;
+      else if (creditsStr == '1000') creditLabel = t.premium.credit_1000;
+      else if (creditsStr == '5000') creditLabel = t.premium.credit_5000;
+      
+      return t.premium.purchase_success(item: creditLabel);
+    }
+    return messageKey;
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = context.t;
@@ -92,8 +115,9 @@ class IapView extends StatelessWidget {
                     __,
                     ___,
                     ____,
+                    _____,
                   ) {
-                    AppToast.showSuccess(message);
+                    AppToast.showSuccess(_translateSuccessMessage(context, message));
                   },
               error:
                   (
@@ -104,6 +128,7 @@ class IapView extends StatelessWidget {
                     __,
                     ___,
                     ____,
+                    _____,
                   ) {
                     context.handleFailure(
                       Failure.business(code: message, message: ''),
@@ -461,7 +486,7 @@ class IapView extends StatelessWidget {
                                                   weeklyProducts.isNotEmpty
                                                   ? weeklyProducts.first.id
                                                   : (Platform.isIOS
-                                                        ? 'buy_weekly'
+                                                        ? 'buy_weakly'
                                                         : 'buy_weekly.andr');
                                               context.read<IapBloc>().add(
                                                 IapEvent.purchase(
@@ -508,7 +533,9 @@ class IapView extends StatelessWidget {
                                           GradientButton(
                                             label: isWeekly
                                                 ? t.premium.start_free_trial
-                                                : t.premium.start_my_subscription,
+                                                : t
+                                                      .premium
+                                                      .start_my_subscription,
                                             leadingIcon: !isWeekly
                                                 ? SvgPicture.asset(
                                                     Assets.icons.icCrown,
@@ -535,7 +562,7 @@ class IapView extends StatelessWidget {
                                                               .first
                                                               .id
                                                         : (Platform.isIOS
-                                                              ? 'buy_weekly'
+                                                              ? 'buy_weakly'
                                                               : 'buy_weekly.andr'))
                                                   : (yearlyProducts.isNotEmpty
                                                         ? yearlyProducts
@@ -613,8 +640,8 @@ class IapView extends StatelessWidget {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  AppToast.showSuccess(
-                                                    t.premium.restore,
+                                                  context.read<IapBloc>().add(
+                                                    const IapEvent.restore(),
                                                   );
                                                 },
                                                 child: Text(
@@ -672,7 +699,9 @@ class IapView extends StatelessWidget {
                           // Restore Pill Button
                           GestureDetector(
                             onTap: () {
-                              AppToast.showSuccess(t.premium.restore);
+                              context.read<IapBloc>().add(
+                                const IapEvent.restore(),
+                              );
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(

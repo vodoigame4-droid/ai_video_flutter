@@ -1,0 +1,164 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 93.0.0 (101.0.0 available)
+  analyzer 10.0.1 (13.1.0 available)
+  cli_util 0.4.2 (0.5.1 available)
+  code_assets 1.2.0 (1.2.1 available)
+  dart_style 3.1.7 (3.1.9 available)
+  dbus 0.7.12 (0.7.14 available)
+  drift 2.31.0 (2.33.0 available)
+  drift_dev 2.31.0 (2.33.0 available)
+  flutter_launcher_icons 0.13.1 (0.14.4 available)
+  flutter_local_notifications 21.0.0 (22.0.0 available)
+  flutter_local_notifications_linux 8.0.0 (8.0.1 available)
+  flutter_local_notifications_platform_interface 11.0.0 (12.0.0 available)
+  flutter_local_notifications_windows 3.0.0 (3.1.0 available)
+  flutter_plugin_android_lifecycle 2.0.34 (2.0.35 available)
+  flutter_secure_storage_darwin 0.3.2 (0.4.0 available)
+  flutter_secure_storage_windows 4.1.0 (4.2.2 available)
+  go_router 17.2.3 (17.3.0 available)
+  google_fonts 6.3.3 (8.1.0 available)
+  hooks 2.0.0 (2.0.2 available)
+  image 4.8.0 (4.9.1 available)
+  image_picker_android 0.8.13+17 (0.8.13+19 available)
+  in_app_purchase 3.2.3 (3.3.0 available)
+  in_app_purchase_android 0.4.0+11 (0.5.0+2 available)
+  in_app_purchase_platform_interface 1.4.0 (1.4.1 available)
+  in_app_purchase_storekit 0.4.9 (0.4.10 available)
+  matcher 0.12.19 (0.12.20 available)
+  media_kit_video 1.3.1 (2.0.1 available)
+  meta 1.17.0 (1.18.3 available)
+  package_info_plus 9.0.1 (10.1.0 available)
+  package_info_plus_platform_interface 3.2.1 (4.1.0 available)
+  share_plus 12.0.2 (13.1.0 available)
+  share_plus_platform_interface 6.1.0 (7.1.0 available)
+  shared_preferences_android 2.4.23 (2.4.25 available)
+  sqflite 2.4.2+1 (2.4.3 available)
+  sqflite_android 2.4.2+3 (2.4.3 available)
+  sqflite_common 2.5.8 (2.5.9 available)
+  sqflite_darwin 2.4.2 (2.4.3 available)
+  sqflite_platform_interface 2.4.0 (2.4.1 available)
+  sqlite3 2.9.4 (3.3.2 available)
+  sqlite3_flutter_libs 0.5.42 (0.6.0+eol available)
+  sqlparser 0.43.1 (0.44.4 available)
+  synchronized 3.4.0+1 (3.4.1 available)
+  test 1.30.0 (1.31.1 available)
+  test_api 0.7.10 (0.7.12 available)
+  test_core 0.6.16 (0.6.18 available)
+  url_launcher_android 6.3.30 (6.3.32 available)
+  vector_math 2.2.0 (2.4.0 available)
+  video_player_android 2.9.5 (2.9.6 available)
+  volume_controller 3.5.0 (3.6.0 available)
+  wakelock_plus 1.5.2 (1.6.1 available)
+  webview_flutter_android 4.12.0 (4.13.0 available)
+  webview_flutter_wkwebview 3.25.1 (3.26.0 available)
+  win32 5.15.0 (6.3.0 available)
+  xml 6.6.1 (7.0.1 available)
+Got dependencies!
+54 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing ai_video_flutter...                                   
+
+   info • The import of 'log_utils.dart' is unnecessary because all of the used elements are also provided by the import of 'package:core_business/core_business.dart' • lib/core/utils/banner_preload_helper.dart:8:8 • unnecessary_import
+   info • Library names are not necessary • lib/core/utils/log_utils.dart:1:9 • unnecessary_library_name
+   info • 'WillPopScope' is deprecated and shouldn't be used. Use PopScope instead. The Android predictive back feature will not work with WillPopScope. This feature was deprecated after v3.12.0-1.0.pre • lib/features/create_video/presentation/pages/create_from_template_page.dart:101:14 • deprecated_member_use
+   info • Unnecessary use of string interpolation • lib/features/create_video/presentation/widgets/custom_prompt_card_widget.dart:168:34 • unnecessary_string_interpolations
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/buy_credits_page.dart:65:31 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/buy_credits_page.dart:66:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/buy_credits_page.dart:67:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/buy_credits_page.dart:68:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/buy_credits_page.dart:69:38 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/buy_credits_page.dart:70:38 • curly_braces_in_flow_control_structures
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:141:68 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:141:72 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:141:77 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:141:83 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:144:66 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:144:70 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:144:75 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/buy_credits_page.dart:144:81 • unnecessary_underscores
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/discount_page.dart:74:31 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/discount_page.dart:75:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/discount_page.dart:76:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/discount_page.dart:77:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/discount_page.dart:78:38 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/discount_page.dart:79:38 • curly_braces_in_flow_control_structures
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:97:70 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:97:74 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:97:79 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:97:85 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:103:68 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:103:72 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:103:77 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/discount_page.dart:103:83 • unnecessary_underscores
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:167:33 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:168:39 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:169:39 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:170:39 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:171:40 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:172:40 • curly_braces_in_flow_control_structures
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:232:72 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:232:76 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:232:81 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:232:87 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:235:70 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:235:74 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:235:79 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_buy_credits_page.dart:235:85 • unnecessary_underscores
+   info • The import of '../../../../core/utils/log_utils.dart' is unnecessary because all of the used elements are also provided by the import of 'package:core_business/core_business.dart' • lib/features/premium/presentation/pages/generation_iap_page.dart:16:8 • unnecessary_import
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_iap_page.dart:140:31 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_iap_page.dart:141:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_iap_page.dart:142:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_iap_page.dart:143:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_iap_page.dart:144:38 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/generation_iap_page.dart:145:38 • curly_braces_in_flow_control_structures
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:177:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:178:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:179:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:180:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:190:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:191:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:192:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/generation_iap_page.dart:193:21 • unnecessary_underscores
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/iap_page.dart:83:31 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/iap_page.dart:84:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/iap_page.dart:85:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/iap_page.dart:86:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/iap_page.dart:87:38 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/iap_page.dart:88:38 • curly_braces_in_flow_control_structures
+   info • 'WillPopScope' is deprecated and shouldn't be used. Use PopScope instead. The Android predictive back feature will not work with WillPopScope. This feature was deprecated after v3.12.0-1.0.pre • lib/features/premium/presentation/pages/iap_page.dart:99:12 • deprecated_member_use
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:115:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:116:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:117:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:118:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:128:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:129:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:130:21 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/iap_page.dart:131:21 • unnecessary_underscores
+   info • The import of '../../../../core/utils/log_utils.dart' is unnecessary because all of the used elements are also provided by the import of 'package:core_business/core_business.dart' • lib/features/premium/presentation/pages/paywall_video_page.dart:12:8 • unnecessary_import
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/paywall_video_page.dart:61:31 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/paywall_video_page.dart:62:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/paywall_video_page.dart:63:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/paywall_video_page.dart:64:37 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/paywall_video_page.dart:65:38 • curly_braces_in_flow_control_structures
+   info • Statements in an if should be enclosed in a block • lib/features/premium/presentation/pages/paywall_video_page.dart:66:38 • curly_braces_in_flow_control_structures
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:82:65 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:82:69 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:82:74 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:82:80 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:86:65 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:86:69 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:86:74 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/premium/presentation/pages/paywall_video_page.dart:86:80 • unnecessary_underscores
+   info • Library names are not necessary • packages/core_business/lib/core_business.dart:1:9 • unnecessary_library_name
+warning • Dead code • packages/core_business/lib/src/core/injection/business_injection.dart:209:32 • dead_code
+warning • The left operand can't be null, so the right operand is never executed • packages/core_business/lib/src/core/injection/business_injection.dart:209:35 • dead_null_aware_expression
+warning • Unused import: 'package:flutter/foundation.dart' • packages/core_business/lib/src/features/auth/domain/usecases/auto_login_usecase.dart:1:8 • unused_import
+warning • The declaration '_$PaginatedListModelToJson' isn't referenced • packages/core_business/lib/src/features/media/data/models/media_models.g.dart:19:22 • unused_element
+warning • Unused import: 'package:core_business/src/core/errors/failure.dart' • packages/core_business/lib/src/features/profile/presentation/bloc/profile_bloc.dart:4:8 • unused_import
+warning • Unused import: 'package:core_business/src/core/utils/log_utils.dart' • packages/core_business/lib/src/features/profile/presentation/bloc/profile_bloc.dart:5:8 • unused_import
+   info • Unnecessary override • packages/core_business/lib/src/features/profile/presentation/bloc/profile_bloc.dart:187:16 • unnecessary_overrides
+   info • The import of 'package:core_business/src/features/media/domain/repositories/media_repository.dart' is unnecessary because all of the used elements are also provided by the import of 'package:core_business/core_business.dart' • packages/core_business/test/create_extend_video_usecase_test.dart:4:8 • unnecessary_import
+   info • The import of 'package:core_business/src/features/media/data/models/media_models.dart' is unnecessary because all of the used elements are also provided by the import of 'package:core_business/core_business.dart' • packages/core_business/test/create_extend_video_usecase_test.dart:5:8 • unnecessary_import
+   info • Don't invoke 'print' in production code • scratch/test_hash.dart:15:5 • avoid_print
+

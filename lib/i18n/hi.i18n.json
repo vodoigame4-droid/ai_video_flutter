@@ -363,7 +363,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "वीडियो 10 सेकंड से कम का होना चाहिए।"
+    "video_too_long": "वीडियो 10 सेकंड से कम का होना चाहिए।",
+    "iap_purchase_cancelled": "खरीद रद्द कर दी गई।",
+    "iap_purchase_in_progress": "खरीद पहले से ही प्रगति पर है।",
+    "iap_purchase_failed": "खरीद विफल।"
   },
   "guide": {
     "step_1": "चरण 1",

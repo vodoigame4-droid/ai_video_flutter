@@ -363,7 +363,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "视频长度必须在10秒以内。"
+    "video_too_long": "视频长度必须在10秒以内。",
+    "iap_purchase_cancelled": "购买已取消。",
+    "iap_purchase_in_progress": "购买已在进行中。",
+    "iap_purchase_failed": "购买失败。"
   },
   "guide": {
     "step_1": "第1步",

@@ -363,7 +363,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "動画は10秒未満である必要があります。"
+    "video_too_long": "動画は10秒未満である必要があります。",
+    "iap_purchase_cancelled": "購入がキャンセルされました。",
+    "iap_purchase_in_progress": "購入処理は既に実行中です。",
+    "iap_purchase_failed": "購入に失敗しました。"
   },
   "guide": {
     "step_1": "ステップ1",

@@ -96,7 +96,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _performBackgroundLogin() async {
     try {
       await autoLoginUseCase(NoParams());
-      
+
       // Fetch and preload home banner (download/cache video/webp or preload image)
       final sharedPreferences = sl<SharedPreferences>();
       await BannerPreloadHelper.preloadBanner(
@@ -187,7 +187,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('5000creditsdis'),
 
               // iOS App Store Connect Subscriptions
-              BillingProduct.subscription('buy_weekly'),
+              BillingProduct.subscription('buy_weakly'),
               BillingProduct.subscription('buy_annualy'),
               BillingProduct.subscription('buy_annualy_discount'),
             ]
@@ -211,10 +211,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.subscription('buy_annualy_discount.andr'),
             ];
 
-      final billingConfig = BillingConfig(
-        debugMode: false,
-        products: products,
-      );
+      final billingConfig = BillingConfig(debugMode: false, products: products);
 
       await HavinSdk.instance.init(billingConfig: billingConfig);
     } catch (e, stack) {
@@ -247,7 +244,9 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   void _checkAllInitializationCompleted() {
-    LogUtils.d('SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress');
+    LogUtils.d(
+      'SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress',
+    );
     if (_isLoginCompleted &&
         _isOnboardingPreloadCompleted &&
         _isHavinSdkInitialized &&

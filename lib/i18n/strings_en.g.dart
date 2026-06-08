@@ -1173,6 +1173,15 @@ class Translations$errors$en {
 	/// en: 'Subscription not found.'
 	String get iap_subscription_not_found => 'Subscription not found.';
 
+	/// en: 'Purchase cancelled.'
+	String get iap_purchase_cancelled => 'Purchase cancelled.';
+
+	/// en: 'Purchase already in progress.'
+	String get iap_purchase_in_progress => 'Purchase already in progress.';
+
+	/// en: 'Purchase failed.'
+	String get iap_purchase_failed => 'Purchase failed.';
+
 	/// en: 'Video must be under 10 seconds.'
 	String get video_too_long => 'Video must be under 10 seconds.';
 }
@@ -1762,6 +1771,9 @@ extension on Translations {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.iap_purchase_cancelled' => 'Purchase cancelled.',
+			'errors.iap_purchase_in_progress' => 'Purchase already in progress.',
+			'errors.iap_purchase_failed' => 'Purchase failed.',
 			'errors.video_too_long' => 'Video must be under 10 seconds.',
 			'guide.step_1' => 'Step 1',
 			'guide.step_2' => 'Step 2',

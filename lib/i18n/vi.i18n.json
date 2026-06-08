@@ -370,6 +370,9 @@
     "get_price_list_failed": "Không thể tải danh sách giá credit.",
     "iap_receipt_not_found": "Không tìm thấy hóa đơn mua hàng.",
     "iap_subscription_not_found": "Không tìm thấy thông tin gói đăng ký.",
+    "iap_purchase_cancelled": "Giao dịch đã bị hủy.",
+    "iap_purchase_in_progress": "Giao dịch đang được xử lý.",
+    "iap_purchase_failed": "Giao dịch thất bại.",
     "video_too_long": "Video phải ngắn hơn 10 giây."
   },
   "guide": {

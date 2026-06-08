@@ -130,6 +130,12 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
       error: (s) => s.regularCreditProducts,
     ) ?? const [];
 
+    final List<Product> discountProducts = iapBlocState.mapOrNull(
+      ready: (s) => s.discountCreditProducts,
+      success: (s) => s.discountCreditProducts,
+      error: (s) => s.discountCreditProducts,
+    ) ?? const [];
+
     String getProductPrice(int credits) {
       final matchCredits = '${credits}credits';
       for (final p in regularProducts) {
@@ -138,7 +144,36 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
           return p.priceString;
         }
       }
+      for (final p in discountProducts) {
+        final id = p.id.toLowerCase();
+        if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+          return p.priceString;
+        }
+      }
       return '...';
+    }
+
+    String translateSuccessMessage(BuildContext context, String messageKey) {
+      final t = context.t;
+      if (messageKey == 'success_weekly') {
+        return t.premium.purchase_success(item: t.premium.weekly);
+      }
+      if (messageKey == 'success_yearly') {
+        return t.premium.purchase_success(item: t.premium.annually);
+      }
+      if (messageKey.startsWith('success_credits_')) {
+        final creditsStr = messageKey.replaceFirst('success_credits_', '');
+        String creditLabel = '$creditsStr Credits';
+        if (creditsStr == '70') creditLabel = t.premium.credit_70;
+        else if (creditsStr == '150') creditLabel = t.premium.credit_150;
+        else if (creditsStr == '350') creditLabel = t.premium.credit_350;
+        else if (creditsStr == '500') creditLabel = t.premium.credit_500;
+        else if (creditsStr == '1000') creditLabel = t.premium.credit_1000;
+        else if (creditsStr == '5000') creditLabel = t.premium.credit_5000;
+        
+        return t.premium.purchase_success(item: creditLabel);
+      }
+      return messageKey;
     }
 
     // Package details mapping
@@ -194,10 +229,10 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
             state.whenOrNull(
-              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-                AppToast.showSuccess(message);
+              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
+                AppToast.showSuccess(translateSuccessMessage(context, message));
               },
-              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
+              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
                 context.handleFailure(
                   Failure.business(code: message, message: ''),
                 );

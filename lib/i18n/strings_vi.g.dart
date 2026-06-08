@@ -557,6 +557,9 @@ class _Translations$errors$vi extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Không thể tải danh sách giá credit.';
 	@override String get iap_receipt_not_found => 'Không tìm thấy hóa đơn mua hàng.';
 	@override String get iap_subscription_not_found => 'Không tìm thấy thông tin gói đăng ký.';
+	@override String get iap_purchase_cancelled => 'Giao dịch đã bị hủy.';
+	@override String get iap_purchase_in_progress => 'Giao dịch đang được xử lý.';
+	@override String get iap_purchase_failed => 'Giao dịch thất bại.';
 	@override String get video_too_long => 'Video phải ngắn hơn 10 giây.';
 }
 
@@ -1041,6 +1044,9 @@ extension on TranslationsVi {
 			'errors.get_price_list_failed' => 'Không thể tải danh sách giá credit.',
 			'errors.iap_receipt_not_found' => 'Không tìm thấy hóa đơn mua hàng.',
 			'errors.iap_subscription_not_found' => 'Không tìm thấy thông tin gói đăng ký.',
+			'errors.iap_purchase_cancelled' => 'Giao dịch đã bị hủy.',
+			'errors.iap_purchase_in_progress' => 'Giao dịch đang được xử lý.',
+			'errors.iap_purchase_failed' => 'Giao dịch thất bại.',
 			'errors.video_too_long' => 'Video phải ngắn hơn 10 giây.',
 			'guide.step_1' => 'Bước 1',
 			'guide.step_2' => 'Bước 2',

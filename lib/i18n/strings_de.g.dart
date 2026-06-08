@@ -543,6 +543,9 @@ class _Translations$errors$de extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => 'Das Video muss unter 10 Sekunden lang sein.';
+	@override String get iap_purchase_cancelled => 'Kauf abgebrochen.';
+	@override String get iap_purchase_in_progress => 'Kauf wird bereits verarbeitet.';
+	@override String get iap_purchase_failed => 'Kauf fehlgeschlagen.';
 }
 
 // Path: guide
@@ -1021,6 +1024,9 @@ extension on TranslationsDe {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => 'Das Video muss unter 10 Sekunden lang sein.',
+			'errors.iap_purchase_cancelled' => 'Kauf abgebrochen.',
+			'errors.iap_purchase_in_progress' => 'Kauf wird bereits verarbeitet.',
+			'errors.iap_purchase_failed' => 'Kauf fehlgeschlagen.',
 			'guide.step_1' => 'Schritt 1',
 			'guide.step_2' => 'Schritt 2',
 			'guide.upload_photo' => 'Foto hochladen',
