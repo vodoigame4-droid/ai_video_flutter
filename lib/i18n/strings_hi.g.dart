@@ -64,6 +64,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$hi notification = _Translations$notification$hi._(_root);
 	@override late final _Translations$rating_dialog$hi rating_dialog = _Translations$rating_dialog$hi._(_root);
 	@override late final _Translations$debug$hi debug = _Translations$debug$hi._(_root);
+	@override late final _Translations$permission$hi permission = _Translations$permission$hi._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$hi extends Translations$debug$en {
 	@override String get paywall_video => 'पेवॉल वीडियो पेज';
 }
 
+// Path: permission
+class _Translations$permission$hi extends Translations$permission$en {
+	_Translations$permission$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'कैमरा अनुमति आवश्यक है';
+	@override String get camera_desc => 'कैमरा अनुमति आवश्यक है। इस सुविधा का उपयोग करने के लिए कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get photos_title => 'फ़ोटो अनुमति';
+	@override String get photos_desc => 'फ़ोटो या वीडियो सहेजने के लिए स्टोरेज अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get microphone_title => 'माइक्रोफ़ोन अनुमति';
+	@override String get microphone_desc => 'वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get notification_title => 'अधिसूचना अनुमति';
+	@override String get notification_desc => 'दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get settings => 'सेटिंग्स';
+	@override String get cancel => 'रद्द करें';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$hi._(TranslationsHi root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsHi {
 			'debug.generation_buy_credits' => 'जेनरेशन क्रेडिट खरीदें',
 			'debug.discount' => 'डिस्काउंट पेज',
 			'debug.paywall_video' => 'पेवॉल वीडियो पेज',
+			'permission.camera_title' => 'कैमरा अनुमति आवश्यक है',
+			'permission.camera_desc' => 'कैमरा अनुमति आवश्यक है। इस सुविधा का उपयोग करने के लिए कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.photos_title' => 'फ़ोटो अनुमति',
+			'permission.photos_desc' => 'फ़ोटो या वीडियो सहेजने के लिए स्टोरेज अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.microphone_title' => 'माइक्रोफ़ोन अनुमति',
+			'permission.microphone_desc' => 'वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.notification_title' => 'अधिसूचना अनुमति',
+			'permission.notification_desc' => 'दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.settings' => 'सेटिंग्स',
+			'permission.cancel' => 'रद्द करें',
 			_ => null,
 		};
 	}

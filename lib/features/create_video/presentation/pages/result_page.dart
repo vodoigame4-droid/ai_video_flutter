@@ -17,6 +17,7 @@ import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/rating_prompt_manager.dart';
+import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
 import '../widgets/extend_video_bottom_sheet.dart';
 import 'generating_page.dart';
 
@@ -615,8 +616,12 @@ class _ResultPageState extends State<ResultPage> {
                                                         child: InkWell(
                                                           onTap: isDownloading
                                                               ? null
-                                                              : () {
-                                                                  _bloc.add(const ResultEvent.downloadVideo());
+                                                              : () async {
+                                                                  final hasPermission = await AppPermissionHandler.checkAndRequestPhotosPermission(context);
+                                                                  if (!context.mounted) return;
+                                                                  if (hasPermission) {
+                                                                    _bloc.add(const ResultEvent.downloadVideo());
+                                                                  }
                                                                 },
                                                           borderRadius:
                                                               const BorderRadius.all(

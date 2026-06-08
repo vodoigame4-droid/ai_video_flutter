@@ -65,6 +65,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$vi notification = _Translations$notification$vi._(_root);
 	@override late final _Translations$rating_dialog$vi rating_dialog = _Translations$rating_dialog$vi._(_root);
 	@override late final _Translations$debug$vi debug = _Translations$debug$vi._(_root);
+	@override late final _Translations$permission$vi permission = _Translations$permission$vi._(_root);
 }
 
 // Path: common
@@ -655,6 +656,25 @@ class _Translations$debug$vi extends Translations$debug$en {
 	@override String get paywall_video => 'Trang Paywall Video';
 }
 
+// Path: permission
+class _Translations$permission$vi extends Translations$permission$en {
+	_Translations$permission$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Quyền truy cập Máy ảnh';
+	@override String get camera_desc => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.';
+	@override String get photos_title => 'Quyền truy cập Ảnh & Bộ nhớ';
+	@override String get photos_desc => 'Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.';
+	@override String get microphone_title => 'Quyền truy cập Micro';
+	@override String get microphone_desc => 'Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.';
+	@override String get notification_title => 'Quyền gửi Thông báo';
+	@override String get notification_desc => 'Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.';
+	@override String get settings => 'Cài đặt';
+	@override String get cancel => 'Hủy';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -1087,6 +1107,16 @@ extension on TranslationsVi {
 			'debug.generation_buy_credits' => 'Trang Generation Mua Credit',
 			'debug.discount' => 'Trang giảm giá',
 			'debug.paywall_video' => 'Trang Paywall Video',
+			'permission.camera_title' => 'Quyền truy cập Máy ảnh',
+			'permission.camera_desc' => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.',
+			'permission.photos_title' => 'Quyền truy cập Ảnh & Bộ nhớ',
+			'permission.photos_desc' => 'Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.',
+			'permission.microphone_title' => 'Quyền truy cập Micro',
+			'permission.microphone_desc' => 'Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.',
+			'permission.notification_title' => 'Quyền gửi Thông báo',
+			'permission.notification_desc' => 'Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.',
+			'permission.settings' => 'Cài đặt',
+			'permission.cancel' => 'Hủy',
 			_ => null,
 		};
 	}

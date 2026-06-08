@@ -64,6 +64,7 @@ class TranslationsPt extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$pt notification = _Translations$notification$pt._(_root);
 	@override late final _Translations$rating_dialog$pt rating_dialog = _Translations$rating_dialog$pt._(_root);
 	@override late final _Translations$debug$pt debug = _Translations$debug$pt._(_root);
+	@override late final _Translations$permission$pt permission = _Translations$permission$pt._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$pt extends Translations$debug$en {
 	@override String get paywall_video => 'Página de vídeo paywall';
 }
 
+// Path: permission
+class _Translations$permission$pt extends Translations$permission$en {
+	_Translations$permission$pt._(TranslationsPt root) : this._root = root, super.internal(root);
+
+	final TranslationsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Permissão de Câmera';
+	@override String get camera_desc => 'A permissão da câmera é necessária. Ative-a nas Configurações para usar este recurso.';
+	@override String get photos_title => 'Permissão de Fotos';
+	@override String get photos_desc => 'A permissão de armazenamento é necessária para salvar fotos ou vídeos. Ative-a nas Configurações.';
+	@override String get microphone_title => 'Permissão de Microfone';
+	@override String get microphone_desc => 'A permissão do microfone é necessária para gravar áudio nos vídeos. Ative-a nas Configurações.';
+	@override String get notification_title => 'Permissão de Notificação';
+	@override String get notification_desc => 'A permissão de notificação é necessária para receber lembretes diários. Ative-a nas Configurações.';
+	@override String get settings => 'Configurações';
+	@override String get cancel => 'Cancelar';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$pt extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$pt._(TranslationsPt root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsPt {
 			'debug.generation_buy_credits' => 'Geração comprar créditos',
 			'debug.discount' => 'Página de desconto',
 			'debug.paywall_video' => 'Página de vídeo paywall',
+			'permission.camera_title' => 'Permissão de Câmera',
+			'permission.camera_desc' => 'A permissão da câmera é necessária. Ative-a nas Configurações para usar este recurso.',
+			'permission.photos_title' => 'Permissão de Fotos',
+			'permission.photos_desc' => 'A permissão de armazenamento é necessária para salvar fotos ou vídeos. Ative-a nas Configurações.',
+			'permission.microphone_title' => 'Permissão de Microfone',
+			'permission.microphone_desc' => 'A permissão do microfone é necessária para gravar áudio nos vídeos. Ative-a nas Configurações.',
+			'permission.notification_title' => 'Permissão de Notificação',
+			'permission.notification_desc' => 'A permissão de notificação é necessária para receber lembretes diários. Ative-a nas Configurações.',
+			'permission.settings' => 'Configurações',
+			'permission.cancel' => 'Cancelar',
 			_ => null,
 		};
 	}

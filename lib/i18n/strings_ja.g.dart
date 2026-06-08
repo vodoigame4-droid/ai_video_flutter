@@ -64,6 +64,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$ja notification = _Translations$notification$ja._(_root);
 	@override late final _Translations$rating_dialog$ja rating_dialog = _Translations$rating_dialog$ja._(_root);
 	@override late final _Translations$debug$ja debug = _Translations$debug$ja._(_root);
+	@override late final _Translations$permission$ja permission = _Translations$permission$ja._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$ja extends Translations$debug$en {
 	@override String get paywall_video => 'ペイウォールビデオページ';
 }
 
+// Path: permission
+class _Translations$permission$ja extends Translations$permission$en {
+	_Translations$permission$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'カメラの権限';
+	@override String get camera_desc => 'カメラの権限が必要です。この機能を使用するには、設定で許可してください。';
+	@override String get photos_title => '写真の権限';
+	@override String get photos_desc => '写真や動画を保存するにはストレージの権限が必要です。設定で許可してください。';
+	@override String get microphone_title => 'マイクの権限';
+	@override String get microphone_desc => '動画の音声録音にはマイクの権限が必要です。設定で許可してください。';
+	@override String get notification_title => '通知の権限';
+	@override String get notification_desc => 'デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。';
+	@override String get settings => '設定';
+	@override String get cancel => 'キャンセル';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ja._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsJa {
 			'debug.generation_buy_credits' => '生成クレジット購入',
 			'debug.discount' => '割引ページ',
 			'debug.paywall_video' => 'ペイウォールビデオページ',
+			'permission.camera_title' => 'カメラの権限',
+			'permission.camera_desc' => 'カメラの権限が必要です。この機能を使用するには、設定で許可してください。',
+			'permission.photos_title' => '写真の権限',
+			'permission.photos_desc' => '写真や動画を保存するにはストレージの権限が必要です。設定で許可してください。',
+			'permission.microphone_title' => 'マイクの権限',
+			'permission.microphone_desc' => '動画の音声録音にはマイクの権限が必要です。設定で許可してください。',
+			'permission.notification_title' => '通知の権限',
+			'permission.notification_desc' => 'デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。',
+			'permission.settings' => '設定',
+			'permission.cancel' => 'キャンセル',
 			_ => null,
 		};
 	}

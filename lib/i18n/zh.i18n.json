@@ -416,5 +416,17 @@
     "generation_buy_credits": "生成购买积分",
     "discount": "折扣页面",
     "paywall_video": "付费墙视频页面"
+  },
+  "permission": {
+    "camera_title": "相机权限",
+    "camera_desc": "需要相机权限。请在设置中启用以使用此功能。",
+    "photos_title": "照片权限",
+    "photos_desc": "需要存储权限来保存照片或视频。请在设置中启用以使用此功能。",
+    "microphone_title": "麦克风权限",
+    "microphone_desc": "需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。",
+    "notification_title": "通知权限",
+    "notification_desc": "需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。",
+    "settings": "设置",
+    "cancel": "取消"
   }
 }

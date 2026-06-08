@@ -64,6 +64,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$ar notification = _Translations$notification$ar._(_root);
 	@override late final _Translations$rating_dialog$ar rating_dialog = _Translations$rating_dialog$ar._(_root);
 	@override late final _Translations$debug$ar debug = _Translations$debug$ar._(_root);
+	@override late final _Translations$permission$ar permission = _Translations$permission$ar._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$ar extends Translations$debug$en {
 	@override String get paywall_video => 'صفحة حظر الفيديو';
 }
 
+// Path: permission
+class _Translations$permission$ar extends Translations$permission$en {
+	_Translations$permission$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'إذن الكاميرا';
+	@override String get camera_desc => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.';
+	@override String get photos_title => 'إذن الصور';
+	@override String get photos_desc => 'مطلوب إذن الوصول إلى وحدة التخزين لحفظ الصور أو مقاطع الفيديو. يرجى تمكينه في الإعدادات.';
+	@override String get microphone_title => 'إذن الميكروفون';
+	@override String get microphone_desc => 'مطلوب إذن الميكروفون لتسجيل صوت الفيديو. يرجى تمكينه في الإعدادات.';
+	@override String get notification_title => 'إذن الإشعارات';
+	@override String get notification_desc => 'مطلوب إذن الإشعارات لتلقي تذكيرات تسجيل الدخول اليومي. يرجى تمكينه في الإعدادات.';
+	@override String get settings => 'الإعدادات';
+	@override String get cancel => 'إلغاء';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ar._(TranslationsAr root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsAr {
 			'debug.generation_buy_credits' => 'شراء رصيد للتوليد',
 			'debug.discount' => 'صفحة الخصم',
 			'debug.paywall_video' => 'صفحة حظر الفيديو',
+			'permission.camera_title' => 'إذن الكاميرا',
+			'permission.camera_desc' => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.',
+			'permission.photos_title' => 'إذن الصور',
+			'permission.photos_desc' => 'مطلوب إذن الوصول إلى وحدة التخزين لحفظ الصور أو مقاطع الفيديو. يرجى تمكينه في الإعدادات.',
+			'permission.microphone_title' => 'إذن الميكروفون',
+			'permission.microphone_desc' => 'مطلوب إذن الميكروفون لتسجيل صوت الفيديو. يرجى تمكينه في الإعدادات.',
+			'permission.notification_title' => 'إذن الإشعارات',
+			'permission.notification_desc' => 'مطلوب إذن الإشعارات لتلقي تذكيرات تسجيل الدخول اليومي. يرجى تمكينه في الإعدادات.',
+			'permission.settings' => 'الإعدادات',
+			'permission.cancel' => 'إلغاء',
 			_ => null,
 		};
 	}

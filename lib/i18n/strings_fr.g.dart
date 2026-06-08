@@ -64,6 +64,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$fr notification = _Translations$notification$fr._(_root);
 	@override late final _Translations$rating_dialog$fr rating_dialog = _Translations$rating_dialog$fr._(_root);
 	@override late final _Translations$debug$fr debug = _Translations$debug$fr._(_root);
+	@override late final _Translations$permission$fr permission = _Translations$permission$fr._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$fr extends Translations$debug$en {
 	@override String get paywall_video => 'Page vidéo paywall';
 }
 
+// Path: permission
+class _Translations$permission$fr extends Translations$permission$en {
+	_Translations$permission$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Autorisation de la caméra';
+	@override String get camera_desc => 'L\'autorisation de la caméra est requise. Veuillez l\'activer dans les Paramètres pour utiliser cette fonctionnalité.';
+	@override String get photos_title => 'Autorisation des Photos';
+	@override String get photos_desc => 'L\'autorisation de stockage est requise pour enregistrer des photos ou des vidéos. Veuillez l\'activer dans les Paramètres.';
+	@override String get microphone_title => 'Autorisation du Micro';
+	@override String get microphone_desc => 'L\'autorisation du microphone est requise pour l\'enregistrement audio des vidéos. Veuillez l\'activer dans les Paramètres.';
+	@override String get notification_title => 'Autorisation des Notifications';
+	@override String get notification_desc => 'L\'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l\'activer dans les Paramètres.';
+	@override String get settings => 'Paramètres';
+	@override String get cancel => 'Annuler';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$fr extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$fr._(TranslationsFr root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsFr {
 			'debug.generation_buy_credits' => 'Génération acheter des crédits',
 			'debug.discount' => 'Page de réduction',
 			'debug.paywall_video' => 'Page vidéo paywall',
+			'permission.camera_title' => 'Autorisation de la caméra',
+			'permission.camera_desc' => 'L\'autorisation de la caméra est requise. Veuillez l\'activer dans les Paramètres pour utiliser cette fonctionnalité.',
+			'permission.photos_title' => 'Autorisation des Photos',
+			'permission.photos_desc' => 'L\'autorisation de stockage est requise pour enregistrer des photos ou des vidéos. Veuillez l\'activer dans les Paramètres.',
+			'permission.microphone_title' => 'Autorisation du Micro',
+			'permission.microphone_desc' => 'L\'autorisation du microphone est requise pour l\'enregistrement audio des vidéos. Veuillez l\'activer dans les Paramètres.',
+			'permission.notification_title' => 'Autorisation des Notifications',
+			'permission.notification_desc' => 'L\'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l\'activer dans les Paramètres.',
+			'permission.settings' => 'Paramètres',
+			'permission.cancel' => 'Annuler',
 			_ => null,
 		};
 	}

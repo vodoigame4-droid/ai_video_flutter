@@ -66,6 +66,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$notification$en notification = Translations$notification$en.internal(_root);
 	late final Translations$rating_dialog$en rating_dialog = Translations$rating_dialog$en.internal(_root);
 	late final Translations$debug$en debug = Translations$debug$en.internal(_root);
+	late final Translations$permission$en permission = Translations$permission$en.internal(_root);
 }
 
 // Path: common
@@ -1354,6 +1355,45 @@ class Translations$debug$en {
 	String get paywall_video => 'Paywall Video Page';
 }
 
+// Path: permission
+class Translations$permission$en {
+	Translations$permission$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Camera Permission'
+	String get camera_title => 'Camera Permission';
+
+	/// en: 'Camera permission is required. Please enable it in Settings to use this feature.'
+	String get camera_desc => 'Camera permission is required. Please enable it in Settings to use this feature.';
+
+	/// en: 'Photos Permission'
+	String get photos_title => 'Photos Permission';
+
+	/// en: 'Storage permission is required to save photos or videos. Please enable it in Settings.'
+	String get photos_desc => 'Storage permission is required to save photos or videos. Please enable it in Settings.';
+
+	/// en: 'Microphone Permission'
+	String get microphone_title => 'Microphone Permission';
+
+	/// en: 'Microphone permission is required for video sound recording. Please enable it in Settings.'
+	String get microphone_desc => 'Microphone permission is required for video sound recording. Please enable it in Settings.';
+
+	/// en: 'Notification Permission'
+	String get notification_title => 'Notification Permission';
+
+	/// en: 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.'
+	String get notification_desc => 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.';
+
+	/// en: 'Settings'
+	String get settings => 'Settings';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en {
 	Translations$onboarding$page1$en.internal(this._root);
@@ -1816,6 +1856,16 @@ extension on Translations {
 			'debug.generation_buy_credits' => 'Generation Buy Credits',
 			'debug.discount' => 'Discount Page',
 			'debug.paywall_video' => 'Paywall Video Page',
+			'permission.camera_title' => 'Camera Permission',
+			'permission.camera_desc' => 'Camera permission is required. Please enable it in Settings to use this feature.',
+			'permission.photos_title' => 'Photos Permission',
+			'permission.photos_desc' => 'Storage permission is required to save photos or videos. Please enable it in Settings.',
+			'permission.microphone_title' => 'Microphone Permission',
+			'permission.microphone_desc' => 'Microphone permission is required for video sound recording. Please enable it in Settings.',
+			'permission.notification_title' => 'Notification Permission',
+			'permission.notification_desc' => 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.',
+			'permission.settings' => 'Settings',
+			'permission.cancel' => 'Cancel',
 			_ => null,
 		};
 	}

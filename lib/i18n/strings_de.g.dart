@@ -64,6 +64,7 @@ class TranslationsDe extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$de notification = _Translations$notification$de._(_root);
 	@override late final _Translations$rating_dialog$de rating_dialog = _Translations$rating_dialog$de._(_root);
 	@override late final _Translations$debug$de debug = _Translations$debug$de._(_root);
+	@override late final _Translations$permission$de permission = _Translations$permission$de._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$de extends Translations$debug$en {
 	@override String get paywall_video => 'Paywall-Videoseite';
 }
 
+// Path: permission
+class _Translations$permission$de extends Translations$permission$en {
+	_Translations$permission$de._(TranslationsDe root) : this._root = root, super.internal(root);
+
+	final TranslationsDe _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Kamerazugriff erforderlich';
+	@override String get camera_desc => 'Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.';
+	@override String get photos_title => 'Fotozugriff erforderlich';
+	@override String get photos_desc => 'Speicherberechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte in den Einstellungen aktivieren.';
+	@override String get microphone_title => 'Mikrofonzugriff erforderlich';
+	@override String get microphone_desc => 'Mikrofonberechtigung ist für die Video-Tonaufnahme erforderlich. Bitte in den Einstellungen aktivieren.';
+	@override String get notification_title => 'Benachrichtigungszugriff erforderlich';
+	@override String get notification_desc => 'Benachrichtigungsberechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte in den Einstellungen aktivieren.';
+	@override String get settings => 'Einstellungen';
+	@override String get cancel => 'Abbrechen';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$de._(TranslationsDe root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsDe {
 			'debug.generation_buy_credits' => 'Generierung Guthaben kaufen',
 			'debug.discount' => 'Rabattseite',
 			'debug.paywall_video' => 'Paywall-Videoseite',
+			'permission.camera_title' => 'Kamerazugriff erforderlich',
+			'permission.camera_desc' => 'Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.',
+			'permission.photos_title' => 'Fotozugriff erforderlich',
+			'permission.photos_desc' => 'Speicherberechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte in den Einstellungen aktivieren.',
+			'permission.microphone_title' => 'Mikrofonzugriff erforderlich',
+			'permission.microphone_desc' => 'Mikrofonberechtigung ist für die Video-Tonaufnahme erforderlich. Bitte in den Einstellungen aktivieren.',
+			'permission.notification_title' => 'Benachrichtigungszugriff erforderlich',
+			'permission.notification_desc' => 'Benachrichtigungsberechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte in den Einstellungen aktivieren.',
+			'permission.settings' => 'Einstellungen',
+			'permission.cancel' => 'Abbrechen',
 			_ => null,
 		};
 	}

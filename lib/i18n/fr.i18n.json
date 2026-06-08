@@ -416,5 +416,17 @@
     "generation_buy_credits": "Génération acheter des crédits",
     "discount": "Page de réduction",
     "paywall_video": "Page vidéo paywall"
+  },
+  "permission": {
+    "camera_title": "Autorisation de la caméra",
+    "camera_desc": "L'autorisation de la caméra est requise. Veuillez l'activer dans les Paramètres pour utiliser cette fonctionnalité.",
+    "photos_title": "Autorisation des Photos",
+    "photos_desc": "L'autorisation de stockage est requise pour enregistrer des photos ou des vidéos. Veuillez l'activer dans les Paramètres.",
+    "microphone_title": "Autorisation du Micro",
+    "microphone_desc": "L'autorisation du microphone est requise pour l'enregistrement audio des vidéos. Veuillez l'activer dans les Paramètres.",
+    "notification_title": "Autorisation des Notifications",
+    "notification_desc": "L'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l'activer dans les Paramètres.",
+    "settings": "Paramètres",
+    "cancel": "Annuler"
   }
 }

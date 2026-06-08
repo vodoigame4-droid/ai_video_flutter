@@ -424,5 +424,17 @@
     "generation_buy_credits": "Generation Buy Credits",
     "discount": "Discount Page",
     "paywall_video": "Paywall Video Page"
+  },
+  "permission": {
+    "camera_title": "Camera Permission",
+    "camera_desc": "Camera permission is required. Please enable it in Settings to use this feature.",
+    "photos_title": "Photos Permission",
+    "photos_desc": "Storage permission is required to save photos or videos. Please enable it in Settings.",
+    "microphone_title": "Microphone Permission",
+    "microphone_desc": "Microphone permission is required for video sound recording. Please enable it in Settings.",
+    "notification_title": "Notification Permission",
+    "notification_desc": "Notification permission is required to receive daily check-in reminders. Please enable it in Settings.",
+    "settings": "Settings",
+    "cancel": "Cancel"
   }
 }

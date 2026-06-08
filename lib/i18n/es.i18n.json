@@ -416,5 +416,17 @@
     "generation_buy_credits": "Comprar créditos de generación",
     "discount": "Página de descuento",
     "paywall_video": "Página de video paywall"
+  },
+  "permission": {
+    "camera_title": "Permiso de Cámara",
+    "camera_desc": "Se requiere el permiso de cámara. Por favor, actívelo en la Configuración para usar esta función.",
+    "photos_title": "Permiso de Fotos",
+    "photos_desc": "Se requiere el permiso de almacenamiento para guardar fotos o videos. Por favor, actívelo en la Configuración.",
+    "microphone_title": "Permiso de Micrófono",
+    "microphone_desc": "Se requiere el permiso de micrófono para grabar el audio del video. Por favor, actívelo en la Configuración.",
+    "notification_title": "Permiso de Notificaciones",
+    "notification_desc": "Se requiere el permiso de notificaciones para recibir recordatorios diarios. Por favor, actívelo en la Configuración.",
+    "settings": "Configuración",
+    "cancel": "Cancelar"
   }
 }

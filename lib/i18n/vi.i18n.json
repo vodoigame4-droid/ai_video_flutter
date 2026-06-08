@@ -424,5 +424,17 @@
     "generation_buy_credits": "Trang Generation Mua Credit",
     "discount": "Trang giảm giá",
     "paywall_video": "Trang Paywall Video"
+  },
+  "permission": {
+    "camera_title": "Quyền truy cập Máy ảnh",
+    "camera_desc": "Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.",
+    "photos_title": "Quyền truy cập Ảnh & Bộ nhớ",
+    "photos_desc": "Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.",
+    "microphone_title": "Quyền truy cập Micro",
+    "microphone_desc": "Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.",
+    "notification_title": "Quyền gửi Thông báo",
+    "notification_desc": "Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.",
+    "settings": "Cài đặt",
+    "cancel": "Hủy"
   }
 }

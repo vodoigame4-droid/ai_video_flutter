@@ -64,6 +64,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$zh notification = _Translations$notification$zh._(_root);
 	@override late final _Translations$rating_dialog$zh rating_dialog = _Translations$rating_dialog$zh._(_root);
 	@override late final _Translations$debug$zh debug = _Translations$debug$zh._(_root);
+	@override late final _Translations$permission$zh permission = _Translations$permission$zh._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$zh extends Translations$debug$en {
 	@override String get paywall_video => '付费墙视频页面';
 }
 
+// Path: permission
+class _Translations$permission$zh extends Translations$permission$en {
+	_Translations$permission$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => '相机权限';
+	@override String get camera_desc => '需要相机权限。请在设置中启用以使用此功能。';
+	@override String get photos_title => '照片权限';
+	@override String get photos_desc => '需要存储权限来保存照片或视频。请在设置中启用以使用此功能。';
+	@override String get microphone_title => '麦克风权限';
+	@override String get microphone_desc => '需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。';
+	@override String get notification_title => '通知权限';
+	@override String get notification_desc => '需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。';
+	@override String get settings => '设置';
+	@override String get cancel => '取消';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$zh._(TranslationsZh root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsZh {
 			'debug.generation_buy_credits' => '生成购买积分',
 			'debug.discount' => '折扣页面',
 			'debug.paywall_video' => '付费墙视频页面',
+			'permission.camera_title' => '相机权限',
+			'permission.camera_desc' => '需要相机权限。请在设置中启用以使用此功能。',
+			'permission.photos_title' => '照片权限',
+			'permission.photos_desc' => '需要存储权限来保存照片或视频。请在设置中启用以使用此功能。',
+			'permission.microphone_title' => '麦克风权限',
+			'permission.microphone_desc' => '需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。',
+			'permission.notification_title' => '通知权限',
+			'permission.notification_desc' => '需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。',
+			'permission.settings' => '设置',
+			'permission.cancel' => '取消',
 			_ => null,
 		};
 	}

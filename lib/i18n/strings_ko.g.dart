@@ -64,6 +64,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$ko notification = _Translations$notification$ko._(_root);
 	@override late final _Translations$rating_dialog$ko rating_dialog = _Translations$rating_dialog$ko._(_root);
 	@override late final _Translations$debug$ko debug = _Translations$debug$ko._(_root);
+	@override late final _Translations$permission$ko permission = _Translations$permission$ko._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$ko extends Translations$debug$en {
 	@override String get paywall_video => '페이월 비디오 페이지';
 }
 
+// Path: permission
+class _Translations$permission$ko extends Translations$permission$en {
+	_Translations$permission$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => '카메라 권한';
+	@override String get camera_desc => '카메라 권한이 필요합니다. 이 기능을 사용하려면 설정에서 권한을 허용해 주세요.';
+	@override String get photos_title => '사진 권한';
+	@override String get photos_desc => '사진이나 동영상을 저장하려면 저장소 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get microphone_title => '마이크 권한';
+	@override String get microphone_desc => '동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get notification_title => '알림 권한';
+	@override String get notification_desc => '일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get settings => '설정';
+	@override String get cancel => '취소';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$ko._(TranslationsKo root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsKo {
 			'debug.generation_buy_credits' => '생성 크레딧 구매',
 			'debug.discount' => '할인 페이지',
 			'debug.paywall_video' => '페이월 비디오 페이지',
+			'permission.camera_title' => '카메라 권한',
+			'permission.camera_desc' => '카메라 권한이 필요합니다. 이 기능을 사용하려면 설정에서 권한을 허용해 주세요.',
+			'permission.photos_title' => '사진 권한',
+			'permission.photos_desc' => '사진이나 동영상을 저장하려면 저장소 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.microphone_title' => '마이크 권한',
+			'permission.microphone_desc' => '동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.notification_title' => '알림 권한',
+			'permission.notification_desc' => '일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.settings' => '설정',
+			'permission.cancel' => '취소',
 			_ => null,
 		};
 	}

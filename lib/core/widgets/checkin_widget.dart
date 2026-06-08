@@ -14,6 +14,7 @@ import '../errors/backend_error_handler.dart';
 import '../notification/local_notification_service.dart';
 import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
+import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
 
 enum DayState { claimed, today, upcoming }
 
@@ -105,9 +106,10 @@ class _CheckInWidgetState extends State<CheckInWidget> {
             builder: (ctx, setDialogState) {
               return _CheckInDialogContent(
                 notificationEnabled: _notificationEnabled,
-                onNotificationChanged: (val) async {
+                 onNotificationChanged: (val) async {
                   if (val) {
-                    final isGranted = await sl<NotificationRepository>().requestPermission();
+                    final isGranted = await AppPermissionHandler.checkAndRequestNotificationPermission(context);
+                    if (!context.mounted || !mounted) return;
                     if (isGranted) {
                       await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
                       await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
@@ -118,15 +120,6 @@ class _CheckInWidgetState extends State<CheckInWidget> {
                         _notificationEnabled = true;
                       });
                     } else {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(context.t.generating.notification_denied),
-                            duration: const Duration(seconds: 3),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
                       setState(() {
                         _notificationEnabled = false;
                       });

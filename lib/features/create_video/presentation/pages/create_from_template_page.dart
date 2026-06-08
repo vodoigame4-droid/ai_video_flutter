@@ -18,6 +18,7 @@ import '../../../../core/widgets/report_bottom_sheet.dart';
 import '../../../../core/widgets/app_confirm_dialog.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
+import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
 import 'package:core_business/core_business.dart';
 import '../widgets/upload_bottom_sheet_widget.dart';
 import 'create_template_settings_page.dart';
@@ -522,6 +523,14 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    if (source == ImageSource.camera) {
+      final hasPermission = await AppPermissionHandler.checkAndRequestCameraPermission(context);
+      if (!mounted) return;
+      if (!hasPermission) {
+        LogUtils.w('CreateFromTemplatePage: Camera permission denied. Aborting image selection.');
+        return;
+      }
+    }
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: source);
@@ -552,6 +561,8 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             toolbarColor: AppColors.surface,
             toolbarWidgetColor: AppColors.white,
             activeControlsWidgetColor: AppColors.primary,
+            cropFrameColor: AppColors.primary,
+            cropGridColor: AppColors.primary,
             initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: false,
             aspectRatioPresets: [

@@ -12,6 +12,7 @@ import 'package:ai_video_flutter/features/create_video/presentation/pages/video_
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
+import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
 
 class UploadSlotWidget extends StatelessWidget {
   final String? mediaPath;
@@ -218,6 +219,14 @@ class UploadSlotWidget extends StatelessWidget {
 
   Future<void> _pickMedia(BuildContext context, ImageSource source) async {
     LogUtils.i('UploadSlotWidget: Starting _pickMedia. isVideoSlot: $isVideoSlot, source: $source');
+    if (source == ImageSource.camera) {
+      final hasPermission = await AppPermissionHandler.checkAndRequestCameraPermission(context);
+      if (!context.mounted) return;
+      if (!hasPermission) {
+        LogUtils.w('UploadSlotWidget: Camera permission denied. Aborting media selection.');
+        return;
+      }
+    }
     final cropTitle = context.t.tips_sheet.title;
     try {
       final ImagePicker picker = ImagePicker();
@@ -300,6 +309,8 @@ class UploadSlotWidget extends StatelessWidget {
             toolbarColor: AppColors.surface,
             toolbarWidgetColor: AppColors.white,
             activeControlsWidgetColor: AppColors.primary,
+            cropFrameColor: AppColors.primary,
+            cropGridColor: AppColors.primary,
             initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: false,
             aspectRatioPresets: [

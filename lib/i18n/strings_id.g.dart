@@ -64,6 +64,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$id notification = _Translations$notification$id._(_root);
 	@override late final _Translations$rating_dialog$id rating_dialog = _Translations$rating_dialog$id._(_root);
 	@override late final _Translations$debug$id debug = _Translations$debug$id._(_root);
+	@override late final _Translations$permission$id permission = _Translations$permission$id._(_root);
 }
 
 // Path: common
@@ -639,6 +640,25 @@ class _Translations$debug$id extends Translations$debug$en {
 	@override String get paywall_video => 'Halaman Video Paywall';
 }
 
+// Path: permission
+class _Translations$permission$id extends Translations$permission$en {
+	_Translations$permission$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Izin Kamera';
+	@override String get camera_desc => 'Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.';
+	@override String get photos_title => 'Izin Galeri';
+	@override String get photos_desc => 'Izin penyimpanan diperlukan untuk menyimpan foto atau video. Silakan aktifkan di Pengaturan.';
+	@override String get microphone_title => 'Izin Mikrofon';
+	@override String get microphone_desc => 'Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.';
+	@override String get notification_title => 'Izin Notifikasi';
+	@override String get notification_desc => 'Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.';
+	@override String get settings => 'Pengaturan';
+	@override String get cancel => 'Batal';
+}
+
 // Path: onboarding.page1
 class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en {
 	_Translations$onboarding$page1$id._(TranslationsId root) : this._root = root, super.internal(root);
@@ -1065,6 +1085,16 @@ extension on TranslationsId {
 			'debug.generation_buy_credits' => 'Generasi Beli Kredit',
 			'debug.discount' => 'Halaman Diskon',
 			'debug.paywall_video' => 'Halaman Video Paywall',
+			'permission.camera_title' => 'Izin Kamera',
+			'permission.camera_desc' => 'Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.',
+			'permission.photos_title' => 'Izin Galeri',
+			'permission.photos_desc' => 'Izin penyimpanan diperlukan untuk menyimpan foto atau video. Silakan aktifkan di Pengaturan.',
+			'permission.microphone_title' => 'Izin Mikrofon',
+			'permission.microphone_desc' => 'Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.',
+			'permission.notification_title' => 'Izin Notifikasi',
+			'permission.notification_desc' => 'Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.',
+			'permission.settings' => 'Pengaturan',
+			'permission.cancel' => 'Batal',
 			_ => null,
 		};
 	}

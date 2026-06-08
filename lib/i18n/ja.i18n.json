@@ -416,5 +416,17 @@
     "generation_buy_credits": "生成クレジット購入",
     "discount": "割引ページ",
     "paywall_video": "ペイウォールビデオページ"
+  },
+  "permission": {
+    "camera_title": "カメラの権限",
+    "camera_desc": "カメラの権限が必要です。この機能を使用するには、設定で許可してください。",
+    "photos_title": "写真の権限",
+    "photos_desc": "写真や動画を保存するにはストレージの権限が必要です。設定で許可してください。",
+    "microphone_title": "マイクの権限",
+    "microphone_desc": "動画の音声録音にはマイクの権限が必要です。設定で許可してください。",
+    "notification_title": "通知の権限",
+    "notification_desc": "デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。",
+    "settings": "設定",
+    "cancel": "キャンセル"
   }
 }

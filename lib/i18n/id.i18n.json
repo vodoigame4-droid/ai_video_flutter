@@ -416,5 +416,17 @@
     "generation_buy_credits": "Generasi Beli Kredit",
     "discount": "Halaman Diskon",
     "paywall_video": "Halaman Video Paywall"
+  },
+  "permission": {
+    "camera_title": "Izin Kamera",
+    "camera_desc": "Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.",
+    "photos_title": "Izin Galeri",
+    "photos_desc": "Izin penyimpanan diperlukan untuk menyimpan foto atau video. Silakan aktifkan di Pengaturan.",
+    "microphone_title": "Izin Mikrofon",
+    "microphone_desc": "Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.",
+    "notification_title": "Izin Notifikasi",
+    "notification_desc": "Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.",
+    "settings": "Pengaturan",
+    "cancel": "Batal"
   }
 }
