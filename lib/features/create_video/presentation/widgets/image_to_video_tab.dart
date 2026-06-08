@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_svg_icon.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import 'custom_prompt_card_widget.dart';
@@ -33,8 +35,7 @@ class ImageToVideoTab extends StatelessWidget {
                 isInspiring,
                 isVip,
               ) {
-                final isGenerateEnabled = slotsPaths[0] != null &&
-                    customPrompt.trim().isNotEmpty;
+                final isGenerateEnabled = slotsPaths[0] != null;
 
                 return Column(
                   children: [
@@ -70,7 +71,7 @@ class ImageToVideoTab extends StatelessWidget {
                             const SizedBox(height: 24),
                             _buildPromptSectionHeader(
                               context,
-                              isRequired: true,
+                              isRequired: false,
                             ),
                             const SizedBox(height: 16),
                             CustomPromptCardWidget(
@@ -161,10 +162,11 @@ class ImageToVideoTab extends StatelessWidget {
             ),
           ],
         ),
-        Icon(
-          Icons.info_outline_rounded,
+        AppSvgIcon(
+          assetName: Assets.icons.icNotice,
           color: AppColors.white.withValues(alpha: 0.6),
-          size: 16,
+          width: 16,
+          height: 16,
         ),
       ],
     );

@@ -48,7 +48,6 @@ class CreateVideoTabBarWidget extends StatelessWidget {
           child: Container(
             height: 62,
             decoration: BoxDecoration(
-              color: context.colorScheme.surface,
               borderRadius: const BorderRadius.all(Radius.circular(100)),
               border: Border.all(color: AppColors.border2, width: 1),
             ),
@@ -83,9 +82,7 @@ class CreateVideoTabBarWidget extends StatelessWidget {
                           SvgPicture.asset(
                             tab.iconAsset,
                             colorFilter: ColorFilter.mode(
-                              isSelected
-                                  ? AppColors.white
-                                  : AppColors.white.withValues(alpha: 0.6),
+                              isSelected ? AppColors.white : AppColors.subText,
                               BlendMode.srcIn,
                             ),
                             width: 18,
@@ -111,10 +108,7 @@ class CreateVideoTabBarWidget extends StatelessWidget {
                 return Expanded(
                   flex: isSelected ? 25 : 10,
                   child: isSelected
-                      ? Hero(
-                          tag: 'tab-hero-$index',
-                          child: tabContent,
-                        )
+                      ? Hero(tag: 'tab-hero-$index', child: tabContent)
                       : tabContent,
                 );
               }),
@@ -130,12 +124,8 @@ class CreateVideoTabBarWidget extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: context.colorScheme.surface,
               shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.white.withValues(alpha: 0.08),
-                width: 1,
-              ),
+              border: Border.all(color: AppColors.border2, width: 1),
             ),
             child: Center(
               child: SvgPicture.asset(
