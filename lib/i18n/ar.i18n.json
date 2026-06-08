@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "سيلفي أكوامان",
     "tap_upload": "حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.",
+    "tap_to_upload_photo": "اضغط هنا لتحميل صورتك.",
     "select_upload_title": "حدد لتحميل صورتك",
     "upload_image": "تحميل الصورة",
     "custom_prompt": "موجّه مخصص",

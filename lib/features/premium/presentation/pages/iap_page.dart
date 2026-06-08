@@ -18,6 +18,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
 import '../widgets/subscription_package_card.dart';
+import '../widgets/buy_credit_now_button.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
 
@@ -56,13 +57,19 @@ class IapView extends StatelessWidget {
     if (messageKey.startsWith('success_credits_')) {
       final creditsStr = messageKey.replaceFirst('success_credits_', '');
       String creditLabel = '$creditsStr Credits';
-      if (creditsStr == '70') creditLabel = t.premium.credit_70;
-      else if (creditsStr == '150') creditLabel = t.premium.credit_150;
-      else if (creditsStr == '350') creditLabel = t.premium.credit_350;
-      else if (creditsStr == '500') creditLabel = t.premium.credit_500;
-      else if (creditsStr == '1000') creditLabel = t.premium.credit_1000;
-      else if (creditsStr == '5000') creditLabel = t.premium.credit_5000;
-      
+      if (creditsStr == '70')
+        creditLabel = t.premium.credit_70;
+      else if (creditsStr == '150')
+        creditLabel = t.premium.credit_150;
+      else if (creditsStr == '350')
+        creditLabel = t.premium.credit_350;
+      else if (creditsStr == '500')
+        creditLabel = t.premium.credit_500;
+      else if (creditsStr == '1000')
+        creditLabel = t.premium.credit_1000;
+      else if (creditsStr == '5000')
+        creditLabel = t.premium.credit_5000;
+
       return t.premium.purchase_success(item: creditLabel);
     }
     return messageKey;
@@ -94,7 +101,9 @@ class IapView extends StatelessWidget {
                     _____,
                   ) {
                     if (message != 'already_vip') {
-                      AppToast.showSuccess(_translateSuccessMessage(context, message));
+                      AppToast.showSuccess(
+                        _translateSuccessMessage(context, message),
+                      );
                     }
                     if (context.mounted && Navigator.of(context).canPop()) {
                       context.pop();
@@ -294,113 +303,9 @@ class IapView extends StatelessWidget {
                                           const SizedBox(height: 16),
 
                                           // Glass-morphic Buy Credit Now Badge Button
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              100,
-                                            ),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                sigmaX: 7.5,
-                                                sigmaY: 7.5,
-                                              ),
-                                              child: Container(
-                                                height: 38,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      AppColors.secondary
-                                                          .withValues(
-                                                            alpha: 0.3,
-                                                          ),
-                                                      AppColors.primary
-                                                          .withValues(
-                                                            alpha: 0.3,
-                                                          ),
-                                                    ],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                        100,
-                                                      ),
-                                                  border: Border.all(
-                                                    color: AppColors.secondary,
-                                                    width: 1,
-                                                  ),
-                                                ),
-                                                child: Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    onTap: () => context.push(
-                                                      BuyCreditsPage.path,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                          Radius.circular(100),
-                                                        ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.fromLTRB(
-                                                            18,
-                                                            0,
-                                                            6,
-                                                            0,
-                                                          ),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            t
-                                                                .premium
-                                                                .buy_credit_now,
-                                                            style:
-                                                                const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 12,
-                                                          ),
-                                                          Container(
-                                                            width: 20,
-                                                            height: 20,
-                                                            decoration:
-                                                                const BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets.all(
-                                                                    2.0,
-                                                                  ),
-                                                              child: SvgPicture.asset(
-                                                                Assets
-                                                                    .icons
-                                                                    .icRightArrow,
-                                                                width: 14,
-                                                                height: 14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                          BuyCreditNowButton(
+                                            onTap: () => context.push(
+                                              BuyCreditsPage.path,
                                             ),
                                           ),
                                           const SizedBox(height: 30),

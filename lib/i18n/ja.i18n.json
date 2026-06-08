@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "セルフィーアクアマン",
     "tap_upload": "写真をアップロードして、数秒でAI動画を作成します。",
+    "tap_to_upload_photo": "ここをタップして写真をアップロードしてください。",
     "select_upload_title": "写真をアップロードする方法を選択",
     "upload_image": "画像をアップロード",
     "custom_prompt": "カスタムプロンプト",

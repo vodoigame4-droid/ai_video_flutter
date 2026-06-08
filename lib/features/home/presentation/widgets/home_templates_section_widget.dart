@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:go_router/go_router.dart';
@@ -47,12 +48,21 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
                   Text(title, style: context.textTheme.titleMedium),
                 ],
               ),
-              TextButton(
-                onPressed: onSeeAllPressed,
-                child: Text(
-                  t.common.see_all,
-                  style: context.appTheme.seeAllTextStyle,
-                ),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: onSeeAllPressed,
+                    child: Text(
+                      t.common.see_all,
+                      style: context.appTheme.seeAllTextStyle,
+                    ),
+                  ),
+                  AppSvgIcon(
+                    assetName: Assets.icons.icRight,
+                    width: 12,
+                    height: 12,
+                  ),
+                ],
               ),
             ],
           ),
@@ -74,7 +84,10 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
                       ? template.resultUrl
                       : template.sourceUrl;
                   if (videoUrl.isNotEmpty) {
-                    VideoCacheManager().getCachedOrDownload(videoUrl, waitForDownload: false);
+                    VideoCacheManager().getCachedOrDownload(
+                      videoUrl,
+                      waitForDownload: false,
+                    );
                   }
                 }
               });

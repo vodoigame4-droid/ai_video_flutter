@@ -161,8 +161,7 @@ class SubscriptionPackageCard extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors:
-                      [const Color(0xFFff6320), const Color(0xFFfae123)],
+                  colors: tagColors ?? [AppColors.primary, AppColors.secondary],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),

@@ -109,6 +109,7 @@ class _Translations$create$ko extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => '셀피 아쿠아맨';
 	@override String get tap_upload => '사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.';
+	@override String get tap_to_upload_photo => '여기를 눌러 사진을 업로드하세요.';
 	@override String get select_upload_title => '사진 업로드 방식 선택';
 	@override String get upload_image => '이미지 업로드';
 	@override String get custom_prompt => '커스텀 프롬프트';
@@ -724,6 +725,7 @@ extension on TranslationsKo {
 			'home.discover' => '발견',
 			'create.selfie_aquaman' => '셀피 아쿠아맨',
 			'create.tap_upload' => '사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.',
+			'create.tap_to_upload_photo' => '여기를 눌러 사진을 업로드하세요.',
 			'create.select_upload_title' => '사진 업로드 방식 선택',
 			'create.upload_image' => '이미지 업로드',
 			'create.custom_prompt' => '커스텀 프롬프트',

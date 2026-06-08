@@ -17,6 +17,7 @@ abstract class AppColors {
   static const Color subText = Color(0xFFB1B1B1);
   static const Color darkGreenBorder = Color(0xFF1C362B);
   static const Color progressTrack = Color(0xFFE2FFF5);
+  static const Color categoryUnselected = Color(0x99252525);
 
   // Generic borders to support theme rules
   static const Color border = Color(0xFF1C362B);

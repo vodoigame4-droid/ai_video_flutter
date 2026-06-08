@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:ai_video_flutter/core/widgets/app_background.dart';
 import 'package:ai_video_flutter/core/widgets/app_svg_icon.dart';
+import 'package:ai_video_flutter/core/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +15,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_heart_button.dart';
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../core/widgets/report_bottom_sheet.dart';
+import '../../../../core/widgets/app_confirm_dialog.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:core_business/core_business.dart';
@@ -52,25 +53,26 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   @override
   void initState() {
     super.initState();
-    _bloc = CreateFromTemplateBloc(
-      isTemplateLikedUseCase: sl(),
-      toggleLikeTemplateUseCase: sl(),
-      templateId: widget.templateId,
-      title: widget.title,
-      videoUrl: widget.videoUrl,
-      imageUrl: widget.imageUrl,
-      themeType: widget.themeType,
-      themeOrgId: widget.themeOrgId,
-    )..add(
-        CreateFromTemplateEvent.init(
+    _bloc =
+        CreateFromTemplateBloc(
+          isTemplateLikedUseCase: sl(),
+          toggleLikeTemplateUseCase: sl(),
           templateId: widget.templateId,
           title: widget.title,
           videoUrl: widget.videoUrl,
           imageUrl: widget.imageUrl,
           themeType: widget.themeType,
           themeOrgId: widget.themeOrgId,
-        ),
-      );
+        )..add(
+          CreateFromTemplateEvent.init(
+            templateId: widget.templateId,
+            title: widget.title,
+            videoUrl: widget.videoUrl,
+            imageUrl: widget.imageUrl,
+            themeType: widget.themeType,
+            themeOrgId: widget.themeOrgId,
+          ),
+        );
   }
 
   Future<bool> _onWillPop() async {
@@ -100,79 +102,83 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       value: _bloc,
       child: WillPopScope(
         onWillPop: _onWillPop,
-        child: AppBackground(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SafeArea(
-              child:
-                  BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
-                    builder: (context, state) {
-                      return state.when(
-                        initial: () =>
-                            const Center(child: CircularProgressIndicator()),
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                        error: (msg) => Center(
-                          child: Text(
-                            msg,
-                            style: context.appTheme.errorTextStyle,
-                          ),
-                        ),
-                        ready:
-                            (
-                              templateId,
-                              title,
-                              videoUrl,
-                              imageUrl,
-                              themeType,
-                              themeOrgId,
-                              selectedPhotoPath,
-                              quality,
-                              duration,
-                              isGenerating,
-                              isSuccess,
-                              isLiked,
-                            ) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0,
-                                ),
-                                child: Column(
-                                  children: [
-                                    const SizedBox(height: 8),
-                                    _buildHeader(context, title),
-                                    const SizedBox(height: 12),
-                                    Expanded(
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            _buildTopCard(
-                                              context,
-                                              imageUrl,
-                                              isLiked,
-                                            ),
-                                            const SizedBox(height: 16),
-                                            _buildBottomCard(
-                                              context,
-                                              selectedPhotoPath,
-                                            ),
-                                            const SizedBox(height: 100),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    _buildContinueButton(
-                                      context,
-                                      selectedPhotoPath,
-                                    ),
-                                    const SizedBox(height: 24),
-                                  ],
-                                ),
-                              );
-                            },
-                      );
-                    },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (msg) => Center(
+                    child: Text(msg, style: context.appTheme.errorTextStyle),
                   ),
+                  ready:
+                      (
+                        templateId,
+                        title,
+                        videoUrl,
+                        imageUrl,
+                        themeType,
+                        themeOrgId,
+                        selectedPhotoPath,
+                        quality,
+                        duration,
+                        isGenerating,
+                        isSuccess,
+                        isLiked,
+                      ) {
+                        return Column(
+                          children: [
+                            const SizedBox(height: 8),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                              ),
+                              child: _buildHeader(context, title),
+                            ),
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                child: _buildTopCard(
+                                  context,
+                                  imageUrl,
+                                  isLiked,
+                                  selectedPhotoPath,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                              ),
+                              child: _buildBottomCard(
+                                context,
+                                selectedPhotoPath,
+                              ),
+                            ),
+                            const SizedBox(height: 32),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                              ),
+                              child: _buildContinueButton(
+                                context,
+                                selectedPhotoPath,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                          ],
+                        );
+                      },
+                );
+              },
             ),
           ),
         ),
@@ -248,6 +254,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     BuildContext context,
     String defaultImageUrl,
     bool isLiked,
+    String? selectedPhotoPath,
   ) {
     final t = context.t;
     final int hash = widget.title.hashCode;
@@ -258,7 +265,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     final String likesCountStr = '${baseLikes.toStringAsFixed(1)}K';
 
     return Hero(
-      tag: 'template-hero-${widget.templateId}',
+      tag: selectedPhotoPath == null
+          ? 'template-hero-${widget.templateId}'
+          : 'template-video-hero-${widget.templateId}',
       child: Container(
         height: 450,
         width: double.infinity,
@@ -275,6 +284,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                 child: SmoothVideoPlayerWidget(
                   videoUrl: widget.videoUrl,
                   imageUrl: widget.imageUrl,
+                  showPlayPauseButton: true,
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
               ),
@@ -282,19 +292,22 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: 88,
+                height: 120,
                 child: Container(
+                  alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        AppColors.black.withValues(alpha: 0.8),
+                        AppColors.black.withValues(alpha: 0.95),
+                        AppColors.black.withValues(alpha: 0.6),
                         AppColors.black.withValues(alpha: 0.0),
                       ],
+                      stops: const [0.0, 0.5, 1.0],
                     ),
                   ),
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
                   child: Row(
                     children: [
                       const Icon(
@@ -341,7 +354,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                 ),
               ),
               Positioned(
-                bottom: 88,
+                bottom: 120,
                 right: 16,
                 child: Column(
                   children: [
@@ -373,96 +386,101 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   Widget _buildBottomCard(BuildContext context, String? selectedPhotoPath) {
     final t = context.t;
 
-    return GestureDetector(
-      onTap: () => _showUploadBottomSheet(context),
-      child: Container(
-        height: 152,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.onSurface,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              if (selectedPhotoPath != null) ...[
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                      width: 132,
-                      height: 152,
-                      child: selectedPhotoPath.startsWith('assets/')
-                          ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                          : Image.file(
-                              File(selectedPhotoPath),
-                              fit: BoxFit.cover,
-                            ),
+    return Hero(
+      tag: selectedPhotoPath != null
+          ? 'template-hero-${widget.templateId}'
+          : 'upload-photo-hero-${widget.templateId}',
+      child: GestureDetector(
+        onTap: () => _showUploadBottomSheet(context),
+        child: Container(
+          height: 152,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: AppColors.onSurface,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                if (selectedPhotoPath != null) ...[
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: 132,
+                        height: 152,
+                        child: selectedPhotoPath.startsWith('assets/')
+                            ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
+                            : Image.file(
+                                File(selectedPhotoPath),
+                                fit: BoxFit.cover,
+                              ),
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 14,
-                  right: 14,
-                  child: ClipOval(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                      child: Material(
-                        color: const Color(0x99979797),
-                        child: InkWell(
-                          onTap: () => _bloc.add(
-                            const CreateFromTemplateEvent.removePhoto(),
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: Icon(
-                              Icons.close_rounded,
-                              color: AppColors.white,
-                              size: 12,
+                  Positioned(
+                    top: 14,
+                    right: 14,
+                    child: ClipOval(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                        child: Material(
+                          color: const Color(0x99979797),
+                          child: InkWell(
+                            onTap: () => _bloc.add(
+                              const CreateFromTemplateEvent.removePhoto(),
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                            child: const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: Icon(
+                                Icons.close_rounded,
+                                color: AppColors.white,
+                                size: 12,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ] else ...[
-                Container(
-                  width: double.infinity,
-                  height: 152,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF171717),
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/ic_image_add.svg',
-                          width: 40,
-                          height: 40,
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          t.create.tap_upload,
-                          textAlign: TextAlign.center,
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: AppColors.subText,
+                ] else ...[
+                  Container(
+                    width: double.infinity,
+                    height: 152,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF171717),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/ic_image_add.svg',
+                            width: 40,
+                            height: 40,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 12),
+                          Text(
+                            t.create.tap_to_upload_photo,
+                            textAlign: TextAlign.center,
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: AppColors.subText,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),
@@ -473,146 +491,33 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     final t = context.t;
     final isEnabled = selectedPhotoPath != null;
 
-    return InkWell(
-      onTap: isEnabled
-          ? () {
-              context.pushNamed(CreateTemplateSettingsPage.name, extra: _bloc);
-            }
-          : null,
-      borderRadius: const BorderRadius.all(Radius.circular(100)),
-      child: Ink(
-        height: 56,
-        decoration: BoxDecoration(
-          gradient: isEnabled ? AppColors.primaryGradient : null,
-          color: isEnabled ? null : AppColors.onSurface,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-        ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.auto_awesome_rounded,
-                color: isEnabled ? AppColors.white : AppColors.subText,
-                size: 24,
-              ),
-              const SizedBox(width: 8),
-
-              Text(
-                t.common.generate, // "Generate" translated text
-                style: context.textTheme.labelLarge?.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: isEnabled ? AppColors.white : AppColors.subText,
-                ),
-              ),
-            ],
-          ),
-        ),
+    return GradientButton(
+      label: t.common.generate,
+      width: double.infinity,
+      isEnabled: isEnabled,
+      leadingIcon: Icon(
+        Icons.auto_awesome_rounded,
+        color: isEnabled
+            ? AppColors.white
+            : AppColors.white.withValues(alpha: 0.4),
+        size: 24,
       ),
+      onPressed: () {
+        context.pushNamed(CreateTemplateSettingsPage.name, extra: _bloc);
+      },
     );
   }
 
   Future<bool?> _showLeaveDialog(BuildContext context) {
     final t = context.t;
-    return showDialog<bool>(
+    return AppConfirmDialog.show<bool>(
       context: context,
-      barrierColor: AppColors.black.withValues(alpha: 0.5),
-      builder: (context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: Dialog(
-            backgroundColor: AppColors.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              side: BorderSide(color: AppColors.secondary, width: 1.2),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    t.leave_dialog.title,
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    t.leave_dialog.desc,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.subText,
-                      fontSize: 15,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context, false),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Text(
-                              t.common.stay,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => Navigator.pop(context, true),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Ink(
-                            height: 48,
-                            decoration: const BoxDecoration(
-                              gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                t.common.leave,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+      title: t.leave_dialog.title,
+      description: t.leave_dialog.desc,
+      cancelLabel: t.common.stay,
+      confirmLabel: t.common.leave,
+      onConfirm: () => Navigator.pop(context, true),
+      onCancel: () => Navigator.pop(context, false),
     );
   }
 
@@ -698,14 +603,14 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   void _showTipsBottomSheet(BuildContext context) {
     final t = context.t;
     final goodMockPhotos = [
-      Assets.images.ob1.path,
-      Assets.images.ob2.path,
-      Assets.images.card1.path,
+      Assets.images.imgOnePerson.path,
+      Assets.images.imgClearFace.path,
+      Assets.images.imgHalfBody.path,
     ];
     final badMockPhotos = [
-      Assets.images.ob4.path,
-      Assets.images.ob5.path,
-      Assets.images.card2.path,
+      Assets.images.imgHidenPage.path,
+      Assets.images.imgMultiplePeople.path,
+      Assets.images.imgBluring.path,
     ];
 
     showModalBottomSheet(
@@ -718,7 +623,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       builder: (context) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.85,
+          initialChildSize: 0.82,
           minChildSize: 0.5,
           maxChildSize: 0.95,
           builder: (context, scrollController) {
@@ -746,7 +651,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         t.tips_sheet.title,
                         style: context.textTheme.titleMedium?.copyWith(
                           color: AppColors.white,
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -769,7 +674,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       SvgPicture.asset(
@@ -802,30 +707,24 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                           padding: EdgeInsets.only(right: idx == 2 ? 0 : 8.0),
                           child: Column(
                             children: [
-                              Container(
-                                height: 130,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(12),
-                                  ),
-                                  border: Border.all(
-                                    color: AppColors.lightBorder,
-                                  ),
-                                ),
+                              AspectRatio(
+                                aspectRatio: 3 / 4,
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(
-                                    Radius.circular(11),
+                                    Radius.circular(16),
                                   ),
                                   child: Image.asset(path, fit: BoxFit.cover),
                                 ),
                               ),
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 8),
                               Text(
                                 label,
                                 style: const TextStyle(
-                                  color: AppColors.subText,
-                                  fontSize: 11,
+                                  color: AppColors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
+                                textAlign: TextAlign.center,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -868,30 +767,24 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                           padding: EdgeInsets.only(right: idx == 2 ? 0 : 8.0),
                           child: Column(
                             children: [
-                              Container(
-                                height: 130,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(12),
-                                  ),
-                                  border: Border.all(
-                                    color: AppColors.lightBorder,
-                                  ),
-                                ),
+                              AspectRatio(
+                                aspectRatio: 3 / 4,
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(
-                                    Radius.circular(11),
+                                    Radius.circular(16),
                                   ),
                                   child: Image.asset(path, fit: BoxFit.cover),
                                 ),
                               ),
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 8),
                               Text(
                                 label,
                                 style: const TextStyle(
-                                  color: AppColors.subText,
-                                  fontSize: 11,
+                                  color: AppColors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
                                 ),
+                                textAlign: TextAlign.center,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),

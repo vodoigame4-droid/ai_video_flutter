@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
     "tap_upload": "Sube tu foto y crea tu video de IA en segundos.",
+    "tap_to_upload_photo": "Toca aquí para subir tu foto.",
     "select_upload_title": "Seleccionar para subir su foto",
     "upload_image": "Subir imagen",
     "custom_prompt": "Indicación personalizada",

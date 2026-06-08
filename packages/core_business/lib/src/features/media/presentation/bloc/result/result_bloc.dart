@@ -116,8 +116,6 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
       (user) => add(ResultEvent.profileUpdated(user)),
     );
 
-    getProfileUseCase(NoParams());
-
     final initialIsVip = watchProfileUseCase.cachedUser?.isVip ?? false;
     final initialInspireMeCount = watchProfileUseCase.cachedUser?.freeSuggestions ?? 3;
     

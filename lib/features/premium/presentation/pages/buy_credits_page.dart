@@ -11,6 +11,7 @@ import '../../../../gen/assets.gen.dart';
 import '../widgets/credit_pack_row.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/widgets/gradient_button.dart';
+import '../../../../core/injection/injection_container.dart';
 
 class BuyCreditsPage extends StatelessWidget {
   static const String path = '/buy_credits';
@@ -52,64 +53,83 @@ class BuyCreditsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = context.t;
+    return StreamBuilder<UserEntity>(
+      stream: sl<WatchProfileUseCase>()(),
+      builder: (context, snapshot) {
+        final isVip = snapshot.data?.isVip ?? false;
+        final t = context.t;
 
-    final iapBlocState = context.watch<IapBloc>().state;
-    final List<Product> regularProducts = iapBlocState.mapOrNull(
-      ready: (s) => s.regularCreditProducts,
-      success: (s) => s.regularCreditProducts,
-      error: (s) => s.regularCreditProducts,
-    ) ?? const [];
+        final iapBlocState = context.watch<IapBloc>().state;
+        final List<Product> regularProducts = iapBlocState.mapOrNull(
+          ready: (s) => s.regularCreditProducts,
+          success: (s) => s.regularCreditProducts,
+          error: (s) => s.regularCreditProducts,
+        ) ?? const [];
 
-    final List<Product> discountProducts = iapBlocState.mapOrNull(
-      ready: (s) => s.discountCreditProducts,
-      success: (s) => s.discountCreditProducts,
-      error: (s) => s.discountCreditProducts,
-    ) ?? const [];
+        final List<Product> discountProducts = iapBlocState.mapOrNull(
+          ready: (s) => s.discountCreditProducts,
+          success: (s) => s.discountCreditProducts,
+          error: (s) => s.discountCreditProducts,
+        ) ?? const [];
 
-    final int selectedPackageIndex = iapBlocState.maybeMap(
-      ready: (s) => s.selectedCreditIndex,
-      success: (s) => s.selectedCreditIndex,
-      error: (s) => s.selectedCreditIndex,
-      orElse: () => 4,
-    );
+        final int selectedPackageIndex = iapBlocState.maybeMap(
+          ready: (s) => s.selectedCreditIndex,
+          success: (s) => s.selectedCreditIndex,
+          error: (s) => s.selectedCreditIndex,
+          orElse: () => 4,
+        );
 
-    String getProductPrice(int credits) {
-      final matchCredits = '${credits}credits';
-      for (final p in regularProducts) {
-        final id = p.id.toLowerCase();
-        if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
-          return p.priceString;
+        String getProductPrice(int credits) {
+          final matchCredits = '${credits}credits';
+          if (isVip) {
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+                return p.priceString;
+              }
+            }
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
+                return p.priceString;
+              }
+            }
+          } else {
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
+                return p.priceString;
+              }
+            }
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+                return p.priceString;
+              }
+            }
+          }
+          return '...';
         }
-      }
-      for (final p in discountProducts) {
-        final id = p.id.toLowerCase();
-        if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
-          return p.priceString;
-        }
-      }
-      return '...';
-    }
 
-    // Helper to get package info based on index
-    Map<String, dynamic> getPackageData(int index) {
-      switch (index) {
-        case 0:
-          return {'credits': 70, 'price': getProductPrice(70)};
-        case 1:
-          return {'credits': 150, 'price': getProductPrice(150)};
-        case 2:
-          return {'credits': 350, 'price': getProductPrice(350)};
-        case 3:
-          return {'credits': 500, 'price': getProductPrice(500)};
-        case 4:
-          return {'credits': 1000, 'price': getProductPrice(1000)};
-        case 5:
-          return {'credits': 5000, 'price': getProductPrice(5000)};
-        default:
-          return {'credits': 1000, 'price': getProductPrice(1000)};
-      }
-    }
+        // Helper to get package info based on index
+        Map<String, dynamic> getPackageData(int index) {
+          switch (index) {
+            case 0:
+              return {'credits': 70, 'price': getProductPrice(70)};
+            case 1:
+              return {'credits': 150, 'price': getProductPrice(150)};
+            case 2:
+              return {'credits': 350, 'price': getProductPrice(350)};
+            case 3:
+              return {'credits': 500, 'price': getProductPrice(500)};
+            case 4:
+              return {'credits': 1000, 'price': getProductPrice(1000)};
+            case 5:
+              return {'credits': 5000, 'price': getProductPrice(5000)};
+            default:
+              return {'credits': 1000, 'price': getProductPrice(1000)};
+          }
+        }
 
     return BlocConsumer<IapBloc, IapState>(
       listener: (context, state) {
@@ -494,6 +514,8 @@ class BuyCreditsView extends StatelessWidget {
               ),
           ],
         );
+      },
+    );
       },
     );
   }

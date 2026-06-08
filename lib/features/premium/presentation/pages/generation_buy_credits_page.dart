@@ -115,40 +115,59 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
 
   @override
   Widget build(BuildContext context) {
-    final t = context.t;
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double cardWidth = (screenWidth - 32 - 10) / 2;
-    final double childAspectRatio = cardWidth / 152;
+    return StreamBuilder<UserEntity>(
+      stream: sl<WatchProfileUseCase>()(),
+      builder: (context, snapshot) {
+        final isVip = snapshot.data?.isVip ?? false;
+        final t = context.t;
+        final double screenWidth = MediaQuery.of(context).size.width;
+        final double cardWidth = (screenWidth - 32 - 10) / 2;
+        final double childAspectRatio = cardWidth / 152;
 
-    final iapBlocState = context.watch<IapBloc>().state;
-    final List<Product> regularProducts = iapBlocState.mapOrNull(
-      ready: (s) => s.regularCreditProducts,
-      success: (s) => s.regularCreditProducts,
-      error: (s) => s.regularCreditProducts,
-    ) ?? const [];
+        final iapBlocState = context.watch<IapBloc>().state;
+        final List<Product> regularProducts = iapBlocState.mapOrNull(
+          ready: (s) => s.regularCreditProducts,
+          success: (s) => s.regularCreditProducts,
+          error: (s) => s.regularCreditProducts,
+        ) ?? const [];
 
-    final List<Product> discountProducts = iapBlocState.mapOrNull(
-      ready: (s) => s.discountCreditProducts,
-      success: (s) => s.discountCreditProducts,
-      error: (s) => s.discountCreditProducts,
-    ) ?? const [];
+        final List<Product> discountProducts = iapBlocState.mapOrNull(
+          ready: (s) => s.discountCreditProducts,
+          success: (s) => s.discountCreditProducts,
+          error: (s) => s.discountCreditProducts,
+        ) ?? const [];
 
-    String getProductPrice(int credits) {
-      final matchCredits = '${credits}credits';
-      for (final p in regularProducts) {
-        final id = p.id.toLowerCase();
-        if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
-          return p.priceString;
+        String getProductPrice(int credits) {
+          final matchCredits = '${credits}credits';
+          if (isVip) {
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+                return p.priceString;
+              }
+            }
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
+                return p.priceString;
+              }
+            }
+          } else {
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
+                return p.priceString;
+              }
+            }
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+                return p.priceString;
+              }
+            }
+          }
+          return '...';
         }
-      }
-      for (final p in discountProducts) {
-        final id = p.id.toLowerCase();
-        if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
-          return p.priceString;
-        }
-      }
-      return '...';
-    }
 
     String translateSuccessMessage(BuildContext context, String messageKey) {
       final t = context.t;
@@ -398,6 +417,8 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
           },
         ),
       ),
+    );
+      },
     );
   }
 }

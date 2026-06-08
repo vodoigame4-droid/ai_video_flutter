@@ -165,11 +165,24 @@ class _SettingsViewState extends State<SettingsView> {
                         return ListView(
                           physics: const BouncingScrollPhysics(),
                           children: [
-                            // 1. Premium Upgrade Banner
-                            PremiumBannerWidget(
-                              onTap: () => context.push(IapPage.path),
+                            // 1. Premium Upgrade Banner (hidden if user is premium)
+                            StreamBuilder<UserEntity>(
+                              stream: sl<WatchProfileUseCase>()(),
+                              builder: (context, snapshot) {
+                                final isVip = snapshot.data?.isVip ?? false;
+                                if (isVip) return const SizedBox.shrink();
+
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    PremiumBannerWidget(
+                                      onTap: () => context.push(IapPage.path),
+                                    ),
+                                    const SizedBox(height: 12),
+                                  ],
+                                );
+                              },
                             ),
-                            const SizedBox(height: 12),
 
                             // 2. My Credits
                             BlocProvider<CreditBadgeBloc>(

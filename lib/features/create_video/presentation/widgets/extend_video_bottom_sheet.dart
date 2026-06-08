@@ -29,6 +29,7 @@ class ExtendVideoBottomSheet extends StatelessWidget {
     return BlocProvider.value(
       value: resultBloc,
       child: BlocBuilder<ResultBloc, ResultState>(
+        bloc: resultBloc,
         builder: (context, state) {
           return state.maybeWhen(
             ready:

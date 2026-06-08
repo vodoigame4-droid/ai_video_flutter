@@ -109,6 +109,7 @@ class _Translations$create$pt extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'Selfie do Aquaman';
 	@override String get tap_upload => 'Carregue sua foto e crie seu vídeo de IA em segundos.';
+	@override String get tap_to_upload_photo => 'Toque aqui para carregar a sua foto.';
 	@override String get select_upload_title => 'Selecione para carregar sua foto';
 	@override String get upload_image => 'Carregar imagem';
 	@override String get custom_prompt => 'Prompt personalizado';
@@ -724,6 +725,7 @@ extension on TranslationsPt {
 			'home.discover' => 'Descobrir',
 			'create.selfie_aquaman' => 'Selfie do Aquaman',
 			'create.tap_upload' => 'Carregue sua foto e crie seu vídeo de IA em segundos.',
+			'create.tap_to_upload_photo' => 'Toque aqui para carregar a sua foto.',
 			'create.select_upload_title' => 'Selecione para carregar sua foto',
 			'create.upload_image' => 'Carregar imagem',
 			'create.custom_prompt' => 'Prompt personalizado',

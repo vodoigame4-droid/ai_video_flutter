@@ -110,6 +110,7 @@ class _Translations$create$vi extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'Ảnh tự sướng Aquaman';
 	@override String get tap_upload => 'Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.';
+	@override String get tap_to_upload_photo => 'Chạm vào đây để tải ảnh của bạn lên.';
 	@override String get select_upload_title => 'Chọn phương thức tải ảnh';
 	@override String get upload_image => 'Tải ảnh lên';
 	@override String get custom_prompt => 'Mô tả tùy chỉnh';
@@ -740,6 +741,7 @@ extension on TranslationsVi {
 			'home.discover' => 'Khám phá',
 			'create.selfie_aquaman' => 'Ảnh tự sướng Aquaman',
 			'create.tap_upload' => 'Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.',
+			'create.tap_to_upload_photo' => 'Chạm vào đây để tải ảnh của bạn lên.',
 			'create.select_upload_title' => 'Chọn phương thức tải ảnh',
 			'create.upload_image' => 'Tải ảnh lên',
 			'create.custom_prompt' => 'Mô tả tùy chỉnh',

@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
     "tap_upload": "Lade dein Foto hoch und erstelle dein KI-Video in Sekundenschnelle.",
+    "tap_to_upload_photo": "Tippe hier, um dein Foto hochzuladen.",
     "select_upload_title": "Auswählen, um Foto hochzuladen",
     "upload_image": "Bild hochladen",
     "custom_prompt": "Benutzerdefinierter Prompt",

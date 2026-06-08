@@ -16,12 +16,12 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/log_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
+import '../widgets/buy_credit_now_button.dart';
 import 'generation_buy_credits_page.dart';
 import 'discount_page.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
-import '../../../../core/widgets/gradient_border_container.dart';
 
 class GenerationIapPage extends StatelessWidget {
   static const String path = '/generation-iap';
@@ -134,13 +134,19 @@ class _GenerationIapViewState extends State<GenerationIapView>
     if (messageKey.startsWith('success_credits_')) {
       final creditsStr = messageKey.replaceFirst('success_credits_', '');
       String creditLabel = '$creditsStr Credits';
-      if (creditsStr == '70') creditLabel = t.premium.credit_70;
-      else if (creditsStr == '150') creditLabel = t.premium.credit_150;
-      else if (creditsStr == '350') creditLabel = t.premium.credit_350;
-      else if (creditsStr == '500') creditLabel = t.premium.credit_500;
-      else if (creditsStr == '1000') creditLabel = t.premium.credit_1000;
-      else if (creditsStr == '5000') creditLabel = t.premium.credit_5000;
-      
+      if (creditsStr == '70')
+        creditLabel = t.premium.credit_70;
+      else if (creditsStr == '150')
+        creditLabel = t.premium.credit_150;
+      else if (creditsStr == '350')
+        creditLabel = t.premium.credit_350;
+      else if (creditsStr == '500')
+        creditLabel = t.premium.credit_500;
+      else if (creditsStr == '1000')
+        creditLabel = t.premium.credit_1000;
+      else if (creditsStr == '5000')
+        creditLabel = t.premium.credit_5000;
+
       return t.premium.purchase_success(item: creditLabel);
     }
     return messageKey;
@@ -177,7 +183,9 @@ class _GenerationIapViewState extends State<GenerationIapView>
                     _____,
                   ) {
                     if (message != 'already_vip') {
-                      AppToast.showSuccess(_translateSuccessMessage(context, message));
+                      AppToast.showSuccess(
+                        _translateSuccessMessage(context, message),
+                      );
                     }
                     if (context.mounted && Navigator.of(context).canPop()) {
                       context.pop();
@@ -378,106 +386,9 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                           const SizedBox(height: 12),
 
                                           // Glassmorphism Buy Credit Now pill button
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              100,
-                                            ),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                sigmaX: 15.0,
-                                                sigmaY: 15.0,
-                                              ),
-                                              child: GradientBorderContainer(
-                                                height: 38,
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                borderWidth: 1.2,
-                                                gradient:
-                                                    AppColors.primaryGradient,
-                                                padding: EdgeInsets.zero,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        AppColors.primary
-                                                            .withValues(
-                                                              alpha: 0.3,
-                                                            ),
-                                                        AppColors.secondary
-                                                            .withValues(
-                                                              alpha: 0.3,
-                                                            ),
-                                                      ],
-                                                      begin:
-                                                          Alignment.centerLeft,
-                                                      end:
-                                                          Alignment.centerRight,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          100,
-                                                        ),
-                                                  ),
-                                                  child: Material(
-                                                    color: Colors.transparent,
-                                                    child: InkWell(
-                                                      onTap: () => context.push(
-                                                        '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            100,
-                                                          ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.symmetric(
-                                                              horizontal: 18,
-                                                            ),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Text(
-                                                              t
-                                                                  .premium
-                                                                  .buy_credit_now,
-                                                              style: const TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 8,
-                                                            ),
-                                                            Container(
-                                                              width: 20,
-                                                              height: 20,
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                  ),
-                                                              child: const Icon(
-                                                                Icons
-                                                                    .arrow_forward_ios_rounded,
-                                                                color: Colors
-                                                                    .black,
-                                                                size: 10,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                          BuyCreditNowButton(
+                                            onTap: () => context.push(
+                                              '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
                                             ),
                                           ),
                                           const SizedBox(height: 24),
@@ -489,6 +400,10 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                             price: weeklyPrice,
                                             suffix: t.premium.weekly_suffix,
                                             tagText: t.premium.best_value,
+                                            tagColors: [
+                                              Color(0xFF2AC5C4),
+                                              Color(0xFF28C4B3),
+                                            ],
                                             isSelected: isWeekly,
                                             onTap: () {
                                               context.read<IapBloc>().add(

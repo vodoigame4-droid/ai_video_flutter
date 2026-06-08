@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../../i18n/strings.g.dart';
 
@@ -46,7 +47,8 @@ class CategorySelectorWidget extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           final category = categories[index];
-          final isSelected = category.toLowerCase() == selectedCategory.toLowerCase();
+          final isSelected =
+              category.toLowerCase() == selectedCategory.toLowerCase();
 
           return Material(
             color: Colors.transparent,
@@ -54,7 +56,10 @@ class CategorySelectorWidget extends StatelessWidget {
               onTap: () => onSelected(category),
               borderRadius: const BorderRadius.all(Radius.circular(100)),
               child: Ink(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   gradient: isSelected
                       ? const LinearGradient(
@@ -63,21 +68,21 @@ class CategorySelectorWidget extends StatelessWidget {
                           end: Alignment.centerRight,
                         )
                       : null,
-                  color: isSelected ? null : Colors.black.withValues(alpha: 0.6),
+                  color: isSelected ? null : AppColors.categoryUnselected,
                   borderRadius: const BorderRadius.all(Radius.circular(100)),
                 ),
                 child: Center(
                   child: Text(
                     _getTranslatedCategory(context, category),
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      fontSize: 14,
-                    ) ??
-                    const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
+                    style:
+                        context.textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          fontSize: 14,
+                        ) ??
+                        const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
               ),

@@ -109,6 +109,7 @@ class _Translations$create$ja extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'セルフィーアクアマン';
 	@override String get tap_upload => '写真をアップロードして、数秒でAI動画を作成します。';
+	@override String get tap_to_upload_photo => 'ここをタップして写真をアップロードしてください。';
 	@override String get select_upload_title => '写真をアップロードする方法を選択';
 	@override String get upload_image => '画像をアップロード';
 	@override String get custom_prompt => 'カスタムプロンプト';
@@ -724,6 +725,7 @@ extension on TranslationsJa {
 			'home.discover' => '発見',
 			'create.selfie_aquaman' => 'セルフィーアクアマン',
 			'create.tap_upload' => '写真をアップロードして、数秒でAI動画を作成します。',
+			'create.tap_to_upload_photo' => 'ここをタップして写真をアップロードしてください。',
 			'create.select_upload_title' => '写真をアップロードする方法を選択',
 			'create.upload_image' => '画像をアップロード',
 			'create.custom_prompt' => 'カスタムプロンプト',

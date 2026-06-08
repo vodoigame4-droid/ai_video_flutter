@@ -451,24 +451,54 @@ class IapBloc extends Bloc<IapEvent, IapState> {
 
           Product? matchedProduct;
 
-          // First search regular credit list
-          for (final p in regular) {
-            if (p.id == matchCredits ||
-                p.id == 'com.vexa.ai.video.$matchCredits' ||
-                p.id.endsWith(matchCredits)) {
-              matchedProduct = p;
-              break;
-            }
+          bool isVip = false;
+          try {
+            final user = await watchProfileUseCase().first;
+            isVip = user.isVip;
+          } catch (e) {
+            LogUtils.w('IapBloc: Failed to get user profile VIP status in purchaseCredits: $e');
           }
 
-          // Next search discount list if not found in regular
-          if (matchedProduct == null) {
+          if (isVip) {
+            // First search discount list
             for (final p in discount) {
               if (p.id == '${matchCredits}dis' ||
                   p.id == 'com.vexa.ai.video.${matchCredits}dis' ||
                   p.id.endsWith('${matchCredits}dis')) {
                 matchedProduct = p;
                 break;
+              }
+            }
+            // Fallback to regular list
+            if (matchedProduct == null) {
+              for (final p in regular) {
+                if (p.id == matchCredits ||
+                    p.id == 'com.vexa.ai.video.$matchCredits' ||
+                    p.id.endsWith(matchCredits)) {
+                  matchedProduct = p;
+                  break;
+                }
+              }
+            }
+          } else {
+            // First search regular credit list
+            for (final p in regular) {
+              if (p.id == matchCredits ||
+                  p.id == 'com.vexa.ai.video.$matchCredits' ||
+                  p.id.endsWith(matchCredits)) {
+                matchedProduct = p;
+                break;
+              }
+            }
+            // Fallback to discount list
+            if (matchedProduct == null) {
+              for (final p in discount) {
+                if (p.id == '${matchCredits}dis' ||
+                    p.id == 'com.vexa.ai.video.${matchCredits}dis' ||
+                    p.id.endsWith('${matchCredits}dis')) {
+                  matchedProduct = p;
+                  break;
+                }
               }
             }
           }

@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "Ảnh tự sướng Aquaman",
     "tap_upload": "Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.",
+    "tap_to_upload_photo": "Chạm vào đây để tải ảnh của bạn lên.",
     "select_upload_title": "Chọn phương thức tải ảnh",
     "upload_image": "Tải ảnh lên",
     "custom_prompt": "Mô tả tùy chỉnh",

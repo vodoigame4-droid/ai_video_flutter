@@ -148,6 +148,9 @@ class Translations$create$en {
 	/// en: 'Upload your photo and create your AI video in seconds.'
 	String get tap_upload => 'Upload your photo and create your AI video in seconds.';
 
+	/// en: 'Tap here to upload your photo.'
+	String get tap_to_upload_photo => 'Tap here to upload your photo.';
+
 	/// en: 'Select to Upload Your Photo'
 	String get select_upload_title => 'Select to Upload Your Photo';
 
@@ -1467,6 +1470,7 @@ extension on Translations {
 			'home.discover' => 'Discover',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
 			'create.tap_upload' => 'Upload your photo and create your AI video in seconds.',
+			'create.tap_to_upload_photo' => 'Tap here to upload your photo.',
 			'create.select_upload_title' => 'Select to Upload Your Photo',
 			'create.upload_image' => 'Upload Image',
 			'create.custom_prompt' => 'Custom Prompt',

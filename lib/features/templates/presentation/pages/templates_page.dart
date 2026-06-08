@@ -130,16 +130,7 @@ class TemplatesView extends StatelessWidget {
                               ),
 
                               // PRO badge button
-                              CreditBadgeWidget(
-                                onTap: () {
-                                  // Handle Upgrade Action
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (context) => const VideoSettingsSheet(),
-                                  );
-                                },
-                              ),
+                              const CreditBadgeWidget(),
                             ],
                           ),
                         ),

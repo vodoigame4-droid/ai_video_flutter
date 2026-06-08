@@ -37,6 +37,39 @@ abstract class AppRoutePage {
       child: child,
     );
   }
+
+  static Page<T> fullscreenDialog<T>({
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CupertinoPage<T>(
+      key: state.pageKey,
+      name: state.name ?? state.matchedLocation,
+      arguments: state.extra,
+      fullscreenDialog: true,
+      child: child,
+    );
+  }
+
+  static Page<T> fade<T>({
+    required GoRouterState state,
+    required Widget child,
+    Duration duration = const Duration(milliseconds: 300),
+  }) {
+    return CustomTransitionPage<T>(
+      key: state.pageKey,
+      name: state.name ?? state.matchedLocation,
+      arguments: state.extra,
+      transitionDuration: duration,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      child: child,
+    );
+  }
 }
 
 final RouteObserver<ModalRoute<dynamic>> routeObserver =
@@ -290,7 +323,7 @@ final GoRouter appRouter = GoRouter(
       name: IapPage.name,
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.cupertino<void>(
+        return AppRoutePage.fullscreenDialog<void>(
           state: state,
           child: IapPage(videoUrl: videoUrl),
         );
@@ -299,7 +332,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: BuyCreditsPage.path,
       name: BuyCreditsPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+      pageBuilder: (context, state) => AppRoutePage.fullscreenDialog<void>(
         state: state,
         child: const BuyCreditsPage(),
       ),
@@ -309,7 +342,7 @@ final GoRouter appRouter = GoRouter(
       name: GenerationIapPage.name,
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.cupertino<void>(
+        return AppRoutePage.fullscreenDialog<void>(
           state: state,
           child: GenerationIapPage(videoUrl: videoUrl),
         );
@@ -320,7 +353,7 @@ final GoRouter appRouter = GoRouter(
       name: GenerationBuyCreditsPage.name,
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.cupertino<void>(
+        return AppRoutePage.fullscreenDialog<void>(
           state: state,
           child: GenerationBuyCreditsPage(videoUrl: videoUrl),
         );
@@ -329,8 +362,9 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: DiscountPage.path,
       name: DiscountPage.name,
-      pageBuilder: (context, state) => AppRoutePage.cupertino<void>(
+      pageBuilder: (context, state) => AppRoutePage.fade<void>(
         state: state,
+        duration: const Duration(seconds: 1),
         child: const DiscountPage(),
       ),
     ),

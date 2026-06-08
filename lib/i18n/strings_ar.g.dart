@@ -109,6 +109,7 @@ class _Translations$create$ar extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'سيلفي أكوامان';
 	@override String get tap_upload => 'حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.';
+	@override String get tap_to_upload_photo => 'اضغط هنا لتحميل صورتك.';
 	@override String get select_upload_title => 'حدد لتحميل صورتك';
 	@override String get upload_image => 'تحميل الصورة';
 	@override String get custom_prompt => 'موجّه مخصص';
@@ -724,6 +725,7 @@ extension on TranslationsAr {
 			'home.discover' => 'اكتشاف',
 			'create.selfie_aquaman' => 'سيلفي أكوامان',
 			'create.tap_upload' => 'حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.',
+			'create.tap_to_upload_photo' => 'اضغط هنا لتحميل صورتك.',
 			'create.select_upload_title' => 'حدد لتحميل صورتك',
 			'create.upload_image' => 'تحميل الصورة',
 			'create.custom_prompt' => 'موجّه مخصص',

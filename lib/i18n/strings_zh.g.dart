@@ -109,6 +109,7 @@ class _Translations$create$zh extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => '海王自拍';
 	@override String get tap_upload => '上传您的照片，在几秒钟内创建您的 AI 视频。';
+	@override String get tap_to_upload_photo => '点击这里上传您的照片。';
 	@override String get select_upload_title => '选择上传照片的方式';
 	@override String get upload_image => '上传图片';
 	@override String get custom_prompt => '自定义提示词';
@@ -724,6 +725,7 @@ extension on TranslationsZh {
 			'home.discover' => '发现',
 			'create.selfie_aquaman' => '海王自拍',
 			'create.tap_upload' => '上传您的照片，在几秒钟内创建您的 AI 视频。',
+			'create.tap_to_upload_photo' => '点击这里上传您的照片。',
 			'create.select_upload_title' => '选择上传照片的方式',
 			'create.upload_image' => '上传图片',
 			'create.custom_prompt' => '自定义提示词',

@@ -39,7 +39,8 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _ProfileViewState extends State<ProfileView>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final TabController _tabController;
   Timer? _settingsHoldTimer;
   bool _isHoldTriggered = false;
@@ -68,7 +69,9 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      LogUtils.d('ProfileView: App lifecycle changed to resumed. Refreshing history.');
+      LogUtils.d(
+        'ProfileView: App lifecycle changed to resumed. Refreshing history.',
+      );
       context.read<ProfileBloc>().add(const ProfileEvent.init());
     }
   }
@@ -151,12 +154,17 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                 onTapDown: (_) {
                                   _isHoldTriggered = false;
                                   _settingsHoldTimer?.cancel();
-                                  _settingsHoldTimer = Timer(const Duration(seconds: 5), () async {
-                                    _isHoldTriggered = true;
-                                    if (mounted) {
-                                      await CreditNavigationHelper.navigateToPaymentScreen(context);
-                                    }
-                                  });
+                                  _settingsHoldTimer = Timer(
+                                    const Duration(seconds: 5),
+                                    () async {
+                                      _isHoldTriggered = true;
+                                      if (mounted) {
+                                        await CreditNavigationHelper.navigateToPaymentScreen(
+                                          context,
+                                        );
+                                      }
+                                    },
+                                  );
                                 },
                                 onTapCancel: () {
                                   _settingsHoldTimer?.cancel();
@@ -215,21 +223,37 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
 
                         const SizedBox(height: 24),
 
-                        // Premium Upgrade Banner
-                        PremiumBannerWidget(
-                          onTap: () {
-                            final videosList = videosState.maybeWhen(
-                              success: (list) => list,
-                              orElse: () => const [],
+                        // Premium Upgrade Banner (hidden if user is premium)
+                        StreamBuilder<UserEntity>(
+                          stream: sl<WatchProfileUseCase>()(),
+                          builder: (context, snapshot) {
+                            final isVip = snapshot.data?.isVip ?? false;
+                            if (isVip) return const SizedBox.shrink();
+
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                PremiumBannerWidget(
+                                  onTap: () {
+                                    final videosList = videosState.maybeWhen(
+                                      success: (list) => list,
+                                      orElse: () => const [],
+                                    );
+                                    final videoUrl = videosList.isNotEmpty
+                                        ? videosList.first.videoUrl
+                                        : (likedTemplates.isNotEmpty
+                                              ? likedTemplates.first.sourceUrl
+                                              : '');
+                                    context.push(
+                                      '${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 16),
+                              ],
                             );
-                            final videoUrl = videosList.isNotEmpty
-                                ? videosList.first.videoUrl
-                                : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                            context.push('${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
                           },
                         ),
-
-                        const SizedBox(height: 16),
 
                         // TabBar selection: My Video and Liked
                         TabBar(
@@ -264,7 +288,9 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                               RefreshIndicator(
                                 onRefresh: () async {
                                   final completer = Completer<void>();
-                                  context.read<ProfileBloc>().add(ProfileEvent.init(completer));
+                                  context.read<ProfileBloc>().add(
+                                    ProfileEvent.init(completer),
+                                  );
                                   await completer.future;
                                 },
                                 child: videosState.when(
@@ -278,18 +304,21 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                       return _buildEmptyPlaceholder(t);
                                     }
                                     return GridView.builder(
-                                      physics: const AlwaysScrollableScrollPhysics(
-                                        parent: BouncingScrollPhysics(),
-                                      ),
+                                      physics:
+                                          const AlwaysScrollableScrollPhysics(
+                                            parent: BouncingScrollPhysics(),
+                                          ),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 12,
-                                        crossAxisSpacing: 12,
-                                        childAspectRatio: 173 / 248,
-                                      ),
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 12,
+                                            crossAxisSpacing: 12,
+                                            childAspectRatio: 173 / 248,
+                                          ),
                                       itemCount: videos.length,
-                                      padding: const EdgeInsets.only(bottom: 100),
+                                      padding: const EdgeInsets.only(
+                                        bottom: 100,
+                                      ),
                                       itemBuilder: (context, index) {
                                         final video = videos[index];
                                         return MyVideoItemWidget(
@@ -306,15 +335,20 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                               ),
                                             );
                                           },
-                                          onDeleteTap: () =>
-                                              _showDeleteDialog(context, video.id),
+                                          onDeleteTap: () => _showDeleteDialog(
+                                            context,
+                                            video.id,
+                                          ),
                                         );
                                       },
                                     );
                                   },
                                   error: (failure) => Center(
                                     child: Text(
-                                      BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
+                                      BackendErrorHelper.getErrorMessage(
+                                        context,
+                                        failure.toErrorCodeOrMessage(),
+                                      ),
                                       style: context.appTheme.errorTextStyle,
                                     ),
                                   ),
@@ -328,13 +362,15 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                       physics: const BouncingScrollPhysics(),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 12,
-                                        crossAxisSpacing: 12,
-                                        childAspectRatio: 173 / 248,
-                                      ),
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 12,
+                                            crossAxisSpacing: 12,
+                                            childAspectRatio: 173 / 248,
+                                          ),
                                       itemCount: likedTemplates.length,
-                                      padding: const EdgeInsets.only(bottom: 100),
+                                      padding: const EdgeInsets.only(
+                                        bottom: 100,
+                                      ),
                                       itemBuilder: (context, index) {
                                         final template = likedTemplates[index];
                                         return LikedTemplateItemWidget(
@@ -346,9 +382,11 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                                                 'templateId': template.id,
                                                 'title': template.name,
                                                 'videoUrl': template.sourceUrl,
-                                                'imageUrl': template.thumbnailUrl,
+                                                'imageUrl':
+                                                    template.thumbnailUrl,
                                                 'themeType': template.type,
-                                                'themeOrgId': template.orgId.toString(),
+                                                'themeOrgId': template.orgId
+                                                    .toString(),
                                               },
                                             );
                                           },
@@ -378,9 +416,7 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
             parent: BouncingScrollPhysics(),
           ),
           child: Container(
-            constraints: BoxConstraints(
-              minHeight: constraints.maxHeight,
-            ),
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
             alignment: const Alignment(0, -0.2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
