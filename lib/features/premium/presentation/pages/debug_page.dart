@@ -7,6 +7,7 @@ import 'buy_credits_page.dart';
 import 'generation_iap_page.dart';
 import 'generation_buy_credits_page.dart';
 import 'discount_page.dart';
+import '../../../create_video/presentation/pages/generating_page.dart';
 
 class DebugPage extends StatelessWidget {
   static const String path = '/debug';
@@ -107,6 +108,23 @@ class DebugPage extends StatelessWidget {
                         icon: Icons.percent_outlined,
                         title: t.debug.discount,
                         onTap: () => context.push(DiscountPage.path),
+                      ),
+                      _buildDebugItem(
+                        icon: Icons.auto_awesome,
+                        title: t.debug.generating_page,
+                        onTap: () {
+                          GeneratingPage.push(
+                            context,
+                            title: 'Debug Video AI',
+                            imageUrl: 'assets/images/img_one_person.png',
+                            themeId: 'debug_theme',
+                            themeType: 'TEMPLATE',
+                            themeOrgId: 1,
+                            isHd: true,
+                            isLongTime: false,
+                            serviceType: 'IMAGE_TO_VIDEO',
+                          );
+                        },
                       ),
                     ],
                   ),

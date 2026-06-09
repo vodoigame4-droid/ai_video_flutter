@@ -415,7 +415,8 @@
     "generation_iap": "Generasi IAP",
     "generation_buy_credits": "Generasi Beli Kredit",
     "discount": "Halaman Diskon",
-    "paywall_video": "Halaman Video Paywall"
+    "paywall_video": "Halaman Video Paywall",
+    "generating_page": "Pratinjau Halaman Pembuatan"
   },
   "permission": {
     "camera_title": "Izin Kamera",

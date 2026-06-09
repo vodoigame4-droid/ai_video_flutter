@@ -638,6 +638,7 @@ class _Translations$debug$ar extends Translations$debug$en {
 	@override String get generation_buy_credits => 'شراء رصيد للتوليد';
 	@override String get discount => 'صفحة الخصم';
 	@override String get paywall_video => 'صفحة حظر الفيديو';
+	@override String get generating_page => 'معاينة صفحة الإنشاء';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsAr {
 			'debug.generation_buy_credits' => 'شراء رصيد للتوليد',
 			'debug.discount' => 'صفحة الخصم',
 			'debug.paywall_video' => 'صفحة حظر الفيديو',
+			'debug.generating_page' => 'معاينة صفحة الإنشاء',
 			'permission.camera_title' => 'إذن الكاميرا',
 			'permission.camera_desc' => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.',
 			'permission.photos_title' => 'إذن الصور',

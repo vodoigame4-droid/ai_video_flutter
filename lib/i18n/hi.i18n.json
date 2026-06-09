@@ -415,7 +415,8 @@
     "generation_iap": "जेनरेशन आईएपी",
     "generation_buy_credits": "जेनरेशन क्रेडिट खरीदें",
     "discount": "डिस्काउंट पेज",
-    "paywall_video": "पेवॉल वीडियो पेज"
+    "paywall_video": "पेवॉल वीडियो पेज",
+    "generating_page": "जेनरेटिंग पेज पूर्वावलोकन"
   },
   "permission": {
     "camera_title": "कैमरा अनुमति आवश्यक है",

@@ -638,6 +638,7 @@ class _Translations$debug$zh extends Translations$debug$en {
 	@override String get generation_buy_credits => '生成购买积分';
 	@override String get discount => '折扣页面';
 	@override String get paywall_video => '付费墙视频页面';
+	@override String get generating_page => '生成页面预览';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsZh {
 			'debug.generation_buy_credits' => '生成购买积分',
 			'debug.discount' => '折扣页面',
 			'debug.paywall_video' => '付费墙视频页面',
+			'debug.generating_page' => '生成页面预览',
 			'permission.camera_title' => '相机权限',
 			'permission.camera_desc' => '需要相机权限。请在设置中启用以使用此功能。',
 			'permission.photos_title' => '照片权限',

@@ -423,7 +423,8 @@
     "generation_iap": "Generation IAP",
     "generation_buy_credits": "Generation Buy Credits",
     "discount": "Discount Page",
-    "paywall_video": "Paywall Video Page"
+    "paywall_video": "Paywall Video Page",
+    "generating_page": "Generating Page Preview"
   },
   "permission": {
     "camera_title": "Camera Permission",

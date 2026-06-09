@@ -49,22 +49,32 @@ class ImageToVideoTab extends StatelessWidget {
                             _buildUploadSectionHeader(context),
                             const SizedBox(height: 16),
                             Center(
-                              child: SizedBox(
-                                width: 173,
-                                height: 173,
-                                child: UploadSlotWidget(
-                                  mediaPath: slotsPaths[0],
-                                  labelText: t.create.tap_upload,
-                                  onMediaRemoved: () {
-                                    context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.removeMedia(0),
-                                    );
-                                  },
-                                  onMediaSelected: (path) {
-                                    context.read<CreateVideoBloc>().add(
-                                      CreateVideoEvent.selectMedia(0, path),
-                                    );
-                                  },
+                              child: Hero(
+                                tag: 'create-video-hero',
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.onSurface,
+                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                  ),
+                                  clipBehavior: Clip.antiAlias,
+                                  child: SizedBox(
+                                    width: 173,
+                                    height: 173,
+                                    child: UploadSlotWidget(
+                                      mediaPath: slotsPaths[0],
+                                      labelText: t.create.tap_upload,
+                                      onMediaRemoved: () {
+                                        context.read<CreateVideoBloc>().add(
+                                          const CreateVideoEvent.removeMedia(0),
+                                        );
+                                      },
+                                      onMediaSelected: (path) {
+                                        context.read<CreateVideoBloc>().add(
+                                          CreateVideoEvent.selectMedia(0, path),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

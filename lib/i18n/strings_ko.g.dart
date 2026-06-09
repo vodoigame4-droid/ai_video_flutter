@@ -638,6 +638,7 @@ class _Translations$debug$ko extends Translations$debug$en {
 	@override String get generation_buy_credits => '생성 크레딧 구매';
 	@override String get discount => '할인 페이지';
 	@override String get paywall_video => '페이월 비디오 페이지';
+	@override String get generating_page => '생성 중 페이지 미리보기';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsKo {
 			'debug.generation_buy_credits' => '생성 크레딧 구매',
 			'debug.discount' => '할인 페이지',
 			'debug.paywall_video' => '페이월 비디오 페이지',
+			'debug.generating_page' => '생성 중 페이지 미리보기',
 			'permission.camera_title' => '카메라 권한',
 			'permission.camera_desc' => '카메라 권한이 필요합니다. 이 기능을 사용하려면 설정에서 권한을 허용해 주세요.',
 			'permission.photos_title' => '사진 권한',

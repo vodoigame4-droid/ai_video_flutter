@@ -104,7 +104,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       child: WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.black,
           body: SafeArea(
             child: BlocBuilder<CreateFromTemplateBloc, CreateFromTemplateState>(
               builder: (context, state) {
@@ -524,10 +524,13 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
 
   Future<void> _pickImage(ImageSource source) async {
     if (source == ImageSource.camera) {
-      final hasPermission = await AppPermissionHandler.checkAndRequestCameraPermission(context);
+      final hasPermission =
+          await AppPermissionHandler.checkAndRequestCameraPermission(context);
       if (!mounted) return;
       if (!hasPermission) {
-        LogUtils.w('CreateFromTemplatePage: Camera permission denied. Aborting image selection.');
+        LogUtils.w(
+          'CreateFromTemplatePage: Camera permission denied. Aborting image selection.',
+        );
         return;
       }
     }

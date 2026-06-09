@@ -638,6 +638,7 @@ class _Translations$debug$ja extends Translations$debug$en {
 	@override String get generation_buy_credits => '生成クレジット購入';
 	@override String get discount => '割引ページ';
 	@override String get paywall_video => 'ペイウォールビデオページ';
+	@override String get generating_page => '生成プロセスページのプレビュー';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsJa {
 			'debug.generation_buy_credits' => '生成クレジット購入',
 			'debug.discount' => '割引ページ',
 			'debug.paywall_video' => 'ペイウォールビデオページ',
+			'debug.generating_page' => '生成プロセスページのプレビュー',
 			'permission.camera_title' => 'カメラの権限',
 			'permission.camera_desc' => 'カメラの権限が必要です。この機能を使用するには、設定で許可してください。',
 			'permission.photos_title' => '写真の権限',

@@ -415,7 +415,8 @@
     "generation_iap": "生成IAP",
     "generation_buy_credits": "生成クレジット購入",
     "discount": "割引ページ",
-    "paywall_video": "ペイウォールビデオページ"
+    "paywall_video": "ペイウォールビデオページ",
+    "generating_page": "生成プロセスページのプレビュー"
   },
   "permission": {
     "camera_title": "カメラの権限",

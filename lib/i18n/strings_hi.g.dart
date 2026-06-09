@@ -638,6 +638,7 @@ class _Translations$debug$hi extends Translations$debug$en {
 	@override String get generation_buy_credits => 'जेनरेशन क्रेडिट खरीदें';
 	@override String get discount => 'डिस्काउंट पेज';
 	@override String get paywall_video => 'पेवॉल वीडियो पेज';
+	@override String get generating_page => 'जेनरेटिंग पेज पूर्वावलोकन';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsHi {
 			'debug.generation_buy_credits' => 'जेनरेशन क्रेडिट खरीदें',
 			'debug.discount' => 'डिस्काउंट पेज',
 			'debug.paywall_video' => 'पेवॉल वीडियो पेज',
+			'debug.generating_page' => 'जेनरेटिंग पेज पूर्वावलोकन',
 			'permission.camera_title' => 'कैमरा अनुमति आवश्यक है',
 			'permission.camera_desc' => 'कैमरा अनुमति आवश्यक है। इस सुविधा का उपयोग करने के लिए कृपया इसे सेटिंग्स में सक्षम करें।',
 			'permission.photos_title' => 'फ़ोटो अनुमति',

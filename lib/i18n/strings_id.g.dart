@@ -638,6 +638,7 @@ class _Translations$debug$id extends Translations$debug$en {
 	@override String get generation_buy_credits => 'Generasi Beli Kredit';
 	@override String get discount => 'Halaman Diskon';
 	@override String get paywall_video => 'Halaman Video Paywall';
+	@override String get generating_page => 'Pratinjau Halaman Pembuatan';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsId {
 			'debug.generation_buy_credits' => 'Generasi Beli Kredit',
 			'debug.discount' => 'Halaman Diskon',
 			'debug.paywall_video' => 'Halaman Video Paywall',
+			'debug.generating_page' => 'Pratinjau Halaman Pembuatan',
 			'permission.camera_title' => 'Izin Kamera',
 			'permission.camera_desc' => 'Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.',
 			'permission.photos_title' => 'Izin Galeri',

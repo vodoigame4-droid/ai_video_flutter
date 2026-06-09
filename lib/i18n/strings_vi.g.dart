@@ -654,6 +654,7 @@ class _Translations$debug$vi extends Translations$debug$en {
 	@override String get generation_buy_credits => 'Trang Generation Mua Credit';
 	@override String get discount => 'Trang giảm giá';
 	@override String get paywall_video => 'Trang Paywall Video';
+	@override String get generating_page => 'Xem trước trang Generating';
 }
 
 // Path: permission
@@ -1107,6 +1108,7 @@ extension on TranslationsVi {
 			'debug.generation_buy_credits' => 'Trang Generation Mua Credit',
 			'debug.discount' => 'Trang giảm giá',
 			'debug.paywall_video' => 'Trang Paywall Video',
+			'debug.generating_page' => 'Xem trước trang Generating',
 			'permission.camera_title' => 'Quyền truy cập Máy ảnh',
 			'permission.camera_desc' => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.',
 			'permission.photos_title' => 'Quyền truy cập Ảnh & Bộ nhớ',

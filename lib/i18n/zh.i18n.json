@@ -415,7 +415,8 @@
     "generation_iap": "生成内购",
     "generation_buy_credits": "生成购买积分",
     "discount": "折扣页面",
-    "paywall_video": "付费墙视频页面"
+    "paywall_video": "付费墙视频页面",
+    "generating_page": "生成页面预览"
   },
   "permission": {
     "camera_title": "相机权限",

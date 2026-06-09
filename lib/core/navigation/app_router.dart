@@ -199,8 +199,20 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: CreateTemplateSettingsPage.path,
       name: CreateTemplateSettingsPage.name,
+      redirect: (context, state) {
+        if (state.extra is! CreateFromTemplateBloc) {
+          return SplashPage.path;
+        }
+        return null;
+      },
       pageBuilder: (context, state) {
-        final bloc = state.extra as CreateFromTemplateBloc;
+        final bloc = state.extra as CreateFromTemplateBloc?;
+        if (bloc == null) {
+          return AppRoutePage.cupertino<void>(
+            state: state,
+            child: const SplashPage(),
+          );
+        }
         return AppRoutePage.cupertino<void>(
           state: state,
           child: CreateTemplateSettingsPage(bloc: bloc),
@@ -223,8 +235,10 @@ final GoRouter appRouter = GoRouter(
             state.uri.queryParameters['serviceType'] ?? 'IMAGE_TO_VIDEO';
         final videoUrl = state.uri.queryParameters['videoUrl'];
         final prompt = state.uri.queryParameters['prompt'];
-        return AppRoutePage.cupertino<void>(
+        final heroTag = state.uri.queryParameters['heroTag'];
+        return AppRoutePage.fade<void>(
           state: state,
+          duration: const Duration(milliseconds: 400),
           child: GeneratingPage(
             title: title,
             imageUrl: imageUrl,
@@ -236,6 +250,7 @@ final GoRouter appRouter = GoRouter(
             serviceType: serviceType,
             videoUrl: videoUrl,
             prompt: prompt,
+            heroTag: heroTag,
           ),
         );
       },
@@ -297,6 +312,28 @@ final GoRouter appRouter = GoRouter(
         final fromGeneration =
             extraArgs?.fromGeneration ??
             state.uri.queryParameters['fromGeneration'] == 'true';
+
+        if (fromGeneration) {
+          return AppRoutePage.fade<void>(
+            state: state,
+            duration: const Duration(milliseconds: 400),
+            child: ResultPage(
+              videoId: videoId,
+              title: title,
+              imageUrl: imageUrl,
+              videoUrl: videoUrl,
+              createdAt: createdAt,
+              serviceType: serviceType,
+              videoUrlSrc: videoUrlSrc,
+              themeId: themeId,
+              themeType: themeType,
+              themeOrgId: themeOrgId,
+              isHd: isHd,
+              isLongTime: isLongTime,
+              fromGeneration: fromGeneration,
+            ),
+          );
+        }
 
         return AppRoutePage.cupertino<void>(
           state: state,

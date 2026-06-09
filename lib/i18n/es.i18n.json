@@ -415,7 +415,8 @@
     "generation_iap": "IAP de generación",
     "generation_buy_credits": "Comprar créditos de generación",
     "discount": "Página de descuento",
-    "paywall_video": "Página de video paywall"
+    "paywall_video": "Página de video paywall",
+    "generating_page": "Vista previa de la página de generación"
   },
   "permission": {
     "camera_title": "Permiso de Cámara",

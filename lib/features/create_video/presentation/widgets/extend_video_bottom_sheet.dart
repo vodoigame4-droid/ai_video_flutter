@@ -14,12 +14,14 @@ class ExtendVideoBottomSheet extends StatelessWidget {
   final ResultBloc resultBloc;
   final String videoTitle;
   final String videoImageUrl;
+  final String? heroTag;
 
   const ExtendVideoBottomSheet({
     super.key,
     required this.resultBloc,
     required this.videoTitle,
     required this.videoImageUrl,
+    this.heroTag,
   });
 
   @override
@@ -207,27 +209,18 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Navigator.pop(context);
-                              context.pushNamed(
-                                GeneratingPage.name,
-                                queryParameters: {
-                                  'title': extendPrompt.trim().isEmpty
-                                      ? "$videoTitle Extended"
-                                      : extendPrompt,
-                                  'imageUrl': videoImageUrl,
-                                  'videoUrl': videoUrl,
-                                  // Sử dụng serviceType 'EXTEND_VIDEO' cho nghiệp vụ Client.
-                                  // Sẽ được CreateExtendVideoUseCase ánh xạ thành 'DANCING_IMAGE' khi gọi API.
-                                  'serviceType': 'EXTEND_VIDEO',
-                                  'isHd':
-                                      (extendQuality == 'Full HD' ||
-                                              extendQuality == 'HD')
-                                          .toString(),
-                                  'isLongTime':
-                                      (extendDuration == '10s' ||
-                                              extendDuration == '15s')
-                                          .toString(),
-                                  'prompt': extendPrompt,
-                                },
+                              GeneratingPage.push(
+                                context,
+                                title: extendPrompt.trim().isEmpty
+                                    ? "$videoTitle Extended"
+                                    : extendPrompt,
+                                imageUrl: videoImageUrl,
+                                videoUrl: videoUrl,
+                                serviceType: 'EXTEND_VIDEO',
+                                isHd: extendQuality == 'Full HD' || extendQuality == 'HD',
+                                isLongTime: extendDuration == '10s' || extendDuration == '15s',
+                                prompt: extendPrompt,
+                                heroTag: heroTag,
                               );
                             },
                             borderRadius: const BorderRadius.all(

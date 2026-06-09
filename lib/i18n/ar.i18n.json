@@ -415,7 +415,8 @@
     "generation_iap": "الشراء داخل التطبيق للتوليد",
     "generation_buy_credits": "شراء رصيد للتوليد",
     "discount": "صفحة الخصم",
-    "paywall_video": "صفحة حظر الفيديو"
+    "paywall_video": "صفحة حظر الفيديو",
+    "generating_page": "معاينة صفحة الإنشاء"
   },
   "permission": {
     "camera_title": "إذن الكاميرا",

@@ -325,10 +325,12 @@ class _ResultPageState extends State<ResultPage> {
                       tag: widget.fromGeneration
                           ? 'template-hero-${widget.themeId}'
                           : 'user-video-hero-${widget.videoId}',
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.black,
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
+                        clipBehavior: Clip.antiAlias,
                         child: SizedBox.expand(
                           child: BlocBuilder<ResultBloc, ResultState>(
                             bloc: _bloc,
@@ -769,20 +771,22 @@ class _ResultPageState extends State<ResultPage> {
                       // Regenerate Button (Gradient fill)
                       InkWell(
                         onTap: () {
-                          // Replace current route with GeneratingPage again to re-run generation
-                          context.replaceNamed(
-                            GeneratingPage.name,
-                            queryParameters: {
-                              'title': widget.title,
-                              'imageUrl': widget.imageUrl,
-                              'themeId': widget.themeId,
-                              'themeType': widget.themeType,
-                              'themeOrgId': widget.themeOrgId.toString(),
-                              'isHd': widget.isHd.toString(),
-                              'isLongTime': widget.isLongTime.toString(),
-                              'serviceType': widget.serviceType,
-                              if (widget.videoUrlSrc != null) 'videoUrl': widget.videoUrlSrc,
-                            },
+                          final activeHeroTag = widget.fromGeneration
+                              ? 'template-hero-${widget.themeId}'
+                              : 'user-video-hero-${widget.videoId}';
+                          GeneratingPage.push(
+                            context,
+                            title: widget.title,
+                            imageUrl: widget.imageUrl,
+                            themeId: widget.themeId,
+                            themeType: widget.themeType,
+                            themeOrgId: widget.themeOrgId,
+                            isHd: widget.isHd,
+                            isLongTime: widget.isLongTime,
+                            serviceType: widget.serviceType,
+                            heroTag: activeHeroTag,
+                            videoUrl: widget.videoUrlSrc,
+                            replace: true,
                           );
                         },
                         borderRadius: const BorderRadius.all(
@@ -902,10 +906,14 @@ class _ResultPageState extends State<ResultPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
       builder: (sheetContext) {
+        final activeHeroTag = widget.fromGeneration
+            ? 'template-hero-${widget.themeId}'
+            : 'user-video-hero-${widget.videoId}';
         return ExtendVideoBottomSheet(
           resultBloc: _bloc,
           videoTitle: widget.title,
           videoImageUrl: widget.imageUrl,
+          heroTag: activeHeroTag,
         );
       },
     );

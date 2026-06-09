@@ -1353,6 +1353,9 @@ class Translations$debug$en {
 
 	/// en: 'Paywall Video Page'
 	String get paywall_video => 'Paywall Video Page';
+
+	/// en: 'Generating Page Preview'
+	String get generating_page => 'Generating Page Preview';
 }
 
 // Path: permission
@@ -1856,6 +1859,7 @@ extension on Translations {
 			'debug.generation_buy_credits' => 'Generation Buy Credits',
 			'debug.discount' => 'Discount Page',
 			'debug.paywall_video' => 'Paywall Video Page',
+			'debug.generating_page' => 'Generating Page Preview',
 			'permission.camera_title' => 'Camera Permission',
 			'permission.camera_desc' => 'Camera permission is required. Please enable it in Settings to use this feature.',
 			'permission.photos_title' => 'Photos Permission',

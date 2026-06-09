@@ -415,7 +415,8 @@
     "generation_iap": "Generierung IAP",
     "generation_buy_credits": "Generierung Guthaben kaufen",
     "discount": "Rabattseite",
-    "paywall_video": "Paywall-Videoseite"
+    "paywall_video": "Paywall-Videoseite",
+    "generating_page": "Vorschau der Generierungsseite"
   },
   "permission": {
     "camera_title": "Kamerazugriff erforderlich",

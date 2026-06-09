@@ -415,7 +415,8 @@
     "generation_iap": "생성 IAP",
     "generation_buy_credits": "생성 크레딧 구매",
     "discount": "할인 페이지",
-    "paywall_video": "페이월 비디오 페이지"
+    "paywall_video": "페이월 비디오 페이지",
+    "generating_page": "생성 중 페이지 미리보기"
   },
   "permission": {
     "camera_title": "카메라 권한",

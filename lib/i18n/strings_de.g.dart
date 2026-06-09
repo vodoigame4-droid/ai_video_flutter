@@ -638,6 +638,7 @@ class _Translations$debug$de extends Translations$debug$en {
 	@override String get generation_buy_credits => 'Generierung Guthaben kaufen';
 	@override String get discount => 'Rabattseite';
 	@override String get paywall_video => 'Paywall-Videoseite';
+	@override String get generating_page => 'Vorschau der Generierungsseite';
 }
 
 // Path: permission
@@ -1085,6 +1086,7 @@ extension on TranslationsDe {
 			'debug.generation_buy_credits' => 'Generierung Guthaben kaufen',
 			'debug.discount' => 'Rabattseite',
 			'debug.paywall_video' => 'Paywall-Videoseite',
+			'debug.generating_page' => 'Vorschau der Generierungsseite',
 			'permission.camera_title' => 'Kamerazugriff erforderlich',
 			'permission.camera_desc' => 'Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.',
 			'permission.photos_title' => 'Fotozugriff erforderlich',

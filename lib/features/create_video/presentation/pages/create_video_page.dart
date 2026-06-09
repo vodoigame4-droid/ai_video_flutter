@@ -116,19 +116,18 @@ class CreateVideoView extends StatelessWidget {
                       imageUrl = resolvedPaths.firstWhere((p) => p.isNotEmpty, orElse: () => '');
                   }
 
-                  context.pushNamed(
-                    GeneratingPage.name,
-                    queryParameters: {
-                      'title': readyState.customPrompt.trim().isEmpty
-                          ? t.profile.imageGeneration
-                          : readyState.customPrompt,
-                      'imageUrl': imageUrl,
-                      'serviceType': serviceType,
-                      'videoUrl': videoUrl,
-                      'prompt': readyState.customPrompt,
-                      'isHd': (readyState.quality == 'Full HD' || readyState.quality == 'HD').toString(),
-                      'isLongTime': (readyState.duration == '10s' || readyState.duration == '15s').toString(),
-                    },
+                  GeneratingPage.push(
+                    context,
+                    title: readyState.customPrompt.trim().isEmpty
+                        ? t.profile.imageGeneration
+                        : readyState.customPrompt,
+                    imageUrl: imageUrl,
+                    serviceType: serviceType,
+                    videoUrl: videoUrl,
+                    prompt: readyState.customPrompt,
+                    isHd: readyState.quality == 'Full HD' || readyState.quality == 'HD',
+                    isLongTime: readyState.duration == '10s' || readyState.duration == '15s',
+                    heroTag: 'create-video-hero',
                   );
                 }
               },

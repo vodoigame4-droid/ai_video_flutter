@@ -423,7 +423,8 @@
     "generation_iap": "Trang Generation IAP",
     "generation_buy_credits": "Trang Generation Mua Credit",
     "discount": "Trang giảm giá",
-    "paywall_video": "Trang Paywall Video"
+    "paywall_video": "Trang Paywall Video",
+    "generating_page": "Xem trước trang Generating"
   },
   "permission": {
     "camera_title": "Quyền truy cập Máy ảnh",
