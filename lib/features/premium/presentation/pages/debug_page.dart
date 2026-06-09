@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 import 'iap_page.dart';
@@ -124,6 +127,15 @@ class DebugPage extends StatelessWidget {
                             isLongTime: false,
                             serviceType: 'IMAGE_TO_VIDEO',
                           );
+                        },
+                      ),
+                      _buildDebugItem(
+                        icon: Icons.delete_sweep_outlined,
+                        title: 'Clear App Data',
+                        onTap: () async {
+                          final prefs = sl<SharedPreferences>();
+                          await prefs.clear();
+                          AppToast.showSuccess('Clear app data successfully! Please restart app.');
                         },
                       ),
                     ],
