@@ -23,7 +23,7 @@ class LogoSectionWidget extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             child: Image.asset(
-              'assets/images/logo.png',
+              'assets/images/app_icon.png',
               width: 120,
               height: 120,
               fit: BoxFit.cover,
