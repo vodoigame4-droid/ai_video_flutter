@@ -9,6 +9,10 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lottie/lottie.dart';
 import 'package:core_business/core_business.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ai_video_flutter/core/navigation/route_observer.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/discount_page.dart';
 import '../injection/injection_container.dart';
 import '../errors/backend_error_handler.dart';
 import '../notification/local_notification_service.dart';
@@ -27,20 +31,31 @@ class CheckInWidget extends StatefulWidget {
   State<CheckInWidget> createState() => _CheckInWidgetState();
 }
 
-class _CheckInWidgetState extends State<CheckInWidget> {
+class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
   bool _notificationEnabled = true;
   bool _hasAutoShown = false;
   StreamSubscription<void>? _triggerSubscription;
+  late final DailyCheckInBloc _dailyCheckInBloc;
 
   @override
   void initState() {
     super.initState();
+    _dailyCheckInBloc = sl<DailyCheckInBloc>()..add(const DailyCheckInEvent.init());
     _checkSystemNotificationPermission();
     _triggerSubscription = CheckInWidget.checkInTrigger.stream.listen((_) {
       if (mounted) {
         _showCheckInDialog(context);
       }
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final modalRoute = ModalRoute.of(context);
+    if (modalRoute != null) {
+      routeObserver.subscribe(this, modalRoute);
+    }
   }
 
   Future<void> _checkSystemNotificationPermission() async {
@@ -54,9 +69,7 @@ class _CheckInWidgetState extends State<CheckInWidget> {
       return;
     }
     try {
-      final settings = await sl<FirebaseMessaging>().getNotificationSettings();
-      final isGranted = settings.authorizationStatus == AuthorizationStatus.authorized ||
-                        settings.authorizationStatus == AuthorizationStatus.provisional;
+      final isGranted = await AppPermissionHandler.isNotificationPermissionGranted();
       if (mounted) {
         setState(() {
           _notificationEnabled = isGranted;
@@ -73,17 +86,43 @@ class _CheckInWidgetState extends State<CheckInWidget> {
 
   @override
   void dispose() {
+    routeObserver.unsubscribe(this);
     _triggerSubscription?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    LogUtils.d('CheckInWidget: returned to home tab, checking check-in auto-show...');
+    _checkAndShowDailyCheckInIfNeeded();
+  }
+
+  void _checkAndShowDailyCheckInIfNeeded() {
+    _dailyCheckInBloc.state.mapOrNull(
+      ready: (readyState) {
+        if (!readyState.isCheckedInToday && !_hasAutoShown && !_isIapOrDiscountActive()) {
+          _hasAutoShown = true;
+          _showCheckInDialog(context);
+        }
+      },
+    );
+  }
+
+  bool _isIapOrDiscountActive() {
+    try {
+      final router = GoRouter.of(context);
+      final location = router.routerDelegate.currentConfiguration.uri.toString();
+      return location.contains(IapPage.path) || location.contains(DiscountPage.path);
+    } catch (_) {
+      return false;
+    }
   }
 
   void _showCheckInDialog(BuildContext context) async {
     final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
     bool isPermissionGranted = false;
     try {
-      final settings = await sl<FirebaseMessaging>().getNotificationSettings();
-      isPermissionGranted = settings.authorizationStatus == AuthorizationStatus.authorized ||
-                            settings.authorizationStatus == AuthorizationStatus.provisional;
+      isPermissionGranted = await AppPermissionHandler.isNotificationPermissionGranted();
     } catch (_) {
       isPermissionGranted = isEnabled;
     }
@@ -112,15 +151,15 @@ class _CheckInWidgetState extends State<CheckInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<DailyCheckInBloc>()..add(const DailyCheckInEvent.init()),
+    return BlocProvider.value(
+      value: _dailyCheckInBloc,
       child: Builder(
         builder: (context) {
           return BlocListener<DailyCheckInBloc, DailyCheckInState>(
             listener: (context, state) {
               state.mapOrNull(
                 ready: (readyState) {
-                  if (!readyState.isCheckedInToday && !_hasAutoShown) {
+                  if (!readyState.isCheckedInToday && !_hasAutoShown && !_isIapOrDiscountActive()) {
                     _hasAutoShown = true;
                     _showCheckInDialog(context);
                   }
@@ -193,9 +232,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
       return;
     }
     try {
-      final settings = await sl<FirebaseMessaging>().getNotificationSettings();
-      final isGranted = settings.authorizationStatus == AuthorizationStatus.authorized ||
-                        settings.authorizationStatus == AuthorizationStatus.provisional;
+      final isGranted = await AppPermissionHandler.isNotificationPermissionGranted();
       if (isGranted) {
         await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
         await sl<LocalNotificationService>().scheduleDailyCheckInNotification();

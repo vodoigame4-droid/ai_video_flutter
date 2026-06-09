@@ -8,9 +8,8 @@ import 'onboarding_state.dart';
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final CompleteOnboardingUseCase completeOnboardingUseCase;
 
-  OnboardingBloc({
-    required this.completeOnboardingUseCase,
-  }) : super(const OnboardingState.initial()) {
+  OnboardingBloc({required this.completeOnboardingUseCase})
+    : super(const OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
       await event.when(
         init: (preloadedImages) async {
@@ -31,11 +30,13 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
                 images.add(fallbackImages[i]);
               }
             }
-            emit(OnboardingState.ready(
-              images: images,
-              index: 0,
-              isCompleted: false,
-            ));
+            emit(
+              OnboardingState.ready(
+                images: images,
+                index: 0,
+                isCompleted: false,
+              ),
+            );
             return;
           }
 
@@ -49,20 +50,20 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
               images.add(fallbackImages[i]);
             }
           }
-          emit(OnboardingState.ready(
-            images: images,
-            index: 0,
-            isCompleted: false,
-          ));
+          emit(
+            OnboardingState.ready(images: images, index: 0, isCompleted: false),
+          );
         },
         pageChanged: (index) async {
           state.maybeWhen(
             ready: (images, currentIndex, isCompleted) {
-              emit(OnboardingState.ready(
-                images: images,
-                index: index,
-                isCompleted: false,
-              ));
+              emit(
+                OnboardingState.ready(
+                  images: images,
+                  index: index,
+                  isCompleted: false,
+                ),
+              );
             },
             orElse: () {},
           );
@@ -71,18 +72,22 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
           await state.maybeWhen(
             ready: (images, index, isCompleted) async {
               if (index < 4) {
-                emit(OnboardingState.ready(
-                  images: images,
-                  index: index + 1,
-                  isCompleted: false,
-                ));
+                emit(
+                  OnboardingState.ready(
+                    images: images,
+                    index: index + 1,
+                    isCompleted: false,
+                  ),
+                );
               } else {
                 await completeOnboardingUseCase(NoParams());
-                emit(OnboardingState.ready(
-                  images: images,
-                  index: index,
-                  isCompleted: true,
-                ));
+                emit(
+                  OnboardingState.ready(
+                    images: images,
+                    index: index,
+                    isCompleted: true,
+                  ),
+                );
               }
             },
             orElse: () {},

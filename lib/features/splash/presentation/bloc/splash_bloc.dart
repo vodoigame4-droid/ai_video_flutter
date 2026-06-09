@@ -177,7 +177,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _initHavinSdk() async {
     if (Platform.isIOS) {
-      HavinAdsManager.instance.requestATT();
+      await HavinAdsManager.instance.requestATT();
     }
 
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
@@ -225,10 +225,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.subscription('buy_annualy.andr'),
               BillingProduct.subscription('buy_annualy_discount.andr'),
             ];
-
       final billingConfig = BillingConfig(debugMode: false, products: products);
 
       await HavinSdk.instance.init(billingConfig: billingConfig);
+
+      // Initialize IapBloc to start loading billing products during Splash
+      sl<IapBloc>().add(const IapEvent.init());
+      LogUtils.d(
+        'SplashBloc: HavinSdk initialized. Triggered IapBloc initialization.',
+      );
     } catch (e, stack) {
       LogUtils.e(
         'SplashBloc: HavinSdk initialization failed',

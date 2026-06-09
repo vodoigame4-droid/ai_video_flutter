@@ -1,4 +1,4 @@
-import 'package:ai_video_flutter/core/widgets/app_image.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/generation_buy_credits_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -144,34 +144,22 @@ class _SettingsViewState extends State<SettingsView> {
 
                   // Settings Items List
                   Expanded(
-                    child: DeferInitWidget(
-                      placeholder: const Center(
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Color(0xFF2BC5C5),
-                          ),
-                        ),
-                      ),
-                      child: BlocBuilder<SettingsBloc, SettingsState>(
-                        builder: (context, state) {
-                          return state.when(
-                            initial: () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            loading: () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            ready: (currentLanguageCode) {
-                              final currentLocale = AppLocale.values.firstWhere(
-                                (l) => l.languageCode == currentLanguageCode,
-                                orElse: () => AppLocale.en,
-                              );
-                              final localeName = _getLocaleName(
-                                t,
-                                currentLocale,
-                              );
+                    child: BlocBuilder<SettingsBloc, SettingsState>(
+                      builder: (context, state) {
+                        final currentLanguageCode = state.maybeWhen(
+                          ready: (code) => code,
+                          orElse: () => LocaleSettings.currentLocale.languageCode,
+                        );
+                        final currentLocale = AppLocale.values.firstWhere(
+                          (l) => l.languageCode == currentLanguageCode,
+                          orElse: () => AppLocale.en,
+                        );
+                        final localeName = _getLocaleName(
+                          t,
+                          currentLocale,
+                        );
 
-                              return ListView(
+                        return ListView(
                                 physics: const BouncingScrollPhysics(),
                                 children: [
                                   // 1. Premium Upgrade Banner (hidden if user is premium)
@@ -221,9 +209,33 @@ class _SettingsViewState extends State<SettingsView> {
                                               ),
                                               title: t.settings.myCredits,
                                               trailingText: creditsStr,
-                                              onTap: () => context.push(
-                                                BuyCreditsPage.path,
-                                              ),
+                                              onTap: () async {
+                                                try {
+                                                  final user =
+                                                      await sl<
+                                                            WatchProfileUseCase
+                                                          >()()
+                                                          .first;
+                                                  if (context.mounted) {
+                                                    if (user.isVip) {
+                                                      context.push(
+                                                        GenerationBuyCreditsPage
+                                                            .path,
+                                                      );
+                                                    } else {
+                                                      context.push(
+                                                        BuyCreditsPage.path,
+                                                      );
+                                                    }
+                                                  }
+                                                } catch (e) {
+                                                  if (context.mounted) {
+                                                    context.push(
+                                                      BuyCreditsPage.path,
+                                                    );
+                                                  }
+                                                }
+                                              },
                                             );
                                           },
                                         ),
@@ -383,11 +395,8 @@ class _SettingsViewState extends State<SettingsView> {
                                 ],
                               );
                             },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+                          ),
+                        ),
                 ],
               ),
             ),

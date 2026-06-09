@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:gal/gal.dart';
 import 'package:ai_video_flutter/core/widgets/app_confirm_dialog.dart';
 import 'package:ai_video_flutter/i18n/strings.g.dart';
 import 'package:ai_video_flutter/core/utils/log_utils.dart';
@@ -67,31 +68,65 @@ class AppPermissionHandler {
   static Future<bool> checkAndRequestPhotosPermission(BuildContext context) async {
     final t = context.t;
 
-    if (Platform.isAndroid) {
-      // For saving/downloading videos using Gal on Android 10 (API 29) and higher,
-      // no runtime permissions are required. We can return true immediately.
-      final sdkVersion = _getAndroidSdkVersion();
-      if (sdkVersion >= 29) {
-        LogUtils.i('AppPermissionHandler: Android SDK version is $sdkVersion. No storage permission is required for downloading.');
+    if (Platform.isIOS) {
+      final status = await Permission.photos.status;
+      LogUtils.d('AppPermissionHandler: Current iOS Photos permission status: $status');
+
+      if (status.isGranted || status.isLimited) {
+        LogUtils.i('AppPermissionHandler: Photos permission is already granted or limited');
         return true;
       }
 
-      // Fallback for Android 9 (API 28) or lower
-      return checkAndRequestPermission(
-        context,
-        Permission.storage,
-        title: t.permission.photos_title,
-        desc: t.permission.photos_desc,
-      );
-    }
+      if (status.isPermanentlyDenied) {
+        LogUtils.w('AppPermissionHandler: Photos permission is permanently denied. Showing settings dialog.');
+        if (context.mounted) {
+          await _showSettingsDialog(
+            context,
+            title: t.permission.photos_title,
+            desc: t.permission.photos_desc,
+          );
+        }
+        return false;
+      }
 
-    // For iOS, check and request photos permission
-    return checkAndRequestPermission(
-      context,
-      Permission.photos,
-      title: t.permission.photos_title,
-      desc: t.permission.photos_desc,
-    );
+      LogUtils.d('AppPermissionHandler: Requesting iOS Photos permission...');
+      final requestResult = await Permission.photos.request();
+      LogUtils.i('AppPermissionHandler: Photos permission request result: $requestResult');
+
+      if (requestResult.isGranted || requestResult.isLimited) {
+        return true;
+      }
+
+      if (requestResult.isPermanentlyDenied) {
+        if (context.mounted) {
+          await _showSettingsDialog(
+            context,
+            title: t.permission.photos_title,
+            desc: t.permission.photos_desc,
+          );
+        }
+      }
+      return false;
+    } else if (Platform.isAndroid) {
+      final sdkVersion = await _getAndroidSdkVersion();
+      LogUtils.d('AppPermissionHandler: Android SDK version: $sdkVersion');
+
+      if (sdkVersion >= 29) {
+        // Android 10+ (API 29+) uses MediaStore to save images/videos, which does not require WRITE_EXTERNAL_STORAGE.
+        // Thus, we consider permission as granted for saving purposes.
+        LogUtils.i('AppPermissionHandler: Android SDK >= 29, no storage permission required for saving.');
+        return true;
+      } else {
+        // Android < 10 (API < 29) requires WRITE_EXTERNAL_STORAGE.
+        return checkAndRequestPermission(
+          context,
+          Permission.storage,
+          title: t.permission.photos_title,
+          desc: t.permission.photos_desc,
+        );
+      }
+    }
+    return true;
   }
 
   /// Checks and requests Microphone permission.
@@ -116,6 +151,41 @@ class AppPermissionHandler {
     );
   }
 
+  /// Checks if Camera permission is already granted.
+  static Future<bool> isCameraPermissionGranted() async {
+    final status = await Permission.camera.status;
+    return status.isGranted;
+  }
+
+  /// Checks if Photos/Gallery permission is already granted.
+  static Future<bool> isPhotosPermissionGranted() async {
+    if (Platform.isIOS) {
+      final status = await Permission.photos.status;
+      return status.isGranted || status.isLimited;
+    } else if (Platform.isAndroid) {
+      final sdkVersion = await _getAndroidSdkVersion();
+      if (sdkVersion >= 29) {
+        return true;
+      } else {
+        final status = await Permission.storage.status;
+        return status.isGranted;
+      }
+    }
+    return true;
+  }
+
+  /// Checks if Microphone permission is already granted.
+  static Future<bool> isMicrophonePermissionGranted() async {
+    final status = await Permission.microphone.status;
+    return status.isGranted;
+  }
+
+  /// Checks if Notification permission is already granted.
+  static Future<bool> isNotificationPermissionGranted() async {
+    final status = await Permission.notification.status;
+    return status.isGranted;
+  }
+
   static Future<void> _showSettingsDialog(
     BuildContext context, {
     required String title,
@@ -135,15 +205,18 @@ class AppPermissionHandler {
     );
   }
 
-  static int _getAndroidSdkVersion() {
+  static Future<int> _getAndroidSdkVersion() async {
+    if (!Platform.isAndroid) return 0;
     try {
-      final versionString = Platform.operatingSystemVersion;
-      // Typically: "Android 10 (SDK 29)" or "SDK 29"
-      final match = RegExp(r'SDK\s+(\d+)').firstMatch(versionString);
+      final sdkString = Platform.operatingSystemVersion;
+      final match = RegExp(r'SDK\s+(\d+)').firstMatch(sdkString);
       if (match != null) {
-        return int.tryParse(match.group(1) ?? '') ?? 0;
+        return int.parse(match.group(1)!);
       }
-    } catch (_) {}
+    } catch (e) {
+      LogUtils.e('AppPermissionHandler: Failed to parse Android SDK version', error: e);
+    }
     return 0;
   }
+
 }

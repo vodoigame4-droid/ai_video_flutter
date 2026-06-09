@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
+import '../../../onboarding/presentation/pages/onboarding_page.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
 import '../bloc/splash_state.dart';
@@ -36,15 +37,23 @@ class SplashView extends StatelessWidget {
         listener: (context, state) {
           state.mapOrNull(
             success: (successState) {
-              if (successState.isVip) {
+              if (!successState.isOnboardingCompleted) {
+                OnboardingPage.go(
+                  context,
+                  preloadedImages: successState.preloadedUrls,
+                );
+              } else if (successState.isVip) {
                 DashboardPage.go(context);
               } else {
-                context.goNamed(
-                  IapPage.name,
-                  queryParameters: {
-                    'fromSplash': 'true',
-                  },
-                );
+                DashboardPage.go(context);
+                if (context.mounted) {
+                  context.pushNamed(
+                    IapPage.name,
+                    queryParameters: {
+                      'fromSplash': 'true',
+                    },
+                  );
+                }
               }
             },
           );

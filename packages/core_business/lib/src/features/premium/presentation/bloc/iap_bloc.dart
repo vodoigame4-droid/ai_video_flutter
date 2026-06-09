@@ -82,28 +82,10 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             },
           );
 
-          // Check if already VIP
-          try {
-            final user = await watchProfileUseCase().first;
-            if (user.isVip) {
-              LogUtils.d('IapBloc: User is already VIP, emitting success already_vip');
-              emit(
-                IapState.success(
-                  message: 'already_vip',
-                  isWeeklySelected: isWeekly,
-                  isVideoRevealed: isRevealed,
-                  selectedCreditIndex: selectedIndex,
-                  weeklyProducts: weekly,
-                  yearlyProducts: yearly,
-                  discountCreditProducts: discount,
-                  regularCreditProducts: regular,
-                ),
-              );
-              return;
-            }
-          } catch (e) {
-            LogUtils.w('IapBloc: Failed to check VIP status in init: $e');
-          }
+          List<Product> weeklyProducts = [];
+          List<Product> yearlyProducts = [];
+          List<Product> discountCreditProducts = [];
+          List<Product> regularCreditProducts = [];
 
           try {
             final isBillingInitialized = HavinBilling.instance.isInitialized;
@@ -117,11 +99,6 @@ class IapBloc extends Bloc<IapEvent, IapState> {
               'IapBloc: Loaded ${products.length} products from store: ${products.map((p) => '${p.id} (${p.priceString})').toList()}',
             );
 
-            final List<Product> weeklyProducts = [];
-            final List<Product> yearlyProducts = [];
-            final List<Product> discountCreditProducts = [];
-            final List<Product> regularCreditProducts = [];
-
             for (final p in products) {
               final id = p.id.toLowerCase();
               if (id.contains('weekly') || id.contains('weakly') || id == 'weekly' || id == 'weakly') {
@@ -130,7 +107,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                   id.contains('annual') ||
                   id == 'yearly') {
                 yearlyProducts.add(p);
-              } else if (id.endsWith('dis') || id.contains('discount')) {
+              } else if (id.contains('dis') || id.contains('discount')) {
                 discountCreditProducts.add(p);
               } else if (id.contains('credits') || id.contains('credit')) {
                 regularCreditProducts.add(p);
@@ -142,36 +119,52 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             LogUtils.d(
               'IapBloc: Sorted products count - weekly: ${weeklyProducts.length}, yearly: ${yearlyProducts.length}, discountCredits: ${discountCreditProducts.length}, regularCredits: ${regularCreditProducts.length}',
             );
-
-            emit(
-              IapState.ready(
-                isWeeklySelected: isWeekly,
-                isVideoRevealed: isRevealed,
-                selectedCreditIndex: selectedIndex,
-                weeklyProducts: weeklyProducts,
-                yearlyProducts: yearlyProducts,
-                discountCreditProducts: discountCreditProducts,
-                regularCreditProducts: regularCreditProducts,
-              ),
-            );
           } catch (e, stack) {
             LogUtils.e(
               'IapBloc: Failed to load store products',
               error: e,
               stackTrace: stack,
             );
-            emit(
-              IapState.ready(
-                isWeeklySelected: isWeekly,
-                isVideoRevealed: isRevealed,
-                selectedCreditIndex: selectedIndex,
-                weeklyProducts: weekly,
-                yearlyProducts: yearly,
-                discountCreditProducts: discount,
-                regularCreditProducts: regular,
-              ),
-            );
+            weeklyProducts = weekly;
+            yearlyProducts = yearly;
+            discountCreditProducts = discount;
+            regularCreditProducts = regular;
           }
+
+          // Check if already VIP
+          try {
+            final user = await watchProfileUseCase().first;
+            if (user.isVip) {
+              LogUtils.d('IapBloc: User is already VIP, emitting success already_vip with products populated');
+              emit(
+                IapState.success(
+                  message: 'already_vip',
+                  isWeeklySelected: isWeekly,
+                  isVideoRevealed: isRevealed,
+                  selectedCreditIndex: selectedIndex,
+                  weeklyProducts: weeklyProducts,
+                  yearlyProducts: yearlyProducts,
+                  discountCreditProducts: discountCreditProducts,
+                  regularCreditProducts: regularCreditProducts,
+                ),
+              );
+              return;
+            }
+          } catch (e) {
+            LogUtils.w('IapBloc: Failed to check VIP status in init: $e');
+          }
+
+          emit(
+            IapState.ready(
+              isWeeklySelected: isWeekly,
+              isVideoRevealed: isRevealed,
+              selectedCreditIndex: selectedIndex,
+              weeklyProducts: weeklyProducts,
+              yearlyProducts: yearlyProducts,
+              discountCreditProducts: discountCreditProducts,
+              regularCreditProducts: regularCreditProducts,
+            ),
+          );
         },
         selectWeekly: () async {
           LogUtils.d('IapBloc: Select Weekly');

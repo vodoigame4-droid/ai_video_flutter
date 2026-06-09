@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ai_video_flutter/core/navigation/route_observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:core_business/core_business.dart';
@@ -73,9 +74,6 @@ abstract class AppRoutePage {
     );
   }
 }
-
-final RouteObserver<ModalRoute<dynamic>> routeObserver =
-    RouteObserver<ModalRoute<dynamic>>();
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 

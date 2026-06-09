@@ -145,6 +145,12 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
 
         String getProductPrice(int credits) {
           final matchCredits = '${credits}credits';
+          LogUtils.d(
+            'GenerationBuyCreditsPage getProductPrice: credits=$credits, isVip=$isVip, '
+            'iapBlocState=${iapBlocState.runtimeType}, '
+            'discountProducts=[${discountProducts.map((p) => '${p.id}:${p.priceString}').join(", ")}], '
+            'regularProducts=[${regularProducts.map((p) => '${p.id}:${p.priceString}').join(", ")}]',
+          );
           if (isVip) {
             for (final p in discountProducts) {
               final id = p.id.toLowerCase();
@@ -153,6 +159,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id.endsWith('${matchCredits}dis') ||
                   id.endsWith('${matchCredits}dis.andr') ||
                   id.contains('${credits}creditsdis')) {
+                LogUtils.d(
+                  'GenerationBuyCreditsPage matched discount product: $id -> ${p.priceString}',
+                );
                 return p.priceString;
               }
             }
@@ -162,6 +171,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id == '$matchCredits.andr' ||
                   id.endsWith(matchCredits) ||
                   id.endsWith('$matchCredits.andr')) {
+                LogUtils.d(
+                  'GenerationBuyCreditsPage matched fallback regular product: $id -> ${p.priceString}',
+                );
                 return p.priceString;
               }
             }
@@ -172,6 +184,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id == '$matchCredits.andr' ||
                   id.endsWith(matchCredits) ||
                   id.endsWith('$matchCredits.andr')) {
+                LogUtils.d(
+                  'GenerationBuyCreditsPage matched regular product: $id -> ${p.priceString}',
+                );
                 return p.priceString;
               }
             }
@@ -182,10 +197,14 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id.endsWith('${matchCredits}dis') ||
                   id.endsWith('${matchCredits}dis.andr') ||
                   id.contains('${credits}creditsdis')) {
+                LogUtils.d(
+                  'GenerationBuyCreditsPage matched fallback discount product: $id -> ${p.priceString}',
+                );
                 return p.priceString;
               }
             }
           }
+          LogUtils.d('GenerationBuyCreditsPage NO MATCH for credits=$credits');
           return '...';
         }
 
@@ -509,60 +528,60 @@ class GenerationCreditPackCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        // Card Container
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.5),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: const Color(0xFF778877).withValues(alpha: 0.53),
-              width: 1.2,
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Card Container
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: const Color(0xFF778877).withValues(alpha: 0.53),
+                width: 1.2,
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Shiny Coin Icon
-                Image.asset(
-                  Assets.images.icCredit.path,
-                  width: 36,
-                  height: 36,
-                  fit: BoxFit.contain,
-                ),
-                const SizedBox(height: 6),
-                // Credit Title
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Shiny Coin Icon
+                  Image.asset(
+                    Assets.images.icCredit.path,
+                    width: 36,
+                    height: 36,
+                    fit: BoxFit.contain,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 2),
-                // Approx Video Estimate
-                Text(
-                  videoEstimate,
-                  style: const TextStyle(
-                    color: Colors.white60,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                  const SizedBox(height: 6),
+                  // Credit Title
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 10),
-                // Price Button
-                GestureDetector(
-                  onTap: onTap,
-                  child: Container(
+                  const SizedBox(height: 2),
+                  // Approx Video Estimate
+                  Text(
+                    videoEstimate,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 10),
+                  // Price Button
+                  Container(
                     width: double.infinity,
                     height: 32,
                     decoration: BoxDecoration(
@@ -586,50 +605,50 @@ class GenerationCreditPackCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
 
-        // Corner Tag Badge on top-right
-        if (tagText != null)
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Container(
-              width: 100,
-              height: 20,
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors:
-                      tagColors ??
-                      [const Color(0xFFff6320), const Color(0xFFfae123)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(12),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  tagText!,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
+          // Corner Tag Badge on top-right
+          if (tagText != null)
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Container(
+                width: 100,
+                height: 20,
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors:
+                        tagColors ??
+                        [const Color(0xFFff6320), const Color(0xFFfae123)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
-                  textAlign: TextAlign.center,
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    tagText!,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
