@@ -115,7 +115,7 @@ class DebugPage extends StatelessWidget {
                         onTap: () {
                           GeneratingPage.push(
                             context,
-                            title: 'Debug Video AI',
+                            title: 'Debug Vido',
                             imageUrl: 'assets/images/img_one_person.png',
                             themeId: 'debug_theme',
                             themeType: 'TEMPLATE',

@@ -11,7 +11,7 @@
     "ok": "확인"
   },
   "home": {
-    "title": "비디오 AI",
+    "title": "Vido",
     "trending": "트렌딩",
     "new_section": "새로운",
     "toy_box": "장난감 피규어 박스",
@@ -69,11 +69,11 @@
     "desc": "편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?"
   },
   "splash": {
-    "appName": "비디오 AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "비디오 AI에 오신 것을 환영합니다",
+      "title": "Vido에 오신 것을 환영합니다",
       "subtitle": "당신의 창의적인 여정이 여기서 시작됩니다...",
       "button": "시작하기"
     },
@@ -120,7 +120,7 @@
     "imageGeneration": "이미지 생성"
   },
   "home_new": {
-    "welcomeToAppName": "비디오 AI에 오신 것을 환영합니다",
+    "welcomeToAppName": "Vido에 오신 것을 환영합니다",
     "imageToVideo": "이미지를\n비디오로",
     "transitionVideo": "트랜지션\n비디오",
     "imageToDance": "이미지를\n댄스로",

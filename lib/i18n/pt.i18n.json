@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Vídeo IA",
+    "title": "Vido",
     "trending": "Tendências",
     "new_section": "Novo",
     "toy_box": "Caixa de figuras de brinquedo",
@@ -69,11 +69,11 @@
     "desc": "Deseja continuar editando ou sair agora?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Bem-vindo ao Video AI",
+      "title": "Bem-vindo ao Vido",
       "subtitle": "Sua jornada criativa começa aqui...",
       "button": "Começar"
     },
@@ -120,7 +120,7 @@
     "imageGeneration": "Geração de imagem"
   },
   "home_new": {
-    "welcomeToAppName": "Bem-vindo ao Video AI",
+    "welcomeToAppName": "Bem-vindo ao Vido",
     "imageToVideo": "Imagem para\nVídeo",
     "transitionVideo": "Vídeo de\nTransição",
     "imageToDance": "Imagem para\nDança",

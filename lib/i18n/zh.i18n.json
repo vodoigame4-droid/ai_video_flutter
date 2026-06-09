@@ -11,7 +11,7 @@
     "ok": "确定"
   },
   "home": {
-    "title": "视频 AI",
+    "title": "Vido",
     "trending": "热门",
     "new_section": "最新",
     "toy_box": "玩具手办盒",
@@ -69,11 +69,11 @@
     "desc": "您要继续编辑还是现在离开？"
   },
   "splash": {
-    "appName": "视频AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "欢迎使用视频AI",
+      "title": "欢迎使用Vido",
       "subtitle": "您的创意之旅从这里开始...",
       "button": "开始体验"
     },
@@ -120,7 +120,7 @@
     "imageGeneration": "图像生成"
   },
   "home_new": {
-    "welcomeToAppName": "欢迎使用视频AI",
+    "welcomeToAppName": "欢迎使用Vido",
     "imageToVideo": "图片转\n视频",
     "transitionVideo": "转场\n视频",
     "imageToDance": "图片\n舞蹈",

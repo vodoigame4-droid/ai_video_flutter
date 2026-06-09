@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Video KI",
+    "title": "Vido",
     "trending": "Angesagt",
     "new_section": "Neu",
     "toy_box": "Spielzeugfiguren-Box",
@@ -69,11 +69,11 @@
     "desc": "Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Willkommen bei Video AI",
+      "title": "Willkommen bei Vido",
       "subtitle": "Deine kreative Reise beginnt hier...",
       "button": "Loslegen"
     },
@@ -120,7 +120,7 @@
     "imageGeneration": "Bildgenerierung"
   },
   "home_new": {
-    "welcomeToAppName": "Willkommen bei Video AI",
+    "welcomeToAppName": "Willkommen bei Vido",
     "imageToVideo": "Bild zu\nVideo",
     "transitionVideo": "Übergangs-\nvideo",
     "imageToDance": "Bild zu\nTanz",

@@ -92,7 +92,7 @@ class _Translations$home$de extends Translations$home$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Video KI';
+	@override String get title => 'Vido';
 	@override String get trending => 'Angesagt';
 	@override String get new_section => 'Neu';
 	@override String get toy_box => 'Spielzeugfiguren-Box';
@@ -171,7 +171,7 @@ class _Translations$splash$de extends Translations$splash$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Video AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -230,7 +230,7 @@ class _Translations$home_new$de extends Translations$home_new$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Willkommen bei Video AI';
+	@override String get welcomeToAppName => 'Willkommen bei Vido';
 	@override String get imageToVideo => 'Bild zu\nVideo';
 	@override String get transitionVideo => 'Übergangs-\nvideo';
 	@override String get imageToDance => 'Bild zu\nTanz';
@@ -667,7 +667,7 @@ class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Willkommen bei Video AI';
+	@override String get title => 'Willkommen bei Vido';
 	@override String get subtitle => 'Deine kreative Reise beginnt hier...';
 	@override String get button => 'Loslegen';
 }
@@ -737,7 +737,7 @@ extension on TranslationsDe {
 			'common.generate' => 'Generieren',
 			'common.processing' => 'Wird bearbeitet...',
 			'common.ok' => 'OK',
-			'home.title' => 'Video KI',
+			'home.title' => 'Vido',
 			'home.trending' => 'Angesagt',
 			'home.new_section' => 'Neu',
 			'home.toy_box' => 'Spielzeugfiguren-Box',
@@ -789,8 +789,8 @@ extension on TranslationsDe {
 			'create.please_add_image_first' => 'Bitte fügen Sie zuerst ein Bild hinzu',
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
-			'splash.appName' => 'Video AI',
-			'onboarding.page1.title' => 'Willkommen bei Video AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Willkommen bei Vido',
 			'onboarding.page1.subtitle' => 'Deine kreative Reise beginnt hier...',
 			'onboarding.page1.button' => 'Loslegen',
 			'onboarding.page2.title' => 'Bild zu Video',
@@ -822,7 +822,7 @@ extension on TranslationsDe {
 			'profile.delete' => 'Löschen',
 			'profile.generating' => 'Generieren...',
 			'profile.imageGeneration' => 'Bildgenerierung',
-			'home_new.welcomeToAppName' => 'Willkommen bei Video AI',
+			'home_new.welcomeToAppName' => 'Willkommen bei Vido',
 			'home_new.imageToVideo' => 'Bild zu\nVideo',
 			'home_new.transitionVideo' => 'Übergangs-\nvideo',
 			'home_new.imageToDance' => 'Bild zu\nTanz',

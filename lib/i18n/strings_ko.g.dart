@@ -92,7 +92,7 @@ class _Translations$home$ko extends Translations$home$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '비디오 AI';
+	@override String get title => 'Vido';
 	@override String get trending => '트렌딩';
 	@override String get new_section => '새로운';
 	@override String get toy_box => '장난감 피규어 박스';
@@ -171,7 +171,7 @@ class _Translations$splash$ko extends Translations$splash$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => '비디오 AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -230,7 +230,7 @@ class _Translations$home_new$ko extends Translations$home_new$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => '비디오 AI에 오신 것을 환영합니다';
+	@override String get welcomeToAppName => 'Vido에 오신 것을 환영합니다';
 	@override String get imageToVideo => '이미지를\n비디오로';
 	@override String get transitionVideo => '트랜지션\n비디오';
 	@override String get imageToDance => '이미지를\n댄스로';
@@ -667,7 +667,7 @@ class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '비디오 AI에 오신 것을 환영합니다';
+	@override String get title => 'Vido에 오신 것을 환영합니다';
 	@override String get subtitle => '당신의 창의적인 여정이 여기서 시작됩니다...';
 	@override String get button => '시작하기';
 }
@@ -737,7 +737,7 @@ extension on TranslationsKo {
 			'common.generate' => '생성하기',
 			'common.processing' => '처리 중...',
 			'common.ok' => '확인',
-			'home.title' => '비디오 AI',
+			'home.title' => 'Vido',
 			'home.trending' => '트렌딩',
 			'home.new_section' => '새로운',
 			'home.toy_box' => '장난감 피규어 박스',
@@ -789,8 +789,8 @@ extension on TranslationsKo {
 			'create.please_add_image_first' => '먼저 이미지를 추가해 주세요',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
-			'splash.appName' => '비디오 AI',
-			'onboarding.page1.title' => '비디오 AI에 오신 것을 환영합니다',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Vido에 오신 것을 환영합니다',
 			'onboarding.page1.subtitle' => '당신의 창의적인 여정이 여기서 시작됩니다...',
 			'onboarding.page1.button' => '시작하기',
 			'onboarding.page2.title' => '이미지를 비디오로',
@@ -822,7 +822,7 @@ extension on TranslationsKo {
 			'profile.delete' => '삭제',
 			'profile.generating' => '생성 중...',
 			'profile.imageGeneration' => '이미지 생성',
-			'home_new.welcomeToAppName' => '비디오 AI에 오신 것을 환영합니다',
+			'home_new.welcomeToAppName' => 'Vido에 오신 것을 환영합니다',
 			'home_new.imageToVideo' => '이미지를\n비디오로',
 			'home_new.transitionVideo' => '트랜지션\n비디오',
 			'home_new.imageToDance' => '이미지를\n댄스로',

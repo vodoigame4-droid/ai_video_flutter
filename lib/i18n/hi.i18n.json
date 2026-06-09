@@ -11,7 +11,7 @@
     "ok": "ठीक है"
   },
   "home": {
-    "title": "वीडियो एआई",
+    "title": "Vido",
     "trending": "ट्रेंडिंग",
     "new_section": "नया",
     "toy_box": "खिलौना आकृति बॉक्स",
@@ -69,11 +69,11 @@
     "desc": "क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?"
   },
   "splash": {
-    "appName": "वीडियो एआई"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "वीडियो एआई में आपका स्वागत है",
+      "title": "Vido में आपका स्वागत है",
       "subtitle": "आपकी रचनात्मक यात्रा यहाँ शुरू होती है...",
       "button": "शुरू करें"
     },
@@ -120,7 +120,7 @@
     "imageGeneration": "छवि निर्माण"
   },
   "home_new": {
-    "welcomeToAppName": "वीडियो एआई में आपका स्वागत है",
+    "welcomeToAppName": "Vido में आपका स्वागत है",
     "imageToVideo": "छवि से\nवीडियो",
     "transitionVideo": "संक्रमण\nवीडियो",
     "imageToDance": "छवि से\nनृत्य",

@@ -113,8 +113,8 @@ class Translations$home$en {
 
 	// Translations
 
-	/// en: 'Video AI'
-	String get title => 'Video AI';
+	/// en: 'Vido'
+	String get title => 'Vido';
 
 	/// en: 'Trending'
 	String get trending => 'Trending';
@@ -215,8 +215,8 @@ class Translations$create$en {
 	/// en: 'Upload Video.'
 	String get upload_video_slot => 'Upload Video.';
 
-	/// en: 'Upload photo.'
-	String get upload_photo_slot => 'Upload photo.';
+	/// en: 'Upload Photo.'
+	String get upload_photo_slot => 'Upload Photo.';
 
 	/// en: 'Photo {num}'
 	String photo_slot_num({required Object num}) => 'Photo ${num}';
@@ -296,8 +296,8 @@ class Translations$splash$en {
 
 	// Translations
 
-	/// en: 'Video AI'
-	String get appName => 'Video AI';
+	/// en: 'Vido'
+	String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -391,8 +391,8 @@ class Translations$home_new$en {
 
 	// Translations
 
-	/// en: 'Welcome To Video AI'
-	String get welcomeToAppName => 'Welcome To Video AI';
+	/// en: 'Welcome To Vido'
+	String get welcomeToAppName => 'Welcome To Vido';
 
 	/// en: 'Image to Video'
 	String get imageToVideo => 'Image to\nVideo';
@@ -1405,8 +1405,8 @@ class Translations$onboarding$page1$en {
 
 	// Translations
 
-	/// en: 'Welcome To Video AI'
-	String get title => 'Welcome To Video AI';
+	/// en: 'Welcome To Vido'
+	String get title => 'Welcome To Vido';
 
 	/// en: 'Your Creative Journey Starts Here...'
 	String get subtitle => 'Your Creative Journey Starts Here...';
@@ -1504,7 +1504,7 @@ extension on Translations {
 			'common.generate' => 'Generate',
 			'common.processing' => 'Processing...',
 			'common.ok' => 'OK',
-			'home.title' => 'Video AI',
+			'home.title' => 'Vido',
 			'home.trending' => 'Trending',
 			'home.new_section' => 'New',
 			'home.toy_box' => 'Toy Figura Box',
@@ -1535,7 +1535,7 @@ extension on Translations {
 			'create.upload_first_photo' => 'Upload first photo.',
 			'create.upload_last_photo' => 'Upload last photo.',
 			'create.upload_video_slot' => 'Upload Video.',
-			'create.upload_photo_slot' => 'Upload photo.',
+			'create.upload_photo_slot' => 'Upload Photo.',
 			'create.photo_slot_num' => ({required Object num}) => 'Photo ${num}',
 			'create.required_label' => 'Required',
 			'create.optional_label' => 'Optional',
@@ -1556,8 +1556,8 @@ extension on Translations {
 			'create.trimming_loading' => 'Trimming video...',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
-			'splash.appName' => 'Video AI',
-			'onboarding.page1.title' => 'Welcome To Video AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Welcome To Vido',
 			'onboarding.page1.subtitle' => 'Your Creative Journey Starts Here...',
 			'onboarding.page1.button' => 'Get Started',
 			'onboarding.page2.title' => 'Image To Video',
@@ -1589,7 +1589,7 @@ extension on Translations {
 			'profile.delete' => 'Delete',
 			'profile.generating' => 'Generating...',
 			'profile.imageGeneration' => 'Image Generation',
-			'home_new.welcomeToAppName' => 'Welcome To Video AI',
+			'home_new.welcomeToAppName' => 'Welcome To Vido',
 			'home_new.imageToVideo' => 'Image to\nVideo',
 			'home_new.transitionVideo' => 'Transition\nVideo',
 			'home_new.imageToDance' => 'Image to\nDance',

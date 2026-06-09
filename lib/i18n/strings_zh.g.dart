@@ -92,7 +92,7 @@ class _Translations$home$zh extends Translations$home$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '视频 AI';
+	@override String get title => 'Vido';
 	@override String get trending => '热门';
 	@override String get new_section => '最新';
 	@override String get toy_box => '玩具手办盒';
@@ -171,7 +171,7 @@ class _Translations$splash$zh extends Translations$splash$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => '视频AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -230,7 +230,7 @@ class _Translations$home_new$zh extends Translations$home_new$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => '欢迎使用视频AI';
+	@override String get welcomeToAppName => '欢迎使用Vido';
 	@override String get imageToVideo => '图片转\n视频';
 	@override String get transitionVideo => '转场\n视频';
 	@override String get imageToDance => '图片\n舞蹈';
@@ -667,7 +667,7 @@ class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '欢迎使用视频AI';
+	@override String get title => '欢迎使用Vido';
 	@override String get subtitle => '您的创意之旅从这里开始...';
 	@override String get button => '开始体验';
 }
@@ -737,7 +737,7 @@ extension on TranslationsZh {
 			'common.generate' => '生成',
 			'common.processing' => '处理中...',
 			'common.ok' => '确定',
-			'home.title' => '视频 AI',
+			'home.title' => 'Vido',
 			'home.trending' => '热门',
 			'home.new_section' => '最新',
 			'home.toy_box' => '玩具手办盒',
@@ -789,8 +789,8 @@ extension on TranslationsZh {
 			'create.please_add_image_first' => '请先添加图片',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
-			'splash.appName' => '视频AI',
-			'onboarding.page1.title' => '欢迎使用视频AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => '欢迎使用Vido',
 			'onboarding.page1.subtitle' => '您的创意之旅从这里开始...',
 			'onboarding.page1.button' => '开始体验',
 			'onboarding.page2.title' => '图片转视频',
@@ -822,7 +822,7 @@ extension on TranslationsZh {
 			'profile.delete' => '删除',
 			'profile.generating' => '生成中...',
 			'profile.imageGeneration' => '图像生成',
-			'home_new.welcomeToAppName' => '欢迎使用视频AI',
+			'home_new.welcomeToAppName' => '欢迎使用Vido',
 			'home_new.imageToVideo' => '图片转\n视频',
 			'home_new.transitionVideo' => '转场\n视频',
 			'home_new.imageToDance' => '图片\n舞蹈',

@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "ビデオAI",
+    "title": "Vido",
     "trending": "トレンド",
     "new_section": "新規",
     "toy_box": "トイフィギュアボックス",
@@ -69,11 +69,11 @@
     "desc": "編集を続けますか、それとも今終了しますか？"
   },
   "splash": {
-    "appName": "ビデオAI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "ビデオAIへようこそ",
+      "title": "Vidoへようこそ",
       "subtitle": "あなたのクリエイティブな旅がここから始まる...",
       "button": "始める"
     },
@@ -120,7 +120,7 @@
     "imageGeneration": "画像生成"
   },
   "home_new": {
-    "welcomeToAppName": "ビデオAIへようこそ",
+    "welcomeToAppName": "Vidoへようこそ",
     "imageToVideo": "画像から\nビデオ",
     "transitionVideo": "トランジション\n動画",
     "imageToDance": "画像から\nダンス",

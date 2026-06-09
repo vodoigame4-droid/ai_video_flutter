@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Video AI",
+    "title": "Vido",
     "trending": "Xu hướng",
     "new_section": "Mới",
     "toy_box": "Hộp đồ chơi",
@@ -21,7 +21,7 @@
   },
   "create": {
     "selfie_aquaman": "Ảnh tự sướng Aquaman",
-    "tap_upload": "Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.",
+    "tap_upload": "Tải ảnh của bạn lên và tạo Vido chỉ trong vài giây.",
     "tap_to_upload_photo": "Chạm vào đây để tải ảnh của bạn lên.",
     "select_upload_title": "Chọn phương thức tải ảnh",
     "upload_image": "Tải ảnh lên",
@@ -69,11 +69,11 @@
     "desc": "Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Chào mừng đến với Video AI",
+      "title": "Chào mừng đến với Vido",
       "subtitle": "Hành trình sáng tạo của bạn bắt đầu tại đây...",
       "button": "Bắt đầu"
     },
@@ -111,7 +111,7 @@
     "myVideo": "Video của tôi",
     "liked": "Đã thích",
     "noVideos": "Chưa có video",
-    "noVideosDesc": "Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.",
+    "noVideosDesc": "Hãy tạo Vido đầu tiên của bạn để nó xuất hiện tại đây.",
     "deleteTitle": "Xóa video này?",
     "deleteDesc": "Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.",
     "cancel": "Hủy",
@@ -120,7 +120,7 @@
     "imageGeneration": "Tạo hình ảnh"
   },
   "home_new": {
-    "welcomeToAppName": "Chào mừng đến với Video AI",
+    "welcomeToAppName": "Chào mừng đến với Vido",
     "imageToVideo": "Ảnh sang\nVideo",
     "transitionVideo": "Video\nChuyển cảnh",
     "imageToDance": "Ảnh sang\nNhảy múa",
