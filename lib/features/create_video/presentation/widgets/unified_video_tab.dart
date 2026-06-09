@@ -55,26 +55,19 @@ class UnifiedVideoTab extends StatelessWidget {
                             Expanded(
                               child: Hero(
                                 tag: 'create-video-hero',
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: AppColors.onSurface,
-                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                  ),
-                                  clipBehavior: Clip.antiAlias,
-                                  child: UploadSlotWidget(
-                                    mediaPath: slotsPaths[0],
-                                    labelText: t.create.photo_slot_num(num: "1"),
-                                    onMediaRemoved: () {
-                                      context.read<CreateVideoBloc>().add(
-                                            const CreateVideoEvent.removeMedia(0),
-                                          );
-                                    },
-                                    onMediaSelected: (path) {
-                                      context.read<CreateVideoBloc>().add(
-                                            CreateVideoEvent.selectMedia(0, path),
-                                          );
-                                    },
-                                  ),
+                                child: UploadSlotWidget(
+                                  mediaPath: slotsPaths[0],
+                                  labelText: t.create.photo_slot_num(num: "1"),
+                                  onMediaRemoved: () {
+                                    context.read<CreateVideoBloc>().add(
+                                          const CreateVideoEvent.removeMedia(0),
+                                        );
+                                  },
+                                  onMediaSelected: (path) {
+                                    context.read<CreateVideoBloc>().add(
+                                          CreateVideoEvent.selectMedia(0, path),
+                                        );
+                                  },
                                 ),
                               ),
                             ),
