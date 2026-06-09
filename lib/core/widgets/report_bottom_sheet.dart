@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../../i18n/strings.g.dart';
+import 'app_confirm_dialog.dart';
 import 'gradient_button.dart';
 
 enum ReportOption { offensive, quality, copyright, bug, other }
@@ -317,107 +318,16 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
 
   void _showConfirmDialog(BuildContext context, String optionText) {
     final t = context.t;
-    showDialog(
+    AppConfirmDialog.show(
       context: context,
-      barrierColor: AppColors.black.withValues(alpha: 0.6),
-      builder: (dialogContext) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: Dialog(
-            backgroundColor: AppColors.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              side: BorderSide(color: AppColors.secondary, width: 1.2),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    t.report_dialog.title,
-                    style: const TextStyle(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    t.report_dialog.desc,
-                    style: const TextStyle(
-                      color: AppColors.subText,
-                      fontSize: 15,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => Navigator.pop(dialogContext),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.white.withValues(alpha: 0.1),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Text(
-                              t.report_dialog.cancel,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(dialogContext); // Close dialog
-                            Navigator.pop(context); // Close bottom sheet
-                            _showThanksMessage(context);
-                          },
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
-                          ),
-                          child: Ink(
-                            height: 48,
-                            decoration: const BoxDecoration(
-                              gradient: AppColors.primaryGradient,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                t.report_dialog.submit,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+      title: t.report_dialog.title,
+      description: t.report_dialog.desc,
+      cancelLabel: t.report_dialog.cancel,
+      confirmLabel: t.report_dialog.submit,
+      onConfirm: () {
+        Navigator.pop(context); // Close dialog
+        Navigator.pop(context); // Close bottom sheet
+        _showThanksMessage(context);
       },
     );
   }

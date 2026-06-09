@@ -557,53 +557,55 @@ class IapView extends StatelessWidget {
                     // LAST in Stack so it renders on top and receives touch events
                     Positioned(
                       top: MediaQuery.of(context).padding.top + 16,
-                      left: 8,
-                      right: 8,
+                      left: 16,
+                      right: 16,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // Back Close Button
-                          GestureDetector(
-                            onTap: () {
-                              context.pushReplacementNamed(DiscountPage.name);
-                            },
-                            child: Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.3),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 20,
+                          Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () {
+                                context.pushReplacementNamed(DiscountPage.name);
+                              },
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),
 
                           // Restore Pill Button
-                          GestureDetector(
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.restore(),
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.3),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: Text(
-                                t.premium.restore,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                          Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(100),
+                            child: InkWell(
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.restore(),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(100),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 8,
+                                ),
+                                child: Text(
+                                  t.premium.restore,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),

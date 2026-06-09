@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import 'gradient_border_container.dart';
 
 class AppConfirmDialog extends StatelessWidget {
   final String title;
@@ -50,22 +51,24 @@ class AppConfirmDialog extends StatelessWidget {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           child: Dialog(
-            backgroundColor: AppColors.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              side: BorderSide(color: AppColors.secondary, width: 1.2),
-            ),
-            child: AppConfirmDialog(
-              title: title,
-              description: description,
-              cancelLabel: cancelLabel,
-              confirmLabel: confirmLabel,
-              onCancel: onCancel ?? () => Navigator.pop(dialogContext),
-              onConfirm: onConfirm,
-              cancelBgColor: cancelBgColor,
-              cancelTextColor: cancelTextColor,
-              confirmGradient: confirmGradient,
-              confirmTextColor: confirmTextColor,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: GradientBorderContainer(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderWidth: 1.2,
+              backgroundColor: AppColors.onSurface,
+              child: AppConfirmDialog(
+                title: title,
+                description: description,
+                cancelLabel: cancelLabel,
+                confirmLabel: confirmLabel,
+                onCancel: onCancel ?? () => Navigator.pop(dialogContext),
+                onConfirm: onConfirm,
+                cancelBgColor: cancelBgColor,
+                cancelTextColor: cancelTextColor,
+                confirmGradient: confirmGradient,
+                confirmTextColor: confirmTextColor,
+              ),
             ),
           ),
         );

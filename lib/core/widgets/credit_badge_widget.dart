@@ -1,5 +1,4 @@
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
-import 'package:ai_video_flutter/features/premium/presentation/pages/buy_credits_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/core_business.dart';
@@ -7,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
 import '../injection/injection_container.dart';
-import 'rolling_counter.dart';
 
 class CreditBadgeWidget extends StatelessWidget {
   const CreditBadgeWidget({super.key});
@@ -23,11 +21,10 @@ class CreditBadgeWidget extends StatelessWidget {
             ready: (isPro, _) => isPro,
             orElse: () => false,
           );
-          final creditsStr = state.maybeWhen(
-            ready: (_, credits) => credits.toString(),
-            loading: () => '...',
-            orElse: () => '0',
-          );
+
+          if (isPro) {
+            return const SizedBox.shrink();
+          }
 
           final gradient = const LinearGradient(
             colors: [Color(0xFF2BC5C5), Color(0xFF24C780)],
@@ -39,18 +36,8 @@ class CreditBadgeWidget extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                LogUtils.d('CreditBadgeWidget: onTap clicked. isPro=$isPro');
-                if (isPro) {
-                  LogUtils.d(
-                    'CreditBadgeWidget: navigating to BuyCreditsPage (${BuyCreditsPage.path})',
-                  );
-                  context.push(BuyCreditsPage.path);
-                } else {
-                  LogUtils.d(
-                    'CreditBadgeWidget: navigating to IapPage (${IapPage.path})',
-                  );
-                  context.push(IapPage.path);
-                }
+                LogUtils.d('CreditBadgeWidget: onTap clicked. navigating to IapPage (${IapPage.path})');
+                context.push(IapPage.path);
               },
               borderRadius: const BorderRadius.all(Radius.circular(100)),
               child: Ink(
@@ -68,35 +55,19 @@ class CreditBadgeWidget extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    isPro
-                        ? Text(
-                            context.t.common.pro,
-                            style:
-                                context.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ) ??
-                                const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          )
-                        : RollingCounter(
-                            text: creditsStr,
-                            textStyle:
-                                context.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ) ??
-                                const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    Text(
+                      context.t.common.pro,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ) ??
+                          const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
+                    ),
                     const SizedBox(width: 4),
                     Image.asset(
                       'assets/icons/ic_star_vip.png',

@@ -201,14 +201,14 @@ class _ResultPageState extends State<ResultPage> {
         child: Scaffold(
           backgroundColor: AppColors.black,
           body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 8),
+            child: Column(
+              children: [
+                const SizedBox(height: 8),
 
-                  // Header row
-                  Row(
+                // Header row
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 6.0),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Back button
@@ -275,11 +275,14 @@ class _ResultPageState extends State<ResultPage> {
                       ),
                     ],
                   ),
+                ),
 
-                  const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-                  // Subtitle/Info row: Spark icon + Video title status info (Embedded as WidgetSpan to prevent Row overflow)
-                  RichText(
+                // Subtitle/Info row: Spark icon + Video title status info (Embedded as WidgetSpan to prevent Row overflow)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       style: context.textTheme.bodySmall?.copyWith(
@@ -316,257 +319,262 @@ class _ResultPageState extends State<ResultPage> {
                       ],
                     ),
                   ),
+                ),
 
-                  const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                  // Video Container Card
-                  Expanded(
+                // Video Container Card
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Hero(
                       tag: widget.fromGeneration
                           ? 'template-hero-${widget.themeId}'
                           : 'user-video-hero-${widget.videoId}',
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.black,
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: SizedBox.expand(
-                          child: BlocBuilder<ResultBloc, ResultState>(
-                            bloc: _bloc,
-                            builder: (context, state) {
-                              return state.maybeWhen(
-                                ready: (
-                                  videoId,
-                                  title,
-                                  imageUrl,
-                                  videoUrl,
-                                  createdAt,
-                                  isPlaying,
-                                  isMuted,
-                                  isBuffering,
-                                  extendPrompt,
-                                  extendQuality,
-                                  extendDuration,
-                                  inspireMeCount,
-                                  isGeneratingExtended,
-                                  isDeleted,
-                                  isDownloading,
-                                  isSharing,
-                                  downloadErrorMessage,
-                                  shareErrorMessage,
-                                  downloadSuccess,
-                                  shareSuccess,
-                                  isVip,
-                                ) {
-                                  return Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                        // 1. Reusable smooth video player
-                                        Positioned.fill(
-                                          child: SmoothVideoPlayerWidget(
-                                            videoUrl: videoUrl,
-                                            imageUrl: imageUrl,
-                                            externalPlayer: _bloc.player,
-                                            borderRadius: const BorderRadius.all(
-                                              Radius.circular(20),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: AppColors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: SizedBox.expand(
+                            child: BlocBuilder<ResultBloc, ResultState>(
+                              bloc: _bloc,
+                              builder: (context, state) {
+                                return state.maybeWhen(
+                                  ready: (
+                                    videoId,
+                                    title,
+                                    imageUrl,
+                                    videoUrl,
+                                    createdAt,
+                                    isPlaying,
+                                    isMuted,
+                                    isBuffering,
+                                    extendPrompt,
+                                    extendQuality,
+                                    extendDuration,
+                                    inspireMeCount,
+                                    isGeneratingExtended,
+                                    isDeleted,
+                                    isDownloading,
+                                    isSharing,
+                                    downloadErrorMessage,
+                                    shareErrorMessage,
+                                    downloadSuccess,
+                                    shareSuccess,
+                                    isVip,
+                                  ) {
+                                    return Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                          // 1. Reusable smooth video player
+                                          Positioned.fill(
+                                            child: SmoothVideoPlayerWidget(
+                                              videoUrl: videoUrl,
+                                              imageUrl: imageUrl,
+                                              externalPlayer: _bloc.player,
+                                              borderRadius: const BorderRadius.all(
+                                                Radius.circular(20),
+                                              ),
                                             ),
                                           ),
-                                        ),
 
-                                        // 2. Bottom Glassmorphic Overlay: Original image thumbnail + title + datetime info
-                                        Positioned(
-                                          bottom: 0,
-                                          left: 0,
-                                          right: 0,
-                                          height: 88,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                begin: Alignment.bottomCenter,
-                                                end: Alignment.topCenter,
-                                                colors: [
-                                                  AppColors.black.withValues(
-                                                    alpha: 0.8,
-                                                  ),
-                                                  AppColors.black.withValues(
-                                                    alpha: 0.0,
+                                          // 2. Bottom Glassmorphic Overlay: Original image thumbnail + title + datetime info
+                                          Positioned(
+                                            bottom: 0,
+                                            left: 0,
+                                            right: 0,
+                                            height: 88,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                  colors: [
+                                                    AppColors.black.withValues(
+                                                      alpha: 0.8,
+                                                    ),
+                                                    AppColors.black.withValues(
+                                                      alpha: 0.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 16.0,
+                                                vertical: 16.0,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  // Original Thumbnail preview
+                                                  if (imageUrl != null)
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          const BorderRadius.all(
+                                                            Radius.circular(4),
+                                                          ),
+                                                      child: Image.network(
+                                                        imageUrl,
+                                                        width: 50,
+                                                        height: 54,
+                                                        fit: BoxFit.cover,
+                                                        errorBuilder: (context, error, stackTrace) {
+                                                          return Container(
+                                                            width: 50,
+                                                            height: 54,
+                                                            decoration: const BoxDecoration(
+                                                              color: Colors.grey,
+                                                              borderRadius: BorderRadius.all(
+                                                                Radius.circular(4),
+                                                              ),
+                                                            ),
+                                                            child: const Icon(
+                                                              Icons.image_not_supported_outlined,
+                                                              color: Colors.white24,
+                                                              size: 20,
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    )
+                                                  else
+                                                    Container(
+                                                      width: 50,
+                                                      height: 54,
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                            color: Colors.grey,
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                  Radius.circular(
+                                                                    4,
+                                                                  ),
+                                                                ),
+                                                          ),
+                                                      child: const Icon(
+                                                        Icons.image,
+                                                        color: Colors.white24,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  const SizedBox(width: 16),
+
+                                                  // Titles and Meta information
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.center,
+                                                      children: [
+                                                        Text(
+                                                          title,
+                                                          style:
+                                                              context
+                                                                  .textTheme
+                                                                  .titleLarge
+                                                                  ?.copyWith(
+                                                                    fontSize: 18,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ) ??
+                                                              const TextStyle(
+                                                                color: Colors.white,
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight.bold,
+                                                              ),
+                                                          maxLines: 1,
+                                                          overflow:
+                                                              TextOverflow.ellipsis,
+                                                        ),
+                                                        const SizedBox(height: 4),
+                                                        Row(
+                                                          children: [
+                                                            const Icon(
+                                                              Icons
+                                                                  .calendar_today_outlined,
+                                                              size: 12,
+                                                              color:
+                                                                  AppColors.subText,
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 6,
+                                                            ),
+                                                            Text(
+                                                              createdAt,
+                                                              style: context
+                                                                  .textTheme
+                                                                  .bodySmall
+                                                                  ?.copyWith(
+                                                                    color: AppColors
+                                                                        .subText,
+                                                                    fontSize: 12,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 16.0,
-                                              vertical: 16.0,
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                // Original Thumbnail preview
-                                                if (imageUrl != null)
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                          Radius.circular(4),
-                                                        ),
-                                                    child: Image.network(
-                                                      imageUrl,
-                                                      width: 50,
-                                                      height: 54,
-                                                      fit: BoxFit.cover,
-                                                      errorBuilder: (context, error, stackTrace) {
-                                                        return Container(
-                                                          width: 50,
-                                                          height: 54,
-                                                          decoration: const BoxDecoration(
-                                                            color: Colors.grey,
-                                                            borderRadius: BorderRadius.all(
-                                                              Radius.circular(4),
-                                                            ),
-                                                          ),
-                                                          child: const Icon(
-                                                            Icons.image_not_supported_outlined,
-                                                            color: Colors.white24,
-                                                            size: 20,
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  )
-                                                else
-                                                  Container(
-                                                    width: 50,
-                                                    height: 54,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                          color: Colors.grey,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                Radius.circular(
-                                                                  4,
-                                                                ),
-                                                              ),
-                                                        ),
-                                                    child: const Icon(
-                                                      Icons.image,
-                                                      color: Colors.white24,
-                                                      size: 20,
-                                                    ),
-                                                  ),
-                                                const SizedBox(width: 16),
-
-                                                // Titles and Meta information
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                    children: [
-                                                      Text(
-                                                        title,
-                                                        style:
-                                                            context
-                                                                .textTheme
-                                                                .titleLarge
-                                                                ?.copyWith(
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ) ??
-                                                            const TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                            ),
-                                                        maxLines: 1,
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
-                                                      ),
-                                                      const SizedBox(height: 4),
-                                                      Row(
-                                                        children: [
-                                                          const Icon(
-                                                            Icons
-                                                                .calendar_today_outlined,
-                                                            size: 12,
-                                                            color:
-                                                                AppColors.subText,
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 6,
-                                                          ),
-                                                          Text(
-                                                            createdAt,
-                                                            style: context
-                                                                .textTheme
-                                                                .bodySmall
-                                                                ?.copyWith(
-                                                                  color: AppColors
-                                                                      .subText,
-                                                                  fontSize: 12,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ),
-                                        ),
 
-                                        // 3. Right-Side Controls: Share, Download, and Delete stack
-                                        Positioned(
-                                          right: 16,
-                                          bottom: 76,
-                                          child: Column(
-                                            children: [
-                                              // Share Action Button
-                                              Column(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          100,
+                                          // 3. Right-Side Controls: Share, Download, and Delete stack
+                                          Positioned(
+                                            right: 16,
+                                            bottom: 76,
+                                            child: Column(
+                                              children: [
+                                                // Share Action Button
+                                                Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            100,
+                                                          ),
+                                                      child: BackdropFilter(
+                                                        filter: ImageFilter.blur(
+                                                          sigmaX: 4,
+                                                          sigmaY: 4,
                                                         ),
-                                                    child: BackdropFilter(
-                                                      filter: ImageFilter.blur(
-                                                        sigmaX: 4,
-                                                        sigmaY: 4,
-                                                      ),
-                                                      child: Material(
-                                                        color: AppColors.black
-                                                            .withValues(
-                                                              alpha: 0.1,
-                                                            ),
-                                                        shape:
-                                                            const CircleBorder(),
-                                                        child: InkWell(
-                                                          onTap: isSharing
-                                                              ? null
-                                                              : () {
-                                                                  _bloc.add(const ResultEvent.shareVideo());
-                                                                },
-                                                          borderRadius:
-                                                              const BorderRadius.all(
-                                                                Radius.circular(
-                                                                  100,
-                                                                ),
+                                                        child: Material(
+                                                          color: AppColors.black
+                                                              .withValues(
+                                                                alpha: 0.1,
                                                               ),
-                                                          child: SizedBox(
-                                                            width: 42,
-                                                            height: 42,
-                                                            child: isSharing
-                                                                ? const Padding(
-                                                                    padding: EdgeInsets.all(11),
-                                                                    child: CircularProgressIndicator(
-                                                                      strokeWidth: 2,
-                                                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                                                    ),
-                                                                  )
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          child: InkWell(
+                                                            onTap: isSharing
+                                                                ? null
+                                                                : () {
+                                                                    _bloc.add(const ResultEvent.shareVideo());
+                                                                  },
+                                                            borderRadius:
+                                                                const BorderRadius.all(
+                                                                  Radius.circular(
+                                                                    100,
+                                                                  ),
+                                                                ),
+                                                            child: SizedBox(
+                                                              width: 42,
+                                                              height: 42,
+                                                              child: isSharing
+                                                                  ? const Padding(
+                                                                      padding: EdgeInsets.all(11),
+                                                                      child: CircularProgressIndicator(
+                                                                        strokeWidth: 2,
+                                                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                                                      ),
+                                                                    )
                                                                   : Center(
                                                                       child: AppSvgIcon(
                                                                         assetName: Assets.icons.icShare,
@@ -575,73 +583,73 @@ class _ResultPageState extends State<ResultPage> {
                                                                         height: 18,
                                                                       ),
                                                                     ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Text(
-                                                    t.result.share,
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      color: AppColors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-
-                                              const SizedBox(height: 30),
-
-                                              // Download Action Button
-                                              Column(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          100,
-                                                        ),
-                                                    child: BackdropFilter(
-                                                      filter: ImageFilter.blur(
-                                                        sigmaX: 4,
-                                                        sigmaY: 4,
+                                                    const SizedBox(height: 4),
+                                                    Text(
+                                                      t.result.share,
+                                                      style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: AppColors.white,
                                                       ),
-                                                      child: Material(
-                                                        color: AppColors.black
-                                                            .withValues(
-                                                              alpha: 0.1,
-                                                            ),
-                                                        shape:
-                                                            const CircleBorder(),
-                                                        child: InkWell(
-                                                          onTap: isDownloading
-                                                              ? null
-                                                              : () async {
-                                                                  final hasPermission = await AppPermissionHandler.checkAndRequestPhotosPermission(context);
-                                                                  if (!context.mounted) return;
-                                                                  if (hasPermission) {
-                                                                    _bloc.add(const ResultEvent.downloadVideo());
-                                                                  }
-                                                                },
-                                                          borderRadius:
-                                                              const BorderRadius.all(
-                                                                Radius.circular(
-                                                                  100,
-                                                                ),
+                                                    ),
+                                                  ],
+                                                ),
+
+                                                const SizedBox(height: 30),
+
+                                                // Download Action Button
+                                                Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            100,
+                                                          ),
+                                                      child: BackdropFilter(
+                                                        filter: ImageFilter.blur(
+                                                          sigmaX: 4,
+                                                          sigmaY: 4,
+                                                        ),
+                                                        child: Material(
+                                                          color: AppColors.black
+                                                              .withValues(
+                                                                alpha: 0.1,
                                                               ),
-                                                          child: SizedBox(
-                                                            width: 42,
-                                                            height: 42,
-                                                            child: isDownloading
-                                                                ? const Padding(
-                                                                    padding: EdgeInsets.all(11),
-                                                                    child: CircularProgressIndicator(
-                                                                      strokeWidth: 2,
-                                                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                                                    ),
-                                                                  )
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          child: InkWell(
+                                                            onTap: isDownloading
+                                                                ? null
+                                                                : () async {
+                                                                    final hasPermission = await AppPermissionHandler.checkAndRequestPhotosPermission(context);
+                                                                    if (!context.mounted) return;
+                                                                    if (hasPermission) {
+                                                                      _bloc.add(const ResultEvent.downloadVideo());
+                                                                    }
+                                                                  },
+                                                            borderRadius:
+                                                                const BorderRadius.all(
+                                                                  Radius.circular(
+                                                                    100,
+                                                                  ),
+                                                                ),
+                                                            child: SizedBox(
+                                                              width: 42,
+                                                              height: 42,
+                                                              child: isDownloading
+                                                                  ? const Padding(
+                                                                      padding: EdgeInsets.all(11),
+                                                                      child: CircularProgressIndicator(
+                                                                        strokeWidth: 2,
+                                                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                                                      ),
+                                                                    )
                                                                   : Center(
                                                                       child: AppSvgIcon(
                                                                         assetName: Assets.icons.icDownload,
@@ -650,123 +658,127 @@ class _ResultPageState extends State<ResultPage> {
                                                                         height: 18,
                                                                       ),
                                                                     ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Text(
-                                                    t.result.download,
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      color: AppColors.white,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-
-                                              const SizedBox(height: 30),
-
-                                              // Delete Action Button
-                                              Column(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          100,
-                                                        ),
-                                                    child: BackdropFilter(
-                                                      filter: ImageFilter.blur(
-                                                        sigmaX: 4,
-                                                        sigmaY: 4,
+                                                    const SizedBox(height: 4),
+                                                    Text(
+                                                      t.result.download,
+                                                      style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: AppColors.white,
                                                       ),
-                                                      child: Material(
-                                                        color: AppColors.black
-                                                            .withValues(
-                                                              alpha: 0.1,
-                                                            ),
-                                                        shape:
-                                                            const CircleBorder(),
-                                                        child: InkWell(
-                                                          onTap: () =>
-                                                              _showDeleteConfirmationDialog(
-                                                                context,
+                                                    ),
+                                                  ],
+                                                ),
+
+                                                const SizedBox(height: 30),
+
+                                                // Delete Action Button
+                                                Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            100,
+                                                          ),
+                                                      child: BackdropFilter(
+                                                        filter: ImageFilter.blur(
+                                                          sigmaX: 4,
+                                                          sigmaY: 4,
+                                                        ),
+                                                        child: Material(
+                                                          color: AppColors.black
+                                                              .withValues(
+                                                                alpha: 0.1,
                                                               ),
-                                                          borderRadius:
-                                                              const BorderRadius.all(
-                                                                Radius.circular(
-                                                                  100,
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          child: InkWell(
+                                                            onTap: () =>
+                                                                _showDeleteConfirmationDialog(
+                                                                  context,
+                                                                ),
+                                                            borderRadius:
+                                                                const BorderRadius.all(
+                                                                  Radius.circular(
+                                                                    100,
+                                                                  ),
+                                                                ),
+                                                            child: SizedBox(
+                                                              width: 42,
+                                                              height: 42,
+                                                              child: Center(
+                                                                child: AppSvgIcon(
+                                                                  assetName: Assets.icons.icDelete,
+                                                                  color: AppColors.white,
+                                                                  width: 18,
+                                                                  height: 18,
                                                                 ),
                                                               ),
-                                                          child: SizedBox(
-                                                            width: 42,
-                                                            height: 42,
-                                                            child: Center(
-                                                              child: AppSvgIcon(
-                                                                assetName: Assets.icons.icDelete,
-                                                                color: AppColors.white,
-                                                                width: 18,
-                                                                height: 18,
-                                                              ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Text(
-                                                    t.result.delete,
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      color: AppColors.white,
+                                                    const SizedBox(height: 4),
+                                                    Text(
+                                                      t.result.delete,
+                                                      style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: AppColors.white,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                      ],
+                                    );
+                                  },
+                                  orElse: () {
+                                    return Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        if (widget.imageUrl.isNotEmpty)
+                                          Positioned.fill(
+                                            child: widget.imageUrl.startsWith('http')
+                                                ? Image.network(widget.imageUrl, fit: BoxFit.cover)
+                                                : (widget.imageUrl.startsWith('assets/')
+                                                    ? Image.asset(widget.imageUrl, fit: BoxFit.cover)
+                                                    : Image.file(File(widget.imageUrl), fit: BoxFit.cover)),
+                                          ),
+                                        const Center(
+                                          child: CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                                           ),
                                         ),
                                       ],
                                     );
                                   },
-                                orElse: () {
-                                  return Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      if (widget.imageUrl.isNotEmpty)
-                                        Positioned.fill(
-                                          child: widget.imageUrl.startsWith('http')
-                                              ? Image.network(widget.imageUrl, fit: BoxFit.cover)
-                                              : (widget.imageUrl.startsWith('assets/')
-                                                  ? Image.asset(widget.imageUrl, fit: BoxFit.cover)
-                                                  : Image.file(File(widget.imageUrl), fit: BoxFit.cover)),
-                                        ),
-                                      const Center(
-                                        child: CircularProgressIndicator(
-                                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
+                ),
 
-                  const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                  // Bottom Action buttons
-                  Column(
+                // Bottom Action buttons
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
                     children: [
                       // Regenerate Button (Gradient fill)
                       InkWell(
@@ -871,10 +883,10 @@ class _ResultPageState extends State<ResultPage> {
                       ),
                     ],
                   ),
+                ),
 
-                  const SizedBox(height: 24),
-                ],
-              ),
+                const SizedBox(height: 24),
+              ],
             ),
           ),
         ),

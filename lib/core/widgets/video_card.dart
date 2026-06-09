@@ -314,7 +314,10 @@ class _VideoCardState extends State<VideoCard> {
     final Widget content = widget.heroTag != null
         ? Hero(
             tag: widget.heroTag!,
-            child: cardWidget,
+            child: Material(
+              color: Colors.transparent,
+              child: cardWidget,
+            ),
           )
         : cardWidget;
 

@@ -144,10 +144,10 @@ class DiscountView extends StatelessWidget {
 
         // Close button top-left
         Positioned(
-          top: MediaQuery.of(context).padding.top + 12,
+          top: MediaQuery.of(context).padding.top + 16,
           left: 16,
           child: Material(
-            color: Colors.white.withValues(alpha: 0.12),
+            color: Colors.black.withValues(alpha: 0.3),
             shape: const CircleBorder(),
             child: InkWell(
               onTap: () {

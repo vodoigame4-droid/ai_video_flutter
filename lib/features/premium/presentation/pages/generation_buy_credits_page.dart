@@ -456,19 +456,20 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                         Positioned(
                           top: MediaQuery.of(context).padding.top + 16,
                           left: 16,
-                          child: GestureDetector(
-                            onTap: () => context.pop(),
-                            child: Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 20,
+                          child: Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () => context.pop(),
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),

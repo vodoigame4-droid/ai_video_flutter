@@ -134,12 +134,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                         return Column(
                           children: [
                             const SizedBox(height: 8),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                              ),
-                              child: _buildHeader(context, title),
-                            ),
+                            _buildHeader(context, title),
                             const SizedBox(height: 12),
                             Expanded(
                               child: Padding(
@@ -269,115 +264,118 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       tag: selectedPhotoPath == null
           ? 'template-hero-${widget.templateId}'
           : 'template-video-hero-${widget.templateId}',
-      child: Container(
-        height: 450,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.onSurface,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Positioned.fill(
-                child: SmoothVideoPlayerWidget(
-                  videoUrl: widget.videoUrl,
-                  imageUrl: widget.imageUrl,
-                  showPlayPauseButton: true,
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: 120,
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        AppColors.black.withValues(alpha: 0.95),
-                        AppColors.black.withValues(alpha: 0.6),
-                        AppColors.black.withValues(alpha: 0.0),
-                      ],
-                      stops: const [0.0, 0.5, 1.0],
-                    ),
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          height: 450,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: AppColors.onSurface,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned.fill(
+                  child: SmoothVideoPlayerWidget(
+                    videoUrl: widget.videoUrl,
+                    imageUrl: widget.imageUrl,
+                    showPlayPauseButton: true,
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
-                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.auto_awesome_rounded,
-                        color: AppColors.white,
-                        size: 24,
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 120,
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          AppColors.black.withValues(alpha: 0.95),
+                          AppColors.black.withValues(alpha: 0.6),
+                          AppColors.black.withValues(alpha: 0.0),
+                        ],
+                        stops: const [0.0, 0.5, 1.0],
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(
-                          t.create.tap_upload,
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: AppColors.white,
-                            fontSize: 16,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                    ),
+                    padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.auto_awesome_rounded,
+                          color: AppColors.white,
+                          size: 24,
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Material(
-                        color: Colors.transparent,
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () => _showTipsBottomSheet(context),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Text(
+                            t.create.tap_upload,
+                            style: context.textTheme.bodyMedium?.copyWith(
+                              color: AppColors.white,
+                              fontSize: 16,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          child: SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: Center(
-                              child: AppSvgIcon(
-                                assetName: Assets.icons.icNotice,
-                                width: 16,
-                                height: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Material(
+                          color: Colors.transparent,
+                          shape: const CircleBorder(),
+                          child: InkWell(
+                            onTap: () => _showTipsBottomSheet(context),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                            child: SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: Center(
+                                child: AppSvgIcon(
+                                  assetName: Assets.icons.icNotice,
+                                  width: 16,
+                                  height: 16,
+                                ),
                               ),
                             ),
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 120,
+                  right: 16,
+                  child: Column(
+                    children: [
+                      AppHeartButton(
+                        isLiked: isLiked,
+                        onTap: () {
+                          _bloc.add(const CreateFromTemplateEvent.toggleLike());
+                        },
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        likesCountStr,
+                        style: const TextStyle(
+                          color: AppColors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 120,
-                right: 16,
-                child: Column(
-                  children: [
-                    AppHeartButton(
-                      isLiked: isLiked,
-                      onTap: () {
-                        _bloc.add(const CreateFromTemplateEvent.toggleLike());
-                      },
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      likesCountStr,
-                      style: const TextStyle(
-                        color: AppColors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -391,96 +389,104 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       tag: selectedPhotoPath != null
           ? 'template-hero-${widget.templateId}'
           : 'upload-photo-hero-${widget.templateId}',
-      child: GestureDetector(
-        onTap: () => _showUploadBottomSheet(context),
-        child: Container(
-          height: 152,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColors.onSurface,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (selectedPhotoPath != null) ...[
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        width: 132,
-                        height: 152,
-                        child: selectedPhotoPath.startsWith('assets/')
-                            ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                            : Image.file(
-                                File(selectedPhotoPath),
-                                fit: BoxFit.cover,
-                              ),
+      child: Material(
+        color: Colors.transparent,
+        child: GestureDetector(
+          onTap: () => _showUploadBottomSheet(context),
+          child: Container(
+            height: 152,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColors.onSurface,
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (selectedPhotoPath != null) ...[
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          width: 132,
+                          height: 152,
+                          child: selectedPhotoPath.startsWith('assets/')
+                              ? Image.asset(
+                                  selectedPhotoPath,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(
+                                  File(selectedPhotoPath),
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 14,
-                    right: 14,
-                    child: ClipOval(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                        child: Material(
-                          color: const Color(0x99979797),
-                          child: InkWell(
-                            onTap: () => _bloc.add(
-                              const CreateFromTemplateEvent.removePhoto(),
-                            ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(100),
-                            ),
-                            child: const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: Icon(
-                                Icons.close_rounded,
-                                color: AppColors.white,
-                                size: 12,
+                    Positioned(
+                      top: 14,
+                      right: 14,
+                      child: ClipOval(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                          child: Material(
+                            color: const Color(0x99979797),
+                            child: InkWell(
+                              onTap: () => _bloc.add(
+                                const CreateFromTemplateEvent.removePhoto(),
+                              ),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
+                              child: const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: Icon(
+                                  Icons.close_rounded,
+                                  color: AppColors.white,
+                                  size: 12,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ] else ...[
-                  Container(
-                    width: double.infinity,
-                    height: 152,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF171717),
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/ic_image_add.svg',
-                            width: 40,
-                            height: 40,
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            t.create.tap_to_upload_photo,
-                            textAlign: TextAlign.center,
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: AppColors.subText,
+                  ] else ...[
+                    Container(
+                      width: double.infinity,
+                      height: 152,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF171717),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/ic_image_add.svg',
+                              width: 40,
+                              height: 40,
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 12),
+                            Text(
+                              t.create.tap_to_upload_photo,
+                              textAlign: TextAlign.center,
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: AppColors.subText,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),
@@ -709,44 +715,28 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   ),
                   const SizedBox(height: 12),
                   Row(
-                    children: List.generate(goodMockPhotos.length, (idx) {
-                      final path = goodMockPhotos[idx];
-                      String label = "";
-                      if (idx == 0) label = t.tips_sheet.one_person;
-                      if (idx == 1) label = t.tips_sheet.clear_face;
-                      if (idx == 2) label = t.tips_sheet.half_body;
-
-                      return Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: idx == 2 ? 0 : 8.0),
-                          child: Column(
-                            children: [
-                              AspectRatio(
-                                aspectRatio: 3 / 4,
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(16),
-                                  ),
-                                  child: Image.asset(path, fit: BoxFit.cover),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                label,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
+                    children: [
+                      Expanded(
+                        child: _buildTipItem(
+                          path: goodMockPhotos[0],
+                          label: t.tips_sheet.one_person,
                         ),
-                      );
-                    }),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _buildTipItem(
+                          path: goodMockPhotos[1],
+                          label: t.tips_sheet.clear_face,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _buildTipItem(
+                          path: goodMockPhotos[2],
+                          label: t.tips_sheet.half_body,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   Row(
@@ -769,44 +759,28 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
                   ),
                   const SizedBox(height: 12),
                   Row(
-                    children: List.generate(badMockPhotos.length, (idx) {
-                      final path = badMockPhotos[idx];
-                      String label = "";
-                      if (idx == 0) label = t.tips_sheet.hidden_face;
-                      if (idx == 1) label = t.tips_sheet.multiple_people;
-                      if (idx == 2) label = t.tips_sheet.blurry_photo;
-
-                      return Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: idx == 2 ? 0 : 8.0),
-                          child: Column(
-                            children: [
-                              AspectRatio(
-                                aspectRatio: 3 / 4,
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(16),
-                                  ),
-                                  child: Image.asset(path, fit: BoxFit.cover),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                label,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
+                    children: [
+                      Expanded(
+                        child: _buildTipItem(
+                          path: badMockPhotos[0],
+                          label: t.tips_sheet.hidden_face,
                         ),
-                      );
-                    }),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _buildTipItem(
+                          path: badMockPhotos[1],
+                          label: t.tips_sheet.multiple_people,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _buildTipItem(
+                          path: badMockPhotos[2],
+                          label: t.tips_sheet.blurry_photo,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 32),
                   InkWell(
@@ -836,6 +810,37 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
           },
         );
       },
+    );
+  }
+
+  Widget _buildTipItem({
+    required String path,
+    required String label,
+  }) {
+    return Column(
+      children: [
+        AspectRatio(
+          aspectRatio: 3 / 4,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(16),
+            ),
+            child: Image.asset(path, fit: BoxFit.cover),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: const TextStyle(
+            color: AppColors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }
