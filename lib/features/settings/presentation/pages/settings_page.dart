@@ -435,8 +435,8 @@ class _SettingsViewState extends State<SettingsView> {
     VoidCallback? onTap,
   }) {
     final Widget leadingIcon = SizedBox(
-      width: 24,
-      height: 24,
+      width: 22,
+      height: 22,
       child: Center(
         child: icon is IconData
             ? Icon(icon, color: Colors.white, size: 22)

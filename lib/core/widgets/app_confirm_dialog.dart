@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import 'gradient_border_container.dart';
+import 'gradient_button.dart';
 
 class AppConfirmDialog extends StatelessWidget {
   final String title;
@@ -55,7 +56,7 @@ class AppConfirmDialog extends StatelessWidget {
             elevation: 0,
             child: GradientBorderContainer(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
-              borderWidth: 1.2,
+              borderWidth: 2.5,
               backgroundColor: AppColors.onSurface,
               child: AppConfirmDialog(
                 title: title,
@@ -142,27 +143,17 @@ class AppConfirmDialog extends StatelessWidget {
               const SizedBox(width: 12),
               // Confirm Button
               Expanded(
-                child: InkWell(
-                  onTap: onConfirm,
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  child: Ink(
-                    height: 48,
-                    decoration: BoxDecoration(
-                      gradient: activeConfirmGradient,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(100),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        confirmLabel,
-                        style: TextStyle(
-                          color: activeConfirmTextColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
+                child: GradientButton(
+                  label: confirmLabel,
+                  onPressed: onConfirm,
+                  height: 48,
+                  width: double.infinity,
+                  gradient: activeConfirmGradient,
+                  horizontalPadding: 8.0,
+                  textStyle: TextStyle(
+                    color: activeConfirmTextColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
                   ),
                 ),
               ),
