@@ -41,7 +41,7 @@ void main() async {
       'Data: ${message.data}',
     );
     final notification = message.notification;
-    if (notification != null) {
+    if (notification != null && Platform.isAndroid) {
       sl<NotificationRepository>().showLocalNotification(
         title: notification.title ?? '',
         body: notification.body ?? '',
@@ -75,7 +75,9 @@ class MyApp extends StatelessWidget {
               title: 'Video AI',
               theme: AppTheme.darkTheme,
               themeMode: ThemeMode.dark,
-              scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+              scrollBehavior: const ScrollBehavior().copyWith(
+                overscroll: false,
+              ),
               locale: TranslationProvider.of(context).locale.flutterLocale,
               supportedLocales: AppLocaleUtils.supportedLocales,
               localizationsDelegates: const [

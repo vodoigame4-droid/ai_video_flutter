@@ -34,10 +34,12 @@ class GenerationBuyCreditsView extends StatefulWidget {
   const GenerationBuyCreditsView({super.key, required this.videoUrl});
 
   @override
-  State<GenerationBuyCreditsView> createState() => _GenerationBuyCreditsViewState();
+  State<GenerationBuyCreditsView> createState() =>
+      _GenerationBuyCreditsViewState();
 }
 
-class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> with SingleTickerProviderStateMixin {
+class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
+    with SingleTickerProviderStateMixin {
   static String get _placeholderVideoUrl =>
       sl<RemoteConfigService>().getBgIAPUrl();
 
@@ -122,46 +124,64 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
         final t = context.t;
         final double screenWidth = MediaQuery.of(context).size.width;
         final double cardWidth = (screenWidth - 32 - 10) / 2;
-        final double childAspectRatio = cardWidth / 152;
+        final double childAspectRatio = cardWidth / 168;
 
         final iapBlocState = context.watch<IapBloc>().state;
-        final List<Product> regularProducts = iapBlocState.mapOrNull(
-          ready: (s) => s.regularCreditProducts,
-          success: (s) => s.regularCreditProducts,
-          error: (s) => s.regularCreditProducts,
-        ) ?? const [];
+        final List<Product> regularProducts =
+            iapBlocState.mapOrNull(
+              ready: (s) => s.regularCreditProducts,
+              success: (s) => s.regularCreditProducts,
+              error: (s) => s.regularCreditProducts,
+            ) ??
+            const [];
 
-        final List<Product> discountProducts = iapBlocState.mapOrNull(
-          ready: (s) => s.discountCreditProducts,
-          success: (s) => s.discountCreditProducts,
-          error: (s) => s.discountCreditProducts,
-        ) ?? const [];
+        final List<Product> discountProducts =
+            iapBlocState.mapOrNull(
+              ready: (s) => s.discountCreditProducts,
+              success: (s) => s.discountCreditProducts,
+              error: (s) => s.discountCreditProducts,
+            ) ??
+            const [];
 
         String getProductPrice(int credits) {
           final matchCredits = '${credits}credits';
           if (isVip) {
             for (final p in discountProducts) {
               final id = p.id.toLowerCase();
-              if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
                 return p.priceString;
               }
             }
             for (final p in regularProducts) {
               final id = p.id.toLowerCase();
-              if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
                 return p.priceString;
               }
             }
           } else {
             for (final p in regularProducts) {
               final id = p.id.toLowerCase();
-              if (id == matchCredits || id == '$matchCredits.andr' || id.endsWith(matchCredits) || id.endsWith('$matchCredits.andr')) {
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
                 return p.priceString;
               }
             }
             for (final p in discountProducts) {
               final id = p.id.toLowerCase();
-              if (id == '${matchCredits}dis' || id == '${matchCredits}dis.andr' || id.endsWith('${matchCredits}dis') || id.endsWith('${matchCredits}dis.andr') || id.contains('${credits}creditsdis')) {
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
                 return p.priceString;
               }
             }
@@ -169,255 +189,298 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView> wit
           return '...';
         }
 
-    String translateSuccessMessage(BuildContext context, String messageKey) {
-      final t = context.t;
-      if (messageKey == 'success_weekly') {
-        return t.premium.purchase_success(item: t.premium.weekly);
-      }
-      if (messageKey == 'success_yearly') {
-        return t.premium.purchase_success(item: t.premium.annually);
-      }
-      if (messageKey.startsWith('success_credits_')) {
-        final creditsStr = messageKey.replaceFirst('success_credits_', '');
-        String creditLabel = '$creditsStr Credits';
-        if (creditsStr == '70') creditLabel = t.premium.credit_70;
-        else if (creditsStr == '150') creditLabel = t.premium.credit_150;
-        else if (creditsStr == '350') creditLabel = t.premium.credit_350;
-        else if (creditsStr == '500') creditLabel = t.premium.credit_500;
-        else if (creditsStr == '1000') creditLabel = t.premium.credit_1000;
-        else if (creditsStr == '5000') creditLabel = t.premium.credit_5000;
-        
-        return t.premium.purchase_success(item: creditLabel);
-      }
-      return messageKey;
-    }
+        String translateSuccessMessage(
+          BuildContext context,
+          String messageKey,
+        ) {
+          final t = context.t;
+          if (messageKey == 'success_weekly') {
+            return t.premium.purchase_success(item: t.premium.weekly);
+          }
+          if (messageKey == 'success_yearly') {
+            return t.premium.purchase_success(item: t.premium.annually);
+          }
+          if (messageKey.startsWith('success_credits_')) {
+            final creditsStr = messageKey.replaceFirst('success_credits_', '');
+            String creditLabel = '$creditsStr Credits';
+            if (creditsStr == '70')
+              creditLabel = t.premium.credit_70;
+            else if (creditsStr == '150')
+              creditLabel = t.premium.credit_150;
+            else if (creditsStr == '350')
+              creditLabel = t.premium.credit_350;
+            else if (creditsStr == '500')
+              creditLabel = t.premium.credit_500;
+            else if (creditsStr == '1000')
+              creditLabel = t.premium.credit_1000;
+            else if (creditsStr == '5000')
+              creditLabel = t.premium.credit_5000;
 
-    // Package details mapping
-    List<Map<String, dynamic>> packages = [
-      {
-        'credits': 70,
-        'title': t.premium.credit_70,
-        'approx': t.premium.approx_videos(count: 2),
-        'price': getProductPrice(70),
-        'tag': null,
-      },
-      {
-        'credits': 150,
-        'title': t.premium.credit_150,
-        'approx': t.premium.approx_videos(count: 4),
-        'price': getProductPrice(150),
-        'tag': null,
-      },
-      {
-        'credits': 350,
-        'title': t.premium.credit_350,
-        'approx': t.premium.approx_videos(count: 10),
-        'price': getProductPrice(350),
-        'tag': null,
-      },
-      {
-        'credits': 500,
-        'title': t.premium.credit_500,
-        'approx': t.premium.approx_videos(count: 14),
-        'price': getProductPrice(500),
-        'tag': null,
-      },
-      {
-        'credits': 1000,
-        'title': t.premium.credit_1000,
-        'approx': t.premium.approx_videos(count: 27),
-        'price': getProductPrice(1000),
-        'tag': t.premium.most_popular,
-      },
-      {
-        'credits': 5000,
-        'title': t.premium.credit_5000,
-        'approx': t.premium.approx_videos(count: 142),
-        'price': getProductPrice(5000),
-        'tag': t.premium.best_value,
-      },
-    ];
+            return t.premium.purchase_success(item: creditLabel);
+          }
+          return messageKey;
+        }
 
-    return PopScope(
-      canPop: true,
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: BlocConsumer<IapBloc, IapState>(
-          listener: (context, state) {
-            state.whenOrNull(
-              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
-                AppToast.showSuccess(translateSuccessMessage(context, message));
-              },
-              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
-                context.handleFailure(
-                  Failure.business(code: message, message: ''),
-                );
-              },
-            );
+        // Package details mapping
+        List<Map<String, dynamic>> packages = [
+          {
+            'credits': 70,
+            'title': t.premium.credit_70,
+            'approx': t.premium.approx_videos(count: 2),
+            'price': getProductPrice(70),
+            'tag': null,
           },
-          builder: (context, state) {
-            return state.maybeWhen(
-              initial: () => const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                ),
-              ),
-              loading: () => Stack(
-                children: [
-                  Positioned.fill(child: Container(color: Colors.black)),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          t.common.processing,
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              orElse: () {
-                return Stack(
-                  children: [
-                    // 1. Fullscreen Video background
-                    Positioned.fill(
-                      child: SmoothVideoPlayerWidget(
-                        videoUrl: widget.videoUrl.isNotEmpty ? widget.videoUrl : _placeholderVideoUrl,
-                        fit: BoxFit.cover,
-                        autoPlay: true,
-                        loop: true,
-                        showMuteButton: false,
-                        showPlayPauseButton: false,
-                        playMuted: true,
-                      ),
-                    ),
+          {
+            'credits': 150,
+            'title': t.premium.credit_150,
+            'approx': t.premium.approx_videos(count: 4),
+            'price': getProductPrice(150),
+            'tag': null,
+          },
+          {
+            'credits': 350,
+            'title': t.premium.credit_350,
+            'approx': t.premium.approx_videos(count: 10),
+            'price': getProductPrice(350),
+            'tag': null,
+          },
+          {
+            'credits': 500,
+            'title': t.premium.credit_500,
+            'approx': t.premium.approx_videos(count: 14),
+            'price': getProductPrice(500),
+            'tag': null,
+          },
+          {
+            'credits': 1000,
+            'title': t.premium.credit_1000,
+            'approx': t.premium.approx_videos(count: 27),
+            'price': getProductPrice(1000),
+            'tag': t.premium.most_popular,
+          },
+          {
+            'credits': 5000,
+            'title': t.premium.credit_5000,
+            'approx': t.premium.approx_videos(count: 142),
+            'price': getProductPrice(5000),
+            'tag': t.premium.best_value,
+          },
+        ];
 
-                    // 2. Animated blur/dim overlay
-                    AnimatedBuilder(
-                      animation: _revealController,
-                      builder: (context, child) {
-                        return Positioned.fill(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: _blurAnimation.value,
-                              sigmaY: _blurAnimation.value,
-                            ),
-                            child: Container(
-                              color: Colors.black.withValues(alpha: _opacityAnimation.value),
-                            ),
-                          ),
+        return PopScope(
+          canPop: true,
+          child: Scaffold(
+            backgroundColor: Colors.black,
+            body: BlocConsumer<IapBloc, IapState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  success:
+                      (
+                        message,
+                        isWeeklySelected,
+                        isVideoRevealed,
+                        _,
+                        __,
+                        ___,
+                        ____,
+                        _____,
+                      ) {
+                        AppToast.showSuccess(
+                          translateSuccessMessage(context, message),
                         );
                       },
-                    ),
-
-                    Positioned.fill(
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(
-                            16,
-                            MediaQuery.of(context).padding.top + 64,
-                            16,
-                            MediaQuery.of(context).padding.bottom + 24,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const SizedBox(height: 24),
-                              // Centered Tap To Reveal Button
-                              Center(child: _buildTapToReveal()),
-                              // Titles
-                              Text(
-                                t.premium.buy_credit,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 4),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(
-                                  t.premium.credit_desc,
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.4,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-
-                              // 3x2 Packages Grid
-                              GridView.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
-                                childAspectRatio: childAspectRatio,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                children: packages.map((pkg) {
-                                  return GenerationCreditPackCard(
-                                    title: pkg['title'] as String,
-                                    videoEstimate: pkg['approx'] as String,
-                                    priceText: pkg['price'] as String,
-                                    tagText: pkg['tag'] as String?,
-                                    onTap: () {
-                                      context.read<IapBloc>().add(
-                                        IapEvent.purchaseCredits(
-                                          credits: pkg['credits'] as int,
-                                          priceText: pkg['price'] as String,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }).toList(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // 4. Header Close Button
-                    Positioned(
-                      top: MediaQuery.of(context).padding.top + 16,
-                      left: 16,
-                      child: GestureDetector(
-                        onTap: () => context.pop(),
-                        child: Container(
-                          width: 36,
-                          height: 36,
-                          decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  error:
+                      (
+                        message,
+                        isWeeklySelected,
+                        isVideoRevealed,
+                        _,
+                        __,
+                        ___,
+                        ____,
+                        _____,
+                      ) {
+                        context.handleFailure(
+                          Failure.business(code: message, message: ''),
+                        );
+                      },
                 );
               },
-            );
-          },
-        ),
-      ),
-    );
+              builder: (context, state) {
+                return state.maybeWhen(
+                  initial: () => const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.primary,
+                      ),
+                    ),
+                  ),
+                  loading: () => Stack(
+                    children: [
+                      Positioned.fill(child: Container(color: Colors.black)),
+                      Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppColors.primary,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              t.common.processing,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  orElse: () {
+                    return Stack(
+                      children: [
+                        // 1. Fullscreen Video background
+                        Positioned.fill(
+                          child: SmoothVideoPlayerWidget(
+                            videoUrl: widget.videoUrl.isNotEmpty
+                                ? widget.videoUrl
+                                : _placeholderVideoUrl,
+                            fit: BoxFit.cover,
+                            autoPlay: true,
+                            loop: true,
+                            showMuteButton: false,
+                            showPlayPauseButton: false,
+                            playMuted: true,
+                          ),
+                        ),
+
+                        // 2. Animated blur/dim overlay
+                        AnimatedBuilder(
+                          animation: _revealController,
+                          builder: (context, child) {
+                            return Positioned.fill(
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: _blurAnimation.value,
+                                  sigmaY: _blurAnimation.value,
+                                ),
+                                child: Container(
+                                  color: Colors.black.withValues(
+                                    alpha: _opacityAnimation.value,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                        Positioned.fill(
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                16,
+                                MediaQuery.of(context).padding.top + 64,
+                                16,
+                                MediaQuery.of(context).padding.bottom + 24,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const SizedBox(height: 80),
+                                  // Centered Tap To Reveal Button
+                                  Center(child: _buildTapToReveal()),
+                                  // Titles
+                                  Text(
+                                    t.premium.buy_more_credit,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+                                    child: Text(
+                                      t.premium.credit_desc,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.4,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  // 3x2 Packages Grid
+                                  GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                    childAspectRatio: childAspectRatio,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: packages.map((pkg) {
+                                      return GenerationCreditPackCard(
+                                        title: pkg['title'] as String,
+                                        videoEstimate: pkg['approx'] as String,
+                                        priceText: pkg['price'] as String,
+                                        tagText: pkg['tag'] as String?,
+                                        onTap: () {
+                                          context.read<IapBloc>().add(
+                                            IapEvent.purchaseCredits(
+                                              credits: pkg['credits'] as int,
+                                              priceText: pkg['price'] as String,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        // 4. Header Close Button
+                        Positioned(
+                          top: MediaQuery.of(context).padding.top + 16,
+                          left: 16,
+                          child: GestureDetector(
+                            onTap: () => context.pop(),
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        );
       },
     );
   }
@@ -538,7 +601,8 @@ class GenerationCreditPackCard extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: tagColors ??
+                  colors:
+                      tagColors ??
                       [const Color(0xFFff6320), const Color(0xFFfae123)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,

@@ -42,6 +42,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_contact_us.svg
   String get icContactUs => 'assets/icons/ic_contact_us.svg';
 
+  /// File path: assets/icons/ic_copy.svg
+  String get icCopy => 'assets/icons/ic_copy.svg';
+
   /// File path: assets/icons/ic_credit_icon.png
   AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
 
@@ -191,6 +194,7 @@ class $AssetsIconsGen {
     icBlueMask,
     icCamera,
     icContactUs,
+    icCopy,
     icCreditIcon,
     icCrown,
     icDanceHome,
