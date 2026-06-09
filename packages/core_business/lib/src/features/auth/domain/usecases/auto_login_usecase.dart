@@ -31,9 +31,9 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
       );
 
       // For debugging purposes, you can uncomment the following line to simulate a specific device ID
-      if (kDebugMode) {
-        storedDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
-      }
+      // if (kDebugMode) {
+      //   storedDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
+      // }
 
       String? freshUdid;
       try {

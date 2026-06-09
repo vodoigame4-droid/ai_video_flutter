@@ -387,7 +387,11 @@
     "today": "今天",
     "day": "第{n}天",
     "check_in_btn": "签到",
-    "daily_bonus_notification": "每日提醒"
+    "daily_bonus_notification": "每日提醒",
+    "disable_notification_title": "禁用签到提醒吗？",
+    "disable_notification_desc": "您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？",
+    "disable_notification_keep": "保持启用",
+    "disable_notification_disable": "禁用"
   },
   "connectivity": {
     "no_internet_title": "无网络连接",

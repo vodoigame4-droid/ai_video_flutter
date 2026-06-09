@@ -387,7 +387,11 @@
     "today": "Heute",
     "day": "Tag {n}",
     "check_in_btn": "Einchecken",
-    "daily_bonus_notification": "Benachrichtigung"
+    "daily_bonus_notification": "Benachrichtigung",
+    "disable_notification_title": "Check-in-Benachrichtigungen deaktivieren?",
+    "disable_notification_desc": "Sie verpassen die täglichen Login-Belohnungen und andere aufregende Boni. Sind Sie sicher, dass Sie deaktivieren möchten?",
+    "disable_notification_keep": "Aktiviert lassen",
+    "disable_notification_disable": "Deaktivieren"
   },
   "connectivity": {
     "no_internet_title": "Keine Verbindung",

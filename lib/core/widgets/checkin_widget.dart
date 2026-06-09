@@ -102,67 +102,160 @@ class _CheckInWidgetState extends State<CheckInWidget> {
       builder: (dialogContext) {
         return BlocProvider.value(
           value: context.read<DailyCheckInBloc>(),
-          child: StatefulBuilder(
-            builder: (ctx, setDialogState) {
-              return _CheckInDialogContent(
-                notificationEnabled: _notificationEnabled,
-                 onNotificationChanged: (val) async {
-                  if (val) {
-                    final isGranted = await AppPermissionHandler.checkAndRequestNotificationPermission(context);
-                    if (!context.mounted || !mounted) return;
-                    if (isGranted) {
-                      await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
-                      await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
-                      setState(() {
-                        _notificationEnabled = true;
-                      });
-                      setDialogState(() {
-                        _notificationEnabled = true;
-                      });
-                    } else {
-                      setState(() {
-                        _notificationEnabled = false;
-                      });
-                      setDialogState(() {
-                        _notificationEnabled = false;
-                      });
-                    }
-                  } else {
-                    final shouldDisable = await _showDisableNotificationConfirmDialog(ctx);
-                    if (shouldDisable) {
-                      await sl<LocalNotificationService>().setCheckInNotificationEnabled(false);
-                      await sl<LocalNotificationService>().cancelDailyCheckInNotification();
-                      setState(() {
-                        _notificationEnabled = false;
-                      });
-                      setDialogState(() {
-                        _notificationEnabled = false;
-                      });
-                    } else {
-                      setDialogState(() {
-                        _notificationEnabled = true;
-                      });
-                    }
-                  }
-                },
-              );
-            },
+          child: _CheckInDialogContent(
+            initialNotificationEnabled: _notificationEnabled,
           ),
         );
       },
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => sl<DailyCheckInBloc>()..add(const DailyCheckInEvent.init()),
+      child: Builder(
+        builder: (context) {
+          return BlocListener<DailyCheckInBloc, DailyCheckInState>(
+            listener: (context, state) {
+              state.mapOrNull(
+                ready: (readyState) {
+                  if (!readyState.isCheckedInToday && !_hasAutoShown) {
+                    _hasAutoShown = true;
+                    _showCheckInDialog(context);
+                  }
+                },
+              );
+            },
+            child: GestureDetector(
+              onTap: () => _showCheckInDialog(context),
+              behavior: HitTestBehavior.opaque,
+              child: Transform.scale(
+                scale: 1.8,
+                child: Lottie.asset(
+                  Assets.raw.checkinBoxLottie,
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CheckInDialogContent extends StatefulWidget {
+  final bool initialNotificationEnabled;
+
+  const _CheckInDialogContent({
+    required this.initialNotificationEnabled,
+  });
+
+  @override
+  State<_CheckInDialogContent> createState() => _CheckInDialogContentState();
+}
+
+class _CheckInDialogContentState extends State<_CheckInDialogContent>
+    with WidgetsBindingObserver {
+  late bool _notificationEnabled;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _notificationEnabled = widget.initialNotificationEnabled;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _checkSystemNotificationPermission();
+    }
+  }
+
+  Future<void> _checkSystemNotificationPermission() async {
+    final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    if (!isEnabled) {
+      if (mounted) {
+        setState(() {
+          _notificationEnabled = false;
+        });
+      }
+      return;
+    }
+    try {
+      final settings = await sl<FirebaseMessaging>().getNotificationSettings();
+      final isGranted = settings.authorizationStatus == AuthorizationStatus.authorized ||
+                        settings.authorizationStatus == AuthorizationStatus.provisional;
+      if (isGranted) {
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+        await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
+      }
+      if (mounted) {
+        setState(() {
+          _notificationEnabled = isGranted;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          _notificationEnabled = isEnabled;
+        });
+      }
+    }
+  }
+
+  Future<void> _onNotificationChanged(bool val) async {
+    if (val) {
+      final isGranted = await AppPermissionHandler.checkAndRequestNotificationPermission(context);
+      if (!mounted) return;
+      if (isGranted) {
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+        await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
+        setState(() {
+          _notificationEnabled = true;
+        });
+      } else {
+        setState(() {
+          _notificationEnabled = false;
+        });
+      }
+    } else {
+      final shouldDisable = await _showDisableNotificationConfirmDialog(context);
+      if (shouldDisable) {
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(false);
+        await sl<LocalNotificationService>().cancelDailyCheckInNotification();
+        if (mounted) {
+          setState(() {
+            _notificationEnabled = false;
+          });
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _notificationEnabled = true;
+          });
+        }
+      }
+    }
+  }
+
   Future<bool> _showDisableNotificationConfirmDialog(BuildContext context) async {
     final t = context.t;
-    final isVi = t.$meta.locale.languageCode == 'vi';
 
-    final title = isVi ? 'Tắt thông báo điểm danh?' : 'Disable check-in notifications?';
-    final desc = isVi
-        ? 'Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?'
-        : 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?';
-    final cancelText = isVi ? 'Giữ lại' : 'Keep Enabled';
-    final confirmText = isVi ? 'Tắt' : 'Disable';
+    final title = t.checkin.disable_notification_title;
+    final desc = t.checkin.disable_notification_desc;
+    final cancelText = t.checkin.disable_notification_keep;
+    final confirmText = t.checkin.disable_notification_disable;
 
     final result = await showDialog<bool>(
       context: context,
@@ -279,52 +372,6 @@ class _CheckInWidgetState extends State<CheckInWidget> {
 
     return result ?? false;
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<DailyCheckInBloc>()..add(const DailyCheckInEvent.init()),
-      child: Builder(
-        builder: (context) {
-          return BlocListener<DailyCheckInBloc, DailyCheckInState>(
-            listener: (context, state) {
-              state.mapOrNull(
-                ready: (readyState) {
-                  if (!readyState.isCheckedInToday && !_hasAutoShown) {
-                    _hasAutoShown = true;
-                    _showCheckInDialog(context);
-                  }
-                },
-              );
-            },
-            child: GestureDetector(
-              onTap: () => _showCheckInDialog(context),
-              behavior: HitTestBehavior.opaque,
-              child: Transform.scale(
-                scale: 1.8,
-                child: Lottie.asset(
-                  Assets.raw.checkinBoxLottie,
-                  height: 40,
-                  width: 40,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _CheckInDialogContent extends StatelessWidget {
-  final bool notificationEnabled;
-  final ValueChanged<bool> onNotificationChanged;
-
-  const _CheckInDialogContent({
-    required this.notificationEnabled,
-    required this.onNotificationChanged,
-  });
 
   Widget _buildTitle(BuildContext context) {
     final String title = context.t.checkin.title;
@@ -807,39 +854,12 @@ class _CheckInDialogContent extends StatelessWidget {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  // TextButton(
-                                  //   style: TextButton.styleFrom(
-                                  //     padding: const EdgeInsets.symmetric(
-                                  //       horizontal: 12,
-                                  //       vertical: 4,
-                                  //     ),
-                                  //     minimumSize: Size.zero,
-                                  //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                  //     backgroundColor: AppColors.secondary.withOpacity(0.2),
-                                  //     shape: RoundedRectangleBorder(
-                                  //       borderRadius: BorderRadius.circular(12),
-                                  //     ),
-                                  //   ),
-                                  //   onPressed: () async {
-                                  //     await sl<NotificationRepository>().requestPermission();
-                                  //     await sl<LocalNotificationService>().triggerTestCheckInNotification();
-                                  //   },
-                                  //   child: Text(
-                                  //     context.t.notification.test_notification,
-                                  //     style: GoogleFonts.inter(
-                                  //       color: AppColors.secondary,
-                                  //       fontWeight: FontWeight.bold,
-                                  //       fontSize: 14,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // const SizedBox(width: 8),
                                   Transform.scale(
                                     scale: 0.8,
                                     child: CupertinoSwitch(
-                                      value: notificationEnabled,
+                                      value: _notificationEnabled,
                                       activeTrackColor: const Color(0xFF00E676),
-                                      onChanged: onNotificationChanged,
+                                      onChanged: _onNotificationChanged,
                                     ),
                                   ),
                                 ],
@@ -979,10 +999,10 @@ class _CheckInDialogContent extends StatelessWidget {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: state == DayState.claimed
-                        ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
-                        : (state == DayState.today
-                            ? const Color(0xFF1E9320)
-                            : const Color(0xFF0A4F87)),
+                      ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
+                      : (state == DayState.today
+                          ? const Color(0xFF1E9320)
+                          : const Color(0xFF0A4F87)),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

@@ -173,25 +173,14 @@ class TransitionVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(t.create.upload_image, style: context.textTheme.titleMedium),
-            const SizedBox(width: 6),
-            Text(
-              "(${t.create.required_label})",
-              style: context.textTheme.labelMedium,
-            ),
-          ],
-        ),
-        AppSvgIcon(
-          assetName: Assets.icons.icNotice,
-          color: AppColors.white.withValues(alpha: 0.6),
-          width: 16,
-          height: 16,
+        Text(t.create.upload_image, style: context.textTheme.titleMedium),
+        const SizedBox(width: 6),
+        Text(
+          "(${t.create.required_label})",
+          style: context.textTheme.labelMedium,
         ),
       ],
     );

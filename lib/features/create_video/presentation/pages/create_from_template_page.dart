@@ -523,8 +523,8 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
       description: t.leave_dialog.desc,
       cancelLabel: t.common.stay,
       confirmLabel: t.common.leave,
-      onConfirm: () => Navigator.pop(context, true),
-      onCancel: () => Navigator.pop(context, false),
+      onConfirm: () {},
+      onCancel: () {},
     );
   }
 

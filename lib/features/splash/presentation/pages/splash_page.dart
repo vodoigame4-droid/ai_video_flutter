@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
-import '../../../onboarding/presentation/pages/onboarding_page.dart';
+import '../../../premium/presentation/pages/iap_page.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
 import '../bloc/splash_state.dart';
@@ -35,10 +36,15 @@ class SplashView extends StatelessWidget {
         listener: (context, state) {
           state.mapOrNull(
             success: (successState) {
-              if (successState.isOnboardingCompleted) {
+              if (successState.isVip) {
                 DashboardPage.go(context);
               } else {
-                OnboardingPage.go(context, preloadedImages: successState.preloadedUrls);
+                context.goNamed(
+                  IapPage.name,
+                  queryParameters: {
+                    'fromSplash': 'true',
+                  },
+                );
               }
             },
           );
@@ -70,7 +76,7 @@ class SplashView extends StatelessWidget {
                   builder: (context, state) {
                     final percent = state.maybeWhen(
                       loading: (percent) => percent,
-                      success: (completed, urls) => 100,
+                      success: (completed, isVip, urls) => 100,
                       orElse: () => 0,
                     );
                     return ProgressSectionWidget(percent: percent);

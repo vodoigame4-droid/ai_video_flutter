@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ai_video_flutter/core/widgets/app_background.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/buy_credits_page.dart';
 import '../../../../core/widgets/gradient_tab_indicator.dart';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import '../../../../core/utils/credit_navigation_helper.dart';
@@ -212,7 +213,7 @@ class _ProfileViewState extends State<ProfileView>
                                 shape: const CircleBorder(),
                                 child: InkWell(
                                   onTap: () {
-                                    context.push(IapPage.path);
+                                    context.push(BuyCreditsPage.path);
                                   },
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(100),

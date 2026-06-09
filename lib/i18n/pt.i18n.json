@@ -387,7 +387,11 @@
     "today": "Hoje",
     "day": "Dia {n}",
     "check_in_btn": "Fichar",
-    "daily_bonus_notification": "Notificação"
+    "daily_bonus_notification": "Notificação",
+    "disable_notification_title": "Desativar notificações de check-in?",
+    "disable_notification_desc": "Você perderá as recompensas diárias de login e outros bônus emocionantes. Tem certeza de que deseja desativar?",
+    "disable_notification_keep": "Manter ativado",
+    "disable_notification_disable": "Desativar"
   },
   "connectivity": {
     "no_internet_title": "Sem conexão",

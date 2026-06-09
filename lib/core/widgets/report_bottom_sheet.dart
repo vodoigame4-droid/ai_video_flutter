@@ -325,7 +325,6 @@ class _ReportBottomSheetState extends State<ReportBottomSheet> {
       cancelLabel: t.report_dialog.cancel,
       confirmLabel: t.report_dialog.submit,
       onConfirm: () {
-        Navigator.pop(context); // Close dialog
         Navigator.pop(context); // Close bottom sheet
         _showThanksMessage(context);
       },

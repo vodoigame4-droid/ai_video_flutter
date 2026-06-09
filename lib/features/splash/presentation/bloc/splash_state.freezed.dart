@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( int percent)?  loading,TResult Function( bool isOnboardingCompleted,  List<String>? preloadedUrls)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( int percent)?  loading,TResult Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading(_that.percent);case _Success() when success != null:
-return success(_that.isOnboardingCompleted,_that.preloadedUrls);case _Error() when error != null:
+return success(_that.isOnboardingCompleted,_that.isVip,_that.preloadedUrls);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( int percent)  loading,required TResult Function( bool isOnboardingCompleted,  List<String>? preloadedUrls)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( int percent)  loading,required TResult Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)  success,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading(_that.percent);case _Success():
-return success(_that.isOnboardingCompleted,_that.preloadedUrls);case _Error():
+return success(_that.isOnboardingCompleted,_that.isVip,_that.preloadedUrls);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( int percent)?  loading,TResult? Function( bool isOnboardingCompleted,  List<String>? preloadedUrls)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( int percent)?  loading,TResult? Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)?  success,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading(_that.percent);case _Success() when success != null:
-return success(_that.isOnboardingCompleted,_that.preloadedUrls);case _Error() when error != null:
+return success(_that.isOnboardingCompleted,_that.isVip,_that.preloadedUrls);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -291,10 +291,11 @@ as int,
 
 
 class _Success implements SplashState {
-  const _Success({required this.isOnboardingCompleted, final  List<String>? preloadedUrls}): _preloadedUrls = preloadedUrls;
+  const _Success({required this.isOnboardingCompleted, required this.isVip, final  List<String>? preloadedUrls}): _preloadedUrls = preloadedUrls;
   
 
  final  bool isOnboardingCompleted;
+ final  bool isVip;
  final  List<String>? _preloadedUrls;
  List<String>? get preloadedUrls {
   final value = _preloadedUrls;
@@ -315,16 +316,16 @@ _$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.isOnboardingCompleted, isOnboardingCompleted) || other.isOnboardingCompleted == isOnboardingCompleted)&&const DeepCollectionEquality().equals(other._preloadedUrls, _preloadedUrls));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.isOnboardingCompleted, isOnboardingCompleted) || other.isOnboardingCompleted == isOnboardingCompleted)&&(identical(other.isVip, isVip) || other.isVip == isVip)&&const DeepCollectionEquality().equals(other._preloadedUrls, _preloadedUrls));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isOnboardingCompleted,const DeepCollectionEquality().hash(_preloadedUrls));
+int get hashCode => Object.hash(runtimeType,isOnboardingCompleted,isVip,const DeepCollectionEquality().hash(_preloadedUrls));
 
 @override
 String toString() {
-  return 'SplashState.success(isOnboardingCompleted: $isOnboardingCompleted, preloadedUrls: $preloadedUrls)';
+  return 'SplashState.success(isOnboardingCompleted: $isOnboardingCompleted, isVip: $isVip, preloadedUrls: $preloadedUrls)';
 }
 
 
@@ -335,7 +336,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $SplashStateCopyWith<$Re
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- bool isOnboardingCompleted, List<String>? preloadedUrls
+ bool isOnboardingCompleted, bool isVip, List<String>? preloadedUrls
 });
 
 
@@ -352,9 +353,10 @@ class __$SuccessCopyWithImpl<$Res>
 
 /// Create a copy of SplashState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? isOnboardingCompleted = null,Object? preloadedUrls = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? isOnboardingCompleted = null,Object? isVip = null,Object? preloadedUrls = freezed,}) {
   return _then(_Success(
 isOnboardingCompleted: null == isOnboardingCompleted ? _self.isOnboardingCompleted : isOnboardingCompleted // ignore: cast_nullable_to_non_nullable
+as bool,isVip: null == isVip ? _self.isVip : isVip // ignore: cast_nullable_to_non_nullable
 as bool,preloadedUrls: freezed == preloadedUrls ? _self._preloadedUrls : preloadedUrls // ignore: cast_nullable_to_non_nullable
 as List<String>?,
   ));

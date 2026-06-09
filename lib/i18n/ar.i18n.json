@@ -387,7 +387,11 @@
     "today": "اليوم",
     "day": "يوم {n}",
     "check_in_btn": "تسجيل",
-    "daily_bonus_notification": "إشعار يومي"
+    "daily_bonus_notification": "إشعار يومي",
+    "disable_notification_title": "تعطيل إشعارات تسجيل الوصول؟",
+    "disable_notification_desc": "ستفقد مكافآت تسجيل الدخول اليومية والمكافآت المثيرة الأخرى. هل أنت متأكد من رغبتك في التعطيل؟",
+    "disable_notification_keep": "الإبقاء على التفعيل",
+    "disable_notification_disable": "تعطيل"
   },
   "connectivity": {
     "no_internet_title": "لا يوجد اتصال",

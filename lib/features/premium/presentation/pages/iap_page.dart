@@ -21,30 +21,33 @@ import '../widgets/subscription_package_card.dart';
 import '../widgets/buy_credit_now_button.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 class IapPage extends StatelessWidget {
   static const String path = '/iap';
   static const String name = 'iap';
 
   final String videoUrl;
+  final bool fromSplash;
 
-  const IapPage({super.key, this.videoUrl = ''});
+  const IapPage({super.key, this.videoUrl = '', this.fromSplash = false});
 
   @override
   Widget build(BuildContext context) {
-    return IapView(videoUrl: videoUrl);
+    return IapView(videoUrl: videoUrl, fromSplash: fromSplash);
   }
 }
 
 class IapView extends StatelessWidget {
   final String videoUrl;
+  final bool fromSplash;
 
   /// Video URL from Remote Config (preloaded during splash).
   /// Falls back to default URL if Remote Config has no value.
   static String get _placeholderVideoUrl =>
       sl<RemoteConfigService>().getBgIAPUrl();
 
-  const IapView({super.key, required this.videoUrl});
+  const IapView({super.key, required this.videoUrl, this.fromSplash = false});
 
   String _translateSuccessMessage(BuildContext context, String messageKey) {
     final t = context.t;
@@ -81,7 +84,14 @@ class IapView extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        context.pushReplacementNamed(DiscountPage.name);
+        if (fromSplash) {
+          context.pushReplacementNamed(
+            DiscountPage.name,
+            queryParameters: {'fromSplash': 'true'},
+          );
+        } else {
+          context.pushReplacementNamed(DiscountPage.name);
+        }
         return false;
       },
       child: Scaffold(
@@ -105,7 +115,10 @@ class IapView extends StatelessWidget {
                         _translateSuccessMessage(context, message),
                       );
                     }
-                    if (context.mounted && Navigator.of(context).canPop()) {
+                    if (fromSplash) {
+                      DashboardPage.go(context);
+                    } else if (context.mounted &&
+                        Navigator.of(context).canPop()) {
                       context.pop();
                     }
                   },
@@ -568,7 +581,16 @@ class IapView extends StatelessWidget {
                             shape: const CircleBorder(),
                             child: InkWell(
                               onTap: () {
-                                context.pushReplacementNamed(DiscountPage.name);
+                                if (fromSplash) {
+                                  context.pushReplacementNamed(
+                                    DiscountPage.name,
+                                    queryParameters: {'fromSplash': 'true'},
+                                  );
+                                } else {
+                                  context.pushReplacementNamed(
+                                    DiscountPage.name,
+                                  );
+                                }
                               },
                               customBorder: const CircleBorder(),
                               child: const SizedBox(

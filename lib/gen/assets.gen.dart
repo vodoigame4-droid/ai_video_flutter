@@ -251,6 +251,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/ai_nav_icon.svg
   String get aiNavIcon => 'assets/images/ai_nav_icon.svg';
 
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/images/app_icon.png');
+
   /// File path: assets/images/arrow_right.svg
   String get arrowRight => 'assets/images/arrow_right.svg';
 
@@ -374,6 +377,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
     aiNavIcon,
+    appIcon,
     arrowRight,
     bgApp,
     bgBannerBuyCredit,

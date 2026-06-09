@@ -582,6 +582,10 @@ class _Translations$checkin$id extends Translations$checkin$en {
 	@override String day({required Object n}) => 'Hari ${n}';
 	@override String get check_in_btn => 'Check-in';
 	@override String get daily_bonus_notification => 'Notifikasi';
+	@override String get disable_notification_title => 'Nonaktifkan notifikasi check-in?';
+	@override String get disable_notification_desc => 'Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?';
+	@override String get disable_notification_keep => 'Tetap Aktif';
+	@override String get disable_notification_disable => 'Nonaktifkan';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsId {
 			'checkin.day' => ({required Object n}) => 'Hari ${n}',
 			'checkin.check_in_btn' => 'Check-in',
 			'checkin.daily_bonus_notification' => 'Notifikasi',
+			'checkin.disable_notification_title' => 'Nonaktifkan notifikasi check-in?',
+			'checkin.disable_notification_desc' => 'Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?',
+			'checkin.disable_notification_keep' => 'Tetap Aktif',
+			'checkin.disable_notification_disable' => 'Nonaktifkan',
 			'connectivity.no_internet_title' => 'Tidak Ada Koneksi',
 			'connectivity.no_internet_desc' => 'Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.',
 			'connectivity.retry_button' => 'Coba Lagi Koneksi',

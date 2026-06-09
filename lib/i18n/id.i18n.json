@@ -387,7 +387,11 @@
     "today": "Hari ini",
     "day": "Hari {n}",
     "check_in_btn": "Check-in",
-    "daily_bonus_notification": "Notifikasi"
+    "daily_bonus_notification": "Notifikasi",
+    "disable_notification_title": "Nonaktifkan notifikasi check-in?",
+    "disable_notification_desc": "Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?",
+    "disable_notification_keep": "Tetap Aktif",
+    "disable_notification_disable": "Nonaktifkan"
   },
   "connectivity": {
     "no_internet_title": "Tidak Ada Koneksi",

@@ -395,7 +395,11 @@
     "day": "Ngày {n}",
     "check_in_btn": "Nhận quà",
     "checked_in": "Đã nhận quà",
-    "daily_bonus_notification": "Thông báo hàng ngày"
+    "daily_bonus_notification": "Thông báo hàng ngày",
+    "disable_notification_title": "Tắt thông báo điểm danh?",
+    "disable_notification_desc": "Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?",
+    "disable_notification_keep": "Giữ lại",
+    "disable_notification_disable": "Tắt"
   },
   "connectivity": {
     "no_internet_title": "Mất kết nối",

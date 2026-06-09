@@ -582,6 +582,10 @@ class _Translations$checkin$fr extends Translations$checkin$en {
 	@override String day({required Object n}) => 'Jour ${n}';
 	@override String get check_in_btn => 'Réclamer';
 	@override String get daily_bonus_notification => 'Notification';
+	@override String get disable_notification_title => 'Désactiver les notifications de check-in ?';
+	@override String get disable_notification_desc => 'Vous manquerez les récompenses quotidiennes de connexion et d\'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?';
+	@override String get disable_notification_keep => 'Garder activé';
+	@override String get disable_notification_disable => 'Désactiver';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsFr {
 			'checkin.day' => ({required Object n}) => 'Jour ${n}',
 			'checkin.check_in_btn' => 'Réclamer',
 			'checkin.daily_bonus_notification' => 'Notification',
+			'checkin.disable_notification_title' => 'Désactiver les notifications de check-in ?',
+			'checkin.disable_notification_desc' => 'Vous manquerez les récompenses quotidiennes de connexion et d\'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?',
+			'checkin.disable_notification_keep' => 'Garder activé',
+			'checkin.disable_notification_disable' => 'Désactiver',
 			'connectivity.no_internet_title' => 'Pas de connexion',
 			'connectivity.no_internet_desc' => 'Veuillez vérifier votre connexion Internet pour continuer à utiliser l\'application.',
 			'connectivity.retry_button' => 'Réessayer la connexion',

@@ -15,21 +15,25 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 class DiscountPage extends StatelessWidget {
   static const String path = '/discount';
   static const String name = 'discount';
+  final bool fromSplash;
 
-  const DiscountPage({super.key});
+  const DiscountPage({super.key, this.fromSplash = false});
 
   @override
   Widget build(BuildContext context) {
-    return const DiscountView();
+    return DiscountView(fromSplash: fromSplash);
   }
 }
 
 class DiscountView extends StatelessWidget {
-  const DiscountView({super.key});
+  final bool fromSplash;
+
+  const DiscountView({super.key, this.fromSplash = false});
 
   /// Video URL from Remote Config (preloaded during splash).
   /// Falls back to default URL if Remote Config has no value.
@@ -63,58 +67,69 @@ class DiscountView extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: BlocConsumer<IapBloc, IapState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
-              if (message != 'already_vip') {
-                AppToast.showSuccess(_translateSuccessMessage(context, message));
-              }
-              if (context.mounted && Navigator.of(context).canPop()) {
-                context.pop();
-              }
-            },
-            error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
-              context.handleFailure(
-                Failure.business(code: message, message: ''),
-              );
-            },
-          );
-        },
-        builder: (context, state) {
-          return state.maybeWhen(
-            initial: () => const Center(
-              child: CircularProgressIndicator(
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(AppColors.primary),
+    return WillPopScope(
+      onWillPop: () async {
+        if (fromSplash) {
+          DashboardPage.go(context);
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: BlocConsumer<IapBloc, IapState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
+                if (message != 'already_vip') {
+                  AppToast.showSuccess(_translateSuccessMessage(context, message));
+                }
+                if (fromSplash) {
+                  DashboardPage.go(context);
+                } else if (context.mounted && Navigator.of(context).canPop()) {
+                  context.pop();
+                }
+              },
+              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____, _____) {
+                context.handleFailure(
+                  Failure.business(code: message, message: ''),
+                );
+              },
+            );
+          },
+          builder: (context, state) {
+            return state.maybeWhen(
+              initial: () => const Center(
+                child: CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(AppColors.primary),
+                ),
               ),
-            ),
-            loading: () => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(AppColors.primary),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    t.common.processing,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+              loading: () => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppColors.primary),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    Text(
+                      t.common.processing,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            orElse: () => _buildContent(context, t),
-          );
-        },
+              orElse: () => _buildContent(context, t),
+            );
+          },
+        ),
       ),
     );
   }
@@ -151,7 +166,9 @@ class DiscountView extends StatelessWidget {
             shape: const CircleBorder(),
             child: InkWell(
               onTap: () {
-                if (Navigator.of(context).canPop()) {
+                if (fromSplash) {
+                  DashboardPage.go(context);
+                } else if (Navigator.of(context).canPop()) {
                   context.pop();
                 }
               },

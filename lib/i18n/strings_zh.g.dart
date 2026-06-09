@@ -582,6 +582,10 @@ class _Translations$checkin$zh extends Translations$checkin$en {
 	@override String day({required Object n}) => '第${n}天';
 	@override String get check_in_btn => '签到';
 	@override String get daily_bonus_notification => '每日提醒';
+	@override String get disable_notification_title => '禁用签到提醒吗？';
+	@override String get disable_notification_desc => '您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？';
+	@override String get disable_notification_keep => '保持启用';
+	@override String get disable_notification_disable => '禁用';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsZh {
 			'checkin.day' => ({required Object n}) => '第${n}天',
 			'checkin.check_in_btn' => '签到',
 			'checkin.daily_bonus_notification' => '每日提醒',
+			'checkin.disable_notification_title' => '禁用签到提醒吗？',
+			'checkin.disable_notification_desc' => '您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？',
+			'checkin.disable_notification_keep' => '保持启用',
+			'checkin.disable_notification_disable' => '禁用',
 			'connectivity.no_internet_title' => '无网络连接',
 			'connectivity.no_internet_desc' => '请检查您的网络连接以继续使用该应用程序。',
 			'connectivity.retry_button' => '重试连接',

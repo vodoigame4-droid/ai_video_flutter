@@ -903,7 +903,6 @@ class _ResultPageState extends State<ResultPage> {
       cancelLabel: t.profile.cancel,
       confirmLabel: t.profile.delete,
       onConfirm: () {
-        Navigator.pop(context);
         _bloc.add(const ResultEvent.deleteVideo());
       },
     );

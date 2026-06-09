@@ -37,7 +37,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to your photo library to select and upload photos for AI video generation.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you, measure advertising performance, and analyze which marketing campaigns lead to app installs. This helps us keep the app free and continuously improve your experience.</string>
+	<string>This identifier will be used to deliver personalized ads to you, measure advertising effectiveness, and optimize our marketing campaigns. This helps us keep the app free and continuously improve your experience.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

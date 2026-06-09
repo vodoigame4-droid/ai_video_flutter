@@ -46,7 +46,7 @@ void main() async {
   final prefs = sl<SharedPreferences>();
   final savedLocaleCode = prefs.getString(StorageKeys.selectedLocale);
   if (savedLocaleCode != null) {
-    LocaleSettings.setLocaleRawSync(savedLocaleCode);
+    await LocaleSettings.setLocaleRaw(savedLocaleCode);
   }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {

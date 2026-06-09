@@ -658,8 +658,24 @@ class IapBloc extends Bloc<IapEvent, IapState> {
           LogUtils.d('IapBloc: Select Credit Package Index $index');
           state.mapOrNull(
             ready: (s) => emit(s.copyWith(selectedCreditIndex: index)),
-            success: (s) => emit(s.copyWith(selectedCreditIndex: index)),
-            error: (s) => emit(s.copyWith(selectedCreditIndex: index)),
+            success: (s) => emit(IapState.ready(
+              isWeeklySelected: s.isWeeklySelected,
+              isVideoRevealed: s.isVideoRevealed,
+              selectedCreditIndex: index,
+              weeklyProducts: s.weeklyProducts,
+              yearlyProducts: s.yearlyProducts,
+              discountCreditProducts: s.discountCreditProducts,
+              regularCreditProducts: s.regularCreditProducts,
+            )),
+            error: (s) => emit(IapState.ready(
+              isWeeklySelected: s.isWeeklySelected,
+              isVideoRevealed: s.isVideoRevealed,
+              selectedCreditIndex: index,
+              weeklyProducts: s.weeklyProducts,
+              yearlyProducts: s.yearlyProducts,
+              discountCreditProducts: s.discountCreditProducts,
+              regularCreditProducts: s.regularCreditProducts,
+            )),
           );
         },
         restore: () async {

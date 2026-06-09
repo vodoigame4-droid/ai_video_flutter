@@ -63,8 +63,16 @@ class AppConfirmDialog extends StatelessWidget {
                 description: description,
                 cancelLabel: cancelLabel,
                 confirmLabel: confirmLabel,
-                onCancel: onCancel ?? () => Navigator.pop(dialogContext),
-                onConfirm: onConfirm,
+                onCancel: () {
+                  Navigator.pop(dialogContext, false);
+                  if (onCancel != null) {
+                    onCancel();
+                  }
+                },
+                onConfirm: () {
+                  Navigator.pop(dialogContext, true);
+                  onConfirm();
+                },
                 cancelBgColor: cancelBgColor,
                 cancelTextColor: cancelTextColor,
                 confirmGradient: confirmGradient,

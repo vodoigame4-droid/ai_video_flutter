@@ -7,6 +7,7 @@ import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
+import '../../../../core/permission/app_permission_handler.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
@@ -348,10 +349,13 @@ class GeneratingView extends StatelessWidget {
 
                       // Notify me when complete button
                       InkWell(
-                        onTap: () {
-                          context.read<GeneratingBloc>().add(
-                            const GeneratingEvent.notifyComplete(),
-                          );
+                        onTap: () async {
+                          await AppPermissionHandler.checkAndRequestNotificationPermission(context);
+                          if (context.mounted) {
+                            context.read<GeneratingBloc>().add(
+                              const GeneratingEvent.notifyComplete(),
+                            );
+                          }
                         },
                         borderRadius: const BorderRadius.all(
                           Radius.circular(100),

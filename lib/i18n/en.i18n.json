@@ -395,7 +395,11 @@
     "day": "Day {n}",
     "check_in_btn": "Check in",
     "checked_in": "Checked In",
-    "daily_bonus_notification": "Daily Bonus Notification"
+    "daily_bonus_notification": "Daily Bonus Notification",
+    "disable_notification_title": "Disable check-in notifications?",
+    "disable_notification_desc": "You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?",
+    "disable_notification_keep": "Keep Enabled",
+    "disable_notification_disable": "Disable"
   },
   "connectivity": {
     "no_internet_title": "No Connection",

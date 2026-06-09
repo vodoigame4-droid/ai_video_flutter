@@ -285,9 +285,11 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                         ____,
                         _____,
                       ) {
-                        AppToast.showSuccess(
-                          translateSuccessMessage(context, message),
-                        );
+                        if (message != 'already_vip') {
+                          AppToast.showSuccess(
+                            translateSuccessMessage(context, message),
+                          );
+                        }
                       },
                   error:
                       (

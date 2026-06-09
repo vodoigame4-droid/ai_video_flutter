@@ -66,24 +66,29 @@ class AppPermissionHandler {
   /// Checks and requests Photos/Storage permission.
   static Future<bool> checkAndRequestPhotosPermission(BuildContext context) async {
     final t = context.t;
-    Permission permission = Platform.isIOS ? Permission.photos : Permission.storage;
 
     if (Platform.isAndroid) {
-      final storageStatus = await Permission.storage.status;
-      if (!storageStatus.isGranted) {
-        final photosStatus = await Permission.photos.status;
-        if (photosStatus.isGranted) {
-          return true;
-        }
-        if (!photosStatus.isRestricted) {
-          permission = Permission.photos;
-        }
+      // For saving/downloading videos using Gal on Android 10 (API 29) and higher,
+      // no runtime permissions are required. We can return true immediately.
+      final sdkVersion = _getAndroidSdkVersion();
+      if (sdkVersion >= 29) {
+        LogUtils.i('AppPermissionHandler: Android SDK version is $sdkVersion. No storage permission is required for downloading.');
+        return true;
       }
+
+      // Fallback for Android 9 (API 28) or lower
+      return checkAndRequestPermission(
+        context,
+        Permission.storage,
+        title: t.permission.photos_title,
+        desc: t.permission.photos_desc,
+      );
     }
 
+    // For iOS, check and request photos permission
     return checkAndRequestPermission(
       context,
-      permission,
+      Permission.photos,
       title: t.permission.photos_title,
       desc: t.permission.photos_desc,
     );
@@ -124,10 +129,21 @@ class AppPermissionHandler {
       cancelLabel: t.permission.cancel,
       confirmLabel: t.permission.settings,
       onConfirm: () async {
-        Navigator.pop(context);
         LogUtils.i('AppPermissionHandler: Opening app settings...');
         await openAppSettings();
       },
     );
+  }
+
+  static int _getAndroidSdkVersion() {
+    try {
+      final versionString = Platform.operatingSystemVersion;
+      // Typically: "Android 10 (SDK 29)" or "SDK 29"
+      final match = RegExp(r'SDK\s+(\d+)').firstMatch(versionString);
+      if (match != null) {
+        return int.tryParse(match.group(1) ?? '') ?? 0;
+      }
+    } catch (_) {}
+    return 0;
   }
 }

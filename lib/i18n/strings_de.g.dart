@@ -582,6 +582,10 @@ class _Translations$checkin$de extends Translations$checkin$en {
 	@override String day({required Object n}) => 'Tag ${n}';
 	@override String get check_in_btn => 'Einchecken';
 	@override String get daily_bonus_notification => 'Benachrichtigung';
+	@override String get disable_notification_title => 'Check-in-Benachrichtigungen deaktivieren?';
+	@override String get disable_notification_desc => 'Sie verpassen die täglichen Login-Belohnungen und andere aufregende Boni. Sind Sie sicher, dass Sie deaktivieren möchten?';
+	@override String get disable_notification_keep => 'Aktiviert lassen';
+	@override String get disable_notification_disable => 'Deaktivieren';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsDe {
 			'checkin.day' => ({required Object n}) => 'Tag ${n}',
 			'checkin.check_in_btn' => 'Einchecken',
 			'checkin.daily_bonus_notification' => 'Benachrichtigung',
+			'checkin.disable_notification_title' => 'Check-in-Benachrichtigungen deaktivieren?',
+			'checkin.disable_notification_desc' => 'Sie verpassen die täglichen Login-Belohnungen und andere aufregende Boni. Sind Sie sicher, dass Sie deaktivieren möchten?',
+			'checkin.disable_notification_keep' => 'Aktiviert lassen',
+			'checkin.disable_notification_disable' => 'Deaktivieren',
 			'connectivity.no_internet_title' => 'Keine Verbindung',
 			'connectivity.no_internet_desc' => 'Bitte überprüfen Sie Ihre Internetverbindung, um die App weiterhin zu nutzen.',
 			'connectivity.retry_button' => 'Verbindung erneut versuchen',

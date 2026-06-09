@@ -12,7 +12,6 @@ void showReportDialog(BuildContext context) {
     cancelLabel: t.report_dialog.cancel,
     confirmLabel: t.report_dialog.submit,
     onConfirm: () {
-      Navigator.pop(context);
       AppToast.showSuccess(t.report_dialog.success);
     },
   );

@@ -387,7 +387,11 @@
     "today": "आज",
     "day": "दिन {n}",
     "check_in_btn": "हाजिri लगाएं",
-    "daily_bonus_notification": "दैनिक सूचना"
+    "daily_bonus_notification": "दैनिक सूचना",
+    "disable_notification_title": "चेक-इन सूचनाएं अक्षम करें?",
+    "disable_notification_desc": "आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?",
+    "disable_notification_keep": "सक्षम रखें",
+    "disable_notification_disable": "अक्षम करें"
   },
   "connectivity": {
     "no_internet_title": "कोई कनेक्शन नहीं",

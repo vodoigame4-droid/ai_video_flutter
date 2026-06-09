@@ -23,6 +23,7 @@ Future<void> initDependencies() async {
       autoLoginUseCase: sl(),
       getOnboardingStatusUseCase: sl(),
       getBannersUseCase: sl(),
+      getProfileUseCase: sl(),
     ),
   );
 

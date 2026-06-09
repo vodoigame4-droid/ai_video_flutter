@@ -8,6 +8,7 @@ abstract class SplashState with _$SplashState {
   const factory SplashState.loading(int percent) = _Loading;
   const factory SplashState.success({
     required bool isOnboardingCompleted,
+    required bool isVip,
     List<String>? preloadedUrls,
   }) = _Success;
   const factory SplashState.error({required String message}) = _Error;

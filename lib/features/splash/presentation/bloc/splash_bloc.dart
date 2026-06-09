@@ -16,12 +16,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final AutoLoginUseCase autoLoginUseCase;
   final GetOnboardingStatusUseCase getOnboardingStatusUseCase;
   final GetBannersUseCase getBannersUseCase;
+  final GetProfileUseCase getProfileUseCase;
   Timer? _timer;
   bool _isLoginCompleted = false;
   bool _isOnboardingPreloadCompleted = false;
   bool _isRemoteConfigInitialized = false;
   bool _isHavinSdkInitialized = false;
   bool _isOnboardingCompleted = false;
+  bool _isVip = false;
   List<String>? _preloadedUrls;
   int _progress = 0;
 
@@ -29,6 +31,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     required this.autoLoginUseCase,
     required this.getOnboardingStatusUseCase,
     required this.getBannersUseCase,
+    required this.getProfileUseCase,
   }) : super(const SplashState.initial()) {
     on<SplashEvent>((event, emit) async {
       await event.when(
@@ -82,6 +85,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
             emit(
               SplashState.success(
                 isOnboardingCompleted: _isOnboardingCompleted,
+                isVip: _isVip,
                 preloadedUrls: _preloadedUrls,
               ),
             );
@@ -96,6 +100,13 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _performBackgroundLogin() async {
     try {
       await autoLoginUseCase(NoParams());
+
+      // Fetch the latest profile (getMe API call)
+      final profileResult = await getProfileUseCase(NoParams());
+      _isVip = profileResult.maybeWhen(
+        success: (user) => user.isVip,
+        orElse: () => false,
+      );
 
       // Fetch and preload home banner (download/cache video/webp or preload image)
       final sharedPreferences = sl<SharedPreferences>();
@@ -165,6 +176,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Future<void> _initHavinSdk() async {
+    if (Platform.isIOS) {
+      HavinAdsManager.instance.requestATT();
+    }
+
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
       _isHavinSdkInitialized = true;
       _checkAllInitializationCompleted();

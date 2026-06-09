@@ -27,7 +27,7 @@ class SubscriptionPackageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget cardContent = Container(
-      constraints: const BoxConstraints(minHeight: 84),
+      constraints: const BoxConstraints(minHeight: 100),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +54,7 @@ class SubscriptionPackageCard extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

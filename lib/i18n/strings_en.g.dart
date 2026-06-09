@@ -1257,6 +1257,18 @@ class Translations$checkin$en {
 
 	/// en: 'Daily Bonus Notification'
 	String get daily_bonus_notification => 'Daily Bonus Notification';
+
+	/// en: 'Disable check-in notifications?'
+	String get disable_notification_title => 'Disable check-in notifications?';
+
+	/// en: 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?'
+	String get disable_notification_desc => 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?';
+
+	/// en: 'Keep Enabled'
+	String get disable_notification_keep => 'Keep Enabled';
+
+	/// en: 'Disable'
+	String get disable_notification_disable => 'Disable';
 }
 
 // Path: connectivity
@@ -1839,6 +1851,10 @@ extension on Translations {
 			'checkin.check_in_btn' => 'Check in',
 			'checkin.checked_in' => 'Checked In',
 			'checkin.daily_bonus_notification' => 'Daily Bonus Notification',
+			'checkin.disable_notification_title' => 'Disable check-in notifications?',
+			'checkin.disable_notification_desc' => 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?',
+			'checkin.disable_notification_keep' => 'Keep Enabled',
+			'checkin.disable_notification_disable' => 'Disable',
 			'connectivity.no_internet_title' => 'No Connection',
 			'connectivity.no_internet_desc' => 'Please check your internet connection to continue using the app.',
 			'connectivity.retry_button' => 'Retry Connection',

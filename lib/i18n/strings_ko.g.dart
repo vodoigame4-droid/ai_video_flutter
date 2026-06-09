@@ -582,6 +582,10 @@ class _Translations$checkin$ko extends Translations$checkin$en {
 	@override String day({required Object n}) => '${n}일차';
 	@override String get check_in_btn => '출석하기';
 	@override String get daily_bonus_notification => '매일 알림';
+	@override String get disable_notification_title => '출석 체크 알림을 비활성화할까요?';
+	@override String get disable_notification_desc => '일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?';
+	@override String get disable_notification_keep => '활성화 유지';
+	@override String get disable_notification_disable => '비활성화';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsKo {
 			'checkin.day' => ({required Object n}) => '${n}일차',
 			'checkin.check_in_btn' => '출석하기',
 			'checkin.daily_bonus_notification' => '매일 알림',
+			'checkin.disable_notification_title' => '출석 체크 알림을 비활성화할까요?',
+			'checkin.disable_notification_desc' => '일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?',
+			'checkin.disable_notification_keep' => '활성화 유지',
+			'checkin.disable_notification_disable' => '비활성화',
 			'connectivity.no_internet_title' => '연결 없음',
 			'connectivity.no_internet_desc' => '앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.',
 			'connectivity.retry_button' => '연결 재시도',

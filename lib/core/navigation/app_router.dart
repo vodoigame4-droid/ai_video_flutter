@@ -366,9 +366,10 @@ final GoRouter appRouter = GoRouter(
       name: IapPage.name,
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
+        final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
         return AppRoutePage.fullscreenDialog<void>(
           state: state,
-          child: IapPage(videoUrl: videoUrl),
+          child: IapPage(videoUrl: videoUrl, fromSplash: fromSplash),
         );
       },
     ),
@@ -405,11 +406,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: DiscountPage.path,
       name: DiscountPage.name,
-      pageBuilder: (context, state) => AppRoutePage.fade<void>(
-        state: state,
-        duration: const Duration(seconds: 1),
-        child: const DiscountPage(),
-      ),
+      pageBuilder: (context, state) {
+        final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
+        return AppRoutePage.fade<void>(
+          state: state,
+          duration: const Duration(seconds: 1),
+          child: DiscountPage(fromSplash: fromSplash),
+        );
+      },
     ),
     GoRoute(
       path: DebugPage.path,

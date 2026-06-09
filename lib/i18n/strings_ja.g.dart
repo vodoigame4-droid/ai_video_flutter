@@ -582,6 +582,10 @@ class _Translations$checkin$ja extends Translations$checkin$en {
 	@override String day({required Object n}) => '${n}日目';
 	@override String get check_in_btn => 'チェックイン';
 	@override String get daily_bonus_notification => '毎日通知';
+	@override String get disable_notification_title => 'チェックイン通知を無効にしますか？';
+	@override String get disable_notification_desc => '毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？';
+	@override String get disable_notification_keep => '有効のままにする';
+	@override String get disable_notification_disable => '無効にする';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsJa {
 			'checkin.day' => ({required Object n}) => '${n}日目',
 			'checkin.check_in_btn' => 'チェックイン',
 			'checkin.daily_bonus_notification' => '毎日通知',
+			'checkin.disable_notification_title' => 'チェックイン通知を無効にしますか？',
+			'checkin.disable_notification_desc' => '毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？',
+			'checkin.disable_notification_keep' => '有効のままにする',
+			'checkin.disable_notification_disable' => '無効にする',
 			'connectivity.no_internet_title' => '接続がありません',
 			'connectivity.no_internet_desc' => 'アプリを引き続き使用するには、インターネット接続を確認してください。',
 			'connectivity.retry_button' => '接続を再試行',

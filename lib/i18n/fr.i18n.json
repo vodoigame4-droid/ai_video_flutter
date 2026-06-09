@@ -387,7 +387,11 @@
     "today": "Auj.",
     "day": "Jour {n}",
     "check_in_btn": "Réclamer",
-    "daily_bonus_notification": "Notification"
+    "daily_bonus_notification": "Notification",
+    "disable_notification_title": "Désactiver les notifications de check-in ?",
+    "disable_notification_desc": "Vous manquerez les récompenses quotidiennes de connexion et d'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?",
+    "disable_notification_keep": "Garder activé",
+    "disable_notification_disable": "Désactiver"
   },
   "connectivity": {
     "no_internet_title": "Pas de connexion",

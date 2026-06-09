@@ -582,6 +582,10 @@ class _Translations$checkin$hi extends Translations$checkin$en {
 	@override String day({required Object n}) => 'दिन ${n}';
 	@override String get check_in_btn => 'हाजिri लगाएं';
 	@override String get daily_bonus_notification => 'दैनिक सूचना';
+	@override String get disable_notification_title => 'चेक-इन सूचनाएं अक्षम करें?';
+	@override String get disable_notification_desc => 'आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?';
+	@override String get disable_notification_keep => 'सक्षम रखें';
+	@override String get disable_notification_disable => 'अक्षम करें';
 }
 
 // Path: connectivity
@@ -1066,6 +1070,10 @@ extension on TranslationsHi {
 			'checkin.day' => ({required Object n}) => 'दिन ${n}',
 			'checkin.check_in_btn' => 'हाजिri लगाएं',
 			'checkin.daily_bonus_notification' => 'दैनिक सूचना',
+			'checkin.disable_notification_title' => 'चेक-इन सूचनाएं अक्षम करें?',
+			'checkin.disable_notification_desc' => 'आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?',
+			'checkin.disable_notification_keep' => 'सक्षम रखें',
+			'checkin.disable_notification_disable' => 'अक्षम करें',
 			'connectivity.no_internet_title' => 'कोई कनेक्शन नहीं',
 			'connectivity.no_internet_desc' => 'कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।',
 			'connectivity.retry_button' => 'पुनः प्रयास करें',
