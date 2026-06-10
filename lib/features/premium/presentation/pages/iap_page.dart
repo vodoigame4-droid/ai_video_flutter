@@ -734,7 +734,7 @@ class _IapViewState extends State<IapView> {
                 t.premium.billed_yearly,
                 style: const TextStyle(
                   color: AppColors.subText,
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),

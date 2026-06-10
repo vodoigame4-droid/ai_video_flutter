@@ -52,7 +52,7 @@ class SubscriptionPackageCard extends StatelessWidget {
                   description,
                   style: const TextStyle(
                     color: AppColors.subText,
-                    fontSize: 12,
+                    fontSize: 16,
                     fontWeight: FontWeight.normal,
                     height: 1.2,
                   ),
@@ -86,7 +86,7 @@ class SubscriptionPackageCard extends StatelessWidget {
                   color: isSelected
                       ? AppColors.primary.withValues(alpha: 0.8)
                       : AppColors.subText,
-                  fontSize: 11,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600,
                   letterSpacing: -0.1,
                 ),
