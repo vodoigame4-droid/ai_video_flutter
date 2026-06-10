@@ -7,6 +7,7 @@ import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import 'custom_prompt_card_widget.dart';
+import 'tips_bottom_sheet.dart';
 import '../../../../core/widgets/upload_slot_widget.dart';
 import 'video_settings_card_widget.dart';
 import 'create_video_button_widget.dart';
@@ -36,9 +37,9 @@ class UnifiedVideoTab extends StatelessWidget {
                 isVip,
               ) {
                 final isGenerateEnabled =
-                    slotsPaths[0] != null &&
-                    slotsPaths[1] != null &&
-                    slotsPaths[2] != null &&
+                    (slotsPaths[0] != null ||
+                     slotsPaths[1] != null ||
+                     slotsPaths[2] != null) &&
                     customPrompt.trim().isNotEmpty;
 
                 return Column(
@@ -198,14 +199,38 @@ class UnifiedVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(t.create.upload_image, style: context.textTheme.titleMedium),
-        const SizedBox(width: 6),
-        Text(
-          "(${t.create.required_label})",
-          style: context.textTheme.labelMedium,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Text(t.create.upload_image, style: context.textTheme.titleMedium),
+            const SizedBox(width: 6),
+            Text(
+              "(${t.create.required_label})",
+              style: context.textTheme.labelMedium,
+            ),
+          ],
+        ),
+        Material(
+          color: Colors.transparent,
+          shape: const CircleBorder(),
+          child: InkWell(
+            onTap: () => TipsBottomSheet.show(context),
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+            child: SizedBox(
+              width: 24,
+              height: 24,
+              child: Center(
+                child: AppSvgIcon(
+                  assetName: Assets.icons.icNotice,
+                  width: 16,
+                  height: 16,
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );

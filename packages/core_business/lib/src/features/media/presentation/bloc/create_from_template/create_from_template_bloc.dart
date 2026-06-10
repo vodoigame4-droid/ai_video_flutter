@@ -28,7 +28,7 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
           themeType: themeType,
           themeOrgId: themeOrgId,
           selectedPhotoPath: null,
-          quality: 'Full HD',
+          quality: 'HD',
           duration: '5s',
           isGenerating: false,
           isLiked: false,
@@ -53,7 +53,7 @@ class CreateFromTemplateBloc extends Bloc<CreateFromTemplateEvent, CreateFromTem
             ),
             quality: state.maybeMap(
               ready: (r) => r.quality,
-              orElse: () => 'Full HD',
+              orElse: () => 'HD',
             ),
             duration: state.maybeMap(
               ready: (r) => r.duration,

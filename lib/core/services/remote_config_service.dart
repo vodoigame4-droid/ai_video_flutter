@@ -15,7 +15,9 @@ class RemoteConfigService {
   static const String rcBgDiscount = 'rcBgDiscount';
   static const String rcBgVideosJson = 'background_videos';
   static const String rcVideoGenCost = 'video_gen_cost';
+  static const String rcVideoGenFullHdCost = 'video_gen_full_hd_cost';
   static const int defaultVideoGenCost = 35;
+  static const int defaultVideoGenFullHdCost = 70;
 
   /// Default fallback values
   static const String defaultBannerUrl =
@@ -43,7 +45,8 @@ class RemoteConfigService {
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/cb6beb974833.webp",
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/e80755ca295c.webp"
   ],
-  "video_gen_cost": 35
+  "video_gen_cost": 35,
+  "video_gen_full_hd_cost": 70
 }
 ''';
 
@@ -71,6 +74,7 @@ class RemoteConfigService {
         rcBgDiscount: defaultBgDiscountUrl,
         rcBgVideosJson: defaultBgVideosJson,
         rcVideoGenCost: defaultVideoGenCost,
+        rcVideoGenFullHdCost: defaultVideoGenFullHdCost,
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
@@ -221,6 +225,18 @@ class RemoteConfigService {
     }
     final value = _remoteConfig.getInt(rcVideoGenCost);
     if (value == 0) return defaultVideoGenCost;
+    return value;
+  }
+
+  /// Get the cost to generate a Full HD video (default 70 credits) from Remote Config.
+  int get videoGenFullHdCost {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['video_gen_full_hd_cost'] != null) {
+      final cost = int.tryParse(jsonMap['video_gen_full_hd_cost'].toString());
+      if (cost != null) return cost;
+    }
+    final value = _remoteConfig.getInt(rcVideoGenFullHdCost);
+    if (value == 0) return defaultVideoGenFullHdCost;
     return value;
   }
 

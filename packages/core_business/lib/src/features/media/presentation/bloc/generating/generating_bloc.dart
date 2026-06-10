@@ -60,7 +60,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
       await event.when(
         startGenerating: (title, imageUrl, themeId, themeType, themeOrgId, isHd, isLongTime, serviceType, videoUrl, prompt) async {
           final randomNum = 100000 + Random().nextInt(900000);
-          final String finalName = 'VIdo : $randomNum';
+          final String finalName = 'Vido AI:$randomNum';
 
           emit(GeneratingState.generating(
             progress: 0.0,

@@ -16,7 +16,7 @@ abstract class ResultState with _$ResultState {
     required bool isMuted,
     required bool isBuffering,
     @Default('') String extendPrompt,
-    @Default('Full HD') String extendQuality,
+    @Default('HD') String extendQuality,
     @Default('5s') String extendDuration,
     @Default(3) int inspireMeCount,
     @Default(false) bool isGeneratingExtended,

@@ -257,7 +257,7 @@ String toString() {
 
 
 class _Ready implements ResultState {
-  const _Ready({required this.videoId, required this.title, required this.imageUrl, required this.videoUrl, required this.createdAt, required this.isPlaying, required this.isMuted, required this.isBuffering, this.extendPrompt = '', this.extendQuality = 'Full HD', this.extendDuration = '5s', this.inspireMeCount = 3, this.isGeneratingExtended = false, this.isDeleted = false, this.isDownloading = false, this.isSharing = false, this.downloadErrorMessage, this.shareErrorMessage, this.downloadSuccess = false, this.shareSuccess = false, this.isVip = false});
+  const _Ready({required this.videoId, required this.title, required this.imageUrl, required this.videoUrl, required this.createdAt, required this.isPlaying, required this.isMuted, required this.isBuffering, this.extendPrompt = '', this.extendQuality = 'HD', this.extendDuration = '5s', this.inspireMeCount = 3, this.isGeneratingExtended = false, this.isDeleted = false, this.isDownloading = false, this.isSharing = false, this.downloadErrorMessage, this.shareErrorMessage, this.downloadSuccess = false, this.shareSuccess = false, this.isVip = false});
   
 
  final  String videoId;
