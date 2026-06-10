@@ -77,7 +77,9 @@ class RemoteConfigService {
       await _remoteConfig.setConfigSettings(
         RemoteConfigSettings(
           fetchTimeout: const Duration(seconds: 10),
-          minimumFetchInterval: kDebugMode ? Duration.zero : const Duration(hours: 1),
+          minimumFetchInterval: kDebugMode
+              ? Duration.zero
+              : const Duration(hours: 1),
         ),
       );
 
@@ -104,30 +106,36 @@ class RemoteConfigService {
     final urls = [getBgIAPUrl(), getBgDiscountUrl()];
 
     LogUtils.d('$_tag: Preloading ${urls.length} videos into cache...');
+    final overallStopwatch = Stopwatch()..start();
 
     final futures = urls.map((url) {
       if (url.startsWith('http')) {
+        final stopwatch = Stopwatch()..start();
+        LogUtils.d('$_tag: Start preloading background video: $url');
         return videoCacheManager
             .getCachedOrDownload(url, waitForDownload: true)
             .then((path) {
-              LogUtils.d('$_tag: Preloaded video $url -> $path');
+              stopwatch.stop();
+              LogUtils.i('$_tag: Preloaded video in ${stopwatch.elapsedMilliseconds}ms: $url -> $path');
             })
             .catchError((e) {
-              LogUtils.e('$_tag: Failed to preload video $url', error: e);
+              stopwatch.stop();
+              LogUtils.e('$_tag: Failed to preload video after ${stopwatch.elapsedMilliseconds}ms: $url', error: e);
             });
       }
       return Future<void>.value();
     }).toList();
 
     await Future.wait(futures).timeout(
-      const Duration(seconds: 15),
+      const Duration(seconds: 8),
       onTimeout: () {
-        LogUtils.w('$_tag: Video preload timed out after 15s');
+        LogUtils.w('$_tag: Video preload timed out after 8s');
         return [];
       },
     );
 
-    LogUtils.d('$_tag: Video preloading completed');
+    overallStopwatch.stop();
+    LogUtils.i('$_tag: Video preloading completed in ${overallStopwatch.elapsedMilliseconds}ms');
   }
 
   // ── Getters ──

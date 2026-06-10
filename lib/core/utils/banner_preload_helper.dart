@@ -50,9 +50,13 @@ class BannerPreloadHelper {
     required GetBannersUseCase getBannersUseCase,
     required SharedPreferences sharedPreferences,
   }) async {
+    final overallStopwatch = Stopwatch()..start();
     try {
       LogUtils.d('$_tag: Fetching banners from API...');
+      final apiStopwatch = Stopwatch()..start();
       final result = await getBannersUseCase(NoParams());
+      apiStopwatch.stop();
+      LogUtils.i('$_tag: Banners API call completed in ${apiStopwatch.elapsedMilliseconds}ms');
       
       await result.maybeWhen(
         success: (urls) async {
@@ -67,6 +71,7 @@ class BannerPreloadHelper {
             // 2. Preload the content based on media type (skip file preloading in widget test environment)
             final isTest = Platform.environment.containsKey('FLUTTER_TEST');
             if (bannerUrl.startsWith('http') && !isTest) {
+              final mediaPreloadStopwatch = Stopwatch()..start();
               if (isVideoOrWebp(bannerUrl)) {
                 LogUtils.d('$_tag: Preloading video/webp banner: $bannerUrl');
                 try {
@@ -76,11 +81,15 @@ class BannerPreloadHelper {
                         waitForDownload: true,
                       )
                       .timeout(const Duration(seconds: 3));
+                  mediaPreloadStopwatch.stop();
                   if (localPath != null && localPath.isNotEmpty) {
                     preloadedLocalPath = localPath;
-                    LogUtils.d('$_tag: Video/webp banner cached at: $localPath');
+                    LogUtils.i('$_tag: Video/webp banner cached in ${mediaPreloadStopwatch.elapsedMilliseconds}ms at: $localPath');
+                  } else {
+                    LogUtils.w('$_tag: Cached/Downloaded banner path is empty after ${mediaPreloadStopwatch.elapsedMilliseconds}ms');
                   }
                 } on TimeoutException {
+                  mediaPreloadStopwatch.stop();
                   LogUtils.w('$_tag: Video preloading timed out at 3s. Continuing download in background.');
                   // Trigger background download without blocking, so it keeps caching
                   VideoCacheManager().getCachedOrDownload(bannerUrl, waitForDownload: false);
@@ -88,6 +97,8 @@ class BannerPreloadHelper {
               } else {
                 LogUtils.d('$_tag: Preloading image banner: $bannerUrl');
                 await _preloadImage(bannerUrl);
+                mediaPreloadStopwatch.stop();
+                LogUtils.i('$_tag: Image banner preloaded in ${mediaPreloadStopwatch.elapsedMilliseconds}ms');
               }
             }
           } else {
@@ -101,6 +112,9 @@ class BannerPreloadHelper {
       );
     } catch (e, stack) {
       LogUtils.e('$_tag: Error preloading banner', error: e, stackTrace: stack);
+    } finally {
+      overallStopwatch.stop();
+      LogUtils.i('$_tag: Total banner preloading process completed in ${overallStopwatch.elapsedMilliseconds}ms');
     }
   }
 

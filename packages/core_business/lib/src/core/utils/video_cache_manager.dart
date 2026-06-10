@@ -26,6 +26,7 @@ class VideoCacheManager {
       return url;
     }
 
+    final stopwatch = Stopwatch()..start();
     try {
       final cacheDir = await getTemporaryDirectory();
       final extension = _getFileExtension(url);
@@ -36,7 +37,8 @@ class VideoCacheManager {
       if (await localFile.exists()) {
         final length = await localFile.length();
         if (length > 0) {
-          LogUtils.d('VideoCacheManager: Cache hit for $url -> ${localFile.path}');
+          stopwatch.stop();
+          LogUtils.d('VideoCacheManager: Cache hit for $url in ${stopwatch.elapsedMilliseconds}ms -> ${localFile.path}');
           return localFile.path;
         } else {
           LogUtils.w('VideoCacheManager: Cache file exists but is empty (0 bytes). Deleting: ${localFile.path}');
@@ -60,18 +62,25 @@ class VideoCacheManager {
       }
 
       if (waitForDownload) {
-        return await downloadFuture;
+        final path = await downloadFuture;
+        stopwatch.stop();
+        LogUtils.i('VideoCacheManager: Caching/Download finished for $url in ${stopwatch.elapsedMilliseconds}ms -> $path');
+        return path;
       }
       
+      stopwatch.stop();
+      LogUtils.d('VideoCacheManager: Returning null immediately (waitForDownload=false) in ${stopwatch.elapsedMilliseconds}ms for $url');
       // Let the caller play from network URL while downloading in background
       return null;
     } catch (e, stack) {
-      LogUtils.e('VideoCacheManager: Failed to get or download video cache', error: e, stackTrace: stack);
+      stopwatch.stop();
+      LogUtils.e('VideoCacheManager: Failed to get or download video cache after ${stopwatch.elapsedMilliseconds}ms', error: e, stackTrace: stack);
       return null;
     }
   }
 
   Future<String> _startDownload(String url, File localFile) async {
+    final downloadStopwatch = Stopwatch()..start();
     try {
       // Create directory if it doesn't exist
       await localFile.parent.create(recursive: true);
@@ -82,13 +91,16 @@ class VideoCacheManager {
         await tempFile.delete();
       }
 
+      LogUtils.d('VideoCacheManager: Downloading bytes from $url...');
       await _dio.download(url, tempFile.path);
       await tempFile.rename(localFile.path);
 
-      LogUtils.d('VideoCacheManager: Download completed and cached: ${localFile.path}');
+      downloadStopwatch.stop();
+      LogUtils.d('VideoCacheManager: Download completed and cached in ${downloadStopwatch.elapsedMilliseconds}ms: ${localFile.path}');
       return localFile.path;
     } catch (e, stack) {
-      LogUtils.e('VideoCacheManager: Error downloading video file', error: e, stackTrace: stack);
+      downloadStopwatch.stop();
+      LogUtils.e('VideoCacheManager: Error downloading video file after ${downloadStopwatch.elapsedMilliseconds}ms', error: e, stackTrace: stack);
       // Clean up temp file
       try {
         final tempFile = File('${localFile.path}.tmp');

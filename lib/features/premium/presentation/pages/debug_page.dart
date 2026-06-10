@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/app_toast.dart';
@@ -327,6 +329,51 @@ class _DebugPageState extends State<DebugPage> {
                           final prefs = sl<SharedPreferences>();
                           await prefs.clear();
                           AppToast.showSuccess('Clear app data successfully! Please restart app.');
+                        },
+                      ),
+                      _buildDebugItem(
+                        icon: Icons.phonelink_erase_outlined,
+                        title: 'Reset & Clear Hardware UDID',
+                        onTap: () async {
+                          final prefs = sl<SharedPreferences>();
+                          await prefs.remove('device_id');
+                          
+                          String message = 'Device ID override cleared successfully!';
+                          
+                          if (Theme.of(context).platform == TargetPlatform.iOS) {
+                            try {
+                              final packageInfo = await PackageInfo.fromPlatform();
+                              final bundleName = packageInfo.appName;
+                              final accountName = packageInfo.packageName;
+                              
+                              const storage = FlutterSecureStorage(
+                                iOptions: IOSOptions(
+                                  accessibility: KeychainAccessibility.first_unlock,
+                                ),
+                              );
+                              
+                              // Delete the key under both current bundleName service and default service
+                              // Note: In flutter_secure_storage, 'accountName' corresponds to kSecAttrService (Service name)
+                              await storage.delete(
+                                key: accountName,
+                                iOptions: IOSOptions(accountName: bundleName),
+                              );
+                              await storage.delete(
+                                key: accountName,
+                                iOptions: const IOSOptions(accountName: 'ai_video_flutter'),
+                              );
+                              
+                              message += '\niOS Keychain UDID cleared successfully!';
+                            } catch (e) {
+                              debugPrint('DebugPage: Failed to clear iOS Keychain UDID: $e');
+                              message += '\nWarning: Failed to clear iOS Keychain.';
+                            }
+                          } else {
+                            message += '\nNote: Android ANDROID_ID cannot be cleared natively (system locked), but your override has been removed.';
+                          }
+                          
+                          _loadDeviceId();
+                          AppToast.showSuccess('$message\n\nPlease restart the app.');
                         },
                       ),
                     ],

@@ -9,7 +9,7 @@ import '../../../../core/widgets/gradient_button.dart';
 
 import '../../../../core/widgets/smooth_video_player_widget.dart';
 
-class ObPageTemplate extends StatelessWidget {
+class ObPageTemplate extends StatefulWidget {
   final String backgroundImage;
   final String title;
   final String subtitle;
@@ -25,6 +25,14 @@ class ObPageTemplate extends StatelessWidget {
     required this.onButtonPressed,
   });
 
+  @override
+  State<ObPageTemplate> createState() => _ObPageTemplateState();
+}
+
+class _ObPageTemplateState extends State<ObPageTemplate> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   bool _isVideo(String path) {
     final p = path.toLowerCase();
     return p.endsWith('.mp4') ||
@@ -38,13 +46,14 @@ class ObPageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Stack(
       children: [
         // Background image or video (loaded dynamically)
         Positioned.fill(
-          child: _isVideo(backgroundImage)
+          child: _isVideo(widget.backgroundImage)
               ? SmoothVideoPlayerWidget(
-                  videoUrl: backgroundImage,
+                  videoUrl: widget.backgroundImage,
                   fit: BoxFit.cover,
                   autoPlay: true,
                   loop: true,
@@ -53,7 +62,7 @@ class ObPageTemplate extends StatelessWidget {
                   playMuted: true,
                 )
               : AppImage(
-                  imageUrl: backgroundImage,
+                  imageUrl: widget.backgroundImage,
                   fit: BoxFit.cover,
                 ),
         ),
@@ -119,13 +128,13 @@ class ObPageTemplate extends StatelessWidget {
               children: [
                 // Text section
                 Text(
-                  title,
+                  widget.title,
                   style: context.appTheme.onboardingTitleStyle,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  subtitle,
+                  widget.subtitle,
                   style: context.appTheme.onboardingSubtitleStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -134,8 +143,8 @@ class ObPageTemplate extends StatelessWidget {
                 GradientButton(
                   gradient: AppColors.primaryGradient,
                   width: double.infinity,
-                  label: buttonText,
-                  onPressed: onButtonPressed,
+                  label: widget.buttonText,
+                  onPressed: widget.onButtonPressed,
                   trailingIcon: SvgPicture.asset(
                     'assets/icons/ic_arrow_right.svg',
                     width: 20,

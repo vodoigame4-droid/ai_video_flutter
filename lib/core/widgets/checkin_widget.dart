@@ -14,6 +14,7 @@ import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.da
 import '../injection/injection_container.dart';
 import '../errors/backend_error_handler.dart';
 import '../notification/local_notification_service.dart';
+import '../utils/app_toast.dart';
 import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
 import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
@@ -39,12 +40,23 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
   @override
   void initState() {
     super.initState();
-    _dailyCheckInBloc = sl<DailyCheckInBloc>()
-      ..add(const DailyCheckInEvent.init());
+    _dailyCheckInBloc = sl<DailyCheckInBloc>();
+    final isReady = _dailyCheckInBloc.state.maybeMap(
+      ready: (_) => true,
+      orElse: () => false,
+    );
+    if (!isReady) {
+      _dailyCheckInBloc.add(const DailyCheckInEvent.init());
+    }
     _checkSystemNotificationPermission();
     _triggerSubscription = CheckInWidget.checkInTrigger.stream.listen((_) {
       if (mounted) {
         _showCheckInDialog(context);
+      }
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _checkAndShowDailyCheckInIfNeeded();
       }
     });
   }
@@ -153,7 +165,7 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (dialogContext, animation, secondaryAnimation) {
         return BlocProvider.value(
-          value: context.read<DailyCheckInBloc>(),
+          value: _dailyCheckInBloc,
           child: _CheckInDialogContent(
             initialNotificationEnabled: _notificationEnabled,
           ),
@@ -562,27 +574,10 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                 // Automatically dismiss check-in dialog
                 navigator.pop();
 
-                // Show gorgeous custom reward success popup
-                showGeneralDialog(
-                  context: navigator.context,
-                  barrierColor: Colors.black.withValues(alpha: 0.75),
-                  barrierDismissible: true,
-                  barrierLabel: 'SuccessDialog',
-                  transitionDuration: const Duration(milliseconds: 400),
-                  pageBuilder: (dialogContext, animation, secondaryAnimation) {
-                    return _CheckInSuccessDialog(credits: credits);
-                  },
-                  transitionBuilder: (dialogContext, animation, secondaryAnimation, child) {
-                    return ScaleTransition(
-                      scale: Tween<double>(begin: 0.8, end: 1.0).animate(
-                        CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-                      ),
-                      child: FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      ),
-                    );
-                  },
+                // Show localized success toast notification
+                final t = Translations.of(navigator.context);
+                AppToast.showSuccess(
+                  t.checkin.check_in_success(credits: credits),
                 );
               },
               error: (failure) {
