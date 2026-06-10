@@ -222,7 +222,7 @@ class _Translations$profile$zh extends Translations$profile$en {
 	@override String get cancel => '取消';
 	@override String get delete => '删除';
 	@override String get generating => '生成中...';
-	@override String get imageGeneration => '图像生成';
+	@override String get imageGeneration => '视频生成';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$zh extends Translations$rating_dialog$en {
 	@override String get title => '喜欢这个应用吗？';
 	@override String get desc => '请给我们评分，帮助我们改善您的体验。谢谢！';
 	@override String get support_us => '支持我们';
+	@override String get encourage_us => '鼓励我们';
+	@override String get rate_on_store => '在商店评分';
 	@override String get maybe_later => '以后再说';
 	@override String get success => '感谢您的支持！';
 }
@@ -830,7 +832,7 @@ extension on TranslationsZh {
 			'profile.cancel' => '取消',
 			'profile.delete' => '删除',
 			'profile.generating' => '生成中...',
-			'profile.imageGeneration' => '图像生成',
+			'profile.imageGeneration' => '视频生成',
 			'home_new.welcomeToAppName' => '欢迎使用Vido',
 			'home_new.imageToVideo' => '图片转\n视频',
 			'home_new.transitionVideo' => '转场\n视频',
@@ -1091,6 +1093,8 @@ extension on TranslationsZh {
 			'rating_dialog.title' => '喜欢这个应用吗？',
 			'rating_dialog.desc' => '请给我们评分，帮助我们改善您的体验。谢谢！',
 			'rating_dialog.support_us' => '支持我们',
+			'rating_dialog.encourage_us' => '鼓励我们',
+			'rating_dialog.rate_on_store' => '在商店评分',
 			'rating_dialog.maybe_later' => '以后再说',
 			'rating_dialog.success' => '感谢您的支持！',
 			'debug.title' => '调试菜单',

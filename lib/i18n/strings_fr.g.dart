@@ -222,7 +222,7 @@ class _Translations$profile$fr extends Translations$profile$en {
 	@override String get cancel => 'Annuler';
 	@override String get delete => 'Supprimer';
 	@override String get generating => 'Génération...';
-	@override String get imageGeneration => 'Génération d\'images';
+	@override String get imageGeneration => 'Génération de vidéos';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$fr extends Translations$rating_dialog$en {
 	@override String get title => 'Vous aimez l\'application ?';
 	@override String get desc => 'Veuillez nous évaluer et nous aider à améliorer votre expérience. Merci !';
 	@override String get support_us => 'Soutenez-nous';
+	@override String get encourage_us => 'Encouragez-nous';
+	@override String get rate_on_store => 'Évaluer sur le Store';
 	@override String get maybe_later => 'Plus tard';
 	@override String get success => 'Merci pour votre soutien !';
 }
@@ -830,7 +832,7 @@ extension on TranslationsFr {
 			'profile.cancel' => 'Annuler',
 			'profile.delete' => 'Supprimer',
 			'profile.generating' => 'Génération...',
-			'profile.imageGeneration' => 'Génération d\'images',
+			'profile.imageGeneration' => 'Génération de vidéos',
 			'home_new.welcomeToAppName' => 'Bienvenue sur Vido',
 			'home_new.imageToVideo' => 'Image en\nVidéo',
 			'home_new.transitionVideo' => 'Transition\nVidéo',
@@ -1091,6 +1093,8 @@ extension on TranslationsFr {
 			'rating_dialog.title' => 'Vous aimez l\'application ?',
 			'rating_dialog.desc' => 'Veuillez nous évaluer et nous aider à améliorer votre expérience. Merci !',
 			'rating_dialog.support_us' => 'Soutenez-nous',
+			'rating_dialog.encourage_us' => 'Encouragez-nous',
+			'rating_dialog.rate_on_store' => 'Évaluer sur le Store',
 			'rating_dialog.maybe_later' => 'Plus tard',
 			'rating_dialog.success' => 'Merci pour votre soutien !',
 			'debug.title' => 'Menu de débogage',

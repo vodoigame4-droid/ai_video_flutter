@@ -119,7 +119,7 @@
     "cancel": "Annuler",
     "delete": "Supprimer",
     "generating": "Génération...",
-    "imageGeneration": "Génération d'images"
+    "imageGeneration": "Génération de vidéos"
   },
   "home_new": {
     "welcomeToAppName": "Bienvenue sur Vido",
@@ -412,6 +412,8 @@
     "title": "Vous aimez l'application ?",
     "desc": "Veuillez nous évaluer et nous aider à améliorer votre expérience. Merci !",
     "support_us": "Soutenez-nous",
+    "encourage_us": "Encouragez-nous",
+    "rate_on_store": "Évaluer sur le Store",
     "maybe_later": "Plus tard",
     "success": "Merci pour votre soutien !"
   },

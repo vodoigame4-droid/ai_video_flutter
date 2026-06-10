@@ -119,7 +119,7 @@
     "cancel": "إلغاء",
     "delete": "حذف",
     "generating": "جاري الإنشاء...",
-    "imageGeneration": "إنشاء الصور"
+    "imageGeneration": "إنشاء الفيديو"
   },
   "home_new": {
     "welcomeToAppName": "مرحبًا بك في Vido",
@@ -412,6 +412,8 @@
     "title": "هل تستمتع بالتطبيق؟",
     "desc": "يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!",
     "support_us": "ادعمنا",
+    "encourage_us": "شجعنا",
+    "rate_on_store": "قيمنا على المتجر",
     "maybe_later": "ربما لاحقًا",
     "success": "شكرا لك على دعمك!"
   },

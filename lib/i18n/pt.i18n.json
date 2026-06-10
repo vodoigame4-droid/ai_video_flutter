@@ -119,7 +119,7 @@
     "cancel": "Cancelar",
     "delete": "Excluir",
     "generating": "Gerando...",
-    "imageGeneration": "Geração de imagem"
+    "imageGeneration": "Geração de vídeo"
   },
   "home_new": {
     "welcomeToAppName": "Bem-vindo ao Vido",
@@ -412,6 +412,8 @@
     "title": "Está gostando do aplicativo?",
     "desc": "Avalie-nos e ajude-nos a melhorar a sua experiência. Obrigado!",
     "support_us": "Apoie-nos",
+    "encourage_us": "Incentive-nos",
+    "rate_on_store": "Avaliar na Loja",
     "maybe_later": "Mais tarde",
     "success": "Obrigado pelo seu apoio!"
   },

@@ -140,7 +140,7 @@ return restore(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function()?  selectWeekly,TResult Function()?  selectAnnually,TResult Function()?  toggleReveal,TResult Function( String? productId)?  purchase,TResult Function( int credits,  String priceText)?  purchaseCredits,TResult Function( int index)?  selectCreditPackage,TResult Function()?  restore,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function()?  selectWeekly,TResult Function()?  selectAnnually,TResult Function()?  toggleReveal,TResult Function( String? productId)?  purchase,TResult Function( String productId)?  purchaseCredits,TResult Function( int index)?  selectCreditPackage,TResult Function()?  restore,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init();case _SelectWeekly() when selectWeekly != null:
@@ -148,7 +148,7 @@ return selectWeekly();case _SelectAnnually() when selectAnnually != null:
 return selectAnnually();case _ToggleReveal() when toggleReveal != null:
 return toggleReveal();case _Purchase() when purchase != null:
 return purchase(_that.productId);case _PurchaseCredits() when purchaseCredits != null:
-return purchaseCredits(_that.credits,_that.priceText);case _SelectCreditPackage() when selectCreditPackage != null:
+return purchaseCredits(_that.productId);case _SelectCreditPackage() when selectCreditPackage != null:
 return selectCreditPackage(_that.index);case _Restore() when restore != null:
 return restore();case _:
   return orElse();
@@ -168,7 +168,7 @@ return restore();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function()  selectWeekly,required TResult Function()  selectAnnually,required TResult Function()  toggleReveal,required TResult Function( String? productId)  purchase,required TResult Function( int credits,  String priceText)  purchaseCredits,required TResult Function( int index)  selectCreditPackage,required TResult Function()  restore,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function()  selectWeekly,required TResult Function()  selectAnnually,required TResult Function()  toggleReveal,required TResult Function( String? productId)  purchase,required TResult Function( String productId)  purchaseCredits,required TResult Function( int index)  selectCreditPackage,required TResult Function()  restore,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init();case _SelectWeekly():
@@ -176,7 +176,7 @@ return selectWeekly();case _SelectAnnually():
 return selectAnnually();case _ToggleReveal():
 return toggleReveal();case _Purchase():
 return purchase(_that.productId);case _PurchaseCredits():
-return purchaseCredits(_that.credits,_that.priceText);case _SelectCreditPackage():
+return purchaseCredits(_that.productId);case _SelectCreditPackage():
 return selectCreditPackage(_that.index);case _Restore():
 return restore();case _:
   throw StateError('Unexpected subclass');
@@ -195,7 +195,7 @@ return restore();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function()?  selectWeekly,TResult? Function()?  selectAnnually,TResult? Function()?  toggleReveal,TResult? Function( String? productId)?  purchase,TResult? Function( int credits,  String priceText)?  purchaseCredits,TResult? Function( int index)?  selectCreditPackage,TResult? Function()?  restore,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function()?  selectWeekly,TResult? Function()?  selectAnnually,TResult? Function()?  toggleReveal,TResult? Function( String? productId)?  purchase,TResult? Function( String productId)?  purchaseCredits,TResult? Function( int index)?  selectCreditPackage,TResult? Function()?  restore,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init();case _SelectWeekly() when selectWeekly != null:
@@ -203,7 +203,7 @@ return selectWeekly();case _SelectAnnually() when selectAnnually != null:
 return selectAnnually();case _ToggleReveal() when toggleReveal != null:
 return toggleReveal();case _Purchase() when purchase != null:
 return purchase(_that.productId);case _PurchaseCredits() when purchaseCredits != null:
-return purchaseCredits(_that.credits,_that.priceText);case _SelectCreditPackage() when selectCreditPackage != null:
+return purchaseCredits(_that.productId);case _SelectCreditPackage() when selectCreditPackage != null:
 return selectCreditPackage(_that.index);case _Restore() when restore != null:
 return restore();case _:
   return null;
@@ -411,11 +411,10 @@ as String?,
 
 
 class _PurchaseCredits implements IapEvent {
-  const _PurchaseCredits({required this.credits, required this.priceText});
+  const _PurchaseCredits({required this.productId});
   
 
- final  int credits;
- final  String priceText;
+ final  String productId;
 
 /// Create a copy of IapEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -427,16 +426,16 @@ _$PurchaseCreditsCopyWith<_PurchaseCredits> get copyWith => __$PurchaseCreditsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseCredits&&(identical(other.credits, credits) || other.credits == credits)&&(identical(other.priceText, priceText) || other.priceText == priceText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseCredits&&(identical(other.productId, productId) || other.productId == productId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,credits,priceText);
+int get hashCode => Object.hash(runtimeType,productId);
 
 @override
 String toString() {
-  return 'IapEvent.purchaseCredits(credits: $credits, priceText: $priceText)';
+  return 'IapEvent.purchaseCredits(productId: $productId)';
 }
 
 
@@ -447,7 +446,7 @@ abstract mixin class _$PurchaseCreditsCopyWith<$Res> implements $IapEventCopyWit
   factory _$PurchaseCreditsCopyWith(_PurchaseCredits value, $Res Function(_PurchaseCredits) _then) = __$PurchaseCreditsCopyWithImpl;
 @useResult
 $Res call({
- int credits, String priceText
+ String productId
 });
 
 
@@ -464,10 +463,9 @@ class __$PurchaseCreditsCopyWithImpl<$Res>
 
 /// Create a copy of IapEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? credits = null,Object? priceText = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? productId = null,}) {
   return _then(_PurchaseCredits(
-credits: null == credits ? _self.credits : credits // ignore: cast_nullable_to_non_nullable
-as int,priceText: null == priceText ? _self.priceText : priceText // ignore: cast_nullable_to_non_nullable
+productId: null == productId ? _self.productId : productId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

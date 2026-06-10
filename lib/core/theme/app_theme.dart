@@ -139,6 +139,9 @@ abstract class AppTheme {
           navLabelActiveStyle: AppTextStyles.navLabelActive,
           navLabelInactiveStyle: AppTextStyles.navLabelInactive,
           navLabelCreateStyle: AppTextStyles.navLabelCreate,
+          creditPackCardTitleStyle: AppTextStyles.creditPackCardTitle,
+          creditPackCardEstimateStyle: AppTextStyles.creditPackCardEstimate,
+          creditPackCardPriceStyle: AppTextStyles.creditPackCardPrice,
         ),
       ],
     );
@@ -167,6 +170,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final TextStyle navLabelActiveStyle;
   final TextStyle navLabelInactiveStyle;
   final TextStyle navLabelCreateStyle;
+  final TextStyle creditPackCardTitleStyle;
+  final TextStyle creditPackCardEstimateStyle;
+  final TextStyle creditPackCardPriceStyle;
 
   const AppThemeExtension({
     required this.primaryGradient,
@@ -189,6 +195,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     required this.navLabelActiveStyle,
     required this.navLabelInactiveStyle,
     required this.navLabelCreateStyle,
+    required this.creditPackCardTitleStyle,
+    required this.creditPackCardEstimateStyle,
+    required this.creditPackCardPriceStyle,
   });
 
   @override
@@ -213,6 +222,9 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     TextStyle? navLabelActiveStyle,
     TextStyle? navLabelInactiveStyle,
     TextStyle? navLabelCreateStyle,
+    TextStyle? creditPackCardTitleStyle,
+    TextStyle? creditPackCardEstimateStyle,
+    TextStyle? creditPackCardPriceStyle,
   }) {
     return AppThemeExtension(
       primaryGradient: primaryGradient ?? this.primaryGradient,
@@ -242,6 +254,12 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       navLabelInactiveStyle:
           navLabelInactiveStyle ?? this.navLabelInactiveStyle,
       navLabelCreateStyle: navLabelCreateStyle ?? this.navLabelCreateStyle,
+      creditPackCardTitleStyle:
+          creditPackCardTitleStyle ?? this.creditPackCardTitleStyle,
+      creditPackCardEstimateStyle:
+          creditPackCardEstimateStyle ?? this.creditPackCardEstimateStyle,
+      creditPackCardPriceStyle:
+          creditPackCardPriceStyle ?? this.creditPackCardPriceStyle,
     );
   }
 
@@ -331,6 +349,21 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       navLabelCreateStyle: TextStyle.lerp(
         navLabelCreateStyle,
         other.navLabelCreateStyle,
+        t,
+      )!,
+      creditPackCardTitleStyle: TextStyle.lerp(
+        creditPackCardTitleStyle,
+        other.creditPackCardTitleStyle,
+        t,
+      )!,
+      creditPackCardEstimateStyle: TextStyle.lerp(
+        creditPackCardEstimateStyle,
+        other.creditPackCardEstimateStyle,
+        t,
+      )!,
+      creditPackCardPriceStyle: TextStyle.lerp(
+        creditPackCardPriceStyle,
+        other.creditPackCardPriceStyle,
         t,
       )!,
     );

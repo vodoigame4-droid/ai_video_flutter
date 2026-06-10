@@ -397,8 +397,8 @@ class IapBloc extends Bloc<IapEvent, IapState> {
             ),
           );
         },
-        purchaseCredits: (credits, priceText) async {
-          LogUtils.d('IapBloc: Purchase $credits Credits for $priceText');
+        purchaseCredits: (productId) async {
+          LogUtils.d('IapBloc: Purchase Credits for Product ID: $productId');
           bool isWeekly = false;
           bool isRevealed = false;
           int selectedIndex = 4;
@@ -439,70 +439,10 @@ class IapBloc extends Bloc<IapEvent, IapState> {
 
           emit(const IapState.loading());
 
-          // Find exact product ID dynamically based on credit counts and loaded products
-          String productId = '';
-          final matchCredits = '${credits}credits';
-
-          Product? matchedProduct;
-
-          bool isVip = false;
-          try {
-            final user = await watchProfileUseCase().first;
-            isVip = user.isVip;
-          } catch (e) {
-            LogUtils.w('IapBloc: Failed to get user profile VIP status in purchaseCredits: $e');
-          }
-
-          if (isVip) {
-            // First search discount list
-            for (final p in discount) {
-              if (p.id == '${matchCredits}dis' ||
-                  p.id == 'com.vexa.ai.video.${matchCredits}dis' ||
-                  p.id.endsWith('${matchCredits}dis')) {
-                matchedProduct = p;
-                break;
-              }
-            }
-            // Fallback to regular list
-            if (matchedProduct == null) {
-              for (final p in regular) {
-                if (p.id == matchCredits ||
-                    p.id == 'com.vexa.ai.video.$matchCredits' ||
-                    p.id.endsWith(matchCredits)) {
-                  matchedProduct = p;
-                  break;
-                }
-              }
-            }
-          } else {
-            // First search regular credit list
-            for (final p in regular) {
-              if (p.id == matchCredits ||
-                  p.id == 'com.vexa.ai.video.$matchCredits' ||
-                  p.id.endsWith(matchCredits)) {
-                matchedProduct = p;
-                break;
-              }
-            }
-            // Fallback to discount list
-            if (matchedProduct == null) {
-              for (final p in discount) {
-                if (p.id == '${matchCredits}dis' ||
-                    p.id == 'com.vexa.ai.video.${matchCredits}dis' ||
-                    p.id.endsWith('${matchCredits}dis')) {
-                  matchedProduct = p;
-                  break;
-                }
-              }
-            }
-          }
-
-          if (matchedProduct != null) {
-            productId = matchedProduct.id;
-          } else {
-            // Default fallback
-            productId = Platform.isIOS ? matchCredits : '$matchCredits.andr';
-          }
+          // Extract credits from productId for the success message key
+          final regExp = RegExp(r'(\d+)credits');
+          final match = regExp.firstMatch(productId.toLowerCase());
+          final credits = match != null ? int.tryParse(match.group(1) ?? '') ?? 0 : 0;
 
           try {
             final purchaseResult = await HavinBilling.instance.purchase(

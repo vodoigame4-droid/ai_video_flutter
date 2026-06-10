@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/services/remote_config_service.dart';
@@ -183,6 +184,52 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
             }
           }
           return '...';
+        }
+
+        String getProductId(int credits) {
+          final matchCredits = '${credits}credits';
+          if (isVip) {
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
+                return p.id;
+              }
+            }
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
+                return p.id;
+              }
+            }
+          } else {
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
+                return p.id;
+              }
+            }
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
+                return p.id;
+              }
+            }
+          }
+          return Platform.isIOS ? matchCredits : '$matchCredits.andr';
         }
 
         // Helper to get package info based on index
@@ -393,8 +440,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 );
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: 70,
-                                    priceText: getProductPrice(70),
+                                    productId: getProductId(70),
                                   ),
                                 );
                               },
@@ -411,8 +457,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 );
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: 150,
-                                    priceText: getProductPrice(150),
+                                    productId: getProductId(150),
                                   ),
                                 );
                               },
@@ -429,8 +474,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 );
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: 350,
-                                    priceText: getProductPrice(350),
+                                    productId: getProductId(350),
                                   ),
                                 );
                               },
@@ -447,8 +491,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 );
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: 500,
-                                    priceText: getProductPrice(500),
+                                    productId: getProductId(500),
                                   ),
                                 );
                               },
@@ -466,8 +509,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 );
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: 1000,
-                                    priceText: getProductPrice(1000),
+                                    productId: getProductId(1000),
                                   ),
                                 );
                               },
@@ -487,8 +529,7 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                 );
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: 5000,
-                                    priceText: getProductPrice(5000),
+                                    productId: getProductId(5000),
                                   ),
                                 );
                               },
@@ -515,11 +556,9 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                                   selectedPackageIndex,
                                 );
                                 final credits = data['credits'] as int;
-                                final price = data['price'] as String;
                                 context.read<IapBloc>().add(
                                   IapEvent.purchaseCredits(
-                                    credits: credits,
-                                    priceText: price,
+                                    productId: getProductId(credits),
                                   ),
                                 );
                               },

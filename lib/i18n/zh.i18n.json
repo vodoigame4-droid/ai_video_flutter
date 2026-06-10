@@ -119,7 +119,7 @@
     "cancel": "取消",
     "delete": "删除",
     "generating": "生成中...",
-    "imageGeneration": "图像生成"
+    "imageGeneration": "视频生成"
   },
   "home_new": {
     "welcomeToAppName": "欢迎使用Vido",
@@ -412,6 +412,8 @@
     "title": "喜欢这个应用吗？",
     "desc": "请给我们评分，帮助我们改善您的体验。谢谢！",
     "support_us": "支持我们",
+    "encourage_us": "鼓励我们",
+    "rate_on_store": "在商店评分",
     "maybe_later": "以后再说",
     "success": "感谢您的支持！"
   },

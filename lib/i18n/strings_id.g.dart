@@ -222,7 +222,7 @@ class _Translations$profile$id extends Translations$profile$en {
 	@override String get cancel => 'Batal';
 	@override String get delete => 'Hapus';
 	@override String get generating => 'Membuat...';
-	@override String get imageGeneration => 'Pembuatan Gambar';
+	@override String get imageGeneration => 'Pembuatan Video';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$id extends Translations$rating_dialog$en {
 	@override String get title => 'Menikmati Aplikasi Ini?';
 	@override String get desc => 'Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!';
 	@override String get support_us => 'Dukung Kami';
+	@override String get encourage_us => 'Semangati kami';
+	@override String get rate_on_store => 'Beri nilai di Store';
 	@override String get maybe_later => 'Mungkin Nanti';
 	@override String get success => 'Terima kasih atas dukungan Anda!';
 }
@@ -830,7 +832,7 @@ extension on TranslationsId {
 			'profile.cancel' => 'Batal',
 			'profile.delete' => 'Hapus',
 			'profile.generating' => 'Membuat...',
-			'profile.imageGeneration' => 'Pembuatan Gambar',
+			'profile.imageGeneration' => 'Pembuatan Video',
 			'home_new.welcomeToAppName' => 'Selamat Datang di Vido',
 			'home_new.imageToVideo' => 'Gambar ke\nVideo',
 			'home_new.transitionVideo' => 'Video\nTransisi',
@@ -1091,6 +1093,8 @@ extension on TranslationsId {
 			'rating_dialog.title' => 'Menikmati Aplikasi Ini?',
 			'rating_dialog.desc' => 'Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!',
 			'rating_dialog.support_us' => 'Dukung Kami',
+			'rating_dialog.encourage_us' => 'Semangati kami',
+			'rating_dialog.rate_on_store' => 'Beri nilai di Store',
 			'rating_dialog.maybe_later' => 'Mungkin Nanti',
 			'rating_dialog.success' => 'Terima kasih atas dukungan Anda!',
 			'debug.title' => 'Menu Debug',

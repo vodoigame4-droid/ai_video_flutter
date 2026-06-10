@@ -248,6 +248,24 @@ abstract class AppTextStyles {
     color: AppColors.white,
   );
 
+  static final TextStyle creditPackCardTitle = GoogleFonts.inter(
+    fontSize: 16.0,
+    fontWeight: FontWeight.w900,
+    color: AppColors.white,
+  );
+
+  static final TextStyle creditPackCardEstimate = GoogleFonts.inter(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w500,
+    color: AppColors.white.withValues(alpha: 0.6),
+  );
+
+  static final TextStyle creditPackCardPrice = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w900,
+    color: AppColors.white,
+  );
+
   static final TextStyle emojiFlag = const TextStyle(
     fontSize: 18.0,
   );

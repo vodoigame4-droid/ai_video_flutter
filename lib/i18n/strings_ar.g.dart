@@ -222,7 +222,7 @@ class _Translations$profile$ar extends Translations$profile$en {
 	@override String get cancel => 'إلغاء';
 	@override String get delete => 'حذف';
 	@override String get generating => 'جاري الإنشاء...';
-	@override String get imageGeneration => 'إنشاء الصور';
+	@override String get imageGeneration => 'إنشاء الفيديو';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$ar extends Translations$rating_dialog$en {
 	@override String get title => 'هل تستمتع بالتطبيق؟';
 	@override String get desc => 'يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!';
 	@override String get support_us => 'ادعمنا';
+	@override String get encourage_us => 'شجعنا';
+	@override String get rate_on_store => 'قيمنا على المتجر';
 	@override String get maybe_later => 'ربما لاحقًا';
 	@override String get success => 'شكرا لك على دعمك!';
 }
@@ -830,7 +832,7 @@ extension on TranslationsAr {
 			'profile.cancel' => 'إلغاء',
 			'profile.delete' => 'حذف',
 			'profile.generating' => 'جاري الإنشاء...',
-			'profile.imageGeneration' => 'إنشاء الصور',
+			'profile.imageGeneration' => 'إنشاء الفيديو',
 			'home_new.welcomeToAppName' => 'مرحبًا بك في Vido',
 			'home_new.imageToVideo' => 'صورة إلى\nفيديو',
 			'home_new.transitionVideo' => 'فيديو\nانتقالي',
@@ -1091,6 +1093,8 @@ extension on TranslationsAr {
 			'rating_dialog.title' => 'هل تستمتع بالتطبيق؟',
 			'rating_dialog.desc' => 'يرجى تقييمنا ومساعدتنا في تحسين تجربتك. شكرًا لك!',
 			'rating_dialog.support_us' => 'ادعمنا',
+			'rating_dialog.encourage_us' => 'شجعنا',
+			'rating_dialog.rate_on_store' => 'قيمنا على المتجر',
 			'rating_dialog.maybe_later' => 'ربما لاحقًا',
 			'rating_dialog.success' => 'شكرا لك على دعمك!',
 			'debug.title' => 'قائمة التصحيح',

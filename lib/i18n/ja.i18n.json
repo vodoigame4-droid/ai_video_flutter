@@ -119,7 +119,7 @@
     "cancel": "キャンセル",
     "delete": "削除",
     "generating": "生成中...",
-    "imageGeneration": "画像生成"
+    "imageGeneration": "動画生成"
   },
   "home_new": {
     "welcomeToAppName": "Vidoへようこそ",
@@ -412,6 +412,8 @@
     "title": "アプリを楽しんでいますか？",
     "desc": "評価をお願いします。より良い体験の提供に努めます。ありがとうございます！",
     "support_us": "応援する",
+    "encourage_us": "励ましてください",
+    "rate_on_store": "ストアで評価する",
     "maybe_later": "後で",
     "success": "ご支援ありがとうございました！"
   },

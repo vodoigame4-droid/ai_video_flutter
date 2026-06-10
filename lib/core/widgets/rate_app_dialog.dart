@@ -15,7 +15,7 @@ import '../injection/injection_container.dart';
 
 Future<void> showRateAppDialog(BuildContext context) {
   final t = context.t;
-  int currentRating = 5; // Default is 5 stars
+  int currentRating = 0; // Default is 5 stars
 
   return showDialog<void>(
     context: context,
@@ -32,7 +32,10 @@ Future<void> showRateAppDialog(BuildContext context) {
                 side: BorderSide(color: AppColors.secondary, width: 1.2),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 28,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -46,15 +49,17 @@ Future<void> showRateAppDialog(BuildContext context) {
                     // Title
                     Text(
                       t.rating_dialog.title,
-                      style: context.textTheme.titleMedium?.copyWith(
-                        color: AppColors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ) ?? const TextStyle(
-                        color: AppColors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style:
+                          context.textTheme.titleMedium?.copyWith(
+                            color: AppColors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ) ??
+                          const TextStyle(
+                            color: AppColors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 12),
@@ -62,15 +67,17 @@ Future<void> showRateAppDialog(BuildContext context) {
                     // Description
                     Text(
                       t.rating_dialog.desc,
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.subText,
-                        fontSize: 15,
-                        height: 1.4,
-                      ) ?? const TextStyle(
-                        color: AppColors.subText,
-                        fontSize: 15,
-                        height: 1.4,
-                      ),
+                      style:
+                          context.textTheme.bodyMedium?.copyWith(
+                            color: AppColors.subText,
+                            fontSize: 15,
+                            height: 1.4,
+                          ) ??
+                          const TextStyle(
+                            color: AppColors.subText,
+                            fontSize: 15,
+                            height: 1.4,
+                          ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 24),
@@ -81,7 +88,7 @@ Future<void> showRateAppDialog(BuildContext context) {
                       children: List.generate(5, (index) {
                         final starIndex = index + 1;
                         final isSelected = starIndex <= currentRating;
-                        
+
                         return GestureDetector(
                           onTap: () {
                             setState(() {
@@ -91,9 +98,11 @@ Future<void> showRateAppDialog(BuildContext context) {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 6),
                             child: Icon(
-                              isSelected ? Icons.star_rounded : Icons.star_outline_rounded,
-                              color: isSelected 
-                                  ? const Color(0xFFFFD700) 
+                              isSelected
+                                  ? Icons.star_rounded
+                                  : Icons.star_outline_rounded,
+                              color: isSelected
+                                  ? const Color(0xFFFFD700)
                                   : AppColors.secondary.withValues(alpha: 0.5),
                               size: 38,
                             ),
@@ -104,7 +113,7 @@ Future<void> showRateAppDialog(BuildContext context) {
                     const SizedBox(height: 28),
 
                     // Support Us Button (Gradient)
-                     InkWell(
+                    InkWell(
                       onTap: () async {
                         // Dismiss dialog first
                         Navigator.pop(context);
@@ -119,33 +128,61 @@ Future<void> showRateAppDialog(BuildContext context) {
                           if (Platform.isIOS) {
                             // iOS: Open App Store
                             const String iosAppId = '6776543288';
-                            final iosUri = Uri.parse('https://apps.apple.com/app/id$iosAppId?action=write-review');
+                            final iosUri = Uri.parse(
+                              'https://apps.apple.com/app/id$iosAppId?action=write-review',
+                            );
                             try {
                               if (await canLaunchUrl(iosUri)) {
-                                await launchUrl(iosUri, mode: LaunchMode.externalApplication);
+                                await launchUrl(
+                                  iosUri,
+                                  mode: LaunchMode.externalApplication,
+                                );
                               } else {
-                                LogUtils.e('RateAppDialog: Could not launch iOS App Store URL: $iosUri');
+                                LogUtils.e(
+                                  'RateAppDialog: Could not launch iOS App Store URL: $iosUri',
+                                );
                               }
                             } catch (e, stack) {
-                              LogUtils.e('RateAppDialog: Error launching iOS App Store', error: e, stackTrace: stack);
+                              LogUtils.e(
+                                'RateAppDialog: Error launching iOS App Store',
+                                error: e,
+                                stackTrace: stack,
+                              );
                             }
                           } else if (Platform.isAndroid) {
                             // Android: Open Play Store
                             try {
-                              final packageInfo = await PackageInfo.fromPlatform();
+                              final packageInfo =
+                                  await PackageInfo.fromPlatform();
                               final packageName = packageInfo.packageName;
-                              final marketUri = Uri.parse('market://details?id=$packageName');
-                              final webUri = Uri.parse('https://play.google.com/store/apps/details?id=$packageName');
+                              final marketUri = Uri.parse(
+                                'market://details?id=$packageName',
+                              );
+                              final webUri = Uri.parse(
+                                'https://play.google.com/store/apps/details?id=$packageName',
+                              );
 
                               if (await canLaunchUrl(marketUri)) {
-                                await launchUrl(marketUri, mode: LaunchMode.externalApplication);
+                                await launchUrl(
+                                  marketUri,
+                                  mode: LaunchMode.externalApplication,
+                                );
                               } else if (await canLaunchUrl(webUri)) {
-                                await launchUrl(webUri, mode: LaunchMode.externalApplication);
+                                await launchUrl(
+                                  webUri,
+                                  mode: LaunchMode.externalApplication,
+                                );
                               } else {
-                                LogUtils.e('RateAppDialog: Could not launch Android Play Store URLs');
+                                LogUtils.e(
+                                  'RateAppDialog: Could not launch Android Play Store URLs',
+                                );
                               }
                             } catch (e, stack) {
-                              LogUtils.e('RateAppDialog: Error launching Android Play Store', error: e, stackTrace: stack);
+                              LogUtils.e(
+                                'RateAppDialog: Error launching Android Play Store',
+                                error: e,
+                                stackTrace: stack,
+                              );
                             }
                           }
                         } else {
@@ -154,36 +191,28 @@ Future<void> showRateAppDialog(BuildContext context) {
                           AppToast.showSuccess(t.rating_dialog.success);
                         }
                       },
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(100),
+                      ),
                       child: Container(
                         height: 52,
                         width: double.infinity,
+                        alignment: Alignment.center,
                         decoration: const BoxDecoration(
                           gradient: AppColors.primaryGradient,
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/ic_support_us.svg',
-                              width: 22,
-                              height: 22,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              t.rating_dialog.support_us,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          currentRating == 0
+                              ? t.rating_dialog.encourage_us
+                              : (currentRating <= 3
+                                    ? t.rating_dialog.encourage_us
+                                    : t.rating_dialog.rate_on_store),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

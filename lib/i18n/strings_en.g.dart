@@ -385,8 +385,8 @@ class Translations$profile$en {
 	/// en: 'Generating...'
 	String get generating => 'Generating...';
 
-	/// en: 'Image Generation'
-	String get imageGeneration => 'Image Generation';
+	/// en: 'Video Generation'
+	String get imageGeneration => 'Video Generation';
 }
 
 // Path: home_new
@@ -1339,6 +1339,12 @@ class Translations$rating_dialog$en {
 	/// en: 'Support Us'
 	String get support_us => 'Support Us';
 
+	/// en: 'Encourage Us'
+	String get encourage_us => 'Encourage Us';
+
+	/// en: 'Rate on Store'
+	String get rate_on_store => 'Rate on Store';
+
 	/// en: 'Maybe Later'
 	String get maybe_later => 'Maybe Later';
 
@@ -1611,7 +1617,7 @@ extension on Translations {
 			'profile.cancel' => 'Cancel',
 			'profile.delete' => 'Delete',
 			'profile.generating' => 'Generating...',
-			'profile.imageGeneration' => 'Image Generation',
+			'profile.imageGeneration' => 'Video Generation',
 			'home_new.welcomeToAppName' => 'Welcome To Vido',
 			'home_new.imageToVideo' => 'Image to\nVideo',
 			'home_new.transitionVideo' => 'Transition\nVideo',
@@ -1878,6 +1884,8 @@ extension on Translations {
 			'rating_dialog.title' => 'Enjoying the App?',
 			'rating_dialog.desc' => 'Please rate us and help us improve your experience. Thank you!',
 			'rating_dialog.support_us' => 'Support Us',
+			'rating_dialog.encourage_us' => 'Encourage Us',
+			'rating_dialog.rate_on_store' => 'Rate on Store',
 			'rating_dialog.maybe_later' => 'Maybe Later',
 			'rating_dialog.success' => 'Thank you for your support!',
 			'debug.title' => 'Debug Menu',

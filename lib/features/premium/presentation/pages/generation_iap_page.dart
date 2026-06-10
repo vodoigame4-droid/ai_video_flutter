@@ -358,11 +358,12 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                         context.read<IapBloc>().add(
                                           const IapEvent.selectAnnually(),
                                         );
-                                        final productId = yearlyProducts.isNotEmpty
+                                        final productId =
+                                            yearlyProducts.isNotEmpty
                                             ? yearlyProducts.first.id
                                             : (Platform.isIOS
-                                                ? 'buy_annualy'
-                                                : 'buy_annualy.andr');
+                                                  ? 'buy_annualy'
+                                                  : 'buy_annualy.andr');
                                         context.read<IapBloc>().add(
                                           IapEvent.purchase(
                                             productId: productId,
@@ -441,7 +442,9 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                       // Weekly Package
                                       SubscriptionPackageCard(
                                         title: t.premium.weekly,
-                                        description: t.premium.weekly_desc(price: weeklyPrice),
+                                        description: t.premium.weekly_desc(
+                                          price: weeklyPrice,
+                                        ),
                                         price: weeklyPrice,
                                         suffix: t.premium.weekly_suffix,
                                         tagText: t.premium.best_value,
@@ -472,7 +475,9 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                       // Annually Package
                                       SubscriptionPackageCard(
                                         title: t.premium.annually,
-                                        description: t.premium.annually_desc(price: yearlyPricePerWeek),
+                                        description: t.premium.annually_desc(
+                                          price: yearlyPricePerWeek,
+                                        ),
                                         price: yearlyPrice,
                                         suffix: t.premium.annually_suffix,
                                         tagText: t.premium.save_80,
@@ -503,13 +508,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                       // Start Free Trial Button
                                       GradientButton(
                                         label: t.common.btn_continue,
-                                        leadingIcon: !isWeekly
-                                            ? SvgPicture.asset(
-                                                Assets.icons.icCrown,
-                                                width: 18,
-                                                height: 18,
-                                              )
-                                            : null,
+                                        leadingIcon: null,
                                         width: double.infinity,
                                         height: 62.0,
                                         gradient: AppColors.primaryGradient,

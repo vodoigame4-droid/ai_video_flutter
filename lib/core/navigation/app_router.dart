@@ -256,7 +256,7 @@ final GoRouter appRouter = GoRouter(
       path: GeneratingPage.path,
       name: GeneratingPage.name,
       pageBuilder: (context, state) {
-        final title = state.uri.queryParameters['title'] ?? 'Image Generation';
+        final title = state.uri.queryParameters['title'] ?? 'Video Generation';
         final imageUrl = state.uri.queryParameters['imageUrl'];
         final themeId = state.uri.queryParameters['themeId'] ?? '1';
         final themeType = state.uri.queryParameters['themeType'] ?? 'TEMPLATE';
@@ -298,7 +298,7 @@ final GoRouter appRouter = GoRouter(
         final title =
             extraArgs?.title ??
             state.uri.queryParameters['title'] ??
-            'Image Generation';
+            'Video Generation';
 
         final rawImageUrl = state.uri.queryParameters['imageUrl'] ?? '';
         final imageUrl =

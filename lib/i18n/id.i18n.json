@@ -119,7 +119,7 @@
     "cancel": "Batal",
     "delete": "Hapus",
     "generating": "Membuat...",
-    "imageGeneration": "Pembuatan Gambar"
+    "imageGeneration": "Pembuatan Video"
   },
   "home_new": {
     "welcomeToAppName": "Selamat Datang di Vido",
@@ -412,6 +412,8 @@
     "title": "Menikmati Aplikasi Ini?",
     "desc": "Silakan beri peringkat dan bantu kami meningkatkan pengalaman Anda. Terima kasih!",
     "support_us": "Dukung Kami",
+    "encourage_us": "Semangati kami",
+    "rate_on_store": "Beri nilai di Store",
     "maybe_later": "Mungkin Nanti",
     "success": "Terima kasih atas dukungan Anda!"
   },

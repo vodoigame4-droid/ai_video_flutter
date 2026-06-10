@@ -210,6 +210,7 @@ void main() {
     when(() => mockRemoteConfigService.getOnboardingUrls()).thenReturn([]);
     when(() => mockRemoteConfigService.getBgIAPUrl()).thenReturn('https://example.com/bg_iap.mp4');
     when(() => mockRemoteConfigService.getBgDiscountUrl()).thenReturn('https://example.com/bg_discount.mp4');
+    when(() => mockRemoteConfigService.closeButtonDelaySeconds).thenReturn(0);
 
     sl.unregister<RemoteConfigService>();
     sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfigService);
@@ -348,7 +349,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
 
     // Verify that we land on IAPPage (shows "Start My Subscription" or similar premium texts)
-    expect(find.text(t.premium.start_my_subscription), findsOneWidget);
+    expect(find.text(t.premium.auto_renewable), findsOneWidget);
 
     // Clean up to dispose all active widgets
     await tester.pumpWidget(const SizedBox());

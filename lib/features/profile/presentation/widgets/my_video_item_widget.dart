@@ -202,7 +202,9 @@ class MyVideoItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          t.profile.imageGeneration,
+                          (!isGenerating && video.title.isNotEmpty)
+                              ? video.title
+                              : t.profile.imageGeneration,
                           style:
                               context.textTheme.bodyMedium?.copyWith(
                                 color: Colors.white,

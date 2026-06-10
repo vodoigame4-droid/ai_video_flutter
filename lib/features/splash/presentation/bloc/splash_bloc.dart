@@ -36,13 +36,28 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           _preloadedUrls = null;
           emit(const SplashState.loading());
 
-          // 1. Initialize Remote Config first so that it is ready for other preloading tasks
+          // 1. Request ATT on iOS first, ensuring it is shown and resolved before anything else
+          if (Platform.isIOS) {
+            final attStopwatch = Stopwatch()..start();
+            try {
+              LogUtils.d('SplashBloc: Requesting ATT before other initializations...');
+              await Future.delayed(const Duration(milliseconds: 500));
+              await HavinAdsManager.instance.requestATT();
+              attStopwatch.stop();
+              LogUtils.i('SplashBloc: requestATT completed in ${attStopwatch.elapsedMilliseconds}ms');
+            } catch (e) {
+              attStopwatch.stop();
+              LogUtils.w('SplashBloc: Failed to request ATT: $e');
+            }
+          }
+
+          // 2. Initialize Remote Config
           await _initRemoteConfig();
 
           // Minimum duration to display logo (1.0 second)
           final minDelay = Future.delayed(const Duration(milliseconds: 1000));
 
-          // 2. Run other initializations concurrently
+          // 3. Run other initializations concurrently
           final concurrentStopwatch = Stopwatch()..start();
           LogUtils.d('SplashBloc: Starting concurrent initialization tasks...');
           await Future.wait([
@@ -191,18 +206,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _initHavinSdk() async {
     final overallStopwatch = Stopwatch()..start();
     LogUtils.d('SplashBloc: Start HavinSdk initialization...');
-    if (Platform.isIOS) {
-      final attStopwatch = Stopwatch()..start();
-      try {
-        LogUtils.d('SplashBloc: Requesting ATT...');
-        await HavinAdsManager.instance.requestATT();
-        attStopwatch.stop();
-        LogUtils.i('SplashBloc: requestATT completed in ${attStopwatch.elapsedMilliseconds}ms');
-      } catch (e) {
-        attStopwatch.stop();
-        LogUtils.w('SplashBloc: Failed to request ATT after ${attStopwatch.elapsedMilliseconds}ms: $e');
-      }
-    }
 
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
       return;

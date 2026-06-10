@@ -493,7 +493,9 @@ class _IapViewState extends State<IapView> {
                                       '${BuyCreditsPage.path}?fromSplash=true',
                                     );
                                   } else {
-                                    context.pushReplacement(BuyCreditsPage.path);
+                                    context.pushReplacement(
+                                      BuyCreditsPage.path,
+                                    );
                                   }
                                 },
                               ),
@@ -537,7 +539,9 @@ class _IapViewState extends State<IapView> {
                               const SizedBox(height: 20),
                               SubscriptionPackageCard(
                                 title: t.premium.weekly,
-                                description: t.premium.weekly_desc(price: weeklyPrice),
+                                description: t.premium.weekly_desc(
+                                  price: weeklyPrice,
+                                ),
                                 price: weeklyPrice,
                                 suffix: t.premium.weekly_suffix,
                                 tagText: t.premium.best_value,
@@ -563,7 +567,9 @@ class _IapViewState extends State<IapView> {
                               const SizedBox(height: 8),
                               SubscriptionPackageCard(
                                 title: t.premium.annually,
-                                description: t.premium.annually_desc(price: yearlyPricePerWeek),
+                                description: t.premium.annually_desc(
+                                  price: yearlyPricePerWeek,
+                                ),
                                 price: yearlyPrice,
                                 suffix: t.premium.annually_suffix,
                                 tagText: t.premium.save_80,
@@ -589,13 +595,7 @@ class _IapViewState extends State<IapView> {
                               const SizedBox(height: 24),
                               GradientButton(
                                 label: t.common.btn_continue,
-                                leadingIcon: !isWeekly
-                                    ? SvgPicture.asset(
-                                        Assets.icons.icCrown,
-                                        width: 18,
-                                        height: 18,
-                                      )
-                                    : null,
+                                leadingIcon: null,
                                 width: double.infinity,
                                 height: 62.0,
                                 gradient: AppColors.primaryGradient,

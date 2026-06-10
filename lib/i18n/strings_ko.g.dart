@@ -222,7 +222,7 @@ class _Translations$profile$ko extends Translations$profile$en {
 	@override String get cancel => '취소';
 	@override String get delete => '삭제';
 	@override String get generating => '생성 중...';
-	@override String get imageGeneration => '이미지 생성';
+	@override String get imageGeneration => '비디오 생성';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$ko extends Translations$rating_dialog$en {
 	@override String get title => '앱이 마음에 드시나요?';
 	@override String get desc => '평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!';
 	@override String get support_us => '지원하기';
+	@override String get encourage_us => '응원하기';
+	@override String get rate_on_store => '스토어에서 평가하기';
 	@override String get maybe_later => '나중에';
 	@override String get success => '지원해 주셔서 감사합니다!';
 }
@@ -830,7 +832,7 @@ extension on TranslationsKo {
 			'profile.cancel' => '취소',
 			'profile.delete' => '삭제',
 			'profile.generating' => '생성 중...',
-			'profile.imageGeneration' => '이미지 생성',
+			'profile.imageGeneration' => '비디오 생성',
 			'home_new.welcomeToAppName' => 'Vido에 오신 것을 환영합니다',
 			'home_new.imageToVideo' => '이미지를\n비디오로',
 			'home_new.transitionVideo' => '트랜지션\n비디오',
@@ -1091,6 +1093,8 @@ extension on TranslationsKo {
 			'rating_dialog.title' => '앱이 마음에 드시나요?',
 			'rating_dialog.desc' => '평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!',
 			'rating_dialog.support_us' => '지원하기',
+			'rating_dialog.encourage_us' => '응원하기',
+			'rating_dialog.rate_on_store' => '스토어에서 평가하기',
 			'rating_dialog.maybe_later' => '나중에',
 			'rating_dialog.success' => '지원해 주셔서 감사합니다!',
 			'debug.title' => '디버그 메뉴',

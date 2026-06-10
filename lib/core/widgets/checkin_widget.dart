@@ -157,7 +157,7 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
 
     if (!context.mounted) return;
 
-    showGeneralDialog(
+    await showGeneralDialog(
       context: context,
       barrierColor: Colors.black.withValues(alpha: 0.75),
       barrierDismissible: true,
@@ -183,6 +183,18 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
         );
       },
     );
+
+    if (!context.mounted) return;
+
+    final isEnabledNow = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    if (isEnabledNow) {
+      final isGranted = await AppPermissionHandler.checkAndRequestNotificationPermission(context);
+      if (isGranted) {
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+        await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
+      }
+    }
+    _checkSystemNotificationPermission();
   }
 
   @override

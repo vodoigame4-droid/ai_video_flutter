@@ -223,7 +223,7 @@ class _Translations$profile$vi extends Translations$profile$en {
 	@override String get cancel => 'Hủy';
 	@override String get delete => 'Xóa';
 	@override String get generating => 'Đang tạo...';
-	@override String get imageGeneration => 'Tạo hình ảnh';
+	@override String get imageGeneration => 'Tạo video';
 }
 
 // Path: home_new
@@ -643,6 +643,8 @@ class _Translations$rating_dialog$vi extends Translations$rating_dialog$en {
 	@override String get title => 'Bạn thích ứng dụng chứ?';
 	@override String get desc => 'Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!';
 	@override String get support_us => 'Hỗ trợ chúng tôi';
+	@override String get encourage_us => 'Khuyến khích chúng tôi';
+	@override String get rate_on_store => 'Đánh giá trên Store';
 	@override String get maybe_later => 'Để sau';
 	@override String get success => 'Cảm ơn bạn đã ủng hộ!';
 }
@@ -846,7 +848,7 @@ extension on TranslationsVi {
 			'profile.cancel' => 'Hủy',
 			'profile.delete' => 'Xóa',
 			'profile.generating' => 'Đang tạo...',
-			'profile.imageGeneration' => 'Tạo hình ảnh',
+			'profile.imageGeneration' => 'Tạo video',
 			'home_new.welcomeToAppName' => 'Chào mừng đến với Vido',
 			'home_new.imageToVideo' => 'Ảnh sang\nVideo',
 			'home_new.transitionVideo' => 'Video\nChuyển cảnh',
@@ -1113,6 +1115,8 @@ extension on TranslationsVi {
 			'rating_dialog.title' => 'Bạn thích ứng dụng chứ?',
 			'rating_dialog.desc' => 'Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!',
 			'rating_dialog.support_us' => 'Hỗ trợ chúng tôi',
+			'rating_dialog.encourage_us' => 'Khuyến khích chúng tôi',
+			'rating_dialog.rate_on_store' => 'Đánh giá trên Store',
 			'rating_dialog.maybe_later' => 'Để sau',
 			'rating_dialog.success' => 'Cảm ơn bạn đã ủng hộ!',
 			'debug.title' => 'Menu Debug',

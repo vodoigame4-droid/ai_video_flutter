@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_theme.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
@@ -169,7 +171,7 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
 
         String getProductPrice(int credits) {
           final matchCredits = '${credits}credits';
-          if (isVip) {
+          if (true) {
             for (final p in discountProducts) {
               final id = p.id.toLowerCase();
               if (id == '${matchCredits}dis' ||
@@ -186,31 +188,35 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id == '$matchCredits.andr' ||
                   id.endsWith(matchCredits) ||
                   id.endsWith('$matchCredits.andr')) {
-                return p.priceString;
-              }
-            }
-          } else {
-            for (final p in regularProducts) {
-              final id = p.id.toLowerCase();
-              if (id == matchCredits ||
-                  id == '$matchCredits.andr' ||
-                  id.endsWith(matchCredits) ||
-                  id.endsWith('$matchCredits.andr')) {
-                return p.priceString;
-              }
-            }
-            for (final p in discountProducts) {
-              final id = p.id.toLowerCase();
-              if (id == '${matchCredits}dis' ||
-                  id == '${matchCredits}dis.andr' ||
-                  id.endsWith('${matchCredits}dis') ||
-                  id.endsWith('${matchCredits}dis.andr') ||
-                  id.contains('${credits}creditsdis')) {
                 return p.priceString;
               }
             }
           }
           return '...';
+        }
+
+        String getProductId(int credits) {
+          final matchCredits = '${credits}credits';
+          for (final p in discountProducts) {
+            final id = p.id.toLowerCase();
+            if (id == '${matchCredits}dis' ||
+                id == '${matchCredits}dis.andr' ||
+                id.endsWith('${matchCredits}dis') ||
+                id.endsWith('${matchCredits}dis.andr') ||
+                id.contains('${credits}creditsdis')) {
+              return p.id;
+            }
+          }
+          for (final p in regularProducts) {
+            final id = p.id.toLowerCase();
+            if (id == matchCredits ||
+                id == '$matchCredits.andr' ||
+                id.endsWith(matchCredits) ||
+                id.endsWith('$matchCredits.andr')) {
+              return p.id;
+            }
+          }
+          return Platform.isIOS ? matchCredits : '$matchCredits.andr';
         }
 
         String translateSuccessMessage(
@@ -422,8 +428,7 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                                     );
                                     context.read<IapBloc>().add(
                                       IapEvent.purchaseCredits(
-                                        credits: 5000,
-                                        priceText: getProductPrice(5000),
+                                        productId: getProductId(5000),
                                       ),
                                     );
                                   },
@@ -472,8 +477,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                                     onTap: () {
                                       context.read<IapBloc>().add(
                                         IapEvent.purchaseCredits(
-                                          credits: pkg['credits'] as int,
-                                          priceText: pkg['price'] as String,
+                                          productId: getProductId(
+                                            pkg['credits'] as int,
+                                          ),
                                         ),
                                       );
                                     },
@@ -578,11 +584,7 @@ class GenerationCreditPackCard extends StatelessWidget {
                   // Credit Title
                   Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: context.appTheme.creditPackCardTitleStyle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -590,11 +592,7 @@ class GenerationCreditPackCard extends StatelessWidget {
                   // Approx Video Estimate
                   Text(
                     videoEstimate,
-                    style: const TextStyle(
-                      color: Colors.white60,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    style: context.appTheme.creditPackCardEstimateStyle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -614,11 +612,7 @@ class GenerationCreditPackCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Text(
                         priceText,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: context.appTheme.creditPackCardPriceStyle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

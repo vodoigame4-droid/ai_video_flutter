@@ -119,7 +119,7 @@
     "cancel": "취소",
     "delete": "삭제",
     "generating": "생성 중...",
-    "imageGeneration": "이미지 생성"
+    "imageGeneration": "비디오 생성"
   },
   "home_new": {
     "welcomeToAppName": "Vido에 오신 것을 환영합니다",
@@ -412,6 +412,8 @@
     "title": "앱이 마음에 드시나요?",
     "desc": "평가해 주시면 더 나은 경험을 제공하는 데 도움이 됩니다. 감사합니다!",
     "support_us": "지원하기",
+    "encourage_us": "응원하기",
+    "rate_on_store": "스토어에서 평가하기",
     "maybe_later": "나중에",
     "success": "지원해 주셔서 감사합니다!"
   },

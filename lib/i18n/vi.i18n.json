@@ -119,7 +119,7 @@
     "cancel": "Hủy",
     "delete": "Xóa",
     "generating": "Đang tạo...",
-    "imageGeneration": "Tạo hình ảnh"
+    "imageGeneration": "Tạo video"
   },
   "home_new": {
     "welcomeToAppName": "Chào mừng đến với Vido",
@@ -420,6 +420,8 @@
     "title": "Bạn thích ứng dụng chứ?",
     "desc": "Vui lòng đánh giá và giúp chúng tôi cải thiện trải nghiệm của bạn. Cảm ơn bạn!",
     "support_us": "Hỗ trợ chúng tôi",
+    "encourage_us": "Khuyến khích chúng tôi",
+    "rate_on_store": "Đánh giá trên Store",
     "maybe_later": "Để sau",
     "success": "Cảm ơn bạn đã ủng hộ!"
   },

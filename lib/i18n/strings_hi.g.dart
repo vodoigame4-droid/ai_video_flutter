@@ -222,7 +222,7 @@ class _Translations$profile$hi extends Translations$profile$en {
 	@override String get cancel => 'रद्द करें';
 	@override String get delete => 'हटाएं';
 	@override String get generating => 'बनाया जा रहा है...';
-	@override String get imageGeneration => 'छवि निर्माण';
+	@override String get imageGeneration => 'वीडियो निर्माण';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$hi extends Translations$rating_dialog$en {
 	@override String get title => 'क्या आप ऐप का आनंद ले रहे हैं?';
 	@override String get desc => 'कृपया हमें रेट करें और अपना अनुभव बेहतर बनाने में हमारी मदद करें। धन्यवाद!';
 	@override String get support_us => 'हमारा समर्थन करें';
+	@override String get encourage_us => 'हमें प्रोत्साहित करें';
+	@override String get rate_on_store => 'स्टोर पर रेट करें';
 	@override String get maybe_later => 'शायद बाद में';
 	@override String get success => 'आपके समर्थन के लिए धन्यवाद!';
 }
@@ -830,7 +832,7 @@ extension on TranslationsHi {
 			'profile.cancel' => 'रद्द करें',
 			'profile.delete' => 'हटाएं',
 			'profile.generating' => 'बनाया जा रहा है...',
-			'profile.imageGeneration' => 'छवि निर्माण',
+			'profile.imageGeneration' => 'वीडियो निर्माण',
 			'home_new.welcomeToAppName' => 'Vido में आपका स्वागत है',
 			'home_new.imageToVideo' => 'छवि से\nवीडियो',
 			'home_new.transitionVideo' => 'संक्रमण\nवीडियो',
@@ -1091,6 +1093,8 @@ extension on TranslationsHi {
 			'rating_dialog.title' => 'क्या आप ऐप का आनंद ले रहे हैं?',
 			'rating_dialog.desc' => 'कृपया हमें रेट करें और अपना अनुभव बेहतर बनाने में हमारी मदद करें। धन्यवाद!',
 			'rating_dialog.support_us' => 'हमारा समर्थन करें',
+			'rating_dialog.encourage_us' => 'हमें प्रोत्साहित करें',
+			'rating_dialog.rate_on_store' => 'स्टोर पर रेट करें',
 			'rating_dialog.maybe_later' => 'शायद बाद में',
 			'rating_dialog.success' => 'आपके समर्थन के लिए धन्यवाद!',
 			'debug.title' => 'डीबग मेनू',

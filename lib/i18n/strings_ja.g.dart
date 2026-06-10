@@ -222,7 +222,7 @@ class _Translations$profile$ja extends Translations$profile$en {
 	@override String get cancel => 'キャンセル';
 	@override String get delete => '削除';
 	@override String get generating => '生成中...';
-	@override String get imageGeneration => '画像生成';
+	@override String get imageGeneration => '動画生成';
 }
 
 // Path: home_new
@@ -627,6 +627,8 @@ class _Translations$rating_dialog$ja extends Translations$rating_dialog$en {
 	@override String get title => 'アプリを楽しんでいますか？';
 	@override String get desc => '評価をお願いします。より良い体験の提供に努めます。ありがとうございます！';
 	@override String get support_us => '応援する';
+	@override String get encourage_us => '励ましてください';
+	@override String get rate_on_store => 'ストアで評価する';
 	@override String get maybe_later => '後で';
 	@override String get success => 'ご支援ありがとうございました！';
 }
@@ -830,7 +832,7 @@ extension on TranslationsJa {
 			'profile.cancel' => 'キャンセル',
 			'profile.delete' => '削除',
 			'profile.generating' => '生成中...',
-			'profile.imageGeneration' => '画像生成',
+			'profile.imageGeneration' => '動画生成',
 			'home_new.welcomeToAppName' => 'Vidoへようこそ',
 			'home_new.imageToVideo' => '画像から\nビデオ',
 			'home_new.transitionVideo' => 'トランジション\n動画',
@@ -1091,6 +1093,8 @@ extension on TranslationsJa {
 			'rating_dialog.title' => 'アプリを楽しんでいますか？',
 			'rating_dialog.desc' => '評価をお願いします。より良い体験の提供に努めます。ありがとうございます！',
 			'rating_dialog.support_us' => '応援する',
+			'rating_dialog.encourage_us' => '励ましてください',
+			'rating_dialog.rate_on_store' => 'ストアで評価する',
 			'rating_dialog.maybe_later' => '後で',
 			'rating_dialog.success' => 'ご支援ありがとうございました！',
 			'debug.title' => 'デバッグメニュー',
