@@ -13,10 +13,13 @@ class CreditNavigationHelper {
   static Future<bool> checkInsufficientCreditsAndNavigate(
     BuildContext context, {
     String videoUrl = '',
+    bool isFullHd = false,
   }) async {
     try {
       final user = await sl<WatchProfileUseCase>()().first;
-      final cost = sl<RemoteConfigService>().videoGenCost;
+      final cost = isFullHd
+          ? sl<RemoteConfigService>().videoGenFullHdCost
+          : sl<RemoteConfigService>().videoGenCost;
       if (user.credits < cost) {
         if (context.mounted) {
           if (user.isVip) {

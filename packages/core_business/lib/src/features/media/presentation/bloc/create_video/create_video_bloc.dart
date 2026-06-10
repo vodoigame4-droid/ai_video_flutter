@@ -36,7 +36,7 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
           inspireMeCount: watchProfileUseCase.cachedUser?.freeSuggestions ?? 3,
           slotsPaths: List<String?>.filled(3, null),
           uploadedSlotsPaths: List<String?>.filled(3, null),
-          quality: 'Full HD',
+          quality: 'HD',
           duration: '5s',
           isGenerating: false,
           isSuccess: false,

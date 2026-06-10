@@ -39,6 +39,7 @@ class CreateTemplateSettingsPage extends StatelessWidget {
                       final hasInsufficient = await CreditNavigationHelper.checkInsufficientCreditsAndNavigate(
                         context,
                         videoUrl: readyState.videoUrl,
+                        isFullHd: readyState.quality == 'Full HD',
                       );
                       if (hasInsufficient) return;
 
@@ -51,7 +52,7 @@ class CreateTemplateSettingsPage extends StatelessWidget {
                         themeId: readyState.templateId,
                         themeType: readyState.themeType,
                         themeOrgId: readyState.themeOrgId,
-                        isHd: readyState.quality == 'Full HD' || readyState.quality == 'HD',
+                        isHd: readyState.quality == 'Full HD',
                         isLongTime: readyState.duration == '10s' || readyState.duration == '15s',
                       );
                     }

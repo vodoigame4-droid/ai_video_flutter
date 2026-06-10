@@ -217,7 +217,7 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                                 imageUrl: videoImageUrl,
                                 videoUrl: videoUrl,
                                 serviceType: 'EXTEND_VIDEO',
-                                isHd: extendQuality == 'Full HD' || extendQuality == 'HD',
+                                isHd: extendQuality == 'Full HD',
                                 isLongTime: extendDuration == '10s' || extendDuration == '15s',
                                 prompt: extendPrompt,
                                 heroTag: heroTag,

@@ -69,6 +69,7 @@ class CreateVideoView extends StatelessWidget {
                   final hasInsufficient = await CreditNavigationHelper.checkInsufficientCreditsAndNavigate(
                     context,
                     videoUrl: resolvedVideoUrl,
+                    isFullHd: readyState.quality == 'Full HD',
                   );
                   if (hasInsufficient) return;
 
@@ -125,7 +126,7 @@ class CreateVideoView extends StatelessWidget {
                     serviceType: serviceType,
                     videoUrl: videoUrl,
                     prompt: readyState.customPrompt,
-                    isHd: readyState.quality == 'Full HD' || readyState.quality == 'HD',
+                    isHd: readyState.quality == 'Full HD',
                     isLongTime: readyState.duration == '10s' || readyState.duration == '15s',
                     heroTag: 'create-video-hero',
                   );
