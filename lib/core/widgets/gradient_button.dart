@@ -14,6 +14,7 @@ class GradientButton extends StatelessWidget {
   final Widget? leadingIcon;
   final TextStyle? textStyle;
   final bool isEnabled;
+  final double? horizontalPadding;
 
   const GradientButton({
     super.key,
@@ -26,6 +27,7 @@ class GradientButton extends StatelessWidget {
     this.leadingIcon,
     this.textStyle,
     this.isEnabled = true,
+    this.horizontalPadding,
   });
 
   @override
@@ -62,7 +64,9 @@ class GradientButton extends StatelessWidget {
               // Button label (centered text)
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalPadding ?? 48.0,
+                  ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,

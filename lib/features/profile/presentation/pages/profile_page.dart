@@ -1,4 +1,8 @@
 import 'dart:async';
+import 'package:ai_video_flutter/core/widgets/app_background.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/buy_credits_page.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/generation_buy_credits_page.dart';
+import '../../../../core/widgets/gradient_tab_indicator.dart';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import '../../../../core/utils/credit_navigation_helper.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +43,8 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _ProfileViewState extends State<ProfileView>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final TabController _tabController;
   Timer? _settingsHoldTimer;
   bool _isHoldTriggered = false;
@@ -68,7 +73,9 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      LogUtils.d('ProfileView: App lifecycle changed to resumed. Refreshing history.');
+      LogUtils.d(
+        'ProfileView: App lifecycle changed to resumed. Refreshing history.',
+      );
       context.read<ProfileBloc>().add(const ProfileEvent.init());
     }
   }
@@ -102,268 +109,323 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Scaffold(
-      body: SafeArea(
-        child: MultiBlocListener(
-          listeners: [
-            BlocListener<ProfileBloc, ProfileState>(
-              listener: (context, profileState) {
-                profileState.mapOrNull(
-                  ready: (readyState) {
-                    if (_tabController.index != readyState.subTabIndex) {
-                      _tabController.animateTo(readyState.subTabIndex);
-                    }
+    return AppBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<ProfileBloc, ProfileState>(
+                listener: (context, profileState) {
+                  profileState.mapOrNull(
+                    ready: (readyState) {
+                      if (_tabController.index != readyState.subTabIndex) {
+                        _tabController.animateTo(readyState.subTabIndex);
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
+            child: BlocBuilder<ProfileBloc, ProfileState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  ready: (subTabIndex, videosState, likedTemplates) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+
+                          // Header Row: Settings (left), Profile (center), Credit Badge (right)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Settings Button
+                              Material(
+                                color: Colors.white.withValues(alpha: 0.1),
+                                shape: const CircleBorder(),
+                                child: InkWell(
+                                  onTap: () {
+                                    _settingsHoldTimer?.cancel();
+                                    if (_isHoldTriggered) {
+                                      _isHoldTriggered = false;
+                                      return;
+                                    }
+                                    context.push(SettingsPage.path);
+                                  },
+                                  onTapDown: (_) {
+                                    _isHoldTriggered = false;
+                                    _settingsHoldTimer?.cancel();
+                                    _settingsHoldTimer = Timer(
+                                      const Duration(seconds: 5),
+                                      () async {
+                                        _isHoldTriggered = true;
+                                        if (mounted) {
+                                          await CreditNavigationHelper.navigateToPaymentScreen(
+                                            context,
+                                          );
+                                        }
+                                      },
+                                    );
+                                  },
+                                  onTapCancel: () {
+                                    _settingsHoldTimer?.cancel();
+                                  },
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(100),
+                                  ),
+                                  child: const SizedBox(
+                                    width: 36,
+                                    height: 36,
+                                    child: Icon(
+                                      Icons.settings_outlined,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              // Page Title
+                              Text(
+                                t.profile.title,
+                                style:
+                                    context.textTheme.titleMedium?.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ) ??
+                                    const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+
+                              // Credit Badge/Icon Button
+                              Material(
+                                color: Colors.transparent,
+                                shape: const CircleBorder(),
+                                child: InkWell(
+                                  onTap: () {
+                                    if (sl<WatchProfileUseCase>()
+                                            .cachedUser
+                                            ?.isVip ??
+                                        false) {
+                                      context.push(
+                                        GenerationBuyCreditsPage.path,
+                                      );
+                                    } else {
+                                      context.push(BuyCreditsPage.path);
+                                    }
+                                  },
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(100),
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/ic_credit_setting.png',
+                                    width: 36,
+                                    height: 36,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 24),
+
+                          // Premium Upgrade Banner (hidden if user is premium)
+                          StreamBuilder<UserEntity>(
+                            stream: sl<WatchProfileUseCase>()(),
+                            builder: (context, snapshot) {
+                              final isVip = snapshot.data?.isVip ?? false;
+                              if (isVip) return const SizedBox.shrink();
+
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  PremiumBannerWidget(
+                                    onTap: () {
+                                      final videosList = videosState.maybeWhen(
+                                        success: (list) => list,
+                                        orElse: () => const [],
+                                      );
+                                      final videoUrl = videosList.isNotEmpty
+                                          ? videosList.first.videoUrl
+                                          : (likedTemplates.isNotEmpty
+                                                ? likedTemplates.first.sourceUrl
+                                                : '');
+                                      context.push(
+                                        '${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
+                              );
+                            },
+                          ),
+
+                          // TabBar selection: My Video and Liked
+                          TabBar(
+                            controller: _tabController,
+                            indicator: GradientTabIndicator(
+                              gradient: context.appTheme.primaryGradient,
+                              height: 3,
+                            ),
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            dividerHeight: 0,
+                            labelColor: const Color(0xFF24C780),
+                            unselectedLabelColor: const Color(0xFFB1B1B1),
+                            labelStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            unselectedLabelStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            tabs: [
+                              Tab(text: t.profile.myVideo),
+                              Tab(text: t.profile.liked),
+                            ],
+                          ),
+
+                          const SizedBox(height: 20),
+
+                          // TabBarView for smooth page swiping
+                          Expanded(
+                            child: TabBarView(
+                              controller: _tabController,
+                              children: [
+                                // My Video Tab (with pull-to-refresh)
+                                RefreshIndicator(
+                                  onRefresh: () async {
+                                    final completer = Completer<void>();
+                                    context.read<ProfileBloc>().add(
+                                      ProfileEvent.init(completer),
+                                    );
+                                    await completer.future;
+                                  },
+                                  child: videosState.when(
+                                    initial: () => const SizedBox.shrink(),
+                                    loading: () => const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                    empty: () => _buildEmptyPlaceholder(t),
+                                    success: (videos) {
+                                      if (videos.isEmpty) {
+                                        return _buildEmptyPlaceholder(t);
+                                      }
+                                      return GridView.builder(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(
+                                              parent: BouncingScrollPhysics(),
+                                            ),
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              mainAxisSpacing: 12,
+                                              crossAxisSpacing: 12,
+                                              childAspectRatio: 173 / 248,
+                                            ),
+                                        itemCount: videos.length,
+                                        padding: const EdgeInsets.only(
+                                          bottom: 100,
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          final video = videos[index];
+                                          return MyVideoItemWidget(
+                                            video: video,
+                                            onPlayTap: () {
+                                              ResultPage.push(
+                                                context,
+                                                ResultPageArgs(
+                                                  videoId: video.id,
+                                                  title: video.title,
+                                                  imageUrl: video.imageUrl,
+                                                  videoUrl: video.videoUrl,
+                                                  createdAt: video.createdAt,
+                                                ),
+                                              );
+                                            },
+                                            onDeleteTap: () =>
+                                                _showDeleteDialog(
+                                                  context,
+                                                  video.id,
+                                                ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    error: (failure) => Center(
+                                      child: Text(
+                                        BackendErrorHelper.getErrorMessage(
+                                          context,
+                                          failure.toErrorCodeOrMessage(),
+                                        ),
+                                        style: context.appTheme.errorTextStyle,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                // Liked Tab
+                                likedTemplates.isEmpty
+                                    ? _buildEmptyPlaceholder(t)
+                                    : GridView.builder(
+                                        physics: const BouncingScrollPhysics(),
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              mainAxisSpacing: 12,
+                                              crossAxisSpacing: 12,
+                                              childAspectRatio: 173 / 248,
+                                            ),
+                                        itemCount: likedTemplates.length,
+                                        padding: const EdgeInsets.only(
+                                          bottom: 100,
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          final template =
+                                              likedTemplates[index];
+                                          return LikedTemplateItemWidget(
+                                            template: template,
+                                            onTap: () {
+                                              context.pushNamed(
+                                                CreateFromTemplatePage.name,
+                                                queryParameters: {
+                                                  'templateId': template.id,
+                                                  'title': template.name,
+                                                  'videoUrl':
+                                                      template.sourceUrl,
+                                                  'imageUrl':
+                                                      template.thumbnailUrl,
+                                                  'themeType': template.type,
+                                                  'themeOrgId': template.orgId
+                                                      .toString(),
+                                                },
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 );
               },
             ),
-          ],
-          child: BlocBuilder<ProfileBloc, ProfileState>(
-            builder: (context, state) {
-              return state.when(
-                initial: () => const Center(child: CircularProgressIndicator()),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                ready: (subTabIndex, videosState, likedTemplates) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-
-                        // Header Row: Settings (left), Profile (center), Credit Badge (right)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Settings Button
-                            Material(
-                              color: Colors.white.withValues(alpha: 0.1),
-                              shape: const CircleBorder(),
-                              child: InkWell(
-                                onTap: () {
-                                  _settingsHoldTimer?.cancel();
-                                  if (_isHoldTriggered) {
-                                    _isHoldTriggered = false;
-                                    return;
-                                  }
-                                  context.push(SettingsPage.path);
-                                },
-                                onTapDown: (_) {
-                                  _isHoldTriggered = false;
-                                  _settingsHoldTimer?.cancel();
-                                  _settingsHoldTimer = Timer(const Duration(seconds: 5), () async {
-                                    _isHoldTriggered = true;
-                                    if (mounted) {
-                                      await CreditNavigationHelper.navigateToPaymentScreen(context);
-                                    }
-                                  });
-                                },
-                                onTapCancel: () {
-                                  _settingsHoldTimer?.cancel();
-                                },
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                child: const SizedBox(
-                                  width: 36,
-                                  height: 36,
-                                  child: Icon(
-                                    Icons.settings_outlined,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            // Page Title
-                            Text(
-                              t.profile.title,
-                              style:
-                                  context.textTheme.titleMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  ) ??
-                                  const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-
-                            // Credit Badge/Icon Button
-                            Material(
-                              color: Colors.transparent,
-                              shape: const CircleBorder(),
-                              child: InkWell(
-                                onTap: () {
-                                  context.push(IapPage.path);
-                                },
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                child: Image.asset(
-                                  'assets/images/ic_credit_setting.png',
-                                  width: 36,
-                                  height: 36,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 24),
-
-                        // Premium Upgrade Banner
-                        PremiumBannerWidget(
-                          onTap: () {
-                            final videosList = videosState.maybeWhen(
-                              success: (list) => list,
-                              orElse: () => const [],
-                            );
-                            final videoUrl = videosList.isNotEmpty
-                                ? videosList.first.videoUrl
-                                : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                            context.push('${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
-                          },
-                        ),
-
-                        const SizedBox(height: 16),
-
-                        // TabBar selection: My Video and Liked
-                        TabBar(
-                          controller: _tabController,
-                          indicatorColor: const Color(0xFF2BC5C5),
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          dividerHeight: 0,
-                          labelColor: const Color(0xFF24C780),
-                          unselectedLabelColor: const Color(0xFFB1B1B1),
-                          labelStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          unselectedLabelStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          tabs: [
-                            Tab(text: t.profile.myVideo),
-                            Tab(text: t.profile.liked),
-                          ],
-                        ),
-
-                        const SizedBox(height: 20),
-
-                        // TabBarView for smooth page swiping
-                        Expanded(
-                          child: TabBarView(
-                            controller: _tabController,
-                            children: [
-                              // My Video Tab (with pull-to-refresh)
-                              RefreshIndicator(
-                                onRefresh: () async {
-                                  final completer = Completer<void>();
-                                  context.read<ProfileBloc>().add(ProfileEvent.init(completer));
-                                  await completer.future;
-                                },
-                                child: videosState.when(
-                                  initial: () => const SizedBox.shrink(),
-                                  loading: () => const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  empty: () => _buildEmptyPlaceholder(t),
-                                  success: (videos) {
-                                    if (videos.isEmpty) {
-                                      return _buildEmptyPlaceholder(t);
-                                    }
-                                    return GridView.builder(
-                                      physics: const AlwaysScrollableScrollPhysics(
-                                        parent: BouncingScrollPhysics(),
-                                      ),
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 12,
-                                        crossAxisSpacing: 12,
-                                        childAspectRatio: 173 / 248,
-                                      ),
-                                      itemCount: videos.length,
-                                      padding: const EdgeInsets.only(bottom: 100),
-                                      itemBuilder: (context, index) {
-                                        final video = videos[index];
-                                        return MyVideoItemWidget(
-                                          video: video,
-                                          onPlayTap: () {
-                                            ResultPage.push(
-                                              context,
-                                              ResultPageArgs(
-                                                videoId: video.id,
-                                                title: video.title,
-                                                imageUrl: video.imageUrl,
-                                                videoUrl: video.videoUrl,
-                                                createdAt: video.createdAt,
-                                              ),
-                                            );
-                                          },
-                                          onDeleteTap: () =>
-                                              _showDeleteDialog(context, video.id),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  error: (failure) => Center(
-                                    child: Text(
-                                      BackendErrorHelper.getErrorMessage(context, failure.toErrorCodeOrMessage()),
-                                      style: context.appTheme.errorTextStyle,
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              // Liked Tab
-                              likedTemplates.isEmpty
-                                  ? _buildEmptyPlaceholder(t)
-                                  : GridView.builder(
-                                      physics: const BouncingScrollPhysics(),
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 12,
-                                        crossAxisSpacing: 12,
-                                        childAspectRatio: 173 / 248,
-                                      ),
-                                      itemCount: likedTemplates.length,
-                                      padding: const EdgeInsets.only(bottom: 100),
-                                      itemBuilder: (context, index) {
-                                        final template = likedTemplates[index];
-                                        return LikedTemplateItemWidget(
-                                          template: template,
-                                          onTap: () {
-                                            context.pushNamed(
-                                              CreateFromTemplatePage.name,
-                                              queryParameters: {
-                                                'templateId': template.id,
-                                                'title': template.name,
-                                                'videoUrl': template.sourceUrl,
-                                                'imageUrl': template.thumbnailUrl,
-                                                'themeType': template.type,
-                                                'themeOrgId': template.orgId.toString(),
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
           ),
         ),
       ),
@@ -378,9 +440,7 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
             parent: BouncingScrollPhysics(),
           ),
           child: Container(
-            constraints: BoxConstraints(
-              minHeight: constraints.maxHeight,
-            ),
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
             alignment: const Alignment(0, -0.2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

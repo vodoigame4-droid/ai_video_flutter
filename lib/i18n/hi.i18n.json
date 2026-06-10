@@ -11,7 +11,7 @@
     "ok": "ठीक है"
   },
   "home": {
-    "title": "वीडियो एआई",
+    "title": "Vido",
     "trending": "ट्रेंडिंग",
     "new_section": "नया",
     "toy_box": "खिलौना आकृति बॉक्स",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "सेल्फी एक्वामैन",
     "tap_upload": "अपनी फ़ोटो अपलोड करें और कुछ ही सेकंड में अपना एआई वीडियो बनाएं।",
+    "tap_to_upload_photo": "अपनी फ़ोटो अपलोड करने के लिए यहाँ टैप करें।",
     "select_upload_title": "अपनी फोटो अपलोड करने के लिए चुनें",
     "upload_image": "छवि अपलोड करें",
     "custom_prompt": "कस्टम प्रॉम्प्ट",
@@ -68,11 +69,11 @@
     "desc": "क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?"
   },
   "splash": {
-    "appName": "वीडियो एआई"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "वीडियो एआई में आपका स्वागत है",
+      "title": "Vido में आपका स्वागत है",
       "subtitle": "आपकी रचनात्मक यात्रा यहाँ शुरू होती है...",
       "button": "शुरू करें"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "छवि निर्माण"
   },
   "home_new": {
-    "welcomeToAppName": "वीडियो एआई में आपका स्वागत है",
+    "welcomeToAppName": "Vido में आपका स्वागत है",
     "imageToVideo": "छवि से\nवीडियो",
     "transitionVideo": "संक्रमण\nवीडियो",
     "imageToDance": "छवि से\nनृत्य",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "वीडियो 10 सेकंड से कम का होना चाहिए।"
+    "video_too_long": "वीडियो 10 सेकंड से कम का होना चाहिए।",
+    "iap_purchase_cancelled": "खरीद रद्द कर दी गई।",
+    "iap_purchase_in_progress": "खरीद पहले से ही प्रगति पर है।",
+    "iap_purchase_failed": "खरीद विफल।"
   },
   "guide": {
     "step_1": "चरण 1",
@@ -383,7 +387,11 @@
     "today": "आज",
     "day": "दिन {n}",
     "check_in_btn": "हाजिri लगाएं",
-    "daily_bonus_notification": "दैनिक सूचना"
+    "daily_bonus_notification": "दैनिक सूचना",
+    "disable_notification_title": "चेक-इन सूचनाएं अक्षम करें?",
+    "disable_notification_desc": "आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?",
+    "disable_notification_keep": "सक्षम रखें",
+    "disable_notification_disable": "अक्षम करें"
   },
   "connectivity": {
     "no_internet_title": "कोई कनेक्शन नहीं",
@@ -411,6 +419,19 @@
     "generation_iap": "जेनरेशन आईएपी",
     "generation_buy_credits": "जेनरेशन क्रेडिट खरीदें",
     "discount": "डिस्काउंट पेज",
-    "paywall_video": "पेवॉल वीडियो पेज"
+    "paywall_video": "पेवॉल वीडियो पेज",
+    "generating_page": "जेनरेटिंग पेज पूर्वावलोकन"
+  },
+  "permission": {
+    "camera_title": "कैमरा अनुमति आवश्यक है",
+    "camera_desc": "कैमरा अनुमति आवश्यक है। इस सुविधा का उपयोग करने के लिए कृपया इसे सेटिंग्स में सक्षम करें।",
+    "photos_title": "फ़ोटो अनुमति",
+    "photos_desc": "फ़ोटो या वीडियो सहेजने के लिए स्टोरेज अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।",
+    "microphone_title": "माइक्रोफ़ोन अनुमति",
+    "microphone_desc": "वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।",
+    "notification_title": "अधिसूचना अनुमति",
+    "notification_desc": "दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।",
+    "settings": "सेटिंग्स",
+    "cancel": "रद्द करें"
   }
 }

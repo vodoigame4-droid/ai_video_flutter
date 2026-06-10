@@ -41,7 +41,8 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
   });
 
   @override
-  State<SmoothVideoPlayerWidget> createState() => _SmoothVideoPlayerWidgetState();
+  State<SmoothVideoPlayerWidget> createState() =>
+      _SmoothVideoPlayerWidgetState();
 }
 
 class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
@@ -58,6 +59,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
   StreamSubscription? _playingSub;
   StreamSubscription? _bufferingSub;
   StreamSubscription? _volumeSub;
+  StreamSubscription? _errorSub;
   Timer? _bufferingTimer;
   Timer? _initTimer;
 
@@ -87,9 +89,27 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
     final player = _player;
     if (player == null) return;
 
+    final currentUrl = widget.videoUrl;
+
+    // Cancel previous subscriptions to prevent memory leaks and duplicate triggers
+    _playingSub?.cancel();
+    _bufferingSub?.cancel();
+    _volumeSub?.cancel();
+    _errorSub?.cancel();
+
+    if (mounted) {
+      setState(() {
+        _hasPlayed = false;
+        _isBuffering = true;
+      });
+    } else {
+      _hasPlayed = false;
+      _isBuffering = true;
+    }
+
     // Listeners for sync state
     _playingSub = player.stream.playing.listen((playing) {
-      if (mounted) {
+      if (mounted && widget.videoUrl == currentUrl) {
         setState(() {
           _isPlaying = playing;
           if (playing) {
@@ -100,6 +120,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
     });
 
     _bufferingSub = player.stream.buffering.listen((buffering) {
+      if (widget.videoUrl != currentUrl) return;
       _bufferingTimer?.cancel();
       if (buffering) {
         // Debounce showing loading indicator to prevent loop flicker
@@ -112,30 +133,55 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
     });
 
     _volumeSub = player.stream.volume.listen((vol) {
-      if (mounted) setState(() => _isMuted = vol == 0);
+      if (mounted && widget.videoUrl == currentUrl) {
+        setState(() => _isMuted = vol == 0);
+      }
+    });
+
+    _errorSub = player.stream.error.listen((err) {
+      LogUtils.e('SmoothVideoPlayerWidget: player error for $currentUrl: $err');
+      if (mounted && widget.videoUrl == currentUrl) {
+        setState(() {
+          _isBuffering = false;
+          _isPlaying = false;
+        });
+      }
     });
 
     if (_isLocalPlayer) {
       try {
-        final cachedPath = await _cacheManager.getCachedOrDownload(widget.videoUrl);
-        final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : widget.videoUrl;
+        final cachedPath = await _cacheManager.getCachedOrDownload(currentUrl);
 
-        // Double check not disposed/null
-        if (!mounted || _player == null) return;
+        // Double check not disposed/null and URL hasn't changed since async cache check
+        if (!mounted || _player == null || widget.videoUrl != currentUrl)
+          return;
+
+        final mediaSource = (cachedPath != null)
+            ? Uri.file(cachedPath).toString()
+            : currentUrl;
 
         if (widget.loop) {
           player.setPlaylistMode(PlaylistMode.single);
         }
-        
+
         player.setVolume(widget.playMuted ? 0.0 : 100.0);
         await player.open(Media(mediaSource), play: widget.autoPlay);
 
         // Trigger background download if not cached
         if (cachedPath == null) {
-          _cacheManager.getCachedOrDownload(widget.videoUrl, waitForDownload: false);
+          _cacheManager.getCachedOrDownload(currentUrl, waitForDownload: false);
         }
       } catch (e, stack) {
-        LogUtils.e('SmoothVideoPlayerWidget: Error playing local video', error: e, stackTrace: stack);
+        LogUtils.e(
+          'SmoothVideoPlayerWidget: Error playing local video',
+          error: e,
+          stackTrace: stack,
+        );
+        if (mounted && widget.videoUrl == currentUrl) {
+          setState(() {
+            _isBuffering = false;
+          });
+        }
       }
     } else {
       // Sync state from existing player
@@ -149,12 +195,21 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
   }
 
   @override
+  void didUpdateWidget(SmoothVideoPlayerWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.videoUrl != oldWidget.videoUrl) {
+      _initPlayer();
+    }
+  }
+
+  @override
   void dispose() {
     _initTimer?.cancel();
     _bufferingTimer?.cancel();
     _playingSub?.cancel();
     _bufferingSub?.cancel();
     _volumeSub?.cancel();
+    _errorSub?.cancel();
     if (_isLocalPlayer) {
       _player?.dispose();
     }
@@ -184,9 +239,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
               controls: NoVideoControls,
             ),
           )
-        : Container(
-            color: AppColors.onSurface,
-          );
+        : Container(color: AppColors.onSurface);
 
     // Apply Border Radius if specified
     if (widget.borderRadius != null) {
@@ -205,22 +258,30 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
           // 1. The Video View itself
           Positioned.fill(child: playerWidget),
 
-          // 2. Poster/Thumbnail image if not playing, has not played yet, not buffering and imageUrl exists
-          if (!_hasPlayed && !_isPlaying && widget.imageUrl != null && !_isBuffering)
+          // 2. Poster/Thumbnail image with smooth fade transition
+          if (widget.imageUrl != null)
             Positioned.fill(
-              child: AppImage(
-                imageUrl: widget.imageUrl!,
-                fit: widget.fit,
-                width: widget.width,
-                height: widget.height,
-                borderRadius: widget.borderRadius?.topLeft.x ?? 0.0,
-                errorWidget: Container(
-                  color: AppColors.onSurface,
-                  child: const Center(
-                    child: Icon(
-                      Icons.image_not_supported_outlined,
-                      color: Colors.white24,
-                      size: 40,
+              child: AnimatedOpacity(
+                opacity: _hasPlayed ? 0.0 : 1.0,
+                duration: const Duration(milliseconds: 700),
+                curve: Curves.easeInOut,
+                child: IgnorePointer(
+                  ignoring: _hasPlayed,
+                  child: AppImage(
+                    imageUrl: widget.imageUrl!,
+                    fit: widget.fit,
+                    width: widget.width,
+                    height: widget.height,
+                    borderRadius: widget.borderRadius?.topLeft.x ?? 0.0,
+                    errorWidget: Container(
+                      color: AppColors.onSurface,
+                      child: const Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Colors.white24,
+                          size: 40,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -243,7 +304,9 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
                         padding: EdgeInsets.all(24.0),
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primary,
+                          ),
                         ),
                       )
                     : const Icon(
@@ -276,12 +339,16 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
                     shape: const CircleBorder(),
                     child: InkWell(
                       onTap: _toggleMute,
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(100),
+                      ),
                       child: SizedBox(
                         width: 42,
                         height: 42,
                         child: Icon(
-                          _isMuted ? Icons.volume_off_rounded : Icons.volume_up_rounded,
+                          _isMuted
+                              ? Icons.volume_off_rounded
+                              : Icons.volume_up_rounded,
                           color: AppColors.white,
                           size: 22,
                         ),

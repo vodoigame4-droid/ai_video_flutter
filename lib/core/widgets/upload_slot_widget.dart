@@ -12,6 +12,7 @@ import 'package:ai_video_flutter/features/create_video/presentation/pages/video_
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
+import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
 
 class UploadSlotWidget extends StatelessWidget {
   final String? mediaPath;
@@ -215,9 +216,21 @@ class UploadSlotWidget extends StatelessWidget {
     );
   }
 
-
   Future<void> _pickMedia(BuildContext context, ImageSource source) async {
-    LogUtils.i('UploadSlotWidget: Starting _pickMedia. isVideoSlot: $isVideoSlot, source: $source');
+    LogUtils.i(
+      'UploadSlotWidget: Starting _pickMedia. isVideoSlot: $isVideoSlot, source: $source',
+    );
+    if (source == ImageSource.camera) {
+      final hasPermission =
+          await AppPermissionHandler.checkAndRequestCameraPermission(context);
+      if (!context.mounted) return;
+      if (!hasPermission) {
+        LogUtils.w(
+          'UploadSlotWidget: Camera permission denied. Aborting media selection.',
+        );
+        return;
+      }
+    }
     final cropTitle = context.t.tips_sheet.title;
     try {
       final ImagePicker picker = ImagePicker();
@@ -228,26 +241,39 @@ class UploadSlotWidget extends StatelessWidget {
           maxDuration: const Duration(seconds: 10),
         );
         if (video != null) {
-          LogUtils.i('UploadSlotWidget: Video picked successfully: ${video.path}');
-          
+          LogUtils.i(
+            'UploadSlotWidget: Video picked successfully: ${video.path}',
+          );
+
           // Verify duration using media_kit to handle Android and custom picker edge cases
           final player = Player();
           try {
-            await player.open(Media(Uri.file(video.path).toString()), play: false);
+            await player.open(
+              Media(Uri.file(video.path).toString()),
+              play: false,
+            );
             final duration = await player.stream.duration
                 .firstWhere((d) => d > Duration.zero)
-                .timeout(const Duration(milliseconds: 1500), onTimeout: () => Duration.zero);
-            
-            LogUtils.d('UploadSlotWidget: Checked video duration: ${duration.inMilliseconds} ms');
-            
+                .timeout(
+                  const Duration(milliseconds: 1500),
+                  onTimeout: () => Duration.zero,
+                );
+
+            LogUtils.d(
+              'UploadSlotWidget: Checked video duration: ${duration.inMilliseconds} ms',
+            );
+
             // Allow up to 10.5 seconds to account for minor frame calculations/offsets
             if (duration > const Duration(milliseconds: 10500)) {
-              LogUtils.i('UploadSlotWidget: Video duration ${duration.inSeconds}s exceeds 10s. Opening trimmer...');
+              LogUtils.i(
+                'UploadSlotWidget: Video duration ${duration.inSeconds}s exceeds 10s. Opening trimmer...',
+              );
               if (context.mounted) {
                 final trimmedPath = await Navigator.push<String?>(
                   context,
                   MaterialPageRoute(
-                    builder: (routeContext) => VideoTrimPage(videoPath: video.path),
+                    builder: (routeContext) =>
+                        VideoTrimPage(videoPath: video.path),
                   ),
                 );
                 if (trimmedPath != null && trimmedPath.isNotEmpty) {
@@ -257,27 +283,37 @@ class UploadSlotWidget extends StatelessWidget {
               return;
             }
           } catch (e, stack) {
-            LogUtils.e('UploadSlotWidget: Error checking video duration', error: e, stackTrace: stack);
+            LogUtils.e(
+              'UploadSlotWidget: Error checking video duration',
+              error: e,
+              stackTrace: stack,
+            );
           } finally {
             await player.dispose();
           }
 
           onMediaSelected(video.path);
         } else {
-          LogUtils.w('UploadSlotWidget: Video picking cancelled or returned null');
+          LogUtils.w(
+            'UploadSlotWidget: Video picking cancelled or returned null',
+          );
         }
       } else {
         LogUtils.d('UploadSlotWidget: Picking image...');
         final XFile? image = await picker.pickImage(source: source);
         if (image != null) {
-          LogUtils.i('UploadSlotWidget: Image picked successfully: ${image.path}');
+          LogUtils.i(
+            'UploadSlotWidget: Image picked successfully: ${image.path}',
+          );
           final croppedPath = await _cropImage(cropTitle, image.path);
           LogUtils.i('UploadSlotWidget: Crop result path: $croppedPath');
           if (croppedPath != null) {
             onMediaSelected(croppedPath);
           }
         } else {
-          LogUtils.w('UploadSlotWidget: Image picking cancelled or returned null');
+          LogUtils.w(
+            'UploadSlotWidget: Image picking cancelled or returned null',
+          );
         }
       }
     } catch (e, stack) {
@@ -300,6 +336,8 @@ class UploadSlotWidget extends StatelessWidget {
             toolbarColor: AppColors.surface,
             toolbarWidgetColor: AppColors.white,
             activeControlsWidgetColor: AppColors.primary,
+            cropFrameColor: AppColors.primary,
+            cropGridColor: AppColors.primary,
             initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: false,
             aspectRatioPresets: [
@@ -325,7 +363,9 @@ class UploadSlotWidget extends StatelessWidget {
         ],
       );
       if (croppedFile != null) {
-        LogUtils.i('UploadSlotWidget: Cropped successfully: ${croppedFile.path}');
+        LogUtils.i(
+          'UploadSlotWidget: Cropped successfully: ${croppedFile.path}',
+        );
       } else {
         LogUtils.w('UploadSlotWidget: Cropping cancelled or returned null');
       }
@@ -349,14 +389,15 @@ class UploadSlotWidget extends StatelessWidget {
       ),
       builder: (sheetContext) {
         return UploadBottomSheetWidget(
-          title: isVideoSlot ? sheetContext.t.create.upload_video_slot : sheetContext.t.create.select_upload_title,
+          title: isVideoSlot
+              ? sheetContext.t.create.upload_video_slot
+              : sheetContext.t.create.select_upload_title,
           onImageSourceSelected: (source) => _pickMedia(context, source),
         );
       },
     );
   }
 }
-
 
 class _DashedBorderPainter extends CustomPainter {
   final Color color;
@@ -430,7 +471,8 @@ class _VideoPreviewWidget extends StatefulWidget {
   State<_VideoPreviewWidget> createState() => _VideoPreviewWidgetState();
 }
 
-class _VideoPreviewWidgetState extends State<_VideoPreviewWidget> with WidgetsBindingObserver {
+class _VideoPreviewWidgetState extends State<_VideoPreviewWidget>
+    with WidgetsBindingObserver {
   late final Player _player;
   late final VideoController _controller;
   late final Future<void> _initializeVideoFuture;
@@ -449,7 +491,10 @@ class _VideoPreviewWidgetState extends State<_VideoPreviewWidget> with WidgetsBi
     try {
       _player.setPlaylistMode(PlaylistMode.single);
       await _player.setVolume(0.0);
-      await _player.open(Media(Uri.file(widget.videoPath).toString()), play: true);
+      await _player.open(
+        Media(Uri.file(widget.videoPath).toString()),
+        play: true,
+      );
       _isInitialized = true;
     } catch (e, stack) {
       LogUtils.e(
@@ -471,7 +516,8 @@ class _VideoPreviewWidgetState extends State<_VideoPreviewWidget> with WidgetsBi
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (!_isInitialized) return;
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
       _player.pause();
     } else if (state == AppLifecycleState.resumed) {
       _player.play();

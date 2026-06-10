@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core_business/src/core/resources/resource.dart';
@@ -58,12 +59,15 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
     on<GeneratingEvent>((event, emit) async {
       await event.when(
         startGenerating: (title, imageUrl, themeId, themeType, themeOrgId, isHd, isLongTime, serviceType, videoUrl, prompt) async {
+          final randomNum = 100000 + Random().nextInt(900000);
+          final String finalName = 'VIdo : $randomNum';
+
           emit(GeneratingState.generating(
             progress: 0.0,
             title: title,
             imageUrl: imageUrl,
           ));
-          LogUtils.d('GeneratingBloc: Start generating video for $title, image: $imageUrl, themeId: $themeId, themeType: $themeType, orgId: $themeOrgId, isHd: $isHd, isLongTime: $isLongTime, serviceType: $serviceType, videoUrl: $videoUrl, prompt: $prompt');
+          LogUtils.d('GeneratingBloc: Start generating video for $finalName (original: $title), image: $imageUrl, themeId: $themeId, themeType: $themeType, orgId: $themeOrgId, isHd: $isHd, isLongTime: $isLongTime, serviceType: $serviceType, videoUrl: $videoUrl, prompt: $prompt');
 
           try {
             // 1. Upload images (handle single or comma-separated multiple paths)
@@ -128,7 +132,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
               case 'IMAGE_TO_VIDEO':
                 createResult = await createImageToVideoUseCase(CreateImageToVideoParams(
                   imageUrl: finalImageUrl,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   themeId: themeId,
                   themeType: themeType,
@@ -140,7 +144,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
               case 'ITV_SINGLE_SOURCE':
                 createResult = await createItvSingleSourceUseCase(CreateItvSingleSourceParams(
                   imageUrl: finalImageUrl,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   isHd: isHd,
                   isLongTime: isLongTime,
@@ -153,7 +157,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 createResult = await createTransitionVideoUseCase(CreateTransitionVideoParams(
                   firstImageUrl: firstImg,
                   secondImageUrl: secondImg,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   isHd: isHd,
                   isLongTime: isLongTime,
@@ -164,7 +168,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 createResult = await createDancingImageUseCase(CreateDancingImageParams(
                   imageUrl: finalImageUrl,
                   videoUrl: finalVideoUrl,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   isHd: isHd,
                   isLongTime: isLongTime,
@@ -177,7 +181,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 createResult = await createExtendVideoUseCase(CreateExtendVideoParams(
                   imageUrl: finalImageUrl,
                   videoUrl: finalVideoUrl,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   isHd: isHd,
                   isLongTime: isLongTime,
@@ -187,7 +191,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 final imageList = finalImageUrl.split(',').where((x) => x.trim().isNotEmpty).toList();
                 createResult = await createItvDualSourceUseCase(CreateItvDualSourceParams(
                   imageUrls: imageList,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   isHd: isHd,
                   isLongTime: isLongTime,
@@ -197,7 +201,7 @@ class GeneratingBloc extends Bloc<GeneratingEvent, GeneratingState> {
                 final request = CreateTgvRequestModel(
                   imageUrl: finalImageUrl,
                   videoUrl: finalVideoUrl.isEmpty ? null : finalVideoUrl,
-                  name: title,
+                  name: finalName,
                   prompt: finalPrompt,
                   themeId: themeId,
                   isHd: isHd,

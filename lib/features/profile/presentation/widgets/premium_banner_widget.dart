@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -80,10 +81,7 @@ class PremiumBannerWidget extends StatelessWidget {
 
                   // Go Premium Button with gradient border, and flipped arrow svg
                   GradientBorderContainer(
-                    width: 176,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(100),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(100)),
                     borderWidth: 1.0,
                     backgroundColor: Colors.white.withValues(alpha: 0.25),
                     child: Padding(
@@ -94,21 +92,19 @@ class PremiumBannerWidget extends StatelessWidget {
                         bottom: 6,
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Expanded(
-                            child: Text(
-                              t.profile.goPremium,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          Text(
+                            t.profile.goPremium,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 12),
                           Ink(
                             width: 30,
                             height: 30,
@@ -116,14 +112,20 @@ class PremiumBannerWidget extends StatelessWidget {
                               gradient: context.appTheme.primaryGradient,
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
-                              child: SvgPicture.asset(
-                                'assets/icons/ic_arrow_right.svg',
-                                width: 16,
-                                height: 16,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.white,
-                                  BlendMode.srcIn,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: AppColors.primary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  'assets/icons/ic_arrow_right.svg',
+                                  width: 16,
+                                  height: 16,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.white,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                               ),
                             ),

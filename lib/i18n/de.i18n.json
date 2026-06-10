@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Video KI",
+    "title": "Vido",
     "trending": "Angesagt",
     "new_section": "Neu",
     "toy_box": "Spielzeugfiguren-Box",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
     "tap_upload": "Lade dein Foto hoch und erstelle dein KI-Video in Sekundenschnelle.",
+    "tap_to_upload_photo": "Tippe hier, um dein Foto hochzuladen.",
     "select_upload_title": "Auswählen, um Foto hochzuladen",
     "upload_image": "Bild hochladen",
     "custom_prompt": "Benutzerdefinierter Prompt",
@@ -68,11 +69,11 @@
     "desc": "Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Willkommen bei Video AI",
+      "title": "Willkommen bei Vido",
       "subtitle": "Deine kreative Reise beginnt hier...",
       "button": "Loslegen"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "Bildgenerierung"
   },
   "home_new": {
-    "welcomeToAppName": "Willkommen bei Video AI",
+    "welcomeToAppName": "Willkommen bei Vido",
     "imageToVideo": "Bild zu\nVideo",
     "transitionVideo": "Übergangs-\nvideo",
     "imageToDance": "Bild zu\nTanz",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "Das Video muss unter 10 Sekunden lang sein."
+    "video_too_long": "Das Video muss unter 10 Sekunden lang sein.",
+    "iap_purchase_cancelled": "Kauf abgebrochen.",
+    "iap_purchase_in_progress": "Kauf wird bereits verarbeitet.",
+    "iap_purchase_failed": "Kauf fehlgeschlagen."
   },
   "guide": {
     "step_1": "Schritt 1",
@@ -383,7 +387,11 @@
     "today": "Heute",
     "day": "Tag {n}",
     "check_in_btn": "Einchecken",
-    "daily_bonus_notification": "Benachrichtigung"
+    "daily_bonus_notification": "Benachrichtigung",
+    "disable_notification_title": "Check-in-Benachrichtigungen deaktivieren?",
+    "disable_notification_desc": "Sie verpassen die täglichen Login-Belohnungen und andere aufregende Boni. Sind Sie sicher, dass Sie deaktivieren möchten?",
+    "disable_notification_keep": "Aktiviert lassen",
+    "disable_notification_disable": "Deaktivieren"
   },
   "connectivity": {
     "no_internet_title": "Keine Verbindung",
@@ -411,6 +419,19 @@
     "generation_iap": "Generierung IAP",
     "generation_buy_credits": "Generierung Guthaben kaufen",
     "discount": "Rabattseite",
-    "paywall_video": "Paywall-Videoseite"
+    "paywall_video": "Paywall-Videoseite",
+    "generating_page": "Vorschau der Generierungsseite"
+  },
+  "permission": {
+    "camera_title": "Kamerazugriff erforderlich",
+    "camera_desc": "Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.",
+    "photos_title": "Fotozugriff erforderlich",
+    "photos_desc": "Speicherberechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte in den Einstellungen aktivieren.",
+    "microphone_title": "Mikrofonzugriff erforderlich",
+    "microphone_desc": "Mikrofonberechtigung ist für die Video-Tonaufnahme erforderlich. Bitte in den Einstellungen aktivieren.",
+    "notification_title": "Benachrichtigungszugriff erforderlich",
+    "notification_desc": "Benachrichtigungsberechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte in den Einstellungen aktivieren.",
+    "settings": "Einstellungen",
+    "cancel": "Abbrechen"
   }
 }

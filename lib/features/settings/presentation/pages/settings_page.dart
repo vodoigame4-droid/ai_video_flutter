@@ -1,3 +1,4 @@
+import 'package:ai_video_flutter/features/premium/presentation/pages/generation_buy_credits_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,11 +34,10 @@ class SettingsPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => sl<SettingsBloc>()..add(const SettingsEvent.init()),
+          create: (context) =>
+              sl<SettingsBloc>()..add(const SettingsEvent.init()),
         ),
-        BlocProvider(
-          create: (context) => sl<DeveloperBloc>(),
-        ),
+        BlocProvider(create: (context) => sl<DeveloperBloc>()),
       ],
       child: const SettingsView(),
     );
@@ -91,269 +91,320 @@ class _SettingsViewState extends State<SettingsView> {
           );
         },
         child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-
-              // Header Row matching LanguagePage exactly
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Back Button
-                  Material(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    shape: const CircleBorder(),
-                    child: InkWell(
-                      onTap: () => context.pop(),
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
-                      child: const SizedBox(
-                        width: 36,
-                        height: 36,
-                        child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                          size: 18,
+                  const SizedBox(height: 20),
+
+                  // Header Row matching LanguagePage exactly
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Back Button
+                      Material(
+                        color: Colors.white.withValues(alpha: 0.1),
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: () => context.pop(),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
+                          child: const SizedBox(
+                            width: 36,
+                            height: 36,
+                            child: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+
+                      // Title (matching size 24, font-semibold from Figma)
+                      Text(
+                        t.settings.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      // Spacer to balance
+                      const SizedBox(width: 36),
+                    ],
                   ),
 
-                  // Title (matching size 24, font-semibold from Figma)
-                  Text(
-                    t.settings.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  const SizedBox(height: 30),
 
-                  // Spacer to balance
-                  const SizedBox(width: 36),
-                ],
-              ),
-
-              const SizedBox(height: 30),
-
-              // Settings Items List
-              Expanded(
-                child: DeferInitWidget(
-                  placeholder: const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2BC5C5)),
-                    ),
-                  ),
-                  child: BlocBuilder<SettingsBloc, SettingsState>(
-                  builder: (context, state) {
-                    return state.when(
-                      initial: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      loading: () =>
-                          const Center(child: CircularProgressIndicator()),
-                      ready: (currentLanguageCode) {
+                  // Settings Items List
+                  Expanded(
+                    child: BlocBuilder<SettingsBloc, SettingsState>(
+                      builder: (context, state) {
+                        final currentLanguageCode = state.maybeWhen(
+                          ready: (code) => code,
+                          orElse: () => LocaleSettings.currentLocale.languageCode,
+                        );
                         final currentLocale = AppLocale.values.firstWhere(
                           (l) => l.languageCode == currentLanguageCode,
                           orElse: () => AppLocale.en,
                         );
-                        final localeName = _getLocaleName(t, currentLocale);
+                        final localeName = _getLocaleName(
+                          t,
+                          currentLocale,
+                        );
 
                         return ListView(
-                          physics: const BouncingScrollPhysics(),
-                          children: [
-                            // 1. Premium Upgrade Banner
-                            PremiumBannerWidget(
-                              onTap: () => context.push(IapPage.path),
-                            ),
-                            const SizedBox(height: 12),
+                                physics: const BouncingScrollPhysics(),
+                                children: [
+                                  // 1. Premium Upgrade Banner (hidden if user is premium)
+                                  StreamBuilder<UserEntity>(
+                                    stream: sl<WatchProfileUseCase>()(),
+                                    builder: (context, snapshot) {
+                                      final isVip =
+                                          snapshot.data?.isVip ?? false;
+                                      if (isVip) return const SizedBox.shrink();
 
-                            // 2. My Credits
-                            BlocProvider<CreditBadgeBloc>(
-                              create: (context) => sl<CreditBadgeBloc>()..add(const CreditBadgeEvent.started()),
-                              child: BlocBuilder<CreditBadgeBloc, CreditBadgeState>(
-                                builder: (context, creditState) {
-                                  final creditsStr = creditState.maybeWhen(
-                                    ready: (_, credits) => credits.toString(),
-                                    loading: () => '...',
-                                    orElse: () => '0',
-                                  );
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          PremiumBannerWidget(
+                                            onTap: () =>
+                                                context.push(IapPage.path),
+                                          ),
+                                          const SizedBox(height: 12),
+                                        ],
+                                      );
+                                    },
+                                  ),
 
-                                  return _buildSettingsItem(
+                                  // 2. My Credits
+                                  BlocProvider<CreditBadgeBloc>(
+                                    create: (context) => sl<CreditBadgeBloc>()
+                                      ..add(const CreditBadgeEvent.started()),
+                                    child:
+                                        BlocBuilder<
+                                          CreditBadgeBloc,
+                                          CreditBadgeState
+                                        >(
+                                          builder: (context, creditState) {
+                                            final creditsStr = creditState
+                                                .maybeWhen(
+                                                  ready: (_, credits) =>
+                                                      credits.toString(),
+                                                  loading: () => '...',
+                                                  orElse: () => '0',
+                                                );
+
+                                            return _buildSettingsItem(
+                                              icon: SvgPicture.asset(
+                                                Assets.icons.icAiSetting,
+                                                width: 22,
+                                                height: 22,
+                                              ),
+                                              title: t.settings.myCredits,
+                                              trailingText: creditsStr,
+                                              onTap: () async {
+                                                try {
+                                                  final user =
+                                                      await sl<
+                                                            WatchProfileUseCase
+                                                          >()()
+                                                          .first;
+                                                  if (context.mounted) {
+                                                    if (user.isVip) {
+                                                      context.push(
+                                                        GenerationBuyCreditsPage
+                                                            .path,
+                                                      );
+                                                    } else {
+                                                      context.push(
+                                                        BuyCreditsPage.path,
+                                                      );
+                                                    }
+                                                  }
+                                                } catch (e) {
+                                                  if (context.mounted) {
+                                                    context.push(
+                                                      BuyCreditsPage.path,
+                                                    );
+                                                  }
+                                                }
+                                              },
+                                            );
+                                          },
+                                        ),
+                                  ),
+
+                                  // 3. Language
+                                  _buildSettingsItem(
                                     icon: SvgPicture.asset(
-                                      Assets.icons.icAiSetting,
+                                      Assets.icons.icLanguage,
                                       width: 22,
                                       height: 22,
                                     ),
-                                    title: t.settings.myCredits,
-                                    trailingText: creditsStr,
-                                    onTap: () => context.push(BuyCreditsPage.path),
-                                  );
-                                },
-                              ),
-                            ),
+                                    title: t.settings.language,
+                                    trailingText: localeName,
+                                    onTap: () =>
+                                        context.push(LanguagePage.path),
+                                  ),
 
-                            // 3. Language
-                            _buildSettingsItem(
-                              icon: SvgPicture.asset(
-                                      Assets.icons.icLanguage,
-                                      width: 18,
-                                      height: 18,
+                                  // 4. Contact Us
+                                  _buildSettingsItem(
+                                    icon: SvgPicture.asset(
+                                      Assets.icons.icContactUs,
+                                      width: 22,
+                                      height: 22,
                                     ),
-                              title: t.settings.language,
-                              trailingText: localeName,
-                              onTap: () => context.push(LanguagePage.path),
-                            ),
+                                    title: t.settings.contactUs,
+                                    onTap: () {
+                                      launchSupportEmail();
+                                    },
+                                  ),
 
-                            // 4. Contact Us
-                            _buildSettingsItem(
-                              icon: SvgPicture.asset(
-                                Assets.icons.icContactUs,
-                                width: 18,
-                                height: 18,
-                              ),
-                              title: t.settings.contactUs,
-                              onTap: () {
-                                launchSupportEmail();
-                              },
-                            ),
+                                  // 5. Rate App
+                                  StreamBuilder<UserEntity>(
+                                    stream: sl<WatchProfileUseCase>()(),
+                                    builder: (context, snapshot) {
+                                      final isRated =
+                                          snapshot.data?.isRated ?? false;
+                                      if (isRated || _hasRated)
+                                        return const SizedBox.shrink();
 
-                             // 5. Rate App
-                             StreamBuilder<UserEntity>(
-                               stream: sl<WatchProfileUseCase>()(),
-                               builder: (context, snapshot) {
-                                 final isRated = snapshot.data?.isRated ?? false;
-                                 if (isRated || _hasRated) return const SizedBox.shrink();
+                                      return _buildSettingsItem(
+                                        icon: SvgPicture.asset(
+                                          Assets.icons.icRate,
+                                          width: 22,
+                                          height: 22,
+                                        ),
+                                        title: t.settings.rateApp,
+                                        onTap: () async {
+                                          await showRateAppDialog(context);
+                                          _checkRatedStatus();
+                                        },
+                                      );
+                                    },
+                                  ),
 
-                                 return _buildSettingsItem(
-                                   icon: SvgPicture.asset(
-                                     Assets.icons.icRate,
-                                     width: 22,
-                                     height: 22,
-                                   ),
-                                   title: t.settings.rateApp,
-                                   onTap: () async {
-                                     await showRateAppDialog(context);
-                                     _checkRatedStatus();
-                                   },
-                                 );
-                               },
-                             ),
-
-                            // 6. Terms of Use
-                            _buildSettingsItem(
-                              icon: SvgPicture.asset(
+                                  // 6. Terms of Use
+                                  _buildSettingsItem(
+                                    icon: SvgPicture.asset(
                                       Assets.icons.icTerm,
                                       width: 22,
                                       height: 22,
                                     ),
-                              title: t.settings.termsOfUse,
-                              onTap: () {
-                                launchTermsOfUse();
-                              },
-                            ),
+                                    title: t.settings.termsOfUse,
+                                    onTap: () {
+                                      launchTermsOfUse();
+                                    },
+                                  ),
 
-                            // 7. Privacy Policy
-                            _buildSettingsItem(
-                              icon: SvgPicture.asset(
+                                  // 7. Privacy Policy
+                                  _buildSettingsItem(
+                                    icon: SvgPicture.asset(
                                       Assets.icons.icPrivacy,
                                       width: 22,
                                       height: 22,
                                     ),
-                              title: t.settings.privacyPolicy,
-                              onTap: () {
-                                launchPrivacyPolicy();
-                              },
-                            ),
+                                    title: t.settings.privacyPolicy,
+                                    onTap: () {
+                                      launchPrivacyPolicy();
+                                    },
+                                  ),
 
-                            // 8. User Code
-                            StreamBuilder<UserEntity>(
-                              stream: sl<WatchProfileUseCase>()(),
-                              builder: (context, snapshot) {
-                                final userId = snapshot.data?.id ?? '...';
+                                  // 8. User Code
+                                  StreamBuilder<UserEntity>(
+                                    stream: sl<WatchProfileUseCase>()(),
+                                    builder: (context, snapshot) {
+                                      final userId = snapshot.data?.id ?? '...';
 
-                                return _buildSettingsItem(
-                                  icon: SvgPicture.asset(
-                                      Assets.icons.icUserCode,
-                                      width: 22,
-                                      height: 22,
-                                    ),
-                                  title: t.settings.userCode,
-                                  showChevron: false,
-                                  trailingWidget: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        _formatUserId(userId),
-                                        style: const TextStyle(
-                                          color: AppColors.primary,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
+                                      return _buildSettingsItem(
+                                        icon: SvgPicture.asset(
+                                          Assets.icons.icUserCode,
+                                          width: 22,
+                                          height: 22,
+                                        ),
+                                        title: t.settings.userCode,
+                                        showChevron: false,
+                                        trailingWidget: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              _formatUserId(
+                                                userId,
+                                              ).toUpperCase(),
+                                              style: const TextStyle(
+                                                color: AppColors.primary,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            SvgPicture.asset(
+                                              Assets.icons.icCopy,
+                                              width: 16,
+                                              height: 16,
+                                            ),
+                                          ],
+                                        ),
+                                        onTap: () {
+                                          Clipboard.setData(
+                                            ClipboardData(text: userId),
+                                          ).then((_) {
+                                            if (context.mounted) {
+                                              AppToast.showSuccess(
+                                                t.settings.copied,
+                                              );
+                                            }
+                                          });
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(height: 24),
+
+                                  // Version Code
+                                  GestureDetector(
+                                    onTap: () {
+                                      context.read<DeveloperBloc>().add(
+                                        const DeveloperEvent.tap(),
+                                      );
+                                    },
+                                    behavior: HitTestBehavior.opaque,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          bottom: 24,
+                                        ),
+                                        child: Text(
+                                          'v${sl<AppConfig>().appVersion}',
+                                          style: const TextStyle(
+                                            color: Color(0xFFB1B1B1),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(width: 8),
-                                      Icon(
-                                        Icons.copy_rounded,
-                                        color: AppColors.primary.withValues(alpha: 0.8),
-                                        size: 18,
-                                      ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    Clipboard.setData(
-                                      ClipboardData(
-                                        text: userId,
-                                      ),
-                                    ).then((_) {
-                                      if (context.mounted) {
-                                        AppToast.showSuccess(t.settings.copied);
-                                      }
-                                    });
-                                  },
-                                );
-                              },
-                            ),
-                            const SizedBox(height: 24),
-
-                            // Version Code
-                            GestureDetector(
-                              onTap: () {
-                                context.read<DeveloperBloc>().add(const DeveloperEvent.tap());
-                              },
-                              behavior: HitTestBehavior.opaque,
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 24),
-                                  child: Text(
-                                    'v${sl<AppConfig>().appVersion}',
-                                    style: const TextStyle(
-                                      color: Color(0xFFB1B1B1),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
-    ),
-  ),
-),
-);
-}
+    );
+  }
 
   String _getLocaleName(Translations t, AppLocale locale) {
     switch (locale) {
@@ -392,15 +443,23 @@ class _SettingsViewState extends State<SettingsView> {
     bool showChevron = true,
     VoidCallback? onTap,
   }) {
-    final Widget leadingIcon = icon is IconData
-        ? Icon(icon, color: Colors.white, size: 22)
-        : (icon as Widget);
+    final Widget leadingIcon = SizedBox(
+      width: 22,
+      height: 22,
+      child: Center(
+        child: icon is IconData
+            ? Icon(icon, color: Colors.white, size: 22)
+            : (icon as Widget),
+      ),
+    );
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: const Color(0x80171717), // rgba(23, 23, 23, 0.5) from Figma
-        borderRadius: const BorderRadius.all(Radius.circular(20)), // radius 20 from Figma
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ), // radius 20 from Figma
       ),
       child: Material(
         color: Colors.transparent,

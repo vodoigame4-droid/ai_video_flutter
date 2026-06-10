@@ -23,15 +23,12 @@ Future<void> initDependencies() async {
       autoLoginUseCase: sl(),
       getOnboardingStatusUseCase: sl(),
       getBannersUseCase: sl(),
+      getProfileUseCase: sl(),
     ),
   );
 
   // Features - Onboarding
-  sl.registerFactory(
-    () => OnboardingBloc(
-      completeOnboardingUseCase: sl(),
-    ),
-  );
+  sl.registerFactory(() => OnboardingBloc(completeOnboardingUseCase: sl()));
 
   // Features - Dashboard
   sl.registerFactory(() => DashboardBloc());
@@ -43,6 +40,7 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton<ApiClient>(
     () => ApiClient(
       baseUrl: 'https://video-effect-be.apihub.today/api/v1',
+      // baseUrl: 'http://192.168.1.22:3000/api/v1',
       logCallback: (msg) {
         final lines = msg.split('\n');
         if (msg.startsWith('📤') || msg.startsWith('-->')) {
@@ -68,10 +66,7 @@ Future<void> initDependencies() async {
         return prefs.getString(StorageKeys.authAccessToken);
       },
       additionalInterceptors: [
-        AuthRetryInterceptor(
-          sharedPreferences: sl(),
-          appConfig: sl(),
-        ),
+        AuthRetryInterceptor(sharedPreferences: sl(), appConfig: sl()),
         PaymentRequiredInterceptor(),
       ],
     ),
@@ -89,9 +84,7 @@ Future<void> initDependencies() async {
   } catch (_) {
     // Fallback for test environments or unsupported platforms
   }
-  sl.registerLazySingleton<AppConfig>(
-    () => AppConfigImpl(appVersion: version),
-  );
+  sl.registerLazySingleton<AppConfig>(() => AppConfigImpl(appVersion: version));
 
   // Local Notification Service
   sl.registerLazySingleton<LocalNotificationService>(
@@ -108,5 +101,7 @@ Future<void> initDependencies() async {
   initBusinessDependencies(sl);
 
   // Remote Config
-  sl.registerLazySingleton<RemoteConfigService>(() => RemoteConfigService.instance);
+  sl.registerLazySingleton<RemoteConfigService>(
+    () => RemoteConfigService.instance,
+  );
 }

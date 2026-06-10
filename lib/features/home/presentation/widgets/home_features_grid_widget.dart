@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
+import '../../../../core/extensions/animation_extensions.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../create_video/presentation/pages/create_video_page.dart';
 
@@ -35,40 +36,60 @@ class HomeFeaturesGridWidget extends StatelessWidget {
             context,
             icon: Assets.icons.icImageHome,
             label: t.home_new.imageToVideo,
+            heroTag: 'tab-hero-0',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '0'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: Duration.zero,
+            duration: const Duration(milliseconds: 350),
           ),
           const SizedBox(width: 8),
           _buildFeatureItem(
             context,
             icon: Assets.icons.icTransitionHome,
             label: t.home_new.transitionVideo,
+            heroTag: 'tab-hero-1',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '1'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: const Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 350),
           ),
           const SizedBox(width: 8),
           _buildFeatureItem(
             context,
             icon: Assets.icons.icDanceHome,
             label: t.home_new.imageToDance,
+            heroTag: 'tab-hero-2',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '2'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 350),
           ),
           const SizedBox(width: 8),
           _buildFeatureItem(
             context,
             icon: Assets.icons.icUnifiedHome,
             label: t.home_new.unifiedVideo,
+            heroTag: 'tab-hero-3',
             onTap: () => context.pushNamed(
               CreateVideoPage.name,
               queryParameters: {'tab': '3'},
             ),
+          ).slideAndFade(
+            begin: const Offset(0.0, 0.25),
+            delay: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 350),
           ),
         ],
       ),
@@ -79,45 +100,49 @@ class HomeFeaturesGridWidget extends StatelessWidget {
     BuildContext context, {
     required String icon,
     required String label,
+    required String heroTag,
     required VoidCallback onTap,
   }) {
     return Expanded(
-      child: GradientBorderContainer(
-        height: 90,
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-        backgroundColor: Colors.white.withValues(alpha: 0.08),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 26,
-                  height: 26,
-                  child: Center(
-                    child: AppSvgIcon(
-                      assetName: icon,
-                      color: AppColors.white,
-                      width: 24,
-                      height: 24,
+      child: Hero(
+        tag: heroTag,
+        child: GradientBorderContainer(
+          height: 90,
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          backgroundColor: Colors.white.withValues(alpha: 0.08),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onTap,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 26,
+                    height: 26,
+                    child: Center(
+                      child: AppSvgIcon(
+                        assetName: icon,
+                        color: AppColors.white,
+                        width: 24,
+                        height: 24,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Text(
-                    label,
-                    style: context.appTheme.navLabelCreateStyle,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Text(
+                      label,
+                      style: context.appTheme.navLabelCreateStyle,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

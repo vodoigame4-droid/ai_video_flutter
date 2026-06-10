@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 import 'iap_page.dart';
@@ -7,7 +10,7 @@ import 'buy_credits_page.dart';
 import 'generation_iap_page.dart';
 import 'generation_buy_credits_page.dart';
 import 'discount_page.dart';
-import 'paywall_video_page.dart';
+import '../../../create_video/presentation/pages/generating_page.dart';
 
 class DebugPage extends StatelessWidget {
   static const String path = '/debug';
@@ -46,7 +49,9 @@ class DebugPage extends StatelessWidget {
                       shape: const CircleBorder(),
                       child: InkWell(
                         onTap: () => context.pop(),
-                        borderRadius: const BorderRadius.all(Radius.circular(100)),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(100),
+                        ),
                         child: const SizedBox(
                           width: 36,
                           height: 36,
@@ -99,7 +104,8 @@ class DebugPage extends StatelessWidget {
                       _buildDebugItem(
                         icon: Icons.wallet_outlined,
                         title: t.debug.generation_buy_credits,
-                        onTap: () => context.push(GenerationBuyCreditsPage.path),
+                        onTap: () =>
+                            context.push(GenerationBuyCreditsPage.path),
                       ),
                       _buildDebugItem(
                         icon: Icons.percent_outlined,
@@ -107,9 +113,30 @@ class DebugPage extends StatelessWidget {
                         onTap: () => context.push(DiscountPage.path),
                       ),
                       _buildDebugItem(
-                        icon: Icons.smart_display_outlined,
-                        title: t.debug.paywall_video,
-                        onTap: () => context.push(PaywallVideoPage.path),
+                        icon: Icons.auto_awesome,
+                        title: t.debug.generating_page,
+                        onTap: () {
+                          GeneratingPage.push(
+                            context,
+                            title: 'Debug Vido',
+                            imageUrl: 'assets/images/img_one_person.png',
+                            themeId: 'debug_theme',
+                            themeType: 'TEMPLATE',
+                            themeOrgId: 1,
+                            isHd: true,
+                            isLongTime: false,
+                            serviceType: 'IMAGE_TO_VIDEO',
+                          );
+                        },
+                      ),
+                      _buildDebugItem(
+                        icon: Icons.delete_sweep_outlined,
+                        title: 'Clear App Data',
+                        onTap: () async {
+                          final prefs = sl<SharedPreferences>();
+                          await prefs.clear();
+                          AppToast.showSuccess('Clear app data successfully! Please restart app.');
+                        },
                       ),
                     ],
                   ),

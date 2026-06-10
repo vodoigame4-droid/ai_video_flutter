@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import '../../../../core/config/app_config.dart';
 import '../../../../core/resources/resource.dart';
@@ -167,6 +168,19 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<Resource<void>> deleteMedia(String id) async {
     try {
       await _remoteDataSource.deleteMedia(id);
+      
+      // Update local history stream immediately by removing the deleted media item
+      final currentResource = _historySubject.value;
+      currentResource.mapOrNull(
+        success: (successState) {
+          final updatedList = successState.data.where((e) => e.id != id).toList();
+          _historySubject.add(Resource.success(updatedList));
+        },
+      );
+      
+      // Trigger background history reload to sync with the server
+      unawaited(getHistory(page: 1, take: 50));
+      
       return const Resource.success(null);
     } catch (e, stack) {
       LogUtils.e('MediaRepositoryImpl: deleteMedia failed',

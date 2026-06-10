@@ -66,6 +66,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final Translations$notification$en notification = Translations$notification$en.internal(_root);
 	late final Translations$rating_dialog$en rating_dialog = Translations$rating_dialog$en.internal(_root);
 	late final Translations$debug$en debug = Translations$debug$en.internal(_root);
+	late final Translations$permission$en permission = Translations$permission$en.internal(_root);
 }
 
 // Path: common
@@ -112,8 +113,8 @@ class Translations$home$en {
 
 	// Translations
 
-	/// en: 'Video AI'
-	String get title => 'Video AI';
+	/// en: 'Vido'
+	String get title => 'Vido';
 
 	/// en: 'Trending'
 	String get trending => 'Trending';
@@ -147,6 +148,9 @@ class Translations$create$en {
 
 	/// en: 'Upload your photo and create your AI video in seconds.'
 	String get tap_upload => 'Upload your photo and create your AI video in seconds.';
+
+	/// en: 'Tap here to upload your photo.'
+	String get tap_to_upload_photo => 'Tap here to upload your photo.';
 
 	/// en: 'Select to Upload Your Photo'
 	String get select_upload_title => 'Select to Upload Your Photo';
@@ -211,8 +215,8 @@ class Translations$create$en {
 	/// en: 'Upload Video.'
 	String get upload_video_slot => 'Upload Video.';
 
-	/// en: 'Upload photo.'
-	String get upload_photo_slot => 'Upload photo.';
+	/// en: 'Upload Photo.'
+	String get upload_photo_slot => 'Upload Photo.';
 
 	/// en: 'Photo {num}'
 	String photo_slot_num({required Object num}) => 'Photo ${num}';
@@ -292,8 +296,8 @@ class Translations$splash$en {
 
 	// Translations
 
-	/// en: 'Video AI'
-	String get appName => 'Video AI';
+	/// en: 'Vido'
+	String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -387,8 +391,8 @@ class Translations$home_new$en {
 
 	// Translations
 
-	/// en: 'Welcome To Video AI'
-	String get welcomeToAppName => 'Welcome To Video AI';
+	/// en: 'Welcome To Vido'
+	String get welcomeToAppName => 'Welcome To Vido';
 
 	/// en: 'Image to Video'
 	String get imageToVideo => 'Image to\nVideo';
@@ -1173,6 +1177,15 @@ class Translations$errors$en {
 	/// en: 'Subscription not found.'
 	String get iap_subscription_not_found => 'Subscription not found.';
 
+	/// en: 'Purchase cancelled.'
+	String get iap_purchase_cancelled => 'Purchase cancelled.';
+
+	/// en: 'Purchase already in progress.'
+	String get iap_purchase_in_progress => 'Purchase already in progress.';
+
+	/// en: 'Purchase failed.'
+	String get iap_purchase_failed => 'Purchase failed.';
+
 	/// en: 'Video must be under 10 seconds.'
 	String get video_too_long => 'Video must be under 10 seconds.';
 }
@@ -1244,6 +1257,18 @@ class Translations$checkin$en {
 
 	/// en: 'Daily Bonus Notification'
 	String get daily_bonus_notification => 'Daily Bonus Notification';
+
+	/// en: 'Disable check-in notifications?'
+	String get disable_notification_title => 'Disable check-in notifications?';
+
+	/// en: 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?'
+	String get disable_notification_desc => 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?';
+
+	/// en: 'Keep Enabled'
+	String get disable_notification_keep => 'Keep Enabled';
+
+	/// en: 'Disable'
+	String get disable_notification_disable => 'Disable';
 }
 
 // Path: connectivity
@@ -1340,6 +1365,48 @@ class Translations$debug$en {
 
 	/// en: 'Paywall Video Page'
 	String get paywall_video => 'Paywall Video Page';
+
+	/// en: 'Generating Page Preview'
+	String get generating_page => 'Generating Page Preview';
+}
+
+// Path: permission
+class Translations$permission$en {
+	Translations$permission$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Camera Permission'
+	String get camera_title => 'Camera Permission';
+
+	/// en: 'Camera permission is required. Please enable it in Settings to use this feature.'
+	String get camera_desc => 'Camera permission is required. Please enable it in Settings to use this feature.';
+
+	/// en: 'Photos Permission'
+	String get photos_title => 'Photos Permission';
+
+	/// en: 'Storage permission is required to save photos or videos. Please enable it in Settings.'
+	String get photos_desc => 'Storage permission is required to save photos or videos. Please enable it in Settings.';
+
+	/// en: 'Microphone Permission'
+	String get microphone_title => 'Microphone Permission';
+
+	/// en: 'Microphone permission is required for video sound recording. Please enable it in Settings.'
+	String get microphone_desc => 'Microphone permission is required for video sound recording. Please enable it in Settings.';
+
+	/// en: 'Notification Permission'
+	String get notification_title => 'Notification Permission';
+
+	/// en: 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.'
+	String get notification_desc => 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.';
+
+	/// en: 'Settings'
+	String get settings => 'Settings';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
 }
 
 // Path: onboarding.page1
@@ -1350,8 +1417,8 @@ class Translations$onboarding$page1$en {
 
 	// Translations
 
-	/// en: 'Welcome To Video AI'
-	String get title => 'Welcome To Video AI';
+	/// en: 'Welcome To Vido'
+	String get title => 'Welcome To Vido';
 
 	/// en: 'Your Creative Journey Starts Here...'
 	String get subtitle => 'Your Creative Journey Starts Here...';
@@ -1449,7 +1516,7 @@ extension on Translations {
 			'common.generate' => 'Generate',
 			'common.processing' => 'Processing...',
 			'common.ok' => 'OK',
-			'home.title' => 'Video AI',
+			'home.title' => 'Vido',
 			'home.trending' => 'Trending',
 			'home.new_section' => 'New',
 			'home.toy_box' => 'Toy Figura Box',
@@ -1458,6 +1525,7 @@ extension on Translations {
 			'home.discover' => 'Discover',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
 			'create.tap_upload' => 'Upload your photo and create your AI video in seconds.',
+			'create.tap_to_upload_photo' => 'Tap here to upload your photo.',
 			'create.select_upload_title' => 'Select to Upload Your Photo',
 			'create.upload_image' => 'Upload Image',
 			'create.custom_prompt' => 'Custom Prompt',
@@ -1479,7 +1547,7 @@ extension on Translations {
 			'create.upload_first_photo' => 'Upload first photo.',
 			'create.upload_last_photo' => 'Upload last photo.',
 			'create.upload_video_slot' => 'Upload Video.',
-			'create.upload_photo_slot' => 'Upload photo.',
+			'create.upload_photo_slot' => 'Upload Photo.',
 			'create.photo_slot_num' => ({required Object num}) => 'Photo ${num}',
 			'create.required_label' => 'Required',
 			'create.optional_label' => 'Optional',
@@ -1500,8 +1568,8 @@ extension on Translations {
 			'create.trimming_loading' => 'Trimming video...',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
-			'splash.appName' => 'Video AI',
-			'onboarding.page1.title' => 'Welcome To Video AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Welcome To Vido',
 			'onboarding.page1.subtitle' => 'Your Creative Journey Starts Here...',
 			'onboarding.page1.button' => 'Get Started',
 			'onboarding.page2.title' => 'Image To Video',
@@ -1533,7 +1601,7 @@ extension on Translations {
 			'profile.delete' => 'Delete',
 			'profile.generating' => 'Generating...',
 			'profile.imageGeneration' => 'Image Generation',
-			'home_new.welcomeToAppName' => 'Welcome To Video AI',
+			'home_new.welcomeToAppName' => 'Welcome To Vido',
 			'home_new.imageToVideo' => 'Image to\nVideo',
 			'home_new.transitionVideo' => 'Transition\nVideo',
 			'home_new.imageToDance' => 'Image to\nDance',
@@ -1762,6 +1830,9 @@ extension on Translations {
 			'errors.get_price_list_failed' => 'Failed to retrieve credit price list.',
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
+			'errors.iap_purchase_cancelled' => 'Purchase cancelled.',
+			'errors.iap_purchase_in_progress' => 'Purchase already in progress.',
+			'errors.iap_purchase_failed' => 'Purchase failed.',
 			'errors.video_too_long' => 'Video must be under 10 seconds.',
 			'guide.step_1' => 'Step 1',
 			'guide.step_2' => 'Step 2',
@@ -1780,6 +1851,10 @@ extension on Translations {
 			'checkin.check_in_btn' => 'Check in',
 			'checkin.checked_in' => 'Checked In',
 			'checkin.daily_bonus_notification' => 'Daily Bonus Notification',
+			'checkin.disable_notification_title' => 'Disable check-in notifications?',
+			'checkin.disable_notification_desc' => 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?',
+			'checkin.disable_notification_keep' => 'Keep Enabled',
+			'checkin.disable_notification_disable' => 'Disable',
 			'connectivity.no_internet_title' => 'No Connection',
 			'connectivity.no_internet_desc' => 'Please check your internet connection to continue using the app.',
 			'connectivity.retry_button' => 'Retry Connection',
@@ -1800,6 +1875,17 @@ extension on Translations {
 			'debug.generation_buy_credits' => 'Generation Buy Credits',
 			'debug.discount' => 'Discount Page',
 			'debug.paywall_video' => 'Paywall Video Page',
+			'debug.generating_page' => 'Generating Page Preview',
+			'permission.camera_title' => 'Camera Permission',
+			'permission.camera_desc' => 'Camera permission is required. Please enable it in Settings to use this feature.',
+			'permission.photos_title' => 'Photos Permission',
+			'permission.photos_desc' => 'Storage permission is required to save photos or videos. Please enable it in Settings.',
+			'permission.microphone_title' => 'Microphone Permission',
+			'permission.microphone_desc' => 'Microphone permission is required for video sound recording. Please enable it in Settings.',
+			'permission.notification_title' => 'Notification Permission',
+			'permission.notification_desc' => 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.',
+			'permission.settings' => 'Settings',
+			'permission.cancel' => 'Cancel',
 			_ => null,
 		};
 	}

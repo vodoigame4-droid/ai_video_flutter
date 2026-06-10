@@ -16,12 +16,12 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/log_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
+import '../widgets/buy_credit_now_button.dart';
 import 'generation_buy_credits_page.dart';
 import 'discount_page.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
-import '../../../../core/widgets/gradient_border_container.dart';
 
 class GenerationIapPage extends StatelessWidget {
   static const String path = '/generation-iap';
@@ -46,7 +46,8 @@ class GenerationIapView extends StatefulWidget {
   State<GenerationIapView> createState() => _GenerationIapViewState();
 }
 
-class _GenerationIapViewState extends State<GenerationIapView> with SingleTickerProviderStateMixin {
+class _GenerationIapViewState extends State<GenerationIapView>
+    with SingleTickerProviderStateMixin {
   static String get _placeholderVideoUrl =>
       sl<RemoteConfigService>().getBgIAPUrl();
 
@@ -57,9 +58,6 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<IapBloc>().add(const IapEvent.init());
-    });
     _revealController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -125,6 +123,35 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
     );
   }
 
+  String _translateSuccessMessage(BuildContext context, String messageKey) {
+    final t = context.t;
+    if (messageKey == 'success_weekly') {
+      return t.premium.purchase_success(item: t.premium.weekly);
+    }
+    if (messageKey == 'success_yearly') {
+      return t.premium.purchase_success(item: t.premium.annually);
+    }
+    if (messageKey.startsWith('success_credits_')) {
+      final creditsStr = messageKey.replaceFirst('success_credits_', '');
+      String creditLabel = '$creditsStr Credits';
+      if (creditsStr == '70')
+        creditLabel = t.premium.credit_70;
+      else if (creditsStr == '150')
+        creditLabel = t.premium.credit_150;
+      else if (creditsStr == '350')
+        creditLabel = t.premium.credit_350;
+      else if (creditsStr == '500')
+        creditLabel = t.premium.credit_500;
+      else if (creditsStr == '1000')
+        creditLabel = t.premium.credit_1000;
+      else if (creditsStr == '5000')
+        creditLabel = t.premium.credit_5000;
+
+      return t.premium.purchase_success(item: creditLabel);
+    }
+    return messageKey;
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = context.t;
@@ -144,12 +171,41 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
             state.whenOrNull(
-              success: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-                AppToast.showSuccess(message);
-              },
-              error: (message, isWeeklySelected, isVideoRevealed, _, __, ___, ____) {
-                context.handleFailure(Failure.business(code: message, message: ''));
-              },
+              success:
+                  (
+                    message,
+                    isWeeklySelected,
+                    isVideoRevealed,
+                    _,
+                    __,
+                    ___,
+                    ____,
+                    _____,
+                  ) {
+                    if (message != 'already_vip') {
+                      AppToast.showSuccess(
+                        _translateSuccessMessage(context, message),
+                      );
+                    }
+                    if (context.mounted && Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
+                  },
+              error:
+                  (
+                    message,
+                    isWeeklySelected,
+                    isVideoRevealed,
+                    _,
+                    __,
+                    ___,
+                    ____,
+                    _____,
+                  ) {
+                    context.handleFailure(
+                      Failure.business(code: message, message: ''),
+                    );
+                  },
             );
           },
           builder: (context, state) {
@@ -157,11 +213,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
               initial: () => const Center(child: CircularProgressIndicator()),
               loading: () => Stack(
                 children: [
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.black,
-                    ),
-                  ),
+                  Positioned.fill(child: Container(color: Colors.black)),
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -170,7 +222,10 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                         const SizedBox(height: 16),
                         Text(
                           t.common.processing,
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                       ],
                     ),
@@ -200,16 +255,24 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                   },
                 );
 
-                final weeklyPrice = weeklyProducts.isNotEmpty ? weeklyProducts.first.priceString : '...';
-                final yearlyPrice = yearlyProducts.isNotEmpty ? yearlyProducts.first.priceString : '...';
-                LogUtils.d('GenerationIapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})');
+                final weeklyPrice = weeklyProducts.isNotEmpty
+                    ? weeklyProducts.first.priceString
+                    : '...';
+                final yearlyPrice = yearlyProducts.isNotEmpty
+                    ? yearlyProducts.first.priceString
+                    : '...';
+                LogUtils.d(
+                  'GenerationIapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})',
+                );
 
                 return Stack(
                   children: [
                     // 1. Fullscreen Video background
                     Positioned.fill(
                       child: SmoothVideoPlayerWidget(
-                        videoUrl: widget.videoUrl.isNotEmpty ? widget.videoUrl : _placeholderVideoUrl,
+                        videoUrl: widget.videoUrl.isNotEmpty
+                            ? widget.videoUrl
+                            : _placeholderVideoUrl,
                         fit: BoxFit.cover,
                         autoPlay: true,
                         loop: true,
@@ -230,7 +293,9 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                               sigmaY: _blurAnimation.value,
                             ),
                             child: Container(
-                              color: Colors.black.withValues(alpha: _opacityAnimation.value),
+                              color: Colors.black.withValues(
+                                alpha: _opacityAnimation.value,
+                              ),
                             ),
                           ),
                         );
@@ -261,7 +326,7 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                       const Spacer(),
 
                                       Center(child: _buildTapToReveal()),
-                                      
+
                                       const Spacer(),
 
                                       // Main information Card
@@ -279,12 +344,18 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                               ),
                                               children: [
                                                 TextSpan(
-                                                  text: '${t.splash.appName.toUpperCase()} ',
-                                                  style: const TextStyle(color: Colors.white),
+                                                  text:
+                                                      '${t.splash.appName.toUpperCase()} ',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
                                                 TextSpan(
-                                                  text: t.premium.pro_title.toUpperCase(),
-                                                  style: const TextStyle(color: Color(0xFF24C780)), // Bright Cyan/Green
+                                                  text: t.premium.pro_title
+                                                      .toUpperCase(),
+                                                  style: const TextStyle(
+                                                    color: Color(0xFF24C780),
+                                                  ), // Bright Cyan/Green
                                                 ),
                                               ],
                                             ),
@@ -315,69 +386,9 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                           const SizedBox(height: 12),
 
                                           // Glassmorphism Buy Credit Now pill button
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(100),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
-                                              child: GradientBorderContainer(
-                                                height: 38,
-                                                borderRadius: BorderRadius.circular(100),
-                                                borderWidth: 1.2,
-                                                gradient: AppColors.primaryGradient,
-                                                padding: EdgeInsets.zero,
-                                                child: Container(
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                        AppColors.primary.withValues(alpha: 0.3),
-                                                        AppColors.secondary.withValues(alpha: 0.3),
-                                                    ],
-                                                      begin: Alignment.centerLeft,
-                                                      end: Alignment.centerRight,
-                                                  ),
-                                                  borderRadius: BorderRadius.circular(100),
-                                                ),
-                                                child: Material(
-                                                    color: Colors.transparent,
-                                                  child: InkWell(
-                                                    onTap: () => context.push(
-                                                      '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
-                                                    ),
-                                                    borderRadius: BorderRadius.circular(100),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.symmetric(horizontal: 18),
-                                                      child: Row(
-                                                        mainAxisSize: MainAxisSize.min,
-                                                        children: [
-                                                          Text(
-                                                            t.premium.buy_credit_now,
-                                                            style: const TextStyle(
-                                                              color: Colors.white,
-                                                              fontSize: 15,
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(width: 8),
-                                                          Container(
-                                                            width: 20,
-                                                            height: 20,
-                                                            decoration: const BoxDecoration(
-                                                              color: Colors.white,
-                                                              shape: BoxShape.circle,
-                                                            ),
-                                                            child: const Icon(
-                                                              Icons.arrow_forward_ios_rounded,
-                                                              color: Colors.black,
-                                                              size: 10,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                          BuyCreditNowButton(
+                                            onTap: () => context.push(
+                                              '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
                                             ),
                                           ),
                                           const SizedBox(height: 24),
@@ -389,13 +400,26 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             price: weeklyPrice,
                                             suffix: t.premium.weekly_suffix,
                                             tagText: t.premium.best_value,
+                                            tagColors: [
+                                              Color(0xFF2AC5C4),
+                                              Color(0xFF28C4B3),
+                                            ],
                                             isSelected: isWeekly,
                                             onTap: () {
-                                              context.read<IapBloc>().add(const IapEvent.selectWeekly());
-                                              final productId = weeklyProducts.isNotEmpty 
-                                                  ? weeklyProducts.first.id 
-                                                  : (Platform.isIOS ? 'buy_weekly' : 'buy_weekly.andr');
-                                              context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
+                                              context.read<IapBloc>().add(
+                                                const IapEvent.selectWeekly(),
+                                              );
+                                              final productId =
+                                                  weeklyProducts.isNotEmpty
+                                                  ? weeklyProducts.first.id
+                                                  : (Platform.isIOS
+                                                        ? 'buy_weakly'
+                                                        : 'buy_weekly.andr');
+                                              context.read<IapBloc>().add(
+                                                IapEvent.purchase(
+                                                  productId: productId,
+                                                ),
+                                              );
                                             },
                                           ),
                                           const SizedBox(height: 10),
@@ -403,7 +427,8 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                           // Annually Package
                                           SubscriptionPackageCard(
                                             title: t.premium.annually,
-                                            description: t.premium.annually_desc,
+                                            description:
+                                                t.premium.annually_desc,
                                             price: yearlyPrice,
                                             suffix: t.premium.annually_suffix,
                                             tagText: t.premium.save_80,
@@ -413,11 +438,20 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             ],
                                             isSelected: !isWeekly,
                                             onTap: () {
-                                              context.read<IapBloc>().add(const IapEvent.selectAnnually());
-                                              final productId = yearlyProducts.isNotEmpty 
-                                                  ? yearlyProducts.first.id 
-                                                  : (Platform.isIOS ? 'buy_annualy' : 'buy_annualy.andr');
-                                              context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
+                                              context.read<IapBloc>().add(
+                                                const IapEvent.selectAnnually(),
+                                              );
+                                              final productId =
+                                                  yearlyProducts.isNotEmpty
+                                                  ? yearlyProducts.first.id
+                                                  : (Platform.isIOS
+                                                        ? 'buy_annualy'
+                                                        : 'buy_annualy.andr');
+                                              context.read<IapBloc>().add(
+                                                IapEvent.purchase(
+                                                  productId: productId,
+                                                ),
+                                              );
                                             },
                                           ),
                                           const SizedBox(height: 24),
@@ -426,7 +460,9 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                           GradientButton(
                                             label: isWeekly
                                                 ? t.premium.start_free_trial
-                                                : t.premium.start_my_subscription,
+                                                : t
+                                                      .premium
+                                                      .start_my_subscription,
                                             leadingIcon: !isWeekly
                                                 ? SvgPicture.asset(
                                                     Assets.icons.icCrown,
@@ -449,14 +485,24 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                             onPressed: () {
                                               final productId = isWeekly
                                                   ? (weeklyProducts.isNotEmpty
-                                                      ? weeklyProducts.first.id
-                                                      : (Platform.isIOS ? 'buy_weekly' : 'buy_weekly.andr'))
+                                                        ? weeklyProducts
+                                                              .first
+                                                              .id
+                                                        : (Platform.isIOS
+                                                              ? 'buy_weakly'
+                                                              : 'buy_weekly.andr'))
                                                   : (yearlyProducts.isNotEmpty
-                                                      ? yearlyProducts.first.id
-                                                      : (Platform.isIOS ? 'buy_annualy' : 'buy_annualy.andr'));
+                                                        ? yearlyProducts
+                                                              .first
+                                                              .id
+                                                        : (Platform.isIOS
+                                                              ? 'buy_annualy'
+                                                              : 'buy_annualy.andr'));
                                               context.read<IapBloc>().add(
-                                                    IapEvent.purchase(productId: productId),
-                                                  );
+                                                IapEvent.purchase(
+                                                  productId: productId,
+                                                ),
+                                              );
                                             },
                                           ),
                                           const SizedBox(height: 12),
@@ -473,10 +519,12 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                           ),
                                           const SizedBox(height: 6),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               GestureDetector(
-                                                onTap: () => launchPrivacyPolicy(),
+                                                onTap: () =>
+                                                    launchPrivacyPolicy(),
                                                 child: Text(
                                                   t.premium.privacy_policy,
                                                   style: const TextStyle(
@@ -487,8 +535,15 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                                 ),
                                               ),
                                               const Padding(
-                                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                                child: Text('|', style: TextStyle(color: AppColors.subText)),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8,
+                                                ),
+                                                child: Text(
+                                                  '|',
+                                                  style: TextStyle(
+                                                    color: AppColors.subText,
+                                                  ),
+                                                ),
                                               ),
                                               GestureDetector(
                                                 onTap: () => launchTermsOfUse(),
@@ -502,12 +557,21 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                                                 ),
                                               ),
                                               const Padding(
-                                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                                child: Text('|', style: TextStyle(color: Colors.white38)),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8,
+                                                ),
+                                                child: Text(
+                                                  '|',
+                                                  style: TextStyle(
+                                                    color: Colors.white38,
+                                                  ),
+                                                ),
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  AppToast.showSuccess(t.premium.restore);
+                                                  context.read<IapBloc>().add(
+                                                    const IapEvent.restore(),
+                                                  );
                                                 },
                                                 child: Text(
                                                   t.premium.restore,
@@ -540,25 +604,26 @@ class _GenerationIapViewState extends State<GenerationIapView> with SingleTicker
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              if (context.canPop()) {
-                                context.pop();
-                              } else {
-                                context.pushReplacementNamed(DiscountPage.name);
-                              }
-                            },
-                            child: Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 20,
+                          Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () {
+                                if (context.canPop()) {
+                                  context.pop();
+                                } else {
+                                  context.pushReplacementNamed(DiscountPage.name);
+                                }
+                              },
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),

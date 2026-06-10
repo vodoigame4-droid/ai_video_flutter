@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted,  bool isDownloading,  bool isSharing,  String? downloadErrorMessage,  String? shareErrorMessage,  bool downloadSuccess,  bool shareSuccess)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted,  bool isDownloading,  bool isSharing,  String? downloadErrorMessage,  String? shareErrorMessage,  bool downloadSuccess,  bool shareSuccess,  bool isVip)?  ready,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted,_that.isDownloading,_that.isSharing,_that.downloadErrorMessage,_that.shareErrorMessage,_that.downloadSuccess,_that.shareSuccess);case _Error() when error != null:
+return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted,_that.isDownloading,_that.isSharing,_that.downloadErrorMessage,_that.shareErrorMessage,_that.downloadSuccess,_that.shareSuccess,_that.isVip);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted,  bool isDownloading,  bool isSharing,  String? downloadErrorMessage,  String? shareErrorMessage,  bool downloadSuccess,  bool shareSuccess)  ready,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted,  bool isDownloading,  bool isSharing,  String? downloadErrorMessage,  String? shareErrorMessage,  bool downloadSuccess,  bool shareSuccess,  bool isVip)  ready,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Ready():
-return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted,_that.isDownloading,_that.isSharing,_that.downloadErrorMessage,_that.shareErrorMessage,_that.downloadSuccess,_that.shareSuccess);case _Error():
+return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted,_that.isDownloading,_that.isSharing,_that.downloadErrorMessage,_that.shareErrorMessage,_that.downloadSuccess,_that.shareSuccess,_that.isVip);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted,  bool isDownloading,  bool isSharing,  String? downloadErrorMessage,  String? shareErrorMessage,  bool downloadSuccess,  bool shareSuccess)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt,  bool isPlaying,  bool isMuted,  bool isBuffering,  String extendPrompt,  String extendQuality,  String extendDuration,  int inspireMeCount,  bool isGeneratingExtended,  bool isDeleted,  bool isDownloading,  bool isSharing,  String? downloadErrorMessage,  String? shareErrorMessage,  bool downloadSuccess,  bool shareSuccess,  bool isVip)?  ready,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Ready() when ready != null:
-return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted,_that.isDownloading,_that.isSharing,_that.downloadErrorMessage,_that.shareErrorMessage,_that.downloadSuccess,_that.shareSuccess);case _Error() when error != null:
+return ready(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt,_that.isPlaying,_that.isMuted,_that.isBuffering,_that.extendPrompt,_that.extendQuality,_that.extendDuration,_that.inspireMeCount,_that.isGeneratingExtended,_that.isDeleted,_that.isDownloading,_that.isSharing,_that.downloadErrorMessage,_that.shareErrorMessage,_that.downloadSuccess,_that.shareSuccess,_that.isVip);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -257,7 +257,7 @@ String toString() {
 
 
 class _Ready implements ResultState {
-  const _Ready({required this.videoId, required this.title, required this.imageUrl, required this.videoUrl, required this.createdAt, required this.isPlaying, required this.isMuted, required this.isBuffering, this.extendPrompt = '', this.extendQuality = 'Full HD', this.extendDuration = '5s', this.inspireMeCount = 3, this.isGeneratingExtended = false, this.isDeleted = false, this.isDownloading = false, this.isSharing = false, this.downloadErrorMessage, this.shareErrorMessage, this.downloadSuccess = false, this.shareSuccess = false});
+  const _Ready({required this.videoId, required this.title, required this.imageUrl, required this.videoUrl, required this.createdAt, required this.isPlaying, required this.isMuted, required this.isBuffering, this.extendPrompt = '', this.extendQuality = 'Full HD', this.extendDuration = '5s', this.inspireMeCount = 3, this.isGeneratingExtended = false, this.isDeleted = false, this.isDownloading = false, this.isSharing = false, this.downloadErrorMessage, this.shareErrorMessage, this.downloadSuccess = false, this.shareSuccess = false, this.isVip = false});
   
 
  final  String videoId;
@@ -280,6 +280,7 @@ class _Ready implements ResultState {
  final  String? shareErrorMessage;
 @JsonKey() final  bool downloadSuccess;
 @JsonKey() final  bool shareSuccess;
+@JsonKey() final  bool isVip;
 
 /// Create a copy of ResultState
 /// with the given fields replaced by the non-null parameter values.
@@ -291,16 +292,16 @@ _$ReadyCopyWith<_Ready> get copyWith => __$ReadyCopyWithImpl<_Ready>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.videoId, videoId) || other.videoId == videoId)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying)&&(identical(other.isMuted, isMuted) || other.isMuted == isMuted)&&(identical(other.isBuffering, isBuffering) || other.isBuffering == isBuffering)&&(identical(other.extendPrompt, extendPrompt) || other.extendPrompt == extendPrompt)&&(identical(other.extendQuality, extendQuality) || other.extendQuality == extendQuality)&&(identical(other.extendDuration, extendDuration) || other.extendDuration == extendDuration)&&(identical(other.inspireMeCount, inspireMeCount) || other.inspireMeCount == inspireMeCount)&&(identical(other.isGeneratingExtended, isGeneratingExtended) || other.isGeneratingExtended == isGeneratingExtended)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isSharing, isSharing) || other.isSharing == isSharing)&&(identical(other.downloadErrorMessage, downloadErrorMessage) || other.downloadErrorMessage == downloadErrorMessage)&&(identical(other.shareErrorMessage, shareErrorMessage) || other.shareErrorMessage == shareErrorMessage)&&(identical(other.downloadSuccess, downloadSuccess) || other.downloadSuccess == downloadSuccess)&&(identical(other.shareSuccess, shareSuccess) || other.shareSuccess == shareSuccess));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready&&(identical(other.videoId, videoId) || other.videoId == videoId)&&(identical(other.title, title) || other.title == title)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.videoUrl, videoUrl) || other.videoUrl == videoUrl)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying)&&(identical(other.isMuted, isMuted) || other.isMuted == isMuted)&&(identical(other.isBuffering, isBuffering) || other.isBuffering == isBuffering)&&(identical(other.extendPrompt, extendPrompt) || other.extendPrompt == extendPrompt)&&(identical(other.extendQuality, extendQuality) || other.extendQuality == extendQuality)&&(identical(other.extendDuration, extendDuration) || other.extendDuration == extendDuration)&&(identical(other.inspireMeCount, inspireMeCount) || other.inspireMeCount == inspireMeCount)&&(identical(other.isGeneratingExtended, isGeneratingExtended) || other.isGeneratingExtended == isGeneratingExtended)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isSharing, isSharing) || other.isSharing == isSharing)&&(identical(other.downloadErrorMessage, downloadErrorMessage) || other.downloadErrorMessage == downloadErrorMessage)&&(identical(other.shareErrorMessage, shareErrorMessage) || other.shareErrorMessage == shareErrorMessage)&&(identical(other.downloadSuccess, downloadSuccess) || other.downloadSuccess == downloadSuccess)&&(identical(other.shareSuccess, shareSuccess) || other.shareSuccess == shareSuccess)&&(identical(other.isVip, isVip) || other.isVip == isVip));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,videoId,title,imageUrl,videoUrl,createdAt,isPlaying,isMuted,isBuffering,extendPrompt,extendQuality,extendDuration,inspireMeCount,isGeneratingExtended,isDeleted,isDownloading,isSharing,downloadErrorMessage,shareErrorMessage,downloadSuccess,shareSuccess]);
+int get hashCode => Object.hashAll([runtimeType,videoId,title,imageUrl,videoUrl,createdAt,isPlaying,isMuted,isBuffering,extendPrompt,extendQuality,extendDuration,inspireMeCount,isGeneratingExtended,isDeleted,isDownloading,isSharing,downloadErrorMessage,shareErrorMessage,downloadSuccess,shareSuccess,isVip]);
 
 @override
 String toString() {
-  return 'ResultState.ready(videoId: $videoId, title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, createdAt: $createdAt, isPlaying: $isPlaying, isMuted: $isMuted, isBuffering: $isBuffering, extendPrompt: $extendPrompt, extendQuality: $extendQuality, extendDuration: $extendDuration, inspireMeCount: $inspireMeCount, isGeneratingExtended: $isGeneratingExtended, isDeleted: $isDeleted, isDownloading: $isDownloading, isSharing: $isSharing, downloadErrorMessage: $downloadErrorMessage, shareErrorMessage: $shareErrorMessage, downloadSuccess: $downloadSuccess, shareSuccess: $shareSuccess)';
+  return 'ResultState.ready(videoId: $videoId, title: $title, imageUrl: $imageUrl, videoUrl: $videoUrl, createdAt: $createdAt, isPlaying: $isPlaying, isMuted: $isMuted, isBuffering: $isBuffering, extendPrompt: $extendPrompt, extendQuality: $extendQuality, extendDuration: $extendDuration, inspireMeCount: $inspireMeCount, isGeneratingExtended: $isGeneratingExtended, isDeleted: $isDeleted, isDownloading: $isDownloading, isSharing: $isSharing, downloadErrorMessage: $downloadErrorMessage, shareErrorMessage: $shareErrorMessage, downloadSuccess: $downloadSuccess, shareSuccess: $shareSuccess, isVip: $isVip)';
 }
 
 
@@ -311,7 +312,7 @@ abstract mixin class _$ReadyCopyWith<$Res> implements $ResultStateCopyWith<$Res>
   factory _$ReadyCopyWith(_Ready value, $Res Function(_Ready) _then) = __$ReadyCopyWithImpl;
 @useResult
 $Res call({
- String videoId, String title, String? imageUrl, String videoUrl, String createdAt, bool isPlaying, bool isMuted, bool isBuffering, String extendPrompt, String extendQuality, String extendDuration, int inspireMeCount, bool isGeneratingExtended, bool isDeleted, bool isDownloading, bool isSharing, String? downloadErrorMessage, String? shareErrorMessage, bool downloadSuccess, bool shareSuccess
+ String videoId, String title, String? imageUrl, String videoUrl, String createdAt, bool isPlaying, bool isMuted, bool isBuffering, String extendPrompt, String extendQuality, String extendDuration, int inspireMeCount, bool isGeneratingExtended, bool isDeleted, bool isDownloading, bool isSharing, String? downloadErrorMessage, String? shareErrorMessage, bool downloadSuccess, bool shareSuccess, bool isVip
 });
 
 
@@ -328,7 +329,7 @@ class __$ReadyCopyWithImpl<$Res>
 
 /// Create a copy of ResultState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? videoId = null,Object? title = null,Object? imageUrl = freezed,Object? videoUrl = null,Object? createdAt = null,Object? isPlaying = null,Object? isMuted = null,Object? isBuffering = null,Object? extendPrompt = null,Object? extendQuality = null,Object? extendDuration = null,Object? inspireMeCount = null,Object? isGeneratingExtended = null,Object? isDeleted = null,Object? isDownloading = null,Object? isSharing = null,Object? downloadErrorMessage = freezed,Object? shareErrorMessage = freezed,Object? downloadSuccess = null,Object? shareSuccess = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? videoId = null,Object? title = null,Object? imageUrl = freezed,Object? videoUrl = null,Object? createdAt = null,Object? isPlaying = null,Object? isMuted = null,Object? isBuffering = null,Object? extendPrompt = null,Object? extendQuality = null,Object? extendDuration = null,Object? inspireMeCount = null,Object? isGeneratingExtended = null,Object? isDeleted = null,Object? isDownloading = null,Object? isSharing = null,Object? downloadErrorMessage = freezed,Object? shareErrorMessage = freezed,Object? downloadSuccess = null,Object? shareSuccess = null,Object? isVip = null,}) {
   return _then(_Ready(
 videoId: null == videoId ? _self.videoId : videoId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -350,6 +351,7 @@ as bool,downloadErrorMessage: freezed == downloadErrorMessage ? _self.downloadEr
 as String?,shareErrorMessage: freezed == shareErrorMessage ? _self.shareErrorMessage : shareErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,downloadSuccess: null == downloadSuccess ? _self.downloadSuccess : downloadSuccess // ignore: cast_nullable_to_non_nullable
 as bool,shareSuccess: null == shareSuccess ? _self.shareSuccess : shareSuccess // ignore: cast_nullable_to_non_nullable
+as bool,isVip: null == isVip ? _self.isVip : isVip // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

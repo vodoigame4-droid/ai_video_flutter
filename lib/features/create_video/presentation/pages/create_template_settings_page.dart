@@ -44,24 +44,15 @@ class CreateTemplateSettingsPage extends StatelessWidget {
 
                       if (!context.mounted) return;
 
-                      context.pushNamed(
-                        GeneratingPage.name,
-                        queryParameters: {
-                          // Tên video (sử dụng tiêu đề hoặc prompt người dùng chỉnh sửa)
-                          'title': readyState.title,
-                          // Đường dẫn ảnh người dùng đã chọn (cục bộ, sẽ được upload lên CDN tại GeneratingBloc)
-                          'imageUrl': readyState.selectedPhotoPath ?? '',
-                          // ID của template chủ đề được chọn (cung cấp làm themeId cho API)
-                          'themeId': readyState.templateId,
-                          // Loại chủ đề tạo video (Ví dụ: "TEMPLATE")
-                          'themeType': readyState.themeType,
-                          // ID tổ chức gốc quản lý template này (themeOrgId)
-                          'themeOrgId': readyState.themeOrgId.toString(),
-                          // Xác định có tạo video HD không (Chất lượng "Full HD" hoặc "HD" được ánh xạ thành true)
-                          'isHd': (readyState.quality == 'Full HD' || readyState.quality == 'HD').toString(),
-                          // Xác định độ dài video dài hơn (Thời lượng "10s" hoặc "15s" được ánh xạ thành true)
-                          'isLongTime': (readyState.duration == '10s' || readyState.duration == '15s').toString(),
-                        },
+                      GeneratingPage.push(
+                        context,
+                        title: readyState.title,
+                        imageUrl: readyState.selectedPhotoPath,
+                        themeId: readyState.templateId,
+                        themeType: readyState.themeType,
+                        themeOrgId: readyState.themeOrgId,
+                        isHd: readyState.quality == 'Full HD' || readyState.quality == 'HD',
+                        isLongTime: readyState.duration == '10s' || readyState.duration == '15s',
                       );
                     }
                   },
@@ -95,7 +86,7 @@ class CreateTemplateSettingsPage extends StatelessWidget {
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    _buildTopCard(context, selectedPhotoPath),
+                                    _buildTopCard(context, selectedPhotoPath, templateId),
                                     const SizedBox(height: 16),
                                     _buildBottomCard(context, quality, duration),
                                     const SizedBox(height: 100),
@@ -161,28 +152,31 @@ class CreateTemplateSettingsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTopCard(BuildContext context, String? selectedPhotoPath) {
-    return Container(
-      height: 450,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.onSurface,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: selectedPhotoPath != null
-            ? (selectedPhotoPath.startsWith('assets/')
-                ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
-                : Image.file(
-                    File(selectedPhotoPath),
-                    fit: BoxFit.cover,
-                  ))
-            : const Icon(
-                Icons.image,
-                size: 80,
-                color: AppColors.subText,
-              ),
+  Widget _buildTopCard(BuildContext context, String? selectedPhotoPath, String templateId) {
+    return Hero(
+      tag: 'template-hero-$templateId',
+      child: Container(
+        height: 450,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.onSurface,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: selectedPhotoPath != null
+              ? (selectedPhotoPath.startsWith('assets/')
+                  ? Image.asset(selectedPhotoPath, fit: BoxFit.cover)
+                  : Image.file(
+                      File(selectedPhotoPath),
+                      fit: BoxFit.cover,
+                    ))
+              : const Icon(
+                  Icons.image,
+                  size: 80,
+                  color: AppColors.subText,
+                ),
+        ),
       ),
     );
   }

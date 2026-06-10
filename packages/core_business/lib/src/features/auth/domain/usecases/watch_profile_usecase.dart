@@ -9,4 +9,6 @@ class WatchProfileUseCase {
   Stream<UserEntity> call() {
     return _repository.watchProfile();
   }
+
+  UserEntity? get cachedUser => _repository.cachedUser;
 }

@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Vidéo IA",
+    "title": "Vido",
     "trending": "Tendances",
     "new_section": "Nouveau",
     "toy_box": "Boîte de figurines",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
     "tap_upload": "Téléchargez votre photo et créez votre vidéo IA en quelques secondes.",
+    "tap_to_upload_photo": "Appuyez ici pour télécharger votre photo.",
     "select_upload_title": "Sélectionnez pour télécharger votre photo",
     "upload_image": "Télécharger l'image",
     "custom_prompt": "Invite personnalisée",
@@ -68,11 +69,11 @@
     "desc": "Voulez-vous continuer l'édition ou partir maintenant ?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Bienvenue sur Video AI",
+      "title": "Bienvenue sur Vido",
       "subtitle": "Votre voyage créatif commence ici...",
       "button": "Commencer"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "Génération d'images"
   },
   "home_new": {
-    "welcomeToAppName": "Bienvenue sur Video AI",
+    "welcomeToAppName": "Bienvenue sur Vido",
     "imageToVideo": "Image en\nVidéo",
     "transitionVideo": "Transition\nVidéo",
     "imageToDance": "Image en\nDanse",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "La vidéo doit durer moins de 10 secondes."
+    "video_too_long": "La vidéo doit durer moins de 10 secondes.",
+    "iap_purchase_cancelled": "Achat annulé.",
+    "iap_purchase_in_progress": "Achat déjà en cours.",
+    "iap_purchase_failed": "Échec de l'achat."
   },
   "guide": {
     "step_1": "Étape 1",
@@ -383,7 +387,11 @@
     "today": "Auj.",
     "day": "Jour {n}",
     "check_in_btn": "Réclamer",
-    "daily_bonus_notification": "Notification"
+    "daily_bonus_notification": "Notification",
+    "disable_notification_title": "Désactiver les notifications de check-in ?",
+    "disable_notification_desc": "Vous manquerez les récompenses quotidiennes de connexion et d'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?",
+    "disable_notification_keep": "Garder activé",
+    "disable_notification_disable": "Désactiver"
   },
   "connectivity": {
     "no_internet_title": "Pas de connexion",
@@ -411,6 +419,19 @@
     "generation_iap": "Génération IAP",
     "generation_buy_credits": "Génération acheter des crédits",
     "discount": "Page de réduction",
-    "paywall_video": "Page vidéo paywall"
+    "paywall_video": "Page vidéo paywall",
+    "generating_page": "Aperçu de la page de génération"
+  },
+  "permission": {
+    "camera_title": "Autorisation de la caméra",
+    "camera_desc": "L'autorisation de la caméra est requise. Veuillez l'activer dans les Paramètres pour utiliser cette fonctionnalité.",
+    "photos_title": "Autorisation des Photos",
+    "photos_desc": "L'autorisation de stockage est requise pour enregistrer des photos ou des vidéos. Veuillez l'activer dans les Paramètres.",
+    "microphone_title": "Autorisation du Micro",
+    "microphone_desc": "L'autorisation du microphone est requise pour l'enregistrement audio des vidéos. Veuillez l'activer dans les Paramètres.",
+    "notification_title": "Autorisation des Notifications",
+    "notification_desc": "L'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l'activer dans les Paramètres.",
+    "settings": "Paramètres",
+    "cancel": "Annuler"
   }
 }

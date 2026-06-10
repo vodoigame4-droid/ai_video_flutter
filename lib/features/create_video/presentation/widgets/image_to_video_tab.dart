@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_svg_icon.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import 'custom_prompt_card_widget.dart';
@@ -33,8 +35,7 @@ class ImageToVideoTab extends StatelessWidget {
                 isInspiring,
                 isVip,
               ) {
-                final isGenerateEnabled = slotsPaths[0] != null &&
-                    customPrompt.trim().isNotEmpty;
+                final isGenerateEnabled = slotsPaths[0] != null;
 
                 return Column(
                   children: [
@@ -48,29 +49,32 @@ class ImageToVideoTab extends StatelessWidget {
                             _buildUploadSectionHeader(context),
                             const SizedBox(height: 16),
                             Center(
-                              child: SizedBox(
-                                width: 173,
-                                height: 173,
-                                child: UploadSlotWidget(
-                                  mediaPath: slotsPaths[0],
-                                  labelText: t.create.tap_upload,
-                                  onMediaRemoved: () {
-                                    context.read<CreateVideoBloc>().add(
-                                      const CreateVideoEvent.removeMedia(0),
-                                    );
-                                  },
-                                  onMediaSelected: (path) {
-                                    context.read<CreateVideoBloc>().add(
-                                      CreateVideoEvent.selectMedia(0, path),
-                                    );
-                                  },
+                              child: Hero(
+                                tag: 'create-video-hero',
+                                child: SizedBox(
+                                  width: 173,
+                                  height: 173,
+                                  child: UploadSlotWidget(
+                                    mediaPath: slotsPaths[0],
+                                    labelText: t.create.tap_upload,
+                                    onMediaRemoved: () {
+                                      context.read<CreateVideoBloc>().add(
+                                        const CreateVideoEvent.removeMedia(0),
+                                      );
+                                    },
+                                    onMediaSelected: (path) {
+                                      context.read<CreateVideoBloc>().add(
+                                        CreateVideoEvent.selectMedia(0, path),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
                             const SizedBox(height: 24),
                             _buildPromptSectionHeader(
                               context,
-                              isRequired: true,
+                              isRequired: false,
                             ),
                             const SizedBox(height: 16),
                             CustomPromptCardWidget(
@@ -147,24 +151,14 @@ class ImageToVideoTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(t.create.upload_image, style: context.textTheme.titleMedium),
-            const SizedBox(width: 6),
-            Text(
-              "(${t.create.required_label})",
-              style: context.textTheme.labelMedium,
-            ),
-          ],
-        ),
-        Icon(
-          Icons.info_outline_rounded,
-          color: AppColors.white.withValues(alpha: 0.6),
-          size: 16,
+        Text(t.create.upload_image, style: context.textTheme.titleMedium),
+        const SizedBox(width: 6),
+        Text(
+          "(${t.create.required_label})",
+          style: context.textTheme.labelMedium,
         ),
       ],
     );

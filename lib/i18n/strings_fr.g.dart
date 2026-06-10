@@ -64,6 +64,7 @@ class TranslationsFr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$fr notification = _Translations$notification$fr._(_root);
 	@override late final _Translations$rating_dialog$fr rating_dialog = _Translations$rating_dialog$fr._(_root);
 	@override late final _Translations$debug$fr debug = _Translations$debug$fr._(_root);
+	@override late final _Translations$permission$fr permission = _Translations$permission$fr._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$fr extends Translations$home$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vidéo IA';
+	@override String get title => 'Vido';
 	@override String get trending => 'Tendances';
 	@override String get new_section => 'Nouveau';
 	@override String get toy_box => 'Boîte de figurines';
@@ -109,6 +110,7 @@ class _Translations$create$fr extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
 	@override String get tap_upload => 'Téléchargez votre photo et créez votre vidéo IA en quelques secondes.';
+	@override String get tap_to_upload_photo => 'Appuyez ici pour télécharger votre photo.';
 	@override String get select_upload_title => 'Sélectionnez pour télécharger votre photo';
 	@override String get upload_image => 'Télécharger l\'image';
 	@override String get custom_prompt => 'Invite personnalisée';
@@ -169,7 +171,7 @@ class _Translations$splash$fr extends Translations$splash$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Video AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -228,7 +230,7 @@ class _Translations$home_new$fr extends Translations$home_new$en {
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Bienvenue sur Video AI';
+	@override String get welcomeToAppName => 'Bienvenue sur Vido';
 	@override String get imageToVideo => 'Image en\nVidéo';
 	@override String get transitionVideo => 'Transition\nVidéo';
 	@override String get imageToDance => 'Image en\nDanse';
@@ -543,6 +545,9 @@ class _Translations$errors$fr extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => 'La vidéo doit durer moins de 10 secondes.';
+	@override String get iap_purchase_cancelled => 'Achat annulé.';
+	@override String get iap_purchase_in_progress => 'Achat déjà en cours.';
+	@override String get iap_purchase_failed => 'Échec de l\'achat.';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$fr extends Translations$checkin$en {
 	@override String day({required Object n}) => 'Jour ${n}';
 	@override String get check_in_btn => 'Réclamer';
 	@override String get daily_bonus_notification => 'Notification';
+	@override String get disable_notification_title => 'Désactiver les notifications de check-in ?';
+	@override String get disable_notification_desc => 'Vous manquerez les récompenses quotidiennes de connexion et d\'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?';
+	@override String get disable_notification_keep => 'Garder activé';
+	@override String get disable_notification_disable => 'Désactiver';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$fr extends Translations$debug$en {
 	@override String get generation_buy_credits => 'Génération acheter des crédits';
 	@override String get discount => 'Page de réduction';
 	@override String get paywall_video => 'Page vidéo paywall';
+	@override String get generating_page => 'Aperçu de la page de génération';
+}
+
+// Path: permission
+class _Translations$permission$fr extends Translations$permission$en {
+	_Translations$permission$fr._(TranslationsFr root) : this._root = root, super.internal(root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Autorisation de la caméra';
+	@override String get camera_desc => 'L\'autorisation de la caméra est requise. Veuillez l\'activer dans les Paramètres pour utiliser cette fonctionnalité.';
+	@override String get photos_title => 'Autorisation des Photos';
+	@override String get photos_desc => 'L\'autorisation de stockage est requise pour enregistrer des photos ou des vidéos. Veuillez l\'activer dans les Paramètres.';
+	@override String get microphone_title => 'Autorisation du Micro';
+	@override String get microphone_desc => 'L\'autorisation du microphone est requise pour l\'enregistrement audio des vidéos. Veuillez l\'activer dans les Paramètres.';
+	@override String get notification_title => 'Autorisation des Notifications';
+	@override String get notification_desc => 'L\'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l\'activer dans les Paramètres.';
+	@override String get settings => 'Paramètres';
+	@override String get cancel => 'Annuler';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$fr extends Translations$onboarding$page1$en
 	final TranslationsFr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Bienvenue sur Video AI';
+	@override String get title => 'Bienvenue sur Vido';
 	@override String get subtitle => 'Votre voyage créatif commence ici...';
 	@override String get button => 'Commencer';
 }
@@ -712,7 +741,7 @@ extension on TranslationsFr {
 			'common.generate' => 'Générer',
 			'common.processing' => 'Traitement en cours...',
 			'common.ok' => 'OK',
-			'home.title' => 'Vidéo IA',
+			'home.title' => 'Vido',
 			'home.trending' => 'Tendances',
 			'home.new_section' => 'Nouveau',
 			'home.toy_box' => 'Boîte de figurines',
@@ -721,6 +750,7 @@ extension on TranslationsFr {
 			'home.discover' => 'Découvrir',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
 			'create.tap_upload' => 'Téléchargez votre photo et créez votre vidéo IA en quelques secondes.',
+			'create.tap_to_upload_photo' => 'Appuyez ici pour télécharger votre photo.',
 			'create.select_upload_title' => 'Sélectionnez pour télécharger votre photo',
 			'create.upload_image' => 'Télécharger l\'image',
 			'create.custom_prompt' => 'Invite personnalisée',
@@ -763,8 +793,8 @@ extension on TranslationsFr {
 			'create.please_add_image_first' => 'Veuillez d\'abord ajouter une image',
 			'leave_dialog.title' => 'Quitter sans sauvegarder ?',
 			'leave_dialog.desc' => 'Voulez-vous continuer l\'édition ou partir maintenant ?',
-			'splash.appName' => 'Video AI',
-			'onboarding.page1.title' => 'Bienvenue sur Video AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Bienvenue sur Vido',
 			'onboarding.page1.subtitle' => 'Votre voyage créatif commence ici...',
 			'onboarding.page1.button' => 'Commencer',
 			'onboarding.page2.title' => 'Image en vidéo',
@@ -796,7 +826,7 @@ extension on TranslationsFr {
 			'profile.delete' => 'Supprimer',
 			'profile.generating' => 'Génération...',
 			'profile.imageGeneration' => 'Génération d\'images',
-			'home_new.welcomeToAppName' => 'Bienvenue sur Video AI',
+			'home_new.welcomeToAppName' => 'Bienvenue sur Vido',
 			'home_new.imageToVideo' => 'Image en\nVidéo',
 			'home_new.transitionVideo' => 'Transition\nVidéo',
 			'home_new.imageToDance' => 'Image en\nDanse',
@@ -1021,6 +1051,9 @@ extension on TranslationsFr {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => 'La vidéo doit durer moins de 10 secondes.',
+			'errors.iap_purchase_cancelled' => 'Achat annulé.',
+			'errors.iap_purchase_in_progress' => 'Achat déjà en cours.',
+			'errors.iap_purchase_failed' => 'Échec de l\'achat.',
 			'guide.step_1' => 'Étape 1',
 			'guide.step_2' => 'Étape 2',
 			'guide.upload_photo' => 'Télécharger la photo',
@@ -1037,6 +1070,10 @@ extension on TranslationsFr {
 			'checkin.day' => ({required Object n}) => 'Jour ${n}',
 			'checkin.check_in_btn' => 'Réclamer',
 			'checkin.daily_bonus_notification' => 'Notification',
+			'checkin.disable_notification_title' => 'Désactiver les notifications de check-in ?',
+			'checkin.disable_notification_desc' => 'Vous manquerez les récompenses quotidiennes de connexion et d\'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?',
+			'checkin.disable_notification_keep' => 'Garder activé',
+			'checkin.disable_notification_disable' => 'Désactiver',
 			'connectivity.no_internet_title' => 'Pas de connexion',
 			'connectivity.no_internet_desc' => 'Veuillez vérifier votre connexion Internet pour continuer à utiliser l\'application.',
 			'connectivity.retry_button' => 'Réessayer la connexion',
@@ -1057,6 +1094,17 @@ extension on TranslationsFr {
 			'debug.generation_buy_credits' => 'Génération acheter des crédits',
 			'debug.discount' => 'Page de réduction',
 			'debug.paywall_video' => 'Page vidéo paywall',
+			'debug.generating_page' => 'Aperçu de la page de génération',
+			'permission.camera_title' => 'Autorisation de la caméra',
+			'permission.camera_desc' => 'L\'autorisation de la caméra est requise. Veuillez l\'activer dans les Paramètres pour utiliser cette fonctionnalité.',
+			'permission.photos_title' => 'Autorisation des Photos',
+			'permission.photos_desc' => 'L\'autorisation de stockage est requise pour enregistrer des photos ou des vidéos. Veuillez l\'activer dans les Paramètres.',
+			'permission.microphone_title' => 'Autorisation du Micro',
+			'permission.microphone_desc' => 'L\'autorisation du microphone est requise pour l\'enregistrement audio des vidéos. Veuillez l\'activer dans les Paramètres.',
+			'permission.notification_title' => 'Autorisation des Notifications',
+			'permission.notification_desc' => 'L\'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l\'activer dans les Paramètres.',
+			'permission.settings' => 'Paramètres',
+			'permission.cancel' => 'Annuler',
 			_ => null,
 		};
 	}

@@ -64,6 +64,7 @@ class TranslationsId extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$id notification = _Translations$notification$id._(_root);
 	@override late final _Translations$rating_dialog$id rating_dialog = _Translations$rating_dialog$id._(_root);
 	@override late final _Translations$debug$id debug = _Translations$debug$id._(_root);
+	@override late final _Translations$permission$id permission = _Translations$permission$id._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$id extends Translations$home$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Video AI';
+	@override String get title => 'Vido';
 	@override String get trending => 'Tren';
 	@override String get new_section => 'Baru';
 	@override String get toy_box => 'Kotak Figur Mainan';
@@ -108,7 +109,8 @@ class _Translations$create$id extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
-	@override String get tap_upload => 'Unggah foto Anda dan buat video AI Anda dalam hitungan detik.';
+	@override String get tap_upload => 'Unggah foto Anda dan buat Vido Anda dalam hitungan detik.';
+	@override String get tap_to_upload_photo => 'Ketuk di sini untuk mengunggah foto Anda.';
 	@override String get select_upload_title => 'Pilih untuk Mengunggah Foto Anda';
 	@override String get upload_image => 'Unggah Gambar';
 	@override String get custom_prompt => 'Perintah Kustom';
@@ -169,7 +171,7 @@ class _Translations$splash$id extends Translations$splash$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Video AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -212,7 +214,7 @@ class _Translations$profile$id extends Translations$profile$en {
 	@override String get myVideo => 'Video Saya';
 	@override String get liked => 'Disukai';
 	@override String get noVideos => 'Belum ada video';
-	@override String get noVideosDesc => 'Buat video AI pertama Anda dan itu akan muncul di sini.';
+	@override String get noVideosDesc => 'Buat Vido pertama Anda dan itu akan muncul di sini.';
 	@override String get deleteTitle => 'Hapus video ini?';
 	@override String get deleteDesc => 'Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.';
 	@override String get cancel => 'Batal';
@@ -228,7 +230,7 @@ class _Translations$home_new$id extends Translations$home_new$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Selamat Datang di Video AI';
+	@override String get welcomeToAppName => 'Selamat Datang di Vido';
 	@override String get imageToVideo => 'Gambar ke\nVideo';
 	@override String get transitionVideo => 'Video\nTransisi';
 	@override String get imageToDance => 'Gambar ke\nTarian';
@@ -543,6 +545,9 @@ class _Translations$errors$id extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => 'Video harus di bawah 10 detik.';
+	@override String get iap_purchase_cancelled => 'Pembelian dibatalkan.';
+	@override String get iap_purchase_in_progress => 'Pembelian sedang diproses.';
+	@override String get iap_purchase_failed => 'Pembelian gagal.';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$id extends Translations$checkin$en {
 	@override String day({required Object n}) => 'Hari ${n}';
 	@override String get check_in_btn => 'Check-in';
 	@override String get daily_bonus_notification => 'Notifikasi';
+	@override String get disable_notification_title => 'Nonaktifkan notifikasi check-in?';
+	@override String get disable_notification_desc => 'Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?';
+	@override String get disable_notification_keep => 'Tetap Aktif';
+	@override String get disable_notification_disable => 'Nonaktifkan';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$id extends Translations$debug$en {
 	@override String get generation_buy_credits => 'Generasi Beli Kredit';
 	@override String get discount => 'Halaman Diskon';
 	@override String get paywall_video => 'Halaman Video Paywall';
+	@override String get generating_page => 'Pratinjau Halaman Pembuatan';
+}
+
+// Path: permission
+class _Translations$permission$id extends Translations$permission$en {
+	_Translations$permission$id._(TranslationsId root) : this._root = root, super.internal(root);
+
+	final TranslationsId _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Izin Kamera';
+	@override String get camera_desc => 'Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.';
+	@override String get photos_title => 'Izin Galeri';
+	@override String get photos_desc => 'Izin penyimpanan diperlukan untuk menyimpan foto atau video. Silakan aktifkan di Pengaturan.';
+	@override String get microphone_title => 'Izin Mikrofon';
+	@override String get microphone_desc => 'Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.';
+	@override String get notification_title => 'Izin Notifikasi';
+	@override String get notification_desc => 'Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.';
+	@override String get settings => 'Pengaturan';
+	@override String get cancel => 'Batal';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Selamat Datang di Video AI';
+	@override String get title => 'Selamat Datang di Vido';
 	@override String get subtitle => 'Perjalanan Kreatif Anda Dimulai Di Sini...';
 	@override String get button => 'Mulai';
 }
@@ -712,7 +741,7 @@ extension on TranslationsId {
 			'common.generate' => 'Hasilkan',
 			'common.processing' => 'Sedang memproses...',
 			'common.ok' => 'OK',
-			'home.title' => 'Video AI',
+			'home.title' => 'Vido',
 			'home.trending' => 'Tren',
 			'home.new_section' => 'Baru',
 			'home.toy_box' => 'Kotak Figur Mainan',
@@ -720,7 +749,8 @@ extension on TranslationsId {
 			'home.anime' => 'Anime',
 			'home.discover' => 'Jelajahi',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Unggah foto Anda dan buat video AI Anda dalam hitungan detik.',
+			'create.tap_upload' => 'Unggah foto Anda dan buat Vido Anda dalam hitungan detik.',
+			'create.tap_to_upload_photo' => 'Ketuk di sini untuk mengunggah foto Anda.',
 			'create.select_upload_title' => 'Pilih untuk Mengunggah Foto Anda',
 			'create.upload_image' => 'Unggah Gambar',
 			'create.custom_prompt' => 'Perintah Kustom',
@@ -763,8 +793,8 @@ extension on TranslationsId {
 			'create.please_add_image_first' => 'Silakan tambahkan gambar terlebih dahulu',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
-			'splash.appName' => 'Video AI',
-			'onboarding.page1.title' => 'Selamat Datang di Video AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Selamat Datang di Vido',
 			'onboarding.page1.subtitle' => 'Perjalanan Kreatif Anda Dimulai Di Sini...',
 			'onboarding.page1.button' => 'Mulai',
 			'onboarding.page2.title' => 'Gambar ke Video',
@@ -789,14 +819,14 @@ extension on TranslationsId {
 			'profile.myVideo' => 'Video Saya',
 			'profile.liked' => 'Disukai',
 			'profile.noVideos' => 'Belum ada video',
-			'profile.noVideosDesc' => 'Buat video AI pertama Anda dan itu akan muncul di sini.',
+			'profile.noVideosDesc' => 'Buat Vido pertama Anda dan itu akan muncul di sini.',
 			'profile.deleteTitle' => 'Hapus video ini?',
 			'profile.deleteDesc' => 'Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.',
 			'profile.cancel' => 'Batal',
 			'profile.delete' => 'Hapus',
 			'profile.generating' => 'Membuat...',
 			'profile.imageGeneration' => 'Pembuatan Gambar',
-			'home_new.welcomeToAppName' => 'Selamat Datang di Video AI',
+			'home_new.welcomeToAppName' => 'Selamat Datang di Vido',
 			'home_new.imageToVideo' => 'Gambar ke\nVideo',
 			'home_new.transitionVideo' => 'Video\nTransisi',
 			'home_new.imageToDance' => 'Gambar ke\nTarian',
@@ -1021,6 +1051,9 @@ extension on TranslationsId {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => 'Video harus di bawah 10 detik.',
+			'errors.iap_purchase_cancelled' => 'Pembelian dibatalkan.',
+			'errors.iap_purchase_in_progress' => 'Pembelian sedang diproses.',
+			'errors.iap_purchase_failed' => 'Pembelian gagal.',
 			'guide.step_1' => 'Langkah 1',
 			'guide.step_2' => 'Langkah 2',
 			'guide.upload_photo' => 'Unggah Foto',
@@ -1037,6 +1070,10 @@ extension on TranslationsId {
 			'checkin.day' => ({required Object n}) => 'Hari ${n}',
 			'checkin.check_in_btn' => 'Check-in',
 			'checkin.daily_bonus_notification' => 'Notifikasi',
+			'checkin.disable_notification_title' => 'Nonaktifkan notifikasi check-in?',
+			'checkin.disable_notification_desc' => 'Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?',
+			'checkin.disable_notification_keep' => 'Tetap Aktif',
+			'checkin.disable_notification_disable' => 'Nonaktifkan',
 			'connectivity.no_internet_title' => 'Tidak Ada Koneksi',
 			'connectivity.no_internet_desc' => 'Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.',
 			'connectivity.retry_button' => 'Coba Lagi Koneksi',
@@ -1057,6 +1094,17 @@ extension on TranslationsId {
 			'debug.generation_buy_credits' => 'Generasi Beli Kredit',
 			'debug.discount' => 'Halaman Diskon',
 			'debug.paywall_video' => 'Halaman Video Paywall',
+			'debug.generating_page' => 'Pratinjau Halaman Pembuatan',
+			'permission.camera_title' => 'Izin Kamera',
+			'permission.camera_desc' => 'Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.',
+			'permission.photos_title' => 'Izin Galeri',
+			'permission.photos_desc' => 'Izin penyimpanan diperlukan untuk menyimpan foto atau video. Silakan aktifkan di Pengaturan.',
+			'permission.microphone_title' => 'Izin Mikrofon',
+			'permission.microphone_desc' => 'Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.',
+			'permission.notification_title' => 'Izin Notifikasi',
+			'permission.notification_desc' => 'Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.',
+			'permission.settings' => 'Pengaturan',
+			'permission.cancel' => 'Batal',
 			_ => null,
 		};
 	}

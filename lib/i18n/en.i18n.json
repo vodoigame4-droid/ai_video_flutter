@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Video AI",
+    "title": "Vido",
     "trending": "Trending",
     "new_section": "New",
     "toy_box": "Toy Figura Box",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
     "tap_upload": "Upload your photo and create your AI video in seconds.",
+    "tap_to_upload_photo": "Tap here to upload your photo.",
     "select_upload_title": "Select to Upload Your Photo",
     "upload_image": "Upload Image",
     "custom_prompt": "Custom Prompt",
@@ -43,7 +44,7 @@
     "upload_first_photo": "Upload first photo.",
     "upload_last_photo": "Upload last photo.",
     "upload_video_slot": "Upload Video.",
-    "upload_photo_slot": "Upload photo.",
+    "upload_photo_slot": "Upload Photo.",
     "photo_slot_num": "Photo {num}",
     "required_label": "Required",
     "optional_label": "Optional",
@@ -68,11 +69,11 @@
     "desc": "Do you want to continue editing or leave now?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Welcome To Video AI",
+      "title": "Welcome To Vido",
       "subtitle": "Your Creative Journey Starts Here...",
       "button": "Get Started"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "Image Generation"
   },
   "home_new": {
-    "welcomeToAppName": "Welcome To Video AI",
+    "welcomeToAppName": "Welcome To Vido",
     "imageToVideo": "Image to\nVideo",
     "transitionVideo": "Transition\nVideo",
     "imageToDance": "Image to\nDance",
@@ -370,6 +371,9 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
+    "iap_purchase_cancelled": "Purchase cancelled.",
+    "iap_purchase_in_progress": "Purchase already in progress.",
+    "iap_purchase_failed": "Purchase failed.",
     "video_too_long": "Video must be under 10 seconds."
   },
   "guide": {
@@ -391,7 +395,11 @@
     "day": "Day {n}",
     "check_in_btn": "Check in",
     "checked_in": "Checked In",
-    "daily_bonus_notification": "Daily Bonus Notification"
+    "daily_bonus_notification": "Daily Bonus Notification",
+    "disable_notification_title": "Disable check-in notifications?",
+    "disable_notification_desc": "You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?",
+    "disable_notification_keep": "Keep Enabled",
+    "disable_notification_disable": "Disable"
   },
   "connectivity": {
     "no_internet_title": "No Connection",
@@ -419,6 +427,19 @@
     "generation_iap": "Generation IAP",
     "generation_buy_credits": "Generation Buy Credits",
     "discount": "Discount Page",
-    "paywall_video": "Paywall Video Page"
+    "paywall_video": "Paywall Video Page",
+    "generating_page": "Generating Page Preview"
+  },
+  "permission": {
+    "camera_title": "Camera Permission",
+    "camera_desc": "Camera permission is required. Please enable it in Settings to use this feature.",
+    "photos_title": "Photos Permission",
+    "photos_desc": "Storage permission is required to save photos or videos. Please enable it in Settings.",
+    "microphone_title": "Microphone Permission",
+    "microphone_desc": "Microphone permission is required for video sound recording. Please enable it in Settings.",
+    "notification_title": "Notification Permission",
+    "notification_desc": "Notification permission is required to receive daily check-in reminders. Please enable it in Settings.",
+    "settings": "Settings",
+    "cancel": "Cancel"
   }
 }

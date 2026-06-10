@@ -42,6 +42,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_contact_us.svg
   String get icContactUs => 'assets/icons/ic_contact_us.svg';
 
+  /// File path: assets/icons/ic_copy.svg
+  String get icCopy => 'assets/icons/ic_copy.svg';
+
   /// File path: assets/icons/ic_credit_icon.png
   AssetGenImage get icCreditIcon => const AssetGenImage('assets/icons/ic_credit_icon.png');
 
@@ -129,6 +132,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_report.svg
   String get icReport => 'assets/icons/ic_report.svg';
 
+  /// File path: assets/icons/ic_right.svg
+  String get icRight => 'assets/icons/ic_right.svg';
+
   /// File path: assets/icons/ic_right_arrow.svg
   String get icRightArrow => 'assets/icons/ic_right_arrow.svg';
 
@@ -188,6 +194,7 @@ class $AssetsIconsGen {
     icBlueMask,
     icCamera,
     icContactUs,
+    icCopy,
     icCreditIcon,
     icCrown,
     icDanceHome,
@@ -217,6 +224,7 @@ class $AssetsIconsGen {
     icRedTick,
     icRegenerate,
     icReport,
+    icRight,
     icRightArrow,
     icShare,
     icStarVip,
@@ -242,6 +250,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/ai_nav_icon.svg
   String get aiNavIcon => 'assets/images/ai_nav_icon.svg';
+
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/images/app_icon.png');
 
   /// File path: assets/images/arrow_right.svg
   String get arrowRight => 'assets/images/arrow_right.svg';
@@ -314,6 +325,25 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_rate_app.png
   AssetGenImage get icRateApp => const AssetGenImage('assets/images/ic_rate_app.png');
 
+  /// File path: assets/images/img_bluring.png
+  AssetGenImage get imgBluring => const AssetGenImage('assets/images/img_bluring.png');
+
+  /// File path: assets/images/img_clear_face.png
+  AssetGenImage get imgClearFace => const AssetGenImage('assets/images/img_clear_face.png');
+
+  /// File path: assets/images/img_half_body.png
+  AssetGenImage get imgHalfBody => const AssetGenImage('assets/images/img_half_body.png');
+
+  /// File path: assets/images/img_hiden_page.png
+  AssetGenImage get imgHidenPage => const AssetGenImage('assets/images/img_hiden_page.png');
+
+  /// File path: assets/images/img_multiple_people.png
+  AssetGenImage get imgMultiplePeople =>
+      const AssetGenImage('assets/images/img_multiple_people.png');
+
+  /// File path: assets/images/img_one_person.png
+  AssetGenImage get imgOnePerson => const AssetGenImage('assets/images/img_one_person.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -347,6 +377,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
     aiNavIcon,
+    appIcon,
     arrowRight,
     bgApp,
     bgBannerBuyCredit,
@@ -370,6 +401,12 @@ class $AssetsImagesGen {
     icRadioActive,
     icRadioInactive,
     icRateApp,
+    imgBluring,
+    imgClearFace,
+    imgHalfBody,
+    imgHidenPage,
+    imgMultiplePeople,
+    imgOnePerson,
     logo,
     navHome,
     navUser,

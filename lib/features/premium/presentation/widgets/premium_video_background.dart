@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:ai_video_flutter/core/navigation/route_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-import '../../../../core/navigation/app_router.dart';
 import '../../../../core/utils/video_cache_manager.dart';
 import '../../../../core/utils/log_utils.dart';
 
@@ -25,11 +25,12 @@ class PremiumVideoBackground extends StatefulWidget {
   State<PremiumVideoBackground> createState() => _PremiumVideoBackgroundState();
 }
 
-class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with WidgetsBindingObserver, RouteAware {
+class _PremiumVideoBackgroundState extends State<PremiumVideoBackground>
+    with WidgetsBindingObserver, RouteAware {
   Player? _player;
   VideoController? _controller;
   final VideoCacheManager _cacheManager = VideoCacheManager();
-  
+
   bool _isInitialized = false;
   bool _hasError = false;
   bool _isCurrentlyVisible = true;
@@ -39,7 +40,7 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    
+
     // Debounce player creation by 300ms to prevent resource leaks during quick screen pushes/pops
     _initTimer = Timer(const Duration(milliseconds: 300), () {
       if (!mounted) return;
@@ -64,8 +65,12 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
 
     try {
       // 1. Check local cache or download in background
-      final cachedPath = await _cacheManager.getCachedOrDownload(widget.videoUrl);
-      final mediaSource = (cachedPath != null) ? Uri.file(cachedPath).toString() : widget.videoUrl;
+      final cachedPath = await _cacheManager.getCachedOrDownload(
+        widget.videoUrl,
+      );
+      final mediaSource = (cachedPath != null)
+          ? Uri.file(cachedPath).toString()
+          : widget.videoUrl;
 
       // Double check not disposed/null
       if (!mounted || _player == null) return;
@@ -89,7 +94,10 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
 
       // If playing from network, schedule background caching download
       if (cachedPath == null) {
-        _cacheManager.getCachedOrDownload(widget.videoUrl, waitForDownload: false);
+        _cacheManager.getCachedOrDownload(
+          widget.videoUrl,
+          waitForDownload: false,
+        );
       }
     } catch (e, stack) {
       LogUtils.e(
@@ -131,9 +139,13 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // Pause on backgrounding, resume when foregrounded if visible
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
       _player?.pause();
-    } else if (state == AppLifecycleState.resumed && _isInitialized && !_hasError && _isCurrentlyVisible) {
+    } else if (state == AppLifecycleState.resumed &&
+        _isInitialized &&
+        !_hasError &&
+        _isCurrentlyVisible) {
       if (widget.videoUrl.isNotEmpty) {
         _player?.play();
       }
@@ -193,7 +205,7 @@ class _PremiumVideoBackgroundState extends State<PremiumVideoBackground> with Wi
       );
     } else {
       // Show Video inside full sized FitBox
-      background = _controller != null 
+      background = _controller != null
           ? SizedBox.expand(
               child: Video(
                 controller: _controller!,

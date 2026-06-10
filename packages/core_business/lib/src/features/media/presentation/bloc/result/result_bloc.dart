@@ -6,6 +6,10 @@ import 'package:core_business/src/core/utils/log_utils.dart';
 import 'package:core_business/src/core/resources/resource.dart';
 import 'package:core_business/src/core/errors/failure.dart';
 import 'package:core_business/src/core/utils/video_cache_manager.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../../../../auth/domain/usecases/watch_profile_usecase.dart';
+import '../../../../auth/domain/usecases/get_profile_usecase.dart';
+import '../../../../auth/domain/entities/user_entity.dart';
 import '../../../domain/usecases/delete_media_usecase.dart';
 import '../../../domain/usecases/download_video_usecase.dart';
 import '../../../domain/usecases/share_video_usecase.dart';
@@ -16,6 +20,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
   final DeleteMediaUseCase deleteMediaUseCase;
   final DownloadVideoUseCase downloadVideoUseCase;
   final ShareVideoUseCase shareVideoUseCase;
+  final WatchProfileUseCase watchProfileUseCase;
+  final GetProfileUseCase getProfileUseCase;
   final Player player = Player(
     configuration: const PlayerConfiguration(
       logLevel: MPVLogLevel.debug,
@@ -27,6 +33,7 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
   StreamSubscription? _playingSub;
   StreamSubscription? _logSub;
   StreamSubscription? _errorSub;
+  StreamSubscription? _profileSubscription;
   Timer? _bufferingTimer;
 
   static const List<String> _presetPrompts = [
@@ -40,6 +47,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     required this.deleteMediaUseCase,
     required this.downloadVideoUseCase,
     required this.shareVideoUseCase,
+    required this.watchProfileUseCase,
+    required this.getProfileUseCase,
   }) : super(const ResultState.initial()) {
     on<ResultEvent>((event, emit) async {
       await event.when(
@@ -85,6 +94,9 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
         resetDownloadShareStatus: () async {
           _onResetDownloadShareStatus(emit);
         },
+        profileUpdated: (user) async {
+          _onProfileUpdated(user, emit);
+        },
       );
     });
   }
@@ -98,6 +110,14 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     Emitter<ResultState> emit,
   ) async {
     LogUtils.d('ResultBloc: Init with url: $videoUrl');
+
+    _profileSubscription?.cancel();
+    _profileSubscription = watchProfileUseCase().listen(
+      (user) => add(ResultEvent.profileUpdated(user)),
+    );
+
+    final initialIsVip = watchProfileUseCase.cachedUser?.isVip ?? false;
+    final initialInspireMeCount = watchProfileUseCase.cachedUser?.freeSuggestions ?? 3;
     
     // Emit ready immediately so the VideoController attaches before player.open() runs
     emit(ResultState.ready(
@@ -109,6 +129,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
       isPlaying: true,
       isMuted: false,
       isBuffering: true,
+      isVip: initialIsVip,
+      inspireMeCount: initialInspireMeCount,
     ));
 
     try {
@@ -169,6 +191,8 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
         isPlaying: true,
         isMuted: false,
         isBuffering: player.state.buffering,
+        isVip: initialIsVip,
+        inspireMeCount: initialInspireMeCount,
       ));
 
       // Trigger download if not cached, so next time it loads locally
@@ -225,13 +249,28 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
   void _onUseInspireMe(Emitter<ResultState> emit) {
     state.mapOrNull(
       ready: (s) {
-        if (s.inspireMeCount <= 0) return;
+        if (!s.isVip && s.inspireMeCount <= 0) return;
         final currentCount = s.inspireMeCount;
         final promptIndex = (3 - currentCount) % _presetPrompts.length;
         final selectedPrompt = _presetPrompts[promptIndex];
         emit(s.copyWith(
           extendPrompt: selectedPrompt,
-          inspireMeCount: currentCount - 1,
+          inspireMeCount: s.isVip ? currentCount : currentCount - 1,
+        ));
+
+        if (!s.isVip) {
+          getProfileUseCase(NoParams());
+        }
+      },
+    );
+  }
+
+  void _onProfileUpdated(UserEntity user, Emitter<ResultState> emit) {
+    state.mapOrNull(
+      ready: (s) {
+        emit(s.copyWith(
+          isVip: user.isVip,
+          inspireMeCount: user.freeSuggestions,
         ));
       },
     );
@@ -352,6 +391,7 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
 
   @override
   Future<void> close() {
+    _profileSubscription?.cancel();
     _bufferingTimer?.cancel();
     _bufferingSub?.cancel();
     _playingSub?.cancel();

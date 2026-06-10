@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "ビデオAI",
+    "title": "Vido",
     "trending": "トレンド",
     "new_section": "新規",
     "toy_box": "トイフィギュアボックス",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "セルフィーアクアマン",
     "tap_upload": "写真をアップロードして、数秒でAI動画を作成します。",
+    "tap_to_upload_photo": "ここをタップして写真をアップロードしてください。",
     "select_upload_title": "写真をアップロードする方法を選択",
     "upload_image": "画像をアップロード",
     "custom_prompt": "カスタムプロンプト",
@@ -68,11 +69,11 @@
     "desc": "編集を続けますか、それとも今終了しますか？"
   },
   "splash": {
-    "appName": "ビデオAI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "ビデオAIへようこそ",
+      "title": "Vidoへようこそ",
       "subtitle": "あなたのクリエイティブな旅がここから始まる...",
       "button": "始める"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "画像生成"
   },
   "home_new": {
-    "welcomeToAppName": "ビデオAIへようこそ",
+    "welcomeToAppName": "Vidoへようこそ",
     "imageToVideo": "画像から\nビデオ",
     "transitionVideo": "トランジション\n動画",
     "imageToDance": "画像から\nダンス",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "動画は10秒未満である必要があります。"
+    "video_too_long": "動画は10秒未満である必要があります。",
+    "iap_purchase_cancelled": "購入がキャンセルされました。",
+    "iap_purchase_in_progress": "購入処理は既に実行中です。",
+    "iap_purchase_failed": "購入に失敗しました。"
   },
   "guide": {
     "step_1": "ステップ1",
@@ -383,7 +387,11 @@
     "today": "今日",
     "day": "{n}日目",
     "check_in_btn": "チェックイン",
-    "daily_bonus_notification": "毎日通知"
+    "daily_bonus_notification": "毎日通知",
+    "disable_notification_title": "チェックイン通知を無効にしますか？",
+    "disable_notification_desc": "毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？",
+    "disable_notification_keep": "有効のままにする",
+    "disable_notification_disable": "無効にする"
   },
   "connectivity": {
     "no_internet_title": "接続がありません",
@@ -411,6 +419,19 @@
     "generation_iap": "生成IAP",
     "generation_buy_credits": "生成クレジット購入",
     "discount": "割引ページ",
-    "paywall_video": "ペイウォールビデオページ"
+    "paywall_video": "ペイウォールビデオページ",
+    "generating_page": "生成プロセスページのプレビュー"
+  },
+  "permission": {
+    "camera_title": "カメラの権限",
+    "camera_desc": "カメラの権限が必要です。この機能を使用するには、設定で許可してください。",
+    "photos_title": "写真の権限",
+    "photos_desc": "写真や動画を保存するにはストレージの権限が必要です。設定で許可してください。",
+    "microphone_title": "マイクの権限",
+    "microphone_desc": "動画の音声録音にはマイクの権限が必要です。設定で許可してください。",
+    "notification_title": "通知の権限",
+    "notification_desc": "デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。",
+    "settings": "設定",
+    "cancel": "キャンセル"
   }
 }

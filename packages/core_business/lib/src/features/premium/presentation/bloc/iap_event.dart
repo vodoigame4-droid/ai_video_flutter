@@ -13,4 +13,6 @@ abstract class IapEvent with _$IapEvent {
     required int credits,
     required String priceText,
   }) = _PurchaseCredits;
+  const factory IapEvent.selectCreditPackage({required int index}) = _SelectCreditPackage;
+  const factory IapEvent.restore() = _Restore;
 }

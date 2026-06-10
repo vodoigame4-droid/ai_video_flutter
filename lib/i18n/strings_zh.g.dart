@@ -64,6 +64,7 @@ class TranslationsZh extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$zh notification = _Translations$notification$zh._(_root);
 	@override late final _Translations$rating_dialog$zh rating_dialog = _Translations$rating_dialog$zh._(_root);
 	@override late final _Translations$debug$zh debug = _Translations$debug$zh._(_root);
+	@override late final _Translations$permission$zh permission = _Translations$permission$zh._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$zh extends Translations$home$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '视频 AI';
+	@override String get title => 'Vido';
 	@override String get trending => '热门';
 	@override String get new_section => '最新';
 	@override String get toy_box => '玩具手办盒';
@@ -109,6 +110,7 @@ class _Translations$create$zh extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => '海王自拍';
 	@override String get tap_upload => '上传您的照片，在几秒钟内创建您的 AI 视频。';
+	@override String get tap_to_upload_photo => '点击这里上传您的照片。';
 	@override String get select_upload_title => '选择上传照片的方式';
 	@override String get upload_image => '上传图片';
 	@override String get custom_prompt => '自定义提示词';
@@ -169,7 +171,7 @@ class _Translations$splash$zh extends Translations$splash$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => '视频AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -228,7 +230,7 @@ class _Translations$home_new$zh extends Translations$home_new$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => '欢迎使用视频AI';
+	@override String get welcomeToAppName => '欢迎使用Vido';
 	@override String get imageToVideo => '图片转\n视频';
 	@override String get transitionVideo => '转场\n视频';
 	@override String get imageToDance => '图片\n舞蹈';
@@ -543,6 +545,9 @@ class _Translations$errors$zh extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => '视频长度必须在10秒以内。';
+	@override String get iap_purchase_cancelled => '购买已取消。';
+	@override String get iap_purchase_in_progress => '购买已在进行中。';
+	@override String get iap_purchase_failed => '购买失败。';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$zh extends Translations$checkin$en {
 	@override String day({required Object n}) => '第${n}天';
 	@override String get check_in_btn => '签到';
 	@override String get daily_bonus_notification => '每日提醒';
+	@override String get disable_notification_title => '禁用签到提醒吗？';
+	@override String get disable_notification_desc => '您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？';
+	@override String get disable_notification_keep => '保持启用';
+	@override String get disable_notification_disable => '禁用';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$zh extends Translations$debug$en {
 	@override String get generation_buy_credits => '生成购买积分';
 	@override String get discount => '折扣页面';
 	@override String get paywall_video => '付费墙视频页面';
+	@override String get generating_page => '生成页面预览';
+}
+
+// Path: permission
+class _Translations$permission$zh extends Translations$permission$en {
+	_Translations$permission$zh._(TranslationsZh root) : this._root = root, super.internal(root);
+
+	final TranslationsZh _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => '相机权限';
+	@override String get camera_desc => '需要相机权限。请在设置中启用以使用此功能。';
+	@override String get photos_title => '照片权限';
+	@override String get photos_desc => '需要存储权限来保存照片或视频。请在设置中启用以使用此功能。';
+	@override String get microphone_title => '麦克风权限';
+	@override String get microphone_desc => '需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。';
+	@override String get notification_title => '通知权限';
+	@override String get notification_desc => '需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。';
+	@override String get settings => '设置';
+	@override String get cancel => '取消';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$zh extends Translations$onboarding$page1$en
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '欢迎使用视频AI';
+	@override String get title => '欢迎使用Vido';
 	@override String get subtitle => '您的创意之旅从这里开始...';
 	@override String get button => '开始体验';
 }
@@ -712,7 +741,7 @@ extension on TranslationsZh {
 			'common.generate' => '生成',
 			'common.processing' => '处理中...',
 			'common.ok' => '确定',
-			'home.title' => '视频 AI',
+			'home.title' => 'Vido',
 			'home.trending' => '热门',
 			'home.new_section' => '最新',
 			'home.toy_box' => '玩具手办盒',
@@ -721,6 +750,7 @@ extension on TranslationsZh {
 			'home.discover' => '发现',
 			'create.selfie_aquaman' => '海王自拍',
 			'create.tap_upload' => '上传您的照片，在几秒钟内创建您的 AI 视频。',
+			'create.tap_to_upload_photo' => '点击这里上传您的照片。',
 			'create.select_upload_title' => '选择上传照片的方式',
 			'create.upload_image' => '上传图片',
 			'create.custom_prompt' => '自定义提示词',
@@ -763,8 +793,8 @@ extension on TranslationsZh {
 			'create.please_add_image_first' => '请先添加图片',
 			'leave_dialog.title' => '不保存直接离开？',
 			'leave_dialog.desc' => '您要继续编辑还是现在离开？',
-			'splash.appName' => '视频AI',
-			'onboarding.page1.title' => '欢迎使用视频AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => '欢迎使用Vido',
 			'onboarding.page1.subtitle' => '您的创意之旅从这里开始...',
 			'onboarding.page1.button' => '开始体验',
 			'onboarding.page2.title' => '图片转视频',
@@ -796,7 +826,7 @@ extension on TranslationsZh {
 			'profile.delete' => '删除',
 			'profile.generating' => '生成中...',
 			'profile.imageGeneration' => '图像生成',
-			'home_new.welcomeToAppName' => '欢迎使用视频AI',
+			'home_new.welcomeToAppName' => '欢迎使用Vido',
 			'home_new.imageToVideo' => '图片转\n视频',
 			'home_new.transitionVideo' => '转场\n视频',
 			'home_new.imageToDance' => '图片\n舞蹈',
@@ -1021,6 +1051,9 @@ extension on TranslationsZh {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => '视频长度必须在10秒以内。',
+			'errors.iap_purchase_cancelled' => '购买已取消。',
+			'errors.iap_purchase_in_progress' => '购买已在进行中。',
+			'errors.iap_purchase_failed' => '购买失败。',
 			'guide.step_1' => '第1步',
 			'guide.step_2' => '第2步',
 			'guide.upload_photo' => '上传图片',
@@ -1037,6 +1070,10 @@ extension on TranslationsZh {
 			'checkin.day' => ({required Object n}) => '第${n}天',
 			'checkin.check_in_btn' => '签到',
 			'checkin.daily_bonus_notification' => '每日提醒',
+			'checkin.disable_notification_title' => '禁用签到提醒吗？',
+			'checkin.disable_notification_desc' => '您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？',
+			'checkin.disable_notification_keep' => '保持启用',
+			'checkin.disable_notification_disable' => '禁用',
 			'connectivity.no_internet_title' => '无网络连接',
 			'connectivity.no_internet_desc' => '请检查您的网络连接以继续使用该应用程序。',
 			'connectivity.retry_button' => '重试连接',
@@ -1057,6 +1094,17 @@ extension on TranslationsZh {
 			'debug.generation_buy_credits' => '生成购买积分',
 			'debug.discount' => '折扣页面',
 			'debug.paywall_video' => '付费墙视频页面',
+			'debug.generating_page' => '生成页面预览',
+			'permission.camera_title' => '相机权限',
+			'permission.camera_desc' => '需要相机权限。请在设置中启用以使用此功能。',
+			'permission.photos_title' => '照片权限',
+			'permission.photos_desc' => '需要存储权限来保存照片或视频。请在设置中启用以使用此功能。',
+			'permission.microphone_title' => '麦克风权限',
+			'permission.microphone_desc' => '需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。',
+			'permission.notification_title' => '通知权限',
+			'permission.notification_desc' => '需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。',
+			'permission.settings' => '设置',
+			'permission.cancel' => '取消',
 			_ => null,
 		};
 	}

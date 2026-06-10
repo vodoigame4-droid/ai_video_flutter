@@ -64,6 +64,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$ja notification = _Translations$notification$ja._(_root);
 	@override late final _Translations$rating_dialog$ja rating_dialog = _Translations$rating_dialog$ja._(_root);
 	@override late final _Translations$debug$ja debug = _Translations$debug$ja._(_root);
+	@override late final _Translations$permission$ja permission = _Translations$permission$ja._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$ja extends Translations$home$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'ビデオAI';
+	@override String get title => 'Vido';
 	@override String get trending => 'トレンド';
 	@override String get new_section => '新規';
 	@override String get toy_box => 'トイフィギュアボックス';
@@ -109,6 +110,7 @@ class _Translations$create$ja extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'セルフィーアクアマン';
 	@override String get tap_upload => '写真をアップロードして、数秒でAI動画を作成します。';
+	@override String get tap_to_upload_photo => 'ここをタップして写真をアップロードしてください。';
 	@override String get select_upload_title => '写真をアップロードする方法を選択';
 	@override String get upload_image => '画像をアップロード';
 	@override String get custom_prompt => 'カスタムプロンプト';
@@ -169,7 +171,7 @@ class _Translations$splash$ja extends Translations$splash$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'ビデオAI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -228,7 +230,7 @@ class _Translations$home_new$ja extends Translations$home_new$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'ビデオAIへようこそ';
+	@override String get welcomeToAppName => 'Vidoへようこそ';
 	@override String get imageToVideo => '画像から\nビデオ';
 	@override String get transitionVideo => 'トランジション\n動画';
 	@override String get imageToDance => '画像から\nダンス';
@@ -543,6 +545,9 @@ class _Translations$errors$ja extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => '動画は10秒未満である必要があります。';
+	@override String get iap_purchase_cancelled => '購入がキャンセルされました。';
+	@override String get iap_purchase_in_progress => '購入処理は既に実行中です。';
+	@override String get iap_purchase_failed => '購入に失敗しました。';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$ja extends Translations$checkin$en {
 	@override String day({required Object n}) => '${n}日目';
 	@override String get check_in_btn => 'チェックイン';
 	@override String get daily_bonus_notification => '毎日通知';
+	@override String get disable_notification_title => 'チェックイン通知を無効にしますか？';
+	@override String get disable_notification_desc => '毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？';
+	@override String get disable_notification_keep => '有効のままにする';
+	@override String get disable_notification_disable => '無効にする';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$ja extends Translations$debug$en {
 	@override String get generation_buy_credits => '生成クレジット購入';
 	@override String get discount => '割引ページ';
 	@override String get paywall_video => 'ペイウォールビデオページ';
+	@override String get generating_page => '生成プロセスページのプレビュー';
+}
+
+// Path: permission
+class _Translations$permission$ja extends Translations$permission$en {
+	_Translations$permission$ja._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'カメラの権限';
+	@override String get camera_desc => 'カメラの権限が必要です。この機能を使用するには、設定で許可してください。';
+	@override String get photos_title => '写真の権限';
+	@override String get photos_desc => '写真や動画を保存するにはストレージの権限が必要です。設定で許可してください。';
+	@override String get microphone_title => 'マイクの権限';
+	@override String get microphone_desc => '動画の音声録音にはマイクの権限が必要です。設定で許可してください。';
+	@override String get notification_title => '通知の権限';
+	@override String get notification_desc => 'デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。';
+	@override String get settings => '設定';
+	@override String get cancel => 'キャンセル';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'ビデオAIへようこそ';
+	@override String get title => 'Vidoへようこそ';
 	@override String get subtitle => 'あなたのクリエイティブな旅がここから始まる...';
 	@override String get button => '始める';
 }
@@ -712,7 +741,7 @@ extension on TranslationsJa {
 			'common.generate' => '生成する',
 			'common.processing' => '処理中...',
 			'common.ok' => 'OK',
-			'home.title' => 'ビデオAI',
+			'home.title' => 'Vido',
 			'home.trending' => 'トレンド',
 			'home.new_section' => '新規',
 			'home.toy_box' => 'トイフィギュアボックス',
@@ -721,6 +750,7 @@ extension on TranslationsJa {
 			'home.discover' => '発見',
 			'create.selfie_aquaman' => 'セルフィーアクアマン',
 			'create.tap_upload' => '写真をアップロードして、数秒でAI動画を作成します。',
+			'create.tap_to_upload_photo' => 'ここをタップして写真をアップロードしてください。',
 			'create.select_upload_title' => '写真をアップロードする方法を選択',
 			'create.upload_image' => '画像をアップロード',
 			'create.custom_prompt' => 'カスタムプロンプト',
@@ -763,8 +793,8 @@ extension on TranslationsJa {
 			'create.please_add_image_first' => '最初に画像を追加してください',
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
-			'splash.appName' => 'ビデオAI',
-			'onboarding.page1.title' => 'ビデオAIへようこそ',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Vidoへようこそ',
 			'onboarding.page1.subtitle' => 'あなたのクリエイティブな旅がここから始まる...',
 			'onboarding.page1.button' => '始める',
 			'onboarding.page2.title' => '画像からビデオへ',
@@ -796,7 +826,7 @@ extension on TranslationsJa {
 			'profile.delete' => '削除',
 			'profile.generating' => '生成中...',
 			'profile.imageGeneration' => '画像生成',
-			'home_new.welcomeToAppName' => 'ビデオAIへようこそ',
+			'home_new.welcomeToAppName' => 'Vidoへようこそ',
 			'home_new.imageToVideo' => '画像から\nビデオ',
 			'home_new.transitionVideo' => 'トランジション\n動画',
 			'home_new.imageToDance' => '画像から\nダンス',
@@ -1021,6 +1051,9 @@ extension on TranslationsJa {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => '動画は10秒未満である必要があります。',
+			'errors.iap_purchase_cancelled' => '購入がキャンセルされました。',
+			'errors.iap_purchase_in_progress' => '購入処理は既に実行中です。',
+			'errors.iap_purchase_failed' => '購入に失敗しました。',
 			'guide.step_1' => 'ステップ1',
 			'guide.step_2' => 'ステップ2',
 			'guide.upload_photo' => '写真をアップロード',
@@ -1037,6 +1070,10 @@ extension on TranslationsJa {
 			'checkin.day' => ({required Object n}) => '${n}日目',
 			'checkin.check_in_btn' => 'チェックイン',
 			'checkin.daily_bonus_notification' => '毎日通知',
+			'checkin.disable_notification_title' => 'チェックイン通知を無効にしますか？',
+			'checkin.disable_notification_desc' => '毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？',
+			'checkin.disable_notification_keep' => '有効のままにする',
+			'checkin.disable_notification_disable' => '無効にする',
 			'connectivity.no_internet_title' => '接続がありません',
 			'connectivity.no_internet_desc' => 'アプリを引き続き使用するには、インターネット接続を確認してください。',
 			'connectivity.retry_button' => '接続を再試行',
@@ -1057,6 +1094,17 @@ extension on TranslationsJa {
 			'debug.generation_buy_credits' => '生成クレジット購入',
 			'debug.discount' => '割引ページ',
 			'debug.paywall_video' => 'ペイウォールビデオページ',
+			'debug.generating_page' => '生成プロセスページのプレビュー',
+			'permission.camera_title' => 'カメラの権限',
+			'permission.camera_desc' => 'カメラの権限が必要です。この機能を使用するには、設定で許可してください。',
+			'permission.photos_title' => '写真の権限',
+			'permission.photos_desc' => '写真や動画を保存するにはストレージの権限が必要です。設定で許可してください。',
+			'permission.microphone_title' => 'マイクの権限',
+			'permission.microphone_desc' => '動画の音声録音にはマイクの権限が必要です。設定で許可してください。',
+			'permission.notification_title' => '通知の権限',
+			'permission.notification_desc' => 'デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。',
+			'permission.settings' => '設定',
+			'permission.cancel' => 'キャンセル',
 			_ => null,
 		};
 	}

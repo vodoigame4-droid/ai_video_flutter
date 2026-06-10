@@ -11,7 +11,7 @@
     "ok": "확인"
   },
   "home": {
-    "title": "비디오 AI",
+    "title": "Vido",
     "trending": "트렌딩",
     "new_section": "새로운",
     "toy_box": "장난감 피규어 박스",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "셀피 아쿠아맨",
     "tap_upload": "사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.",
+    "tap_to_upload_photo": "여기를 눌러 사진을 업로드하세요.",
     "select_upload_title": "사진 업로드 방식 선택",
     "upload_image": "이미지 업로드",
     "custom_prompt": "커스텀 프롬프트",
@@ -68,11 +69,11 @@
     "desc": "편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?"
   },
   "splash": {
-    "appName": "비디오 AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "비디오 AI에 오신 것을 환영합니다",
+      "title": "Vido에 오신 것을 환영합니다",
       "subtitle": "당신의 창의적인 여정이 여기서 시작됩니다...",
       "button": "시작하기"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "이미지 생성"
   },
   "home_new": {
-    "welcomeToAppName": "비디오 AI에 오신 것을 환영합니다",
+    "welcomeToAppName": "Vido에 오신 것을 환영합니다",
     "imageToVideo": "이미지를\n비디오로",
     "transitionVideo": "트랜지션\n비디오",
     "imageToDance": "이미지를\n댄스로",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "동영상은 10초 미만이어야 합니다."
+    "video_too_long": "동영상은 10초 미만이어야 합니다.",
+    "iap_purchase_cancelled": "구매가 취소되었습니다.",
+    "iap_purchase_in_progress": "구매가 이미 진행 중입니다.",
+    "iap_purchase_failed": "구매 실패."
   },
   "guide": {
     "step_1": "1단계",
@@ -383,7 +387,11 @@
     "today": "오늘",
     "day": "{n}일차",
     "check_in_btn": "출석하기",
-    "daily_bonus_notification": "매일 알림"
+    "daily_bonus_notification": "매일 알림",
+    "disable_notification_title": "출석 체크 알림을 비활성화할까요?",
+    "disable_notification_desc": "일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?",
+    "disable_notification_keep": "활성화 유지",
+    "disable_notification_disable": "비활성화"
   },
   "connectivity": {
     "no_internet_title": "연결 없음",
@@ -411,6 +419,19 @@
     "generation_iap": "생성 IAP",
     "generation_buy_credits": "생성 크레딧 구매",
     "discount": "할인 페이지",
-    "paywall_video": "페이월 비디오 페이지"
+    "paywall_video": "페이월 비디오 페이지",
+    "generating_page": "생성 중 페이지 미리보기"
+  },
+  "permission": {
+    "camera_title": "카메라 권한",
+    "camera_desc": "카메라 권한이 필요합니다. 이 기능을 사용하려면 설정에서 권한을 허용해 주세요.",
+    "photos_title": "사진 권한",
+    "photos_desc": "사진이나 동영상을 저장하려면 저장소 권한이 필요합니다. 설정에서 권한을 허용해 주세요.",
+    "microphone_title": "마이크 권한",
+    "microphone_desc": "동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.",
+    "notification_title": "알림 권한",
+    "notification_desc": "일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.",
+    "settings": "설정",
+    "cancel": "취소"
   }
 }

@@ -1,4 +1,4 @@
-import 'package:ai_video_flutter/features/premium/presentation/pages/paywall_video_page.dart';
+import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -165,7 +165,7 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
                     return;
                   }
                   if (showPremium) {
-                    context.push('${PaywallVideoPage.path}');
+                    context.push('${IapPage.path}');
                   } else {
                     widget.onInspireMePressed();
                   }

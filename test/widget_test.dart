@@ -208,7 +208,7 @@ void main() {
     sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfigService);
   });
 
-  testWidgets('Video AI app renders successfully', (WidgetTester tester) async {
+  testWidgets('Vido app renders successfully', (WidgetTester tester) async {
     // Initialize slang for testing
     LocaleSettings.setLocale(AppLocale.en);
 

@@ -205,4 +205,38 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.white,
   );
+
+  static final TextStyle settingsTitle = GoogleFonts.plusJakartaSans(
+    fontSize: 24.0,
+    fontWeight: FontWeight.w600,
+    color: AppColors.white,
+  );
+
+  static final TextStyle settingsItemTitle = GoogleFonts.inter(
+    fontSize: 16.0,
+    fontWeight: FontWeight.w500,
+    color: AppColors.white,
+  );
+
+  static final TextStyle settingsTrailingText = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.normal,
+    color: AppColors.primary,
+  );
+
+  static final TextStyle settingsUserCode = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
+
+  static final TextStyle settingsVersion = GoogleFonts.inter(
+    fontSize: 14.0,
+    fontWeight: FontWeight.normal,
+    color: AppColors.subText,
+  );
+
+  static final TextStyle emojiFlag = const TextStyle(
+    fontSize: 18.0,
+  );
 }

@@ -29,13 +29,30 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
     required this.uploadImageUseCase,
     required this.watchProfileUseCase,
     required this.getProfileUseCase,
-  }) : super(const CreateVideoState.initial()) {
+    int initialTab = 0,
+  }) : super(CreateVideoState.ready(
+          selectedTab: initialTab,
+          customPrompt: "",
+          inspireMeCount: watchProfileUseCase.cachedUser?.freeSuggestions ?? 3,
+          slotsPaths: List<String?>.filled(3, null),
+          uploadedSlotsPaths: List<String?>.filled(3, null),
+          quality: 'Full HD',
+          duration: '5s',
+          isGenerating: false,
+          isSuccess: false,
+          isInspiring: false,
+          isVip: watchProfileUseCase.cachedUser?.isVip ?? false,
+        )) {
     on<CreateVideoEvent>((event, emit) async {
       await event.when(
         init: (initialTab) async {
           LogUtils.d("Initializing CreateVideoBloc with tab: $initialTab");
-          emit(const CreateVideoState.loading());
-          await Future.delayed(const Duration(milliseconds: 100));
+
+          state.mapOrNull(
+            ready: (readyState) {
+              emit(readyState.copyWith(selectedTab: initialTab));
+            },
+          );
 
           _profileSubscription?.cancel();
           _profileSubscription = watchProfileUseCase().listen(
@@ -43,20 +60,6 @@ class CreateVideoBloc extends Bloc<CreateVideoEvent, CreateVideoState> {
           );
 
           getProfileUseCase(NoParams());
-
-          emit(CreateVideoState.ready(
-            selectedTab: initialTab,
-            customPrompt: "",
-            inspireMeCount: 3,
-            isVip: false,
-            slotsPaths: List<String?>.filled(3, null),
-            uploadedSlotsPaths: List<String?>.filled(3, null),
-            quality: 'Full HD',
-            duration: '5s',
-            isGenerating: false,
-            isSuccess: false,
-            isInspiring: false,
-          ));
         },
         changeTab: (tabIndex) {
           state.mapOrNull(

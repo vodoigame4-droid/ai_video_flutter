@@ -65,6 +65,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$vi notification = _Translations$notification$vi._(_root);
 	@override late final _Translations$rating_dialog$vi rating_dialog = _Translations$rating_dialog$vi._(_root);
 	@override late final _Translations$debug$vi debug = _Translations$debug$vi._(_root);
+	@override late final _Translations$permission$vi permission = _Translations$permission$vi._(_root);
 }
 
 // Path: common
@@ -92,7 +93,7 @@ class _Translations$home$vi extends Translations$home$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Video AI';
+	@override String get title => 'Vido';
 	@override String get trending => 'Xu hướng';
 	@override String get new_section => 'Mới';
 	@override String get toy_box => 'Hộp đồ chơi';
@@ -109,7 +110,8 @@ class _Translations$create$vi extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Ảnh tự sướng Aquaman';
-	@override String get tap_upload => 'Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.';
+	@override String get tap_upload => 'Tải ảnh của bạn lên và tạo Vido chỉ trong vài giây.';
+	@override String get tap_to_upload_photo => 'Chạm vào đây để tải ảnh của bạn lên.';
 	@override String get select_upload_title => 'Chọn phương thức tải ảnh';
 	@override String get upload_image => 'Tải ảnh lên';
 	@override String get custom_prompt => 'Mô tả tùy chỉnh';
@@ -170,7 +172,7 @@ class _Translations$splash$vi extends Translations$splash$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Video AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -213,7 +215,7 @@ class _Translations$profile$vi extends Translations$profile$en {
 	@override String get myVideo => 'Video của tôi';
 	@override String get liked => 'Đã thích';
 	@override String get noVideos => 'Chưa có video';
-	@override String get noVideosDesc => 'Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.';
+	@override String get noVideosDesc => 'Hãy tạo Vido đầu tiên của bạn để nó xuất hiện tại đây.';
 	@override String get deleteTitle => 'Xóa video này?';
 	@override String get deleteDesc => 'Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.';
 	@override String get cancel => 'Hủy';
@@ -229,7 +231,7 @@ class _Translations$home_new$vi extends Translations$home_new$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Chào mừng đến với Video AI';
+	@override String get welcomeToAppName => 'Chào mừng đến với Vido';
 	@override String get imageToVideo => 'Ảnh sang\nVideo';
 	@override String get transitionVideo => 'Video\nChuyển cảnh';
 	@override String get imageToDance => 'Ảnh sang\nNhảy múa';
@@ -557,6 +559,9 @@ class _Translations$errors$vi extends Translations$errors$en {
 	@override String get get_price_list_failed => 'Không thể tải danh sách giá credit.';
 	@override String get iap_receipt_not_found => 'Không tìm thấy hóa đơn mua hàng.';
 	@override String get iap_subscription_not_found => 'Không tìm thấy thông tin gói đăng ký.';
+	@override String get iap_purchase_cancelled => 'Giao dịch đã bị hủy.';
+	@override String get iap_purchase_in_progress => 'Giao dịch đang được xử lý.';
+	@override String get iap_purchase_failed => 'Giao dịch thất bại.';
 	@override String get video_too_long => 'Video phải ngắn hơn 10 giây.';
 }
 
@@ -593,6 +598,10 @@ class _Translations$checkin$vi extends Translations$checkin$en {
 	@override String get check_in_btn => 'Nhận quà';
 	@override String get checked_in => 'Đã nhận quà';
 	@override String get daily_bonus_notification => 'Thông báo hàng ngày';
+	@override String get disable_notification_title => 'Tắt thông báo điểm danh?';
+	@override String get disable_notification_desc => 'Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?';
+	@override String get disable_notification_keep => 'Giữ lại';
+	@override String get disable_notification_disable => 'Tắt';
 }
 
 // Path: connectivity
@@ -649,6 +658,26 @@ class _Translations$debug$vi extends Translations$debug$en {
 	@override String get generation_buy_credits => 'Trang Generation Mua Credit';
 	@override String get discount => 'Trang giảm giá';
 	@override String get paywall_video => 'Trang Paywall Video';
+	@override String get generating_page => 'Xem trước trang Generating';
+}
+
+// Path: permission
+class _Translations$permission$vi extends Translations$permission$en {
+	_Translations$permission$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'Quyền truy cập Máy ảnh';
+	@override String get camera_desc => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.';
+	@override String get photos_title => 'Quyền truy cập Ảnh & Bộ nhớ';
+	@override String get photos_desc => 'Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.';
+	@override String get microphone_title => 'Quyền truy cập Micro';
+	@override String get microphone_desc => 'Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.';
+	@override String get notification_title => 'Quyền gửi Thông báo';
+	@override String get notification_desc => 'Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.';
+	@override String get settings => 'Cài đặt';
+	@override String get cancel => 'Hủy';
 }
 
 // Path: onboarding.page1
@@ -658,7 +687,7 @@ class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Chào mừng đến với Video AI';
+	@override String get title => 'Chào mừng đến với Vido';
 	@override String get subtitle => 'Hành trình sáng tạo của bạn bắt đầu tại đây...';
 	@override String get button => 'Bắt đầu';
 }
@@ -728,7 +757,7 @@ extension on TranslationsVi {
 			'common.generate' => 'Tạo video',
 			'common.processing' => 'Đang xử lý...',
 			'common.ok' => 'OK',
-			'home.title' => 'Video AI',
+			'home.title' => 'Vido',
 			'home.trending' => 'Xu hướng',
 			'home.new_section' => 'Mới',
 			'home.toy_box' => 'Hộp đồ chơi',
@@ -736,7 +765,8 @@ extension on TranslationsVi {
 			'home.anime' => 'Hoạt hình',
 			'home.discover' => 'Khám phá',
 			'create.selfie_aquaman' => 'Ảnh tự sướng Aquaman',
-			'create.tap_upload' => 'Tải ảnh của bạn lên và tạo video AI chỉ trong vài giây.',
+			'create.tap_upload' => 'Tải ảnh của bạn lên và tạo Vido chỉ trong vài giây.',
+			'create.tap_to_upload_photo' => 'Chạm vào đây để tải ảnh của bạn lên.',
 			'create.select_upload_title' => 'Chọn phương thức tải ảnh',
 			'create.upload_image' => 'Tải ảnh lên',
 			'create.custom_prompt' => 'Mô tả tùy chỉnh',
@@ -779,8 +809,8 @@ extension on TranslationsVi {
 			'create.please_add_image_first' => 'Vui lòng thêm ảnh vào trước',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
-			'splash.appName' => 'Video AI',
-			'onboarding.page1.title' => 'Chào mừng đến với Video AI',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Chào mừng đến với Vido',
 			'onboarding.page1.subtitle' => 'Hành trình sáng tạo của bạn bắt đầu tại đây...',
 			'onboarding.page1.button' => 'Bắt đầu',
 			'onboarding.page2.title' => 'Hình ảnh sang Video',
@@ -805,14 +835,14 @@ extension on TranslationsVi {
 			'profile.myVideo' => 'Video của tôi',
 			'profile.liked' => 'Đã thích',
 			'profile.noVideos' => 'Chưa có video',
-			'profile.noVideosDesc' => 'Hãy tạo video AI đầu tiên của bạn để nó xuất hiện tại đây.',
+			'profile.noVideosDesc' => 'Hãy tạo Vido đầu tiên của bạn để nó xuất hiện tại đây.',
 			'profile.deleteTitle' => 'Xóa video này?',
 			'profile.deleteDesc' => 'Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.',
 			'profile.cancel' => 'Hủy',
 			'profile.delete' => 'Xóa',
 			'profile.generating' => 'Đang tạo...',
 			'profile.imageGeneration' => 'Tạo hình ảnh',
-			'home_new.welcomeToAppName' => 'Chào mừng đến với Video AI',
+			'home_new.welcomeToAppName' => 'Chào mừng đến với Vido',
 			'home_new.imageToVideo' => 'Ảnh sang\nVideo',
 			'home_new.transitionVideo' => 'Video\nChuyển cảnh',
 			'home_new.imageToDance' => 'Ảnh sang\nNhảy múa',
@@ -1041,6 +1071,9 @@ extension on TranslationsVi {
 			'errors.get_price_list_failed' => 'Không thể tải danh sách giá credit.',
 			'errors.iap_receipt_not_found' => 'Không tìm thấy hóa đơn mua hàng.',
 			'errors.iap_subscription_not_found' => 'Không tìm thấy thông tin gói đăng ký.',
+			'errors.iap_purchase_cancelled' => 'Giao dịch đã bị hủy.',
+			'errors.iap_purchase_in_progress' => 'Giao dịch đang được xử lý.',
+			'errors.iap_purchase_failed' => 'Giao dịch thất bại.',
 			'errors.video_too_long' => 'Video phải ngắn hơn 10 giây.',
 			'guide.step_1' => 'Bước 1',
 			'guide.step_2' => 'Bước 2',
@@ -1059,6 +1092,10 @@ extension on TranslationsVi {
 			'checkin.check_in_btn' => 'Nhận quà',
 			'checkin.checked_in' => 'Đã nhận quà',
 			'checkin.daily_bonus_notification' => 'Thông báo hàng ngày',
+			'checkin.disable_notification_title' => 'Tắt thông báo điểm danh?',
+			'checkin.disable_notification_desc' => 'Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?',
+			'checkin.disable_notification_keep' => 'Giữ lại',
+			'checkin.disable_notification_disable' => 'Tắt',
 			'connectivity.no_internet_title' => 'Mất kết nối',
 			'connectivity.no_internet_desc' => 'Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.',
 			'connectivity.retry_button' => 'Thử lại kết nối',
@@ -1079,6 +1116,17 @@ extension on TranslationsVi {
 			'debug.generation_buy_credits' => 'Trang Generation Mua Credit',
 			'debug.discount' => 'Trang giảm giá',
 			'debug.paywall_video' => 'Trang Paywall Video',
+			'debug.generating_page' => 'Xem trước trang Generating',
+			'permission.camera_title' => 'Quyền truy cập Máy ảnh',
+			'permission.camera_desc' => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.',
+			'permission.photos_title' => 'Quyền truy cập Ảnh & Bộ nhớ',
+			'permission.photos_desc' => 'Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.',
+			'permission.microphone_title' => 'Quyền truy cập Micro',
+			'permission.microphone_desc' => 'Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.',
+			'permission.notification_title' => 'Quyền gửi Thông báo',
+			'permission.notification_desc' => 'Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.',
+			'permission.settings' => 'Cài đặt',
+			'permission.cancel' => 'Hủy',
 			_ => null,
 		};
 	}

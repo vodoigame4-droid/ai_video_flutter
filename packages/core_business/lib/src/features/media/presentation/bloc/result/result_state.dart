@@ -27,6 +27,7 @@ abstract class ResultState with _$ResultState {
     String? shareErrorMessage,
     @Default(false) bool downloadSuccess,
     @Default(false) bool shareSuccess,
+    @Default(false) bool isVip,
   }) = _Ready;
   const factory ResultState.error({required String message}) = _Error;
 }

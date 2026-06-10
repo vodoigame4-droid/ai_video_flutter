@@ -33,44 +33,20 @@ class LanguageView extends StatefulWidget {
 }
 
 class _LanguageViewState extends State<LanguageView> {
-  String? _pendingLanguageCode;
-  bool _isApplying = false;
+  Future<void> _selectLanguage(BuildContext context, String languageCode) async {
+    final locale = AppLocale.values.firstWhere(
+      (l) => l.languageCode == languageCode,
+      orElse: () => AppLocale.en,
+    );
 
-  void _selectLanguage(String languageCode) {
-    if (_isApplying) return;
+    // Load the deferred language library asynchronously
+    await LocaleSettings.setLocale(locale);
 
-    setState(() {
-      _pendingLanguageCode = languageCode;
-      _isApplying = true;
-    });
-
-    // Enforce 1.5 seconds delay, then apply the language change to SettingsBloc and LocaleSettings
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      if (mounted) {
-        context.read<SettingsBloc>().add(
-              SettingsEvent.changeLanguage(languageCode),
-            );
-        final locale = AppLocale.values.firstWhere(
-          (l) => l.languageCode == languageCode,
-          orElse: () => AppLocale.en,
-        );
-        LocaleSettings.setLocale(locale);
-
-        setState(() {
-          _isApplying = false;
-          // Check if bloc is already ready with the pending language
-          final blocState = context.read<SettingsBloc>().state;
-          blocState.maybeWhen(
-            ready: (currentLanguageCode) {
-              if (currentLanguageCode == _pendingLanguageCode) {
-                _pendingLanguageCode = null;
-              }
-            },
-            orElse: () {},
+    if (context.mounted) {
+      context.read<SettingsBloc>().add(
+            SettingsEvent.changeLanguage(languageCode),
           );
-        });
-      }
-    });
+    }
   }
 
   @override
@@ -94,15 +70,13 @@ class _LanguageViewState extends State<LanguageView> {
               children: [
                 const SizedBox(height: 20),
 
-                // Header Row matching Figma image
+                // Header Row
                 BlocBuilder<SettingsBloc, SettingsState>(
                   builder: (context, state) {
-                    final isBlocLoading = state.maybeWhen(
+                    final isLoading = state.maybeWhen(
                       loading: () => true,
                       orElse: () => false,
                     );
-
-                    final isLoading = _isApplying || isBlocLoading;
 
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -181,20 +155,13 @@ class _LanguageViewState extends State<LanguageView> {
                             if (LocaleSettings.currentLocale != locale) {
                               LocaleSettings.setLocale(locale);
                             }
-                            
-                            // If we are not currently applying (timer finished), clear pending code
-                            if (!_isApplying) {
-                              setState(() {
-                                _pendingLanguageCode = null;
-                              });
-                            }
                           },
                           orElse: () {},
                         );
                       },
                       child: BlocBuilder<SettingsBloc, SettingsState>(
                         builder: (context, state) {
-                          final isBlocLoading = state.maybeWhen(
+                          final isLoading = state.maybeWhen(
                             loading: () => true,
                             orElse: () => false,
                           );
@@ -207,15 +174,12 @@ class _LanguageViewState extends State<LanguageView> {
                                 orElse: () => 'en',
                               );
 
-                              final selectedCode = _pendingLanguageCode ?? currentLanguageCode;
-                              final isLoading = _isApplying || isBlocLoading;
-
                               return ListView.builder(
                                 physics: const BouncingScrollPhysics(),
                                 itemCount: AppLocale.values.length,
                                 itemBuilder: (context, index) {
                                   final locale = AppLocale.values[index];
-                                  final isSelected = locale.languageCode == selectedCode;
+                                  final isSelected = locale.languageCode == currentLanguageCode;
                                   final nativeName = _getNativeLanguageName(locale);
 
                                   return _buildLanguageItem(
@@ -225,7 +189,7 @@ class _LanguageViewState extends State<LanguageView> {
                                     isSelected: isSelected,
                                     onTap: isLoading
                                         ? null
-                                        : () => _selectLanguage(locale.languageCode),
+                                        : () => _selectLanguage(context, locale.languageCode),
                                   );
                                 },
                               );

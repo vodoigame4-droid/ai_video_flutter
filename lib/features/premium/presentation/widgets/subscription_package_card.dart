@@ -26,10 +26,11 @@ class SubscriptionPackageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget cardContent = Padding(
-      padding: const EdgeInsets.fromLTRB(16, 18, 16, 12),
+    final Widget cardContent = Container(
+      constraints: const BoxConstraints(minHeight: 100),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Left Content: Title and description
           Expanded(
@@ -161,8 +162,7 @@ class SubscriptionPackageCard extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors:
-                      [const Color(0xFFff6320), const Color(0xFFfae123)],
+                  colors: tagColors ?? [AppColors.primary, AppColors.secondary],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),

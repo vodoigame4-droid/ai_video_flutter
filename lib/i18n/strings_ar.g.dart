@@ -64,6 +64,7 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$ar notification = _Translations$notification$ar._(_root);
 	@override late final _Translations$rating_dialog$ar rating_dialog = _Translations$rating_dialog$ar._(_root);
 	@override late final _Translations$debug$ar debug = _Translations$debug$ar._(_root);
+	@override late final _Translations$permission$ar permission = _Translations$permission$ar._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$ar extends Translations$home$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'فيديو الذكاء الاصطناعي';
+	@override String get title => 'Vido';
 	@override String get trending => 'شائع';
 	@override String get new_section => 'جديد';
 	@override String get toy_box => 'صندوق ألعاب مجسمات';
@@ -108,7 +109,8 @@ class _Translations$create$ar extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'سيلفي أكوامان';
-	@override String get tap_upload => 'حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.';
+	@override String get tap_upload => 'حمّل صورتك وأنشئ Vido الخاص بك في ثوانٍ.';
+	@override String get tap_to_upload_photo => 'اضغط هنا لتحميل صورتك.';
 	@override String get select_upload_title => 'حدد لتحميل صورتك';
 	@override String get upload_image => 'تحميل الصورة';
 	@override String get custom_prompt => 'موجّه مخصص';
@@ -169,7 +171,7 @@ class _Translations$splash$ar extends Translations$splash$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'فيديو ذكاء اصطناعي';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -212,7 +214,7 @@ class _Translations$profile$ar extends Translations$profile$en {
 	@override String get myVideo => 'فيديوهاتي';
 	@override String get liked => 'أعجبني';
 	@override String get noVideos => 'لا توجد فيديوهات بعد';
-	@override String get noVideosDesc => 'أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا.';
+	@override String get noVideosDesc => 'أنشئ أول Vido لك وسيظهر هنا.';
 	@override String get deleteTitle => 'حذف هذا الفيديو؟';
 	@override String get deleteDesc => 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟ لا يمكن التراجع عن هذا الإجراء.';
 	@override String get cancel => 'إلغاء';
@@ -228,7 +230,7 @@ class _Translations$home_new$ar extends Translations$home_new$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'مرحبًا بك في فيديو ذكاء اصطناعي';
+	@override String get welcomeToAppName => 'مرحبًا بك في Vido';
 	@override String get imageToVideo => 'صورة إلى\nفيديو';
 	@override String get transitionVideo => 'فيديو\nانتقالي';
 	@override String get imageToDance => 'صورة إلى\nرقص';
@@ -543,6 +545,9 @@ class _Translations$errors$ar extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => 'يجب أن يكون الفيديو أقل من 10 ثوانٍ.';
+	@override String get iap_purchase_cancelled => 'تم إلغاء عملية الشراء.';
+	@override String get iap_purchase_in_progress => 'عملية الشراء قيد التنفيذ بالفعل.';
+	@override String get iap_purchase_failed => 'فشلت عملية الشراء.';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$ar extends Translations$checkin$en {
 	@override String day({required Object n}) => 'يوم ${n}';
 	@override String get check_in_btn => 'تسجيل';
 	@override String get daily_bonus_notification => 'إشعار يومي';
+	@override String get disable_notification_title => 'تعطيل إشعارات تسجيل الوصول؟';
+	@override String get disable_notification_desc => 'ستفقد مكافآت تسجيل الدخول اليومية والمكافآت المثيرة الأخرى. هل أنت متأكد من رغبتك في التعطيل؟';
+	@override String get disable_notification_keep => 'الإبقاء على التفعيل';
+	@override String get disable_notification_disable => 'تعطيل';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$ar extends Translations$debug$en {
 	@override String get generation_buy_credits => 'شراء رصيد للتوليد';
 	@override String get discount => 'صفحة الخصم';
 	@override String get paywall_video => 'صفحة حظر الفيديو';
+	@override String get generating_page => 'معاينة صفحة الإنشاء';
+}
+
+// Path: permission
+class _Translations$permission$ar extends Translations$permission$en {
+	_Translations$permission$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+	final TranslationsAr _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'إذن الكاميرا';
+	@override String get camera_desc => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.';
+	@override String get photos_title => 'إذن الصور';
+	@override String get photos_desc => 'مطلوب إذن الوصول إلى وحدة التخزين لحفظ الصور أو مقاطع الفيديو. يرجى تمكينه في الإعدادات.';
+	@override String get microphone_title => 'إذن الميكروفون';
+	@override String get microphone_desc => 'مطلوب إذن الميكروفون لتسجيل صوت الفيديو. يرجى تمكينه في الإعدادات.';
+	@override String get notification_title => 'إذن الإشعارات';
+	@override String get notification_desc => 'مطلوب إذن الإشعارات لتلقي تذكيرات تسجيل الدخول اليومي. يرجى تمكينه في الإعدادات.';
+	@override String get settings => 'الإعدادات';
+	@override String get cancel => 'إلغاء';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'مرحبًا بك في فيديو ذكاء اصطناعي';
+	@override String get title => 'مرحبًا بك في Vido';
 	@override String get subtitle => 'رحلتك الإبداعية تبدأ من هنا...';
 	@override String get button => 'البدء';
 }
@@ -712,7 +741,7 @@ extension on TranslationsAr {
 			'common.generate' => 'توليد',
 			'common.processing' => 'جارٍ المعالجة...',
 			'common.ok' => 'موافق',
-			'home.title' => 'فيديو الذكاء الاصطناعي',
+			'home.title' => 'Vido',
 			'home.trending' => 'شائع',
 			'home.new_section' => 'جديد',
 			'home.toy_box' => 'صندوق ألعاب مجسمات',
@@ -720,7 +749,8 @@ extension on TranslationsAr {
 			'home.anime' => 'أنيمي',
 			'home.discover' => 'اكتشاف',
 			'create.selfie_aquaman' => 'سيلفي أكوامان',
-			'create.tap_upload' => 'حمّل صورتك وأنشئ فيديو الذكاء الاصطناعي الخاص بك في ثوانٍ.',
+			'create.tap_upload' => 'حمّل صورتك وأنشئ Vido الخاص بك في ثوانٍ.',
+			'create.tap_to_upload_photo' => 'اضغط هنا لتحميل صورتك.',
 			'create.select_upload_title' => 'حدد لتحميل صورتك',
 			'create.upload_image' => 'تحميل الصورة',
 			'create.custom_prompt' => 'موجّه مخصص',
@@ -763,8 +793,8 @@ extension on TranslationsAr {
 			'create.please_add_image_first' => 'يرجى إضافة صورة أولاً',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
-			'splash.appName' => 'فيديو ذكاء اصطناعي',
-			'onboarding.page1.title' => 'مرحبًا بك في فيديو ذكاء اصطناعي',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'مرحبًا بك في Vido',
 			'onboarding.page1.subtitle' => 'رحلتك الإبداعية تبدأ من هنا...',
 			'onboarding.page1.button' => 'البدء',
 			'onboarding.page2.title' => 'صورة إلى فيديو',
@@ -789,14 +819,14 @@ extension on TranslationsAr {
 			'profile.myVideo' => 'فيديوهاتي',
 			'profile.liked' => 'أعجبني',
 			'profile.noVideos' => 'لا توجد فيديوهات بعد',
-			'profile.noVideosDesc' => 'أنشئ أول فيديو ذكاء اصطناعي لك وسيظهر هنا.',
+			'profile.noVideosDesc' => 'أنشئ أول Vido لك وسيظهر هنا.',
 			'profile.deleteTitle' => 'حذف هذا الفيديو؟',
 			'profile.deleteDesc' => 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟ لا يمكن التراجع عن هذا الإجراء.',
 			'profile.cancel' => 'إلغاء',
 			'profile.delete' => 'حذف',
 			'profile.generating' => 'جاري الإنشاء...',
 			'profile.imageGeneration' => 'إنشاء الصور',
-			'home_new.welcomeToAppName' => 'مرحبًا بك في فيديو ذكاء اصطناعي',
+			'home_new.welcomeToAppName' => 'مرحبًا بك في Vido',
 			'home_new.imageToVideo' => 'صورة إلى\nفيديو',
 			'home_new.transitionVideo' => 'فيديو\nانتقالي',
 			'home_new.imageToDance' => 'صورة إلى\nرقص',
@@ -1021,6 +1051,9 @@ extension on TranslationsAr {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => 'يجب أن يكون الفيديو أقل من 10 ثوانٍ.',
+			'errors.iap_purchase_cancelled' => 'تم إلغاء عملية الشراء.',
+			'errors.iap_purchase_in_progress' => 'عملية الشراء قيد التنفيذ بالفعل.',
+			'errors.iap_purchase_failed' => 'فشلت عملية الشراء.',
 			'guide.step_1' => 'الخطوة 1',
 			'guide.step_2' => 'الخطوة 2',
 			'guide.upload_photo' => 'تحميل الصورة',
@@ -1037,6 +1070,10 @@ extension on TranslationsAr {
 			'checkin.day' => ({required Object n}) => 'يوم ${n}',
 			'checkin.check_in_btn' => 'تسجيل',
 			'checkin.daily_bonus_notification' => 'إشعار يومي',
+			'checkin.disable_notification_title' => 'تعطيل إشعارات تسجيل الوصول؟',
+			'checkin.disable_notification_desc' => 'ستفقد مكافآت تسجيل الدخول اليومية والمكافآت المثيرة الأخرى. هل أنت متأكد من رغبتك في التعطيل؟',
+			'checkin.disable_notification_keep' => 'الإبقاء على التفعيل',
+			'checkin.disable_notification_disable' => 'تعطيل',
 			'connectivity.no_internet_title' => 'لا يوجد اتصال',
 			'connectivity.no_internet_desc' => 'يرجى التحقق من اتصالك بالإنترنت لمتابعة استخدام التطبيق.',
 			'connectivity.retry_button' => 'إعادة محاولة الاتصال',
@@ -1057,6 +1094,17 @@ extension on TranslationsAr {
 			'debug.generation_buy_credits' => 'شراء رصيد للتوليد',
 			'debug.discount' => 'صفحة الخصم',
 			'debug.paywall_video' => 'صفحة حظر الفيديو',
+			'debug.generating_page' => 'معاينة صفحة الإنشاء',
+			'permission.camera_title' => 'إذن الكاميرا',
+			'permission.camera_desc' => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.',
+			'permission.photos_title' => 'إذن الصور',
+			'permission.photos_desc' => 'مطلوب إذن الوصول إلى وحدة التخزين لحفظ الصور أو مقاطع الفيديو. يرجى تمكينه في الإعدادات.',
+			'permission.microphone_title' => 'إذن الميكروفون',
+			'permission.microphone_desc' => 'مطلوب إذن الميكروفون لتسجيل صوت الفيديو. يرجى تمكينه في الإعدادات.',
+			'permission.notification_title' => 'إذن الإشعارات',
+			'permission.notification_desc' => 'مطلوب إذن الإشعارات لتلقي تذكيرات تسجيل الدخول اليومي. يرجى تمكينه في الإعدادات.',
+			'permission.settings' => 'الإعدادات',
+			'permission.cancel' => 'إلغاء',
 			_ => null,
 		};
 	}

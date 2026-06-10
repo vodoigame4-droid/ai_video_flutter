@@ -11,7 +11,7 @@
     "ok": "OK"
   },
   "home": {
-    "title": "Video AI",
+    "title": "Vido",
     "trending": "Tren",
     "new_section": "Baru",
     "toy_box": "Kotak Figur Mainan",
@@ -21,7 +21,8 @@
   },
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
-    "tap_upload": "Unggah foto Anda dan buat video AI Anda dalam hitungan detik.",
+    "tap_upload": "Unggah foto Anda dan buat Vido Anda dalam hitungan detik.",
+    "tap_to_upload_photo": "Ketuk di sini untuk mengunggah foto Anda.",
     "select_upload_title": "Pilih untuk Mengunggah Foto Anda",
     "upload_image": "Unggah Gambar",
     "custom_prompt": "Perintah Kustom",
@@ -68,11 +69,11 @@
     "desc": "Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?"
   },
   "splash": {
-    "appName": "Video AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "Selamat Datang di Video AI",
+      "title": "Selamat Datang di Vido",
       "subtitle": "Perjalanan Kreatif Anda Dimulai Di Sini...",
       "button": "Mulai"
     },
@@ -110,7 +111,7 @@
     "myVideo": "Video Saya",
     "liked": "Disukai",
     "noVideos": "Belum ada video",
-    "noVideosDesc": "Buat video AI pertama Anda dan itu akan muncul di sini.",
+    "noVideosDesc": "Buat Vido pertama Anda dan itu akan muncul di sini.",
     "deleteTitle": "Hapus video ini?",
     "deleteDesc": "Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.",
     "cancel": "Batal",
@@ -119,7 +120,7 @@
     "imageGeneration": "Pembuatan Gambar"
   },
   "home_new": {
-    "welcomeToAppName": "Selamat Datang di Video AI",
+    "welcomeToAppName": "Selamat Datang di Vido",
     "imageToVideo": "Gambar ke\nVideo",
     "transitionVideo": "Video\nTransisi",
     "imageToDance": "Gambar ke\nTarian",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "Video harus di bawah 10 detik."
+    "video_too_long": "Video harus di bawah 10 detik.",
+    "iap_purchase_cancelled": "Pembelian dibatalkan.",
+    "iap_purchase_in_progress": "Pembelian sedang diproses.",
+    "iap_purchase_failed": "Pembelian gagal."
   },
   "guide": {
     "step_1": "Langkah 1",
@@ -383,7 +387,11 @@
     "today": "Hari ini",
     "day": "Hari {n}",
     "check_in_btn": "Check-in",
-    "daily_bonus_notification": "Notifikasi"
+    "daily_bonus_notification": "Notifikasi",
+    "disable_notification_title": "Nonaktifkan notifikasi check-in?",
+    "disable_notification_desc": "Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?",
+    "disable_notification_keep": "Tetap Aktif",
+    "disable_notification_disable": "Nonaktifkan"
   },
   "connectivity": {
     "no_internet_title": "Tidak Ada Koneksi",
@@ -411,6 +419,19 @@
     "generation_iap": "Generasi IAP",
     "generation_buy_credits": "Generasi Beli Kredit",
     "discount": "Halaman Diskon",
-    "paywall_video": "Halaman Video Paywall"
+    "paywall_video": "Halaman Video Paywall",
+    "generating_page": "Pratinjau Halaman Pembuatan"
+  },
+  "permission": {
+    "camera_title": "Izin Kamera",
+    "camera_desc": "Izin kamera diperlukan. Silakan aktifkan di Pengaturan untuk menggunakan fitur ini.",
+    "photos_title": "Izin Galeri",
+    "photos_desc": "Izin penyimpanan diperlukan untuk menyimpan foto atau video. Silakan aktifkan di Pengaturan.",
+    "microphone_title": "Izin Mikrofon",
+    "microphone_desc": "Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.",
+    "notification_title": "Izin Notifikasi",
+    "notification_desc": "Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.",
+    "settings": "Pengaturan",
+    "cancel": "Batal"
   }
 }

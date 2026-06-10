@@ -1,5 +1,6 @@
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/app_svg_icon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -74,19 +75,22 @@ class ImageToDanceTab extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
-                                  child: UploadSlotWidget(
-                                    mediaPath: slotsPaths[1],
-                                    labelText: t.create.upload_photo_slot,
-                                    onMediaRemoved: () {
-                                      context.read<CreateVideoBloc>().add(
-                                        const CreateVideoEvent.removeMedia(1),
-                                      );
-                                    },
-                                    onMediaSelected: (path) {
-                                      context.read<CreateVideoBloc>().add(
-                                        CreateVideoEvent.selectMedia(1, path),
-                                      );
-                                    },
+                                  child: Hero(
+                                    tag: 'create-video-hero',
+                                    child: UploadSlotWidget(
+                                      mediaPath: slotsPaths[1],
+                                      labelText: t.create.upload_photo_slot,
+                                      onMediaRemoved: () {
+                                        context.read<CreateVideoBloc>().add(
+                                          const CreateVideoEvent.removeMedia(1),
+                                        );
+                                      },
+                                      onMediaSelected: (path) {
+                                        context.read<CreateVideoBloc>().add(
+                                          CreateVideoEvent.selectMedia(1, path),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
@@ -171,24 +175,14 @@ class ImageToDanceTab extends StatelessWidget {
     final t = context.t;
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(t.create.upload_image, style: context.textTheme.titleMedium),
-            const SizedBox(width: 6),
-            Text(
-              "(${t.create.required_label})",
-              style: context.textTheme.labelMedium,
-            ),
-          ],
-        ),
-        Icon(
-          Icons.info_outline_rounded,
-          color: AppColors.white.withValues(alpha: 0.6),
-          size: 16,
+        Text(t.create.upload_image, style: context.textTheme.titleMedium),
+        const SizedBox(width: 6),
+        Text(
+          "(${t.create.required_label})",
+          style: context.textTheme.labelMedium,
         ),
       ],
     );

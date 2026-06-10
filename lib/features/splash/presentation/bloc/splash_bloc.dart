@@ -16,12 +16,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final AutoLoginUseCase autoLoginUseCase;
   final GetOnboardingStatusUseCase getOnboardingStatusUseCase;
   final GetBannersUseCase getBannersUseCase;
+  final GetProfileUseCase getProfileUseCase;
   Timer? _timer;
   bool _isLoginCompleted = false;
   bool _isOnboardingPreloadCompleted = false;
   bool _isRemoteConfigInitialized = false;
   bool _isHavinSdkInitialized = false;
   bool _isOnboardingCompleted = false;
+  bool _isVip = false;
   List<String>? _preloadedUrls;
   int _progress = 0;
 
@@ -29,6 +31,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     required this.autoLoginUseCase,
     required this.getOnboardingStatusUseCase,
     required this.getBannersUseCase,
+    required this.getProfileUseCase,
   }) : super(const SplashState.initial()) {
     on<SplashEvent>((event, emit) async {
       await event.when(
@@ -82,6 +85,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
             emit(
               SplashState.success(
                 isOnboardingCompleted: _isOnboardingCompleted,
+                isVip: _isVip,
                 preloadedUrls: _preloadedUrls,
               ),
             );
@@ -96,7 +100,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _performBackgroundLogin() async {
     try {
       await autoLoginUseCase(NoParams());
-      
+
+      // Fetch the latest profile (getMe API call)
+      final profileResult = await getProfileUseCase(NoParams());
+      _isVip = profileResult.maybeWhen(
+        success: (user) => user.isVip,
+        orElse: () => false,
+      );
+
       // Fetch and preload home banner (download/cache video/webp or preload image)
       final sharedPreferences = sl<SharedPreferences>();
       await BannerPreloadHelper.preloadBanner(
@@ -165,6 +176,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Future<void> _initHavinSdk() async {
+    if (Platform.isIOS) {
+      await HavinAdsManager.instance.requestATT();
+    }
+
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
       _isHavinSdkInitialized = true;
       _checkAllInitializationCompleted();
@@ -187,7 +202,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('5000creditsdis'),
 
               // iOS App Store Connect Subscriptions
-              BillingProduct.subscription('buy_weekly'),
+              BillingProduct.subscription('buy_weakly'),
               BillingProduct.subscription('buy_annualy'),
               BillingProduct.subscription('buy_annualy_discount'),
             ]
@@ -210,13 +225,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.subscription('buy_annualy.andr'),
               BillingProduct.subscription('buy_annualy_discount.andr'),
             ];
-
-      final billingConfig = BillingConfig(
-        debugMode: false,
-        products: products,
-      );
+      final billingConfig = BillingConfig(debugMode: false, products: products);
 
       await HavinSdk.instance.init(billingConfig: billingConfig);
+
+      // Initialize IapBloc to start loading billing products during Splash
+      sl<IapBloc>().add(const IapEvent.init());
+      LogUtils.d(
+        'SplashBloc: HavinSdk initialized. Triggered IapBloc initialization.',
+      );
     } catch (e, stack) {
       LogUtils.e(
         'SplashBloc: HavinSdk initialization failed',
@@ -247,7 +264,9 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   void _checkAllInitializationCompleted() {
-    LogUtils.d('SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress');
+    LogUtils.d(
+      'SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress',
+    );
     if (_isLoginCompleted &&
         _isOnboardingPreloadCompleted &&
         _isHavinSdkInitialized &&

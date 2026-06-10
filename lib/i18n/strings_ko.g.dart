@@ -64,6 +64,7 @@ class TranslationsKo extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$ko notification = _Translations$notification$ko._(_root);
 	@override late final _Translations$rating_dialog$ko rating_dialog = _Translations$rating_dialog$ko._(_root);
 	@override late final _Translations$debug$ko debug = _Translations$debug$ko._(_root);
+	@override late final _Translations$permission$ko permission = _Translations$permission$ko._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$ko extends Translations$home$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '비디오 AI';
+	@override String get title => 'Vido';
 	@override String get trending => '트렌딩';
 	@override String get new_section => '새로운';
 	@override String get toy_box => '장난감 피규어 박스';
@@ -109,6 +110,7 @@ class _Translations$create$ko extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => '셀피 아쿠아맨';
 	@override String get tap_upload => '사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.';
+	@override String get tap_to_upload_photo => '여기를 눌러 사진을 업로드하세요.';
 	@override String get select_upload_title => '사진 업로드 방식 선택';
 	@override String get upload_image => '이미지 업로드';
 	@override String get custom_prompt => '커스텀 프롬프트';
@@ -169,7 +171,7 @@ class _Translations$splash$ko extends Translations$splash$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => '비디오 AI';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -228,7 +230,7 @@ class _Translations$home_new$ko extends Translations$home_new$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => '비디오 AI에 오신 것을 환영합니다';
+	@override String get welcomeToAppName => 'Vido에 오신 것을 환영합니다';
 	@override String get imageToVideo => '이미지를\n비디오로';
 	@override String get transitionVideo => '트랜지션\n비디오';
 	@override String get imageToDance => '이미지를\n댄스로';
@@ -543,6 +545,9 @@ class _Translations$errors$ko extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => '동영상은 10초 미만이어야 합니다.';
+	@override String get iap_purchase_cancelled => '구매가 취소되었습니다.';
+	@override String get iap_purchase_in_progress => '구매가 이미 진행 중입니다.';
+	@override String get iap_purchase_failed => '구매 실패.';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$ko extends Translations$checkin$en {
 	@override String day({required Object n}) => '${n}일차';
 	@override String get check_in_btn => '출석하기';
 	@override String get daily_bonus_notification => '매일 알림';
+	@override String get disable_notification_title => '출석 체크 알림을 비활성화할까요?';
+	@override String get disable_notification_desc => '일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?';
+	@override String get disable_notification_keep => '활성화 유지';
+	@override String get disable_notification_disable => '비활성화';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$ko extends Translations$debug$en {
 	@override String get generation_buy_credits => '생성 크레딧 구매';
 	@override String get discount => '할인 페이지';
 	@override String get paywall_video => '페이월 비디오 페이지';
+	@override String get generating_page => '생성 중 페이지 미리보기';
+}
+
+// Path: permission
+class _Translations$permission$ko extends Translations$permission$en {
+	_Translations$permission$ko._(TranslationsKo root) : this._root = root, super.internal(root);
+
+	final TranslationsKo _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => '카메라 권한';
+	@override String get camera_desc => '카메라 권한이 필요합니다. 이 기능을 사용하려면 설정에서 권한을 허용해 주세요.';
+	@override String get photos_title => '사진 권한';
+	@override String get photos_desc => '사진이나 동영상을 저장하려면 저장소 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get microphone_title => '마이크 권한';
+	@override String get microphone_desc => '동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get notification_title => '알림 권한';
+	@override String get notification_desc => '일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get settings => '설정';
+	@override String get cancel => '취소';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$ko extends Translations$onboarding$page1$en
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '비디오 AI에 오신 것을 환영합니다';
+	@override String get title => 'Vido에 오신 것을 환영합니다';
 	@override String get subtitle => '당신의 창의적인 여정이 여기서 시작됩니다...';
 	@override String get button => '시작하기';
 }
@@ -712,7 +741,7 @@ extension on TranslationsKo {
 			'common.generate' => '생성하기',
 			'common.processing' => '처리 중...',
 			'common.ok' => '확인',
-			'home.title' => '비디오 AI',
+			'home.title' => 'Vido',
 			'home.trending' => '트렌딩',
 			'home.new_section' => '새로운',
 			'home.toy_box' => '장난감 피규어 박스',
@@ -721,6 +750,7 @@ extension on TranslationsKo {
 			'home.discover' => '발견',
 			'create.selfie_aquaman' => '셀피 아쿠아맨',
 			'create.tap_upload' => '사진을 업로드하고 몇 초 만에 AI 비디오를 만들어보세요.',
+			'create.tap_to_upload_photo' => '여기를 눌러 사진을 업로드하세요.',
 			'create.select_upload_title' => '사진 업로드 방식 선택',
 			'create.upload_image' => '이미지 업로드',
 			'create.custom_prompt' => '커스텀 프롬프트',
@@ -763,8 +793,8 @@ extension on TranslationsKo {
 			'create.please_add_image_first' => '먼저 이미지를 추가해 주세요',
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
-			'splash.appName' => '비디오 AI',
-			'onboarding.page1.title' => '비디오 AI에 오신 것을 환영합니다',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Vido에 오신 것을 환영합니다',
 			'onboarding.page1.subtitle' => '당신의 창의적인 여정이 여기서 시작됩니다...',
 			'onboarding.page1.button' => '시작하기',
 			'onboarding.page2.title' => '이미지를 비디오로',
@@ -796,7 +826,7 @@ extension on TranslationsKo {
 			'profile.delete' => '삭제',
 			'profile.generating' => '생성 중...',
 			'profile.imageGeneration' => '이미지 생성',
-			'home_new.welcomeToAppName' => '비디오 AI에 오신 것을 환영합니다',
+			'home_new.welcomeToAppName' => 'Vido에 오신 것을 환영합니다',
 			'home_new.imageToVideo' => '이미지를\n비디오로',
 			'home_new.transitionVideo' => '트랜지션\n비디오',
 			'home_new.imageToDance' => '이미지를\n댄스로',
@@ -1021,6 +1051,9 @@ extension on TranslationsKo {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => '동영상은 10초 미만이어야 합니다.',
+			'errors.iap_purchase_cancelled' => '구매가 취소되었습니다.',
+			'errors.iap_purchase_in_progress' => '구매가 이미 진행 중입니다.',
+			'errors.iap_purchase_failed' => '구매 실패.',
 			'guide.step_1' => '1단계',
 			'guide.step_2' => '2단계',
 			'guide.upload_photo' => '사진 업로드',
@@ -1037,6 +1070,10 @@ extension on TranslationsKo {
 			'checkin.day' => ({required Object n}) => '${n}일차',
 			'checkin.check_in_btn' => '출석하기',
 			'checkin.daily_bonus_notification' => '매일 알림',
+			'checkin.disable_notification_title' => '출석 체크 알림을 비활성화할까요?',
+			'checkin.disable_notification_desc' => '일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?',
+			'checkin.disable_notification_keep' => '활성화 유지',
+			'checkin.disable_notification_disable' => '비활성화',
 			'connectivity.no_internet_title' => '연결 없음',
 			'connectivity.no_internet_desc' => '앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.',
 			'connectivity.retry_button' => '연결 재시도',
@@ -1057,6 +1094,17 @@ extension on TranslationsKo {
 			'debug.generation_buy_credits' => '생성 크레딧 구매',
 			'debug.discount' => '할인 페이지',
 			'debug.paywall_video' => '페이월 비디오 페이지',
+			'debug.generating_page' => '생성 중 페이지 미리보기',
+			'permission.camera_title' => '카메라 권한',
+			'permission.camera_desc' => '카메라 권한이 필요합니다. 이 기능을 사용하려면 설정에서 권한을 허용해 주세요.',
+			'permission.photos_title' => '사진 권한',
+			'permission.photos_desc' => '사진이나 동영상을 저장하려면 저장소 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.microphone_title' => '마이크 권한',
+			'permission.microphone_desc' => '동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.notification_title' => '알림 권한',
+			'permission.notification_desc' => '일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.settings' => '설정',
+			'permission.cancel' => '취소',
 			_ => null,
 		};
 	}

@@ -42,6 +42,7 @@ class LoggingInterceptor extends Interceptor {
     }
 
     _log(buffer.toString().trimRight());
+    _log('cURL: ${_toCurl(options)}');
     super.onRequest(options, handler);
   }
 
@@ -118,6 +119,50 @@ class LoggingInterceptor extends Interceptor {
     } catch (_) {
       return data.toString();
     }
+  }
+
+  String _toCurl(RequestOptions options) {
+    final buffer = StringBuffer();
+    buffer.write('curl -X ${options.method}');
+
+    // Headers
+    options.headers.forEach((key, value) {
+      if (key == 'content-length') return; // skip content-length header
+      buffer.write(' -H "$key: $value"');
+    });
+
+    // Request URI already contains the path and query parameters
+    buffer.write(' "${options.uri.toString()}"');
+
+    // Body
+    if (options.data != null) {
+      final data = options.data;
+      String? bodyStr;
+      if (data is Map || data is List) {
+        bodyStr = jsonEncode(data);
+      } else if (data is FormData) {
+        final fields = <String>[];
+        for (final entry in data.fields) {
+          fields.add('-F "${entry.key}=${entry.value}"');
+        }
+        for (final entry in data.files) {
+          fields.add('-F "${entry.key}=@${entry.value.filename ?? 'file'}"');
+        }
+        if (fields.isNotEmpty) {
+          buffer.write(' ${fields.join(' ')}');
+        }
+      } else {
+        bodyStr = data.toString();
+      }
+
+      if (bodyStr != null) {
+        // Escape single quotes for shell command if needed, or wrap in single quotes.
+        final escapedBody = bodyStr.replaceAll("'", "'\\''");
+        buffer.write(" -d '$escapedBody'");
+      }
+    }
+
+    return buffer.toString().replaceAll('\n', ' ').replaceAll('\r', ' ');
   }
 
   void _log(String message) {

@@ -12,6 +12,7 @@ abstract class IapState with _$IapState {
   const factory IapState.ready({
     required bool isWeeklySelected,
     required bool isVideoRevealed,
+    @Default(4) int selectedCreditIndex,
     @Default([]) List<Product> weeklyProducts,
     @Default([]) List<Product> yearlyProducts,
     @Default([]) List<Product> discountCreditProducts,
@@ -22,6 +23,7 @@ abstract class IapState with _$IapState {
     required String message,
     required bool isWeeklySelected,
     required bool isVideoRevealed,
+    @Default(4) int selectedCreditIndex,
     @Default([]) List<Product> weeklyProducts,
     @Default([]) List<Product> yearlyProducts,
     @Default([]) List<Product> discountCreditProducts,
@@ -32,6 +34,7 @@ abstract class IapState with _$IapState {
     required String message,
     required bool isWeeklySelected,
     required bool isVideoRevealed,
+    @Default(4) int selectedCreditIndex,
     @Default([]) List<Product> weeklyProducts,
     @Default([]) List<Product> yearlyProducts,
     @Default([]) List<Product> discountCreditProducts,

@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:flutter/foundation.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,22 @@ import 'package:core_business/core_business.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Set up Firebase Crashlytics
+  if (kDebugMode) {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+  } else {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  }
+
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   MediaKit.ensureInitialized();
   await initDependencies();
   sl<NotificationRepository>().initialize();
@@ -29,7 +46,7 @@ void main() async {
   final prefs = sl<SharedPreferences>();
   final savedLocaleCode = prefs.getString(StorageKeys.selectedLocale);
   if (savedLocaleCode != null) {
-    LocaleSettings.setLocaleRawSync(savedLocaleCode);
+    await LocaleSettings.setLocaleRaw(savedLocaleCode);
   }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -41,7 +58,7 @@ void main() async {
       'Data: ${message.data}',
     );
     final notification = message.notification;
-    if (notification != null) {
+    if (notification != null && Platform.isAndroid) {
       sl<NotificationRepository>().showLocalNotification(
         title: notification.title ?? '',
         body: notification.body ?? '',
@@ -58,6 +75,43 @@ void main() async {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
+  // Prevent red/grey screen of death in production
+  if (!kDebugMode) {
+    ErrorWidget.builder = (FlutterErrorDetails details) {
+      FirebaseCrashlytics.instance.recordFlutterError(details);
+      return Scaffold(
+        backgroundColor: const Color(0xFF0D0D0D),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.error_outline_rounded,
+                    color: Colors.redAccent,
+                    size: 64,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    t.errors.unknown,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    };
+  }
+
   runApp(const MyApp());
 }
 
@@ -72,10 +126,12 @@ class MyApp extends StatelessWidget {
         child: Builder(
           builder: (context) {
             return MaterialApp.router(
-              title: 'Video AI',
+              title: 'Vido',
               theme: AppTheme.darkTheme,
               themeMode: ThemeMode.dark,
-              scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+              scrollBehavior: const ScrollBehavior().copyWith(
+                overscroll: false,
+              ),
               locale: TranslationProvider.of(context).locale.flutterLocale,
               supportedLocales: AppLocaleUtils.supportedLocales,
               localizationsDelegates: const [

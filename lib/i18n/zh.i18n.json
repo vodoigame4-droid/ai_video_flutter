@@ -11,7 +11,7 @@
     "ok": "确定"
   },
   "home": {
-    "title": "视频 AI",
+    "title": "Vido",
     "trending": "热门",
     "new_section": "最新",
     "toy_box": "玩具手办盒",
@@ -22,6 +22,7 @@
   "create": {
     "selfie_aquaman": "海王自拍",
     "tap_upload": "上传您的照片，在几秒钟内创建您的 AI 视频。",
+    "tap_to_upload_photo": "点击这里上传您的照片。",
     "select_upload_title": "选择上传照片的方式",
     "upload_image": "上传图片",
     "custom_prompt": "自定义提示词",
@@ -68,11 +69,11 @@
     "desc": "您要继续编辑还是现在离开？"
   },
   "splash": {
-    "appName": "视频AI"
+    "appName": "Vido"
   },
   "onboarding": {
     "page1": {
-      "title": "欢迎使用视频AI",
+      "title": "欢迎使用Vido",
       "subtitle": "您的创意之旅从这里开始...",
       "button": "开始体验"
     },
@@ -119,7 +120,7 @@
     "imageGeneration": "图像生成"
   },
   "home_new": {
-    "welcomeToAppName": "欢迎使用视频AI",
+    "welcomeToAppName": "欢迎使用Vido",
     "imageToVideo": "图片转\n视频",
     "transitionVideo": "转场\n视频",
     "imageToDance": "图片\n舞蹈",
@@ -363,7 +364,10 @@
     "get_price_list_failed": "Failed to retrieve credit price list.",
     "iap_receipt_not_found": "Purchase receipt not found.",
     "iap_subscription_not_found": "Subscription not found.",
-    "video_too_long": "视频长度必须在10秒以内。"
+    "video_too_long": "视频长度必须在10秒以内。",
+    "iap_purchase_cancelled": "购买已取消。",
+    "iap_purchase_in_progress": "购买已在进行中。",
+    "iap_purchase_failed": "购买失败。"
   },
   "guide": {
     "step_1": "第1步",
@@ -383,7 +387,11 @@
     "today": "今天",
     "day": "第{n}天",
     "check_in_btn": "签到",
-    "daily_bonus_notification": "每日提醒"
+    "daily_bonus_notification": "每日提醒",
+    "disable_notification_title": "禁用签到提醒吗？",
+    "disable_notification_desc": "您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？",
+    "disable_notification_keep": "保持启用",
+    "disable_notification_disable": "禁用"
   },
   "connectivity": {
     "no_internet_title": "无网络连接",
@@ -411,6 +419,19 @@
     "generation_iap": "生成内购",
     "generation_buy_credits": "生成购买积分",
     "discount": "折扣页面",
-    "paywall_video": "付费墙视频页面"
+    "paywall_video": "付费墙视频页面",
+    "generating_page": "生成页面预览"
+  },
+  "permission": {
+    "camera_title": "相机权限",
+    "camera_desc": "需要相机权限。请在设置中启用以使用此功能。",
+    "photos_title": "照片权限",
+    "photos_desc": "需要存储权限来保存照片或视频。请在设置中启用以使用此功能。",
+    "microphone_title": "麦克风权限",
+    "microphone_desc": "需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。",
+    "notification_title": "通知权限",
+    "notification_desc": "需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。",
+    "settings": "设置",
+    "cancel": "取消"
   }
 }

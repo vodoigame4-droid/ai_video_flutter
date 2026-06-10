@@ -44,3 +44,17 @@ flutter build appbundle --release --build-name=1.0.0 --build-number=1
 # Build gói phát hành iOS (IPA)
 flutter build ipa --release --build-name=1.0.0 --build-number=1
 ```
+
+## 4. Dọn dẹp & Reset iOS Build (Chuyển đổi Thiết bị thật <-> Máy ảo)
+Khi gặp lỗi biên dịch liên quan đến CocoaPods hoặc cache Xcode khi chuyển đổi build giữa máy thật (Physical Device) và máy ảo (Simulator), chạy chuỗi lệnh sau để dọn dẹp sạch sẽ:
+```bash
+# 1. Dọn dẹp build cache của Flutter
+flutter clean && flutter pub get
+
+# 2. Di chuyển vào thư mục ios để xóa cấu trúc CocoaPods cũ và cài đặt lại sạch sẽ
+cd ios
+pod deintegrate
+pod cache clean --all
+pod install --repo-update
+cd ..
+```

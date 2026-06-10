@@ -55,7 +55,7 @@ extension ResultEventPatterns on ResultEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _TogglePlay value)?  togglePlay,TResult Function( _ToggleMute value)?  toggleMute,TResult Function( _UpdatePlaying value)?  updatePlaying,TResult Function( _UpdateBuffering value)?  updateBuffering,TResult Function( _ChangeExtendPrompt value)?  changeExtendPrompt,TResult Function( _ClearPrompt value)?  clearExtendPrompt,TResult Function( _UseInspireMe value)?  useInspireMe,TResult Function( _ChangeExtendQuality value)?  changeExtendQuality,TResult Function( _ChangeExtendDuration value)?  changeExtendDuration,TResult Function( _DeleteVideo value)?  deleteVideo,TResult Function( _DownloadVideo value)?  downloadVideo,TResult Function( _ShareVideo value)?  shareVideo,TResult Function( _ResetDownloadShareStatus value)?  resetDownloadShareStatus,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _TogglePlay value)?  togglePlay,TResult Function( _ToggleMute value)?  toggleMute,TResult Function( _UpdatePlaying value)?  updatePlaying,TResult Function( _UpdateBuffering value)?  updateBuffering,TResult Function( _ChangeExtendPrompt value)?  changeExtendPrompt,TResult Function( _ClearPrompt value)?  clearExtendPrompt,TResult Function( _UseInspireMe value)?  useInspireMe,TResult Function( _ChangeExtendQuality value)?  changeExtendQuality,TResult Function( _ChangeExtendDuration value)?  changeExtendDuration,TResult Function( _DeleteVideo value)?  deleteVideo,TResult Function( _DownloadVideo value)?  downloadVideo,TResult Function( _ShareVideo value)?  shareVideo,TResult Function( _ResetDownloadShareStatus value)?  resetDownloadShareStatus,TResult Function( _ProfileUpdated value)?  profileUpdated,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -72,7 +72,8 @@ return changeExtendDuration(_that);case _DeleteVideo() when deleteVideo != null:
 return deleteVideo(_that);case _DownloadVideo() when downloadVideo != null:
 return downloadVideo(_that);case _ShareVideo() when shareVideo != null:
 return shareVideo(_that);case _ResetDownloadShareStatus() when resetDownloadShareStatus != null:
-return resetDownloadShareStatus(_that);case _:
+return resetDownloadShareStatus(_that);case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that);case _:
   return orElse();
 
 }
@@ -90,7 +91,7 @@ return resetDownloadShareStatus(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _TogglePlay value)  togglePlay,required TResult Function( _ToggleMute value)  toggleMute,required TResult Function( _UpdatePlaying value)  updatePlaying,required TResult Function( _UpdateBuffering value)  updateBuffering,required TResult Function( _ChangeExtendPrompt value)  changeExtendPrompt,required TResult Function( _ClearPrompt value)  clearExtendPrompt,required TResult Function( _UseInspireMe value)  useInspireMe,required TResult Function( _ChangeExtendQuality value)  changeExtendQuality,required TResult Function( _ChangeExtendDuration value)  changeExtendDuration,required TResult Function( _DeleteVideo value)  deleteVideo,required TResult Function( _DownloadVideo value)  downloadVideo,required TResult Function( _ShareVideo value)  shareVideo,required TResult Function( _ResetDownloadShareStatus value)  resetDownloadShareStatus,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _TogglePlay value)  togglePlay,required TResult Function( _ToggleMute value)  toggleMute,required TResult Function( _UpdatePlaying value)  updatePlaying,required TResult Function( _UpdateBuffering value)  updateBuffering,required TResult Function( _ChangeExtendPrompt value)  changeExtendPrompt,required TResult Function( _ClearPrompt value)  clearExtendPrompt,required TResult Function( _UseInspireMe value)  useInspireMe,required TResult Function( _ChangeExtendQuality value)  changeExtendQuality,required TResult Function( _ChangeExtendDuration value)  changeExtendDuration,required TResult Function( _DeleteVideo value)  deleteVideo,required TResult Function( _DownloadVideo value)  downloadVideo,required TResult Function( _ShareVideo value)  shareVideo,required TResult Function( _ResetDownloadShareStatus value)  resetDownloadShareStatus,required TResult Function( _ProfileUpdated value)  profileUpdated,}){
 final _that = this;
 switch (_that) {
 case _Init():
@@ -107,7 +108,8 @@ return changeExtendDuration(_that);case _DeleteVideo():
 return deleteVideo(_that);case _DownloadVideo():
 return downloadVideo(_that);case _ShareVideo():
 return shareVideo(_that);case _ResetDownloadShareStatus():
-return resetDownloadShareStatus(_that);case _:
+return resetDownloadShareStatus(_that);case _ProfileUpdated():
+return profileUpdated(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -124,7 +126,7 @@ return resetDownloadShareStatus(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _TogglePlay value)?  togglePlay,TResult? Function( _ToggleMute value)?  toggleMute,TResult? Function( _UpdatePlaying value)?  updatePlaying,TResult? Function( _UpdateBuffering value)?  updateBuffering,TResult? Function( _ChangeExtendPrompt value)?  changeExtendPrompt,TResult? Function( _ClearPrompt value)?  clearExtendPrompt,TResult? Function( _UseInspireMe value)?  useInspireMe,TResult? Function( _ChangeExtendQuality value)?  changeExtendQuality,TResult? Function( _ChangeExtendDuration value)?  changeExtendDuration,TResult? Function( _DeleteVideo value)?  deleteVideo,TResult? Function( _DownloadVideo value)?  downloadVideo,TResult? Function( _ShareVideo value)?  shareVideo,TResult? Function( _ResetDownloadShareStatus value)?  resetDownloadShareStatus,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _TogglePlay value)?  togglePlay,TResult? Function( _ToggleMute value)?  toggleMute,TResult? Function( _UpdatePlaying value)?  updatePlaying,TResult? Function( _UpdateBuffering value)?  updateBuffering,TResult? Function( _ChangeExtendPrompt value)?  changeExtendPrompt,TResult? Function( _ClearPrompt value)?  clearExtendPrompt,TResult? Function( _UseInspireMe value)?  useInspireMe,TResult? Function( _ChangeExtendQuality value)?  changeExtendQuality,TResult? Function( _ChangeExtendDuration value)?  changeExtendDuration,TResult? Function( _DeleteVideo value)?  deleteVideo,TResult? Function( _DownloadVideo value)?  downloadVideo,TResult? Function( _ShareVideo value)?  shareVideo,TResult? Function( _ResetDownloadShareStatus value)?  resetDownloadShareStatus,TResult? Function( _ProfileUpdated value)?  profileUpdated,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -141,7 +143,8 @@ return changeExtendDuration(_that);case _DeleteVideo() when deleteVideo != null:
 return deleteVideo(_that);case _DownloadVideo() when downloadVideo != null:
 return downloadVideo(_that);case _ShareVideo() when shareVideo != null:
 return shareVideo(_that);case _ResetDownloadShareStatus() when resetDownloadShareStatus != null:
-return resetDownloadShareStatus(_that);case _:
+return resetDownloadShareStatus(_that);case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that);case _:
   return null;
 
 }
@@ -158,7 +161,7 @@ return resetDownloadShareStatus(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult Function()?  togglePlay,TResult Function()?  toggleMute,TResult Function( bool isPlaying)?  updatePlaying,TResult Function( bool isBuffering)?  updateBuffering,TResult Function( String prompt)?  changeExtendPrompt,TResult Function()?  clearExtendPrompt,TResult Function()?  useInspireMe,TResult Function( String quality)?  changeExtendQuality,TResult Function( String duration)?  changeExtendDuration,TResult Function()?  deleteVideo,TResult Function()?  downloadVideo,TResult Function()?  shareVideo,TResult Function()?  resetDownloadShareStatus,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult Function()?  togglePlay,TResult Function()?  toggleMute,TResult Function( bool isPlaying)?  updatePlaying,TResult Function( bool isBuffering)?  updateBuffering,TResult Function( String prompt)?  changeExtendPrompt,TResult Function()?  clearExtendPrompt,TResult Function()?  useInspireMe,TResult Function( String quality)?  changeExtendQuality,TResult Function( String duration)?  changeExtendDuration,TResult Function()?  deleteVideo,TResult Function()?  downloadVideo,TResult Function()?  shareVideo,TResult Function()?  resetDownloadShareStatus,TResult Function( UserEntity user)?  profileUpdated,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _TogglePlay() when togglePlay != null:
@@ -174,7 +177,8 @@ return changeExtendDuration(_that.duration);case _DeleteVideo() when deleteVideo
 return deleteVideo();case _DownloadVideo() when downloadVideo != null:
 return downloadVideo();case _ShareVideo() when shareVideo != null:
 return shareVideo();case _ResetDownloadShareStatus() when resetDownloadShareStatus != null:
-return resetDownloadShareStatus();case _:
+return resetDownloadShareStatus();case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that.user);case _:
   return orElse();
 
 }
@@ -192,7 +196,7 @@ return resetDownloadShareStatus();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)  init,required TResult Function()  togglePlay,required TResult Function()  toggleMute,required TResult Function( bool isPlaying)  updatePlaying,required TResult Function( bool isBuffering)  updateBuffering,required TResult Function( String prompt)  changeExtendPrompt,required TResult Function()  clearExtendPrompt,required TResult Function()  useInspireMe,required TResult Function( String quality)  changeExtendQuality,required TResult Function( String duration)  changeExtendDuration,required TResult Function()  deleteVideo,required TResult Function()  downloadVideo,required TResult Function()  shareVideo,required TResult Function()  resetDownloadShareStatus,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)  init,required TResult Function()  togglePlay,required TResult Function()  toggleMute,required TResult Function( bool isPlaying)  updatePlaying,required TResult Function( bool isBuffering)  updateBuffering,required TResult Function( String prompt)  changeExtendPrompt,required TResult Function()  clearExtendPrompt,required TResult Function()  useInspireMe,required TResult Function( String quality)  changeExtendQuality,required TResult Function( String duration)  changeExtendDuration,required TResult Function()  deleteVideo,required TResult Function()  downloadVideo,required TResult Function()  shareVideo,required TResult Function()  resetDownloadShareStatus,required TResult Function( UserEntity user)  profileUpdated,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _TogglePlay():
@@ -208,7 +212,8 @@ return changeExtendDuration(_that.duration);case _DeleteVideo():
 return deleteVideo();case _DownloadVideo():
 return downloadVideo();case _ShareVideo():
 return shareVideo();case _ResetDownloadShareStatus():
-return resetDownloadShareStatus();case _:
+return resetDownloadShareStatus();case _ProfileUpdated():
+return profileUpdated(_that.user);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -225,7 +230,7 @@ return resetDownloadShareStatus();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult? Function()?  togglePlay,TResult? Function()?  toggleMute,TResult? Function( bool isPlaying)?  updatePlaying,TResult? Function( bool isBuffering)?  updateBuffering,TResult? Function( String prompt)?  changeExtendPrompt,TResult? Function()?  clearExtendPrompt,TResult? Function()?  useInspireMe,TResult? Function( String quality)?  changeExtendQuality,TResult? Function( String duration)?  changeExtendDuration,TResult? Function()?  deleteVideo,TResult? Function()?  downloadVideo,TResult? Function()?  shareVideo,TResult? Function()?  resetDownloadShareStatus,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String videoId,  String title,  String? imageUrl,  String videoUrl,  String createdAt)?  init,TResult? Function()?  togglePlay,TResult? Function()?  toggleMute,TResult? Function( bool isPlaying)?  updatePlaying,TResult? Function( bool isBuffering)?  updateBuffering,TResult? Function( String prompt)?  changeExtendPrompt,TResult? Function()?  clearExtendPrompt,TResult? Function()?  useInspireMe,TResult? Function( String quality)?  changeExtendQuality,TResult? Function( String duration)?  changeExtendDuration,TResult? Function()?  deleteVideo,TResult? Function()?  downloadVideo,TResult? Function()?  shareVideo,TResult? Function()?  resetDownloadShareStatus,TResult? Function( UserEntity user)?  profileUpdated,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init(_that.videoId,_that.title,_that.imageUrl,_that.videoUrl,_that.createdAt);case _TogglePlay() when togglePlay != null:
@@ -241,7 +246,8 @@ return changeExtendDuration(_that.duration);case _DeleteVideo() when deleteVideo
 return deleteVideo();case _DownloadVideo() when downloadVideo != null:
 return downloadVideo();case _ShareVideo() when shareVideo != null:
 return shareVideo();case _ResetDownloadShareStatus() when resetDownloadShareStatus != null:
-return resetDownloadShareStatus();case _:
+return resetDownloadShareStatus();case _ProfileUpdated() when profileUpdated != null:
+return profileUpdated(_that.user);case _:
   return null;
 
 }
@@ -908,5 +914,80 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _ProfileUpdated implements ResultEvent {
+  const _ProfileUpdated(this.user);
+  
+
+ final  UserEntity user;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProfileUpdatedCopyWith<_ProfileUpdated> get copyWith => __$ProfileUpdatedCopyWithImpl<_ProfileUpdated>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileUpdated&&(identical(other.user, user) || other.user == user));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,user);
+
+@override
+String toString() {
+  return 'ResultEvent.profileUpdated(user: $user)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ProfileUpdatedCopyWith<$Res> implements $ResultEventCopyWith<$Res> {
+  factory _$ProfileUpdatedCopyWith(_ProfileUpdated value, $Res Function(_ProfileUpdated) _then) = __$ProfileUpdatedCopyWithImpl;
+@useResult
+$Res call({
+ UserEntity user
+});
+
+
+$UserEntityCopyWith<$Res> get user;
+
+}
+/// @nodoc
+class __$ProfileUpdatedCopyWithImpl<$Res>
+    implements _$ProfileUpdatedCopyWith<$Res> {
+  __$ProfileUpdatedCopyWithImpl(this._self, this._then);
+
+  final _ProfileUpdated _self;
+  final $Res Function(_ProfileUpdated) _then;
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
+  return _then(_ProfileUpdated(
+null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as UserEntity,
+  ));
+}
+
+/// Create a copy of ResultEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserEntityCopyWith<$Res> get user {
+  
+  return $UserEntityCopyWith<$Res>(_self.user, (value) {
+    return _then(_self.copyWith(user: value));
+  });
+}
+}
 
 // dart format on

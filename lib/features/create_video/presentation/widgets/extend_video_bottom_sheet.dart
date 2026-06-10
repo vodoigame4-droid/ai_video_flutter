@@ -14,12 +14,14 @@ class ExtendVideoBottomSheet extends StatelessWidget {
   final ResultBloc resultBloc;
   final String videoTitle;
   final String videoImageUrl;
+  final String? heroTag;
 
   const ExtendVideoBottomSheet({
     super.key,
     required this.resultBloc,
     required this.videoTitle,
     required this.videoImageUrl,
+    this.heroTag,
   });
 
   @override
@@ -29,6 +31,7 @@ class ExtendVideoBottomSheet extends StatelessWidget {
     return BlocProvider.value(
       value: resultBloc,
       child: BlocBuilder<ResultBloc, ResultState>(
+        bloc: resultBloc,
         builder: (context, state) {
           return state.maybeWhen(
             ready:
@@ -53,6 +56,7 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                   shareErrorMessage,
                   downloadSuccess,
                   shareSuccess,
+                  isVip,
                 ) {
                   return GestureDetector(
                     onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -140,33 +144,27 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                           const SizedBox(height: 12),
 
                           // Custom Prompt Card wrapped in StreamBuilder
-                          StreamBuilder<UserEntity>(
-                            stream: sl<WatchProfileUseCase>()(),
-                            builder: (context, snapshot) {
-                              final isVip = snapshot.data?.isVip ?? false;
-                              return CustomPromptCardWidget(
-                                promptText: extendPrompt,
-                                inspireMeCount: inspireMeCount,
-                                isVip: isVip,
-                                onPromptChanged: (val) {
-                                  resultBloc.add(
-                                    ResultEvent.changeExtendPrompt(val),
-                                  );
-                                },
-                                onInspireMePressed: () {
-                                  resultBloc.add(
-                                    const ResultEvent.useInspireMe(),
-                                  );
-                                },
-                                onClearPressed: () {
-                                  resultBloc.add(
-                                    const ResultEvent.clearExtendPrompt(),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 24),
+                           CustomPromptCardWidget(
+                             promptText: extendPrompt,
+                             inspireMeCount: inspireMeCount,
+                             isVip: isVip,
+                             onPromptChanged: (val) {
+                               resultBloc.add(
+                                 ResultEvent.changeExtendPrompt(val),
+                               );
+                             },
+                             onInspireMePressed: () {
+                               resultBloc.add(
+                                 const ResultEvent.useInspireMe(),
+                               );
+                             },
+                             onClearPressed: () {
+                               resultBloc.add(
+                                 const ResultEvent.clearExtendPrompt(),
+                               );
+                             },
+                           ),
+                           const SizedBox(height: 24),
 
                           // Video Settings Label
                           Row(
@@ -211,27 +209,18 @@ class ExtendVideoBottomSheet extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Navigator.pop(context);
-                              context.pushNamed(
-                                GeneratingPage.name,
-                                queryParameters: {
-                                  'title': extendPrompt.trim().isEmpty
-                                      ? "$videoTitle Extended"
-                                      : extendPrompt,
-                                  'imageUrl': videoImageUrl,
-                                  'videoUrl': videoUrl,
-                                  // Sử dụng serviceType 'EXTEND_VIDEO' cho nghiệp vụ Client.
-                                  // Sẽ được CreateExtendVideoUseCase ánh xạ thành 'DANCING_IMAGE' khi gọi API.
-                                  'serviceType': 'EXTEND_VIDEO',
-                                  'isHd':
-                                      (extendQuality == 'Full HD' ||
-                                              extendQuality == 'HD')
-                                          .toString(),
-                                  'isLongTime':
-                                      (extendDuration == '10s' ||
-                                              extendDuration == '15s')
-                                          .toString(),
-                                  'prompt': extendPrompt,
-                                },
+                              GeneratingPage.push(
+                                context,
+                                title: extendPrompt.trim().isEmpty
+                                    ? "$videoTitle Extended"
+                                    : extendPrompt,
+                                imageUrl: videoImageUrl,
+                                videoUrl: videoUrl,
+                                serviceType: 'EXTEND_VIDEO',
+                                isHd: extendQuality == 'Full HD' || extendQuality == 'HD',
+                                isLongTime: extendDuration == '10s' || extendDuration == '15s',
+                                prompt: extendPrompt,
+                                heroTag: heroTag,
                               );
                             },
                             borderRadius: const BorderRadius.all(

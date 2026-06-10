@@ -64,6 +64,7 @@ class TranslationsHi extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _Translations$notification$hi notification = _Translations$notification$hi._(_root);
 	@override late final _Translations$rating_dialog$hi rating_dialog = _Translations$rating_dialog$hi._(_root);
 	@override late final _Translations$debug$hi debug = _Translations$debug$hi._(_root);
+	@override late final _Translations$permission$hi permission = _Translations$permission$hi._(_root);
 }
 
 // Path: common
@@ -91,7 +92,7 @@ class _Translations$home$hi extends Translations$home$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'वीडियो एआई';
+	@override String get title => 'Vido';
 	@override String get trending => 'ट्रेंडिंग';
 	@override String get new_section => 'नया';
 	@override String get toy_box => 'खिलौना आकृति बॉक्स';
@@ -109,6 +110,7 @@ class _Translations$create$hi extends Translations$create$en {
 	// Translations
 	@override String get selfie_aquaman => 'सेल्फी एक्वामैन';
 	@override String get tap_upload => 'अपनी फ़ोटो अपलोड करें और कुछ ही सेकंड में अपना एआई वीडियो बनाएं।';
+	@override String get tap_to_upload_photo => 'अपनी फ़ोटो अपलोड करने के लिए यहाँ टैप करें।';
 	@override String get select_upload_title => 'अपनी फोटो अपलोड करने के लिए चुनें';
 	@override String get upload_image => 'छवि अपलोड करें';
 	@override String get custom_prompt => 'कस्टम प्रॉम्प्ट';
@@ -169,7 +171,7 @@ class _Translations$splash$hi extends Translations$splash$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'वीडियो एआई';
+	@override String get appName => 'Vido';
 }
 
 // Path: onboarding
@@ -228,7 +230,7 @@ class _Translations$home_new$hi extends Translations$home_new$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'वीडियो एआई में आपका स्वागत है';
+	@override String get welcomeToAppName => 'Vido में आपका स्वागत है';
 	@override String get imageToVideo => 'छवि से\nवीडियो';
 	@override String get transitionVideo => 'संक्रमण\nवीडियो';
 	@override String get imageToDance => 'छवि से\nनृत्य';
@@ -543,6 +545,9 @@ class _Translations$errors$hi extends Translations$errors$en {
 	@override String get iap_receipt_not_found => 'Purchase receipt not found.';
 	@override String get iap_subscription_not_found => 'Subscription not found.';
 	@override String get video_too_long => 'वीडियो 10 सेकंड से कम का होना चाहिए।';
+	@override String get iap_purchase_cancelled => 'खरीद रद्द कर दी गई।';
+	@override String get iap_purchase_in_progress => 'खरीद पहले से ही प्रगति पर है।';
+	@override String get iap_purchase_failed => 'खरीद विफल।';
 }
 
 // Path: guide
@@ -577,6 +582,10 @@ class _Translations$checkin$hi extends Translations$checkin$en {
 	@override String day({required Object n}) => 'दिन ${n}';
 	@override String get check_in_btn => 'हाजिri लगाएं';
 	@override String get daily_bonus_notification => 'दैनिक सूचना';
+	@override String get disable_notification_title => 'चेक-इन सूचनाएं अक्षम करें?';
+	@override String get disable_notification_desc => 'आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?';
+	@override String get disable_notification_keep => 'सक्षम रखें';
+	@override String get disable_notification_disable => 'अक्षम करें';
 }
 
 // Path: connectivity
@@ -633,6 +642,26 @@ class _Translations$debug$hi extends Translations$debug$en {
 	@override String get generation_buy_credits => 'जेनरेशन क्रेडिट खरीदें';
 	@override String get discount => 'डिस्काउंट पेज';
 	@override String get paywall_video => 'पेवॉल वीडियो पेज';
+	@override String get generating_page => 'जेनरेटिंग पेज पूर्वावलोकन';
+}
+
+// Path: permission
+class _Translations$permission$hi extends Translations$permission$en {
+	_Translations$permission$hi._(TranslationsHi root) : this._root = root, super.internal(root);
+
+	final TranslationsHi _root; // ignore: unused_field
+
+	// Translations
+	@override String get camera_title => 'कैमरा अनुमति आवश्यक है';
+	@override String get camera_desc => 'कैमरा अनुमति आवश्यक है। इस सुविधा का उपयोग करने के लिए कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get photos_title => 'फ़ोटो अनुमति';
+	@override String get photos_desc => 'फ़ोटो या वीडियो सहेजने के लिए स्टोरेज अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get microphone_title => 'माइक्रोफ़ोन अनुमति';
+	@override String get microphone_desc => 'वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get notification_title => 'अधिसूचना अनुमति';
+	@override String get notification_desc => 'दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get settings => 'सेटिंग्स';
+	@override String get cancel => 'रद्द करें';
 }
 
 // Path: onboarding.page1
@@ -642,7 +671,7 @@ class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'वीडियो एआई में आपका स्वागत है';
+	@override String get title => 'Vido में आपका स्वागत है';
 	@override String get subtitle => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...';
 	@override String get button => 'शुरू करें';
 }
@@ -712,7 +741,7 @@ extension on TranslationsHi {
 			'common.generate' => 'उत्पन्न करें',
 			'common.processing' => 'प्रक्रिया जारी है...',
 			'common.ok' => 'ठीक है',
-			'home.title' => 'वीडियो एआई',
+			'home.title' => 'Vido',
 			'home.trending' => 'ट्रेंडिंग',
 			'home.new_section' => 'नया',
 			'home.toy_box' => 'खिलौना आकृति बॉक्स',
@@ -721,6 +750,7 @@ extension on TranslationsHi {
 			'home.discover' => 'खोजें',
 			'create.selfie_aquaman' => 'सेल्फी एक्वामैन',
 			'create.tap_upload' => 'अपनी फ़ोटो अपलोड करें और कुछ ही सेकंड में अपना एआई वीडियो बनाएं।',
+			'create.tap_to_upload_photo' => 'अपनी फ़ोटो अपलोड करने के लिए यहाँ टैप करें।',
 			'create.select_upload_title' => 'अपनी फोटो अपलोड करने के लिए चुनें',
 			'create.upload_image' => 'छवि अपलोड करें',
 			'create.custom_prompt' => 'कस्टम प्रॉम्प्ट',
@@ -763,8 +793,8 @@ extension on TranslationsHi {
 			'create.please_add_image_first' => 'कृपया पहले एक छवि जोड़ें',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
-			'splash.appName' => 'वीडियो एआई',
-			'onboarding.page1.title' => 'वीडियो एआई में आपका स्वागत है',
+			'splash.appName' => 'Vido',
+			'onboarding.page1.title' => 'Vido में आपका स्वागत है',
 			'onboarding.page1.subtitle' => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...',
 			'onboarding.page1.button' => 'शुरू करें',
 			'onboarding.page2.title' => 'छवि से वीडियो',
@@ -796,7 +826,7 @@ extension on TranslationsHi {
 			'profile.delete' => 'हटाएं',
 			'profile.generating' => 'बनाया जा रहा है...',
 			'profile.imageGeneration' => 'छवि निर्माण',
-			'home_new.welcomeToAppName' => 'वीडियो एआई में आपका स्वागत है',
+			'home_new.welcomeToAppName' => 'Vido में आपका स्वागत है',
 			'home_new.imageToVideo' => 'छवि से\nवीडियो',
 			'home_new.transitionVideo' => 'संक्रमण\nवीडियो',
 			'home_new.imageToDance' => 'छवि से\nनृत्य',
@@ -1021,6 +1051,9 @@ extension on TranslationsHi {
 			'errors.iap_receipt_not_found' => 'Purchase receipt not found.',
 			'errors.iap_subscription_not_found' => 'Subscription not found.',
 			'errors.video_too_long' => 'वीडियो 10 सेकंड से कम का होना चाहिए।',
+			'errors.iap_purchase_cancelled' => 'खरीद रद्द कर दी गई।',
+			'errors.iap_purchase_in_progress' => 'खरीद पहले से ही प्रगति पर है।',
+			'errors.iap_purchase_failed' => 'खरीद विफल।',
 			'guide.step_1' => 'चरण 1',
 			'guide.step_2' => 'चरण 2',
 			'guide.upload_photo' => 'फोटो अपलोड करें',
@@ -1037,6 +1070,10 @@ extension on TranslationsHi {
 			'checkin.day' => ({required Object n}) => 'दिन ${n}',
 			'checkin.check_in_btn' => 'हाजिri लगाएं',
 			'checkin.daily_bonus_notification' => 'दैनिक सूचना',
+			'checkin.disable_notification_title' => 'चेक-इन सूचनाएं अक्षम करें?',
+			'checkin.disable_notification_desc' => 'आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?',
+			'checkin.disable_notification_keep' => 'सक्षम रखें',
+			'checkin.disable_notification_disable' => 'अक्षम करें',
 			'connectivity.no_internet_title' => 'कोई कनेक्शन नहीं',
 			'connectivity.no_internet_desc' => 'कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।',
 			'connectivity.retry_button' => 'पुनः प्रयास करें',
@@ -1057,6 +1094,17 @@ extension on TranslationsHi {
 			'debug.generation_buy_credits' => 'जेनरेशन क्रेडिट खरीदें',
 			'debug.discount' => 'डिस्काउंट पेज',
 			'debug.paywall_video' => 'पेवॉल वीडियो पेज',
+			'debug.generating_page' => 'जेनरेटिंग पेज पूर्वावलोकन',
+			'permission.camera_title' => 'कैमरा अनुमति आवश्यक है',
+			'permission.camera_desc' => 'कैमरा अनुमति आवश्यक है। इस सुविधा का उपयोग करने के लिए कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.photos_title' => 'फ़ोटो अनुमति',
+			'permission.photos_desc' => 'फ़ोटो या वीडियो सहेजने के लिए स्टोरेज अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.microphone_title' => 'माइक्रोफ़ोन अनुमति',
+			'permission.microphone_desc' => 'वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.notification_title' => 'अधिसूचना अनुमति',
+			'permission.notification_desc' => 'दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.settings' => 'सेटिंग्स',
+			'permission.cancel' => 'रद्द करें',
 			_ => null,
 		};
 	}

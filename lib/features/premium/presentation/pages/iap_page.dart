@@ -15,59 +15,68 @@ import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/widgets/defer_init_widget.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
 import '../widgets/subscription_package_card.dart';
+import '../widgets/buy_credit_now_button.dart';
 import 'buy_credits_page.dart';
 import 'discount_page.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
-class IapPage extends StatefulWidget {
+class IapPage extends StatelessWidget {
   static const String path = '/iap';
   static const String name = 'iap';
 
   final String videoUrl;
+  final bool fromSplash;
 
-  const IapPage({super.key, this.videoUrl = ''});
-
-  @override
-  State<IapPage> createState() => _IapPageState();
-}
-
-class _IapPageState extends State<IapPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<IapBloc>().add(const IapEvent.init());
-    });
-  }
+  const IapPage({super.key, this.videoUrl = '', this.fromSplash = false});
 
   @override
   Widget build(BuildContext context) {
-    return DeferInitWidget(
-      placeholder: const Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-          ),
-        ),
-      ),
-      child: IapView(videoUrl: widget.videoUrl),
-    );
+    return IapView(videoUrl: videoUrl, fromSplash: fromSplash);
   }
 }
 
 class IapView extends StatelessWidget {
   final String videoUrl;
+  final bool fromSplash;
 
   /// Video URL from Remote Config (preloaded during splash).
   /// Falls back to default URL if Remote Config has no value.
   static String get _placeholderVideoUrl =>
       sl<RemoteConfigService>().getBgIAPUrl();
 
-  const IapView({super.key, required this.videoUrl});
+  const IapView({super.key, required this.videoUrl, this.fromSplash = false});
+
+  String _translateSuccessMessage(BuildContext context, String messageKey) {
+    final t = context.t;
+    if (messageKey == 'success_weekly') {
+      return t.premium.purchase_success(item: t.premium.weekly);
+    }
+    if (messageKey == 'success_yearly') {
+      return t.premium.purchase_success(item: t.premium.annually);
+    }
+    if (messageKey.startsWith('success_credits_')) {
+      final creditsStr = messageKey.replaceFirst('success_credits_', '');
+      String creditLabel = '$creditsStr Credits';
+      if (creditsStr == '70')
+        creditLabel = t.premium.credit_70;
+      else if (creditsStr == '150')
+        creditLabel = t.premium.credit_150;
+      else if (creditsStr == '350')
+        creditLabel = t.premium.credit_350;
+      else if (creditsStr == '500')
+        creditLabel = t.premium.credit_500;
+      else if (creditsStr == '1000')
+        creditLabel = t.premium.credit_1000;
+      else if (creditsStr == '5000')
+        creditLabel = t.premium.credit_5000;
+
+      return t.premium.purchase_success(item: creditLabel);
+    }
+    return messageKey;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +84,14 @@ class IapView extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        context.pushReplacementNamed(DiscountPage.name);
+        if (fromSplash) {
+          context.pushReplacementNamed(
+            DiscountPage.name,
+            queryParameters: {'fromSplash': 'true'},
+          );
+        } else {
+          context.pushReplacementNamed(DiscountPage.name);
+        }
         return false;
       },
       child: Scaffold(
@@ -92,8 +108,19 @@ class IapView extends StatelessWidget {
                     __,
                     ___,
                     ____,
+                    _____,
                   ) {
-                    AppToast.showSuccess(message);
+                    if (message != 'already_vip') {
+                      AppToast.showSuccess(
+                        _translateSuccessMessage(context, message),
+                      );
+                    }
+                    if (fromSplash) {
+                      DashboardPage.go(context);
+                    } else if (context.mounted &&
+                        Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
                   },
               error:
                   (
@@ -104,6 +131,7 @@ class IapView extends StatelessWidget {
                     __,
                     ___,
                     ____,
+                    _____,
                   ) {
                     context.handleFailure(
                       Failure.business(code: message, message: ''),
@@ -288,113 +316,9 @@ class IapView extends StatelessWidget {
                                           const SizedBox(height: 16),
 
                                           // Glass-morphic Buy Credit Now Badge Button
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              100,
-                                            ),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                sigmaX: 7.5,
-                                                sigmaY: 7.5,
-                                              ),
-                                              child: Container(
-                                                height: 38,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      AppColors.secondary
-                                                          .withValues(
-                                                            alpha: 0.3,
-                                                          ),
-                                                      AppColors.primary
-                                                          .withValues(
-                                                            alpha: 0.3,
-                                                          ),
-                                                    ],
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                        100,
-                                                      ),
-                                                  border: Border.all(
-                                                    color: AppColors.secondary,
-                                                    width: 1,
-                                                  ),
-                                                ),
-                                                child: Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    onTap: () => context.push(
-                                                      BuyCreditsPage.path,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                          Radius.circular(100),
-                                                        ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.fromLTRB(
-                                                            18,
-                                                            0,
-                                                            6,
-                                                            0,
-                                                          ),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            t
-                                                                .premium
-                                                                .buy_credit_now,
-                                                            style:
-                                                                const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 12,
-                                                          ),
-                                                          Container(
-                                                            width: 20,
-                                                            height: 20,
-                                                            decoration:
-                                                                const BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets.all(
-                                                                    2.0,
-                                                                  ),
-                                                              child: SvgPicture.asset(
-                                                                Assets
-                                                                    .icons
-                                                                    .icRightArrow,
-                                                                width: 14,
-                                                                height: 14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                          BuyCreditNowButton(
+                                            onTap: () => context.push(
+                                              BuyCreditsPage.path,
                                             ),
                                           ),
                                           const SizedBox(height: 30),
@@ -461,7 +385,7 @@ class IapView extends StatelessWidget {
                                                   weeklyProducts.isNotEmpty
                                                   ? weeklyProducts.first.id
                                                   : (Platform.isIOS
-                                                        ? 'buy_weekly'
+                                                        ? 'buy_weakly'
                                                         : 'buy_weekly.andr');
                                               context.read<IapBloc>().add(
                                                 IapEvent.purchase(
@@ -508,7 +432,9 @@ class IapView extends StatelessWidget {
                                           GradientButton(
                                             label: isWeekly
                                                 ? t.premium.start_free_trial
-                                                : t.premium.start_my_subscription,
+                                                : t
+                                                      .premium
+                                                      .start_my_subscription,
                                             leadingIcon: !isWeekly
                                                 ? SvgPicture.asset(
                                                     Assets.icons.icCrown,
@@ -535,7 +461,7 @@ class IapView extends StatelessWidget {
                                                               .first
                                                               .id
                                                         : (Platform.isIOS
-                                                              ? 'buy_weekly'
+                                                              ? 'buy_weakly'
                                                               : 'buy_weekly.andr'))
                                                   : (yearlyProducts.isNotEmpty
                                                         ? yearlyProducts
@@ -613,8 +539,8 @@ class IapView extends StatelessWidget {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  AppToast.showSuccess(
-                                                    t.premium.restore,
+                                                  context.read<IapBloc>().add(
+                                                    const IapEvent.restore(),
                                                   );
                                                 },
                                                 child: Text(
@@ -644,51 +570,64 @@ class IapView extends StatelessWidget {
                     // LAST in Stack so it renders on top and receives touch events
                     Positioned(
                       top: MediaQuery.of(context).padding.top + 16,
-                      left: 8,
-                      right: 8,
+                      left: 16,
+                      right: 16,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           // Back Close Button
-                          GestureDetector(
-                            onTap: () {
-                              context.pushReplacementNamed(DiscountPage.name);
-                            },
-                            child: Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.3),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 20,
+                          Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () {
+                                if (fromSplash) {
+                                  context.pushReplacementNamed(
+                                    DiscountPage.name,
+                                    queryParameters: {'fromSplash': 'true'},
+                                  );
+                                } else {
+                                  context.pushReplacementNamed(
+                                    DiscountPage.name,
+                                  );
+                                }
+                              },
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),
 
                           // Restore Pill Button
-                          GestureDetector(
-                            onTap: () {
-                              AppToast.showSuccess(t.premium.restore);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.3),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: Text(
-                                t.premium.restore,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                          Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            borderRadius: BorderRadius.circular(100),
+                            child: InkWell(
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.restore(),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(100),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 8,
+                                ),
+                                child: Text(
+                                  t.premium.restore,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),

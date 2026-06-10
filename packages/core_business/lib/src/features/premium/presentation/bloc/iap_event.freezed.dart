@@ -55,7 +55,7 @@ extension IapEventPatterns on IapEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectWeekly value)?  selectWeekly,TResult Function( _SelectAnnually value)?  selectAnnually,TResult Function( _ToggleReveal value)?  toggleReveal,TResult Function( _Purchase value)?  purchase,TResult Function( _PurchaseCredits value)?  purchaseCredits,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectWeekly value)?  selectWeekly,TResult Function( _SelectAnnually value)?  selectAnnually,TResult Function( _ToggleReveal value)?  toggleReveal,TResult Function( _Purchase value)?  purchase,TResult Function( _PurchaseCredits value)?  purchaseCredits,TResult Function( _SelectCreditPackage value)?  selectCreditPackage,TResult Function( _Restore value)?  restore,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -64,7 +64,9 @@ return selectWeekly(_that);case _SelectAnnually() when selectAnnually != null:
 return selectAnnually(_that);case _ToggleReveal() when toggleReveal != null:
 return toggleReveal(_that);case _Purchase() when purchase != null:
 return purchase(_that);case _PurchaseCredits() when purchaseCredits != null:
-return purchaseCredits(_that);case _:
+return purchaseCredits(_that);case _SelectCreditPackage() when selectCreditPackage != null:
+return selectCreditPackage(_that);case _Restore() when restore != null:
+return restore(_that);case _:
   return orElse();
 
 }
@@ -82,7 +84,7 @@ return purchaseCredits(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectWeekly value)  selectWeekly,required TResult Function( _SelectAnnually value)  selectAnnually,required TResult Function( _ToggleReveal value)  toggleReveal,required TResult Function( _Purchase value)  purchase,required TResult Function( _PurchaseCredits value)  purchaseCredits,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectWeekly value)  selectWeekly,required TResult Function( _SelectAnnually value)  selectAnnually,required TResult Function( _ToggleReveal value)  toggleReveal,required TResult Function( _Purchase value)  purchase,required TResult Function( _PurchaseCredits value)  purchaseCredits,required TResult Function( _SelectCreditPackage value)  selectCreditPackage,required TResult Function( _Restore value)  restore,}){
 final _that = this;
 switch (_that) {
 case _Init():
@@ -91,7 +93,9 @@ return selectWeekly(_that);case _SelectAnnually():
 return selectAnnually(_that);case _ToggleReveal():
 return toggleReveal(_that);case _Purchase():
 return purchase(_that);case _PurchaseCredits():
-return purchaseCredits(_that);case _:
+return purchaseCredits(_that);case _SelectCreditPackage():
+return selectCreditPackage(_that);case _Restore():
+return restore(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -108,7 +112,7 @@ return purchaseCredits(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectWeekly value)?  selectWeekly,TResult? Function( _SelectAnnually value)?  selectAnnually,TResult? Function( _ToggleReveal value)?  toggleReveal,TResult? Function( _Purchase value)?  purchase,TResult? Function( _PurchaseCredits value)?  purchaseCredits,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectWeekly value)?  selectWeekly,TResult? Function( _SelectAnnually value)?  selectAnnually,TResult? Function( _ToggleReveal value)?  toggleReveal,TResult? Function( _Purchase value)?  purchase,TResult? Function( _PurchaseCredits value)?  purchaseCredits,TResult? Function( _SelectCreditPackage value)?  selectCreditPackage,TResult? Function( _Restore value)?  restore,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
@@ -117,7 +121,9 @@ return selectWeekly(_that);case _SelectAnnually() when selectAnnually != null:
 return selectAnnually(_that);case _ToggleReveal() when toggleReveal != null:
 return toggleReveal(_that);case _Purchase() when purchase != null:
 return purchase(_that);case _PurchaseCredits() when purchaseCredits != null:
-return purchaseCredits(_that);case _:
+return purchaseCredits(_that);case _SelectCreditPackage() when selectCreditPackage != null:
+return selectCreditPackage(_that);case _Restore() when restore != null:
+return restore(_that);case _:
   return null;
 
 }
@@ -134,7 +140,7 @@ return purchaseCredits(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function()?  selectWeekly,TResult Function()?  selectAnnually,TResult Function()?  toggleReveal,TResult Function( String? productId)?  purchase,TResult Function( int credits,  String priceText)?  purchaseCredits,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function()?  selectWeekly,TResult Function()?  selectAnnually,TResult Function()?  toggleReveal,TResult Function( String? productId)?  purchase,TResult Function( int credits,  String priceText)?  purchaseCredits,TResult Function( int index)?  selectCreditPackage,TResult Function()?  restore,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init();case _SelectWeekly() when selectWeekly != null:
@@ -142,7 +148,9 @@ return selectWeekly();case _SelectAnnually() when selectAnnually != null:
 return selectAnnually();case _ToggleReveal() when toggleReveal != null:
 return toggleReveal();case _Purchase() when purchase != null:
 return purchase(_that.productId);case _PurchaseCredits() when purchaseCredits != null:
-return purchaseCredits(_that.credits,_that.priceText);case _:
+return purchaseCredits(_that.credits,_that.priceText);case _SelectCreditPackage() when selectCreditPackage != null:
+return selectCreditPackage(_that.index);case _Restore() when restore != null:
+return restore();case _:
   return orElse();
 
 }
@@ -160,7 +168,7 @@ return purchaseCredits(_that.credits,_that.priceText);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function()  selectWeekly,required TResult Function()  selectAnnually,required TResult Function()  toggleReveal,required TResult Function( String? productId)  purchase,required TResult Function( int credits,  String priceText)  purchaseCredits,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function()  selectWeekly,required TResult Function()  selectAnnually,required TResult Function()  toggleReveal,required TResult Function( String? productId)  purchase,required TResult Function( int credits,  String priceText)  purchaseCredits,required TResult Function( int index)  selectCreditPackage,required TResult Function()  restore,}) {final _that = this;
 switch (_that) {
 case _Init():
 return init();case _SelectWeekly():
@@ -168,7 +176,9 @@ return selectWeekly();case _SelectAnnually():
 return selectAnnually();case _ToggleReveal():
 return toggleReveal();case _Purchase():
 return purchase(_that.productId);case _PurchaseCredits():
-return purchaseCredits(_that.credits,_that.priceText);case _:
+return purchaseCredits(_that.credits,_that.priceText);case _SelectCreditPackage():
+return selectCreditPackage(_that.index);case _Restore():
+return restore();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -185,7 +195,7 @@ return purchaseCredits(_that.credits,_that.priceText);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function()?  selectWeekly,TResult? Function()?  selectAnnually,TResult? Function()?  toggleReveal,TResult? Function( String? productId)?  purchase,TResult? Function( int credits,  String priceText)?  purchaseCredits,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function()?  selectWeekly,TResult? Function()?  selectAnnually,TResult? Function()?  toggleReveal,TResult? Function( String? productId)?  purchase,TResult? Function( int credits,  String priceText)?  purchaseCredits,TResult? Function( int index)?  selectCreditPackage,TResult? Function()?  restore,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
 return init();case _SelectWeekly() when selectWeekly != null:
@@ -193,7 +203,9 @@ return selectWeekly();case _SelectAnnually() when selectAnnually != null:
 return selectAnnually();case _ToggleReveal() when toggleReveal != null:
 return toggleReveal();case _Purchase() when purchase != null:
 return purchase(_that.productId);case _PurchaseCredits() when purchaseCredits != null:
-return purchaseCredits(_that.credits,_that.priceText);case _:
+return purchaseCredits(_that.credits,_that.priceText);case _SelectCreditPackage() when selectCreditPackage != null:
+return selectCreditPackage(_that.index);case _Restore() when restore != null:
+return restore();case _:
   return null;
 
 }
@@ -462,5 +474,103 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class _SelectCreditPackage implements IapEvent {
+  const _SelectCreditPackage({required this.index});
+  
+
+ final  int index;
+
+/// Create a copy of IapEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SelectCreditPackageCopyWith<_SelectCreditPackage> get copyWith => __$SelectCreditPackageCopyWithImpl<_SelectCreditPackage>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectCreditPackage&&(identical(other.index, index) || other.index == index));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,index);
+
+@override
+String toString() {
+  return 'IapEvent.selectCreditPackage(index: $index)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SelectCreditPackageCopyWith<$Res> implements $IapEventCopyWith<$Res> {
+  factory _$SelectCreditPackageCopyWith(_SelectCreditPackage value, $Res Function(_SelectCreditPackage) _then) = __$SelectCreditPackageCopyWithImpl;
+@useResult
+$Res call({
+ int index
+});
+
+
+
+
+}
+/// @nodoc
+class __$SelectCreditPackageCopyWithImpl<$Res>
+    implements _$SelectCreditPackageCopyWith<$Res> {
+  __$SelectCreditPackageCopyWithImpl(this._self, this._then);
+
+  final _SelectCreditPackage _self;
+  final $Res Function(_SelectCreditPackage) _then;
+
+/// Create a copy of IapEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? index = null,}) {
+  return _then(_SelectCreditPackage(
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Restore implements IapEvent {
+  const _Restore();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Restore);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'IapEvent.restore()';
+}
+
+
+}
+
+
+
 
 // dart format on
