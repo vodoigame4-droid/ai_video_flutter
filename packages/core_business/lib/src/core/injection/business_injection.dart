@@ -280,7 +280,7 @@ void initBusinessDependencies(GetIt sl) {
   );
   sl.registerLazySingleton(() => GetDailyLoginStatusUseCase(dailyLoginRepository: sl()));
   sl.registerLazySingleton(() => CheckInUseCase(dailyLoginRepository: sl()));
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => DailyCheckInBloc(
       getDailyLoginStatusUseCase: sl(),
       checkInUseCase: sl(),

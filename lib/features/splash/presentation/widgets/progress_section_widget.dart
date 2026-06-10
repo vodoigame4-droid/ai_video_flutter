@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../i18n/strings.g.dart';
 
 class ProgressSectionWidget extends StatelessWidget {
-  final int percent;
-
-  const ProgressSectionWidget({
-    super.key,
-    required this.percent,
-  });
+  const ProgressSectionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final t = context.t;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Custom progress bar matching Figma styling
+        // Custom progress bar with indeterminate animation (running indefinitely)
         SizedBox(
           width: 174,
           height: 10,
           child: Stack(
             children: [
-              // Background track
+              // Background track matching original Figma styling
               Container(
                 width: 174,
                 height: 10,
@@ -30,14 +27,16 @@ class ProgressSectionWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                 ),
               ),
-              // Progress fill
-              FractionallySizedBox(
-                widthFactor: percent / 100.0,
-                child: Container(
-                  height: 10,
-                  decoration: const BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
+              // Sliding gradient progress indicator
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                child: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) => AppColors.primaryGradient.createShader(bounds),
+                  child: const LinearProgressIndicator(
+                    backgroundColor: Colors.transparent,
+                    color: Colors.white,
+                    minHeight: 10,
                   ),
                 ),
               ),
@@ -45,9 +44,9 @@ class ProgressSectionWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        // Progress percentage text
+        // Localized loading text
         Text(
-          '$percent%',
+          t.splash.loading,
           style: context.textTheme.bodySmall?.copyWith(
             color: AppColors.subText,
           ),

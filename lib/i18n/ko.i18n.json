@@ -69,7 +69,8 @@
     "desc": "편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "로딩 중..."
   },
   "onboarding": {
     "page1": {
@@ -391,7 +392,8 @@
     "disable_notification_title": "출석 체크 알림을 비활성화할까요?",
     "disable_notification_desc": "일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?",
     "disable_notification_keep": "활성화 유지",
-    "disable_notification_disable": "비활성화"
+    "disable_notification_disable": "비활성화",
+    "check_in_success": "+{credits} 크레딧! 출석 체크가 완료되었습니다."
   },
   "connectivity": {
     "no_internet_title": "연결 없음",

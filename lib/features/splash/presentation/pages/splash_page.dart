@@ -45,15 +45,7 @@ class SplashView extends StatelessWidget {
               } else if (successState.isVip) {
                 DashboardPage.go(context);
               } else {
-                DashboardPage.go(context);
-                if (context.mounted) {
-                  context.pushNamed(
-                    IapPage.name,
-                    queryParameters: {
-                      'fromSplash': 'true',
-                    },
-                  );
-                }
+                _navigateToIapAndHome(context);
               }
             },
           );
@@ -76,26 +68,29 @@ class SplashView extends StatelessWidget {
               ),
             ),
             // Bottom Progress section
-            Positioned(
+            const Positioned(
               bottom: 80,
               left: 0,
               right: 0,
               child: Center(
-                child: BlocBuilder<SplashBloc, SplashState>(
-                  builder: (context, state) {
-                    final percent = state.maybeWhen(
-                      loading: (percent) => percent,
-                      success: (completed, isVip, urls) => 100,
-                      orElse: () => 0,
-                    );
-                    return ProgressSectionWidget(percent: percent);
-                  },
-                ),
+                child: ProgressSectionWidget(),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _navigateToIapAndHome(BuildContext context) async {
+    await context.pushNamed(
+      IapPage.name,
+      queryParameters: {
+        'fromSplash': 'true',
+      },
+    );
+    if (context.mounted) {
+      DashboardPage.go(context);
+    }
   }
 }

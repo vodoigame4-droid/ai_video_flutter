@@ -128,11 +128,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( int percent)?  loading,TResult Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading(_that.percent);case _Success() when success != null:
+return loading();case _Success() when success != null:
 return success(_that.isOnboardingCompleted,_that.isVip,_that.preloadedUrls);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
@@ -152,11 +152,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( int percent)  loading,required TResult Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)  success,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
-return loading(_that.percent);case _Success():
+return loading();case _Success():
 return success(_that.isOnboardingCompleted,_that.isVip,_that.preloadedUrls);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
@@ -175,11 +175,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( int percent)?  loading,TResult? Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( bool isOnboardingCompleted,  bool isVip,  List<String>? preloadedUrls)?  success,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading(_that.percent);case _Success() when success != null:
+return loading();case _Success() when success != null:
 return success(_that.isOnboardingCompleted,_that.isVip,_that.preloadedUrls);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
@@ -225,67 +225,33 @@ String toString() {
 
 
 class _Loading implements SplashState {
-  const _Loading(this.percent);
+  const _Loading();
   
 
- final  int percent;
 
-/// Create a copy of SplashState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$LoadingCopyWith<_Loading> get copyWith => __$LoadingCopyWithImpl<_Loading>(this, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading&&(identical(other.percent, percent) || other.percent == percent));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,percent);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SplashState.loading(percent: $percent)';
+  return 'SplashState.loading()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class _$LoadingCopyWith<$Res> implements $SplashStateCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) _then) = __$LoadingCopyWithImpl;
-@useResult
-$Res call({
- int percent
-});
 
 
-
-
-}
-/// @nodoc
-class __$LoadingCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(this._self, this._then);
-
-  final _Loading _self;
-  final $Res Function(_Loading) _then;
-
-/// Create a copy of SplashState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? percent = null,}) {
-  return _then(_Loading(
-null == percent ? _self.percent : percent // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
-
-}
 
 /// @nodoc
 

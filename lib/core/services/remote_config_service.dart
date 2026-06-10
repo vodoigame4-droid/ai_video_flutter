@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:core_business/core_business.dart';
 
@@ -23,24 +24,24 @@ class RemoteConfigService {
       'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4';
   static const String defaultBgDiscountUrl =
       'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/709be36f7bdb.mp4';
-  
+
   static const String defaultBgVideosJson = '''
 {
   "banner_home": "https://mathiasbynens.be/demo/animated-webp-supported.webp",
   "iap": "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/786913993694.mp4",
   "discount": "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/videos/709be36f7bdb.mp4",
   "guides": [
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp"
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/5c43a471fa58.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/8c0c37e84228.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/d0ae5af99672.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/cb6beb974833.webp"
   ],
   "onboarding": [
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f1e7f3744849.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/c3781fec7331.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/71b69fc44403.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp"
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/5c43a471fa58.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/8c0c37e84228.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/d0ae5af99672.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/cb6beb974833.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/e80755ca295c.webp"
   ],
   "video_gen_cost": 35
 }
@@ -73,10 +74,14 @@ class RemoteConfigService {
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
-      await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-        fetchTimeout: const Duration(seconds: 10),
-        minimumFetchInterval: const Duration(hours: 1),
-      ));
+      await _remoteConfig.setConfigSettings(
+        RemoteConfigSettings(
+          fetchTimeout: const Duration(seconds: 10),
+          minimumFetchInterval: kDebugMode
+              ? Duration.zero
+              : const Duration(hours: 1),
+        ),
+      );
 
       // Fetch and activate
       await _remoteConfig.fetchAndActivate();
@@ -86,8 +91,11 @@ class RemoteConfigService {
       LogUtils.d('$_tag: $rcBgIAP = ${getBgIAPUrl()}');
       LogUtils.d('$_tag: $rcBgDiscount = ${getBgDiscountUrl()}');
     } catch (e, stack) {
-      LogUtils.e('$_tag: Failed to initialize Remote Config',
-          error: e, stackTrace: stack);
+      LogUtils.e(
+        '$_tag: Failed to initialize Remote Config',
+        error: e,
+        stackTrace: stack,
+      );
     }
   }
 
@@ -98,29 +106,36 @@ class RemoteConfigService {
     final urls = [getBgIAPUrl(), getBgDiscountUrl()];
 
     LogUtils.d('$_tag: Preloading ${urls.length} videos into cache...');
+    final overallStopwatch = Stopwatch()..start();
 
     final futures = urls.map((url) {
       if (url.startsWith('http')) {
+        final stopwatch = Stopwatch()..start();
+        LogUtils.d('$_tag: Start preloading background video: $url');
         return videoCacheManager
             .getCachedOrDownload(url, waitForDownload: true)
             .then((path) {
-          LogUtils.d('$_tag: Preloaded video $url -> $path');
-        }).catchError((e) {
-          LogUtils.e('$_tag: Failed to preload video $url', error: e);
-        });
+              stopwatch.stop();
+              LogUtils.i('$_tag: Preloaded video in ${stopwatch.elapsedMilliseconds}ms: $url -> $path');
+            })
+            .catchError((e) {
+              stopwatch.stop();
+              LogUtils.e('$_tag: Failed to preload video after ${stopwatch.elapsedMilliseconds}ms: $url', error: e);
+            });
       }
       return Future<void>.value();
     }).toList();
 
     await Future.wait(futures).timeout(
-      const Duration(seconds: 15),
+      const Duration(seconds: 8),
       onTimeout: () {
-        LogUtils.w('$_tag: Video preload timed out after 15s');
+        LogUtils.w('$_tag: Video preload timed out after 8s');
         return [];
       },
     );
 
-    LogUtils.d('$_tag: Video preloading completed');
+    overallStopwatch.stop();
+    LogUtils.i('$_tag: Video preloading completed in ${overallStopwatch.elapsedMilliseconds}ms');
   }
 
   // ── Getters ──
@@ -135,7 +150,11 @@ class RemoteConfigService {
         }
       }
     } catch (e, stack) {
-      LogUtils.e('$_tag: Failed to parse $rcBgVideosJson', error: e, stackTrace: stack);
+      LogUtils.e(
+        '$_tag: Failed to parse $rcBgVideosJson',
+        error: e,
+        stackTrace: stack,
+      );
     }
     return null;
   }

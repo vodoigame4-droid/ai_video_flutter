@@ -19,7 +19,6 @@ import '../../features/premium/presentation/pages/iap_page.dart';
 import '../../features/premium/presentation/pages/buy_credits_page.dart';
 import '../../features/premium/presentation/pages/generation_iap_page.dart';
 import '../../features/premium/presentation/pages/generation_buy_credits_page.dart';
-import '../../features/premium/presentation/pages/discount_page.dart';
 import '../../features/premium/presentation/pages/debug_page.dart';
 import '../../features/create_video/presentation/pages/create_from_template_page.dart';
 import '../../features/create_video/presentation/pages/create_template_settings_page.dart';
@@ -68,6 +67,36 @@ abstract class AppRoutePage {
         return FadeTransition(
           opacity: animation,
           child: child,
+        );
+      },
+      child: child,
+    );
+  }
+
+  static Page<T> slideUpAndFade<T>({
+    required GoRouterState state,
+    required Widget child,
+    Duration duration = const Duration(milliseconds: 500),
+  }) {
+    return CustomTransitionPage<T>(
+      key: state.pageKey,
+      name: state.name ?? state.matchedLocation,
+      arguments: state.extra,
+      transitionDuration: duration,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutQuart,
+        );
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0.0, 1.0),
+            end: Offset.zero,
+          ).animate(curvedAnimation),
+          child: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
         );
       },
       child: child,
@@ -365,8 +394,9 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
         final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
-        return AppRoutePage.fullscreenDialog<void>(
+        return AppRoutePage.slideUpAndFade<void>(
           state: state,
+          duration: const Duration(milliseconds: 500),
           child: IapPage(videoUrl: videoUrl, fromSplash: fromSplash),
         );
       },
@@ -374,8 +404,9 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: BuyCreditsPage.path,
       name: BuyCreditsPage.name,
-      pageBuilder: (context, state) => AppRoutePage.fullscreenDialog<void>(
+      pageBuilder: (context, state) => AppRoutePage.slideUpAndFade<void>(
         state: state,
+        duration: const Duration(milliseconds: 500),
         child: const BuyCreditsPage(),
       ),
     ),
@@ -384,8 +415,9 @@ final GoRouter appRouter = GoRouter(
       name: GenerationIapPage.name,
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.fullscreenDialog<void>(
+        return AppRoutePage.slideUpAndFade<void>(
           state: state,
+          duration: const Duration(milliseconds: 500),
           child: GenerationIapPage(videoUrl: videoUrl),
         );
       },
@@ -395,21 +427,22 @@ final GoRouter appRouter = GoRouter(
       name: GenerationBuyCreditsPage.name,
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
-        return AppRoutePage.fullscreenDialog<void>(
+        return AppRoutePage.slideUpAndFade<void>(
           state: state,
+          duration: const Duration(milliseconds: 500),
           child: GenerationBuyCreditsPage(videoUrl: videoUrl),
         );
       },
     ),
     GoRoute(
-      path: DiscountPage.path,
-      name: DiscountPage.name,
+      path: IapPage.discountPath,
+      name: IapPage.discountName,
       pageBuilder: (context, state) {
         final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
         return AppRoutePage.fade<void>(
           state: state,
           duration: const Duration(seconds: 1),
-          child: DiscountPage(fromSplash: fromSplash),
+          child: IapPage(fromSplash: fromSplash, showDiscountInit: true),
         );
       },
     ),

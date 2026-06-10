@@ -69,7 +69,8 @@
     "desc": "Do you want to continue editing or leave now?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Loading..."
   },
   "onboarding": {
     "page1": {
@@ -399,7 +400,8 @@
     "disable_notification_title": "Disable check-in notifications?",
     "disable_notification_desc": "You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?",
     "disable_notification_keep": "Keep Enabled",
-    "disable_notification_disable": "Disable"
+    "disable_notification_disable": "Disable",
+    "check_in_success": "+{credits} Credits! Checked in successfully."
   },
   "connectivity": {
     "no_internet_title": "No Connection",

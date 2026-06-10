@@ -17,15 +17,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final GetOnboardingStatusUseCase getOnboardingStatusUseCase;
   final GetBannersUseCase getBannersUseCase;
   final GetProfileUseCase getProfileUseCase;
-  Timer? _timer;
-  bool _isLoginCompleted = false;
-  bool _isOnboardingPreloadCompleted = false;
-  bool _isRemoteConfigInitialized = false;
-  bool _isHavinSdkInitialized = false;
+
   bool _isOnboardingCompleted = false;
   bool _isVip = false;
   List<String>? _preloadedUrls;
-  int _progress = 0;
 
   SplashBloc({
     required this.autoLoginUseCase,
@@ -36,84 +31,79 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<SplashEvent>((event, emit) async {
       await event.when(
         init: () async {
-          _progress = 0;
-          _isLoginCompleted = false;
-          _isOnboardingPreloadCompleted = false;
-          _isHavinSdkInitialized = false;
-          _isRemoteConfigInitialized = false;
           _isOnboardingCompleted = false;
+          _isVip = false;
           _preloadedUrls = null;
-          emit(const SplashState.loading(0));
+          emit(const SplashState.loading());
 
-          // 1. Start background login process
-          _performBackgroundLogin();
+          // 1. Initialize Remote Config first so that it is ready for other preloading tasks
+          await _initRemoteConfig();
 
-          // 2. Start preloading onboarding images/videos if not completed
-          _performOnboardingPreload();
+          // Minimum duration to display logo (1.5 seconds)
+          final minDelay = Future.delayed(const Duration(milliseconds: 1500));
 
-          // 3. Initialize Havin SDK with iOS store configurations
-          _initHavinSdk();
+          // 2. Run other initializations concurrently
+          final concurrentStopwatch = Stopwatch()..start();
+          LogUtils.d('SplashBloc: Starting concurrent initialization tasks...');
+          await Future.wait([
+            _performBackgroundLogin(),
+            _performOnboardingPreload(),
+            _initHavinSdk(),
+            minDelay,
+          ]);
+          concurrentStopwatch.stop();
+          LogUtils.i('SplashBloc: Concurrent initialization tasks completed in ${concurrentStopwatch.elapsedMilliseconds}ms');
 
-          // 4. Initialize Firebase Remote Config
-          _initRemoteConfig();
-
-          // 5. Start progress animation timer
-          _timer?.cancel();
-          _timer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
-            _progress += 2;
-
-            if (_progress >= 100) {
-              if (_isLoginCompleted &&
-                  _isOnboardingPreloadCompleted &&
-                  _isHavinSdkInitialized &&
-                  _isRemoteConfigInitialized) {
-                _progress = 100;
-                timer.cancel();
-                add(const SplashEvent.progressUpdated(100));
-              } else {
-                // Hold at 99% until background initialization completes
-                _progress = 99;
-                add(const SplashEvent.progressUpdated(99));
-              }
-            } else {
-              add(SplashEvent.progressUpdated(_progress));
-            }
-          });
-        },
-        progressUpdated: (percent) async {
-          if (percent >= 100) {
-            emit(
-              SplashState.success(
-                isOnboardingCompleted: _isOnboardingCompleted,
-                isVip: _isVip,
-                preloadedUrls: _preloadedUrls,
-              ),
-            );
-          } else {
-            emit(SplashState.loading(percent));
-          }
+          emit(
+            SplashState.success(
+              isOnboardingCompleted: _isOnboardingCompleted,
+              isVip: _isVip,
+              preloadedUrls: _preloadedUrls,
+            ),
+          );
         },
       );
     });
   }
 
   Future<void> _performBackgroundLogin() async {
+    final overallStopwatch = Stopwatch()..start();
+    LogUtils.d('SplashBloc: Start background login tasks...');
     try {
+      final loginStopwatch = Stopwatch()..start();
       await autoLoginUseCase(NoParams());
+      loginStopwatch.stop();
+      LogUtils.i('SplashBloc: autoLoginUseCase completed in ${loginStopwatch.elapsedMilliseconds}ms');
+
+      // Pre-initialize daily check-in bloc in background to avoid delay on Home screen
+      try {
+        final checkinInitStopwatch = Stopwatch()..start();
+        sl<DailyCheckInBloc>().add(const DailyCheckInEvent.init());
+        checkinInitStopwatch.stop();
+        LogUtils.i('SplashBloc: DailyCheckInBloc.init triggered in ${checkinInitStopwatch.elapsedMilliseconds}ms');
+      } catch (e) {
+        LogUtils.w('SplashBloc: Failed to trigger DailyCheckInBloc init: $e');
+      }
 
       // Fetch the latest profile (getMe API call)
+      final profileStopwatch = Stopwatch()..start();
       final profileResult = await getProfileUseCase(NoParams());
       _isVip = profileResult.maybeWhen(
         success: (user) => user.isVip,
         orElse: () => false,
       );
+      profileStopwatch.stop();
+      LogUtils.i('SplashBloc: getProfileUseCase completed in ${profileStopwatch.elapsedMilliseconds}ms. isVip: $_isVip');
 
-      // Fetch and preload home banner (download/cache video/webp or preload image)
+      // Fetch and preload home banner
+      final bannerStopwatch = Stopwatch()..start();
       final sharedPreferences = sl<SharedPreferences>();
       await BannerPreloadHelper.preloadBanner(
         getBannersUseCase: getBannersUseCase,
         sharedPreferences: sharedPreferences,
       );
+      bannerStopwatch.stop();
+      LogUtils.i('SplashBloc: BannerPreloadHelper.preloadBanner completed in ${bannerStopwatch.elapsedMilliseconds}ms');
     } catch (e, stack) {
       LogUtils.e(
         'SplashBloc: Background login failed',
@@ -121,18 +111,23 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         stackTrace: stack,
       );
     } finally {
-      _isLoginCompleted = true;
-      _checkAllInitializationCompleted();
+      overallStopwatch.stop();
+      LogUtils.i('SplashBloc: Total background login tasks duration: ${overallStopwatch.elapsedMilliseconds}ms');
     }
   }
 
   Future<void> _performOnboardingPreload() async {
+    final overallStopwatch = Stopwatch()..start();
+    LogUtils.d('SplashBloc: Start onboarding preloading...');
     try {
+      final statusStopwatch = Stopwatch()..start();
       final onboardingResult = await getOnboardingStatusUseCase(NoParams());
       _isOnboardingCompleted = onboardingResult.maybeWhen(
         success: (data) => data,
         orElse: () => false,
       );
+      statusStopwatch.stop();
+      LogUtils.i('SplashBloc: getOnboardingStatusUseCase completed in ${statusStopwatch.elapsedMilliseconds}ms. isOnboardingCompleted: $_isOnboardingCompleted');
 
       if (!_isOnboardingCompleted) {
         final urls = sl<RemoteConfigService>().getOnboardingUrls();
@@ -145,20 +140,38 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               if (url.startsWith('http')) {
                 if (_isVideoUrl(url)) {
                   preloadFutures.add(
-                    VideoCacheManager().getCachedOrDownload(
-                      url,
-                      waitForDownload: true,
-                    ),
+                    () async {
+                      final stopwatch = Stopwatch()..start();
+                      LogUtils.d('SplashBloc: Start preloading onboarding video: $url');
+                      final path = await VideoCacheManager().getCachedOrDownload(
+                        url,
+                        waitForDownload: true,
+                      );
+                      stopwatch.stop();
+                      LogUtils.i('SplashBloc: Preloaded onboarding video in ${stopwatch.elapsedMilliseconds}ms: $url -> $path');
+                      return path;
+                    }(),
                   );
                 } else {
-                  preloadFutures.add(_preloadImage(url));
+                  preloadFutures.add(
+                    () async {
+                      final stopwatch = Stopwatch()..start();
+                      LogUtils.d('SplashBloc: Start preloading onboarding image: $url');
+                      await _preloadImage(url);
+                      stopwatch.stop();
+                      LogUtils.i('SplashBloc: Preloaded onboarding image in ${stopwatch.elapsedMilliseconds}ms: $url');
+                    }(),
+                  );
                 }
               }
             }
             if (preloadFutures.isNotEmpty) {
               await Future.wait(
                 preloadFutures,
-              ).timeout(const Duration(seconds: 5), onTimeout: () => []);
+              ).timeout(const Duration(seconds: 15), onTimeout: () {
+                LogUtils.w('SplashBloc: Onboarding assets preloading timed out at 15s');
+                return [];
+              });
             }
           }
         }
@@ -170,25 +183,33 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         stackTrace: stack,
       );
     } finally {
-      _isOnboardingPreloadCompleted = true;
-      _checkAllInitializationCompleted();
+      overallStopwatch.stop();
+      LogUtils.i('SplashBloc: Total onboarding preloading time: ${overallStopwatch.elapsedMilliseconds}ms');
     }
   }
 
   Future<void> _initHavinSdk() async {
+    final overallStopwatch = Stopwatch()..start();
+    LogUtils.d('SplashBloc: Start HavinSdk initialization...');
     if (Platform.isIOS) {
-      await HavinAdsManager.instance.requestATT();
+      final attStopwatch = Stopwatch()..start();
+      try {
+        LogUtils.d('SplashBloc: Requesting ATT...');
+        await HavinAdsManager.instance.requestATT();
+        attStopwatch.stop();
+        LogUtils.i('SplashBloc: requestATT completed in ${attStopwatch.elapsedMilliseconds}ms');
+      } catch (e) {
+        attStopwatch.stop();
+        LogUtils.w('SplashBloc: Failed to request ATT after ${attStopwatch.elapsedMilliseconds}ms: $e');
+      }
     }
 
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
-      _isHavinSdkInitialized = true;
-      _checkAllInitializationCompleted();
       return;
     }
     try {
       final List<BillingProduct> products = Platform.isIOS
           ? const [
-              // iOS App Store Connect Consumables
               BillingProduct.consumable('70credits'),
               BillingProduct.consumable('70creditsdis'),
               BillingProduct.consumable('150credits'),
@@ -200,14 +221,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('1000creditsdis'),
               BillingProduct.consumable('5000credits'),
               BillingProduct.consumable('5000creditsdis'),
-
-              // iOS App Store Connect Subscriptions
               BillingProduct.subscription('buy_weakly'),
               BillingProduct.subscription('buy_annualy'),
               BillingProduct.subscription('buy_annualy_discount'),
             ]
           : const [
-              // Android Google Play Consumables
               BillingProduct.consumable('70credits.andr'),
               BillingProduct.consumable('70creditsdis.andr'),
               BillingProduct.consumable('150credits.andr'),
@@ -219,8 +237,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('1000creditsdis.andr'),
               BillingProduct.consumable('5000credits.andr'),
               BillingProduct.consumable('5000creditsdis.andr'),
-
-              // Android Google Play Subscriptions
               BillingProduct.subscription('buy_weekly.andr'),
               BillingProduct.subscription('buy_annualy.andr'),
               BillingProduct.subscription('buy_annualy_discount.andr'),
@@ -228,54 +244,41 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       final billingConfig = BillingConfig(debugMode: false, products: products);
 
       await HavinSdk.instance.init(billingConfig: billingConfig);
-
-      // Initialize IapBloc to start loading billing products during Splash
       sl<IapBloc>().add(const IapEvent.init());
-      LogUtils.d(
-        'SplashBloc: HavinSdk initialized. Triggered IapBloc initialization.',
+      overallStopwatch.stop();
+      LogUtils.i(
+        'SplashBloc: HavinSdk initialized in ${overallStopwatch.elapsedMilliseconds}ms. Triggered IapBloc initialization.',
       );
     } catch (e, stack) {
+      overallStopwatch.stop();
       LogUtils.e(
-        'SplashBloc: HavinSdk initialization failed',
+        'SplashBloc: HavinSdk initialization failed after ${overallStopwatch.elapsedMilliseconds}ms',
         error: e,
         stackTrace: stack,
       );
-    } finally {
-      _isHavinSdkInitialized = true;
-      _checkAllInitializationCompleted();
     }
   }
 
   Future<void> _initRemoteConfig() async {
+    final stopwatch = Stopwatch()..start();
+    LogUtils.d('SplashBloc: Start initializing Remote Config...');
     try {
       final remoteConfigService = sl<RemoteConfigService>();
       await remoteConfigService.initialize();
-      await remoteConfigService.preloadVideos();
+      stopwatch.stop();
+      LogUtils.i('SplashBloc: Remote Config initialized and activated in ${stopwatch.elapsedMilliseconds}ms');
+      
+      // Preload IAP & Discount videos in the background without awaiting them to avoid blocking splash
+      remoteConfigService.preloadVideos().catchError((e) {
+        LogUtils.w('SplashBloc: Failed to preload IAP/Discount videos: $e');
+      });
     } catch (e, stack) {
+      stopwatch.stop();
       LogUtils.e(
-        'SplashBloc: Remote Config initialization failed',
+        'SplashBloc: Remote Config initialization failed after ${stopwatch.elapsedMilliseconds}ms',
         error: e,
         stackTrace: stack,
       );
-    } finally {
-      _isRemoteConfigInitialized = true;
-      _checkAllInitializationCompleted();
-    }
-  }
-
-  void _checkAllInitializationCompleted() {
-    LogUtils.d(
-      'SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress',
-    );
-    if (_isLoginCompleted &&
-        _isOnboardingPreloadCompleted &&
-        _isHavinSdkInitialized &&
-        _isRemoteConfigInitialized) {
-      if (_progress >= 99) {
-        _timer?.cancel();
-        _timer = null;
-        add(const SplashEvent.progressUpdated(100));
-      }
     }
   }
 
@@ -309,11 +312,5 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     } catch (e) {
       LogUtils.e('SplashBloc: Failed to preload image $url', error: e);
     }
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
   }
 }

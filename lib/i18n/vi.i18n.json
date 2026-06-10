@@ -69,7 +69,8 @@
     "desc": "Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Đang tải..."
   },
   "onboarding": {
     "page1": {
@@ -399,7 +400,8 @@
     "disable_notification_title": "Tắt thông báo điểm danh?",
     "disable_notification_desc": "Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?",
     "disable_notification_keep": "Giữ lại",
-    "disable_notification_disable": "Tắt"
+    "disable_notification_disable": "Tắt",
+    "check_in_success": "+{credits} Điểm tín dụng! Điểm danh thành công."
   },
   "connectivity": {
     "no_internet_title": "Mất kết nối",

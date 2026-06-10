@@ -69,7 +69,8 @@
     "desc": "Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Memuat..."
   },
   "onboarding": {
     "page1": {
@@ -391,7 +392,8 @@
     "disable_notification_title": "Nonaktifkan notifikasi check-in?",
     "disable_notification_desc": "Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?",
     "disable_notification_keep": "Tetap Aktif",
-    "disable_notification_disable": "Nonaktifkan"
+    "disable_notification_disable": "Nonaktifkan",
+    "check_in_success": "+{credits} Kredit! Berhasil masuk."
   },
   "connectivity": {
     "no_internet_title": "Tidak Ada Koneksi",

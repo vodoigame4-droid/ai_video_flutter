@@ -38,38 +38,47 @@ Future<void> initDependencies() async {
 
   // Network Client
   sl.registerLazySingleton<ApiClient>(
-    () => ApiClient(
-      baseUrl: 'https://video-effect-be.apihub.today/api/v1',
-      // baseUrl: 'http://192.168.1.22:3000/api/v1',
-      logCallback: (msg) {
-        final lines = msg.split('\n');
-        if (msg.startsWith('📤') || msg.startsWith('-->')) {
-          for (final line in lines) {
-            LogUtils.d(line); // Request (Blue)
+    () {
+      final apiClient = ApiClient(
+        baseUrl: 'https://video-effect-be.apihub.today/api/v1',
+        // baseUrl: 'http://192.168.1.22:3000/api/v1',
+        logCallback: (msg) {
+          final lines = msg.split('\n');
+          if (msg.startsWith('📤') || msg.startsWith('-->')) {
+            for (final line in lines) {
+              LogUtils.d(line); // Request (Blue)
+            }
+          } else if (msg.startsWith('📥') || msg.startsWith('<--')) {
+            for (final line in lines) {
+              LogUtils.i(line); // Response (Green)
+            }
+          } else if (msg.startsWith('🚨') || msg.startsWith('!!!')) {
+            for (final line in lines) {
+              LogUtils.e(line); // Error (Red)
+            }
+          } else {
+            for (final line in lines) {
+              LogUtils.v(line); // Fallback (Cyan)
+            }
           }
-        } else if (msg.startsWith('📥') || msg.startsWith('<--')) {
-          for (final line in lines) {
-            LogUtils.i(line); // Response (Green)
-          }
-        } else if (msg.startsWith('🚨') || msg.startsWith('!!!')) {
-          for (final line in lines) {
-            LogUtils.e(line); // Error (Red)
-          }
-        } else {
-          for (final line in lines) {
-            LogUtils.v(line); // Fallback (Cyan)
-          }
-        }
-      },
-      tokenProvider: () async {
-        final prefs = sl<SharedPreferences>();
-        return prefs.getString(StorageKeys.authAccessToken);
-      },
-      additionalInterceptors: [
-        AuthRetryInterceptor(sharedPreferences: sl(), appConfig: sl()),
-        PaymentRequiredInterceptor(),
-      ],
-    ),
+        },
+        tokenProvider: () async {
+          final prefs = sl<SharedPreferences>();
+          return prefs.getString(StorageKeys.authAccessToken);
+        },
+        additionalInterceptors: [
+          AuthRetryInterceptor(sharedPreferences: sl(), appConfig: sl()),
+          PaymentRequiredInterceptor(),
+        ],
+      );
+
+      // Add TimeoutRetryInterceptor to retry requests failing with connection/receive/send timeouts
+      apiClient.dio.interceptors.add(
+        TimeoutRetryInterceptor(dio: apiClient.dio),
+      );
+
+      return apiClient;
+    },
   );
 
   // Shared Preferences

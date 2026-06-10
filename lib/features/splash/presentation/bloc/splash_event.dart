@@ -5,5 +5,4 @@ part 'splash_event.freezed.dart';
 @freezed
 abstract class SplashEvent with _$SplashEvent {
   const factory SplashEvent.init() = _Init;
-  const factory SplashEvent.progressUpdated(int percent) = _ProgressUpdated;
 }

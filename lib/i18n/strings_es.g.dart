@@ -172,6 +172,7 @@ class _Translations$splash$es extends Translations$splash$en {
 
 	// Translations
 	@override String get appName => 'Vido';
+	@override String get loading => 'Cargando...';
 }
 
 // Path: onboarding
@@ -586,6 +587,7 @@ class _Translations$checkin$es extends Translations$checkin$en {
 	@override String get disable_notification_desc => 'Te perderás las recompensas diarias de inicio de sesión y otros bonos emocionantes. ¿Estás seguro de que deseas desactivarlas?';
 	@override String get disable_notification_keep => 'Mantener activadas';
 	@override String get disable_notification_disable => 'Desactivar';
+	@override String check_in_success({required Object credits}) => '¡+${credits} créditos! Registro diario completado con éxito.';
 }
 
 // Path: connectivity
@@ -794,6 +796,7 @@ extension on TranslationsEs {
 			'leave_dialog.title' => '¿Salir sin guardar?',
 			'leave_dialog.desc' => '¿Desea continuar editando o salir ahora?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => 'Cargando...',
 			'onboarding.page1.title' => 'Bienvenido a Vido',
 			'onboarding.page1.subtitle' => 'Tu viaje creativo comienza aquí...',
 			'onboarding.page1.button' => 'Comenzar',
@@ -1074,6 +1077,7 @@ extension on TranslationsEs {
 			'checkin.disable_notification_desc' => 'Te perderás las recompensas diarias de inicio de sesión y otros bonos emocionantes. ¿Estás seguro de que deseas desactivarlas?',
 			'checkin.disable_notification_keep' => 'Mantener activadas',
 			'checkin.disable_notification_disable' => 'Desactivar',
+			'checkin.check_in_success' => ({required Object credits}) => '¡+${credits} créditos! Registro diario completado con éxito.',
 			'connectivity.no_internet_title' => 'Sin conexión',
 			'connectivity.no_internet_desc' => 'Por favor, comprueba tu conexão a Internet para seguir usando la aplicación.',
 			'connectivity.retry_button' => 'Reintentar conexión',

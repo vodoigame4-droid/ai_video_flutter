@@ -298,6 +298,9 @@ class Translations$splash$en {
 
 	/// en: 'Vido'
 	String get appName => 'Vido';
+
+	/// en: 'Loading...'
+	String get loading => 'Loading...';
 }
 
 // Path: onboarding
@@ -1269,6 +1272,9 @@ class Translations$checkin$en {
 
 	/// en: 'Disable'
 	String get disable_notification_disable => 'Disable';
+
+	/// en: '+{credits} Credits! Checked in successfully.'
+	String check_in_success({required Object credits}) => '+${credits} Credits! Checked in successfully.';
 }
 
 // Path: connectivity
@@ -1569,6 +1575,7 @@ extension on Translations {
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => 'Loading...',
 			'onboarding.page1.title' => 'Welcome To Vido',
 			'onboarding.page1.subtitle' => 'Your Creative Journey Starts Here...',
 			'onboarding.page1.button' => 'Get Started',
@@ -1855,6 +1862,7 @@ extension on Translations {
 			'checkin.disable_notification_desc' => 'You will miss daily login rewards and other exciting bonuses. Are you sure you want to disable?',
 			'checkin.disable_notification_keep' => 'Keep Enabled',
 			'checkin.disable_notification_disable' => 'Disable',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} Credits! Checked in successfully.',
 			'connectivity.no_internet_title' => 'No Connection',
 			'connectivity.no_internet_desc' => 'Please check your internet connection to continue using the app.',
 			'connectivity.retry_button' => 'Retry Connection',

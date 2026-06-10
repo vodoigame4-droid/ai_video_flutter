@@ -172,6 +172,7 @@ class _Translations$splash$fr extends Translations$splash$en {
 
 	// Translations
 	@override String get appName => 'Vido';
+	@override String get loading => 'Chargement...';
 }
 
 // Path: onboarding
@@ -586,6 +587,7 @@ class _Translations$checkin$fr extends Translations$checkin$en {
 	@override String get disable_notification_desc => 'Vous manquerez les récompenses quotidiennes de connexion et d\'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?';
 	@override String get disable_notification_keep => 'Garder activé';
 	@override String get disable_notification_disable => 'Désactiver';
+	@override String check_in_success({required Object credits}) => '+${credits} Crédits ! Enregistrement réussi.';
 }
 
 // Path: connectivity
@@ -794,6 +796,7 @@ extension on TranslationsFr {
 			'leave_dialog.title' => 'Quitter sans sauvegarder ?',
 			'leave_dialog.desc' => 'Voulez-vous continuer l\'édition ou partir maintenant ?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => 'Chargement...',
 			'onboarding.page1.title' => 'Bienvenue sur Vido',
 			'onboarding.page1.subtitle' => 'Votre voyage créatif commence ici...',
 			'onboarding.page1.button' => 'Commencer',
@@ -1074,6 +1077,7 @@ extension on TranslationsFr {
 			'checkin.disable_notification_desc' => 'Vous manquerez les récompenses quotidiennes de connexion et d\'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?',
 			'checkin.disable_notification_keep' => 'Garder activé',
 			'checkin.disable_notification_disable' => 'Désactiver',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} Crédits ! Enregistrement réussi.',
 			'connectivity.no_internet_title' => 'Pas de connexion',
 			'connectivity.no_internet_desc' => 'Veuillez vérifier votre connexion Internet pour continuer à utiliser l\'application.',
 			'connectivity.retry_button' => 'Réessayer la connexion',

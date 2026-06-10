@@ -172,6 +172,7 @@ class _Translations$splash$hi extends Translations$splash$en {
 
 	// Translations
 	@override String get appName => 'Vido';
+	@override String get loading => 'लोड हो रहा है...';
 }
 
 // Path: onboarding
@@ -586,6 +587,7 @@ class _Translations$checkin$hi extends Translations$checkin$en {
 	@override String get disable_notification_desc => 'आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?';
 	@override String get disable_notification_keep => 'सक्षम रखें';
 	@override String get disable_notification_disable => 'अक्षम करें';
+	@override String check_in_success({required Object credits}) => '+${credits} क्रेडिट! दैनिक चेक-इन सफलतापूर्वक पूरा हुआ।';
 }
 
 // Path: connectivity
@@ -794,6 +796,7 @@ extension on TranslationsHi {
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => 'लोड हो रहा है...',
 			'onboarding.page1.title' => 'Vido में आपका स्वागत है',
 			'onboarding.page1.subtitle' => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...',
 			'onboarding.page1.button' => 'शुरू करें',
@@ -1074,6 +1077,7 @@ extension on TranslationsHi {
 			'checkin.disable_notification_desc' => 'आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?',
 			'checkin.disable_notification_keep' => 'सक्षम रखें',
 			'checkin.disable_notification_disable' => 'अक्षम करें',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} क्रेडिट! दैनिक चेक-इन सफलतापूर्वक पूरा हुआ।',
 			'connectivity.no_internet_title' => 'कोई कनेक्शन नहीं',
 			'connectivity.no_internet_desc' => 'कृपया ऐप का उपयोग जारी रखने के लिए अपने इंटरनेट कनेक्शन की जांच करें।',
 			'connectivity.retry_button' => 'पुनः प्रयास करें',

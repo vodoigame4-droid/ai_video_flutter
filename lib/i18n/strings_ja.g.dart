@@ -172,6 +172,7 @@ class _Translations$splash$ja extends Translations$splash$en {
 
 	// Translations
 	@override String get appName => 'Vido';
+	@override String get loading => '読み込み中...';
 }
 
 // Path: onboarding
@@ -586,6 +587,7 @@ class _Translations$checkin$ja extends Translations$checkin$en {
 	@override String get disable_notification_desc => '毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？';
 	@override String get disable_notification_keep => '有効のままにする';
 	@override String get disable_notification_disable => '無効にする';
+	@override String check_in_success({required Object credits}) => '+${credits} クレジット！チェックインに成功しました。';
 }
 
 // Path: connectivity
@@ -794,6 +796,7 @@ extension on TranslationsJa {
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
 			'splash.appName' => 'Vido',
+			'splash.loading' => '読み込み中...',
 			'onboarding.page1.title' => 'Vidoへようこそ',
 			'onboarding.page1.subtitle' => 'あなたのクリエイティブな旅がここから始まる...',
 			'onboarding.page1.button' => '始める',
@@ -1074,6 +1077,7 @@ extension on TranslationsJa {
 			'checkin.disable_notification_desc' => '毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？',
 			'checkin.disable_notification_keep' => '有効のままにする',
 			'checkin.disable_notification_disable' => '無効にする',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} クレジット！チェックインに成功しました。',
 			'connectivity.no_internet_title' => '接続がありません',
 			'connectivity.no_internet_desc' => 'アプリを引き続き使用するには、インターネット接続を確認してください。',
 			'connectivity.retry_button' => '接続を再試行',

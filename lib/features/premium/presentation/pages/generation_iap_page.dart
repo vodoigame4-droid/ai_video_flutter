@@ -18,7 +18,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
 import '../widgets/buy_credit_now_button.dart';
 import 'generation_buy_credits_page.dart';
-import 'discount_page.dart';
+import 'iap_page.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
@@ -163,7 +163,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
         if (context.canPop()) {
           context.pop();
         } else {
-          context.pushReplacementNamed(DiscountPage.name);
+          context.pushReplacementNamed(IapPage.discountName);
         }
       },
       child: Scaffold(
@@ -612,7 +612,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                 if (context.canPop()) {
                                   context.pop();
                                 } else {
-                                  context.pushReplacementNamed(DiscountPage.name);
+                                  context.pushReplacementNamed(IapPage.discountName);
                                 }
                               },
                               customBorder: const CircleBorder(),
