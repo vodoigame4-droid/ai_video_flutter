@@ -27,8 +27,8 @@ class SubscriptionPackageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget cardContent = Container(
-      constraints: const BoxConstraints(minHeight: 100),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      constraints: const BoxConstraints(minHeight: 80),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -42,8 +42,9 @@ class SubscriptionPackageCard extends StatelessWidget {
                   title,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.3,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -51,8 +52,9 @@ class SubscriptionPackageCard extends StatelessWidget {
                   description,
                   style: const TextStyle(
                     color: AppColors.subText,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.normal,
+                    height: 1.2,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -61,7 +63,7 @@ class SubscriptionPackageCard extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(width: 30),
+          const SizedBox(width: 12),
 
           // Right Content: Price and Suffix
           Column(
@@ -70,19 +72,23 @@ class SubscriptionPackageCard extends StatelessWidget {
             children: [
               Text(
                 price,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                style: TextStyle(
+                  color: isSelected ? AppColors.primary : Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -0.3,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 suffix,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                style: TextStyle(
+                  color: isSelected
+                      ? AppColors.primary.withValues(alpha: 0.8)
+                      : AppColors.subText,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: -0.1,
                 ),
               ),
             ],
@@ -95,7 +101,7 @@ class SubscriptionPackageCard extends StatelessWidget {
     Widget decoratedCard;
     if (isSelected) {
       decoratedCard = GradientBorderContainer(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
         backgroundColor: Colors.transparent,
         gradient: const LinearGradient(
           colors: [AppColors.secondary, AppColors.primary],
@@ -112,13 +118,13 @@ class SubscriptionPackageCard extends StatelessWidget {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
               onTap: onTap,
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               child: cardContent,
             ),
           ),
@@ -130,7 +136,7 @@ class SubscriptionPackageCard extends StatelessWidget {
           color: AppColors.onSurface.withValues(
             alpha: 0.5,
           ), // Match rgba(23,23,23,0.5)
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
           border: Border.all(
             color: AppColors.activeTab.withValues(alpha: 0.5),
             width: 1,
@@ -140,7 +146,7 @@ class SubscriptionPackageCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
             child: cardContent,
           ),
         ),
@@ -158,7 +164,7 @@ class SubscriptionPackageCard extends StatelessWidget {
             right: 0,
             child: Container(
               constraints: const BoxConstraints(minWidth: 88, minHeight: 21),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -167,8 +173,8 @@ class SubscriptionPackageCard extends StatelessWidget {
                   end: Alignment.centerRight,
                 ),
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  topRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(12),
+                  topRight: Radius.circular(16),
                 ),
               ),
               child: Text(

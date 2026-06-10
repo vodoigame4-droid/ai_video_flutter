@@ -83,6 +83,7 @@ class _Translations$common$ar extends Translations$common$en {
 	@override String get generate => 'توليد';
 	@override String get processing => 'جارٍ المعالجة...';
 	@override String get ok => 'موافق';
+	@override String get btn_continue => 'استمرار';
 }
 
 // Path: home
@@ -743,6 +744,7 @@ extension on TranslationsAr {
 			'common.generate' => 'توليد',
 			'common.processing' => 'جارٍ المعالجة...',
 			'common.ok' => 'موافق',
+			'common.btn_continue' => 'استمرار',
 			'home.title' => 'Vido',
 			'home.trending' => 'شائع',
 			'home.new_section' => 'جديد',

@@ -8,7 +8,8 @@
     "gallery": "갤러리",
     "generate": "생성하기",
     "processing": "처리 중...",
-    "ok": "확인"
+    "ok": "확인",
+    "btn_continue": "계속"
   },
   "home": {
     "title": "Vido",

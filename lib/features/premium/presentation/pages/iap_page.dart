@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui';
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +19,7 @@ import '../../../../core/widgets/gradient_button.dart';
 import '../widgets/subscription_package_card.dart';
 import '../widgets/buy_credit_now_button.dart';
 import 'buy_credits_page.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 class IapPage extends StatelessWidget {
   static const String path = '/iap';
@@ -66,6 +66,7 @@ class IapView extends StatefulWidget {
 
 class _IapViewState extends State<IapView> {
   late bool _showDiscount;
+  IapState? _lastState;
 
   @override
   void initState() {
@@ -79,7 +80,9 @@ class _IapViewState extends State<IapView> {
         _showDiscount = true;
       });
     } else {
-      if (context.mounted && Navigator.of(context).canPop()) {
+      if (widget.fromSplash) {
+        DashboardPage.go(context);
+      } else if (context.mounted && Navigator.of(context).canPop()) {
         Navigator.of(context).pop(false);
       }
     }
@@ -115,8 +118,6 @@ class _IapViewState extends State<IapView> {
     return messageKey;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final t = context.t;
@@ -131,226 +132,213 @@ class _IapViewState extends State<IapView> {
         backgroundColor: Colors.black,
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
+            state.maybeMap(
+              ready: (s) => _lastState = s,
+              success: (s) => _lastState = s,
+              error: (s) => _lastState = s,
+              orElse: () {},
+            );
             state.whenOrNull(
-              success: (
-                message,
-                isWeeklySelected,
-                isVideoRevealed,
-                _,
-                __,
-                ___,
-                ____,
-                _____,
-              ) {
-                if (message != 'already_vip') {
-                  AppToast.showSuccess(
-                    _translateSuccessMessage(context, message),
-                  );
-                }
-                if (context.mounted && Navigator.of(context).canPop()) {
-                  Navigator.of(context).pop(true);
-                }
-              },
-              error: (
-                message,
-                isWeeklySelected,
-                isVideoRevealed,
-                _,
-                __,
-                ___,
-                ____,
-                _____,
-              ) {
-                context.handleFailure(
-                  Failure.business(code: message, message: ''),
-                );
-              },
+              success:
+                  (
+                    message,
+                    isWeeklySelected,
+                    isVideoRevealed,
+                    _,
+                    __,
+                    ___,
+                    ____,
+                    _____,
+                  ) async {
+                    await sl<GetProfileUseCase>()(NoParams());
+                    if (message != 'already_vip') {
+                      AppToast.showSuccess(
+                        _translateSuccessMessage(context, message),
+                      );
+                    }
+                    if (widget.fromSplash) {
+                      DashboardPage.go(context);
+                    } else if (context.mounted &&
+                        Navigator.of(context).canPop()) {
+                      Navigator.of(context).pop(true);
+                    }
+                  },
+              error:
+                  (
+                    message,
+                    isWeeklySelected,
+                    isVideoRevealed,
+                    _,
+                    __,
+                    ___,
+                    ____,
+                    _____,
+                  ) {
+                    context.handleFailure(
+                      Failure.business(code: message, message: ''),
+                    );
+                  },
             );
           },
           builder: (context, state) {
-            return state.maybeWhen(
-              initial: () => const Center(child: CircularProgressIndicator()),
-              loading: () => Stack(
-                children: [
-                  Positioned.fill(child: Container(color: Colors.black)),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CircularProgressIndicator(),
-                        const SizedBox(height: 16),
-                        Text(
-                          t.common.processing,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
+            state.maybeMap(
+              ready: (s) => _lastState = s,
+              success: (s) => _lastState = s,
+              error: (s) => _lastState = s,
+              orElse: () {},
+            );
+
+            if (_lastState == null) {
+              return const Scaffold(
+                backgroundColor: Colors.black,
+                body: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppColors.primary,
                     ),
                   ),
-                ],
-              ),
-              orElse: () {
-                return Stack(
-                  children: [
-                    // 1. Video background (Discount) - rendered underneath the IAP video
-                    if (_showDiscount)
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: MediaQuery.of(context).size.height,
-                        child: SmoothVideoPlayerWidget(
-                          key: const ValueKey('discount_video'),
-                          videoUrl: sl<RemoteConfigService>().getBgDiscountUrl(),
-                          fit: BoxFit.fitWidth,
-                          alignment: Alignment.topCenter,
-                          autoPlay: true,
-                          loop: true,
-                          showMuteButton: false,
-                          showPlayPauseButton: false,
-                          playMuted: true,
-                          showBufferingIndicator: false,
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                        ),
-                      ),
+                ),
+              );
+            }
 
-                    // 2. Video background (IAP) - fades out smoothly to reveal Discount video
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      child: AnimatedOpacity(
-                        opacity: _showDiscount ? 0.0 : 1.0,
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.easeInOutCubic,
-                        child: IgnorePointer(
-                          ignoring: _showDiscount,
-                          child: SmoothVideoPlayerWidget(
-                            key: const ValueKey('iap_video'),
-                            videoUrl: widget.videoUrl.isNotEmpty
-                                ? widget.videoUrl
-                                : sl<RemoteConfigService>().getBgIAPUrl(),
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                            autoPlay: true,
-                            loop: true,
-                            showMuteButton: false,
-                            showPlayPauseButton: false,
-                            playMuted: true,
-                            showBufferingIndicator: false,
-                            height: MediaQuery.of(context).size.height * 0.5,
+            final content = Stack(
+              children: [
+                // 1. Video background (Discount) - rendered underneath the IAP video
+                if (_showDiscount)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: MediaQuery.of(context).size.height,
+                    child: SmoothVideoPlayerWidget(
+                      key: const ValueKey('discount_video'),
+                      videoUrl: sl<RemoteConfigService>().getBgDiscountUrl(),
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                      autoPlay: true,
+                      loop: true,
+                      showMuteButton: false,
+                      showPlayPauseButton: false,
+                      playMuted: true,
+                      showBufferingIndicator: false,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                    ),
+                  ),
+
+                // 2. Video background (IAP) - fades out smoothly to reveal Discount video
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: AnimatedOpacity(
+                    opacity: _showDiscount ? 0.0 : 1.0,
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeInOutCubic,
+                    child: IgnorePointer(
+                      ignoring: _showDiscount,
+                      child: SmoothVideoPlayerWidget(
+                        key: const ValueKey('iap_video'),
+                        videoUrl: widget.videoUrl.isNotEmpty
+                            ? widget.videoUrl
+                            : sl<RemoteConfigService>().getBgIAPUrl(),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                        autoPlay: true,
+                        loop: true,
+                        showMuteButton: false,
+                        showPlayPauseButton: false,
+                        playMuted: true,
+                        showBufferingIndicator: false,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // 2. Content view switcher
+                Positioned.fill(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 600),
+                    switchInCurve: Curves.easeInOutCubic,
+                    switchOutCurve: Curves.easeInOutCubic,
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(0.0, 0.08),
+                            end: Offset.zero,
+                          ).animate(animation),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: _showDiscount
+                        ? Stack(
+                            key: const ValueKey('discount_content'),
+                            children: [
+                              Positioned(
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                child: _buildDiscountContent(
+                                  context,
+                                  t,
+                                  _lastState!,
+                                ),
+                              ),
+                            ],
+                          )
+                        : _buildIapContent(context, t, _lastState!),
+                  ),
+                ),
+
+                // 3. Fixed close button & restore button top row
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 16,
+                  left: 16,
+                  right: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Close Button
+                      Material(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: _handleClose,
+                          customBorder: const CircleBorder(),
+                          child: const SizedBox(
+                            width: 36,
+                            height: 36,
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-
-                    // 2. Content view switcher
-                    Positioned.fill(
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 600),
-                        switchInCurve: Curves.easeInOutCubic,
-                        switchOutCurve: Curves.easeInOutCubic,
-                        transitionBuilder: (child, animation) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: SlideTransition(
-                              position: Tween<Offset>(
-                                begin: const Offset(0.0, 0.08),
-                                end: Offset.zero,
-                              ).animate(animation),
-                              child: child,
-                            ),
-                          );
-                        },
-                        child: _showDiscount
-                            ? Stack(
-                                key: const ValueKey('discount_content'),
-                                children: [
-                                  Positioned(
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    child: _buildDiscountContent(context, t, state),
-                                  ),
-                                ],
-                              )
-                            : _buildIapContent(context, t, state),
-                      ),
-                    ),
-
-                    // 3. Fixed close button & restore button top row
-                    Positioned(
-                      top: MediaQuery.of(context).padding.top + 16,
-                      left: 16,
-                      right: 16,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Close Button
-                          Material(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            shape: const CircleBorder(),
-                            child: InkWell(
-                              onTap: _handleClose,
-                              customBorder: const CircleBorder(),
-                              child: const SizedBox(
-                                width: 36,
-                                height: 36,
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // Restore Pill Button
-                          if (!_showDiscount)
-                            Material(
-                              color: Colors.black.withValues(alpha: 0.3),
-                              borderRadius: BorderRadius.circular(100),
-                              child: InkWell(
-                                onTap: () {
-                                  context.read<IapBloc>().add(
-                                    const IapEvent.restore(),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(100),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 14,
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    t.premium.restore,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  ),
+                ),
+              ],
             );
+
+            return content;
           },
         ),
       ),
     );
   }
 
-  Widget _buildIapContent(BuildContext context, Translations t, IapState state) {
+  Widget _buildIapContent(
+    BuildContext context,
+    Translations t,
+    IapState state,
+  ) {
     return Stack(
       key: const ValueKey('iap_content'),
       children: [
@@ -413,9 +401,7 @@ class _IapViewState extends State<IapView> {
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: constraints.maxHeight,
-                  ),
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
@@ -436,7 +422,8 @@ class _IapViewState extends State<IapView> {
                                   ),
                                   children: [
                                     TextSpan(
-                                      text: '${t.splash.appName.toUpperCase()} ',
+                                      text:
+                                          '${t.splash.appName.toUpperCase()} ',
                                       style: const TextStyle(
                                         color: Colors.white,
                                       ),
@@ -472,7 +459,9 @@ class _IapViewState extends State<IapView> {
                               ),
                               const SizedBox(height: 16),
                               BuyCreditNowButton(
-                                onTap: () => context.push(BuyCreditsPage.path),
+                                onTap: () => context.pushReplacement(
+                                  BuyCreditsPage.path,
+                                ),
                               ),
                               const SizedBox(height: 30),
                               Row(
@@ -480,22 +469,32 @@ class _IapViewState extends State<IapView> {
                                 children: [
                                   Flexible(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        _buildCheckItem(t.premium.unlock_templates),
+                                        _buildCheckItem(
+                                          t.premium.unlock_templates,
+                                        ),
                                         const SizedBox(height: 8),
-                                        _buildCheckItem(t.premium.discount_packs),
+                                        _buildCheckItem(
+                                          t.premium.discount_packs,
+                                        ),
                                       ],
                                     ),
                                   ),
                                   const SizedBox(width: 16),
                                   Flexible(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        _buildCheckItem(t.premium.fast_generation),
+                                        _buildCheckItem(
+                                          t.premium.fast_generation,
+                                        ),
                                         const SizedBox(height: 8),
-                                        _buildCheckItem(t.premium.videos_per_year),
+                                        _buildCheckItem(
+                                          t.premium.videos_per_year,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -520,8 +519,8 @@ class _IapViewState extends State<IapView> {
                                   final productId = weeklyProducts.isNotEmpty
                                       ? weeklyProducts.first.id
                                       : (Platform.isIOS
-                                          ? 'buy_weakly'
-                                          : 'buy_weekly.andr');
+                                            ? 'buy_weakly'
+                                            : 'buy_weekly.andr');
                                   context.read<IapBloc>().add(
                                     IapEvent.purchase(productId: productId),
                                   );
@@ -546,8 +545,8 @@ class _IapViewState extends State<IapView> {
                                   final productId = yearlyProducts.isNotEmpty
                                       ? yearlyProducts.first.id
                                       : (Platform.isIOS
-                                          ? 'buy_annualy'
-                                          : 'buy_annualy.andr');
+                                            ? 'buy_annualy'
+                                            : 'buy_annualy.andr');
                                   context.read<IapBloc>().add(
                                     IapEvent.purchase(productId: productId),
                                   );
@@ -555,9 +554,7 @@ class _IapViewState extends State<IapView> {
                               ),
                               const SizedBox(height: 24),
                               GradientButton(
-                                label: isWeekly
-                                    ? t.premium.start_free_trial
-                                    : t.premium.start_my_subscription,
+                                label: t.common.btn_continue,
                                 leadingIcon: !isWeekly
                                     ? SvgPicture.asset(
                                         Assets.icons.icCrown,
@@ -566,11 +563,13 @@ class _IapViewState extends State<IapView> {
                                       )
                                     : null,
                                 width: double.infinity,
+                                height: 62.0,
                                 gradient: AppColors.primaryGradient,
                                 textStyle: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 0.5,
                                 ),
                                 trailingIcon: const Icon(
                                   Icons.arrow_forward_rounded,
@@ -580,15 +579,15 @@ class _IapViewState extends State<IapView> {
                                 onPressed: () {
                                   final productId = isWeekly
                                       ? (weeklyProducts.isNotEmpty
-                                          ? weeklyProducts.first.id
-                                          : (Platform.isIOS
-                                              ? 'buy_weakly'
-                                              : 'buy_weekly.andr'))
+                                            ? weeklyProducts.first.id
+                                            : (Platform.isIOS
+                                                  ? 'buy_weakly'
+                                                  : 'buy_weekly.andr'))
                                       : (yearlyProducts.isNotEmpty
-                                          ? yearlyProducts.first.id
-                                          : (Platform.isIOS
-                                              ? 'buy_annualy'
-                                              : 'buy_annualy.andr'));
+                                            ? yearlyProducts.first.id
+                                            : (Platform.isIOS
+                                                  ? 'buy_annualy'
+                                                  : 'buy_annualy.andr'));
                                   context.read<IapBloc>().add(
                                     IapEvent.purchase(productId: productId),
                                   );
@@ -618,7 +617,9 @@ class _IapViewState extends State<IapView> {
                                     ),
                                   ),
                                   const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 8),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
                                     child: Text(
                                       '|',
                                       style: TextStyle(
@@ -638,7 +639,9 @@ class _IapViewState extends State<IapView> {
                                     ),
                                   ),
                                   const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 8),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
                                     child: Text(
                                       '|',
                                       style: TextStyle(
@@ -678,17 +681,25 @@ class _IapViewState extends State<IapView> {
     );
   }
 
-  Widget _buildDiscountContent(BuildContext context, Translations t, IapState state) {
-    final List<Product> yearlyProducts = state.mapOrNull(
-      ready: (s) => s.yearlyProducts,
-      success: (s) => s.yearlyProducts,
-      error: (s) => s.yearlyProducts,
-    ) ?? const [];
+  Widget _buildDiscountContent(
+    BuildContext context,
+    Translations t,
+    IapState state,
+  ) {
+    final List<Product> yearlyProducts =
+        state.mapOrNull(
+          ready: (s) => s.yearlyProducts,
+          success: (s) => s.yearlyProducts,
+          error: (s) => s.yearlyProducts,
+        ) ??
+        const [];
 
     String discountPrice = '...';
     for (final p in yearlyProducts) {
       final id = p.id.toLowerCase();
-      if (id.contains('discount') || id.contains('dis') || id == 'buy_annualy_discount') {
+      if (id.contains('discount') ||
+          id.contains('dis') ||
+          id == 'buy_annualy_discount') {
         discountPrice = p.priceString;
         break;
       }
@@ -757,11 +768,7 @@ class _IapViewState extends State<IapView> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(
-            Assets.icons.icTrendingDown,
-            width: 14,
-            height: 14,
-          ),
+          SvgPicture.asset(Assets.icons.icTrendingDown, width: 14, height: 14),
           const SizedBox(width: 8),
           ShaderMask(
             shaderCallback: (bounds) => AppColors.primaryGradient.createShader(
@@ -823,8 +830,9 @@ class _IapViewState extends State<IapView> {
 
   Widget _buildSubscriptionButton(BuildContext context, Translations t) {
     return GradientButton(
-      label: t.premium.start_my_subscription,
+      label: t.common.btn_continue,
       width: double.infinity,
+      height: 62.0,
       gradient: const LinearGradient(
         colors: [AppColors.primary, AppColors.secondary],
         begin: Alignment.centerLeft,
@@ -832,9 +840,9 @@ class _IapViewState extends State<IapView> {
       ),
       textStyle: const TextStyle(
         color: Colors.white,
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 0.3,
+        fontSize: 20,
+        fontWeight: FontWeight.w800,
+        letterSpacing: 0.5,
       ),
       trailingIcon: Container(
         width: 28,
@@ -843,14 +851,12 @@ class _IapViewState extends State<IapView> {
           color: Colors.white.withValues(alpha: 0.2),
           shape: BoxShape.circle,
         ),
-        child: const Icon(
-          Icons.arrow_forward,
-          color: Colors.white,
-          size: 16,
-        ),
+        child: const Icon(Icons.arrow_forward, color: Colors.white, size: 16),
       ),
       onPressed: () {
-        final productId = Platform.isIOS ? 'buy_annualy_discount' : 'buy_annualy_discount.andr';
+        final productId = Platform.isIOS
+            ? 'buy_annualy_discount'
+            : 'buy_annualy_discount.andr';
         context.read<IapBloc>().add(IapEvent.purchase(productId: productId));
       },
     );
@@ -918,8 +924,8 @@ class _IapViewState extends State<IapView> {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

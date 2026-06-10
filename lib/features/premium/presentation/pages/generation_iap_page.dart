@@ -13,7 +13,6 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
-import '../../../../core/utils/log_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
 import '../widgets/buy_credit_now_button.dart';
@@ -54,6 +53,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
   late AnimationController _revealController;
   late Animation<double> _blurAnimation;
   late Animation<double> _opacityAnimation;
+  IapState? _lastState;
 
   @override
   void initState() {
@@ -76,8 +76,9 @@ class _GenerationIapViewState extends State<GenerationIapView>
     super.dispose();
   }
 
-  Widget _buildTapToReveal() {
+  Widget _buildTapToReveal({required VoidCallback onTap}) {
     return GestureDetector(
+      onTap: onTap,
       onTapDown: (_) => _revealController.forward(),
       onTapUp: (_) => _revealController.reverse(),
       onTapCancel: () => _revealController.reverse(),
@@ -134,18 +135,19 @@ class _GenerationIapViewState extends State<GenerationIapView>
     if (messageKey.startsWith('success_credits_')) {
       final creditsStr = messageKey.replaceFirst('success_credits_', '');
       String creditLabel = '$creditsStr Credits';
-      if (creditsStr == '70')
+      if (creditsStr == '70') {
         creditLabel = t.premium.credit_70;
-      else if (creditsStr == '150')
+      } else if (creditsStr == '150') {
         creditLabel = t.premium.credit_150;
-      else if (creditsStr == '350')
+      } else if (creditsStr == '350') {
         creditLabel = t.premium.credit_350;
-      else if (creditsStr == '500')
+      } else if (creditsStr == '500') {
         creditLabel = t.premium.credit_500;
-      else if (creditsStr == '1000')
+      } else if (creditsStr == '1000') {
         creditLabel = t.premium.credit_1000;
-      else if (creditsStr == '5000')
+      } else if (creditsStr == '5000') {
         creditLabel = t.premium.credit_5000;
+      }
 
       return t.premium.purchase_success(item: creditLabel);
     }
@@ -170,6 +172,12 @@ class _GenerationIapViewState extends State<GenerationIapView>
         backgroundColor: Colors.black,
         body: BlocConsumer<IapBloc, IapState>(
           listener: (context, state) {
+            state.maybeMap(
+              ready: (s) => _lastState = s,
+              success: (s) => _lastState = s,
+              error: (s) => _lastState = s,
+              orElse: () {},
+            );
             state.whenOrNull(
               success:
                   (
@@ -181,7 +189,8 @@ class _GenerationIapViewState extends State<GenerationIapView>
                     ___,
                     ____,
                     _____,
-                  ) {
+                  ) async {
+                    await sl<GetProfileUseCase>()(NoParams());
                     if (message != 'already_vip') {
                       AppToast.showSuccess(
                         _translateSuccessMessage(context, message),
@@ -209,431 +218,438 @@ class _GenerationIapViewState extends State<GenerationIapView>
             );
           },
           builder: (context, state) {
-            return state.maybeWhen(
-              initial: () => const Center(child: CircularProgressIndicator()),
-              loading: () => Stack(
-                children: [
-                  Positioned.fill(child: Container(color: Colors.black)),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CircularProgressIndicator(),
-                        const SizedBox(height: 16),
-                        Text(
-                          t.common.processing,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
+            state.maybeMap(
+              ready: (s) => _lastState = s,
+              success: (s) => _lastState = s,
+              error: (s) => _lastState = s,
+              orElse: () {},
+            );
+
+            if (_lastState == null) {
+              return const Scaffold(
+                backgroundColor: Colors.black,
+                body: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppColors.primary,
                     ),
                   ),
-                ],
-              ),
-              orElse: () {
-                bool isWeekly = false;
-                List<Product> weeklyProducts = [];
-                List<Product> yearlyProducts = [];
+                ),
+              );
+            }
 
-                state.mapOrNull(
-                  ready: (s) {
-                    isWeekly = s.isWeeklySelected;
-                    weeklyProducts = s.weeklyProducts;
-                    yearlyProducts = s.yearlyProducts;
-                  },
-                  success: (s) {
-                    isWeekly = s.isWeeklySelected;
-                    weeklyProducts = s.weeklyProducts;
-                    yearlyProducts = s.yearlyProducts;
-                  },
-                  error: (s) {
-                    isWeekly = s.isWeeklySelected;
-                    weeklyProducts = s.weeklyProducts;
-                    yearlyProducts = s.yearlyProducts;
-                  },
-                );
+            bool isWeekly = false;
+            List<Product> weeklyProducts = [];
+            List<Product> yearlyProducts = [];
 
-                final weeklyPrice = weeklyProducts.isNotEmpty
-                    ? weeklyProducts.first.priceString
-                    : '...';
-                final yearlyPrice = yearlyProducts.isNotEmpty
-                    ? yearlyProducts.first.priceString
-                    : '...';
-                LogUtils.d(
-                  'GenerationIapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})',
-                );
+            _lastState!.mapOrNull(
+              ready: (s) {
+                isWeekly = s.isWeeklySelected;
+                weeklyProducts = s.weeklyProducts;
+                yearlyProducts = s.yearlyProducts;
+              },
+              success: (s) {
+                isWeekly = s.isWeeklySelected;
+                weeklyProducts = s.weeklyProducts;
+                yearlyProducts = s.yearlyProducts;
+              },
+              error: (s) {
+                isWeekly = s.isWeeklySelected;
+                weeklyProducts = s.weeklyProducts;
+                yearlyProducts = s.yearlyProducts;
+              },
+            );
 
-                return Stack(
-                  children: [
-                    // 1. Fullscreen Video background
-                    Positioned.fill(
-                      child: SmoothVideoPlayerWidget(
-                        videoUrl: widget.videoUrl.isNotEmpty
-                            ? widget.videoUrl
-                            : _placeholderVideoUrl,
-                        fit: BoxFit.cover,
-                        autoPlay: true,
-                        loop: true,
-                        showMuteButton: false,
-                        showPlayPauseButton: false,
-                        playMuted: true,
-                      ),
-                    ),
+            final weeklyPrice = weeklyProducts.isNotEmpty
+                ? weeklyProducts.first.priceString
+                : '...';
+            final yearlyPrice = yearlyProducts.isNotEmpty
+                ? yearlyProducts.first.priceString
+                : '...';
+            LogUtils.d(
+              'GenerationIapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})',
+            );
 
-                    // 2. Animated blur/dim overlay
-                    AnimatedBuilder(
-                      animation: _revealController,
-                      builder: (context, child) {
-                        return Positioned.fill(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: _blurAnimation.value,
-                              sigmaY: _blurAnimation.value,
-                            ),
-                            child: Container(
-                              color: Colors.black.withValues(
-                                alpha: _opacityAnimation.value,
-                              ),
-                            ),
+            final content = Stack(
+              children: [
+                // 1. Fullscreen Video background
+                Positioned.fill(
+                  child: SmoothVideoPlayerWidget(
+                    videoUrl: widget.videoUrl.isNotEmpty
+                        ? widget.videoUrl
+                        : _placeholderVideoUrl,
+                    fit: BoxFit.cover,
+                    autoPlay: true,
+                    loop: true,
+                    showMuteButton: false,
+                    showPlayPauseButton: false,
+                    playMuted: true,
+                  ),
+                ),
+
+                // 2. Animated blur/dim overlay
+                AnimatedBuilder(
+                  animation: _revealController,
+                  builder: (context, child) {
+                    return Positioned.fill(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: _blurAnimation.value,
+                          sigmaY: _blurAnimation.value,
+                        ),
+                        child: Container(
+                          color: Colors.black.withValues(
+                            alpha: _opacityAnimation.value,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
 
-                    // 3. Scrollable contents
-                    Positioned.fill(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          return SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minHeight: constraints.maxHeight,
+                // 3. Scrollable contents
+                Positioned.fill(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight,
+                          ),
+                          child: IntrinsicHeight(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                16,
+                                MediaQuery.of(context).padding.top + 64,
+                                16,
+                                MediaQuery.of(context).padding.bottom + 16,
                               ),
-                              child: IntrinsicHeight(
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                    16,
-                                    MediaQuery.of(context).padding.top + 64,
-                                    16,
-                                    MediaQuery.of(context).padding.bottom + 16,
+                              child: Column(
+                                children: [
+                                  // Centered Tap To Reveal Button
+                                  const Spacer(),
+
+                                  Center(
+                                    child: _buildTapToReveal(
+                                      onTap: () {
+                                        context.read<IapBloc>().add(
+                                          const IapEvent.selectAnnually(),
+                                        );
+                                        final productId = yearlyProducts.isNotEmpty
+                                            ? yearlyProducts.first.id
+                                            : (Platform.isIOS
+                                                ? 'buy_annualy'
+                                                : 'buy_annualy.andr');
+                                        context.read<IapBloc>().add(
+                                          IapEvent.purchase(
+                                            productId: productId,
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
-                                  child: Column(
+
+                                  const Spacer(),
+
+                                  // Main information Card
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      // Centered Tap To Reveal Button
-                                      const Spacer(),
-
-                                      Center(child: _buildTapToReveal()),
-
-                                      const Spacer(),
-
-                                      // Main information Card
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          // Title PRO
-                                          RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
+                                      // Title PRO
+                                      RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          style: const TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.w900,
+                                            fontFamily: 'Inter',
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  '${t.splash.appName.toUpperCase()} ',
                                               style: const TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.w900,
-                                                fontFamily: 'Inter',
+                                                color: Colors.white,
                                               ),
-                                              children: [
-                                                TextSpan(
-                                                  text:
-                                                      '${t.splash.appName.toUpperCase()} ',
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: t.premium.pro_title
-                                                      .toUpperCase(),
-                                                  style: const TextStyle(
-                                                    color: Color(0xFF24C780),
-                                                  ), // Bright Cyan/Green
-                                                ),
-                                              ],
                                             ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          // 50% OFF
-                                          Text(
-                                            t.premium.discount_title,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 50,
-                                              fontWeight: FontWeight.w900,
-                                              letterSpacing: 1.2,
-                                              height: 1.1,
-                                              fontFamily: 'Inter',
+                                            TextSpan(
+                                              text: t.premium.pro_title
+                                                  .toUpperCase(),
+                                              style: const TextStyle(
+                                                color: Color(0xFF24C780),
+                                              ), // Bright Cyan/Green
                                             ),
-                                          ),
-                                          // CREDIT PRICES
-                                          Text(
-                                            t.premium.discount_subtitle,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: 0.5,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 12),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      // 50% OFF
+                                      Text(
+                                        t.premium.discount_title,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.w900,
+                                          letterSpacing: 1.2,
+                                          height: 1.1,
+                                          fontFamily: 'Inter',
+                                        ),
+                                      ),
+                                      // CREDIT PRICES
+                                      Text(
+                                        t.premium.discount_subtitle,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
 
-                                          // Glassmorphism Buy Credit Now pill button
-                                          BuyCreditNowButton(
-                                            onTap: () => context.push(
-                                              '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
+                                      // Glassmorphism Buy Credit Now pill button
+                                      BuyCreditNowButton(
+                                        onTap: () => context.pushReplacement(
+                                          '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(widget.videoUrl)}',
+                                        ),
+                                      ),
+                                      const SizedBox(height: 24),
+
+                                      // Weekly Package
+                                      SubscriptionPackageCard(
+                                        title: t.premium.weekly,
+                                        description: t.premium.weekly_desc,
+                                        price: weeklyPrice,
+                                        suffix: t.premium.weekly_suffix,
+                                        tagText: t.premium.best_value,
+                                        tagColors: [
+                                          Color(0xFF2AC5C4),
+                                          Color(0xFF28C4B3),
+                                        ],
+                                        isSelected: isWeekly,
+                                        onTap: () {
+                                          context.read<IapBloc>().add(
+                                            const IapEvent.selectWeekly(),
+                                          );
+                                          final productId =
+                                              weeklyProducts.isNotEmpty
+                                              ? weeklyProducts.first.id
+                                              : (Platform.isIOS
+                                                    ? 'buy_weakly'
+                                                    : 'buy_weekly.andr');
+                                          context.read<IapBloc>().add(
+                                            IapEvent.purchase(
+                                              productId: productId,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(height: 10),
+
+                                      // Annually Package
+                                      SubscriptionPackageCard(
+                                        title: t.premium.annually,
+                                        description: t.premium.annually_desc,
+                                        price: yearlyPrice,
+                                        suffix: t.premium.annually_suffix,
+                                        tagText: t.premium.save_80,
+                                        tagColors: const [
+                                          Color(0xFFFFB300),
+                                          Color(0xFFFF8F00),
+                                        ],
+                                        isSelected: !isWeekly,
+                                        onTap: () {
+                                          context.read<IapBloc>().add(
+                                            const IapEvent.selectAnnually(),
+                                          );
+                                          final productId =
+                                              yearlyProducts.isNotEmpty
+                                              ? yearlyProducts.first.id
+                                              : (Platform.isIOS
+                                                    ? 'buy_annualy'
+                                                    : 'buy_annualy.andr');
+                                          context.read<IapBloc>().add(
+                                            IapEvent.purchase(
+                                              productId: productId,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(height: 24),
+
+                                      // Start Free Trial Button
+                                      GradientButton(
+                                        label: t.common.btn_continue,
+                                        leadingIcon: !isWeekly
+                                            ? SvgPicture.asset(
+                                                Assets.icons.icCrown,
+                                                width: 18,
+                                                height: 18,
+                                              )
+                                            : null,
+                                        width: double.infinity,
+                                        height: 62.0,
+                                        gradient: AppColors.primaryGradient,
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w800,
+                                          letterSpacing: 0.5,
+                                        ),
+                                        trailingIcon: const Icon(
+                                          Icons.arrow_forward_rounded,
+                                          color: Colors.white,
+                                          size: 24,
+                                        ),
+                                        onPressed: () {
+                                          final productId = isWeekly
+                                              ? (weeklyProducts.isNotEmpty
+                                                    ? weeklyProducts.first.id
+                                                    : (Platform.isIOS
+                                                          ? 'buy_weakly'
+                                                          : 'buy_weekly.andr'))
+                                              : (yearlyProducts.isNotEmpty
+                                                    ? yearlyProducts.first.id
+                                                    : (Platform.isIOS
+                                                          ? 'buy_annualy'
+                                                          : 'buy_annualy.andr'));
+                                          context.read<IapBloc>().add(
+                                            IapEvent.purchase(
+                                              productId: productId,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(height: 12),
+
+                                      // Footer Info
+                                      Text(
+                                        t.premium.auto_renewable,
+                                        style: TextStyle(
+                                          color: AppColors.subText,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () => launchPrivacyPolicy(),
+                                            child: Text(
+                                              t.premium.privacy_policy,
+                                              style: const TextStyle(
+                                                color: AppColors.subText,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                           ),
-                                          const SizedBox(height: 24),
-
-                                          // Weekly Package
-                                          SubscriptionPackageCard(
-                                            title: t.premium.weekly,
-                                            description: t.premium.weekly_desc,
-                                            price: weeklyPrice,
-                                            suffix: t.premium.weekly_suffix,
-                                            tagText: t.premium.best_value,
-                                            tagColors: [
-                                              Color(0xFF2AC5C4),
-                                              Color(0xFF28C4B3),
-                                            ],
-                                            isSelected: isWeekly,
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 8,
+                                            ),
+                                            child: Text(
+                                              '|',
+                                              style: TextStyle(
+                                                color: AppColors.subText,
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () => launchTermsOfUse(),
+                                            child: Text(
+                                              t.premium.terms_of_use,
+                                              style: const TextStyle(
+                                                color: AppColors.subText,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 8,
+                                            ),
+                                            child: Text(
+                                              '|',
+                                              style: TextStyle(
+                                                color: Colors.white38,
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
                                             onTap: () {
                                               context.read<IapBloc>().add(
-                                                const IapEvent.selectWeekly(),
-                                              );
-                                              final productId =
-                                                  weeklyProducts.isNotEmpty
-                                                  ? weeklyProducts.first.id
-                                                  : (Platform.isIOS
-                                                        ? 'buy_weakly'
-                                                        : 'buy_weekly.andr');
-                                              context.read<IapBloc>().add(
-                                                IapEvent.purchase(
-                                                  productId: productId,
-                                                ),
+                                                const IapEvent.restore(),
                                               );
                                             },
-                                          ),
-                                          const SizedBox(height: 10),
-
-                                          // Annually Package
-                                          SubscriptionPackageCard(
-                                            title: t.premium.annually,
-                                            description:
-                                                t.premium.annually_desc,
-                                            price: yearlyPrice,
-                                            suffix: t.premium.annually_suffix,
-                                            tagText: t.premium.save_80,
-                                            tagColors: const [
-                                              Color(0xFFFFB300),
-                                              Color(0xFFFF8F00),
-                                            ],
-                                            isSelected: !isWeekly,
-                                            onTap: () {
-                                              context.read<IapBloc>().add(
-                                                const IapEvent.selectAnnually(),
-                                              );
-                                              final productId =
-                                                  yearlyProducts.isNotEmpty
-                                                  ? yearlyProducts.first.id
-                                                  : (Platform.isIOS
-                                                        ? 'buy_annualy'
-                                                        : 'buy_annualy.andr');
-                                              context.read<IapBloc>().add(
-                                                IapEvent.purchase(
-                                                  productId: productId,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                          const SizedBox(height: 24),
-
-                                          // Start Free Trial Button
-                                          GradientButton(
-                                            label: isWeekly
-                                                ? t.premium.start_free_trial
-                                                : t
-                                                      .premium
-                                                      .start_my_subscription,
-                                            leadingIcon: !isWeekly
-                                                ? SvgPicture.asset(
-                                                    Assets.icons.icCrown,
-                                                    width: 18,
-                                                    height: 18,
-                                                  )
-                                                : null,
-                                            width: double.infinity,
-                                            gradient: AppColors.primaryGradient,
-                                            textStyle: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600,
+                                            child: Text(
+                                              t.premium.restore,
+                                              style: const TextStyle(
+                                                color: AppColors.subText,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                            trailingIcon: const Icon(
-                                              Icons.arrow_forward_rounded,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                            onPressed: () {
-                                              final productId = isWeekly
-                                                  ? (weeklyProducts.isNotEmpty
-                                                        ? weeklyProducts
-                                                              .first
-                                                              .id
-                                                        : (Platform.isIOS
-                                                              ? 'buy_weakly'
-                                                              : 'buy_weekly.andr'))
-                                                  : (yearlyProducts.isNotEmpty
-                                                        ? yearlyProducts
-                                                              .first
-                                                              .id
-                                                        : (Platform.isIOS
-                                                              ? 'buy_annualy'
-                                                              : 'buy_annualy.andr'));
-                                              context.read<IapBloc>().add(
-                                                IapEvent.purchase(
-                                                  productId: productId,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                          const SizedBox(height: 12),
-
-                                          // Footer Info
-                                          Text(
-                                            t.premium.auto_renewable,
-                                            style: TextStyle(
-                                              color: AppColors.subText,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          const SizedBox(height: 6),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () =>
-                                                    launchPrivacyPolicy(),
-                                                child: Text(
-                                                  t.premium.privacy_policy,
-                                                  style: const TextStyle(
-                                                    color: AppColors.subText,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                ),
-                                                child: Text(
-                                                  '|',
-                                                  style: TextStyle(
-                                                    color: AppColors.subText,
-                                                  ),
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () => launchTermsOfUse(),
-                                                child: Text(
-                                                  t.premium.terms_of_use,
-                                                  style: const TextStyle(
-                                                    color: AppColors.subText,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                ),
-                                                child: Text(
-                                                  '|',
-                                                  style: TextStyle(
-                                                    color: Colors.white38,
-                                                  ),
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  context.read<IapBloc>().add(
-                                                    const IapEvent.restore(),
-                                                  );
-                                                },
-                                                child: Text(
-                                                  t.premium.restore,
-                                                  style: const TextStyle(
-                                                    color: AppColors.subText,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-
-                    // 4. Header buttons: Back & Restore
-                    Positioned(
-                      top: MediaQuery.of(context).padding.top + 16,
-                      left: 16,
-                      right: 16,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Material(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            shape: const CircleBorder(),
-                            child: InkWell(
-                              onTap: () {
-                                if (context.canPop()) {
-                                  context.pop();
-                                } else {
-                                  context.pushReplacementNamed(IapPage.discountName);
-                                }
-                              },
-                              customBorder: const CircleBorder(),
-                              child: const SizedBox(
-                                width: 36,
-                                height: 36,
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                // 4. Header buttons: Back & Restore
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 16,
+                  left: 16,
+                  right: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Material(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: () {
+                            if (context.canPop()) {
+                              context.pop();
+                            } else {
+                              context.pushReplacementNamed(
+                                IapPage.discountName,
+                              );
+                            }
+                          },
+                          customBorder: const CircleBorder(),
+                          child: const SizedBox(
+                            width: 36,
+                            height: 36,
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  ),
+                ),
+              ],
             );
+            return content;
           },
         ),
       ),

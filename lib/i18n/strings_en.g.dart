@@ -103,6 +103,9 @@ class Translations$common$en {
 
 	/// en: 'OK'
 	String get ok => 'OK';
+
+	/// en: 'Continue'
+	String get btn_continue => 'Continue';
 }
 
 // Path: home
@@ -1522,6 +1525,7 @@ extension on Translations {
 			'common.generate' => 'Generate',
 			'common.processing' => 'Processing...',
 			'common.ok' => 'OK',
+			'common.btn_continue' => 'Continue',
 			'home.title' => 'Vido',
 			'home.trending' => 'Trending',
 			'home.new_section' => 'New',

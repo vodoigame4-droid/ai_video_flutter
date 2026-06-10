@@ -83,6 +83,7 @@ class _Translations$common$ja extends Translations$common$en {
 	@override String get generate => '生成する';
 	@override String get processing => '処理中...';
 	@override String get ok => 'OK';
+	@override String get btn_continue => '続行';
 }
 
 // Path: home
@@ -743,6 +744,7 @@ extension on TranslationsJa {
 			'common.generate' => '生成する',
 			'common.processing' => '処理中...',
 			'common.ok' => 'OK',
+			'common.btn_continue' => '続行',
 			'home.title' => 'Vido',
 			'home.trending' => 'トレンド',
 			'home.new_section' => '新規',

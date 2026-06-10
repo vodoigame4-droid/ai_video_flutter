@@ -83,6 +83,7 @@ class _Translations$common$es extends Translations$common$en {
 	@override String get generate => 'Generar';
 	@override String get processing => 'Procesando...';
 	@override String get ok => 'Aceptar';
+	@override String get btn_continue => 'Continuar';
 }
 
 // Path: home
@@ -743,6 +744,7 @@ extension on TranslationsEs {
 			'common.generate' => 'Generar',
 			'common.processing' => 'Procesando...',
 			'common.ok' => 'Aceptar',
+			'common.btn_continue' => 'Continuar',
 			'home.title' => 'Vido',
 			'home.trending' => 'Tendencias',
 			'home.new_section' => 'Nuevo',

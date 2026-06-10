@@ -84,6 +84,7 @@ class _Translations$common$vi extends Translations$common$en {
 	@override String get generate => 'Tạo video';
 	@override String get processing => 'Đang xử lý...';
 	@override String get ok => 'OK';
+	@override String get btn_continue => 'Tiếp tục';
 }
 
 // Path: home
@@ -759,6 +760,7 @@ extension on TranslationsVi {
 			'common.generate' => 'Tạo video',
 			'common.processing' => 'Đang xử lý...',
 			'common.ok' => 'OK',
+			'common.btn_continue' => 'Tiếp tục',
 			'home.title' => 'Vido',
 			'home.trending' => 'Xu hướng',
 			'home.new_section' => 'Mới',

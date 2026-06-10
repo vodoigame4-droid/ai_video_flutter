@@ -83,6 +83,7 @@ class _Translations$common$ko extends Translations$common$en {
 	@override String get generate => '생성하기';
 	@override String get processing => '처리 중...';
 	@override String get ok => '확인';
+	@override String get btn_continue => '계속';
 }
 
 // Path: home
@@ -743,6 +744,7 @@ extension on TranslationsKo {
 			'common.generate' => '생성하기',
 			'common.processing' => '처리 중...',
 			'common.ok' => '확인',
+			'common.btn_continue' => '계속',
 			'home.title' => 'Vido',
 			'home.trending' => '트렌딩',
 			'home.new_section' => '새로운',

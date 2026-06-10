@@ -83,6 +83,7 @@ class _Translations$common$zh extends Translations$common$en {
 	@override String get generate => '生成';
 	@override String get processing => '处理中...';
 	@override String get ok => '确定';
+	@override String get btn_continue => '继续';
 }
 
 // Path: home
@@ -743,6 +744,7 @@ extension on TranslationsZh {
 			'common.generate' => '生成',
 			'common.processing' => '处理中...',
 			'common.ok' => '确定',
+			'common.btn_continue' => '继续',
 			'home.title' => 'Vido',
 			'home.trending' => '热门',
 			'home.new_section' => '最新',

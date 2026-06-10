@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
@@ -57,6 +58,16 @@ class SplashView extends StatelessWidget {
               child: Image.asset(
                 'assets/images/bg_splash.png',
                 fit: BoxFit.cover,
+              ).animate().scale(
+                begin: const Offset(1.25, 1.25),
+                end: const Offset(1.0, 1.0),
+                duration: const Duration(seconds: 4),
+                curve: Curves.easeOutCubic,
+              ).fade(
+                begin: 0.0,
+                end: 1.0,
+                duration: const Duration(milliseconds: 1200),
+                curve: Curves.easeOut,
               ),
             ),
             // Center Logo & Title

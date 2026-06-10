@@ -46,6 +46,7 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
   late AnimationController _revealController;
   late Animation<double> _blurAnimation;
   late Animation<double> _opacityAnimation;
+  IapState? _lastState;
 
   @override
   void initState() {
@@ -68,8 +69,9 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
     super.dispose();
   }
 
-  Widget _buildTapToReveal() {
+  Widget _buildTapToReveal({required VoidCallback onTap}) {
     return GestureDetector(
+      onTap: onTap,
       onTapDown: (_) => _revealController.forward(),
       onTapUp: (_) => _revealController.reverse(),
       onTapCancel: () => _revealController.reverse(),
@@ -127,8 +129,15 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
         final double childAspectRatio = cardWidth / 168;
 
         final iapBlocState = context.watch<IapBloc>().state;
+        iapBlocState.maybeMap(
+          ready: (s) => _lastState = s,
+          success: (s) => _lastState = s,
+          error: (s) => _lastState = s,
+          orElse: () {},
+        );
+
         final List<Product> regularProducts =
-            iapBlocState.mapOrNull(
+            _lastState?.mapOrNull(
               ready: (s) => s.regularCreditProducts,
               success: (s) => s.regularCreditProducts,
               error: (s) => s.regularCreditProducts,
@@ -136,7 +145,7 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
             const [];
 
         final List<Product> discountProducts =
-            iapBlocState.mapOrNull(
+            _lastState?.mapOrNull(
               ready: (s) => s.discountCreditProducts,
               success: (s) => s.discountCreditProducts,
               error: (s) => s.discountCreditProducts,
@@ -145,12 +154,6 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
 
         String getProductPrice(int credits) {
           final matchCredits = '${credits}credits';
-          LogUtils.d(
-            'GenerationBuyCreditsPage getProductPrice: credits=$credits, isVip=$isVip, '
-            'iapBlocState=${iapBlocState.runtimeType}, '
-            'discountProducts=[${discountProducts.map((p) => '${p.id}:${p.priceString}').join(", ")}], '
-            'regularProducts=[${regularProducts.map((p) => '${p.id}:${p.priceString}').join(", ")}]',
-          );
           if (isVip) {
             for (final p in discountProducts) {
               final id = p.id.toLowerCase();
@@ -159,9 +162,6 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id.endsWith('${matchCredits}dis') ||
                   id.endsWith('${matchCredits}dis.andr') ||
                   id.contains('${credits}creditsdis')) {
-                LogUtils.d(
-                  'GenerationBuyCreditsPage matched discount product: $id -> ${p.priceString}',
-                );
                 return p.priceString;
               }
             }
@@ -171,9 +171,6 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id == '$matchCredits.andr' ||
                   id.endsWith(matchCredits) ||
                   id.endsWith('$matchCredits.andr')) {
-                LogUtils.d(
-                  'GenerationBuyCreditsPage matched fallback regular product: $id -> ${p.priceString}',
-                );
                 return p.priceString;
               }
             }
@@ -184,9 +181,6 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id == '$matchCredits.andr' ||
                   id.endsWith(matchCredits) ||
                   id.endsWith('$matchCredits.andr')) {
-                LogUtils.d(
-                  'GenerationBuyCreditsPage matched regular product: $id -> ${p.priceString}',
-                );
                 return p.priceString;
               }
             }
@@ -197,14 +191,10 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                   id.endsWith('${matchCredits}dis') ||
                   id.endsWith('${matchCredits}dis.andr') ||
                   id.contains('${credits}creditsdis')) {
-                LogUtils.d(
-                  'GenerationBuyCreditsPage matched fallback discount product: $id -> ${p.priceString}',
-                );
                 return p.priceString;
               }
             }
           }
-          LogUtils.d('GenerationBuyCreditsPage NO MATCH for credits=$credits');
           return '...';
         }
 
@@ -292,6 +282,12 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
             backgroundColor: Colors.black,
             body: BlocConsumer<IapBloc, IapState>(
               listener: (context, state) {
+                state.maybeMap(
+                  ready: (s) => _lastState = s,
+                  success: (s) => _lastState = s,
+                  error: (s) => _lastState = s,
+                  orElse: () {},
+                );
                 state.whenOrNull(
                   success:
                       (
@@ -303,7 +299,8 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                         ___,
                         ____,
                         _____,
-                      ) {
+                      ) async {
+                        await sl<GetProfileUseCase>()(NoParams());
                         if (message != 'already_vip') {
                           AppToast.showSuccess(
                             translateSuccessMessage(context, message),
@@ -328,177 +325,177 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                 );
               },
               builder: (context, state) {
-                return state.maybeWhen(
-                  initial: () => const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.primary,
+                state.maybeMap(
+                  ready: (s) => _lastState = s,
+                  success: (s) => _lastState = s,
+                  error: (s) => _lastState = s,
+                  orElse: () {},
+                );
+
+                if (_lastState == null) {
+                  return const Scaffold(
+                    backgroundColor: Colors.black,
+                    body: Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppColors.primary,
+                        ),
                       ),
                     ),
-                  ),
-                  loading: () => Stack(
-                    children: [
-                      Positioned.fill(child: Container(color: Colors.black)),
-                      Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                AppColors.primary,
+                  );
+                }
+
+                final content = Stack(
+                  children: [
+                    // 1. Fullscreen Video background
+                    Positioned.fill(
+                      child: SmoothVideoPlayerWidget(
+                        videoUrl: widget.videoUrl.isNotEmpty
+                            ? widget.videoUrl
+                            : _placeholderVideoUrl,
+                        fit: BoxFit.cover,
+                        autoPlay: true,
+                        loop: true,
+                        showMuteButton: false,
+                        showPlayPauseButton: false,
+                        playMuted: true,
+                      ),
+                    ),
+
+                    // 2. Animated blur/dim overlay
+                    AnimatedBuilder(
+                      animation: _revealController,
+                      builder: (context, child) {
+                        return Positioned.fill(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(
+                              sigmaX: _blurAnimation.value,
+                              sigmaY: _blurAnimation.value,
+                            ),
+                            child: Container(
+                              color: Colors.black.withValues(
+                                alpha: _opacityAnimation.value,
                               ),
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              t.common.processing,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
+                          ),
+                        );
+                      },
+                    ),
+
+                    Positioned.fill(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                            16,
+                            MediaQuery.of(context).padding.top + 64,
+                            16,
+                            MediaQuery.of(context).padding.bottom + 24,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const SizedBox(height: 80),
+                              // Centered Tap To Reveal Button
+                              Center(
+                                child: _buildTapToReveal(
+                                  onTap: () {
+                                    context.read<IapBloc>().add(
+                                      const IapEvent.selectCreditPackage(
+                                        index: 5,
+                                      ),
+                                    );
+                                    context.read<IapBloc>().add(
+                                      IapEvent.purchaseCredits(
+                                        credits: 5000,
+                                        priceText: getProductPrice(5000),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
+                              // Titles
+                              Text(
+                                t.premium.buy_more_credit,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 4),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                child: Text(
+                                  t.premium.credit_desc,
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.4,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              // 3x2 Packages Grid
+                              GridView.count(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: childAspectRatio,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: packages.map((pkg) {
+                                  return GenerationCreditPackCard(
+                                    title: pkg['title'] as String,
+                                    videoEstimate: pkg['approx'] as String,
+                                    priceText: pkg['price'] as String,
+                                    tagText: pkg['tag'] as String?,
+                                    onTap: () {
+                                      context.read<IapBloc>().add(
+                                        IapEvent.purchaseCredits(
+                                          credits: pkg['credits'] as int,
+                                          priceText: pkg['price'] as String,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                  orElse: () {
-                    return Stack(
-                      children: [
-                        // 1. Fullscreen Video background
-                        Positioned.fill(
-                          child: SmoothVideoPlayerWidget(
-                            videoUrl: widget.videoUrl.isNotEmpty
-                                ? widget.videoUrl
-                                : _placeholderVideoUrl,
-                            fit: BoxFit.cover,
-                            autoPlay: true,
-                            loop: true,
-                            showMuteButton: false,
-                            showPlayPauseButton: false,
-                            playMuted: true,
-                          ),
-                        ),
+                    ),
 
-                        // 2. Animated blur/dim overlay
-                        AnimatedBuilder(
-                          animation: _revealController,
-                          builder: (context, child) {
-                            return Positioned.fill(
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(
-                                  sigmaX: _blurAnimation.value,
-                                  sigmaY: _blurAnimation.value,
-                                ),
-                                child: Container(
-                                  color: Colors.black.withValues(
-                                    alpha: _opacityAnimation.value,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-
-                        Positioned.fill(
-                          child: SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                16,
-                                MediaQuery.of(context).padding.top + 64,
-                                16,
-                                MediaQuery.of(context).padding.bottom + 24,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const SizedBox(height: 80),
-                                  // Centered Tap To Reveal Button
-                                  Center(child: _buildTapToReveal()),
-                                  // Titles
-                                  Text(
-                                    t.premium.buy_more_credit,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child: Text(
-                                      t.premium.credit_desc,
-                                      style: const TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.4,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  // 3x2 Packages Grid
-                                  GridView.count(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                    childAspectRatio: childAspectRatio,
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    children: packages.map((pkg) {
-                                      return GenerationCreditPackCard(
-                                        title: pkg['title'] as String,
-                                        videoEstimate: pkg['approx'] as String,
-                                        priceText: pkg['price'] as String,
-                                        tagText: pkg['tag'] as String?,
-                                        onTap: () {
-                                          context.read<IapBloc>().add(
-                                            IapEvent.purchaseCredits(
-                                              credits: pkg['credits'] as int,
-                                              priceText: pkg['price'] as String,
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    }).toList(),
-                                  ),
-                                ],
-                              ),
+                    // 4. Header Close Button
+                    Positioned(
+                      top: MediaQuery.of(context).padding.top + 16,
+                      left: 16,
+                      child: Material(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          onTap: () => context.pop(),
+                          customBorder: const CircleBorder(),
+                          child: const SizedBox(
+                            width: 36,
+                            height: 36,
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 20,
                             ),
                           ),
                         ),
-
-                        // 4. Header Close Button
-                        Positioned(
-                          top: MediaQuery.of(context).padding.top + 16,
-                          left: 16,
-                          child: Material(
-                            color: Colors.black.withValues(alpha: 0.3),
-                            shape: const CircleBorder(),
-                            child: InkWell(
-                              onTap: () => context.pop(),
-                              customBorder: const CircleBorder(),
-                              child: const SizedBox(
-                                width: 36,
-                                height: 36,
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                      ),
+                    ),
+                  ],
                 );
+                return content;
               },
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/extensions/animation_extensions.dart';
 import '../../../../i18n/strings.g.dart';
 
 class ProgressSectionWidget extends StatelessWidget {
@@ -14,14 +15,14 @@ class ProgressSectionWidget extends StatelessWidget {
       children: [
         // Custom progress bar with indeterminate animation (running indefinitely)
         SizedBox(
-          width: 174,
-          height: 10,
+          width: 200,
+          height: 6,
           child: Stack(
             children: [
               // Background track matching original Figma styling
               Container(
-                width: 174,
-                height: 10,
+                width: 200,
+                height: 6,
                 decoration: const BoxDecoration(
                   color: Color(0xFFE2FFF5),
                   borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -32,7 +33,8 @@ class ProgressSectionWidget extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(100)),
                 child: ShaderMask(
                   blendMode: BlendMode.srcIn,
-                  shaderCallback: (bounds) => AppColors.primaryGradient.createShader(bounds),
+                  shaderCallback: (bounds) =>
+                      AppColors.primaryGradient.createShader(bounds),
                   child: const LinearProgressIndicator(
                     backgroundColor: Colors.transparent,
                     color: Colors.white,
@@ -52,6 +54,10 @@ class ProgressSectionWidget extends StatelessWidget {
           ),
         ),
       ],
+    ).slideAndFade(
+      begin: const Offset(0.0, 0.3),
+      delay: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
   }
 }

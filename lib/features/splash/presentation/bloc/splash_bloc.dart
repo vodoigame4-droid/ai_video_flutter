@@ -39,8 +39,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           // 1. Initialize Remote Config first so that it is ready for other preloading tasks
           await _initRemoteConfig();
 
-          // Minimum duration to display logo (1.5 seconds)
-          final minDelay = Future.delayed(const Duration(milliseconds: 1500));
+          // Minimum duration to display logo (1.0 second)
+          final minDelay = Future.delayed(const Duration(milliseconds: 1000));
 
           // 2. Run other initializations concurrently
           final concurrentStopwatch = Stopwatch()..start();

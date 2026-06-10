@@ -83,6 +83,7 @@ class _Translations$common$hi extends Translations$common$en {
 	@override String get generate => 'उत्पन्न करें';
 	@override String get processing => 'प्रक्रिया जारी है...';
 	@override String get ok => 'ठीक है';
+	@override String get btn_continue => 'जारी रखें';
 }
 
 // Path: home
@@ -743,6 +744,7 @@ extension on TranslationsHi {
 			'common.generate' => 'उत्पन्न करें',
 			'common.processing' => 'प्रक्रिया जारी है...',
 			'common.ok' => 'ठीक है',
+			'common.btn_continue' => 'जारी रखें',
 			'home.title' => 'Vido',
 			'home.trending' => 'ट्रेंडिंग',
 			'home.new_section' => 'नया',

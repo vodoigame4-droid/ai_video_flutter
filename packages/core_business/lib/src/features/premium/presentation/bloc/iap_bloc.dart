@@ -303,6 +303,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                       'IapBloc: Purchase Verification Failed: $message',
                     );
                     // Fallback to success for mockup mode
+                    await getProfileUseCase(NoParams());
                     emit(
                       IapState.success(
                         message: isWeekly ? 'success_weekly' : 'success_yearly',
@@ -554,6 +555,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                       'IapBloc: Purchase Credits Verification Failed: $message',
                     );
                     // Fallback to success for mockup
+                    await getProfileUseCase(NoParams());
                     emit(
                       IapState.success(
                         message: 'success_credits_$credits',
