@@ -172,6 +172,7 @@ class _Translations$splash$id extends Translations$splash$en {
 
 	// Translations
 	@override String get appName => 'Vido';
+	@override String get loading => 'Memuat...';
 }
 
 // Path: onboarding
@@ -795,6 +796,7 @@ extension on TranslationsId {
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => 'Memuat...',
 			'onboarding.page1.title' => 'Selamat Datang di Vido',
 			'onboarding.page1.subtitle' => 'Perjalanan Kreatif Anda Dimulai Di Sini...',
 			'onboarding.page1.button' => 'Mulai',

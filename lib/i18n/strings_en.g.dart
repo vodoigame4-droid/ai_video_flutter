@@ -298,6 +298,9 @@ class Translations$splash$en {
 
 	/// en: 'Vido'
 	String get appName => 'Vido';
+
+	/// en: 'Loading...'
+	String get loading => 'Loading...';
 }
 
 // Path: onboarding
@@ -1572,6 +1575,7 @@ extension on Translations {
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => 'Loading...',
 			'onboarding.page1.title' => 'Welcome To Vido',
 			'onboarding.page1.subtitle' => 'Your Creative Journey Starts Here...',
 			'onboarding.page1.button' => 'Get Started',

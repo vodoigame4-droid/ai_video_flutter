@@ -172,6 +172,7 @@ class _Translations$splash$ko extends Translations$splash$en {
 
 	// Translations
 	@override String get appName => 'Vido';
+	@override String get loading => '로딩 중...';
 }
 
 // Path: onboarding
@@ -795,6 +796,7 @@ extension on TranslationsKo {
 			'leave_dialog.title' => '저장하지 않고 나갈까요?',
 			'leave_dialog.desc' => '편집을 계속하시겠습니까, 아니면 지금 나가시겠습니까?',
 			'splash.appName' => 'Vido',
+			'splash.loading' => '로딩 중...',
 			'onboarding.page1.title' => 'Vido에 오신 것을 환영합니다',
 			'onboarding.page1.subtitle' => '당신의 창의적인 여정이 여기서 시작됩니다...',
 			'onboarding.page1.button' => '시작하기',

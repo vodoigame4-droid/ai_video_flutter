@@ -115,11 +115,7 @@ class _IapViewState extends State<IapView> {
     return messageKey;
   }
 
-  String get _currentVideoUrl => _showDiscount
-      ? sl<RemoteConfigService>().getBgDiscountUrl()
-      : widget.videoUrl.isNotEmpty
-          ? widget.videoUrl
-          : sl<RemoteConfigService>().getBgIAPUrl();
+
 
   @override
   Widget build(BuildContext context) {
@@ -198,28 +194,57 @@ class _IapViewState extends State<IapView> {
               orElse: () {
                 return Stack(
                   children: [
-                    // 1. Video background
+                    // 1. Video background (Discount) - rendered underneath the IAP video
+                    if (_showDiscount)
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: MediaQuery.of(context).size.height,
+                        child: SmoothVideoPlayerWidget(
+                          key: const ValueKey('discount_video'),
+                          videoUrl: sl<RemoteConfigService>().getBgDiscountUrl(),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                          autoPlay: true,
+                          loop: true,
+                          showMuteButton: false,
+                          showPlayPauseButton: false,
+                          playMuted: true,
+                          showBufferingIndicator: false,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                        ),
+                      ),
+
+                    // 2. Video background (IAP) - fades out smoothly to reveal Discount video
                     Positioned(
                       top: 0,
                       left: 0,
                       right: 0,
-                      height: _showDiscount
-                          ? MediaQuery.of(context).size.height
-                          : MediaQuery.of(context).size.height * 0.5,
-                      child: SmoothVideoPlayerWidget(
-                        key: ValueKey(_showDiscount ? 'discount_video' : 'iap_video'),
-                        videoUrl: _currentVideoUrl,
-                        fit: _showDiscount ? BoxFit.fitWidth : BoxFit.cover,
-                        alignment: _showDiscount ? Alignment.topCenter : Alignment.center,
-                        autoPlay: true,
-                        loop: true,
-                        showMuteButton: false,
-                        showPlayPauseButton: false,
-                        playMuted: true,
-                        width: _showDiscount ? MediaQuery.of(context).size.width : null,
-                        height: _showDiscount
-                            ? MediaQuery.of(context).size.height
-                            : MediaQuery.of(context).size.height * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: AnimatedOpacity(
+                        opacity: _showDiscount ? 0.0 : 1.0,
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.easeInOutCubic,
+                        child: IgnorePointer(
+                          ignoring: _showDiscount,
+                          child: SmoothVideoPlayerWidget(
+                            key: const ValueKey('iap_video'),
+                            videoUrl: widget.videoUrl.isNotEmpty
+                                ? widget.videoUrl
+                                : sl<RemoteConfigService>().getBgIAPUrl(),
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                            autoPlay: true,
+                            loop: true,
+                            showMuteButton: false,
+                            showPlayPauseButton: false,
+                            playMuted: true,
+                            showBufferingIndicator: false,
+                            height: MediaQuery.of(context).size.height * 0.5,
+                          ),
+                        ),
                       ),
                     ),
 

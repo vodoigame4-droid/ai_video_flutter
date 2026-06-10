@@ -68,21 +68,12 @@ class SplashView extends StatelessWidget {
               ),
             ),
             // Bottom Progress section
-            Positioned(
+            const Positioned(
               bottom: 80,
               left: 0,
               right: 0,
               child: Center(
-                child: BlocBuilder<SplashBloc, SplashState>(
-                  builder: (context, state) {
-                    final percent = state.maybeWhen(
-                      loading: (percent) => percent,
-                      success: (completed, isVip, urls) => 100,
-                      orElse: () => 0,
-                    );
-                    return ProgressSectionWidget(percent: percent);
-                  },
-                ),
+                child: ProgressSectionWidget(),
               ),
             ),
           ],

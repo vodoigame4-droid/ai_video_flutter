@@ -69,7 +69,8 @@
     "desc": "هل تريد متابعة التحرير أم المغادرة الآن؟"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "جارٍ التحميل..."
   },
   "onboarding": {
     "page1": {

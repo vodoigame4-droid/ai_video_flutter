@@ -69,7 +69,8 @@
     "desc": "क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "लोड हो रहा है..."
   },
   "onboarding": {
     "page1": {

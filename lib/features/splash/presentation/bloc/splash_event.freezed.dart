@@ -55,12 +55,11 @@ extension SplashEventPatterns on SplashEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _ProgressUpdated value)?  progressUpdated,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init(_that);case _ProgressUpdated() when progressUpdated != null:
-return progressUpdated(_that);case _:
+return init(_that);case _:
   return orElse();
 
 }
@@ -78,12 +77,11 @@ return progressUpdated(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _ProgressUpdated value)  progressUpdated,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,}){
 final _that = this;
 switch (_that) {
 case _Init():
-return init(_that);case _ProgressUpdated():
-return progressUpdated(_that);case _:
+return init(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +98,11 @@ return progressUpdated(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _ProgressUpdated value)?  progressUpdated,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init(_that);case _ProgressUpdated() when progressUpdated != null:
-return progressUpdated(_that);case _:
+return init(_that);case _:
   return null;
 
 }
@@ -122,11 +119,10 @@ return progressUpdated(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( int percent)?  progressUpdated,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _ProgressUpdated() when progressUpdated != null:
-return progressUpdated(_that.percent);case _:
+return init();case _:
   return orElse();
 
 }
@@ -144,11 +140,10 @@ return progressUpdated(_that.percent);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( int percent)  progressUpdated,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,}) {final _that = this;
 switch (_that) {
 case _Init():
-return init();case _ProgressUpdated():
-return progressUpdated(_that.percent);case _:
+return init();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +160,10 @@ return progressUpdated(_that.percent);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( int percent)?  progressUpdated,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _ProgressUpdated() when progressUpdated != null:
-return progressUpdated(_that.percent);case _:
+return init();case _:
   return null;
 
 }
@@ -208,71 +202,5 @@ String toString() {
 
 
 
-
-/// @nodoc
-
-
-class _ProgressUpdated implements SplashEvent {
-  const _ProgressUpdated(this.percent);
-  
-
- final  int percent;
-
-/// Create a copy of SplashEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ProgressUpdatedCopyWith<_ProgressUpdated> get copyWith => __$ProgressUpdatedCopyWithImpl<_ProgressUpdated>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProgressUpdated&&(identical(other.percent, percent) || other.percent == percent));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,percent);
-
-@override
-String toString() {
-  return 'SplashEvent.progressUpdated(percent: $percent)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$ProgressUpdatedCopyWith<$Res> implements $SplashEventCopyWith<$Res> {
-  factory _$ProgressUpdatedCopyWith(_ProgressUpdated value, $Res Function(_ProgressUpdated) _then) = __$ProgressUpdatedCopyWithImpl;
-@useResult
-$Res call({
- int percent
-});
-
-
-
-
-}
-/// @nodoc
-class __$ProgressUpdatedCopyWithImpl<$Res>
-    implements _$ProgressUpdatedCopyWith<$Res> {
-  __$ProgressUpdatedCopyWithImpl(this._self, this._then);
-
-  final _ProgressUpdated _self;
-  final $Res Function(_ProgressUpdated) _then;
-
-/// Create a copy of SplashEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? percent = null,}) {
-  return _then(_ProgressUpdated(
-null == percent ? _self.percent : percent // ignore: cast_nullable_to_non_nullable
-as int,
-  ));
-}
-
-
-}
 
 // dart format on

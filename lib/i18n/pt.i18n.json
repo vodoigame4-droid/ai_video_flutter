@@ -69,7 +69,8 @@
     "desc": "Deseja continuar editando ou sair agora?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Carregando..."
   },
   "onboarding": {
     "page1": {

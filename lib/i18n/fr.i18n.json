@@ -69,7 +69,8 @@
     "desc": "Voulez-vous continuer l'édition ou partir maintenant ?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Chargement..."
   },
   "onboarding": {
     "page1": {

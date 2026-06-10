@@ -69,7 +69,8 @@
     "desc": "Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Memuat..."
   },
   "onboarding": {
     "page1": {

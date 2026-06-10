@@ -69,7 +69,8 @@
     "desc": "Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "Laden..."
   },
   "onboarding": {
     "page1": {

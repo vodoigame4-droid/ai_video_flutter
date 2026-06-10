@@ -69,7 +69,8 @@
     "desc": "您要继续编辑还是现在离开？"
   },
   "splash": {
-    "appName": "Vido"
+    "appName": "Vido",
+    "loading": "加载中..."
   },
   "onboarding": {
     "page1": {

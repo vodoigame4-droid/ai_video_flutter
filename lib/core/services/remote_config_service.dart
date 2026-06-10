@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:core_business/core_business.dart';
 
@@ -33,7 +34,7 @@ class RemoteConfigService {
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/5c43a471fa58.webp",
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/8c0c37e84228.webp",
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/d0ae5af99672.webp",
-    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/cb6beb974833.webp",
+    "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/cb6beb974833.webp"
   ],
   "onboarding": [
     "https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/5c43a471fa58.webp",
@@ -76,7 +77,7 @@ class RemoteConfigService {
       await _remoteConfig.setConfigSettings(
         RemoteConfigSettings(
           fetchTimeout: const Duration(seconds: 10),
-          minimumFetchInterval: const Duration(hours: 1),
+          minimumFetchInterval: kDebugMode ? Duration.zero : const Duration(hours: 1),
         ),
       );
 

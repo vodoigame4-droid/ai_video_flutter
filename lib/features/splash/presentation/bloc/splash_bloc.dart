@@ -17,15 +17,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final GetOnboardingStatusUseCase getOnboardingStatusUseCase;
   final GetBannersUseCase getBannersUseCase;
   final GetProfileUseCase getProfileUseCase;
-  Timer? _timer;
-  bool _isLoginCompleted = false;
-  bool _isOnboardingPreloadCompleted = false;
-  bool _isRemoteConfigInitialized = false;
-  bool _isHavinSdkInitialized = false;
+
   bool _isOnboardingCompleted = false;
   bool _isVip = false;
   List<String>? _preloadedUrls;
-  int _progress = 0;
 
   SplashBloc({
     required this.autoLoginUseCase,
@@ -36,62 +31,32 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<SplashEvent>((event, emit) async {
       await event.when(
         init: () async {
-          _progress = 0;
-          _isLoginCompleted = false;
-          _isOnboardingPreloadCompleted = false;
-          _isHavinSdkInitialized = false;
-          _isRemoteConfigInitialized = false;
           _isOnboardingCompleted = false;
+          _isVip = false;
           _preloadedUrls = null;
-          emit(const SplashState.loading(0));
+          emit(const SplashState.loading());
 
-          // 1. Initialize Firebase Remote Config first and wait for completion
+          // 1. Initialize Remote Config first so that it is ready for other preloading tasks
           await _initRemoteConfig();
 
-          // 2. Start background login process
-          _performBackgroundLogin();
+          // Minimum duration to display logo (1.5 seconds)
+          final minDelay = Future.delayed(const Duration(milliseconds: 1500));
 
-          // 3. Start preloading onboarding images/videos if not completed
-          _performOnboardingPreload();
+          // 2. Run other initializations concurrently
+          await Future.wait([
+            _performBackgroundLogin(),
+            _performOnboardingPreload(),
+            _initHavinSdk(),
+            minDelay,
+          ]);
 
-          // 4. Initialize Havin SDK with iOS store configurations
-          _initHavinSdk();
-
-          // 5. Start progress animation timer
-          _timer?.cancel();
-          _timer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
-            _progress += 2;
-
-            if (_progress >= 100) {
-              if (_isLoginCompleted &&
-                  _isOnboardingPreloadCompleted &&
-                  _isHavinSdkInitialized &&
-                  _isRemoteConfigInitialized) {
-                _progress = 100;
-                timer.cancel();
-                add(const SplashEvent.progressUpdated(100));
-              } else {
-                // Hold at 99% until background initialization completes
-                _progress = 99;
-                add(const SplashEvent.progressUpdated(99));
-              }
-            } else {
-              add(SplashEvent.progressUpdated(_progress));
-            }
-          });
-        },
-        progressUpdated: (percent) async {
-          if (percent >= 100) {
-            emit(
-              SplashState.success(
-                isOnboardingCompleted: _isOnboardingCompleted,
-                isVip: _isVip,
-                preloadedUrls: _preloadedUrls,
-              ),
-            );
-          } else {
-            emit(SplashState.loading(percent));
-          }
+          emit(
+            SplashState.success(
+              isOnboardingCompleted: _isOnboardingCompleted,
+              isVip: _isVip,
+              preloadedUrls: _preloadedUrls,
+            ),
+          );
         },
       );
     });
@@ -108,7 +73,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         orElse: () => false,
       );
 
-      // Fetch and preload home banner (download/cache video/webp or preload image)
+      // Fetch and preload home banner
       final sharedPreferences = sl<SharedPreferences>();
       await BannerPreloadHelper.preloadBanner(
         getBannersUseCase: getBannersUseCase,
@@ -120,9 +85,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         error: e,
         stackTrace: stack,
       );
-    } finally {
-      _isLoginCompleted = true;
-      _checkAllInitializationCompleted();
     }
   }
 
@@ -158,7 +120,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
             if (preloadFutures.isNotEmpty) {
               await Future.wait(
                 preloadFutures,
-              ).timeout(const Duration(seconds: 5), onTimeout: () => []);
+              ).timeout(const Duration(seconds: 30), onTimeout: () => []);
             }
           }
         }
@@ -169,9 +131,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         error: e,
         stackTrace: stack,
       );
-    } finally {
-      _isOnboardingPreloadCompleted = true;
-      _checkAllInitializationCompleted();
     }
   }
 
@@ -181,14 +140,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     }
 
     if (Platform.environment.containsKey('FLUTTER_TEST')) {
-      _isHavinSdkInitialized = true;
-      _checkAllInitializationCompleted();
       return;
     }
     try {
       final List<BillingProduct> products = Platform.isIOS
           ? const [
-              // iOS App Store Connect Consumables
               BillingProduct.consumable('70credits'),
               BillingProduct.consumable('70creditsdis'),
               BillingProduct.consumable('150credits'),
@@ -200,14 +156,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('1000creditsdis'),
               BillingProduct.consumable('5000credits'),
               BillingProduct.consumable('5000creditsdis'),
-
-              // iOS App Store Connect Subscriptions
               BillingProduct.subscription('buy_weakly'),
               BillingProduct.subscription('buy_annualy'),
               BillingProduct.subscription('buy_annualy_discount'),
             ]
           : const [
-              // Android Google Play Consumables
               BillingProduct.consumable('70credits.andr'),
               BillingProduct.consumable('70creditsdis.andr'),
               BillingProduct.consumable('150credits.andr'),
@@ -219,8 +172,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('1000creditsdis.andr'),
               BillingProduct.consumable('5000credits.andr'),
               BillingProduct.consumable('5000creditsdis.andr'),
-
-              // Android Google Play Subscriptions
               BillingProduct.subscription('buy_weekly.andr'),
               BillingProduct.subscription('buy_annualy.andr'),
               BillingProduct.subscription('buy_annualy_discount.andr'),
@@ -228,8 +179,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       final billingConfig = BillingConfig(debugMode: false, products: products);
 
       await HavinSdk.instance.init(billingConfig: billingConfig);
-
-      // Initialize IapBloc to start loading billing products during Splash
       sl<IapBloc>().add(const IapEvent.init());
       LogUtils.d(
         'SplashBloc: HavinSdk initialized. Triggered IapBloc initialization.',
@@ -240,9 +189,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         error: e,
         stackTrace: stack,
       );
-    } finally {
-      _isHavinSdkInitialized = true;
-      _checkAllInitializationCompleted();
     }
   }
 
@@ -257,25 +203,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         error: e,
         stackTrace: stack,
       );
-    } finally {
-      _isRemoteConfigInitialized = true;
-      _checkAllInitializationCompleted();
-    }
-  }
-
-  void _checkAllInitializationCompleted() {
-    LogUtils.d(
-      'SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, remoteConfig=$_isRemoteConfigInitialized, progress=$_progress',
-    );
-    if (_isLoginCompleted &&
-        _isOnboardingPreloadCompleted &&
-        _isHavinSdkInitialized &&
-        _isRemoteConfigInitialized) {
-      if (_progress >= 99) {
-        _timer?.cancel();
-        _timer = null;
-        add(const SplashEvent.progressUpdated(100));
-      }
     }
   }
 
@@ -309,11 +236,5 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     } catch (e) {
       LogUtils.e('SplashBloc: Failed to preload image $url', error: e);
     }
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
   }
 }

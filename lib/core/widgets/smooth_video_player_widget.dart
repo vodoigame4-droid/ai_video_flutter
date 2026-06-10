@@ -24,6 +24,7 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
   final Player? externalPlayer;
   final bool playMuted;
   final Alignment? alignment;
+  final bool showBufferingIndicator;
 
   const SmoothVideoPlayerWidget({
     super.key,
@@ -40,6 +41,7 @@ class SmoothVideoPlayerWidget extends StatefulWidget {
     this.externalPlayer,
     this.playMuted = false,
     this.alignment,
+    this.showBufferingIndicator = true,
   });
 
   @override
@@ -80,15 +82,9 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
       _controller = VideoController(_player!);
       _initPlayer();
     } else {
-      // Debounce player creation by 300ms to prevent resource leaks during quick screen pushes/pops
-      _initTimer = Timer(const Duration(milliseconds: 300), () {
-        if (!mounted) return;
-        setState(() {
-          _player = Player();
-          _controller = VideoController(_player!);
-        });
-        _initPlayer();
-      });
+      _player = Player();
+      _controller = VideoController(_player!);
+      _initPlayer();
     }
   }
 
@@ -296,7 +292,9 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
             ),
 
           // 3. Play/Pause center toggle
-          if (widget.showPlayPauseButton && (!_isPlaying || _isBuffering))
+          if (widget.showPlayPauseButton &&
+              ((!_isPlaying && (widget.autoPlay ? _hasPlayed : true)) ||
+                  (_isBuffering && widget.showBufferingIndicator)))
             GestureDetector(
               onTap: _togglePlay,
               child: Container(
@@ -307,15 +305,17 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
                   color: AppColors.black.withValues(alpha: 0.1),
                 ),
                 child: _isBuffering
-                    ? const Padding(
-                        padding: EdgeInsets.all(24.0),
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            AppColors.primary,
-                          ),
-                        ),
-                      )
+                    ? (widget.showBufferingIndicator
+                        ? const Padding(
+                            padding: EdgeInsets.all(24.0),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppColors.primary,
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink())
                     : const Icon(
                         Icons.play_arrow_rounded,
                         color: AppColors.white,
@@ -325,7 +325,7 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
             ),
 
           // 4. Buffering spinner when playing but stalling
-          if (_isBuffering && _isPlaying)
+          if (_isBuffering && _isPlaying && widget.showBufferingIndicator)
             const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
