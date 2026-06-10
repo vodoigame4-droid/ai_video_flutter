@@ -302,11 +302,11 @@ class _Translations$premium$zh extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => '轻触解锁';
 	@override String get weekly => '每周';
-	@override String get weekly_desc => '7天免费体验，之后 249.000đ/周';
+	@override String weekly_desc({required Object price}) => '7天免费体验，之后 ${price}/周';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/周';
 	@override String get annually => '每年';
-	@override String get annually_desc => '仅折合 24.980đ/周';
+	@override String annually_desc({required Object price}) => '仅折合 ${price}/周';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/年';
 	@override String get best_value => '超值推荐';
@@ -356,7 +356,7 @@ class _Translations$premium$zh extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => '节省高达 ${percent}%';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/年';
-	@override String get billed_yearly => '按799.000đ/年计费 - 随时取消';
+	@override String billed_yearly({required Object price}) => '按${price}/年计费 - 随时取消';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsZh {
 			'language.zh' => '中文',
 			'premium.tap_to_reveal' => '轻触解锁',
 			'premium.weekly' => '每周',
-			'premium.weekly_desc' => '7天免费体验，之后 249.000đ/周',
+			'premium.weekly_desc' => ({required Object price}) => '7天免费体验，之后 ${price}/周',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/周',
 			'premium.annually' => '每年',
-			'premium.annually_desc' => '仅折合 24.980đ/周',
+			'premium.annually_desc' => ({required Object price}) => '仅折合 ${price}/周',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/年',
 			'premium.best_value' => '超值推荐',
@@ -919,7 +919,7 @@ extension on TranslationsZh {
 			'premium.save_up_to' => ({required Object percent}) => '节省高达 ${percent}%',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/年',
-			'premium.billed_yearly' => '按799.000đ/年计费 - 随时取消',
+			'premium.billed_yearly' => ({required Object price}) => '按${price}/年计费 - 随时取消',
 			'generating.title' => '正在生成',
 			'generating.your_video' => '您的视频',
 			'generating.desc' => '这可能需要几分钟时间。\n请稍候...',

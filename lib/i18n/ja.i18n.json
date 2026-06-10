@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "タップして表示",
     "weekly": "週週プラン",
-    "weekly_desc": "7日間の無料体験、その後 249.000đ/週",
+    "weekly_desc": "7日間の無料体験、その後 {price}/週",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/週",
     "annually": "年額プラン",
-    "annually_desc": "実質 24.980đ/週",
+    "annually_desc": "実質 {price}/週",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/年",
     "best_value": "最もお得",
@@ -218,7 +218,7 @@
     "save_up_to": "最大{percent}%オフ",
     "discount_price": "799.000",
     "discount_price_suffix": "/年",
-    "billed_yearly": "799.000đ/年で請求 - いつでもキャンセル可能"
+    "billed_yearly": "{price}/年で請求 - いつでもキャンセル可能"
   },
   "generating": {
     "title": "生成中",

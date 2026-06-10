@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "탭하여 잠금 해제",
     "weekly": "주간",
-    "weekly_desc": "7일 무료 체험, 이후 249.000đ/주",
+    "weekly_desc": "7일 무료 체험, 이후 {price}/주",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/주",
     "annually": "연간",
-    "annually_desc": "주당 24.980đ 상당",
+    "annually_desc": "주당 {price} 상당",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/년",
     "best_value": "최고의 가치",
@@ -218,7 +218,7 @@
     "save_up_to": "최대 {percent}% 절약",
     "discount_price": "799.000",
     "discount_price_suffix": "/년",
-    "billed_yearly": "799.000đ/년 청구 - 언제든지 취소 가능"
+    "billed_yearly": "{price}/년 청구 - 언제든지 취소 가능"
   },
   "generating": {
     "title": "생성 중",

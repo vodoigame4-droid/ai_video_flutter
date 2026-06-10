@@ -404,11 +404,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: BuyCreditsPage.path,
       name: BuyCreditsPage.name,
-      pageBuilder: (context, state) => AppRoutePage.slideUpAndFade<void>(
-        state: state,
-        duration: const Duration(milliseconds: 500),
-        child: const BuyCreditsPage(),
-      ),
+      pageBuilder: (context, state) {
+        final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
+        return AppRoutePage.slideUpAndFade<void>(
+          state: state,
+          duration: const Duration(milliseconds: 500),
+          child: BuyCreditsPage(fromSplash: fromSplash),
+        );
+      },
     ),
     GoRoute(
       path: GenerationIapPage.path,

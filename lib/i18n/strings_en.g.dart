@@ -535,8 +535,8 @@ class Translations$premium$en {
 	/// en: 'Weekly'
 	String get weekly => 'Weekly';
 
-	/// en: '7-day unlimited access, then 249.000đ/week'
-	String get weekly_desc => '7-day unlimited access, then 249.000đ/week';
+	/// en: '7-day unlimited access, then {price}/week'
+	String weekly_desc({required Object price}) => '7-day unlimited access, then ${price}/week';
 
 	/// en: '199.000 đ'
 	String get weekly_price => '199.000 đ';
@@ -547,8 +547,8 @@ class Translations$premium$en {
 	/// en: 'Annually'
 	String get annually => 'Annually';
 
-	/// en: 'Only 24.980đ/week'
-	String get annually_desc => 'Only 24.980đ/week';
+	/// en: 'Only {price}/week'
+	String annually_desc({required Object price}) => 'Only ${price}/week';
 
 	/// en: '1.299.000 đ'
 	String get annually_price => '1.299.000 đ';
@@ -697,8 +697,8 @@ class Translations$premium$en {
 	/// en: '/year'
 	String get discount_price_suffix => '/year';
 
-	/// en: 'Billed 799.000đ/year - Cancel Anytime'
-	String get billed_yearly => 'Billed 799.000đ/year - Cancel Anytime';
+	/// en: 'Billed {price}/year - Cancel Anytime'
+	String billed_yearly({required Object price}) => 'Billed ${price}/year - Cancel Anytime';
 }
 
 // Path: video_player
@@ -1646,11 +1646,11 @@ extension on Translations {
 			'language.zh' => 'Chinese',
 			'premium.tap_to_reveal' => 'Tap to Reveal',
 			'premium.weekly' => 'Weekly',
-			'premium.weekly_desc' => '7-day unlimited access, then 249.000đ/week',
+			'premium.weekly_desc' => ({required Object price}) => '7-day unlimited access, then ${price}/week',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/week',
 			'premium.annually' => 'Annually',
-			'premium.annually_desc' => 'Only 24.980đ/week',
+			'premium.annually_desc' => ({required Object price}) => 'Only ${price}/week',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/year',
 			'premium.best_value' => 'Best Value',
@@ -1700,7 +1700,7 @@ extension on Translations {
 			'premium.save_up_to' => ({required Object percent}) => 'Save Up To ${percent}%',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/year',
-			'premium.billed_yearly' => 'Billed 799.000đ/year - Cancel Anytime',
+			'premium.billed_yearly' => ({required Object price}) => 'Billed ${price}/year - Cancel Anytime',
 			'video_player.play' => 'Play',
 			'video_player.pause' => 'Pause',
 			'video_player.error_loading' => 'Failed to load video.',

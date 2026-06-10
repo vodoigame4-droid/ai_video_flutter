@@ -302,11 +302,11 @@ class _Translations$premium$fr extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => 'Appuyez pour révéler';
 	@override String get weekly => 'Hebdomadaire';
-	@override String get weekly_desc => 'Accès illimité de 7 jours, puis 249.000đ/semaine';
+	@override String weekly_desc({required Object price}) => 'Accès illimité de 7 jours, puis ${price}/semaine';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/semaine';
 	@override String get annually => 'Annuel';
-	@override String get annually_desc => 'Seulement 24.980đ/semaine';
+	@override String annually_desc({required Object price}) => 'Seulement ${price}/semaine';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/an';
 	@override String get best_value => 'Meilleur prix';
@@ -356,7 +356,7 @@ class _Translations$premium$fr extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => 'Économisez jusqu\'à ${percent}%';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/an';
-	@override String get billed_yearly => 'Facturé 799.000đ/an - Annulez à tout moment';
+	@override String billed_yearly({required Object price}) => 'Facturé ${price}/an - Annulez à tout moment';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsFr {
 			'language.zh' => 'Chinois',
 			'premium.tap_to_reveal' => 'Appuyez pour révéler',
 			'premium.weekly' => 'Hebdomadaire',
-			'premium.weekly_desc' => 'Accès illimité de 7 jours, puis 249.000đ/semaine',
+			'premium.weekly_desc' => ({required Object price}) => 'Accès illimité de 7 jours, puis ${price}/semaine',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/semaine',
 			'premium.annually' => 'Annuel',
-			'premium.annually_desc' => 'Seulement 24.980đ/semaine',
+			'premium.annually_desc' => ({required Object price}) => 'Seulement ${price}/semaine',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/an',
 			'premium.best_value' => 'Meilleur prix',
@@ -919,7 +919,7 @@ extension on TranslationsFr {
 			'premium.save_up_to' => ({required Object percent}) => 'Économisez jusqu\'à ${percent}%',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/an',
-			'premium.billed_yearly' => 'Facturé 799.000đ/an - Annulez à tout moment',
+			'premium.billed_yearly' => ({required Object price}) => 'Facturé ${price}/an - Annulez à tout moment',
 			'generating.title' => 'Génération',
 			'generating.your_video' => 'de votre vidéo',
 			'generating.desc' => 'Cela peut prendre quelques minutes.\nVeuillez patienter...',

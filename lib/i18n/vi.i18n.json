@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "Chạm để Mở khóa",
     "weekly": "Hàng tuần",
-    "weekly_desc": "7 ngày truy cập không giới hạn, sau đó 249.000đ/tuần",
+    "weekly_desc": "7 ngày truy cập không giới hạn, sau đó {price}/tuần",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/tuần",
     "annually": "Hàng năm",
-    "annually_desc": "Chỉ 24.980đ/tuần",
+    "annually_desc": "Chỉ {price}/tuần",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/năm",
     "best_value": "Tốt nhất",
@@ -218,7 +218,7 @@
     "save_up_to": "Tiết kiệm đến {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/năm",
-    "billed_yearly": "Thanh toán 799.000đ/năm - Hủy bất cứ lúc nào"
+    "billed_yearly": "Thanh toán {price}/năm - Hủy bất cứ lúc nào"
   },
   "video_player": {
     "play": "Phát",

@@ -48,6 +48,8 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
   late Animation<double> _opacityAnimation;
   IapState? _lastState;
 
+  bool _showCloseButton = false;
+
   @override
   void initState() {
     super.initState();
@@ -61,6 +63,19 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
     _opacityAnimation = Tween<double>(begin: 0.45, end: 0.1).animate(
       CurvedAnimation(parent: _revealController, curve: Curves.easeOut),
     );
+
+    final delaySeconds = sl<RemoteConfigService>().closeButtonDelaySeconds;
+    if (delaySeconds > 0) {
+      Future.delayed(Duration(seconds: delaySeconds), () {
+        if (mounted) {
+          setState(() {
+            _showCloseButton = true;
+          });
+        }
+      });
+    } else {
+      _showCloseButton = true;
+    }
   }
 
   @override
@@ -475,19 +490,26 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                     Positioned(
                       top: MediaQuery.of(context).padding.top + 16,
                       left: 16,
-                      child: Material(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () => context.pop(),
-                          customBorder: const CircleBorder(),
-                          child: const SizedBox(
-                            width: 36,
-                            height: 36,
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.white,
-                              size: 20,
+                      child: IgnorePointer(
+                        ignoring: !_showCloseButton,
+                        child: AnimatedOpacity(
+                          opacity: _showCloseButton ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () => context.pop(),
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
                             ),
                           ),
                         ),

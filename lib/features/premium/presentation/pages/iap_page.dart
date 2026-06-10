@@ -13,6 +13,7 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/utils/price_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
@@ -67,11 +68,25 @@ class IapView extends StatefulWidget {
 class _IapViewState extends State<IapView> {
   late bool _showDiscount;
   IapState? _lastState;
+  bool _showCloseButton = false;
 
   @override
   void initState() {
     super.initState();
     _showDiscount = widget.showDiscountInit;
+
+    final delaySeconds = sl<RemoteConfigService>().closeButtonDelaySeconds;
+    if (delaySeconds > 0 && !widget.showDiscountInit) {
+      Future.delayed(Duration(seconds: delaySeconds), () {
+        if (mounted) {
+          setState(() {
+            _showCloseButton = true;
+          });
+        }
+      });
+    } else {
+      _showCloseButton = true;
+    }
   }
 
   void _handleClose() {
@@ -304,19 +319,26 @@ class _IapViewState extends State<IapView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Close Button
-                      Material(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: _handleClose,
-                          customBorder: const CircleBorder(),
-                          child: const SizedBox(
-                            width: 36,
-                            height: 36,
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.white,
-                              size: 20,
+                      IgnorePointer(
+                        ignoring: !_showCloseButton,
+                        child: AnimatedOpacity(
+                          opacity: _showCloseButton ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: _handleClose,
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -397,6 +419,12 @@ class _IapViewState extends State<IapView> {
               final yearlyPrice = yearlyProducts.isNotEmpty
                   ? yearlyProducts.first.priceString
                   : '...';
+              final yearlyPricePerWeek = yearlyProducts.isNotEmpty
+                  ? PriceUtils.formatPrice(
+                      yearlyProducts.first.priceAmount / 52,
+                      yearlyProducts.first.currencyCode,
+                    )
+                  : '...';
 
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -459,9 +487,15 @@ class _IapViewState extends State<IapView> {
                               ),
                               const SizedBox(height: 16),
                               BuyCreditNowButton(
-                                onTap: () => context.pushReplacement(
-                                  BuyCreditsPage.path,
-                                ),
+                                onTap: () {
+                                  if (widget.fromSplash) {
+                                    context.pushReplacement(
+                                      '${BuyCreditsPage.path}?fromSplash=true',
+                                    );
+                                  } else {
+                                    context.pushReplacement(BuyCreditsPage.path);
+                                  }
+                                },
                               ),
                               const SizedBox(height: 30),
                               Row(
@@ -503,7 +537,7 @@ class _IapViewState extends State<IapView> {
                               const SizedBox(height: 20),
                               SubscriptionPackageCard(
                                 title: t.premium.weekly,
-                                description: t.premium.weekly_desc,
+                                description: t.premium.weekly_desc(price: weeklyPrice),
                                 price: weeklyPrice,
                                 suffix: t.premium.weekly_suffix,
                                 tagText: t.premium.best_value,
@@ -529,7 +563,7 @@ class _IapViewState extends State<IapView> {
                               const SizedBox(height: 8),
                               SubscriptionPackageCard(
                                 title: t.premium.annually,
-                                description: t.premium.annually_desc,
+                                description: t.premium.annually_desc(price: yearlyPricePerWeek),
                                 price: yearlyPrice,
                                 suffix: t.premium.annually_suffix,
                                 tagText: t.premium.save_80,
@@ -731,7 +765,7 @@ class _IapViewState extends State<IapView> {
               _buildPriceRow(discountPrice, t),
               const SizedBox(height: 8),
               Text(
-                t.premium.billed_yearly,
+                t.premium.billed_yearly(price: discountPrice),
                 style: const TextStyle(
                   color: AppColors.subText,
                   fontSize: 16,

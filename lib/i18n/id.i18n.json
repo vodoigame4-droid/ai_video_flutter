@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "Ketuk untuk Membuka",
     "weekly": "Mingguan",
-    "weekly_desc": "Akses tak terbatas 7 hari, lalu 249.000đ/minggu",
+    "weekly_desc": "Akses tak terbatas 7 hari, lalu {price}/minggu",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/minggu",
     "annually": "Tahunan",
-    "annually_desc": "Hanya 24.980đ/minggu",
+    "annually_desc": "Hanya {price}/minggu",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/tahun",
     "best_value": "Nilai Terbaik",
@@ -218,7 +218,7 @@
     "save_up_to": "Hemat Hingga {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/tahun",
-    "billed_yearly": "Ditagih 799.000đ/tahun - Batalkan Kapan Saja"
+    "billed_yearly": "Ditagih {price}/tahun - Batalkan Kapan Saja"
   },
   "generating": {
     "title": "Membuat",

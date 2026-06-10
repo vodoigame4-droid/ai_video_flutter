@@ -302,11 +302,11 @@ class _Translations$premium$ko extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => '탭하여 잠금 해제';
 	@override String get weekly => '주간';
-	@override String get weekly_desc => '7일 무료 체험, 이후 249.000đ/주';
+	@override String weekly_desc({required Object price}) => '7일 무료 체험, 이후 ${price}/주';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/주';
 	@override String get annually => '연간';
-	@override String get annually_desc => '주당 24.980đ 상당';
+	@override String annually_desc({required Object price}) => '주당 ${price} 상당';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/년';
 	@override String get best_value => '최고의 가치';
@@ -356,7 +356,7 @@ class _Translations$premium$ko extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => '최대 ${percent}% 절약';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/년';
-	@override String get billed_yearly => '799.000đ/년 청구 - 언제든지 취소 가능';
+	@override String billed_yearly({required Object price}) => '${price}/년 청구 - 언제든지 취소 가능';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsKo {
 			'language.zh' => '중국어',
 			'premium.tap_to_reveal' => '탭하여 잠금 해제',
 			'premium.weekly' => '주간',
-			'premium.weekly_desc' => '7일 무료 체험, 이후 249.000đ/주',
+			'premium.weekly_desc' => ({required Object price}) => '7일 무료 체험, 이후 ${price}/주',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/주',
 			'premium.annually' => '연간',
-			'premium.annually_desc' => '주당 24.980đ 상당',
+			'premium.annually_desc' => ({required Object price}) => '주당 ${price} 상당',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/년',
 			'premium.best_value' => '최고의 가치',
@@ -919,7 +919,7 @@ extension on TranslationsKo {
 			'premium.save_up_to' => ({required Object percent}) => '최대 ${percent}% 절약',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/년',
-			'premium.billed_yearly' => '799.000đ/년 청구 - 언제든지 취소 가능',
+			'premium.billed_yearly' => ({required Object price}) => '${price}/년 청구 - 언제든지 취소 가능',
 			'generating.title' => '생성 중',
 			'generating.your_video' => '동영상 생성',
 			'generating.desc' => '몇 분 정도 걸릴 수 있습니다.\n잠시만 기다려 주세요...',

@@ -302,11 +302,11 @@ class _Translations$premium$ar extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => 'اضغط للكشف';
 	@override String get weekly => 'أسبوعي';
-	@override String get weekly_desc => 'وصول غير محدود لمدة 7 أيام، ثم 249.000đ/أسبوع';
+	@override String weekly_desc({required Object price}) => 'وصول غير محدود لمدة 7 أيام، ثم ${price}/أسبوع';
 	@override String get weekly_price => '199.000 د.إ';
 	@override String get weekly_suffix => '/أسبوع';
 	@override String get annually => 'سنوي';
-	@override String get annually_desc => 'فقط 24.980đ/أسبوع';
+	@override String annually_desc({required Object price}) => 'فقط ${price}/أسبوع';
 	@override String get annually_price => '1.299.000 د.إ';
 	@override String get annually_suffix => '/سنة';
 	@override String get best_value => 'أفضل قيمة';
@@ -356,7 +356,7 @@ class _Translations$premium$ar extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => 'وفر حتى ${percent}%';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/سنة';
-	@override String get billed_yearly => 'يُفوتر 799.000đ/سنة - إلغاء في أي وقت';
+	@override String billed_yearly({required Object price}) => 'يُفوتر ${price}/سنة - إلغاء في أي وقت';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsAr {
 			'language.zh' => 'الصينية',
 			'premium.tap_to_reveal' => 'اضغط للكشف',
 			'premium.weekly' => 'أسبوعي',
-			'premium.weekly_desc' => 'وصول غير محدود لمدة 7 أيام، ثم 249.000đ/أسبوع',
+			'premium.weekly_desc' => ({required Object price}) => 'وصول غير محدود لمدة 7 أيام، ثم ${price}/أسبوع',
 			'premium.weekly_price' => '199.000 د.إ',
 			'premium.weekly_suffix' => '/أسبوع',
 			'premium.annually' => 'سنوي',
-			'premium.annually_desc' => 'فقط 24.980đ/أسبوع',
+			'premium.annually_desc' => ({required Object price}) => 'فقط ${price}/أسبوع',
 			'premium.annually_price' => '1.299.000 د.إ',
 			'premium.annually_suffix' => '/سنة',
 			'premium.best_value' => 'أفضل قيمة',
@@ -919,7 +919,7 @@ extension on TranslationsAr {
 			'premium.save_up_to' => ({required Object percent}) => 'وفر حتى ${percent}%',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/سنة',
-			'premium.billed_yearly' => 'يُفوتر 799.000đ/سنة - إلغاء في أي وقت',
+			'premium.billed_yearly' => ({required Object price}) => 'يُفوتر ${price}/سنة - إلغاء في أي وقت',
 			'generating.title' => 'جاري الإنشاء',
 			'generating.your_video' => 'الفيديو الخاص بك',
 			'generating.desc' => 'قد يستغرق هذا بضع دقائق.\nيرجى الانتظار...',

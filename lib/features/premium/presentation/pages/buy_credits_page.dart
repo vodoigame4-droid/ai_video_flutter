@@ -1,5 +1,6 @@
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/services/remote_config_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -13,21 +14,26 @@ import '../widgets/credit_pack_row.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/widgets/gradient_button.dart';
 import '../../../../core/injection/injection_container.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 class BuyCreditsPage extends StatelessWidget {
   static const String path = '/buy_credits';
   static const String name = 'buy_credits';
 
-  const BuyCreditsPage({super.key});
+  final bool fromSplash;
+
+  const BuyCreditsPage({super.key, this.fromSplash = false});
 
   @override
   Widget build(BuildContext context) {
-    return const BuyCreditsView();
+    return BuyCreditsView(fromSplash: fromSplash);
   }
 }
 
 class BuyCreditsView extends StatefulWidget {
-  const BuyCreditsView({super.key});
+  final bool fromSplash;
+
+  const BuyCreditsView({super.key, this.fromSplash = false});
 
   @override
   State<BuyCreditsView> createState() => _BuyCreditsViewState();
@@ -35,6 +41,32 @@ class BuyCreditsView extends StatefulWidget {
 
 class _BuyCreditsViewState extends State<BuyCreditsView> {
   IapState? _lastState;
+  bool _showCloseButton = false;
+
+  void _handleClose() {
+    if (widget.fromSplash) {
+      DashboardPage.go(context);
+    } else {
+      context.pop();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final delaySeconds = sl<RemoteConfigService>().closeButtonDelaySeconds;
+    if (delaySeconds > 0) {
+      Future.delayed(Duration(seconds: delaySeconds), () {
+        if (mounted) {
+          setState(() {
+            _showCloseButton = true;
+          });
+        }
+      });
+    } else {
+      _showCloseButton = true;
+    }
+  }
 
   String _translateSuccessMessage(BuildContext context, String messageKey) {
     final t = context.t;
@@ -249,330 +281,355 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
               );
             }
 
-            return Scaffold(
-              backgroundColor: Colors.black,
-              body: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    // Status bar spacing
-                    SizedBox(height: MediaQuery.of(context).padding.top + 16),
+            return PopScope(
+              canPop: !widget.fromSplash,
+              onPopInvokedWithResult: (didPop, result) {
+                if (didPop) return;
+                _handleClose();
+              },
+              child: Scaffold(
+                backgroundColor: Colors.black,
+                body: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      // Status bar spacing
+                      SizedBox(height: MediaQuery.of(context).padding.top + 16),
 
-                    // Top bar: Close button + Title centered
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Title centered
-                          Text(
-                            t.premium.buy_credit,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap: () => context.pop(),
-                              child: const Icon(
-                                Icons.close,
+                      // Top bar: Close button + Title centered
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            // Title centered
+                            Text(
+                              t.premium.buy_credit,
+                              style: const TextStyle(
                                 color: Colors.white,
-                                size: 24,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: IgnorePointer(
+                                ignoring: !_showCloseButton,
+                                child: AnimatedOpacity(
+                                  opacity: _showCloseButton ? 1.0 : 0.0,
+                                  duration: const Duration(milliseconds: 300),
+                                  child: GestureDetector(
+                                    onTap: _handleClose,
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: Colors.white,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-
-                    // Subtitle description
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        t.premium.credit_desc,
-                        style: const TextStyle(
-                          color: AppColors.subText,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          height: 1.4,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Subscription Discount Banner (green gradient)
-                    InkWell(
-                      onTap: () {
-                        context.pushReplacement(IapPage.path);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 4,
-                        ),
-                        child: Image.asset(
-                          Assets.images.bgBannerBuyCredit.path,
-                          width: double.infinity,
-                          height: 100,
-                          fit: BoxFit.fill,
+                          ],
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
+                      const SizedBox(height: 12),
 
-                    // Vertical selectable credit package list
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          CreditPackRow(
-                            title: t.premium.credit_70,
-                            videoEstimate: t.premium.approx_videos(count: 2),
-                            priceText: getProductPrice(70),
-                            isSelected: selectedPackageIndex == 0,
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.selectCreditPackage(index: 0),
-                              );
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: 70,
-                                  priceText: getProductPrice(70),
-                                ),
-                              );
-                            },
+                      // Subtitle description
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          t.premium.credit_desc,
+                          style: const TextStyle(
+                            color: AppColors.subText,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            height: 1.4,
                           ),
-                          const SizedBox(height: 8),
-                          CreditPackRow(
-                            title: t.premium.credit_150,
-                            videoEstimate: t.premium.approx_videos(count: 4),
-                            priceText: getProductPrice(150),
-                            isSelected: selectedPackageIndex == 1,
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.selectCreditPackage(index: 1),
-                              );
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: 150,
-                                  priceText: getProductPrice(150),
-                                ),
-                              );
-                            },
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Subscription Discount Banner (green gradient)
+                      InkWell(
+                        onTap: () {
+                          if (widget.fromSplash) {
+                            context.pushReplacement(
+                              '${IapPage.path}?fromSplash=true',
+                            );
+                          } else {
+                            context.pushReplacement(IapPage.path);
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 4,
                           ),
-                          const SizedBox(height: 8),
-                          CreditPackRow(
-                            title: t.premium.credit_350,
-                            videoEstimate: t.premium.approx_videos(count: 10),
-                            priceText: getProductPrice(350),
-                            isSelected: selectedPackageIndex == 2,
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.selectCreditPackage(index: 2),
-                              );
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: 350,
-                                  priceText: getProductPrice(350),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 8),
-                          CreditPackRow(
-                            title: t.premium.credit_500,
-                            videoEstimate: t.premium.approx_videos(count: 14),
-                            priceText: getProductPrice(500),
-                            isSelected: selectedPackageIndex == 3,
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.selectCreditPackage(index: 3),
-                              );
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: 500,
-                                  priceText: getProductPrice(500),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 8),
-                          CreditPackRow(
-                            title: t.premium.credit_1000,
-                            videoEstimate: t.premium.approx_videos(count: 27),
-                            priceText: getProductPrice(1000),
-                            tagText: t.premium.most_popular,
-                            isSelected: selectedPackageIndex == 4,
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.selectCreditPackage(index: 4),
-                              );
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: 1000,
-                                  priceText: getProductPrice(1000),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 8),
-                          CreditPackRow(
-                            title: t.premium.credit_5000,
-                            videoEstimate: t.premium.approx_videos(count: 142),
-                            priceText: getProductPrice(5000),
-                            tagText: t.premium.best_value,
-                            isSelected: selectedPackageIndex == 5,
-                            onTap: () {
-                              context.read<IapBloc>().add(
-                                const IapEvent.selectCreditPackage(index: 5),
-                              );
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: 5000,
-                                  priceText: getProductPrice(5000),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 16),
-                          GradientButton(
-                            label: t.common.btn_continue,
+                          child: Image.asset(
+                            Assets.images.bgBannerBuyCredit.path,
                             width: double.infinity,
-                            height: 62.0,
-                            gradient: AppColors.primaryGradient,
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 0.5,
-                            ),
-                            trailingIcon: const Icon(
-                              Icons.arrow_forward_rounded,
-                              color: Colors.white,
-                              size: 22,
-                            ),
-                            onPressed: () {
-                              final data = getPackageData(selectedPackageIndex);
-                              final credits = data['credits'] as int;
-                              final price = data['price'] as String;
-                              context.read<IapBloc>().add(
-                                IapEvent.purchaseCredits(
-                                  credits: credits,
-                                  priceText: price,
-                                ),
-                              );
-                            },
+                            height: 100,
+                            fit: BoxFit.fill,
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 24),
+                      const SizedBox(height: 12),
 
-                    // Footer container inside ScrollView
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          Text(
-                            t.premium.auto_renewable,
-                            style: const TextStyle(
-                              color: AppColors.subText,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
+                      // Vertical selectable credit package list
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            CreditPackRow(
+                              title: t.premium.credit_70,
+                              videoEstimate: t.premium.approx_videos(count: 2),
+                              priceText: getProductPrice(70),
+                              isSelected: selectedPackageIndex == 0,
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.selectCreditPackage(index: 0),
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: 70,
+                                    priceText: getProductPrice(70),
+                                  ),
+                                );
+                              },
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 12),
-
-                          // Privacy Policy | Term of Use | Restore
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () => launchPrivacyPolicy(),
-                                child: Text(
-                                  t.premium.privacy_policy,
-                                  style: const TextStyle(
-                                    color: AppColors.subText,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
+                            const SizedBox(height: 8),
+                            CreditPackRow(
+                              title: t.premium.credit_150,
+                              videoEstimate: t.premium.approx_videos(count: 4),
+                              priceText: getProductPrice(150),
+                              isSelected: selectedPackageIndex == 1,
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.selectCreditPackage(index: 1),
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: 150,
+                                    priceText: getProductPrice(150),
                                   ),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 6),
-                                child: Text(
-                                  '|',
-                                  style: TextStyle(
-                                    color: AppColors.activeTab,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () => launchTermsOfUse(),
-                                child: Text(
-                                  t.premium.terms_of_use,
-                                  style: const TextStyle(
-                                    color: AppColors.subText,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 6),
-                                child: Text(
-                                  '|',
-                                  style: TextStyle(
-                                    color: AppColors.activeTab,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  context.read<IapBloc>().add(
-                                    const IapEvent.restore(),
-                                  );
-                                },
-                                child: Text(
-                                  t.premium.restore,
-                                  style: const TextStyle(
-                                    color: AppColors.subText,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-
-                          // iTunes disclaimer
-                          Text(
-                            t.premium.itunes_disclaimer,
-                            style: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.35),
-                              fontSize: 9,
-                              fontWeight: FontWeight.w400,
-                              height: 1.4,
+                                );
+                              },
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).padding.bottom + 24,
-                          ),
-                        ],
+                            const SizedBox(height: 8),
+                            CreditPackRow(
+                              title: t.premium.credit_350,
+                              videoEstimate: t.premium.approx_videos(count: 10),
+                              priceText: getProductPrice(350),
+                              isSelected: selectedPackageIndex == 2,
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.selectCreditPackage(index: 2),
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: 350,
+                                    priceText: getProductPrice(350),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 8),
+                            CreditPackRow(
+                              title: t.premium.credit_500,
+                              videoEstimate: t.premium.approx_videos(count: 14),
+                              priceText: getProductPrice(500),
+                              isSelected: selectedPackageIndex == 3,
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.selectCreditPackage(index: 3),
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: 500,
+                                    priceText: getProductPrice(500),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 8),
+                            CreditPackRow(
+                              title: t.premium.credit_1000,
+                              videoEstimate: t.premium.approx_videos(count: 27),
+                              priceText: getProductPrice(1000),
+                              tagText: t.premium.most_popular,
+                              isSelected: selectedPackageIndex == 4,
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.selectCreditPackage(index: 4),
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: 1000,
+                                    priceText: getProductPrice(1000),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 8),
+                            CreditPackRow(
+                              title: t.premium.credit_5000,
+                              videoEstimate: t.premium.approx_videos(
+                                count: 142,
+                              ),
+                              priceText: getProductPrice(5000),
+                              tagText: t.premium.best_value,
+                              isSelected: selectedPackageIndex == 5,
+                              onTap: () {
+                                context.read<IapBloc>().add(
+                                  const IapEvent.selectCreditPackage(index: 5),
+                                );
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: 5000,
+                                    priceText: getProductPrice(5000),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            GradientButton(
+                              label: t.common.btn_continue,
+                              width: double.infinity,
+                              height: 62.0,
+                              gradient: AppColors.primaryGradient,
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 0.5,
+                              ),
+                              trailingIcon: const Icon(
+                                Icons.arrow_forward_rounded,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                              onPressed: () {
+                                final data = getPackageData(
+                                  selectedPackageIndex,
+                                );
+                                final credits = data['credits'] as int;
+                                final price = data['price'] as String;
+                                context.read<IapBloc>().add(
+                                  IapEvent.purchaseCredits(
+                                    credits: credits,
+                                    priceText: price,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 24),
+
+                      // Footer container inside ScrollView
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            Text(
+                              t.premium.auto_renewable,
+                              style: const TextStyle(
+                                color: AppColors.subText,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 12),
+
+                            // Privacy Policy | Term of Use | Restore
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => launchPrivacyPolicy(),
+                                  child: Text(
+                                    t.premium.privacy_policy,
+                                    style: const TextStyle(
+                                      color: AppColors.subText,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 6),
+                                  child: Text(
+                                    '|',
+                                    style: TextStyle(
+                                      color: AppColors.activeTab,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () => launchTermsOfUse(),
+                                  child: Text(
+                                    t.premium.terms_of_use,
+                                    style: const TextStyle(
+                                      color: AppColors.subText,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 6),
+                                  child: Text(
+                                    '|',
+                                    style: TextStyle(
+                                      color: AppColors.activeTab,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    context.read<IapBloc>().add(
+                                      const IapEvent.restore(),
+                                    );
+                                  },
+                                  child: Text(
+                                    t.premium.restore,
+                                    style: const TextStyle(
+                                      color: AppColors.subText,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+
+                            // iTunes disclaimer
+                            Text(
+                              t.premium.itunes_disclaimer,
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.35),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).padding.bottom + 24,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

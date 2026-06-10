@@ -302,11 +302,11 @@ class _Translations$premium$ja extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => 'タップして表示';
 	@override String get weekly => '週週プラン';
-	@override String get weekly_desc => '7日間の無料体験、その後 249.000đ/週';
+	@override String weekly_desc({required Object price}) => '7日間の無料体験、その後 ${price}/週';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/週';
 	@override String get annually => '年額プラン';
-	@override String get annually_desc => '実質 24.980đ/週';
+	@override String annually_desc({required Object price}) => '実質 ${price}/週';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/年';
 	@override String get best_value => '最もお得';
@@ -356,7 +356,7 @@ class _Translations$premium$ja extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => '最大${percent}%オフ';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/年';
-	@override String get billed_yearly => '799.000đ/年で請求 - いつでもキャンセル可能';
+	@override String billed_yearly({required Object price}) => '${price}/年で請求 - いつでもキャンセル可能';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsJa {
 			'language.zh' => '中国語',
 			'premium.tap_to_reveal' => 'タップして表示',
 			'premium.weekly' => '週週プラン',
-			'premium.weekly_desc' => '7日間の無料体験、その後 249.000đ/週',
+			'premium.weekly_desc' => ({required Object price}) => '7日間の無料体験、その後 ${price}/週',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/週',
 			'premium.annually' => '年額プラン',
-			'premium.annually_desc' => '実質 24.980đ/週',
+			'premium.annually_desc' => ({required Object price}) => '実質 ${price}/週',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/年',
 			'premium.best_value' => '最もお得',
@@ -919,7 +919,7 @@ extension on TranslationsJa {
 			'premium.save_up_to' => ({required Object percent}) => '最大${percent}%オフ',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/年',
-			'premium.billed_yearly' => '799.000đ/年で請求 - いつでもキャンセル可能',
+			'premium.billed_yearly' => ({required Object price}) => '${price}/年で請求 - いつでもキャンセル可能',
 			'generating.title' => '生成中',
 			'generating.your_video' => '動画を作成しています',
 			'generating.desc' => '数分かかる場合があります。\n少々お待ちください...',

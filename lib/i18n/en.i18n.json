@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "Tap to Reveal",
     "weekly": "Weekly",
-    "weekly_desc": "7-day unlimited access, then 249.000đ/week",
+    "weekly_desc": "7-day unlimited access, then {price}/week",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/week",
     "annually": "Annually",
-    "annually_desc": "Only 24.980đ/week",
+    "annually_desc": "Only {price}/week",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/year",
     "best_value": "Best Value",
@@ -218,7 +218,7 @@
     "save_up_to": "Save Up To {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/year",
-    "billed_yearly": "Billed 799.000đ/year - Cancel Anytime"
+    "billed_yearly": "Billed {price}/year - Cancel Anytime"
   },
   "video_player": {
     "play": "Play",

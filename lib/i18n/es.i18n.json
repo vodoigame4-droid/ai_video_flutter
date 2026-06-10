@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "Toca para revelar",
     "weekly": "Semanal",
-    "weekly_desc": "Acceso ilimitado por 7 días, luego 249.000đ/semana",
+    "weekly_desc": "Acceso ilimitado por 7 días, luego {price}/semana",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/semana",
     "annually": "Anual",
-    "annually_desc": "Solo 24.980đ/semana",
+    "annually_desc": "Solo {price}/semana",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/año",
     "best_value": "Mejor valor",
@@ -218,7 +218,7 @@
     "save_up_to": "Ahorra hasta un {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/año",
-    "billed_yearly": "Facturado 799.000đ/año - Cancela en cualquier momento"
+    "billed_yearly": "Facturado {price}/año - Cancela en cualquier momento"
   },
   "generating": {
     "title": "Generando",

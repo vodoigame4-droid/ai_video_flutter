@@ -308,7 +308,15 @@ class UploadSlotWidget extends StatelessWidget {
           final croppedPath = await _cropImage(cropTitle, image.path);
           LogUtils.i('UploadSlotWidget: Crop result path: $croppedPath');
           if (croppedPath != null) {
-            onMediaSelected(croppedPath);
+            final file = File(croppedPath);
+            final exists = await file.exists();
+            final length = exists ? await file.length() : 0;
+            LogUtils.i('UploadSlotWidget: Cropped file validation - exists: $exists, size: $length bytes');
+            if (context.mounted && exists) {
+              onMediaSelected(croppedPath);
+            } else {
+              LogUtils.w('UploadSlotWidget: Context not mounted or file does not exist, cannot call onMediaSelected.');
+            }
           }
         } else {
           LogUtils.w(

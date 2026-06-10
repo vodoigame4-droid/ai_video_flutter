@@ -302,11 +302,11 @@ class _Translations$premium$id extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => 'Ketuk untuk Membuka';
 	@override String get weekly => 'Mingguan';
-	@override String get weekly_desc => 'Akses tak terbatas 7 hari, lalu 249.000đ/minggu';
+	@override String weekly_desc({required Object price}) => 'Akses tak terbatas 7 hari, lalu ${price}/minggu';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/minggu';
 	@override String get annually => 'Tahunan';
-	@override String get annually_desc => 'Hanya 24.980đ/minggu';
+	@override String annually_desc({required Object price}) => 'Hanya ${price}/minggu';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/tahun';
 	@override String get best_value => 'Nilai Terbaik';
@@ -356,7 +356,7 @@ class _Translations$premium$id extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => 'Hemat Hingga ${percent}%';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/tahun';
-	@override String get billed_yearly => 'Ditagih 799.000đ/tahun - Batalkan Kapan Saja';
+	@override String billed_yearly({required Object price}) => 'Ditagih ${price}/tahun - Batalkan Kapan Saja';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsId {
 			'language.zh' => 'Tionghoa',
 			'premium.tap_to_reveal' => 'Ketuk untuk Membuka',
 			'premium.weekly' => 'Mingguan',
-			'premium.weekly_desc' => 'Akses tak terbatas 7 hari, lalu 249.000đ/minggu',
+			'premium.weekly_desc' => ({required Object price}) => 'Akses tak terbatas 7 hari, lalu ${price}/minggu',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/minggu',
 			'premium.annually' => 'Tahunan',
-			'premium.annually_desc' => 'Hanya 24.980đ/minggu',
+			'premium.annually_desc' => ({required Object price}) => 'Hanya ${price}/minggu',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/tahun',
 			'premium.best_value' => 'Nilai Terbaik',
@@ -919,7 +919,7 @@ extension on TranslationsId {
 			'premium.save_up_to' => ({required Object percent}) => 'Hemat Hingga ${percent}%',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/tahun',
-			'premium.billed_yearly' => 'Ditagih 799.000đ/tahun - Batalkan Kapan Saja',
+			'premium.billed_yearly' => ({required Object price}) => 'Ditagih ${price}/tahun - Batalkan Kapan Saja',
 			'generating.title' => 'Membuat',
 			'generating.your_video' => 'video Anda',
 			'generating.desc' => 'Ini mungkin memakan waktu beberapa menit.\nMohon tunggu...',

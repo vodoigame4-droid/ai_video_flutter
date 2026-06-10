@@ -13,6 +13,7 @@ import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import '../../../../core/extensions/context_failure_ext.dart';
 import '../../../../core/utils/app_toast.dart';
+import '../../../../core/utils/price_utils.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../widgets/subscription_package_card.dart';
 import '../widgets/buy_credit_now_button.dart';
@@ -55,6 +56,8 @@ class _GenerationIapViewState extends State<GenerationIapView>
   late Animation<double> _opacityAnimation;
   IapState? _lastState;
 
+  bool _showCloseButton = false;
+
   @override
   void initState() {
     super.initState();
@@ -68,6 +71,19 @@ class _GenerationIapViewState extends State<GenerationIapView>
     _opacityAnimation = Tween<double>(begin: 0.45, end: 0.1).animate(
       CurvedAnimation(parent: _revealController, curve: Curves.easeOut),
     );
+
+    final delaySeconds = sl<RemoteConfigService>().closeButtonDelaySeconds;
+    if (delaySeconds > 0) {
+      Future.delayed(Duration(seconds: delaySeconds), () {
+        if (mounted) {
+          setState(() {
+            _showCloseButton = true;
+          });
+        }
+      });
+    } else {
+      _showCloseButton = true;
+    }
   }
 
   @override
@@ -266,6 +282,12 @@ class _GenerationIapViewState extends State<GenerationIapView>
             final yearlyPrice = yearlyProducts.isNotEmpty
                 ? yearlyProducts.first.priceString
                 : '...';
+            final yearlyPricePerWeek = yearlyProducts.isNotEmpty
+                ? PriceUtils.formatPrice(
+                    yearlyProducts.first.priceAmount / 52,
+                    yearlyProducts.first.currencyCode,
+                  )
+                : '...';
             LogUtils.d(
               'GenerationIapPage build: weeklyPrice=$weeklyPrice (${weeklyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"}), yearlyPrice=$yearlyPrice (${yearlyProducts.isNotEmpty ? "FROM STORE" : "FALLBACK HARDCODED"})',
             );
@@ -419,7 +441,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                       // Weekly Package
                                       SubscriptionPackageCard(
                                         title: t.premium.weekly,
-                                        description: t.premium.weekly_desc,
+                                        description: t.premium.weekly_desc(price: weeklyPrice),
                                         price: weeklyPrice,
                                         suffix: t.premium.weekly_suffix,
                                         tagText: t.premium.best_value,
@@ -450,7 +472,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                       // Annually Package
                                       SubscriptionPackageCard(
                                         title: t.premium.annually,
-                                        description: t.premium.annually_desc,
+                                        description: t.premium.annually_desc(price: yearlyPricePerWeek),
                                         price: yearlyPrice,
                                         suffix: t.premium.annually_suffix,
                                         tagText: t.premium.save_80,
@@ -619,27 +641,34 @@ class _GenerationIapViewState extends State<GenerationIapView>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Material(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () {
-                            if (context.canPop()) {
-                              context.pop();
-                            } else {
-                              context.pushReplacementNamed(
-                                IapPage.discountName,
-                              );
-                            }
-                          },
-                          customBorder: const CircleBorder(),
-                          child: const SizedBox(
-                            width: 36,
-                            height: 36,
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.white,
-                              size: 20,
+                      IgnorePointer(
+                        ignoring: !_showCloseButton,
+                        child: AnimatedOpacity(
+                          opacity: _showCloseButton ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: Material(
+                            color: Colors.black.withValues(alpha: 0.3),
+                            shape: const CircleBorder(),
+                            child: InkWell(
+                              onTap: () {
+                                if (context.canPop()) {
+                                  context.pop();
+                                } else {
+                                  context.pushReplacementNamed(
+                                    IapPage.discountName,
+                                  );
+                                }
+                              },
+                              customBorder: const CircleBorder(),
+                              child: const SizedBox(
+                                width: 36,
+                                height: 36,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
                             ),
                           ),
                         ),

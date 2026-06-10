@@ -302,11 +302,11 @@ class _Translations$premium$hi extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => 'दिखाने के लिए टैप करें';
 	@override String get weekly => 'साप्ताहिक';
-	@override String get weekly_desc => '7-दिन का असीमित एक्सेस, फिर 249.000đ/सप्ताह';
+	@override String weekly_desc({required Object price}) => '7-दिन का असीमित एक्सेस, फिर ${price}/सप्ताह';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/सप्ताह';
 	@override String get annually => 'वार्षिक';
-	@override String get annually_desc => 'केवल 24.980đ/सप्ताह';
+	@override String annually_desc({required Object price}) => 'केवल ${price}/सप्ताह';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/वर्ष';
 	@override String get best_value => 'सर्वोत्तम मूल्य';
@@ -356,7 +356,7 @@ class _Translations$premium$hi extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => '${percent}% तक बचाएं';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/वर्ष';
-	@override String get billed_yearly => '799.000đ/वर्ष बिल किया गया - कभी भी रद्द करें';
+	@override String billed_yearly({required Object price}) => '${price}/वर्ष बिल किया गया - कभी भी रद्द करें';
 }
 
 // Path: generating
@@ -865,11 +865,11 @@ extension on TranslationsHi {
 			'language.zh' => 'चीनी',
 			'premium.tap_to_reveal' => 'दिखाने के लिए टैप करें',
 			'premium.weekly' => 'साप्ताहिक',
-			'premium.weekly_desc' => '7-दिन का असीमित एक्सेस, फिर 249.000đ/सप्ताह',
+			'premium.weekly_desc' => ({required Object price}) => '7-दिन का असीमित एक्सेस, फिर ${price}/सप्ताह',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/सप्ताह',
 			'premium.annually' => 'वार्षिक',
-			'premium.annually_desc' => 'केवल 24.980đ/सप्ताह',
+			'premium.annually_desc' => ({required Object price}) => 'केवल ${price}/सप्ताह',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/वर्ष',
 			'premium.best_value' => 'सर्वोत्तम मूल्य',
@@ -919,7 +919,7 @@ extension on TranslationsHi {
 			'premium.save_up_to' => ({required Object percent}) => '${percent}% तक बचाएं',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/वर्ष',
-			'premium.billed_yearly' => '799.000đ/वर्ष बिल किया गया - कभी भी रद्द करें',
+			'premium.billed_yearly' => ({required Object price}) => '${price}/वर्ष बिल किया गया - कभी भी रद्द करें',
 			'generating.title' => 'बनाया जा रहा है',
 			'generating.your_video' => 'आपका वीडियो',
 			'generating.desc' => 'इसमें कुछ मिनट लग सकते हैं।\nकृपया प्रतीक्षा करें...',

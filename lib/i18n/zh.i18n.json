@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "轻触解锁",
     "weekly": "每周",
-    "weekly_desc": "7天免费体验，之后 249.000đ/周",
+    "weekly_desc": "7天免费体验，之后 {price}/周",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/周",
     "annually": "每年",
-    "annually_desc": "仅折合 24.980đ/周",
+    "annually_desc": "仅折合 {price}/周",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/年",
     "best_value": "超值推荐",
@@ -218,7 +218,7 @@
     "save_up_to": "节省高达 {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/年",
-    "billed_yearly": "按799.000đ/年计费 - 随时取消"
+    "billed_yearly": "按{price}/年计费 - 随时取消"
   },
   "generating": {
     "title": "正在生成",

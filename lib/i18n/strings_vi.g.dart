@@ -303,11 +303,11 @@ class _Translations$premium$vi extends Translations$premium$en {
 	// Translations
 	@override String get tap_to_reveal => 'Chạm để Mở khóa';
 	@override String get weekly => 'Hàng tuần';
-	@override String get weekly_desc => '7 ngày truy cập không giới hạn, sau đó 249.000đ/tuần';
+	@override String weekly_desc({required Object price}) => '7 ngày truy cập không giới hạn, sau đó ${price}/tuần';
 	@override String get weekly_price => '199.000 đ';
 	@override String get weekly_suffix => '/tuần';
 	@override String get annually => 'Hàng năm';
-	@override String get annually_desc => 'Chỉ 24.980đ/tuần';
+	@override String annually_desc({required Object price}) => 'Chỉ ${price}/tuần';
 	@override String get annually_price => '1.299.000 đ';
 	@override String get annually_suffix => '/năm';
 	@override String get best_value => 'Tốt nhất';
@@ -357,7 +357,7 @@ class _Translations$premium$vi extends Translations$premium$en {
 	@override String save_up_to({required Object percent}) => 'Tiết kiệm đến ${percent}%';
 	@override String get discount_price => '799.000';
 	@override String get discount_price_suffix => '/năm';
-	@override String get billed_yearly => 'Thanh toán 799.000đ/năm - Hủy bất cứ lúc nào';
+	@override String billed_yearly({required Object price}) => 'Thanh toán ${price}/năm - Hủy bất cứ lúc nào';
 }
 
 // Path: video_player
@@ -881,11 +881,11 @@ extension on TranslationsVi {
 			'language.zh' => 'Tiếng Trung',
 			'premium.tap_to_reveal' => 'Chạm để Mở khóa',
 			'premium.weekly' => 'Hàng tuần',
-			'premium.weekly_desc' => '7 ngày truy cập không giới hạn, sau đó 249.000đ/tuần',
+			'premium.weekly_desc' => ({required Object price}) => '7 ngày truy cập không giới hạn, sau đó ${price}/tuần',
 			'premium.weekly_price' => '199.000 đ',
 			'premium.weekly_suffix' => '/tuần',
 			'premium.annually' => 'Hàng năm',
-			'premium.annually_desc' => 'Chỉ 24.980đ/tuần',
+			'premium.annually_desc' => ({required Object price}) => 'Chỉ ${price}/tuần',
 			'premium.annually_price' => '1.299.000 đ',
 			'premium.annually_suffix' => '/năm',
 			'premium.best_value' => 'Tốt nhất',
@@ -935,7 +935,7 @@ extension on TranslationsVi {
 			'premium.save_up_to' => ({required Object percent}) => 'Tiết kiệm đến ${percent}%',
 			'premium.discount_price' => '799.000',
 			'premium.discount_price_suffix' => '/năm',
-			'premium.billed_yearly' => 'Thanh toán 799.000đ/năm - Hủy bất cứ lúc nào',
+			'premium.billed_yearly' => ({required Object price}) => 'Thanh toán ${price}/năm - Hủy bất cứ lúc nào',
 			'video_player.play' => 'Phát',
 			'video_player.pause' => 'Tạm dừng',
 			'video_player.error_loading' => 'Không thể tải video.',

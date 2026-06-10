@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "اضغط للكشف",
     "weekly": "أسبوعي",
-    "weekly_desc": "وصول غير محدود لمدة 7 أيام، ثم 249.000đ/أسبوع",
+    "weekly_desc": "وصول غير محدود لمدة 7 أيام، ثم {price}/أسبوع",
     "weekly_price": "199.000 د.إ",
     "weekly_suffix": "/أسبوع",
     "annually": "سنوي",
-    "annually_desc": "فقط 24.980đ/أسبوع",
+    "annually_desc": "فقط {price}/أسبوع",
     "annually_price": "1.299.000 د.إ",
     "annually_suffix": "/سنة",
     "best_value": "أفضل قيمة",
@@ -218,7 +218,7 @@
     "save_up_to": "وفر حتى {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/سنة",
-    "billed_yearly": "يُفوتر 799.000đ/سنة - إلغاء في أي وقت"
+    "billed_yearly": "يُفوتر {price}/سنة - إلغاء في أي وقت"
   },
   "generating": {
     "title": "جاري الإنشاء",

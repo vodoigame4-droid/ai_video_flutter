@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/gradient_border_container.dart';
 
 class SubscriptionPackageCard extends StatelessWidget {
@@ -27,7 +28,7 @@ class SubscriptionPackageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget cardContent = Container(
-      constraints: const BoxConstraints(minHeight: 80),
+      constraints: const BoxConstraints(minHeight: 88),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,22 +39,14 @@ class SubscriptionPackageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: -0.3,
-                  ),
-                ),
+                Text(title, style: AppTextStyles.paywallCardTitle),
                 const SizedBox(height: 4),
                 Text(
                   description,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.subText,
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
                     height: 1.2,
                   ),
                   maxLines: 2,
@@ -71,26 +64,18 @@ class SubscriptionPackageCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                price,
-                style: TextStyle(
-                  color: isSelected ? AppColors.primary : Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.3,
+                price + suffix,
+                style: AppTextStyles.paywallCardPrice.copyWith(
+                  color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 2),
-              Text(
-                suffix,
-                style: TextStyle(
-                  color: isSelected
-                      ? AppColors.primary.withValues(alpha: 0.8)
-                      : AppColors.subText,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: -0.1,
-                ),
-              ),
+              // const SizedBox(height: 2),
+              // Text(
+              //   suffix,
+              //   style: AppTextStyles.paywallCardPrice.copyWith(
+              //     color: Colors.white,
+              //   ),
+              // ),
             ],
           ),
         ],

@@ -1,6 +1,6 @@
+import 'package:ai_video_flutter/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import '../../../../gen/assets.gen.dart';
-
 
 class CreditPackRow extends StatelessWidget {
   final String title;
@@ -42,10 +42,7 @@ class CreditPackRow extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(14)),
-            border: Border.all(
-              color: borderColor,
-              width: borderWidth,
-            ),
+            border: Border.all(color: borderColor, width: borderWidth),
           ),
           child: Material(
             color: Colors.transparent,
@@ -85,10 +82,9 @@ class CreditPackRow extends StatelessWidget {
                         children: [
                           Text(
                             title,
-                            style: const TextStyle(
+                            style: AppTextStyles.paywallCardPrice.copyWith(
                               color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
                           ),
                           const SizedBox(height: 2),
@@ -96,7 +92,7 @@ class CreditPackRow extends StatelessWidget {
                             videoEstimate,
                             style: TextStyle(
                               color: Colors.white.withValues(alpha: 0.5),
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.normal,
                             ),
                           ),
@@ -107,12 +103,9 @@ class CreditPackRow extends StatelessWidget {
                     // Price text
                     Text(
                       priceText,
-                      style: TextStyle(
-                        color: isSelected
-                            ? const Color(0xFF00D492)
-                            : Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
+                      style: AppTextStyles.paywallCardPrice.copyWith(
+                        color: Colors.white,
+                        fontSize: 16,
                       ),
                     ),
                   ],
@@ -134,7 +127,8 @@ class CreditPackRow extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: tagColors ??
+                  colors:
+                      tagColors ??
                       [const Color(0xFFff6320), const Color(0xFFfae123)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,

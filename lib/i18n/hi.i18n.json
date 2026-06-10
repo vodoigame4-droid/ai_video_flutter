@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "दिखाने के लिए टैप करें",
     "weekly": "साप्ताहिक",
-    "weekly_desc": "7-दिन का असीमित एक्सेस, फिर 249.000đ/सप्ताह",
+    "weekly_desc": "7-दिन का असीमित एक्सेस, फिर {price}/सप्ताह",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/सप्ताह",
     "annually": "वार्षिक",
-    "annually_desc": "केवल 24.980đ/सप्ताह",
+    "annually_desc": "केवल {price}/सप्ताह",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/वर्ष",
     "best_value": "सर्वोत्तम मूल्य",
@@ -218,7 +218,7 @@
     "save_up_to": "{percent}% तक बचाएं",
     "discount_price": "799.000",
     "discount_price_suffix": "/वर्ष",
-    "billed_yearly": "799.000đ/वर्ष बिल किया गया - कभी भी रद्द करें"
+    "billed_yearly": "{price}/वर्ष बिल किया गया - कभी भी रद्द करें"
   },
   "generating": {
     "title": "बनाया जा रहा है",

@@ -530,6 +530,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    LogUtils.i('CreateFromTemplatePage: _pickImage started. source: $source, context mounted: $mounted');
     if (source == ImageSource.camera) {
       final hasPermission =
           await AppPermissionHandler.checkAndRequestCameraPermission(context);
@@ -548,7 +549,16 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
         if (mounted) {
           final croppedPath = await _cropImage(context, image.path);
           if (croppedPath != null) {
-            _bloc.add(CreateFromTemplateEvent.selectPhoto(croppedPath));
+            final file = File(croppedPath);
+            final exists = await file.exists();
+            final length = exists ? await file.length() : 0;
+            LogUtils.i('CreateFromTemplatePage: Cropped file validation - exists: $exists, size: $length bytes');
+            if (mounted && exists) {
+              LogUtils.i('CreateFromTemplatePage: Adding selectPhoto event to Bloc with path: $croppedPath');
+              _bloc.add(CreateFromTemplateEvent.selectPhoto(croppedPath));
+            } else {
+              LogUtils.w('CreateFromTemplatePage: Context not mounted or file does not exist, cannot add selectPhoto.');
+            }
           }
         }
       }

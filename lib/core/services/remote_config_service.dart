@@ -18,6 +18,8 @@ class RemoteConfigService {
   static const String rcVideoGenFullHdCost = 'video_gen_full_hd_cost';
   static const int defaultVideoGenCost = 35;
   static const int defaultVideoGenFullHdCost = 70;
+  static const String rcCloseButtonDelaySeconds = 'close_button_delay_seconds';
+  static const int defaultCloseButtonDelaySeconds = 3;
 
   /// Default fallback values
   static const String defaultBannerUrl =
@@ -75,6 +77,7 @@ class RemoteConfigService {
         rcBgVideosJson: defaultBgVideosJson,
         rcVideoGenCost: defaultVideoGenCost,
         rcVideoGenFullHdCost: defaultVideoGenFullHdCost,
+        rcCloseButtonDelaySeconds: defaultCloseButtonDelaySeconds,
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
@@ -237,6 +240,23 @@ class RemoteConfigService {
     }
     final value = _remoteConfig.getInt(rcVideoGenFullHdCost);
     if (value == 0) return defaultVideoGenFullHdCost;
+    return value;
+  }
+
+  /// Get the delay in seconds before showing the close button on IAP pages.
+  int get closeButtonDelaySeconds {
+    final jsonMap = _getParsedBgVideosJson();
+    if (jsonMap != null && jsonMap['close_button_delay_seconds'] != null) {
+      final delay = int.tryParse(jsonMap['close_button_delay_seconds'].toString());
+      if (delay != null) return delay;
+    }
+    final value = _remoteConfig.getInt(rcCloseButtonDelaySeconds);
+    // Note: If configured as 0 explicitly on Remote Config, it will be 0.
+    // However, if the getInt fallback returns 0 because key is not found, we use default.
+    final rawValue = _remoteConfig.getValue(rcCloseButtonDelaySeconds);
+    if (rawValue.source == ValueSource.valueStatic) {
+      return defaultCloseButtonDelaySeconds;
+    }
     return value;
   }
 

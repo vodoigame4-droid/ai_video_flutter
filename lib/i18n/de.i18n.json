@@ -164,11 +164,11 @@
   "premium": {
     "tap_to_reveal": "Tippen zum Enthüllen",
     "weekly": "Wöchentlich",
-    "weekly_desc": "7 Tage unbegrenzter Zugriff, dann 249.000đ/Woche",
+    "weekly_desc": "7 Tage unbegrenzter Zugriff, dann {price}/Woche",
     "weekly_price": "199.000 đ",
     "weekly_suffix": "/Woche",
     "annually": "Jährlich",
-    "annually_desc": "Nur 24.980đ/Woche",
+    "annually_desc": "Nur {price}/Woche",
     "annually_price": "1.299.000 đ",
     "annually_suffix": "/Jahr",
     "best_value": "Bester Wert",
@@ -218,7 +218,7 @@
     "save_up_to": "Sparen Sie bis zu {percent}%",
     "discount_price": "799.000",
     "discount_price_suffix": "/Jahr",
-    "billed_yearly": "799.000đ/Jahr abgerechnet - Jederzeit kündbar"
+    "billed_yearly": "{price}/Jahr abgerechnet - Jederzeit kündbar"
   },
   "generating": {
     "title": "Generieren",

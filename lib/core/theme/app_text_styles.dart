@@ -236,6 +236,18 @@ abstract class AppTextStyles {
     color: AppColors.subText,
   );
 
+  static final TextStyle paywallCardTitle = GoogleFonts.inter(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w900,
+    color: AppColors.white,
+  );
+
+  static final TextStyle paywallCardPrice = GoogleFonts.inter(
+    fontSize: 20.0,
+    fontWeight: FontWeight.w900,
+    color: AppColors.white,
+  );
+
   static final TextStyle emojiFlag = const TextStyle(
     fontSize: 18.0,
   );
