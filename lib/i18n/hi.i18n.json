@@ -391,7 +391,8 @@
     "disable_notification_title": "चेक-इन सूचनाएं अक्षम करें?",
     "disable_notification_desc": "आप दैनिक लॉगिन पुरस्कार और अन्य रोमांचक बोनस खो देंगे। क्या आप वाकई अक्षम करना चाहते हैं?",
     "disable_notification_keep": "सक्षम रखें",
-    "disable_notification_disable": "अक्षम करें"
+    "disable_notification_disable": "अक्षम करें",
+    "check_in_success": "+{credits} क्रेडिट! दैनिक चेक-इन सफलतापूर्वक पूरा हुआ।"
   },
   "connectivity": {
     "no_internet_title": "कोई कनेक्शन नहीं",

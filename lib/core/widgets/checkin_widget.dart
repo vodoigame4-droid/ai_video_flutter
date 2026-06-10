@@ -8,17 +8,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:lottie/lottie.dart';
 import 'package:core_business/core_business.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ai_video_flutter/core/navigation/route_observer.dart';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
-import 'package:ai_video_flutter/features/premium/presentation/pages/discount_page.dart';
 import '../injection/injection_container.dart';
 import '../errors/backend_error_handler.dart';
 import '../notification/local_notification_service.dart';
 import '../../gen/assets.gen.dart';
 import '../../i18n/strings.g.dart';
 import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
+import 'package:ai_video_flutter/core/extensions/animation_extensions.dart';
 
 enum DayState { claimed, today, upcoming }
 
@@ -40,7 +39,8 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
   @override
   void initState() {
     super.initState();
-    _dailyCheckInBloc = sl<DailyCheckInBloc>()..add(const DailyCheckInEvent.init());
+    _dailyCheckInBloc = sl<DailyCheckInBloc>()
+      ..add(const DailyCheckInEvent.init());
     _checkSystemNotificationPermission();
     _triggerSubscription = CheckInWidget.checkInTrigger.stream.listen((_) {
       if (mounted) {
@@ -59,7 +59,8 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
   }
 
   Future<void> _checkSystemNotificationPermission() async {
-    final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    final isEnabled = sl<LocalNotificationService>()
+        .isCheckInNotificationEnabled();
     if (!isEnabled) {
       if (mounted) {
         setState(() {
@@ -69,7 +70,8 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
       return;
     }
     try {
-      final isGranted = await AppPermissionHandler.isNotificationPermissionGranted();
+      final isGranted =
+          await AppPermissionHandler.isNotificationPermissionGranted();
       if (mounted) {
         setState(() {
           _notificationEnabled = isGranted;
@@ -93,14 +95,18 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
 
   @override
   void didPopNext() {
-    LogUtils.d('CheckInWidget: returned to home tab, checking check-in auto-show...');
+    LogUtils.d(
+      'CheckInWidget: returned to home tab, checking check-in auto-show...',
+    );
     _checkAndShowDailyCheckInIfNeeded();
   }
 
   void _checkAndShowDailyCheckInIfNeeded() {
     _dailyCheckInBloc.state.mapOrNull(
       ready: (readyState) {
-        if (!readyState.isCheckedInToday && !_hasAutoShown && !_isIapOrDiscountActive()) {
+        if (!readyState.isCheckedInToday &&
+            !_hasAutoShown &&
+            !_isIapOrDiscountActive()) {
           _hasAutoShown = true;
           _showCheckInDialog(context);
         }
@@ -111,18 +117,22 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
   bool _isIapOrDiscountActive() {
     try {
       final router = GoRouter.of(context);
-      final location = router.routerDelegate.currentConfiguration.uri.toString();
-      return location.contains(IapPage.path) || location.contains(DiscountPage.path);
+      final location = router.routerDelegate.currentConfiguration.uri
+          .toString();
+      return location.contains(IapPage.path) ||
+          location.contains(IapPage.discountPath);
     } catch (_) {
       return false;
     }
   }
 
   void _showCheckInDialog(BuildContext context) async {
-    final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    final isEnabled = sl<LocalNotificationService>()
+        .isCheckInNotificationEnabled();
     bool isPermissionGranted = false;
     try {
-      isPermissionGranted = await AppPermissionHandler.isNotificationPermissionGranted();
+      isPermissionGranted =
+          await AppPermissionHandler.isNotificationPermissionGranted();
     } catch (_) {
       isPermissionGranted = isEnabled;
     }
@@ -135,14 +145,28 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
 
     if (!context.mounted) return;
 
-    showDialog(
+    showGeneralDialog(
       context: context,
       barrierColor: Colors.black.withValues(alpha: 0.75),
-      builder: (dialogContext) {
+      barrierDismissible: true,
+      barrierLabel: 'CheckinDialog',
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (dialogContext, animation, secondaryAnimation) {
         return BlocProvider.value(
           value: context.read<DailyCheckInBloc>(),
           child: _CheckInDialogContent(
             initialNotificationEnabled: _notificationEnabled,
+          ),
+        );
+      },
+      transitionBuilder: (dialogContext, animation, secondaryAnimation, child) {
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.9, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+          ),
+          child: FadeTransition(
+            opacity: animation,
+            child: child,
           ),
         );
       },
@@ -159,7 +183,9 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
             listener: (context, state) {
               state.mapOrNull(
                 ready: (readyState) {
-                  if (!readyState.isCheckedInToday && !_hasAutoShown && !_isIapOrDiscountActive()) {
+                  if (!readyState.isCheckedInToday &&
+                      !_hasAutoShown &&
+                      !_isIapOrDiscountActive()) {
                     _hasAutoShown = true;
                     _showCheckInDialog(context);
                   }
@@ -189,9 +215,7 @@ class _CheckInWidgetState extends State<CheckInWidget> with RouteAware {
 class _CheckInDialogContent extends StatefulWidget {
   final bool initialNotificationEnabled;
 
-  const _CheckInDialogContent({
-    required this.initialNotificationEnabled,
-  });
+  const _CheckInDialogContent({required this.initialNotificationEnabled});
 
   @override
   State<_CheckInDialogContent> createState() => _CheckInDialogContentState();
@@ -222,7 +246,8 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
   }
 
   Future<void> _checkSystemNotificationPermission() async {
-    final isEnabled = sl<LocalNotificationService>().isCheckInNotificationEnabled();
+    final isEnabled = sl<LocalNotificationService>()
+        .isCheckInNotificationEnabled();
     if (!isEnabled) {
       if (mounted) {
         setState(() {
@@ -232,9 +257,12 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
       return;
     }
     try {
-      final isGranted = await AppPermissionHandler.isNotificationPermissionGranted();
+      final isGranted =
+          await AppPermissionHandler.isNotificationPermissionGranted();
       if (isGranted) {
-        await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(
+          true,
+        );
         await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
       }
       if (mounted) {
@@ -253,10 +281,15 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
 
   Future<void> _onNotificationChanged(bool val) async {
     if (val) {
-      final isGranted = await AppPermissionHandler.checkAndRequestNotificationPermission(context);
+      final isGranted =
+          await AppPermissionHandler.checkAndRequestNotificationPermission(
+            context,
+          );
       if (!mounted) return;
       if (isGranted) {
-        await sl<LocalNotificationService>().setCheckInNotificationEnabled(true);
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(
+          true,
+        );
         await sl<LocalNotificationService>().scheduleDailyCheckInNotification();
         setState(() {
           _notificationEnabled = true;
@@ -267,9 +300,13 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
         });
       }
     } else {
-      final shouldDisable = await _showDisableNotificationConfirmDialog(context);
+      final shouldDisable = await _showDisableNotificationConfirmDialog(
+        context,
+      );
       if (shouldDisable) {
-        await sl<LocalNotificationService>().setCheckInNotificationEnabled(false);
+        await sl<LocalNotificationService>().setCheckInNotificationEnabled(
+          false,
+        );
         await sl<LocalNotificationService>().cancelDailyCheckInNotification();
         if (mounted) {
           setState(() {
@@ -286,7 +323,9 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
     }
   }
 
-  Future<bool> _showDisableNotificationConfirmDialog(BuildContext context) async {
+  Future<bool> _showDisableNotificationConfirmDialog(
+    BuildContext context,
+  ) async {
     final t = context.t;
 
     final title = t.checkin.disable_notification_title;
@@ -306,10 +345,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
             decoration: BoxDecoration(
               color: const Color(0xFF171717),
               borderRadius: const BorderRadius.all(Radius.circular(20)),
-              border: Border.all(
-                color: const Color(0xFF2BC5C5),
-                width: 1,
-              ),
+              border: Border.all(color: const Color(0xFF2BC5C5), width: 1),
             ),
             child: Material(
               color: Colors.transparent,
@@ -346,12 +382,16 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                       Expanded(
                         child: InkWell(
                           onTap: () => Navigator.pop(dialogContext, false),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Container(
                             height: 48,
                             decoration: const BoxDecoration(
                               color: Color(0xFF979797),
-                              borderRadius: BorderRadius.all(Radius.circular(100)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Center(
                               child: Text(
@@ -372,17 +412,18 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                       Expanded(
                         child: InkWell(
                           onTap: () => Navigator.pop(dialogContext, true),
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100),
+                          ),
                           child: Container(
                             height: 48,
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
-                                colors: [
-                                  Color(0xFF007BFF),
-                                  Color(0xFF24C780),
-                                ],
+                                colors: [Color(0xFF007BFF), Color(0xFF24C780)],
                               ),
-                              borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
                             ),
                             child: Center(
                               child: Text(
@@ -425,10 +466,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
           ShaderMask(
             blendMode: BlendMode.srcIn,
             shaderCallback: (bounds) => const LinearGradient(
-              colors: [
-                Color(0xFF007BFF),
-                Color(0xFF00C6FF),
-              ],
+              colors: [Color(0xFF007BFF), Color(0xFF00C6FF)],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ).createShader(bounds),
@@ -445,10 +483,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
           ShaderMask(
             blendMode: BlendMode.srcIn,
             shaderCallback: (bounds) => const LinearGradient(
-              colors: [
-                Color(0xFF24C780),
-                Color(0xFF2BC5C5),
-              ],
+              colors: [Color(0xFF24C780), Color(0xFF2BC5C5)],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ).createShader(bounds),
@@ -467,10 +502,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
       return ShaderMask(
         blendMode: BlendMode.srcIn,
         shaderCallback: (bounds) => const LinearGradient(
-          colors: [
-            Color(0xFF007BFF),
-            Color(0xFF24C780),
-          ],
+          colors: [Color(0xFF007BFF), Color(0xFF24C780)],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ).createShader(bounds),
@@ -524,20 +556,33 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
           ready: (readyState) {
             readyState.checkInStatus.whenOrNull(
               success: (credits) {
-                final isVi = Translations.of(context).$meta.locale.languageCode == 'vi';
-                final message = isVi
-                    ? '+$credits Điểm tín dụng! Điểm danh thành công.'
-                    : '+$credits Credits! Checked in successfully.';
+                // Save navigator before popping
+                final navigator = Navigator.of(context);
                 
                 // Automatically dismiss check-in dialog
-                Navigator.of(context).pop();
+                navigator.pop();
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(message),
-                    duration: const Duration(seconds: 3),
-                    backgroundColor: AppColors.primary,
-                  ),
+                // Show gorgeous custom reward success popup
+                showGeneralDialog(
+                  context: navigator.context,
+                  barrierColor: Colors.black.withValues(alpha: 0.75),
+                  barrierDismissible: true,
+                  barrierLabel: 'SuccessDialog',
+                  transitionDuration: const Duration(milliseconds: 400),
+                  pageBuilder: (dialogContext, animation, secondaryAnimation) {
+                    return _CheckInSuccessDialog(credits: credits);
+                  },
+                  transitionBuilder: (dialogContext, animation, secondaryAnimation, child) {
+                    return ScaleTransition(
+                      scale: Tween<double>(begin: 0.8, end: 1.0).animate(
+                        CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+                      ),
+                      child: FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      ),
+                    );
+                  },
                 );
               },
               error: (failure) {
@@ -564,9 +609,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
           loading: () => const Dialog(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+            child: Center(child: CircularProgressIndicator()),
           ),
           error: (message) => Dialog(
             backgroundColor: AppColors.onSurface,
@@ -583,13 +626,18 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                   const SizedBox(height: 16),
                   Text(
                     BackendErrorHelper.getErrorMessage(context, message),
-                    style: const TextStyle(color: AppColors.white, fontSize: 16),
+                    style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
-                      context.read<DailyCheckInBloc>().add(const DailyCheckInEvent.init());
+                      context.read<DailyCheckInBloc>().add(
+                        const DailyCheckInEvent.init(),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
@@ -609,17 +657,21 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
           ready: (dailyLoginEntity, isCheckedInToday, checkInStatus) {
             final double screenWidth = MediaQuery.of(context).size.width;
             final double day7Width = (screenWidth * 0.65).clamp(180.0, 240.0);
-            final double day7Height = (screenWidth * 0.45).clamp(120.0, 160.0) * 0.85;
+            final double day7Height =
+                (screenWidth * 0.45).clamp(120.0, 160.0) * 0.85;
 
             final rewardsMap = {
-              for (var r in dailyLoginEntity.rewards) r.streakDay: r
+              for (var r in dailyLoginEntity.rewards) r.streakDay: r,
             };
 
             return Dialog(
               backgroundColor: Colors.transparent,
               elevation: 0,
               shape: const RoundedRectangleBorder(side: BorderSide.none),
-              insetPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              insetPadding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 12,
+              ),
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
                 child: Column(
@@ -667,6 +719,9 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                                     fit: BoxFit.contain,
                                   ),
                                 ],
+                              ).slideAndFade(
+                                begin: const Offset(0.0, -0.25),
+                                delay: const Duration(milliseconds: 150),
                               ),
                               const SizedBox(height: 6),
                               // Subtitle
@@ -680,84 +735,131 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
+                              ).slideAndFade(
+                                begin: const Offset(0.0, -0.25),
+                                delay: const Duration(milliseconds: 200),
                               ),
                               const SizedBox(height: 20),
 
                               // Days Grid
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   _buildDayCard(
                                     context: context,
                                     day: 1,
-                                    reward: 'x${(rewardsMap[1]?.rewardCredits ?? 5).toString().padLeft(2, '0')}',
+                                    reward:
+                                        'x${(rewardsMap[1]?.rewardCredits ?? 5).toString().padLeft(2, '0')}',
                                     state: _getDayState(
                                       streakDay: 1,
-                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      currentStreak:
+                                          dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
-                                    isToday: _isTodayDay(1, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                    delay: const Duration(milliseconds: 200),
+                                    isToday: _isTodayDay(
+                                      1,
+                                      dailyLoginEntity.currentStreak,
+                                      isCheckedInToday,
+                                    ),
                                   ),
                                   _buildDayCard(
                                     context: context,
                                     day: 2,
-                                    reward: 'x${(rewardsMap[2]?.rewardCredits ?? 8).toString().padLeft(2, '0')}',
+                                    reward:
+                                        'x${(rewardsMap[2]?.rewardCredits ?? 8).toString().padLeft(2, '0')}',
                                     state: _getDayState(
                                       streakDay: 2,
-                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      currentStreak:
+                                          dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
-                                    isToday: _isTodayDay(2, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                    delay: const Duration(milliseconds: 250),
+                                    isToday: _isTodayDay(
+                                      2,
+                                      dailyLoginEntity.currentStreak,
+                                      isCheckedInToday,
+                                    ),
                                   ),
                                   _buildDayCard(
                                     context: context,
                                     day: 3,
-                                    reward: 'x${(rewardsMap[3]?.rewardCredits ?? 10).toString().padLeft(2, '0')}',
+                                    reward:
+                                        'x${(rewardsMap[3]?.rewardCredits ?? 10).toString().padLeft(2, '0')}',
                                     state: _getDayState(
                                       streakDay: 3,
-                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      currentStreak:
+                                          dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
-                                    isToday: _isTodayDay(3, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                    delay: const Duration(milliseconds: 300),
+                                    isToday: _isTodayDay(
+                                      3,
+                                      dailyLoginEntity.currentStreak,
+                                      isCheckedInToday,
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 12),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   _buildDayCard(
                                     context: context,
                                     day: 4,
-                                    reward: 'x${(rewardsMap[4]?.rewardCredits ?? 12).toString().padLeft(2, '0')}',
+                                    reward:
+                                        'x${(rewardsMap[4]?.rewardCredits ?? 12).toString().padLeft(2, '0')}',
                                     state: _getDayState(
                                       streakDay: 4,
-                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      currentStreak:
+                                          dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
-                                    isToday: _isTodayDay(4, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                    delay: const Duration(milliseconds: 350),
+                                    isToday: _isTodayDay(
+                                      4,
+                                      dailyLoginEntity.currentStreak,
+                                      isCheckedInToday,
+                                    ),
                                   ),
                                   _buildDayCard(
                                     context: context,
                                     day: 5,
-                                    reward: 'x${(rewardsMap[5]?.rewardCredits ?? 15).toString().padLeft(2, '0')}',
+                                    reward:
+                                        'x${(rewardsMap[5]?.rewardCredits ?? 15).toString().padLeft(2, '0')}',
                                     state: _getDayState(
                                       streakDay: 5,
-                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      currentStreak:
+                                          dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
-                                    isToday: _isTodayDay(5, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                    delay: const Duration(milliseconds: 400),
+                                    isToday: _isTodayDay(
+                                      5,
+                                      dailyLoginEntity.currentStreak,
+                                      isCheckedInToday,
+                                    ),
                                   ),
                                   _buildDayCard(
                                     context: context,
                                     day: 6,
-                                    reward: 'x${(rewardsMap[6]?.rewardCredits ?? 18).toString().padLeft(2, '0')}',
+                                    reward:
+                                        'x${(rewardsMap[6]?.rewardCredits ?? 18).toString().padLeft(2, '0')}',
                                     state: _getDayState(
                                       streakDay: 6,
-                                      currentStreak: dailyLoginEntity.currentStreak,
+                                      currentStreak:
+                                          dailyLoginEntity.currentStreak,
                                       isCheckedInToday: isCheckedInToday,
                                     ),
-                                    isToday: _isTodayDay(6, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                    delay: const Duration(milliseconds: 450),
+                                    isToday: _isTodayDay(
+                                      6,
+                                      dailyLoginEntity.currentStreak,
+                                      isCheckedInToday,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -766,57 +868,99 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                               Center(
                                 child: _buildDay7Card(
                                   context: context,
-                                  reward: 'x${(rewardsMap[7]?.rewardCredits ?? 25).toString()}',
+                                  reward:
+                                      'x${(rewardsMap[7]?.rewardCredits ?? 25).toString()}',
                                   state: _getDayState(
                                     streakDay: 7,
-                                    currentStreak: dailyLoginEntity.currentStreak,
+                                    currentStreak:
+                                        dailyLoginEntity.currentStreak,
                                     isCheckedInToday: isCheckedInToday,
                                   ),
                                   width: day7Width,
                                   height: day7Height,
-                                  isToday: _isTodayDay(7, dailyLoginEntity.currentStreak, isCheckedInToday),
+                                  delay: const Duration(milliseconds: 500),
+                                  isToday: _isTodayDay(
+                                    7,
+                                    dailyLoginEntity.currentStreak,
+                                    isCheckedInToday,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 24),
 
                               // Check-in Button
-                              Container(
-                                width: double.infinity,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  gradient: isCheckedInToday
-                                      ? null
-                                      : const LinearGradient(
-                                          colors: [AppColors.primary, AppColors.secondary],
-                                        ),
-                                  color: isCheckedInToday ? const Color(0xFFE0E0E0) : null,
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                                child: InkWell(
-                                  onTap: isCheckedInToday || checkInStatus.maybeWhen(loading: () => true, orElse: () => false)
-                                      ? null
-                                      : () => context.read<DailyCheckInBloc>().add(
-                                            const DailyCheckInEvent.checkIn(ignoreReward: false),
+                              Builder(
+                                builder: (context) {
+                                  Widget button = Container(
+                                    width: double.infinity,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      gradient: isCheckedInToday
+                                          ? null
+                                          : const LinearGradient(
+                                              colors: [
+                                                AppColors.primary,
+                                                AppColors.secondary,
+                                              ],
+                                            ),
+                                      color: isCheckedInToday
+                                          ? const Color(0xFFE0E0E0)
+                                          : null,
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    child: InkWell(
+                                      onTap: isCheckedInToday ||
+                                              checkInStatus.maybeWhen(
+                                                loading: () => true,
+                                                orElse: () => false,
+                                              )
+                                          ? null
+                                          : () => context
+                                                .read<DailyCheckInBloc>()
+                                                .add(
+                                                  const DailyCheckInEvent.checkIn(
+                                                    ignoreReward: false,
+                                                  ),
+                                                ),
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Center(
+                                        child: checkInStatus.maybeWhen(
+                                          loading: () =>
+                                              const CupertinoActivityIndicator(
+                                                color: Colors.white,
+                                              ),
+                                          orElse: () => Text(
+                                            isCheckedInToday
+                                                ? context.t.checkin.checked_in
+                                                : context.t.checkin.check_in_btn,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: isCheckedInToday
+                                                  ? const Color(0xFF9E9E9E)
+                                                  : Colors.white,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Center(
-                                    child: checkInStatus.maybeWhen(
-                                      loading: () => const CupertinoActivityIndicator(color: Colors.white),
-                                      orElse: () => Text(
-                                        isCheckedInToday
-                                            ? context.t.checkin.checked_in
-                                            : context.t.checkin.check_in_btn,
-                                        style: GoogleFonts.inter(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: isCheckedInToday ? const Color(0xFF9E9E9E) : Colors.white,
                                         ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                  ),
-                                ),
+                                  );
+
+                                  button = button.bounceIn(
+                                    delay: const Duration(milliseconds: 550),
+                                  );
+
+                                  if (!isCheckedInToday) {
+                                    button = button.pulse(
+                                      scale: 1.03,
+                                      duration: const Duration(milliseconds: 1000),
+                                    );
+                                  }
+
+                                  return button;
+                                },
                               ),
                             ],
                           ),
@@ -828,7 +972,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                             Assets.images.bgCheckinHeader.path,
                             height: 130,
                             fit: BoxFit.contain,
-                          ),
+                          ).bounceIn(delay: const Duration(milliseconds: 100)),
                         ),
                         // Close Button
                         Positioned(
@@ -839,7 +983,9 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                             child: Container(
                               padding: const EdgeInsets.all(6),
                               decoration: BoxDecoration(
-                                color: AppColors.activeTab.withValues(alpha: 0.6),
+                                color: AppColors.activeTab.withValues(
+                                  alpha: 0.6,
+                                ),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(
@@ -849,7 +995,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                               ),
                             ),
                           ),
-                        ),
+                        ).bounceIn(delay: const Duration(milliseconds: 100)),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -869,7 +1015,10 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                             borderRadius: BorderRadius.circular(15),
                             border: const GradientBoxBorder(
                               gradient: LinearGradient(
-                                colors: [AppColors.primary, AppColors.secondary],
+                                colors: [
+                                  AppColors.primary,
+                                  AppColors.secondary,
+                                ],
                               ),
                             ),
                           ),
@@ -905,6 +1054,9 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                           ),
                         ),
                       ),
+                    ).slideAndFade(
+                      begin: const Offset(0.0, 0.3),
+                      delay: const Duration(milliseconds: 600),
                     ),
                   ],
                 ),
@@ -921,6 +1073,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
     required int day,
     required String reward,
     required DayState state,
+    required Duration delay,
     bool isToday = false,
   }) {
     Color borderColor;
@@ -1036,10 +1189,10 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: state == DayState.claimed
-                      ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
-                      : (state == DayState.today
-                          ? const Color(0xFF1E9320)
-                          : const Color(0xFF0A4F87)),
+                        ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
+                        : (state == DayState.today
+                              ? const Color(0xFF1E9320)
+                              : const Color(0xFF0A4F87)),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -1048,7 +1201,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
               ],
             ),
           ),
-        ),
+        ).bounceIn(delay: delay),
       ),
     );
   }
@@ -1059,6 +1212,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
     required DayState state,
     required double width,
     required double height,
+    required Duration delay,
     bool isToday = false,
   }) {
     Color borderColor = const Color(0xFFBBDEFB);
@@ -1127,14 +1281,9 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
               padding: const EdgeInsets.symmetric(vertical: 2),
               width: double.infinity,
               alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: null,
-                gradient: headerGradient,
-              ),
+              decoration: BoxDecoration(color: null, gradient: headerGradient),
               child: Text(
-                isToday
-                    ? context.t.checkin.today
-                    : context.t.checkin.day(n: 7),
+                isToday ? context.t.checkin.today : context.t.checkin.day(n: 7),
                 style: GoogleFonts.inter(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1148,10 +1297,7 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
               child: Padding(
                 padding: EdgeInsets.zero,
                 child: Center(
-                  child: Transform.scale(
-                    scale: 2.0,
-                    child: centerIcon,
-                  ),
+                  child: Transform.scale(scale: 2.0, child: centerIcon),
                 ),
               ),
             ),
@@ -1163,15 +1309,169 @@ class _CheckInDialogContentState extends State<_CheckInDialogContent>
                 color: state == DayState.claimed
                     ? const Color(0xFF0A4F87).withValues(alpha: 0.5)
                     : (state == DayState.today
-                        ? const Color(0xFF1E9320)
-                        : const Color(0xFF0A4F87)),
+                          ? const Color(0xFF1E9320)
+                          : const Color(0xFF0A4F87)),
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
           ],
         ),
+      ),
+    ).bounceIn(delay: delay);
+  }
+}
+
+class _CheckInSuccessDialog extends StatelessWidget {
+  final int credits;
+
+  const _CheckInSuccessDialog({required this.credits});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          // Dark glassmorphism card container
+          Container(
+            width: 320,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            decoration: BoxDecoration(
+              color: const Color(0xFF171717),
+              borderRadius: const BorderRadius.all(Radius.circular(24)),
+              border: Border.all(
+                color: const Color(0xFF2BC5C5).withValues(alpha: 0.3),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF2BC5C5).withValues(alpha: 0.1),
+                  blurRadius: 24,
+                  spreadRadius: 4,
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Floating Golden Coin with Glow
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            const Color(0xFFFFD700).withValues(alpha: 0.3),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
+                    Image.asset(
+                      Assets.images.icCheckinBadgeCoin.path,
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.contain,
+                    ).bounceIn(delay: const Duration(milliseconds: 150)).float(distance: 6, duration: const Duration(seconds: 2)),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                
+                // Reward text
+                ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ).createShader(bounds),
+                  child: Text(
+                    '+$credits',
+                    style: GoogleFonts.inter(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ).slideAndFade(
+                  begin: const Offset(0.0, 0.3),
+                  delay: const Duration(milliseconds: 300),
+                ),
+                
+                const SizedBox(height: 8),
+                
+                // Success message
+                Text(
+                  context.t.checkin.check_in_success(credits: credits).split('!').last.trim(),
+                  style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ).slideAndFade(
+                  begin: const Offset(0.0, 0.3),
+                  delay: const Duration(milliseconds: 400),
+                ),
+                
+                const SizedBox(height: 28),
+                
+                // Got it button
+                Container(
+                  width: double.infinity,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF00E676), Color(0xFF00B0FF)],
+                    ),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: InkWell(
+                    onTap: () => Navigator.of(context).pop(),
+                    borderRadius: BorderRadius.circular(100),
+                    child: Center(
+                      child: Text(
+                        context.t.guide.got_it,
+                        style: GoogleFonts.inter(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ).bounceIn(delay: const Duration(milliseconds: 500)),
+              ],
+            ),
+          ).fadeAndScale(
+            beginScale: 0.8,
+            duration: const Duration(milliseconds: 400),
+          ),
+          
+          // Confetti overlay playing once
+          Positioned(
+            top: -50,
+            bottom: -50,
+            left: -50,
+            right: -50,
+            child: IgnorePointer(
+              child: Lottie.asset(
+                Assets.raw.clickAnimation,
+                fit: BoxFit.cover,
+                repeat: false,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

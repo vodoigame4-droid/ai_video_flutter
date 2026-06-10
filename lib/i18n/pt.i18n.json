@@ -391,7 +391,8 @@
     "disable_notification_title": "Desativar notificações de check-in?",
     "disable_notification_desc": "Você perderá as recompensas diárias de login e outros bônus emocionantes. Tem certeza de que deseja desativar?",
     "disable_notification_keep": "Manter ativado",
-    "disable_notification_disable": "Desativar"
+    "disable_notification_disable": "Desativar",
+    "check_in_success": "+{credits} Créditos! Check-in realizado com sucesso."
   },
   "connectivity": {
     "no_internet_title": "Sem conexão",

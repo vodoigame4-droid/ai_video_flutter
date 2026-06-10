@@ -45,15 +45,7 @@ class SplashView extends StatelessWidget {
               } else if (successState.isVip) {
                 DashboardPage.go(context);
               } else {
-                DashboardPage.go(context);
-                if (context.mounted) {
-                  context.pushNamed(
-                    IapPage.name,
-                    queryParameters: {
-                      'fromSplash': 'true',
-                    },
-                  );
-                }
+                _navigateToIapAndHome(context);
               }
             },
           );
@@ -97,5 +89,17 @@ class SplashView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _navigateToIapAndHome(BuildContext context) async {
+    await context.pushNamed(
+      IapPage.name,
+      queryParameters: {
+        'fromSplash': 'true',
+      },
+    );
+    if (context.mounted) {
+      DashboardPage.go(context);
+    }
   }
 }

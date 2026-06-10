@@ -391,7 +391,8 @@
     "disable_notification_title": "تعطيل إشعارات تسجيل الوصول؟",
     "disable_notification_desc": "ستفقد مكافآت تسجيل الدخول اليومية والمكافآت المثيرة الأخرى. هل أنت متأكد من رغبتك في التعطيل؟",
     "disable_notification_keep": "الإبقاء على التفعيل",
-    "disable_notification_disable": "تعطيل"
+    "disable_notification_disable": "تعطيل",
+    "check_in_success": "+{credits} رصيد! تم تسجيل الوصول بنجاح."
   },
   "connectivity": {
     "no_internet_title": "لا يوجد اتصال",

@@ -45,17 +45,17 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           _preloadedUrls = null;
           emit(const SplashState.loading(0));
 
-          // 1. Start background login process
+          // 1. Initialize Firebase Remote Config first and wait for completion
+          await _initRemoteConfig();
+
+          // 2. Start background login process
           _performBackgroundLogin();
 
-          // 2. Start preloading onboarding images/videos if not completed
+          // 3. Start preloading onboarding images/videos if not completed
           _performOnboardingPreload();
 
-          // 3. Initialize Havin SDK with iOS store configurations
+          // 4. Initialize Havin SDK with iOS store configurations
           _initHavinSdk();
-
-          // 4. Initialize Firebase Remote Config
-          _initRemoteConfig();
 
           // 5. Start progress animation timer
           _timer?.cancel();
@@ -265,7 +265,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   void _checkAllInitializationCompleted() {
     LogUtils.d(
-      'SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, progress=$_progress',
+      'SplashBloc: _checkAllInitializationCompleted: login=$_isLoginCompleted, preload=$_isOnboardingPreloadCompleted, havin=$_isHavinSdkInitialized, remoteConfig=$_isRemoteConfigInitialized, progress=$_progress',
     );
     if (_isLoginCompleted &&
         _isOnboardingPreloadCompleted &&

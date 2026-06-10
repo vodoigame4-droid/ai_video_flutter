@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -67,6 +69,11 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
   void initState() {
     super.initState();
     _isLocalPlayer = widget.externalPlayer == null;
+
+    final isTest = !kIsWeb && Platform.environment.containsKey('FLUTTER_TEST');
+    if (isTest) {
+      return;
+    }
 
     if (widget.externalPlayer != null) {
       _player = widget.externalPlayer;

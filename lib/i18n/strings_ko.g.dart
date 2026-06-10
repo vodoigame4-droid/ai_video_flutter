@@ -586,6 +586,7 @@ class _Translations$checkin$ko extends Translations$checkin$en {
 	@override String get disable_notification_desc => '일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?';
 	@override String get disable_notification_keep => '활성화 유지';
 	@override String get disable_notification_disable => '비활성화';
+	@override String check_in_success({required Object credits}) => '+${credits} 크레딧! 출석 체크가 완료되었습니다.';
 }
 
 // Path: connectivity
@@ -1074,6 +1075,7 @@ extension on TranslationsKo {
 			'checkin.disable_notification_desc' => '일일 로그인 보상 및 기타 흥미로운 보너스를 놓치게 됩니다. 정말로 비활성화하시겠습니까?',
 			'checkin.disable_notification_keep' => '활성화 유지',
 			'checkin.disable_notification_disable' => '비활성화',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} 크레딧! 출석 체크가 완료되었습니다.',
 			'connectivity.no_internet_title' => '연결 없음',
 			'connectivity.no_internet_desc' => '앱을 계속 사용하려면 인터넷 연결을 확인해 주세요.',
 			'connectivity.retry_button' => '연결 재시도',

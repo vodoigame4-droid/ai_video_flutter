@@ -586,6 +586,7 @@ class _Translations$checkin$ar extends Translations$checkin$en {
 	@override String get disable_notification_desc => 'ستفقد مكافآت تسجيل الدخول اليومية والمكافآت المثيرة الأخرى. هل أنت متأكد من رغبتك في التعطيل؟';
 	@override String get disable_notification_keep => 'الإبقاء على التفعيل';
 	@override String get disable_notification_disable => 'تعطيل';
+	@override String check_in_success({required Object credits}) => '+${credits} رصيد! تم تسجيل الوصول بنجاح.';
 }
 
 // Path: connectivity
@@ -1074,6 +1075,7 @@ extension on TranslationsAr {
 			'checkin.disable_notification_desc' => 'ستفقد مكافآت تسجيل الدخول اليومية والمكافآت المثيرة الأخرى. هل أنت متأكد من رغبتك في التعطيل؟',
 			'checkin.disable_notification_keep' => 'الإبقاء على التفعيل',
 			'checkin.disable_notification_disable' => 'تعطيل',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} رصيد! تم تسجيل الوصول بنجاح.',
 			'connectivity.no_internet_title' => 'لا يوجد اتصال',
 			'connectivity.no_internet_desc' => 'يرجى التحقق من اتصالك بالإنترنت لمتابعة استخدام التطبيق.',
 			'connectivity.retry_button' => 'إعادة محاولة الاتصال',

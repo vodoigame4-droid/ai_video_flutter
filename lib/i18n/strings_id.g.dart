@@ -586,6 +586,7 @@ class _Translations$checkin$id extends Translations$checkin$en {
 	@override String get disable_notification_desc => 'Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?';
 	@override String get disable_notification_keep => 'Tetap Aktif';
 	@override String get disable_notification_disable => 'Nonaktifkan';
+	@override String check_in_success({required Object credits}) => '+${credits} Kredit! Berhasil masuk.';
 }
 
 // Path: connectivity
@@ -1074,6 +1075,7 @@ extension on TranslationsId {
 			'checkin.disable_notification_desc' => 'Anda akan melewatkan hadiah login harian dan bonus menarik lainnya. Apakah Anda yakin ingin menonaktifkan?',
 			'checkin.disable_notification_keep' => 'Tetap Aktif',
 			'checkin.disable_notification_disable' => 'Nonaktifkan',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} Kredit! Berhasil masuk.',
 			'connectivity.no_internet_title' => 'Tidak Ada Koneksi',
 			'connectivity.no_internet_desc' => 'Silakan periksa koneksi internet Anda untuk terus menggunakan aplikasi.',
 			'connectivity.retry_button' => 'Coba Lagi Koneksi',

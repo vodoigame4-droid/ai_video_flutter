@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:core_business/core_business.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
+import '../../../premium/presentation/pages/iap_page.dart';
 import '../bloc/onboarding_bloc.dart';
 import '../bloc/onboarding_event.dart';
 import '../bloc/onboarding_state.dart';
@@ -55,6 +57,32 @@ class _OnboardingViewState extends State<OnboardingView> {
     super.dispose();
   }
 
+  Future<void> _onOnboardingCompleted(BuildContext context) async {
+    bool isVip = false;
+    try {
+      final user = await sl<WatchProfileUseCase>()().first.timeout(const Duration(milliseconds: 500));
+      isVip = user.isVip;
+    } catch (e) {
+      LogUtils.w('OnboardingView: Failed to check VIP status, defaulting to false: $e');
+    }
+
+    if (context.mounted) {
+      if (isVip) {
+        DashboardPage.go(context);
+      } else {
+        await context.pushNamed(
+          IapPage.name,
+          queryParameters: {
+            'fromSplash': 'true',
+          },
+        );
+        if (context.mounted) {
+          DashboardPage.go(context);
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +92,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           state.maybeWhen(
             ready: (images, index, isCompleted) {
               if (isCompleted) {
-                DashboardPage.go(context);
+                _onOnboardingCompleted(context);
                 return;
               }
               if (_pageController.hasClients &&

@@ -586,6 +586,7 @@ class _Translations$checkin$zh extends Translations$checkin$en {
 	@override String get disable_notification_desc => '您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？';
 	@override String get disable_notification_keep => '保持启用';
 	@override String get disable_notification_disable => '禁用';
+	@override String check_in_success({required Object credits}) => '+${credits} 积分！签到成功。';
 }
 
 // Path: connectivity
@@ -1074,6 +1075,7 @@ extension on TranslationsZh {
 			'checkin.disable_notification_desc' => '您将错过每日登录奖励和其他令人兴奋的红利。您确定要禁用吗？',
 			'checkin.disable_notification_keep' => '保持启用',
 			'checkin.disable_notification_disable' => '禁用',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} 积分！签到成功。',
 			'connectivity.no_internet_title' => '无网络连接',
 			'connectivity.no_internet_desc' => '请检查您的网络连接以继续使用该应用程序。',
 			'connectivity.retry_button' => '重试连接',

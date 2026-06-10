@@ -602,6 +602,7 @@ class _Translations$checkin$vi extends Translations$checkin$en {
 	@override String get disable_notification_desc => 'Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?';
 	@override String get disable_notification_keep => 'Giữ lại';
 	@override String get disable_notification_disable => 'Tắt';
+	@override String check_in_success({required Object credits}) => '+${credits} Điểm tín dụng! Điểm danh thành công.';
 }
 
 // Path: connectivity
@@ -1096,6 +1097,7 @@ extension on TranslationsVi {
 			'checkin.disable_notification_desc' => 'Bạn sẽ bỏ lỡ phần thưởng điểm danh hàng ngày và các phần quà hấp dẫn tiếp theo. Bạn vẫn muốn tắt chứ?',
 			'checkin.disable_notification_keep' => 'Giữ lại',
 			'checkin.disable_notification_disable' => 'Tắt',
+			'checkin.check_in_success' => ({required Object credits}) => '+${credits} Điểm tín dụng! Điểm danh thành công.',
 			'connectivity.no_internet_title' => 'Mất kết nối',
 			'connectivity.no_internet_desc' => 'Vui lòng kiểm tra lại kết nối mạng để tiếp tục sử dụng ứng dụng.',
 			'connectivity.retry_button' => 'Thử lại kết nối',

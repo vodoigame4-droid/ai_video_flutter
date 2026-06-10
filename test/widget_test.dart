@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +10,7 @@ import 'package:core_business/core_business.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ai_video_flutter/core/services/remote_config_service.dart';
+import 'package:ai_video_flutter/core/navigation/app_router.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class MockMediaRepository extends Mock implements MediaRepository {}
@@ -30,8 +32,11 @@ void main() {
     registerFallbackValue(NoParams());
 
     SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
     await sl.reset();
     await initDependencies();
+    appRouter.go('/');
 
     final mockFirebaseMessaging = MockFirebaseMessaging();
     final mockNotificationSettings = MockNotificationSettings();
@@ -203,12 +208,43 @@ void main() {
     when(() => mockRemoteConfigService.getBannerHomeUrl()).thenReturn('https://example.com/banner.png');
     when(() => mockRemoteConfigService.videoGenCost).thenReturn(35);
     when(() => mockRemoteConfigService.getOnboardingUrls()).thenReturn([]);
+    when(() => mockRemoteConfigService.getBgIAPUrl()).thenReturn('https://example.com/bg_iap.mp4');
+    when(() => mockRemoteConfigService.getBgDiscountUrl()).thenReturn('https://example.com/bg_discount.mp4');
 
     sl.unregister<RemoteConfigService>();
     sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfigService);
   });
 
-  testWidgets('Vido app renders successfully', (WidgetTester tester) async {
+  testWidgets('Vido app renders successfully - VIP user bypasses IAP', (WidgetTester tester) async {
+    final mockUser = UserEntity(
+      id: 'mock_user_id',
+      deviceId: 'mock-device-id-tgv',
+      name: 'Mock User',
+      email: 'mock@example.com',
+      avatarUrl: '',
+      inviteCode: '',
+      status: 'active',
+      credits: 100,
+      extraCredits: 0,
+      subscribeCredits: 0,
+      isRated: false,
+      isVip: true, // VIP!
+      freeSuggestions: 3,
+      activeSubId: null,
+      refUsersCount: 0,
+      createdAt: DateTime.now(),
+    );
+
+    when(() => sl<AutoLoginUseCase>()(any())).thenAnswer(
+      (_) async => Resource.success(mockUser),
+    );
+    when(() => sl<GetProfileUseCase>()(any())).thenAnswer(
+      (_) async => Resource.success(mockUser),
+    );
+    when(() => sl<WatchProfileUseCase>()()).thenAnswer(
+      (_) => Stream.value(mockUser),
+    );
+
     // Initialize slang for testing
     LocaleSettings.setLocale(AppLocale.en);
 
@@ -243,5 +279,79 @@ void main() {
 
     // Verify that the dashboard create video label is rendered on HomePage.
     expect(find.text(t.dashboard.createVideo), findsOneWidget);
+
+    // Clean up to dispose all active widgets
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('Vido app goes through onboarding and shows IAP screen - non-VIP user', (WidgetTester tester) async {
+    final mockUser = UserEntity(
+      id: 'mock_user_id',
+      deviceId: 'mock-device-id-tgv',
+      name: 'Mock User',
+      email: 'mock@example.com',
+      avatarUrl: '',
+      inviteCode: '',
+      status: 'active',
+      credits: 100,
+      extraCredits: 0,
+      subscribeCredits: 0,
+      isRated: false,
+      isVip: false, // NOT VIP!
+      freeSuggestions: 3,
+      activeSubId: null,
+      refUsersCount: 0,
+      createdAt: DateTime.now(),
+    );
+
+    when(() => sl<AutoLoginUseCase>()(any())).thenAnswer(
+      (_) async => Resource.success(mockUser),
+    );
+    when(() => sl<GetProfileUseCase>()(any())).thenAnswer(
+      (_) async => Resource.success(mockUser),
+    );
+    when(() => sl<WatchProfileUseCase>()()).thenAnswer(
+      (_) => Stream.value(mockUser),
+    );
+
+    // Initialize slang for testing
+    LocaleSettings.setLocale(AppLocale.en);
+
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
+
+    // Wait for Splash screen timer and navigation to complete (1.5 seconds splash + transition)
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final t = await AppLocale.en.build();
+
+    // Tap Get Started on page 1
+    await tester.tap(find.text(t.onboarding.page1.button));
+    await tester.pumpAndSettle();
+
+    // Tap Continue on page 2
+    await tester.tap(find.text(t.onboarding.page2.button));
+    await tester.pumpAndSettle();
+
+    // Tap Continue on page 3
+    await tester.tap(find.text(t.onboarding.page3.button));
+    await tester.pumpAndSettle();
+
+    // Tap Continue on page 4
+    await tester.tap(find.text(t.onboarding.page4.button));
+    await tester.pumpAndSettle();
+
+    // Tap Continue on page 5 to navigate to IapPage
+    await tester.tap(find.text(t.onboarding.page5.button));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    // Verify that we land on IAPPage (shows "Start My Subscription" or similar premium texts)
+    expect(find.text(t.premium.start_my_subscription), findsOneWidget);
+
+    // Clean up to dispose all active widgets
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpAndSettle();
   });
 }

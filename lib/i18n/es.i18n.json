@@ -391,7 +391,8 @@
     "disable_notification_title": "¿Desactivar notificaciones de check-in?",
     "disable_notification_desc": "Te perderás las recompensas diarias de inicio de sesión y otros bonos emocionantes. ¿Estás seguro de que deseas desactivarlas?",
     "disable_notification_keep": "Mantener activadas",
-    "disable_notification_disable": "Desactivar"
+    "disable_notification_disable": "Desactivar",
+    "check_in_success": "¡+{credits} créditos! Registro diario completado con éxito."
   },
   "connectivity": {
     "no_internet_title": "Sin conexión",

@@ -391,7 +391,8 @@
     "disable_notification_title": "Désactiver les notifications de check-in ?",
     "disable_notification_desc": "Vous manquerez les récompenses quotidiennes de connexion et d'autres bonus excitants. Êtes-vous sûr de vouloir désactiver ?",
     "disable_notification_keep": "Garder activé",
-    "disable_notification_disable": "Désactiver"
+    "disable_notification_disable": "Désactiver",
+    "check_in_success": "+{credits} Crédits ! Enregistrement réussi."
   },
   "connectivity": {
     "no_internet_title": "Pas de connexion",

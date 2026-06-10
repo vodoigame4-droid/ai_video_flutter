@@ -194,6 +194,9 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
       biz.LogUtils.d(
         'NotificationRepositoryImpl: Permission status: ${settings.authorizationStatus}',
       );
+      if (isGranted) {
+        unawaited(_subscribeToDefaultTopics());
+      }
       return isGranted;
     } catch (e, stackTrace) {
       biz.LogUtils.e(

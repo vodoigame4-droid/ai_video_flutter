@@ -391,7 +391,8 @@
     "disable_notification_title": "チェックイン通知を無効にしますか？",
     "disable_notification_desc": "毎日のログイン報酬やその他のエキサイティングなボーナスを受け取れなくなります。本当に無効にしますか？",
     "disable_notification_keep": "有効のままにする",
-    "disable_notification_disable": "無効にする"
+    "disable_notification_disable": "無効にする",
+    "check_in_success": "+{credits} クレジット！チェックインに成功しました。"
   },
   "connectivity": {
     "no_internet_title": "接続がありません",
