@@ -97,24 +97,23 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
 
       // Setup Notification topics in the background without blocking the login/app startup flow
       if (deviceId != null) {
-        notificationRepository
-            .subscribeToTopic('all')
-            .catchError((e, stack) {
-              LogUtils.e(
-                'AutoLoginUseCase: Failed to subscribe to "all" topic',
-                error: e,
-                stackTrace: stack,
-              );
-            });
-        notificationRepository
-            .subscribeToTopic(deviceId)
-            .catchError((e, stack) {
-              LogUtils.e(
-                'AutoLoginUseCase: Failed to subscribe to "$deviceId" topic',
-                error: e,
-                stackTrace: stack,
-              );
-            });
+        notificationRepository.subscribeToTopic('all').catchError((e, stack) {
+          LogUtils.e(
+            'AutoLoginUseCase: Failed to subscribe to "all" topic',
+            error: e,
+            stackTrace: stack,
+          );
+        });
+        notificationRepository.subscribeToTopic(deviceId).catchError((
+          e,
+          stack,
+        ) {
+          LogUtils.e(
+            'AutoLoginUseCase: Failed to subscribe to "$deviceId" topic',
+            error: e,
+            stackTrace: stack,
+          );
+        });
       }
 
       if (user != null) {

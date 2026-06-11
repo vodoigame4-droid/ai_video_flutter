@@ -314,7 +314,9 @@ class _ProfileViewState extends State<ProfileView>
                                     await completer.future;
                                   },
                                   child: videosState.when(
-                                    initial: () => const SizedBox.shrink(),
+                                    initial: () => const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
                                     loading: () => const Center(
                                       child: CircularProgressIndicator(),
                                     ),
