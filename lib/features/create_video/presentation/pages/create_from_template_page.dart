@@ -19,6 +19,7 @@ import '../../../../core/widgets/app_confirm_dialog.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../../gen/assets.gen.dart';
 import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
+import 'package:screen_protector/screen_protector.dart';
 import 'package:core_business/core_business.dart';
 import '../widgets/upload_bottom_sheet_widget.dart';
 import '../widgets/tips_bottom_sheet.dart';
@@ -542,6 +543,7 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
         return;
       }
     }
+    await ScreenProtector.preventScreenshotOff();
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: source);
@@ -568,6 +570,8 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
         error: e,
         stackTrace: stack,
       );
+    } finally {
+      await ScreenProtector.preventScreenshotOn();
     }
   }
 

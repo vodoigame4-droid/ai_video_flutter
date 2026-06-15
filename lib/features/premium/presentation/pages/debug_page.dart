@@ -311,7 +311,7 @@ class _DebugPageState extends State<DebugPage> {
                         onTap: () {
                           GeneratingPage.push(
                             context,
-                            title: 'Debug Vido',
+                            title: 'Debug VidoVerse',
                             imageUrl: 'assets/images/img_one_person.png',
                             themeId: 'debug_theme',
                             themeType: 'TEMPLATE',

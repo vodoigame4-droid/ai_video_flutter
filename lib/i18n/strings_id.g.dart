@@ -93,7 +93,7 @@ class _Translations$home$id extends Translations$home$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido';
+	@override String get title => 'VidoVerse';
 	@override String get trending => 'Tren';
 	@override String get new_section => 'Baru';
 	@override String get toy_box => 'Kotak Figur Mainan';
@@ -110,7 +110,7 @@ class _Translations$create$id extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Selfie Aquaman';
-	@override String get tap_upload => 'Unggah foto Anda dan buat Vido Anda dalam hitungan detik.';
+	@override String get tap_upload => 'Unggah foto Anda dan buat video VidoVerse Anda dalam hitungan detik.';
 	@override String get tap_to_upload_photo => 'Ketuk di sini untuk mengunggah foto Anda.';
 	@override String get select_upload_title => 'Pilih untuk Mengunggah Foto Anda';
 	@override String get upload_image => 'Unggah Gambar';
@@ -172,7 +172,7 @@ class _Translations$splash$id extends Translations$splash$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Vido';
+	@override String get appName => 'VidoVerse';
 	@override String get loading => 'Memuat...';
 }
 
@@ -216,7 +216,7 @@ class _Translations$profile$id extends Translations$profile$en {
 	@override String get myVideo => 'Video Saya';
 	@override String get liked => 'Disukai';
 	@override String get noVideos => 'Belum ada video';
-	@override String get noVideosDesc => 'Buat Vido pertama Anda dan itu akan muncul di sini.';
+	@override String get noVideosDesc => 'Buat video VidoVerse pertama Anda dan itu akan muncul di sini.';
 	@override String get deleteTitle => 'Hapus video ini?';
 	@override String get deleteDesc => 'Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.';
 	@override String get cancel => 'Batal';
@@ -232,7 +232,7 @@ class _Translations$home_new$id extends Translations$home_new$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Selamat Datang di Vido';
+	@override String get welcomeToAppName => 'Selamat Datang di VidoVerse';
 	@override String get imageToVideo => 'Gambar ke\nVideo';
 	@override String get transitionVideo => 'Video\nTransisi';
 	@override String get imageToDance => 'Gambar ke\nTarian';
@@ -676,7 +676,7 @@ class _Translations$onboarding$page1$id extends Translations$onboarding$page1$en
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Selamat Datang di Vido';
+	@override String get title => 'Selamat Datang di VidoVerse';
 	@override String get subtitle => 'Perjalanan Kreatif Anda Dimulai Di Sini...';
 	@override String get button => 'Mulai';
 }
@@ -747,7 +747,7 @@ extension on TranslationsId {
 			'common.processing' => 'Sedang memproses...',
 			'common.ok' => 'OK',
 			'common.btn_continue' => 'Lanjutkan',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'Tren',
 			'home.new_section' => 'Baru',
 			'home.toy_box' => 'Kotak Figur Mainan',
@@ -755,7 +755,7 @@ extension on TranslationsId {
 			'home.anime' => 'Anime',
 			'home.discover' => 'Jelajahi',
 			'create.selfie_aquaman' => 'Selfie Aquaman',
-			'create.tap_upload' => 'Unggah foto Anda dan buat Vido Anda dalam hitungan detik.',
+			'create.tap_upload' => 'Unggah foto Anda dan buat video VidoVerse Anda dalam hitungan detik.',
 			'create.tap_to_upload_photo' => 'Ketuk di sini untuk mengunggah foto Anda.',
 			'create.select_upload_title' => 'Pilih untuk Mengunggah Foto Anda',
 			'create.upload_image' => 'Unggah Gambar',
@@ -799,9 +799,9 @@ extension on TranslationsId {
 			'create.please_add_image_first' => 'Silakan tambahkan gambar terlebih dahulu',
 			'leave_dialog.title' => 'Keluar tanpa menyimpan?',
 			'leave_dialog.desc' => 'Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => 'Memuat...',
-			'onboarding.page1.title' => 'Selamat Datang di Vido',
+			'onboarding.page1.title' => 'Selamat Datang di VidoVerse',
 			'onboarding.page1.subtitle' => 'Perjalanan Kreatif Anda Dimulai Di Sini...',
 			'onboarding.page1.button' => 'Mulai',
 			'onboarding.page2.title' => 'Gambar ke Video',
@@ -826,14 +826,14 @@ extension on TranslationsId {
 			'profile.myVideo' => 'Video Saya',
 			'profile.liked' => 'Disukai',
 			'profile.noVideos' => 'Belum ada video',
-			'profile.noVideosDesc' => 'Buat Vido pertama Anda dan itu akan muncul di sini.',
+			'profile.noVideosDesc' => 'Buat video VidoVerse pertama Anda dan itu akan muncul di sini.',
 			'profile.deleteTitle' => 'Hapus video ini?',
 			'profile.deleteDesc' => 'Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.',
 			'profile.cancel' => 'Batal',
 			'profile.delete' => 'Hapus',
 			'profile.generating' => 'Membuat...',
 			'profile.imageGeneration' => 'Pembuatan Video',
-			'home_new.welcomeToAppName' => 'Selamat Datang di Vido',
+			'home_new.welcomeToAppName' => 'Selamat Datang di VidoVerse',
 			'home_new.imageToVideo' => 'Gambar ke\nVideo',
 			'home_new.transitionVideo' => 'Video\nTransisi',
 			'home_new.imageToDance' => 'Gambar ke\nTarian',

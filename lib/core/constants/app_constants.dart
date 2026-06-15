@@ -7,7 +7,7 @@ abstract class AppConstants {
   const AppConstants._();
 
   static const String supportEmail = 'vidoai.support@gmail.com';
-  static const String emailSubject = 'Support & Feedback - Vido AI: Video Generator';
+  static const String emailSubject = 'Support & Feedback - VidoVerse';
   static const String privacyPolicyUrl = 'https://sites.google.com/view/vido-ai-video-generator/privacy-policy?authuser=0';
   static const String termsOfUseUrl = 'https://sites.google.com/view/vido-ai-video-generator/terms-conditions?authuser=0';
 }

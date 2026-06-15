@@ -12,7 +12,7 @@
     "btn_continue": "Tiếp tục"
   },
   "home": {
-    "title": "Vido",
+    "title": "VidoVerse",
     "trending": "Xu hướng",
     "new_section": "Mới",
     "toy_box": "Hộp đồ chơi",
@@ -22,7 +22,7 @@
   },
   "create": {
     "selfie_aquaman": "Ảnh tự sướng Aquaman",
-    "tap_upload": "Tải ảnh của bạn lên và tạo Vido chỉ trong vài giây.",
+    "tap_upload": "Tải ảnh của bạn lên và tạo video VidoVerse chỉ trong vài giây.",
     "tap_to_upload_photo": "Chạm vào đây để tải ảnh của bạn lên.",
     "select_upload_title": "Chọn phương thức tải ảnh",
     "upload_image": "Tải ảnh lên",
@@ -70,12 +70,12 @@
     "desc": "Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?"
   },
   "splash": {
-    "appName": "Vido",
+    "appName": "VidoVerse",
     "loading": "Đang tải..."
   },
   "onboarding": {
     "page1": {
-      "title": "Chào mừng đến với Vido",
+      "title": "Chào mừng đến với VidoVerse",
       "subtitle": "Hành trình sáng tạo của bạn bắt đầu tại đây...",
       "button": "Bắt đầu"
     },
@@ -113,7 +113,7 @@
     "myVideo": "Video của tôi",
     "liked": "Đã thích",
     "noVideos": "Chưa có video",
-    "noVideosDesc": "Hãy tạo Vido đầu tiên của bạn để nó xuất hiện tại đây.",
+    "noVideosDesc": "Hãy tạo video VidoVerse đầu tiên của bạn để nó xuất hiện tại đây.",
     "deleteTitle": "Xóa video này?",
     "deleteDesc": "Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.",
     "cancel": "Hủy",
@@ -122,7 +122,7 @@
     "imageGeneration": "Tạo video"
   },
   "home_new": {
-    "welcomeToAppName": "Chào mừng đến với Vido",
+    "welcomeToAppName": "Chào mừng đến với VidoVerse",
     "imageToVideo": "Ảnh sang\nVideo",
     "transitionVideo": "Video\nChuyển cảnh",
     "imageToDance": "Ảnh sang\nNhảy múa",

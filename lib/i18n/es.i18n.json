@@ -12,7 +12,7 @@
     "btn_continue": "Continuar"
   },
   "home": {
-    "title": "Vido",
+    "title": "VidoVerse",
     "trending": "Tendencias",
     "new_section": "Nuevo",
     "toy_box": "Caja de figuras de juguete",
@@ -70,12 +70,12 @@
     "desc": "¿Desea continuar editando o salir ahora?"
   },
   "splash": {
-    "appName": "Vido",
+    "appName": "VidoVerse",
     "loading": "Cargando..."
   },
   "onboarding": {
     "page1": {
-      "title": "Bienvenido a Vido",
+      "title": "Bienvenido a VidoVerse",
       "subtitle": "Tu viaje creativo comienza aquí...",
       "button": "Comenzar"
     },
@@ -122,7 +122,7 @@
     "imageGeneration": "Generación de video"
   },
   "home_new": {
-    "welcomeToAppName": "Bienvenido a Vido",
+    "welcomeToAppName": "Bienvenido a VidoVerse",
     "imageToVideo": "Imagen a\nVideo",
     "transitionVideo": "Video de\nTransición",
     "imageToDance": "Imagen a\nBaile",

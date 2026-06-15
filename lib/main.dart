@@ -19,8 +19,11 @@ import 'core/widgets/global_purchase_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
+import 'package:screen_protector/screen_protector.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenProtector.preventScreenshotOn();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Set up Firebase Crashlytics

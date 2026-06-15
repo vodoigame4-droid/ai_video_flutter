@@ -93,7 +93,7 @@ class _Translations$home$ja extends Translations$home$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido';
+	@override String get title => 'VidoVerse';
 	@override String get trending => 'トレンド';
 	@override String get new_section => '新規';
 	@override String get toy_box => 'トイフィギュアボックス';
@@ -172,7 +172,7 @@ class _Translations$splash$ja extends Translations$splash$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Vido';
+	@override String get appName => 'VidoVerse';
 	@override String get loading => '読み込み中...';
 }
 
@@ -232,7 +232,7 @@ class _Translations$home_new$ja extends Translations$home_new$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Vidoへようこそ';
+	@override String get welcomeToAppName => 'VidoVerseへようこそ';
 	@override String get imageToVideo => '画像から\nビデオ';
 	@override String get transitionVideo => 'トランジション\n動画';
 	@override String get imageToDance => '画像から\nダンス';
@@ -676,7 +676,7 @@ class _Translations$onboarding$page1$ja extends Translations$onboarding$page1$en
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vidoへようこそ';
+	@override String get title => 'VidoVerseへようこそ';
 	@override String get subtitle => 'あなたのクリエイティブな旅がここから始まる...';
 	@override String get button => '始める';
 }
@@ -747,7 +747,7 @@ extension on TranslationsJa {
 			'common.processing' => '処理中...',
 			'common.ok' => 'OK',
 			'common.btn_continue' => '続行',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'トレンド',
 			'home.new_section' => '新規',
 			'home.toy_box' => 'トイフィギュアボックス',
@@ -799,9 +799,9 @@ extension on TranslationsJa {
 			'create.please_add_image_first' => '最初に画像を追加してください',
 			'leave_dialog.title' => '保存せずに終了しますか？',
 			'leave_dialog.desc' => '編集を続けますか、それとも今終了しますか？',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => '読み込み中...',
-			'onboarding.page1.title' => 'Vidoへようこそ',
+			'onboarding.page1.title' => 'VidoVerseへようこそ',
 			'onboarding.page1.subtitle' => 'あなたのクリエイティブな旅がここから始まる...',
 			'onboarding.page1.button' => '始める',
 			'onboarding.page2.title' => '画像からビデオへ',
@@ -833,7 +833,7 @@ extension on TranslationsJa {
 			'profile.delete' => '削除',
 			'profile.generating' => '生成中...',
 			'profile.imageGeneration' => '動画生成',
-			'home_new.welcomeToAppName' => 'Vidoへようこそ',
+			'home_new.welcomeToAppName' => 'VidoVerseへようこそ',
 			'home_new.imageToVideo' => '画像から\nビデオ',
 			'home_new.transitionVideo' => 'トランジション\n動画',
 			'home_new.imageToDance' => '画像から\nダンス',

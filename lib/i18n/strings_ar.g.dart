@@ -93,7 +93,7 @@ class _Translations$home$ar extends Translations$home$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido';
+	@override String get title => 'VidoVerse';
 	@override String get trending => 'شائع';
 	@override String get new_section => 'جديد';
 	@override String get toy_box => 'صندوق ألعاب مجسمات';
@@ -110,7 +110,7 @@ class _Translations$create$ar extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'سيلفي أكوامان';
-	@override String get tap_upload => 'حمّل صورتك وأنشئ Vido الخاص بك في ثوانٍ.';
+	@override String get tap_upload => 'حمّل صورتك وأنشئ فيديو VidoVerse الخاص بك في ثوانٍ.';
 	@override String get tap_to_upload_photo => 'اضغط هنا لتحميل صورتك.';
 	@override String get select_upload_title => 'حدد لتحميل صورتك';
 	@override String get upload_image => 'تحميل الصورة';
@@ -172,7 +172,7 @@ class _Translations$splash$ar extends Translations$splash$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Vido';
+	@override String get appName => 'VidoVerse';
 	@override String get loading => 'جارٍ التحميل...';
 }
 
@@ -216,7 +216,7 @@ class _Translations$profile$ar extends Translations$profile$en {
 	@override String get myVideo => 'فيديوهاتي';
 	@override String get liked => 'أعجبني';
 	@override String get noVideos => 'لا توجد فيديوهات بعد';
-	@override String get noVideosDesc => 'أنشئ أول Vido لك وسيظهر هنا.';
+	@override String get noVideosDesc => 'أنشئ أول فيديو VidoVerse لك وسيظهر هنا.';
 	@override String get deleteTitle => 'حذف هذا الفيديو؟';
 	@override String get deleteDesc => 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟ لا يمكن التراجع عن هذا الإجراء.';
 	@override String get cancel => 'إلغاء';
@@ -232,7 +232,7 @@ class _Translations$home_new$ar extends Translations$home_new$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'مرحبًا بك في Vido';
+	@override String get welcomeToAppName => 'مرحبًا بك في VidoVerse';
 	@override String get imageToVideo => 'صورة إلى\nفيديو';
 	@override String get transitionVideo => 'فيديو\nانتقالي';
 	@override String get imageToDance => 'صورة إلى\nرقص';
@@ -676,7 +676,7 @@ class _Translations$onboarding$page1$ar extends Translations$onboarding$page1$en
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'مرحبًا بك في Vido';
+	@override String get title => 'مرحبًا بك في VidoVerse';
 	@override String get subtitle => 'رحلتك الإبداعية تبدأ من هنا...';
 	@override String get button => 'البدء';
 }
@@ -747,7 +747,7 @@ extension on TranslationsAr {
 			'common.processing' => 'جارٍ المعالجة...',
 			'common.ok' => 'موافق',
 			'common.btn_continue' => 'استمرار',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'شائع',
 			'home.new_section' => 'جديد',
 			'home.toy_box' => 'صندوق ألعاب مجسمات',
@@ -755,7 +755,7 @@ extension on TranslationsAr {
 			'home.anime' => 'أنيمي',
 			'home.discover' => 'اكتشاف',
 			'create.selfie_aquaman' => 'سيلفي أكوامان',
-			'create.tap_upload' => 'حمّل صورتك وأنشئ Vido الخاص بك في ثوانٍ.',
+			'create.tap_upload' => 'حمّل صورتك وأنشئ فيديو VidoVerse الخاص بك في ثوانٍ.',
 			'create.tap_to_upload_photo' => 'اضغط هنا لتحميل صورتك.',
 			'create.select_upload_title' => 'حدد لتحميل صورتك',
 			'create.upload_image' => 'تحميل الصورة',
@@ -799,9 +799,9 @@ extension on TranslationsAr {
 			'create.please_add_image_first' => 'يرجى إضافة صورة أولاً',
 			'leave_dialog.title' => 'هل تريد المغادرة دون حفظ؟',
 			'leave_dialog.desc' => 'هل تريد متابعة التحرير أم المغادرة الآن؟',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => 'جارٍ التحميل...',
-			'onboarding.page1.title' => 'مرحبًا بك في Vido',
+			'onboarding.page1.title' => 'مرحبًا بك في VidoVerse',
 			'onboarding.page1.subtitle' => 'رحلتك الإبداعية تبدأ من هنا...',
 			'onboarding.page1.button' => 'البدء',
 			'onboarding.page2.title' => 'صورة إلى فيديو',
@@ -826,14 +826,14 @@ extension on TranslationsAr {
 			'profile.myVideo' => 'فيديوهاتي',
 			'profile.liked' => 'أعجبني',
 			'profile.noVideos' => 'لا توجد فيديوهات بعد',
-			'profile.noVideosDesc' => 'أنشئ أول Vido لك وسيظهر هنا.',
+			'profile.noVideosDesc' => 'أنشئ أول فيديو VidoVerse لك وسيظهر هنا.',
 			'profile.deleteTitle' => 'حذف هذا الفيديو؟',
 			'profile.deleteDesc' => 'هل أنت متأكد أنك تريد حذف هذا الفيديو؟ لا يمكن التراجع عن هذا الإجراء.',
 			'profile.cancel' => 'إلغاء',
 			'profile.delete' => 'حذف',
 			'profile.generating' => 'جاري الإنشاء...',
 			'profile.imageGeneration' => 'إنشاء الفيديو',
-			'home_new.welcomeToAppName' => 'مرحبًا بك في Vido',
+			'home_new.welcomeToAppName' => 'مرحبًا بك في VidoVerse',
 			'home_new.imageToVideo' => 'صورة إلى\nفيديو',
 			'home_new.transitionVideo' => 'فيديو\nانتقالي',
 			'home_new.imageToDance' => 'صورة إلى\nرقص',

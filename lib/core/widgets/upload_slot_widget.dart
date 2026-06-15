@@ -13,6 +13,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
 import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
+import 'package:screen_protector/screen_protector.dart';
 
 class UploadSlotWidget extends StatelessWidget {
   final String? mediaPath;
@@ -232,6 +233,7 @@ class UploadSlotWidget extends StatelessWidget {
       }
     }
     final cropTitle = context.t.tips_sheet.title;
+    await ScreenProtector.preventScreenshotOff();
     try {
       final ImagePicker picker = ImagePicker();
       if (isVideoSlot) {
@@ -330,6 +332,8 @@ class UploadSlotWidget extends StatelessWidget {
         error: e,
         stackTrace: stack,
       );
+    } finally {
+      await ScreenProtector.preventScreenshotOn();
     }
   }
 

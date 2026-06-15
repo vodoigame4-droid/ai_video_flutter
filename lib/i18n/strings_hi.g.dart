@@ -93,7 +93,7 @@ class _Translations$home$hi extends Translations$home$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido';
+	@override String get title => 'VidoVerse';
 	@override String get trending => 'ट्रेंडिंग';
 	@override String get new_section => 'नया';
 	@override String get toy_box => 'खिलौना आकृति बॉक्स';
@@ -172,7 +172,7 @@ class _Translations$splash$hi extends Translations$splash$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Vido';
+	@override String get appName => 'VidoVerse';
 	@override String get loading => 'लोड हो रहा है...';
 }
 
@@ -232,7 +232,7 @@ class _Translations$home_new$hi extends Translations$home_new$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Vido में आपका स्वागत है';
+	@override String get welcomeToAppName => 'VidoVerse में आपका स्वागत है';
 	@override String get imageToVideo => 'छवि से\nवीडियो';
 	@override String get transitionVideo => 'संक्रमण\nवीडियो';
 	@override String get imageToDance => 'छवि से\nनृत्य';
@@ -676,7 +676,7 @@ class _Translations$onboarding$page1$hi extends Translations$onboarding$page1$en
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido में आपका स्वागत है';
+	@override String get title => 'VidoVerse में आपका स्वागत है';
 	@override String get subtitle => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...';
 	@override String get button => 'शुरू करें';
 }
@@ -747,7 +747,7 @@ extension on TranslationsHi {
 			'common.processing' => 'प्रक्रिया जारी है...',
 			'common.ok' => 'ठीक है',
 			'common.btn_continue' => 'जारी रखें',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'ट्रेंडिंग',
 			'home.new_section' => 'नया',
 			'home.toy_box' => 'खिलौना आकृति बॉक्स',
@@ -799,9 +799,9 @@ extension on TranslationsHi {
 			'create.please_add_image_first' => 'कृपया पहले एक छवि जोड़ें',
 			'leave_dialog.title' => 'बिना सहेजे छोड़ें?',
 			'leave_dialog.desc' => 'क्या आप संपादन जारी रखना चाहते हैं या अभी छोड़ना चाहते हैं?',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => 'लोड हो रहा है...',
-			'onboarding.page1.title' => 'Vido में आपका स्वागत है',
+			'onboarding.page1.title' => 'VidoVerse में आपका स्वागत है',
 			'onboarding.page1.subtitle' => 'आपकी रचनात्मक यात्रा यहाँ शुरू होती है...',
 			'onboarding.page1.button' => 'शुरू करें',
 			'onboarding.page2.title' => 'छवि से वीडियो',
@@ -833,7 +833,7 @@ extension on TranslationsHi {
 			'profile.delete' => 'हटाएं',
 			'profile.generating' => 'बनाया जा रहा है...',
 			'profile.imageGeneration' => 'वीडियो निर्माण',
-			'home_new.welcomeToAppName' => 'Vido में आपका स्वागत है',
+			'home_new.welcomeToAppName' => 'VidoVerse में आपका स्वागत है',
 			'home_new.imageToVideo' => 'छवि से\nवीडियो',
 			'home_new.transitionVideo' => 'संक्रमण\nवीडियो',
 			'home_new.imageToDance' => 'छवि से\nनृत्य',

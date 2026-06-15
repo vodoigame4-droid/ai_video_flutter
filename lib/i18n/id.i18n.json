@@ -12,7 +12,7 @@
     "btn_continue": "Lanjutkan"
   },
   "home": {
-    "title": "Vido",
+    "title": "VidoVerse",
     "trending": "Tren",
     "new_section": "Baru",
     "toy_box": "Kotak Figur Mainan",
@@ -22,7 +22,7 @@
   },
   "create": {
     "selfie_aquaman": "Selfie Aquaman",
-    "tap_upload": "Unggah foto Anda dan buat Vido Anda dalam hitungan detik.",
+    "tap_upload": "Unggah foto Anda dan buat video VidoVerse Anda dalam hitungan detik.",
     "tap_to_upload_photo": "Ketuk di sini untuk mengunggah foto Anda.",
     "select_upload_title": "Pilih untuk Mengunggah Foto Anda",
     "upload_image": "Unggah Gambar",
@@ -70,12 +70,12 @@
     "desc": "Apakah Anda ingin melanjutkan pengeditan atau keluar sekarang?"
   },
   "splash": {
-    "appName": "Vido",
+    "appName": "VidoVerse",
     "loading": "Memuat..."
   },
   "onboarding": {
     "page1": {
-      "title": "Selamat Datang di Vido",
+      "title": "Selamat Datang di VidoVerse",
       "subtitle": "Perjalanan Kreatif Anda Dimulai Di Sini...",
       "button": "Mulai"
     },
@@ -113,7 +113,7 @@
     "myVideo": "Video Saya",
     "liked": "Disukai",
     "noVideos": "Belum ada video",
-    "noVideosDesc": "Buat Vido pertama Anda dan itu akan muncul di sini.",
+    "noVideosDesc": "Buat video VidoVerse pertama Anda dan itu akan muncul di sini.",
     "deleteTitle": "Hapus video ini?",
     "deleteDesc": "Apakah Anda yakin ingin menghapus video ini? Tindakan ini tidak dapat dibatalkan.",
     "cancel": "Batal",
@@ -122,7 +122,7 @@
     "imageGeneration": "Pembuatan Video"
   },
   "home_new": {
-    "welcomeToAppName": "Selamat Datang di Vido",
+    "welcomeToAppName": "Selamat Datang di VidoVerse",
     "imageToVideo": "Gambar ke\nVideo",
     "transitionVideo": "Video\nTransisi",
     "imageToDance": "Gambar ke\nTarian",

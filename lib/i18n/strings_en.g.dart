@@ -116,8 +116,8 @@ class Translations$home$en {
 
 	// Translations
 
-	/// en: 'Vido'
-	String get title => 'Vido';
+	/// en: 'VidoVerse'
+	String get title => 'VidoVerse';
 
 	/// en: 'Trending'
 	String get trending => 'Trending';
@@ -299,8 +299,8 @@ class Translations$splash$en {
 
 	// Translations
 
-	/// en: 'Vido'
-	String get appName => 'Vido';
+	/// en: 'VidoVerse'
+	String get appName => 'VidoVerse';
 
 	/// en: 'Loading...'
 	String get loading => 'Loading...';
@@ -397,8 +397,8 @@ class Translations$home_new$en {
 
 	// Translations
 
-	/// en: 'Welcome To Vido'
-	String get welcomeToAppName => 'Welcome To Vido';
+	/// en: 'Welcome To VidoVerse'
+	String get welcomeToAppName => 'Welcome To VidoVerse';
 
 	/// en: 'Image to Video'
 	String get imageToVideo => 'Image to\nVideo';
@@ -1432,8 +1432,8 @@ class Translations$onboarding$page1$en {
 
 	// Translations
 
-	/// en: 'Welcome To Vido'
-	String get title => 'Welcome To Vido';
+	/// en: 'Welcome To VidoVerse'
+	String get title => 'Welcome To VidoVerse';
 
 	/// en: 'Your Creative Journey Starts Here...'
 	String get subtitle => 'Your Creative Journey Starts Here...';
@@ -1532,7 +1532,7 @@ extension on Translations {
 			'common.processing' => 'Processing...',
 			'common.ok' => 'OK',
 			'common.btn_continue' => 'Continue',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'Trending',
 			'home.new_section' => 'New',
 			'home.toy_box' => 'Toy Figura Box',
@@ -1584,9 +1584,9 @@ extension on Translations {
 			'create.trimming_loading' => 'Trimming video...',
 			'leave_dialog.title' => 'Leave without saving?',
 			'leave_dialog.desc' => 'Do you want to continue editing or leave now?',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => 'Loading...',
-			'onboarding.page1.title' => 'Welcome To Vido',
+			'onboarding.page1.title' => 'Welcome To VidoVerse',
 			'onboarding.page1.subtitle' => 'Your Creative Journey Starts Here...',
 			'onboarding.page1.button' => 'Get Started',
 			'onboarding.page2.title' => 'Image To Video',
@@ -1618,7 +1618,7 @@ extension on Translations {
 			'profile.delete' => 'Delete',
 			'profile.generating' => 'Generating...',
 			'profile.imageGeneration' => 'Video Generation',
-			'home_new.welcomeToAppName' => 'Welcome To Vido',
+			'home_new.welcomeToAppName' => 'Welcome To VidoVerse',
 			'home_new.imageToVideo' => 'Image to\nVideo',
 			'home_new.transitionVideo' => 'Transition\nVideo',
 			'home_new.imageToDance' => 'Image to\nDance',

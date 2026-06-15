@@ -94,7 +94,7 @@ class _Translations$home$vi extends Translations$home$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido';
+	@override String get title => 'VidoVerse';
 	@override String get trending => 'Xu hướng';
 	@override String get new_section => 'Mới';
 	@override String get toy_box => 'Hộp đồ chơi';
@@ -111,7 +111,7 @@ class _Translations$create$vi extends Translations$create$en {
 
 	// Translations
 	@override String get selfie_aquaman => 'Ảnh tự sướng Aquaman';
-	@override String get tap_upload => 'Tải ảnh của bạn lên và tạo Vido chỉ trong vài giây.';
+	@override String get tap_upload => 'Tải ảnh của bạn lên và tạo video VidoVerse chỉ trong vài giây.';
 	@override String get tap_to_upload_photo => 'Chạm vào đây để tải ảnh của bạn lên.';
 	@override String get select_upload_title => 'Chọn phương thức tải ảnh';
 	@override String get upload_image => 'Tải ảnh lên';
@@ -173,7 +173,7 @@ class _Translations$splash$vi extends Translations$splash$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Vido';
+	@override String get appName => 'VidoVerse';
 	@override String get loading => 'Đang tải...';
 }
 
@@ -217,7 +217,7 @@ class _Translations$profile$vi extends Translations$profile$en {
 	@override String get myVideo => 'Video của tôi';
 	@override String get liked => 'Đã thích';
 	@override String get noVideos => 'Chưa có video';
-	@override String get noVideosDesc => 'Hãy tạo Vido đầu tiên của bạn để nó xuất hiện tại đây.';
+	@override String get noVideosDesc => 'Hãy tạo video VidoVerse đầu tiên của bạn để nó xuất hiện tại đây.';
 	@override String get deleteTitle => 'Xóa video này?';
 	@override String get deleteDesc => 'Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.';
 	@override String get cancel => 'Hủy';
@@ -233,7 +233,7 @@ class _Translations$home_new$vi extends Translations$home_new$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Chào mừng đến với Vido';
+	@override String get welcomeToAppName => 'Chào mừng đến với VidoVerse';
 	@override String get imageToVideo => 'Ảnh sang\nVideo';
 	@override String get transitionVideo => 'Video\nChuyển cảnh';
 	@override String get imageToDance => 'Ảnh sang\nNhảy múa';
@@ -692,7 +692,7 @@ class _Translations$onboarding$page1$vi extends Translations$onboarding$page1$en
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Chào mừng đến với Vido';
+	@override String get title => 'Chào mừng đến với VidoVerse';
 	@override String get subtitle => 'Hành trình sáng tạo của bạn bắt đầu tại đây...';
 	@override String get button => 'Bắt đầu';
 }
@@ -763,7 +763,7 @@ extension on TranslationsVi {
 			'common.processing' => 'Đang xử lý...',
 			'common.ok' => 'OK',
 			'common.btn_continue' => 'Tiếp tục',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'Xu hướng',
 			'home.new_section' => 'Mới',
 			'home.toy_box' => 'Hộp đồ chơi',
@@ -771,7 +771,7 @@ extension on TranslationsVi {
 			'home.anime' => 'Hoạt hình',
 			'home.discover' => 'Khám phá',
 			'create.selfie_aquaman' => 'Ảnh tự sướng Aquaman',
-			'create.tap_upload' => 'Tải ảnh của bạn lên và tạo Vido chỉ trong vài giây.',
+			'create.tap_upload' => 'Tải ảnh của bạn lên và tạo video VidoVerse chỉ trong vài giây.',
 			'create.tap_to_upload_photo' => 'Chạm vào đây để tải ảnh của bạn lên.',
 			'create.select_upload_title' => 'Chọn phương thức tải ảnh',
 			'create.upload_image' => 'Tải ảnh lên',
@@ -815,9 +815,9 @@ extension on TranslationsVi {
 			'create.please_add_image_first' => 'Vui lòng thêm ảnh vào trước',
 			'leave_dialog.title' => 'Rời đi không lưu?',
 			'leave_dialog.desc' => 'Bạn muốn tiếp tục chỉnh sửa hay rời đi ngay bây giờ?',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => 'Đang tải...',
-			'onboarding.page1.title' => 'Chào mừng đến với Vido',
+			'onboarding.page1.title' => 'Chào mừng đến với VidoVerse',
 			'onboarding.page1.subtitle' => 'Hành trình sáng tạo của bạn bắt đầu tại đây...',
 			'onboarding.page1.button' => 'Bắt đầu',
 			'onboarding.page2.title' => 'Hình ảnh sang Video',
@@ -842,14 +842,14 @@ extension on TranslationsVi {
 			'profile.myVideo' => 'Video của tôi',
 			'profile.liked' => 'Đã thích',
 			'profile.noVideos' => 'Chưa có video',
-			'profile.noVideosDesc' => 'Hãy tạo Vido đầu tiên của bạn để nó xuất hiện tại đây.',
+			'profile.noVideosDesc' => 'Hãy tạo video VidoVerse đầu tiên của bạn để nó xuất hiện tại đây.',
 			'profile.deleteTitle' => 'Xóa video này?',
 			'profile.deleteDesc' => 'Bạn có chắc chắn muốn xóa video này không? Hành động này không thể hoàn tác.',
 			'profile.cancel' => 'Hủy',
 			'profile.delete' => 'Xóa',
 			'profile.generating' => 'Đang tạo...',
 			'profile.imageGeneration' => 'Tạo video',
-			'home_new.welcomeToAppName' => 'Chào mừng đến với Vido',
+			'home_new.welcomeToAppName' => 'Chào mừng đến với VidoVerse',
 			'home_new.imageToVideo' => 'Ảnh sang\nVideo',
 			'home_new.transitionVideo' => 'Video\nChuyển cảnh',
 			'home_new.imageToDance' => 'Ảnh sang\nNhảy múa',

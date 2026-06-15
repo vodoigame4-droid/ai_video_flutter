@@ -42,7 +42,8 @@ flutter build appbundle --release --build-name=1.0.0 --build-number=1
 ### iOS
 ```bash
 # Build gói phát hành iOS (IPA)
-flutter build ipa --release --build-name=1.0.0 --build-number=1
+flutter build ipa --release --build-name=1.0.2 --build-number=1
+
 ```
 
 ## 4. Dọn dẹp & Reset iOS Build (Chuyển đổi Thiết bị thật <-> Máy ảo)

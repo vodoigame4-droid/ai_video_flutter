@@ -93,7 +93,7 @@ class _Translations$home$de extends Translations$home$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Vido';
+	@override String get title => 'VidoVerse';
 	@override String get trending => 'Angesagt';
 	@override String get new_section => 'Neu';
 	@override String get toy_box => 'Spielzeugfiguren-Box';
@@ -172,7 +172,7 @@ class _Translations$splash$de extends Translations$splash$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get appName => 'Vido';
+	@override String get appName => 'VidoVerse';
 	@override String get loading => 'Laden...';
 }
 
@@ -232,7 +232,7 @@ class _Translations$home_new$de extends Translations$home_new$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcomeToAppName => 'Willkommen bei Vido';
+	@override String get welcomeToAppName => 'Willkommen bei VidoVerse';
 	@override String get imageToVideo => 'Bild zu\nVideo';
 	@override String get transitionVideo => 'Übergangs-\nvideo';
 	@override String get imageToDance => 'Bild zu\nTanz';
@@ -676,7 +676,7 @@ class _Translations$onboarding$page1$de extends Translations$onboarding$page1$en
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Willkommen bei Vido';
+	@override String get title => 'Willkommen bei VidoVerse';
 	@override String get subtitle => 'Deine kreative Reise beginnt hier...';
 	@override String get button => 'Loslegen';
 }
@@ -747,7 +747,7 @@ extension on TranslationsDe {
 			'common.processing' => 'Wird bearbeitet...',
 			'common.ok' => 'OK',
 			'common.btn_continue' => 'Weiter',
-			'home.title' => 'Vido',
+			'home.title' => 'VidoVerse',
 			'home.trending' => 'Angesagt',
 			'home.new_section' => 'Neu',
 			'home.toy_box' => 'Spielzeugfiguren-Box',
@@ -799,9 +799,9 @@ extension on TranslationsDe {
 			'create.please_add_image_first' => 'Bitte fügen Sie zuerst ein Bild hinzu',
 			'leave_dialog.title' => 'Verlassen ohne zu speichern?',
 			'leave_dialog.desc' => 'Möchten Sie die Bearbeitung fortsetzen oder jetzt verlassen?',
-			'splash.appName' => 'Vido',
+			'splash.appName' => 'VidoVerse',
 			'splash.loading' => 'Laden...',
-			'onboarding.page1.title' => 'Willkommen bei Vido',
+			'onboarding.page1.title' => 'Willkommen bei VidoVerse',
 			'onboarding.page1.subtitle' => 'Deine kreative Reise beginnt hier...',
 			'onboarding.page1.button' => 'Loslegen',
 			'onboarding.page2.title' => 'Bild zu Video',
@@ -833,7 +833,7 @@ extension on TranslationsDe {
 			'profile.delete' => 'Löschen',
 			'profile.generating' => 'Generieren...',
 			'profile.imageGeneration' => 'Videogenerierung',
-			'home_new.welcomeToAppName' => 'Willkommen bei Vido',
+			'home_new.welcomeToAppName' => 'Willkommen bei VidoVerse',
 			'home_new.imageToVideo' => 'Bild zu\nVideo',
 			'home_new.transitionVideo' => 'Übergangs-\nvideo',
 			'home_new.imageToDance' => 'Bild zu\nTanz',
