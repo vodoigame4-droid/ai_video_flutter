@@ -90,16 +90,10 @@ class _IapViewState extends State<IapView> {
   }
 
   void _handleClose() {
-    if (!_showDiscount) {
-      setState(() {
-        _showDiscount = true;
-      });
-    } else {
-      if (widget.fromSplash) {
-        DashboardPage.go(context);
-      } else if (context.mounted && Navigator.of(context).canPop()) {
-        Navigator.of(context).pop(false);
-      }
+    if (widget.fromSplash) {
+      DashboardPage.go(context);
+    } else if (context.mounted && Navigator.of(context).canPop()) {
+      Navigator.of(context).pop(false);
     }
   }
 
