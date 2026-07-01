@@ -417,10 +417,17 @@ class _Translations$privacy_dialog$vi extends Translations$privacy_dialog$en {
 	final TranslationsVi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Quyền riêng tư dữ liệu';
-	@override String get desc => 'Ảnh của bạn được xử lý an toàn bởi hệ thống AI nội bộ của chúng tôi. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin của bạn cho bất kỳ bên thứ ba nào.';
+	@override String get title => 'Đồng ý xử lý AI';
+	@override String get desc => 'Để tạo nội dung AI, ảnh bạn chọn (bao gồm cả thông tin khuôn mặt nếu có), mô tả văn bản và cài đặt thế hệ đã chọn sẽ được tải lên máy chủ AI của chúng tôi một cách an toàn để xử lý.';
 	@override String get cancel => 'Hủy bỏ';
 	@override String get confirm => 'Xác nhận';
+	@override String read_policy({required Object privacy, required Object terms}) => 'Vui lòng đọc ${privacy} và ${terms} của chúng tôi.';
+	@override String get bullet_1 => 'Dữ liệu của bạn chỉ được sử dụng để tạo nội dung bạn yêu cầu.';
+	@override String get bullet_2 => 'Chúng tôi không sử dụng ảnh hoặc dữ liệu khuôn mặt của bạn để nhận dạng khuôn mặt, xác minh danh tính, quảng cáo hoặc lập hồ sơ.';
+	@override String get bullet_3 => 'Dữ liệu của bạn sẽ bị xóa ngay sau khi quá trình xử lý hoàn tất.';
+	@override String get dont_show_again => 'Không hiển thị lại';
+	@override String get agree => 'Đồng ý';
+	@override String agree_policy({required Object privacy, required Object terms}) => 'Bằng cách tiếp tục, bạn đồng ý với ${privacy} và ${terms} của chúng tôi.';
 }
 
 // Path: report_dialog
@@ -961,10 +968,17 @@ extension on TranslationsVi {
 			'result.delete' => 'Xóa',
 			'result.share_success' => 'Đã sao chép liên kết video để chia sẻ',
 			'result.download_success' => 'Đã lưu video vào thư viện',
-			'privacy_dialog.title' => 'Quyền riêng tư dữ liệu',
-			'privacy_dialog.desc' => 'Ảnh của bạn được xử lý an toàn bởi hệ thống AI nội bộ của chúng tôi. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin của bạn cho bất kỳ bên thứ ba nào.',
+			'privacy_dialog.title' => 'Đồng ý xử lý AI',
+			'privacy_dialog.desc' => 'Để tạo nội dung AI, ảnh bạn chọn (bao gồm cả thông tin khuôn mặt nếu có), mô tả văn bản và cài đặt thế hệ đã chọn sẽ được tải lên máy chủ AI của chúng tôi một cách an toàn để xử lý.',
 			'privacy_dialog.cancel' => 'Hủy bỏ',
 			'privacy_dialog.confirm' => 'Xác nhận',
+			'privacy_dialog.read_policy' => ({required Object privacy, required Object terms}) => 'Vui lòng đọc ${privacy} và ${terms} của chúng tôi.',
+			'privacy_dialog.bullet_1' => 'Dữ liệu của bạn chỉ được sử dụng để tạo nội dung bạn yêu cầu.',
+			'privacy_dialog.bullet_2' => 'Chúng tôi không sử dụng ảnh hoặc dữ liệu khuôn mặt của bạn để nhận dạng khuôn mặt, xác minh danh tính, quảng cáo hoặc lập hồ sơ.',
+			'privacy_dialog.bullet_3' => 'Dữ liệu của bạn sẽ bị xóa ngay sau khi quá trình xử lý hoàn tất.',
+			'privacy_dialog.dont_show_again' => 'Không hiển thị lại',
+			'privacy_dialog.agree' => 'Đồng ý',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'Bằng cách tiếp tục, bạn đồng ý với ${privacy} và ${terms} của chúng tôi.',
 			'report_dialog.title' => 'Báo cáo',
 			'report_dialog.desc' => 'Bạn có chắc chắn muốn gửi báo cáo không?',
 			'report_dialog.cancel' => 'Hủy bỏ',

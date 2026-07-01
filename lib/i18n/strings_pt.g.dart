@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$pt extends Translations$privacy_dialog$en {
 	final TranslationsPt _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Privacidade de Dados';
-	@override String get desc => 'Suas fotos são processadas com segurança por nossos sistemas internos de IA. Não compartilhamos, vendemos ou divulgamos suas informações a terceiros.';
+	@override String get title => 'Consentimento de Processamento de IA';
+	@override String get desc => 'Para gerar conteúdo de IA, a foto selecionada (incluindo informações faciais, se presentes), o comando de texto e as configurações de geração selecionadas serão carregados com segurança para os nossos servidores de IA para processamento.';
 	@override String get cancel => 'Cancelar';
 	@override String get confirm => 'Confirmar';
+	@override String get bullet_1 => 'Seus dados são usados exclusivamente para gerar o conteúdo solicitado.';
+	@override String get bullet_2 => 'Não usamos suas fotos ou dados faciais para reconhecimento facial, verificação de identidade, publicidade ou criação de perfis.';
+	@override String get bullet_3 => 'Seus dados são excluídos após a conclusão do processamento.';
+	@override String get dont_show_again => 'Não mostrar novamente';
+	@override String get agree => 'Concordar';
+	@override String agree_policy({required Object privacy, required Object terms}) => 'Ao continuar, você concorda com a nossa ${privacy} e ${terms}.';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsPt {
 			'result.delete' => 'Excluir',
 			'result.share_success' => 'Link do vídeo copiado para compartilhar',
 			'result.download_success' => 'Vídeo salvo na galeria',
-			'privacy_dialog.title' => 'Privacidade de Dados',
-			'privacy_dialog.desc' => 'Suas fotos são processadas com segurança por nossos sistemas internos de IA. Não compartilhamos, vendemos ou divulgamos suas informações a terceiros.',
+			'privacy_dialog.title' => 'Consentimento de Processamento de IA',
+			'privacy_dialog.desc' => 'Para gerar conteúdo de IA, a foto selecionada (incluindo informações faciais, se presentes), o comando de texto e as configurações de geração selecionadas serão carregados com segurança para os nossos servidores de IA para processamento.',
 			'privacy_dialog.cancel' => 'Cancelar',
 			'privacy_dialog.confirm' => 'Confirmar',
+			'privacy_dialog.bullet_1' => 'Seus dados são usados exclusivamente para gerar o conteúdo solicitado.',
+			'privacy_dialog.bullet_2' => 'Não usamos suas fotos ou dados faciais para reconhecimento facial, verificação de identidade, publicidade ou criação de perfis.',
+			'privacy_dialog.bullet_3' => 'Seus dados são excluídos após a conclusão do processamento.',
+			'privacy_dialog.dont_show_again' => 'Não mostrar novamente',
+			'privacy_dialog.agree' => 'Concordar',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'Ao continuar, você concorda com a nossa ${privacy} e ${terms}.',
 			'report_dialog.title' => 'Denunciar',
 			'report_dialog.desc' => 'Tem certeza de que deseja enviar a denúncia?',
 			'report_dialog.cancel' => 'Cancelar',

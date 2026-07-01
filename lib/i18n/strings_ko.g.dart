@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$ko extends Translations$privacy_dialog$en {
 	final TranslationsKo _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '데이터 개인정보 보호';
-	@override String get desc => '사진은 당사의 내부 AI 시스템에 의해 안전하게 처리됩니다. 당사는 귀하의 정보를 제3자에게 공유, 판매 또는 공개하지 않습니다.';
+	@override String get title => 'AI 처리 동의';
+	@override String get desc => 'AI 콘텐츠를 생성하기 위해, 선택한 사진(얼굴 정보가 포함된 경우 포함), 텍스트 프롬프트 및 선택한 생성 설정이 처리를 위해 당사의 AI 서버로 안전하게 업로드됩니다.';
 	@override String get cancel => '취소';
 	@override String get confirm => '확인';
+	@override String get bullet_1 => '귀하의 데이터는 요청하신 콘텐츠를 생성하는 목적으로만 사용됩니다.';
+	@override String get bullet_2 => '당사는 얼굴 인식, 신원 확인, 광고 또는 프로파일링을 위해 귀하의 사진이나 얼굴 데이터를 사용하지 않습니다.';
+	@override String get bullet_3 => '처리가 완료되면 귀하의 데이터는 삭제됩니다.';
+	@override String get dont_show_again => '다시 보지 않기';
+	@override String get agree => '동의';
+	@override String agree_policy({required Object privacy, required Object terms}) => '계속 진행함으로써 귀하는 당사의 ${privacy} 및 ${terms}에 동의하게 됩니다.';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsKo {
 			'result.delete' => '삭제',
 			'result.share_success' => '공유할 비디오 링크가 복사되었습니다',
 			'result.download_success' => '비디오가 갤러리에 저장되었습니다',
-			'privacy_dialog.title' => '데이터 개인정보 보호',
-			'privacy_dialog.desc' => '사진은 당사의 내부 AI 시스템에 의해 안전하게 처리됩니다. 당사는 귀하의 정보를 제3자에게 공유, 판매 또는 공개하지 않습니다.',
+			'privacy_dialog.title' => 'AI 처리 동의',
+			'privacy_dialog.desc' => 'AI 콘텐츠를 생성하기 위해, 선택한 사진(얼굴 정보가 포함된 경우 포함), 텍스트 프롬프트 및 선택한 생성 설정이 처리를 위해 당사의 AI 서버로 안전하게 업로드됩니다.',
 			'privacy_dialog.cancel' => '취소',
 			'privacy_dialog.confirm' => '확인',
+			'privacy_dialog.bullet_1' => '귀하의 데이터는 요청하신 콘텐츠를 생성하는 목적으로만 사용됩니다.',
+			'privacy_dialog.bullet_2' => '당사는 얼굴 인식, 신원 확인, 광고 또는 프로파일링을 위해 귀하의 사진이나 얼굴 데이터를 사용하지 않습니다.',
+			'privacy_dialog.bullet_3' => '처리가 완료되면 귀하의 데이터는 삭제됩니다.',
+			'privacy_dialog.dont_show_again' => '다시 보지 않기',
+			'privacy_dialog.agree' => '동의',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => '계속 진행함으로써 귀하는 당사의 ${privacy} 및 ${terms}에 동의하게 됩니다.',
 			'report_dialog.title' => '신고',
 			'report_dialog.desc' => '신고를 제출하시겠습니까?',
 			'report_dialog.cancel' => '취소',

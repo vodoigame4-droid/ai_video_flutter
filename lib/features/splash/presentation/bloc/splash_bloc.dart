@@ -36,15 +36,21 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           _preloadedUrls = null;
           emit(const SplashState.loading());
 
-          // 1. Request ATT on iOS first, ensuring it is shown and resolved before anything else
+          // 1. Request ATT on iOS first, ensuring it is shown and resolved before proceeding
           if (Platform.isIOS) {
             final attStopwatch = Stopwatch()..start();
             try {
-              LogUtils.d('SplashBloc: Requesting ATT before other initializations...');
-              await Future.delayed(const Duration(milliseconds: 500));
-              await HavinAdsManager.instance.requestATT();
+              LogUtils.d('SplashBloc: Waiting 1.5 seconds for app to become active before requesting ATT...');
+              await Future.delayed(const Duration(milliseconds: 1500));
+              LogUtils.d('SplashBloc: Requesting ATT...');
+              await HavinAdsManager.instance.requestATT().timeout(
+                const Duration(seconds: 8),
+                onTimeout: () {
+                  throw TimeoutException('ATT request timed out after 8s to prevent startup hang');
+                },
+              );
               attStopwatch.stop();
-              LogUtils.i('SplashBloc: requestATT completed in ${attStopwatch.elapsedMilliseconds}ms');
+              LogUtils.i('SplashBloc: requestATT completed or timed out in ${attStopwatch.elapsedMilliseconds}ms');
             } catch (e) {
               attStopwatch.stop();
               LogUtils.w('SplashBloc: Failed to request ATT: $e');

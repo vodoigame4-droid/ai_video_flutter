@@ -243,10 +243,16 @@
     "download_success": "Video in der Galerie gespeichert"
   },
   "privacy_dialog": {
-    "title": "Datenschutz",
-    "desc": "Ihre Fotos werden von unseren internen KI-Systemen sicher verarbeitet. Wir teilen, verkaufen oder geben Ihre Informationen nicht an Dritte weiter.",
+    "title": "Einwilligung zur KI-Verarbeitung",
+    "desc": "Um KI-Inhalte zu erstellen, werden Ihr ausgewähltes Foto (einschließlich Gesichtsinformationen, falls vorhanden), Ihr Text-Prompt und die ausgewählten Erstellungseinstellungen sicher auf unsere KI-Server zur Verarbeitung hochgeladen.",
     "cancel": "Abbrechen",
-    "confirm": "Bestätigen"
+    "confirm": "Bestätigen",
+    "bullet_1": "Ihre Daten werden ausschließlich zur Erstellung der von Ihnen angeforderten Inhalte verwendet.",
+    "bullet_2": "Wir verwenden Ihre Fotos oder Gesichtsdaten nicht für Gesichtserkennung, Identitätsprüfung, Werbung oder Profiling.",
+    "bullet_3": "Ihre Daten werden nach Abschluss der Verarbeitung gelöscht.",
+    "dont_show_again": "Nicht mehr anzeigen",
+    "agree": "Zustimmen",
+    "agree_policy": "Indem Sie fortfahren, stimmen Sie unserer {privacy} und unseren {terms} zu."
   },
   "report_dialog": {
     "title": "Melden",

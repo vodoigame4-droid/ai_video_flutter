@@ -805,17 +805,38 @@ class Translations$privacy_dialog$en {
 
 	// Translations
 
-	/// en: 'Data Privacy'
-	String get title => 'Data Privacy';
+	/// en: 'AI Processing Consent'
+	String get title => 'AI Processing Consent';
 
-	/// en: 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.'
-	String get desc => 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.';
+	/// en: 'To generate AI content, your selected photo (including facial information if present), text prompt, and selected generation settings will be securely uploaded to our AI servers for processing.'
+	String get desc => 'To generate AI content, your selected photo (including facial information if present), text prompt, and selected generation settings will be securely uploaded to our AI servers for processing.';
 
 	/// en: 'Cancel'
 	String get cancel => 'Cancel';
 
 	/// en: 'Confirm'
 	String get confirm => 'Confirm';
+
+	/// en: 'Please read our {privacy} and {terms}.'
+	String read_policy({required Object privacy, required Object terms}) => 'Please read our ${privacy} and ${terms}.';
+
+	/// en: 'Your data is used solely to generate the content you request.'
+	String get bullet_1 => 'Your data is used solely to generate the content you request.';
+
+	/// en: 'We do not use your photos or face data for facial recognition, identity verification, advertising, or profiling.'
+	String get bullet_2 => 'We do not use your photos or face data for facial recognition, identity verification, advertising, or profiling.';
+
+	/// en: 'Your data is deleted after processing is completed.'
+	String get bullet_3 => 'Your data is deleted after processing is completed.';
+
+	/// en: 'Don't show again'
+	String get dont_show_again => 'Don\'t show again';
+
+	/// en: 'Agree'
+	String get agree => 'Agree';
+
+	/// en: 'By continuing, you agree to our {privacy} and {terms}.'
+	String agree_policy({required Object privacy, required Object terms}) => 'By continuing, you agree to our ${privacy} and ${terms}.';
 }
 
 // Path: report_dialog
@@ -1730,10 +1751,17 @@ extension on Translations {
 			'result.delete' => 'Delete',
 			'result.share_success' => 'Video link copied to share',
 			'result.download_success' => 'Video saved to gallery',
-			'privacy_dialog.title' => 'Data Privacy',
-			'privacy_dialog.desc' => 'Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.',
+			'privacy_dialog.title' => 'AI Processing Consent',
+			'privacy_dialog.desc' => 'To generate AI content, your selected photo (including facial information if present), text prompt, and selected generation settings will be securely uploaded to our AI servers for processing.',
 			'privacy_dialog.cancel' => 'Cancel',
 			'privacy_dialog.confirm' => 'Confirm',
+			'privacy_dialog.read_policy' => ({required Object privacy, required Object terms}) => 'Please read our ${privacy} and ${terms}.',
+			'privacy_dialog.bullet_1' => 'Your data is used solely to generate the content you request.',
+			'privacy_dialog.bullet_2' => 'We do not use your photos or face data for facial recognition, identity verification, advertising, or profiling.',
+			'privacy_dialog.bullet_3' => 'Your data is deleted after processing is completed.',
+			'privacy_dialog.dont_show_again' => 'Don\'t show again',
+			'privacy_dialog.agree' => 'Agree',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'By continuing, you agree to our ${privacy} and ${terms}.',
 			'report_dialog.title' => 'Report',
 			'report_dialog.desc' => 'Are you sure you want to submit the report?',
 			'report_dialog.cancel' => 'Cancel',

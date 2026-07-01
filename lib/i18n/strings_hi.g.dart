@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$hi extends Translations$privacy_dialog$en {
 	final TranslationsHi _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'डेटा गोपनीयता';
-	@override String get desc => 'आपकी तस्वीरों को हमारे आंतरिक एआई सिस्टम द्वारा सुरक्षित रूप से संसाधित किया जाता है। हम आपकी जानकारी किसी भी तीसरे पक्ष के साथ साझा, बेच या प्रकट नहीं करते हैं।';
+	@override String get title => 'एआई प्रोसेसिंग सहमति';
+	@override String get desc => 'एआई सामग्री उत्पन्न करने के लिए, आपकी चयनित फोटो (यदि मौजूद हो तो चेहरे की जानकारी सहित), टेक्स्ट प्रॉम्प्ट और चयनित जनरेशन सेटिंग्स को प्रोसेसिंग के लिए हमारे एआई सर्वर पर सुरक्षित रूप से अपलोड किया जाएगा।';
 	@override String get cancel => 'रद्द करें';
 	@override String get confirm => 'पुष्टि करें';
+	@override String get bullet_1 => 'आपके डेटा का उपयोग केवल आपके द्वारा अनुरोधित सामग्री को उत्पन्न करने के लिए किया जाता है।';
+	@override String get bullet_2 => 'हम चेहरे की पहचान, पहचान सत्यापन, विज्ञापन या प्रोफाइलिंग के लिए आपकी तस्वीरों या चेहरे के डेटा का उपयोग नहीं करते हैं।';
+	@override String get bullet_3 => 'प्रोसेसिंग पूरी होने के बाद आपका डेटा डिलीट कर दिया जाता है।';
+	@override String get dont_show_again => 'दोबारा न दिखाएं';
+	@override String get agree => 'सहमत';
+	@override String agree_policy({required Object privacy, required Object terms}) => 'जारी रखकर, आप हमारी ${privacy} और ${terms} से सहमत होते हैं।';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsHi {
 			'result.delete' => 'हटाएं',
 			'result.share_success' => 'साझा करने के लिए वीडियो लिंक कॉपी किया गया',
 			'result.download_success' => 'वीडियो गैलरी में सहेजा गया',
-			'privacy_dialog.title' => 'डेटा गोपनीयता',
-			'privacy_dialog.desc' => 'आपकी तस्वीरों को हमारे आंतरिक एआई सिस्टम द्वारा सुरक्षित रूप से संसाधित किया जाता है। हम आपकी जानकारी किसी भी तीसरे पक्ष के साथ साझा, बेच या प्रकट नहीं करते हैं।',
+			'privacy_dialog.title' => 'एआई प्रोसेसिंग सहमति',
+			'privacy_dialog.desc' => 'एआई सामग्री उत्पन्न करने के लिए, आपकी चयनित फोटो (यदि मौजूद हो तो चेहरे की जानकारी सहित), टेक्स्ट प्रॉम्प्ट और चयनित जनरेशन सेटिंग्स को प्रोसेसिंग के लिए हमारे एआई सर्वर पर सुरक्षित रूप से अपलोड किया जाएगा।',
 			'privacy_dialog.cancel' => 'रद्द करें',
 			'privacy_dialog.confirm' => 'पुष्टि करें',
+			'privacy_dialog.bullet_1' => 'आपके डेटा का उपयोग केवल आपके द्वारा अनुरोधित सामग्री को उत्पन्न करने के लिए किया जाता है।',
+			'privacy_dialog.bullet_2' => 'हम चेहरे की पहचान, पहचान सत्यापन, विज्ञापन या प्रोफाइलिंग के लिए आपकी तस्वीरों या चेहरे के डेटा का उपयोग नहीं करते हैं।',
+			'privacy_dialog.bullet_3' => 'प्रोसेसिंग पूरी होने के बाद आपका डेटा डिलीट कर दिया जाता है।',
+			'privacy_dialog.dont_show_again' => 'दोबारा न दिखाएं',
+			'privacy_dialog.agree' => 'सहमत',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'जारी रखकर, आप हमारी ${privacy} और ${terms} से सहमत होते हैं।',
 			'report_dialog.title' => 'रिपोर्ट करें',
 			'report_dialog.desc' => 'क्या आप वाकई रिपोर्ट सबमिट करना चाहते हैं?',
 			'report_dialog.cancel' => 'रद्द करें',

@@ -8,4 +8,5 @@ abstract class StorageKeys {
   static const String refCode = 'ref_code';
   static const String isOnboardingCompleted = 'is_onboarding_completed';
   static const String bannerHomeUrl = 'banner_home_url';
+  static const String isPrivacyAccepted = 'is_privacy_accepted';
 }

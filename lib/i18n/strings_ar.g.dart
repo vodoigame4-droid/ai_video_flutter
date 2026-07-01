@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$ar extends Translations$privacy_dialog$en {
 	final TranslationsAr _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'خصوصية البيانات';
-	@override String get desc => 'يتم معالجة صورك بأمان بواسطة أنظمة الذكاء الاصطناعي الداخلية لدينا. نحن لا نشارك أو نبيع أو نكشف عن معلوماتك لأي طرف ثالث.';
+	@override String get title => 'موافقة على معالجة الذكاء الاصطناعي';
+	@override String get desc => 'لإنشاء محتوى الذكاء الاصطناعي، سيتم تحميل صورتك المحددة (بما في ذلك معلومات الوجه إن وجدت) والمطالبة النصية وإعدادات الإنشاء المحددة بشكل آمن إلى خوادم الذكاء الاصطناعي الخاصة بنا لمعالجتها.';
 	@override String get cancel => 'إلغاء';
 	@override String get confirm => 'تأكيد';
+	@override String get bullet_1 => 'تُستخدم بياناتك فقط لإنشاء المحتوى الذي تطلبه.';
+	@override String get bullet_2 => 'نحن لا نستخدم صورك أو بيانات وجهك للتعرف على الوجه، أو التحقق من الهوية، أو الإعلان، أو التنميط.';
+	@override String get bullet_3 => 'يتم حذف بياناتك بعد اكتمال المعالجة.';
+	@override String get dont_show_again => 'عدم الإظهار مجدداً';
+	@override String get agree => 'موافق';
+	@override String agree_policy({required Object privacy, required Object terms}) => 'من خلال الاستمرار، فإنك توافق على ${privacy} و${terms} الخاصة بنا.';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsAr {
 			'result.delete' => 'حذف',
 			'result.share_success' => 'تم نسخ رابط الفيديو للمشاركة',
 			'result.download_success' => 'تم حفظ الفيديو في المعرض',
-			'privacy_dialog.title' => 'خصوصية البيانات',
-			'privacy_dialog.desc' => 'يتم معالجة صورك بأمان بواسطة أنظمة الذكاء الاصطناعي الداخلية لدينا. نحن لا نشارك أو نبيع أو نكشف عن معلوماتك لأي طرف ثالث.',
+			'privacy_dialog.title' => 'موافقة على معالجة الذكاء الاصطناعي',
+			'privacy_dialog.desc' => 'لإنشاء محتوى الذكاء الاصطناعي، سيتم تحميل صورتك المحددة (بما في ذلك معلومات الوجه إن وجدت) والمطالبة النصية وإعدادات الإنشاء المحددة بشكل آمن إلى خوادم الذكاء الاصطناعي الخاصة بنا لمعالجتها.',
 			'privacy_dialog.cancel' => 'إلغاء',
 			'privacy_dialog.confirm' => 'تأكيد',
+			'privacy_dialog.bullet_1' => 'تُستخدم بياناتك فقط لإنشاء المحتوى الذي تطلبه.',
+			'privacy_dialog.bullet_2' => 'نحن لا نستخدم صورك أو بيانات وجهك للتعرف على الوجه، أو التحقق من الهوية، أو الإعلان، أو التنميط.',
+			'privacy_dialog.bullet_3' => 'يتم حذف بياناتك بعد اكتمال المعالجة.',
+			'privacy_dialog.dont_show_again' => 'عدم الإظهار مجدداً',
+			'privacy_dialog.agree' => 'موافق',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'من خلال الاستمرار، فإنك توافق على ${privacy} و${terms} الخاصة بنا.',
 			'report_dialog.title' => 'إبلاغ',
 			'report_dialog.desc' => 'هل أنت متأكد أنك تريد إرسال الإبلاغ؟',
 			'report_dialog.cancel' => 'إلغاء',

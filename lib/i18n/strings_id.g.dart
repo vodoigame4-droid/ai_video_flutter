@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$id extends Translations$privacy_dialog$en {
 	final TranslationsId _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Privasi Data';
-	@override String get desc => 'Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.';
+	@override String get title => 'Persetujuan Pemrosesan AI';
+	@override String get desc => 'Untuk menghasilkan konten AI, foto pilihan Anda (termasuk informasi wajah jika ada), petunjuk teks, dan pengaturan generasi yang dipilih akan diunggah dengan aman ke server AI kami untuk diproses.';
 	@override String get cancel => 'Batal';
 	@override String get confirm => 'Konfirmasi';
+	@override String get bullet_1 => 'Data Anda digunakan semata-mata untuk menghasilkan konten yang Anda minta.';
+	@override String get bullet_2 => 'Kami tidak menggunakan foto atau data wajah Anda untuk pengenalan wajah, verifikasi identitas, iklan, atau profil.';
+	@override String get bullet_3 => 'Data Anda dihapus setelah pemrosesan selesai.';
+	@override String get dont_show_again => 'Jangan tampilkan lagi';
+	@override String get agree => 'Setuju';
+	@override String agree_policy({required Object privacy, required Object terms}) => 'Dengan melanjutkan, Anda menyetujui ${privacy} dan ${terms} kami.';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsId {
 			'result.delete' => 'Hapus',
 			'result.share_success' => 'Tautan video disalin untuk dibagikan',
 			'result.download_success' => 'Video disimpan ke galeri',
-			'privacy_dialog.title' => 'Privasi Data',
-			'privacy_dialog.desc' => 'Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.',
+			'privacy_dialog.title' => 'Persetujuan Pemrosesan AI',
+			'privacy_dialog.desc' => 'Untuk menghasilkan konten AI, foto pilihan Anda (termasuk informasi wajah jika ada), petunjuk teks, dan pengaturan generasi yang dipilih akan diunggah dengan aman ke server AI kami untuk diproses.',
 			'privacy_dialog.cancel' => 'Batal',
 			'privacy_dialog.confirm' => 'Konfirmasi',
+			'privacy_dialog.bullet_1' => 'Data Anda digunakan semata-mata untuk menghasilkan konten yang Anda minta.',
+			'privacy_dialog.bullet_2' => 'Kami tidak menggunakan foto atau data wajah Anda untuk pengenalan wajah, verifikasi identitas, iklan, atau profil.',
+			'privacy_dialog.bullet_3' => 'Data Anda dihapus setelah pemrosesan selesai.',
+			'privacy_dialog.dont_show_again' => 'Jangan tampilkan lagi',
+			'privacy_dialog.agree' => 'Setuju',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'Dengan melanjutkan, Anda menyetujui ${privacy} dan ${terms} kami.',
 			'report_dialog.title' => 'Laporkan',
 			'report_dialog.desc' => 'Apakah Anda yakin ingin mengirimkan laporan?',
 			'report_dialog.cancel' => 'Batal',

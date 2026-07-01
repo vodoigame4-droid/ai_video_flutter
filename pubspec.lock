@@ -2259,9 +2259,10 @@ packages:
   wiwi_havin_base_ads:
     dependency: "direct main"
     description:
-      path: "../wiwi-havin-base-ads"
-      relative: true
-    source: path
+      name: wiwi_havin_base_ads
+      sha256: "058ee2f385d44acbf2d7f5c63a043f34f4f1e1813887c88be8569b0e00c25d29"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.2"
   xdg_directories:
     dependency: transitive

@@ -21,6 +21,8 @@ import '../../../../gen/assets.gen.dart';
 import 'package:ai_video_flutter/core/permission/app_permission_handler.dart';
 import 'package:screen_protector/screen_protector.dart';
 import 'package:core_business/core_business.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/widgets/consent_bottom_sheet.dart';
 import '../widgets/upload_bottom_sheet_widget.dart';
 import '../widgets/tips_bottom_sheet.dart';
 import 'create_template_settings_page.dart';
@@ -76,6 +78,18 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             themeOrgId: widget.themeOrgId,
           ),
         );
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1));
+      final prefs = sl<SharedPreferences>();
+      final isAccepted = prefs.getBool(StorageKeys.isPrivacyAccepted) ?? false;
+      if (!isAccepted) {
+        if (!mounted) return;
+        final accepted = await ConsentBottomSheet.show(context);
+        if (!accepted && mounted) {
+          context.pop();
+        }
+      }
+    });
   }
 
   Future<bool> _onWillPop() async {
@@ -531,7 +545,9 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
-    LogUtils.i('CreateFromTemplatePage: _pickImage started. source: $source, context mounted: $mounted');
+    LogUtils.i(
+      'CreateFromTemplatePage: _pickImage started. source: $source, context mounted: $mounted',
+    );
     if (source == ImageSource.camera) {
       final hasPermission =
           await AppPermissionHandler.checkAndRequestCameraPermission(context);
@@ -554,12 +570,18 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
             final file = File(croppedPath);
             final exists = await file.exists();
             final length = exists ? await file.length() : 0;
-            LogUtils.i('CreateFromTemplatePage: Cropped file validation - exists: $exists, size: $length bytes');
+            LogUtils.i(
+              'CreateFromTemplatePage: Cropped file validation - exists: $exists, size: $length bytes',
+            );
             if (mounted && exists) {
-              LogUtils.i('CreateFromTemplatePage: Adding selectPhoto event to Bloc with path: $croppedPath');
+              LogUtils.i(
+                'CreateFromTemplatePage: Adding selectPhoto event to Bloc with path: $croppedPath',
+              );
               _bloc.add(CreateFromTemplateEvent.selectPhoto(croppedPath));
             } else {
-              LogUtils.w('CreateFromTemplatePage: Context not mounted or file does not exist, cannot add selectPhoto.');
+              LogUtils.w(
+                'CreateFromTemplatePage: Context not mounted or file does not exist, cannot add selectPhoto.',
+              );
             }
           }
         }
@@ -622,7 +644,20 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     }
   }
 
-  void _showUploadBottomSheet(BuildContext context) {
+  void _showUploadBottomSheet(BuildContext context) async {
+    final prefs = sl<SharedPreferences>();
+    final isAccepted = prefs.getBool(StorageKeys.isPrivacyAccepted) ?? false;
+
+    if (!isAccepted) {
+      if (!mounted) return;
+      final consentResult = await ConsentBottomSheet.show(context);
+      if (!consentResult) {
+        LogUtils.i('CreateFromTemplatePage: User declined privacy consent.');
+        return;
+      }
+    }
+
+    if (!mounted) return;
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.onSurface,
@@ -639,4 +674,3 @@ class _CreateFromTemplatePageState extends State<CreateFromTemplatePage> {
     TipsBottomSheet.show(context);
   }
 }
-

@@ -250,10 +250,17 @@
     "download_success": "Video saved to gallery"
   },
   "privacy_dialog": {
-    "title": "Data Privacy",
-    "desc": "Your photos are processed securely by our internal AI systems. We do not share, sell, or disclose your information to any third parties.",
+    "title": "AI Processing Consent",
+    "desc": "To generate AI content, your selected photo (including facial information if present), text prompt, and selected generation settings will be securely uploaded to our AI servers for processing.",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "read_policy": "Please read our {privacy} and {terms}.",
+    "bullet_1": "Your data is used solely to generate the content you request.",
+    "bullet_2": "We do not use your photos or face data for facial recognition, identity verification, advertising, or profiling.",
+    "bullet_3": "Your data is deleted after processing is completed.",
+    "dont_show_again": "Don't show again",
+    "agree": "Agree",
+    "agree_policy": "By continuing, you agree to our {privacy} and {terms}."
   },
   "report_dialog": {
     "title": "Report",

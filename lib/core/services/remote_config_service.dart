@@ -20,6 +20,8 @@ class RemoteConfigService {
   static const int defaultVideoGenFullHdCost = 70;
   static const String rcCloseButtonDelaySeconds = 'close_button_delay_seconds';
   static const int defaultCloseButtonDelaySeconds = 3;
+  static const String rcPrivacySheetTitle = 'privacy_sheet_title';
+  static const String rcPrivacySheetDescription = 'privacy_sheet_description';
 
   /// Default fallback values
   static const String defaultBannerUrl =
@@ -78,6 +80,8 @@ class RemoteConfigService {
         rcVideoGenCost: defaultVideoGenCost,
         rcVideoGenFullHdCost: defaultVideoGenFullHdCost,
         rcCloseButtonDelaySeconds: defaultCloseButtonDelaySeconds,
+        rcPrivacySheetTitle: 'Data Privacy Consent',
+        rcPrivacySheetDescription: 'Your photos will be processed securely by our servers and shared with our third-party AI partners strictly to generate the video. All photos are automatically deleted within 24 hours of generation.',
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
@@ -277,4 +281,10 @@ class RemoteConfigService {
       'https://ai-videogenerator.sfo3.cdn.digitaloceanspaces.com/files/images/f274548b10c1.webp',
     ];
   }
+
+  /// Get the dynamic privacy consent sheet title.
+  String get privacySheetTitle => _remoteConfig.getString(rcPrivacySheetTitle);
+
+  /// Get the dynamic privacy consent sheet description.
+  String get privacySheetDescription => _remoteConfig.getString(rcPrivacySheetDescription);
 }

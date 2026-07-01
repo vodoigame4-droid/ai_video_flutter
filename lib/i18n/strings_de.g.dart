@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$de extends Translations$privacy_dialog$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Datenschutz';
-	@override String get desc => 'Ihre Fotos werden von unseren internen KI-Systemen sicher verarbeitet. Wir teilen, verkaufen oder geben Ihre Informationen nicht an Dritte weiter.';
+	@override String get title => 'Einwilligung zur KI-Verarbeitung';
+	@override String get desc => 'Um KI-Inhalte zu erstellen, werden Ihr ausgewähltes Foto (einschließlich Gesichtsinformationen, falls vorhanden), Ihr Text-Prompt und die ausgewählten Erstellungseinstellungen sicher auf unsere KI-Server zur Verarbeitung hochgeladen.';
 	@override String get cancel => 'Abbrechen';
 	@override String get confirm => 'Bestätigen';
+	@override String get bullet_1 => 'Ihre Daten werden ausschließlich zur Erstellung der von Ihnen angeforderten Inhalte verwendet.';
+	@override String get bullet_2 => 'Wir verwenden Ihre Fotos oder Gesichtsdaten nicht für Gesichtserkennung, Identitätsprüfung, Werbung oder Profiling.';
+	@override String get bullet_3 => 'Ihre Daten werden nach Abschluss der Verarbeitung gelöscht.';
+	@override String get dont_show_again => 'Nicht mehr anzeigen';
+	@override String get agree => 'Zustimmen';
+	@override String agree_policy({required Object privacy, required Object terms}) => 'Indem Sie fortfahren, stimmen Sie unserer ${privacy} und unseren ${terms} zu.';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsDe {
 			'result.delete' => 'Löschen',
 			'result.share_success' => 'Videolink zum Teilen kopiert',
 			'result.download_success' => 'Video in der Galerie gespeichert',
-			'privacy_dialog.title' => 'Datenschutz',
-			'privacy_dialog.desc' => 'Ihre Fotos werden von unseren internen KI-Systemen sicher verarbeitet. Wir teilen, verkaufen oder geben Ihre Informationen nicht an Dritte weiter.',
+			'privacy_dialog.title' => 'Einwilligung zur KI-Verarbeitung',
+			'privacy_dialog.desc' => 'Um KI-Inhalte zu erstellen, werden Ihr ausgewähltes Foto (einschließlich Gesichtsinformationen, falls vorhanden), Ihr Text-Prompt und die ausgewählten Erstellungseinstellungen sicher auf unsere KI-Server zur Verarbeitung hochgeladen.',
 			'privacy_dialog.cancel' => 'Abbrechen',
 			'privacy_dialog.confirm' => 'Bestätigen',
+			'privacy_dialog.bullet_1' => 'Ihre Daten werden ausschließlich zur Erstellung der von Ihnen angeforderten Inhalte verwendet.',
+			'privacy_dialog.bullet_2' => 'Wir verwenden Ihre Fotos oder Gesichtsdaten nicht für Gesichtserkennung, Identitätsprüfung, Werbung oder Profiling.',
+			'privacy_dialog.bullet_3' => 'Ihre Daten werden nach Abschluss der Verarbeitung gelöscht.',
+			'privacy_dialog.dont_show_again' => 'Nicht mehr anzeigen',
+			'privacy_dialog.agree' => 'Zustimmen',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => 'Indem Sie fortfahren, stimmen Sie unserer ${privacy} und unseren ${terms} zu.',
 			'report_dialog.title' => 'Melden',
 			'report_dialog.desc' => 'Sind Sie sicher, dass Sie den Bericht senden möchten?',
 			'report_dialog.cancel' => 'Abbrechen',

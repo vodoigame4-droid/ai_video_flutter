@@ -8,8 +8,8 @@ abstract class AppConstants {
 
   static const String supportEmail = 'vidoai.support@gmail.com';
   static const String emailSubject = 'Support & Feedback - VidoVerse';
-  static const String privacyPolicyUrl = 'https://sites.google.com/view/vido-ai-video-generator/privacy-policy?authuser=0';
-  static const String termsOfUseUrl = 'https://sites.google.com/view/vido-ai-video-generator/terms-conditions?authuser=0';
+  static const String privacyPolicyUrl = 'https://sites.google.com/view/vidoverse-app/privacy-policy';
+  static const String termsOfUseUrl = 'https://sites.google.com/view/vidoverse-app/terms-conditions';
 }
 
 /// Helper function to open the email client with predefined subject, body, and app metadata.

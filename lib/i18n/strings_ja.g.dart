@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$ja extends Translations$privacy_dialog$en {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'データプライバシー';
-	@override String get desc => 'あなたの写真は当社の内部AIシステムによって安全に処理されます。お客様の情報を第三者に共有、販売、または開示することはありません。';
+	@override String get title => 'AI処理への同意';
+	@override String get desc => 'AIコンテンツを生成するため、選択された写真（顔情報が含まれる場合はそれを含む）、テキストプロンプト、および選択された生成設定は、処理のために当社のAIサーバーに安全にアップロードされます。';
 	@override String get cancel => 'キャンセル';
 	@override String get confirm => '確認';
+	@override String get bullet_1 => 'お客様のデータは、要求されたコンテンツを生成する目的にのみ使用されます。';
+	@override String get bullet_2 => '顔認識、本人確認、広告、またはプロファイリングのために、写真や顔データを使用することはありません。';
+	@override String get bullet_3 => 'データは処理完了後に削除されます。';
+	@override String get dont_show_again => '再表示しない';
+	@override String get agree => '同意する';
+	@override String agree_policy({required Object privacy, required Object terms}) => '続行することにより、当社の${privacy}および${terms}に同意したものとみなされます。';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsJa {
 			'result.delete' => '削除',
 			'result.share_success' => '共有用ビデオリンクがコピーされました',
 			'result.download_success' => 'ビデオがギャラリーに保存されました',
-			'privacy_dialog.title' => 'データプライバシー',
-			'privacy_dialog.desc' => 'あなたの写真は当社の内部AIシステムによって安全に処理されます。お客様の情報を第三者に共有、販売、または開示することはありません。',
+			'privacy_dialog.title' => 'AI処理への同意',
+			'privacy_dialog.desc' => 'AIコンテンツを生成するため、選択された写真（顔情報が含まれる場合はそれを含む）、テキストプロンプト、および選択された生成設定は、処理のために当社のAIサーバーに安全にアップロードされます。',
 			'privacy_dialog.cancel' => 'キャンセル',
 			'privacy_dialog.confirm' => '確認',
+			'privacy_dialog.bullet_1' => 'お客様のデータは、要求されたコンテンツを生成する目的にのみ使用されます。',
+			'privacy_dialog.bullet_2' => '顔認識、本人確認、広告、またはプロファイリングのために、写真や顔データを使用することはありません。',
+			'privacy_dialog.bullet_3' => 'データは処理完了後に削除されます。',
+			'privacy_dialog.dont_show_again' => '再表示しない',
+			'privacy_dialog.agree' => '同意する',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => '続行することにより、当社の${privacy}および${terms}に同意したものとみなされます。',
 			'report_dialog.title' => '報告',
 			'report_dialog.desc' => '報告を送信してもよろしいですか？',
 			'report_dialog.cancel' => 'キャンセル',

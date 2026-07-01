@@ -243,10 +243,16 @@
     "download_success": "Vídeo salvo na galeria"
   },
   "privacy_dialog": {
-    "title": "Privacidade de Dados",
-    "desc": "Suas fotos são processadas com segurança por nossos sistemas internos de IA. Não compartilhamos, vendemos ou divulgamos suas informações a terceiros.",
+    "title": "Consentimento de Processamento de IA",
+    "desc": "Para gerar conteúdo de IA, a foto selecionada (incluindo informações faciais, se presentes), o comando de texto e as configurações de geração selecionadas serão carregados com segurança para os nossos servidores de IA para processamento.",
     "cancel": "Cancelar",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "bullet_1": "Seus dados são usados exclusivamente para gerar o conteúdo solicitado.",
+    "bullet_2": "Não usamos suas fotos ou dados faciais para reconhecimento facial, verificação de identidade, publicidade ou criação de perfis.",
+    "bullet_3": "Seus dados são excluídos após a conclusão do processamento.",
+    "dont_show_again": "Não mostrar novamente",
+    "agree": "Concordar",
+    "agree_policy": "Ao continuar, você concorda com a nossa {privacy} e {terms}."
   },
   "report_dialog": {
     "title": "Denunciar",

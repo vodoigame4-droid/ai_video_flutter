@@ -243,10 +243,16 @@
     "download_success": "Video disimpan ke galeri"
   },
   "privacy_dialog": {
-    "title": "Privasi Data",
-    "desc": "Foto Anda diproses dengan aman oleh sistem AI internal kami. Kami tidak membagikan, menjual, atau mengungkapkan informasi Anda kepada pihak ketiga mana pun.",
+    "title": "Persetujuan Pemrosesan AI",
+    "desc": "Untuk menghasilkan konten AI, foto pilihan Anda (termasuk informasi wajah jika ada), petunjuk teks, dan pengaturan generasi yang dipilih akan diunggah dengan aman ke server AI kami untuk diproses.",
     "cancel": "Batal",
-    "confirm": "Konfirmasi"
+    "confirm": "Konfirmasi",
+    "bullet_1": "Data Anda digunakan semata-mata untuk menghasilkan konten yang Anda minta.",
+    "bullet_2": "Kami tidak menggunakan foto atau data wajah Anda untuk pengenalan wajah, verifikasi identitas, iklan, atau profil.",
+    "bullet_3": "Data Anda dihapus setelah pemrosesan selesai.",
+    "dont_show_again": "Jangan tampilkan lagi",
+    "agree": "Setuju",
+    "agree_policy": "Dengan melanjutkan, Anda menyetujui {privacy} dan {terms} kami."
   },
   "report_dialog": {
     "title": "Laporkan",

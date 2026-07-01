@@ -243,10 +243,16 @@
     "download_success": "Vidéo enregistrée dans la galerie"
   },
   "privacy_dialog": {
-    "title": "Confidentialité des données",
-    "desc": "Vos photos sont traitées en toute sécurité par nos systèmes d'IA internes. Nous ne partageons, ne vendons ni ne divulguons vos informations à des tiers.",
+    "title": "Consentement au traitement IA",
+    "desc": "Pour générer du contenu IA, votre photo sélectionnée (y compris les informations faciales si présentes), votre invite textuelle et les paramètres de génération choisis seront téléchargés en toute sécurité sur nos serveurs d'IA pour traitement.",
     "cancel": "Annuler",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "bullet_1": "Vos données sont utilisées uniquement pour générer le contenu demandé.",
+    "bullet_2": "Nous n'utilisons pas vos photos ou données faciales pour la reconnaissance faciale, la vérification d'identité, la publicité ou le ciblage.",
+    "bullet_3": "Vos données sont supprimées une fois le traitement terminé.",
+    "dont_show_again": "Ne plus afficher",
+    "agree": "Accepter",
+    "agree_policy": "En continuant, vous acceptez notre {privacy} et nos {terms}."
   },
   "report_dialog": {
     "title": "Signaler",

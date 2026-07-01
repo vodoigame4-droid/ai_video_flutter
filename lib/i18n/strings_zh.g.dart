@@ -402,10 +402,16 @@ class _Translations$privacy_dialog$zh extends Translations$privacy_dialog$en {
 	final TranslationsZh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => '数据隐私';
-	@override String get desc => '您的照片将通过我们的内部AI系统进行安全处理。我们不会与任何第三方分享、出售或披露您的信息。';
+	@override String get title => 'AI 处理同意书';
+	@override String get desc => '为了生成 AI 内容，您选择的照片（如果存在人脸信息则包括人脸信息）、文本提示和选定的生成设置将被安全地上传到我们的 AI 服务器进行处理。';
 	@override String get cancel => '取消';
 	@override String get confirm => '确认';
+	@override String get bullet_1 => '您的数据仅用于生成您请求的内容。';
+	@override String get bullet_2 => '我们不会将您的照片或人脸数据用于人脸识别、身份验证、广告或画像分析。';
+	@override String get bullet_3 => '处理完成后，您的数据将被删除。';
+	@override String get dont_show_again => '不再显示';
+	@override String get agree => '同意';
+	@override String agree_policy({required Object privacy, required Object terms}) => '继续操作即表示您同意我们的 ${privacy} 和 ${terms}。';
 }
 
 // Path: report_dialog
@@ -940,10 +946,16 @@ extension on TranslationsZh {
 			'result.delete' => '删除',
 			'result.share_success' => '视频链接已复制以分享',
 			'result.download_success' => '视频已保存至相册',
-			'privacy_dialog.title' => '数据隐私',
-			'privacy_dialog.desc' => '您的照片将通过我们的内部AI系统进行安全处理。我们不会与任何第三方分享、出售或披露您的信息。',
+			'privacy_dialog.title' => 'AI 处理同意书',
+			'privacy_dialog.desc' => '为了生成 AI 内容，您选择的照片（如果存在人脸信息则包括人脸信息）、文本提示和选定的生成设置将被安全地上传到我们的 AI 服务器进行处理。',
 			'privacy_dialog.cancel' => '取消',
 			'privacy_dialog.confirm' => '确认',
+			'privacy_dialog.bullet_1' => '您的数据仅用于生成您请求的内容。',
+			'privacy_dialog.bullet_2' => '我们不会将您的照片或人脸数据用于人脸识别、身份验证、广告或画像分析。',
+			'privacy_dialog.bullet_3' => '处理完成后，您的数据将被删除。',
+			'privacy_dialog.dont_show_again' => '不再显示',
+			'privacy_dialog.agree' => '同意',
+			'privacy_dialog.agree_policy' => ({required Object privacy, required Object terms}) => '继续操作即表示您同意我们的 ${privacy} 和 ${terms}。',
 			'report_dialog.title' => '举报',
 			'report_dialog.desc' => '您确定要提交举报吗？',
 			'report_dialog.cancel' => '取消',
