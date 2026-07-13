@@ -18,6 +18,7 @@ import '../bloc/developer_bloc.dart';
 import '../bloc/developer_event.dart';
 import '../bloc/developer_state.dart';
 import 'package:core_business/core_business.dart';
+import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/rate_app_dialog.dart';
 import '../../../../core/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -166,7 +167,9 @@ class _SettingsViewState extends State<SettingsView> {
                               stream: sl<WatchProfileUseCase>()(),
                               builder: (context, snapshot) {
                                 final isVip = snapshot.data?.isVip ?? false;
-                                if (isVip) return const SizedBox.shrink();
+                                if (isVip || !sl<RemoteConfigService>().showIAP) {
+                                  return const SizedBox.shrink();
+                                }
 
                                 return Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -191,6 +194,9 @@ class _SettingsViewState extends State<SettingsView> {
                                     CreditBadgeState
                                   >(
                                     builder: (context, creditState) {
+                                      if (!sl<RemoteConfigService>().showIAP) {
+                                        return const SizedBox.shrink();
+                                      }
                                       final creditsStr = creditState.maybeWhen(
                                         ready: (_, credits) =>
                                             credits.toString(),

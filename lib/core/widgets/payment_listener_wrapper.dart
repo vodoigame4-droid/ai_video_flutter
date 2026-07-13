@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../navigation/app_router.dart';
 import '../network/payment_event_broker.dart';
 import '../../features/premium/presentation/pages/iap_page.dart';
+import '../../i18n/strings.g.dart';
+import '../injection/injection_container.dart';
+import '../services/remote_config_service.dart';
 
 /// A wrapper widget that listens to global payment events (such as VIP limit errors)
 /// and programmatically navigates to the IAP (VIP upgrade) screen.
@@ -23,6 +26,16 @@ class _PaymentListenerWrapperState extends State<PaymentListenerWrapper> {
     super.initState();
     _subscription = PaymentEventBroker.instance.stream.listen((event) {
       if (event == PaymentEvent.vipUpgrade) {
+        if (!sl<RemoteConfigService>().showIAP) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.t.errors.insufficient_fund),
+              ),
+            );
+          }
+          return;
+        }
         final currentPath = appRouter.routerDelegate.currentConfiguration.uri.toString();
         // Guard against multiple concurrent pushes if already on the IAP page
         if (!currentPath.contains(IapPage.path)) {

@@ -123,6 +123,7 @@ void initBusinessDependencies(GetIt sl) {
         authRepository: sl(),
         notificationRepository: sl(),
         sharedPreferences: sl(),
+        appConfig: sl(),
       ));
 
   // Media

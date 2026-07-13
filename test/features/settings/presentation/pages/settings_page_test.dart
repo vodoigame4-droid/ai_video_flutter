@@ -2,6 +2,7 @@ import 'package:ai_video_flutter/features/settings/presentation/pages/settings_p
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ai_video_flutter/features/profile/presentation/widgets/premium_banner_widget.dart';
 import 'package:ai_video_flutter/core/injection/injection_container.dart';
 import 'package:ai_video_flutter/core/theme/app_theme.dart';
 import 'package:core_business/core_business.dart';
@@ -50,6 +51,7 @@ void main() {
     mockAppConfig = MockAppConfig();
 
     when(() => mockAppConfig.appVersion).thenReturn('1.1.1');
+    when(() => mockAppConfig.showIAP).thenReturn(true);
     
     final mockUser = UserEntity(
       id: 'EDFO1R0Y2XLBJ1I2',
@@ -76,6 +78,7 @@ void main() {
 
     mockRemoteConfig = MockRemoteConfigService();
     when(() => mockRemoteConfig.showRatingFeature).thenReturn(true);
+    when(() => mockRemoteConfig.showIAP).thenReturn(true);
 
     await sl.reset();
     sl.allowReassignment = true;
@@ -159,5 +162,27 @@ void main() {
 
     // Verify tap event was sent to DeveloperBloc
     verify(() => mockDeveloperBloc.add(const DeveloperEvent.tap())).called(7);
+  });
+
+  testWidgets('SettingsPage hides Premium Banner and My Credits when showIAP is false', (WidgetTester tester) async {
+    when(() => mockRemoteConfig.showIAP).thenReturn(false);
+    LocaleSettings.setLocale(AppLocale.en);
+    final t = await AppLocale.en.build();
+
+    await tester.pumpWidget(
+      TranslationProvider(
+        child: MaterialApp(
+          theme: AppTheme.darkTheme,
+          home: const SettingsPage(),
+        ),
+      ),
+    );
+
+    await tester.pump();
+
+    // Verify My Credits item is NOT found
+    expect(find.text(t.settings.myCredits), findsNothing);
+    // Premium upgrade banner should also not be rendered
+    expect(find.byType(PremiumBannerWidget), findsNothing);
   });
 }

@@ -6,12 +6,16 @@ import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
 import '../injection/injection_container.dart';
+import '../services/remote_config_service.dart';
 
 class CreditBadgeWidget extends StatelessWidget {
   const CreditBadgeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    if (!sl<RemoteConfigService>().showIAP) {
+      return const SizedBox.shrink();
+    }
     return BlocProvider<CreditBadgeBloc>(
       create: (context) =>
           sl<CreditBadgeBloc>()..add(const CreditBadgeEvent.started()),

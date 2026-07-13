@@ -4,6 +4,8 @@ import 'package:ai_video_flutter/core/navigation/route_observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:core_business/core_business.dart';
+import '../injection/injection_container.dart';
+import '../services/remote_config_service.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
@@ -391,6 +393,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: IapPage.path,
       name: IapPage.name,
+      redirect: (context, state) {
+        if (!sl<RemoteConfigService>().showIAP) {
+          return HomePage.path;
+        }
+        return null;
+      },
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
         final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
@@ -404,6 +412,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: BuyCreditsPage.path,
       name: BuyCreditsPage.name,
+      redirect: (context, state) {
+        if (!sl<RemoteConfigService>().showIAP) {
+          return HomePage.path;
+        }
+        return null;
+      },
       pageBuilder: (context, state) {
         final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
         return AppRoutePage.slideUpAndFade<void>(
@@ -416,6 +430,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: GenerationIapPage.path,
       name: GenerationIapPage.name,
+      redirect: (context, state) {
+        if (!sl<RemoteConfigService>().showIAP) {
+          return HomePage.path;
+        }
+        return null;
+      },
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
         return AppRoutePage.slideUpAndFade<void>(
@@ -428,6 +448,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: GenerationBuyCreditsPage.path,
       name: GenerationBuyCreditsPage.name,
+      redirect: (context, state) {
+        if (!sl<RemoteConfigService>().showIAP) {
+          return HomePage.path;
+        }
+        return null;
+      },
       pageBuilder: (context, state) {
         final videoUrl = state.uri.queryParameters['videoUrl'] ?? '';
         return AppRoutePage.slideUpAndFade<void>(
@@ -440,6 +466,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: IapPage.discountPath,
       name: IapPage.discountName,
+      redirect: (context, state) {
+        if (!sl<RemoteConfigService>().showIAP) {
+          return HomePage.path;
+        }
+        return null;
+      },
       pageBuilder: (context, state) {
         final fromSplash = state.uri.queryParameters['fromSplash'] == 'true';
         return AppRoutePage.fade<void>(

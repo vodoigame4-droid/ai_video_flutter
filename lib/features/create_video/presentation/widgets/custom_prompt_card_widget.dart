@@ -8,6 +8,8 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_svg_icon.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../i18n/strings.g.dart';
+import '../../../../core/injection/injection_container.dart';
+import '../../../../core/services/remote_config_service.dart';
 
 class CustomPromptCardWidget extends StatefulWidget {
   final String promptText;
@@ -165,7 +167,15 @@ class _CustomPromptCardWidgetState extends State<CustomPromptCardWidget> {
                     return;
                   }
                   if (showPremium) {
-                    context.push('${IapPage.path}');
+                    if (sl<RemoteConfigService>().showIAP) {
+                      context.push('${IapPage.path}');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(context.t.errors.insufficient_fund),
+                        ),
+                      );
+                    }
                   } else {
                     widget.onInspireMePressed();
                   }

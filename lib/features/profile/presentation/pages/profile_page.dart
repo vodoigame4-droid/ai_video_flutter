@@ -5,6 +5,7 @@ import 'package:ai_video_flutter/features/premium/presentation/pages/generation_
 import '../../../../core/widgets/gradient_tab_indicator.dart';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import '../../../../core/utils/credit_navigation_helper.dart';
+import '../../../../core/services/remote_config_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -160,6 +161,7 @@ class _ProfileViewState extends State<ProfileView>
                                     context.push(SettingsPage.path);
                                   },
                                   onTapDown: (_) {
+                                    if (!sl<RemoteConfigService>().showIAP) return;
                                     _isHoldTriggered = false;
                                     _settingsHoldTimer?.cancel();
                                     _settingsHoldTimer = Timer(
@@ -209,32 +211,35 @@ class _ProfileViewState extends State<ProfileView>
                               ),
 
                               // Credit Badge/Icon Button
-                              Material(
-                                color: Colors.transparent,
-                                shape: const CircleBorder(),
-                                child: InkWell(
-                                  onTap: () {
-                                    if (sl<WatchProfileUseCase>()
-                                            .cachedUser
-                                            ?.isVip ??
-                                        false) {
-                                      context.push(
-                                        GenerationBuyCreditsPage.path,
-                                      );
-                                    } else {
-                                      context.push(BuyCreditsPage.path);
-                                    }
-                                  },
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(100),
+                              if (sl<RemoteConfigService>().showIAP)
+                                Material(
+                                  color: Colors.transparent,
+                                  shape: const CircleBorder(),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (sl<WatchProfileUseCase>()
+                                              .cachedUser
+                                              ?.isVip ??
+                                          false) {
+                                        context.push(
+                                          GenerationBuyCreditsPage.path,
+                                        );
+                                      } else {
+                                        context.push(BuyCreditsPage.path);
+                                      }
+                                    },
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(100),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/ic_credit_setting.png',
+                                      width: 36,
+                                      height: 36,
+                                    ),
                                   ),
-                                  child: Image.asset(
-                                    'assets/images/ic_credit_setting.png',
-                                    width: 36,
-                                    height: 36,
-                                  ),
-                                ),
-                              ),
+                                )
+                              else
+                                const SizedBox(width: 36, height: 36),
                             ],
                           ),
 
@@ -245,7 +250,9 @@ class _ProfileViewState extends State<ProfileView>
                             stream: sl<WatchProfileUseCase>()(),
                             builder: (context, snapshot) {
                               final isVip = snapshot.data?.isVip ?? false;
-                              if (isVip) return const SizedBox.shrink();
+                              if (isVip || !sl<RemoteConfigService>().showIAP) {
+                                return const SizedBox.shrink();
+                              }
 
                               return Column(
                                 mainAxisSize: MainAxisSize.min,

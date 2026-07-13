@@ -24,6 +24,8 @@ class RemoteConfigService {
   static const String rcPrivacySheetDescription = 'privacy_sheet_description';
   static const String rcShowRatingFeature = 'show_rating_feature';
   static const bool defaultShowRatingFeature = true;
+  static const String rcShowIAP = 'show_iap';
+  static const bool defaultShowIAP = true;
 
   /// Default fallback values
   static const String defaultBannerUrl =
@@ -85,6 +87,7 @@ class RemoteConfigService {
         rcPrivacySheetTitle: 'Data Privacy Consent',
         rcPrivacySheetDescription: 'Your photos will be processed securely by our servers and shared with our third-party AI partners strictly to generate the video. All photos are automatically deleted within 24 hours of generation.',
         rcShowRatingFeature: defaultShowRatingFeature,
+        rcShowIAP: defaultShowIAP,
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
@@ -297,6 +300,15 @@ class RemoteConfigService {
       return _remoteConfig.getBool(rcShowRatingFeature);
     } catch (_) {
       return defaultShowRatingFeature;
+    }
+  }
+
+  /// Check if the IAP/purchasing features are enabled.
+  bool get showIAP {
+    try {
+      return _remoteConfig.getBool(rcShowIAP);
+    } catch (_) {
+      return defaultShowIAP;
     }
   }
 }

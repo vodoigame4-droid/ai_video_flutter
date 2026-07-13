@@ -5,6 +5,7 @@ import 'package:core_business/core_business.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
+import '../../../../core/services/remote_config_service.dart';
 import '../bloc/onboarding_bloc.dart';
 import '../bloc/onboarding_event.dart';
 import '../bloc/onboarding_state.dart';
@@ -67,7 +68,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     }
 
     if (context.mounted) {
-      if (isVip) {
+      if (isVip || !sl<RemoteConfigService>().showIAP) {
         DashboardPage.go(context);
       } else {
         await context.pushNamed(

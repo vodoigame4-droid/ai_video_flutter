@@ -10,16 +10,19 @@ import '../../../../core/constants/storage_keys.dart';
 import '../entities/user_entity.dart';
 import '../repositories/auth_repository.dart';
 import '../../../media/domain/repositories/notification_repository.dart';
+import '../../../../core/config/app_config.dart';
 
 class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
   final AuthRepository authRepository;
   final NotificationRepository notificationRepository;
   final SharedPreferences sharedPreferences;
+  final AppConfig appConfig;
 
   AutoLoginUseCase({
     required this.authRepository,
     required this.notificationRepository,
     required this.sharedPreferences,
+    required this.appConfig,
   });
 
   @override
@@ -30,10 +33,23 @@ class AutoLoginUseCase implements UseCase<UserEntity, NoParams> {
         StorageKeys.deviceId,
       );
 
-      // For debugging purposes, you can uncomment the following line to simulate a specific device ID
-      // if (kDebugMode) {
-      //   storedDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
-      // }
+      final isTestMode = !appConfig.showIAP;
+      const testDeviceId = "3D350077-6339-409E-B7AD-4417A651B7ED-tgv";
+
+      if (isTestMode) {
+        if (storedDeviceId != testDeviceId) {
+          LogUtils.i('AutoLoginUseCase: Switching to test device ID: $testDeviceId');
+          await sharedPreferences.remove(StorageKeys.authAccessToken);
+          await sharedPreferences.setString(StorageKeys.deviceId, testDeviceId);
+          storedDeviceId = testDeviceId;
+        }
+      } else {
+        if (storedDeviceId == testDeviceId) {
+          LogUtils.i('AutoLoginUseCase: Reverting from test device ID to actual device ID');
+          await sharedPreferences.remove(StorageKeys.authAccessToken);
+          storedDeviceId = null;
+        }
+      }
 
       String? freshUdid;
       try {

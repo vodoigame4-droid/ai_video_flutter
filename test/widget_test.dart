@@ -211,6 +211,8 @@ void main() {
     when(() => mockRemoteConfigService.getBgIAPUrl()).thenReturn('https://example.com/bg_iap.mp4');
     when(() => mockRemoteConfigService.getBgDiscountUrl()).thenReturn('https://example.com/bg_discount.mp4');
     when(() => mockRemoteConfigService.closeButtonDelaySeconds).thenReturn(0);
+    when(() => mockRemoteConfigService.showIAP).thenReturn(true);
+    when(() => mockRemoteConfigService.showRatingFeature).thenReturn(true);
 
     sl.unregister<RemoteConfigService>();
     sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfigService);

@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
+import '../../../../core/services/remote_config_service.dart';
 import '../../../onboarding/presentation/pages/onboarding_page.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
@@ -43,7 +44,7 @@ class SplashView extends StatelessWidget {
                   context,
                   preloadedImages: successState.preloadedUrls,
                 );
-              } else if (successState.isVip) {
+              } else if (successState.isVip || !sl<RemoteConfigService>().showIAP) {
                 DashboardPage.go(context);
               } else {
                 _navigateToIapAndHome(context);

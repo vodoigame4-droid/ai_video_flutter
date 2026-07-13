@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:core_business/core_business.dart';
 import '../injection/injection_container.dart';
 import '../services/remote_config_service.dart';
+import '../../i18n/strings.g.dart';
 import '../../features/premium/presentation/pages/generation_buy_credits_page.dart';
 import '../../features/premium/presentation/pages/generation_iap_page.dart';
 
@@ -22,6 +23,14 @@ class CreditNavigationHelper {
           : sl<RemoteConfigService>().videoGenCost;
       if (user.credits < cost) {
         if (context.mounted) {
+          if (!sl<RemoteConfigService>().showIAP) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.t.errors.insufficient_fund),
+              ),
+            );
+            return true;
+          }
           if (user.isVip) {
             context.push(
               '${GenerationBuyCreditsPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}',
@@ -46,6 +55,7 @@ class CreditNavigationHelper {
     String videoUrl = '',
   }) async {
     try {
+      if (!sl<RemoteConfigService>().showIAP) return;
       final user = await sl<WatchProfileUseCase>()().first;
       if (context.mounted) {
         if (user.isVip) {
