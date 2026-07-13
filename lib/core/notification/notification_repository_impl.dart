@@ -84,11 +84,27 @@ class NotificationRepositoryImpl implements biz.NotificationRepository {
 
     // Check initial message asynchronously so it doesn't block the rest of the flow
     _checkInitialMessage();
+
+    // Log current FCM Token asynchronously
+    _logCurrentFcmToken();
   }
 
   void _handleNotificationClick(RemoteMessage message) {
     if (message.data.isNotEmpty) {
       _notificationDataController.add(message.data);
+    }
+  }
+
+  Future<void> _logCurrentFcmToken() async {
+    try {
+      final token = await _firebaseMessaging.getToken();
+      biz.LogUtils.d('NotificationRepositoryImpl: Current FCM Token: $token');
+    } catch (e, stackTrace) {
+      biz.LogUtils.e(
+        'NotificationRepositoryImpl: Failed to get FCM Token',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
   }
 

@@ -22,6 +22,8 @@ class RemoteConfigService {
   static const int defaultCloseButtonDelaySeconds = 3;
   static const String rcPrivacySheetTitle = 'privacy_sheet_title';
   static const String rcPrivacySheetDescription = 'privacy_sheet_description';
+  static const String rcShowRatingFeature = 'show_rating_feature';
+  static const bool defaultShowRatingFeature = true;
 
   /// Default fallback values
   static const String defaultBannerUrl =
@@ -82,6 +84,7 @@ class RemoteConfigService {
         rcCloseButtonDelaySeconds: defaultCloseButtonDelaySeconds,
         rcPrivacySheetTitle: 'Data Privacy Consent',
         rcPrivacySheetDescription: 'Your photos will be processed securely by our servers and shared with our third-party AI partners strictly to generate the video. All photos are automatically deleted within 24 hours of generation.',
+        rcShowRatingFeature: defaultShowRatingFeature,
       });
 
       // Configure settings: fetch interval 1 hour for release, 0 for debug
@@ -287,4 +290,13 @@ class RemoteConfigService {
 
   /// Get the dynamic privacy consent sheet description.
   String get privacySheetDescription => _remoteConfig.getString(rcPrivacySheetDescription);
+
+  /// Check if the rating/review feature is enabled.
+  bool get showRatingFeature {
+    try {
+      return _remoteConfig.getBool(rcShowRatingFeature);
+    } catch (_) {
+      return defaultShowRatingFeature;
+    }
+  }
 }

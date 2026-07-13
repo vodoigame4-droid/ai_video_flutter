@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:core_business/core_business.dart';
 import '../injection/injection_container.dart';
 import '../widgets/rate_app_dialog.dart';
+import '../services/remote_config_service.dart';
 
 class RatingPromptManager {
   static const String _keyCountShowRating = 'countShowRating';
@@ -32,6 +33,11 @@ class RatingPromptManager {
   /// This should be called when video generation is completed.
   static Future<void> checkAndPromptRating(BuildContext context) async {
     try {
+      if (!sl<RemoteConfigService>().showRatingFeature) {
+        LogUtils.d('RatingPromptManager: rating/review feature is disabled by Remote Config. Will not prompt.');
+        return;
+      }
+
       final prefs = sl<SharedPreferences>();
 
       // 1. Get user rating status from repository

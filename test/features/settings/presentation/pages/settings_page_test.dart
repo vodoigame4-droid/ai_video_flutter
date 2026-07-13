@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ai_video_flutter/features/settings/presentation/bloc/developer_bloc.dart';
 import 'package:ai_video_flutter/features/settings/presentation/bloc/developer_event.dart';
 import 'package:ai_video_flutter/features/settings/presentation/bloc/developer_state.dart';
+import 'package:ai_video_flutter/core/services/remote_config_service.dart';
 
 class MockSettingsBloc extends Mock implements SettingsBloc {}
 class MockCreditBadgeBloc extends Mock implements CreditBadgeBloc {}
@@ -17,11 +18,13 @@ class MockWatchProfileUseCase extends Mock implements WatchProfileUseCase {}
 class MockAppConfig extends Mock implements AppConfig {}
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 class MockDeveloperBloc extends Mock implements DeveloperBloc {}
+class MockRemoteConfigService extends Mock implements RemoteConfigService {}
 
 void main() {
   late MockSettingsBloc mockSettingsBloc;
   late MockWatchProfileUseCase mockWatchProfileUseCase;
   late MockAppConfig mockAppConfig;
+  late MockRemoteConfigService mockRemoteConfig;
 
   setUp(() async {
     mockSettingsBloc = MockSettingsBloc();
@@ -71,6 +74,9 @@ void main() {
     final mockPrefs = MockSharedPreferences();
     when(() => mockPrefs.getBool('rating_has_rated')).thenReturn(false);
 
+    mockRemoteConfig = MockRemoteConfigService();
+    when(() => mockRemoteConfig.showRatingFeature).thenReturn(true);
+
     await sl.reset();
     sl.allowReassignment = true;
     sl.registerFactory<SettingsBloc>(() => mockSettingsBloc);
@@ -79,6 +85,7 @@ void main() {
     sl.registerLazySingleton<WatchProfileUseCase>(() => mockWatchProfileUseCase);
     sl.registerLazySingleton<AppConfig>(() => mockAppConfig);
     sl.registerLazySingleton<SharedPreferences>(() => mockPrefs);
+    sl.registerLazySingleton<RemoteConfigService>(() => mockRemoteConfig);
   });
 
   testWidgets('SettingsPage renders all items correctly', (WidgetTester tester) async {

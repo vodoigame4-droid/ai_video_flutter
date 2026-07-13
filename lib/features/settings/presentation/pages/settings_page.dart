@@ -21,6 +21,7 @@ import 'package:core_business/core_business.dart';
 import '../../../../core/widgets/rate_app_dialog.dart';
 import '../../../../core/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/services/remote_config_service.dart';
 import 'language_page.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -264,8 +265,9 @@ class _SettingsViewState extends State<SettingsView> {
                               stream: sl<WatchProfileUseCase>()(),
                               builder: (context, snapshot) {
                                 final isRated = snapshot.data?.isRated ?? false;
-                                if (isRated || _hasRated)
+                                if (isRated || _hasRated || !sl<RemoteConfigService>().showRatingFeature) {
                                   return const SizedBox.shrink();
+                                }
 
                                 return _buildSettingsItem(
                                   icon: SvgPicture.asset(

@@ -12,7 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  wiwi_havin_base_ads: ^1.0.2
+  wiwi_havin_base_ads: ^2.0.0
 
   network:
     path: ./packages/network
