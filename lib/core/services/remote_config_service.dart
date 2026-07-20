@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -59,6 +60,7 @@ class RemoteConfigService {
 ''';
 
   final FirebaseRemoteConfig _remoteConfig;
+  StreamSubscription<RemoteConfigUpdate>? _configUpdateSubscription;
 
   RemoteConfigService._(this._remoteConfig);
 
@@ -85,7 +87,7 @@ class RemoteConfigService {
         rcVideoGenFullHdCost: defaultVideoGenFullHdCost,
         rcCloseButtonDelaySeconds: defaultCloseButtonDelaySeconds,
         rcPrivacySheetTitle: 'Data Privacy Consent',
-        rcPrivacySheetDescription: 'Your photos will be processed securely by our servers and shared with our third-party AI partners strictly to generate the video. All photos are automatically deleted within 24 hours of generation.',
+        rcPrivacySheetDescription: 'To generate your AI video, your selected image will be securely processed on our private first-party servers. We do not collect any biometric or facial recognition data. All uploaded images are permanently deleted immediately after the video is generated.',
         rcShowRatingFeature: defaultShowRatingFeature,
         rcShowIAP: defaultShowIAP,
       });
@@ -102,6 +104,17 @@ class RemoteConfigService {
 
       // Fetch and activate
       await _remoteConfig.fetchAndActivate();
+
+      // Listen for real-time updates
+      await _configUpdateSubscription?.cancel();
+      _configUpdateSubscription = _remoteConfig.onConfigUpdated.listen((configUpdate) async {
+        try {
+          await _remoteConfig.activate();
+          LogUtils.d('$_tag: Remote Config updated in real-time. Updated keys: ${configUpdate.updatedKeys}');
+        } catch (e, stack) {
+          LogUtils.e('$_tag: Failed to activate real-time Remote Config update', error: e, stackTrace: stack);
+        }
+      });
 
       LogUtils.d('$_tag: Remote Config initialized and activated successfully');
       LogUtils.d('$_tag: $rcBannerHome = ${getBannerHomeUrl()}');

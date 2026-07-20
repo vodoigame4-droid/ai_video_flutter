@@ -42,7 +42,7 @@ flutter build appbundle --release --build-name=1.0.0 --build-number=1
 ### iOS
 ```bash
 # Build gói phát hành iOS (IPA)
-flutter build ipa --release --build-name=1.0.4 --build-number=2
+flutter build ipa --release --build-name=1.0.4 --build-number=4
 
 ```
 
