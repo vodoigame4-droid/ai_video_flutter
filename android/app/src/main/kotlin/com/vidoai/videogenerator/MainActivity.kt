@@ -1,4 +1,4 @@
-package com.tgv.aivideo.ai_video_flutter
+package com.vidoai.videogenerator
 
 import io.flutter.embedding.android.FlutterActivity
 

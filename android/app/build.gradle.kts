@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tgv.aivideo.ai_video_flutter"
+    namespace = "com.vidoai.videogenerator"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -26,7 +26,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.tgv.aivideo"
+        applicationId = "com.vidoai.videogenerator"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

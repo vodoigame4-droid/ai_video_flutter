@@ -102,7 +102,7 @@ class _VideoCardState extends State<VideoCard> {
               colors: [AppColors.badgeYellow, AppColors.badgeOrange],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              )
+            )
           : const LinearGradient(
               colors: [AppColors.badgeBlue, AppColors.badgeGreen],
               begin: Alignment.centerLeft,
@@ -314,10 +314,7 @@ class _VideoCardState extends State<VideoCard> {
     final Widget content = widget.heroTag != null
         ? Hero(
             tag: widget.heroTag!,
-            child: Material(
-              color: Colors.transparent,
-              child: cardWidget,
-            ),
+            child: Material(color: Colors.transparent, child: cardWidget),
           )
         : cardWidget;
 
@@ -325,7 +322,7 @@ class _VideoCardState extends State<VideoCard> {
       key: ValueKey('videocard_${widget.title}_${widget.imageUrl}'),
       onVisibilityChanged: (visibilityInfo) {
         final double visiblePercentage = visibilityInfo.visibleFraction * 100;
-        final bool shouldPlay = visiblePercentage >= 20;
+        final bool shouldPlay = visiblePercentage >= 90;
         if (_isPlayable != shouldPlay) {
           if (mounted) {
             setState(() {
@@ -334,9 +331,7 @@ class _VideoCardState extends State<VideoCard> {
           }
         }
       },
-      child: RepaintBoundary(
-        child: content,
-      ),
+      child: RepaintBoundary(child: content),
     );
   }
 }
