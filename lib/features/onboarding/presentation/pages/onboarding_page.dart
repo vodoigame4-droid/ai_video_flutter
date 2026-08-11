@@ -118,38 +118,44 @@ class _OnboardingViewState extends State<OnboardingView> {
                 ),
               ),
               ready: (images, index, isCompleted) {
-                return PageView(
+                return PageView.builder(
                   controller: _pageController,
+                  itemCount: images.length,
                   onPageChanged: (newIndex) {
-                    context.read<OnboardingBloc>().add(OnboardingEvent.pageChanged(newIndex));
+                    context.read<OnboardingBloc>().add(
+                      OnboardingEvent.pageChanged(newIndex),
+                    );
                   },
-                  children: [
-                    ObPage1(
-                      backgroundImage: images[0],
-                      onButtonPressed: () =>
-                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                    ),
-                    ObPage2(
-                      backgroundImage: images[1],
-                      onButtonPressed: () =>
-                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                    ),
-                    ObPage3(
-                      backgroundImage: images[2],
-                      onButtonPressed: () =>
-                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                    ),
-                    ObPage4(
-                      backgroundImage: images[3],
-                      onButtonPressed: () =>
-                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                    ),
-                    ObPage5(
-                      backgroundImage: images[4],
-                      onButtonPressed: () =>
-                          context.read<OnboardingBloc>().add(const OnboardingEvent.nextPage()),
-                    ),
-                  ],
+                  itemBuilder: (context, pageIndex) {
+                    void onButtonPressed() => context
+                        .read<OnboardingBloc>()
+                        .add(const OnboardingEvent.nextPage());
+
+                    final page = switch (pageIndex) {
+                      0 => ObPage1(
+                        backgroundImage: images[pageIndex],
+                        onButtonPressed: onButtonPressed,
+                      ),
+                      1 => ObPage2(
+                        backgroundImage: images[pageIndex],
+                        onButtonPressed: onButtonPressed,
+                      ),
+                      2 => ObPage3(
+                        backgroundImage: images[pageIndex],
+                        onButtonPressed: onButtonPressed,
+                      ),
+                      3 => ObPage4(
+                        backgroundImage: images[pageIndex],
+                        onButtonPressed: onButtonPressed,
+                      ),
+                      _ => ObPage5(
+                        backgroundImage: images[pageIndex],
+                        onButtonPressed: onButtonPressed,
+                      ),
+                    };
+
+                    return TickerMode(enabled: pageIndex == index, child: page);
+                  },
                 );
               },
               error: (message) => Center(

@@ -6,8 +6,9 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_image.dart';
 import '../../../../core/widgets/glassmorphic_container.dart';
 import '../../../../core/widgets/gradient_button.dart';
-
 import '../../../../core/widgets/smooth_video_player_widget.dart';
+import '../../../../core/widgets/animated_webp_webview.dart';
+import '../../../../core/utils/banner_preload_helper.dart';
 
 class ObPageTemplate extends StatefulWidget {
   final String backgroundImage;
@@ -29,42 +30,51 @@ class ObPageTemplate extends StatefulWidget {
   State<ObPageTemplate> createState() => _ObPageTemplateState();
 }
 
-class _ObPageTemplateState extends State<ObPageTemplate> with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class _ObPageTemplateState extends State<ObPageTemplate> {
   bool _isVideo(String path) {
-    final p = path.toLowerCase();
-    return p.endsWith('.mp4') ||
-        p.endsWith('.mkv') ||
-        p.endsWith('.mov') ||
-        p.endsWith('.avi') ||
-        p.endsWith('.webm') ||
-        p.endsWith('.3gp') ||
-        p.endsWith('.flv');
+    final uri = Uri.tryParse(path);
+    final isRemoteWebp =
+        path.toLowerCase().endsWith('.webp') &&
+        uri != null &&
+        (uri.scheme == 'http' || uri.scheme == 'https');
+    return isRemoteWebp || BannerPreloadHelper.isVideoOrWebp(path);
+  }
+
+  bool _isRemoteWebp(String path) {
+    final uri = Uri.tryParse(path);
+    return path.toLowerCase().endsWith('.webp') &&
+        uri != null &&
+        (uri.scheme == 'http' || uri.scheme == 'https');
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    final mediaSize = MediaQuery.sizeOf(context);
+
     return Stack(
       children: [
-        // Background image or video (loaded dynamically)
+        // Background image, webp animation, or video (loaded dynamically)
         Positioned.fill(
-          child: _isVideo(widget.backgroundImage)
-              ? SmoothVideoPlayerWidget(
-                  videoUrl: widget.backgroundImage,
-                  fit: BoxFit.cover,
-                  autoPlay: true,
-                  loop: true,
-                  showMuteButton: false,
-                  showPlayPauseButton: false,
-                  playMuted: true,
-                )
-              : AppImage(
-                  imageUrl: widget.backgroundImage,
-                  fit: BoxFit.cover,
-                ),
+          child: RepaintBoundary(
+            child: _isRemoteWebp(widget.backgroundImage)
+                ? AnimatedWebpWebView(url: widget.backgroundImage)
+                : _isVideo(widget.backgroundImage)
+                ? SmoothVideoPlayerWidget(
+                    videoUrl: widget.backgroundImage,
+                    fit: BoxFit.cover,
+                    autoPlay: true,
+                    loop: true,
+                    showMuteButton: false,
+                    showPlayPauseButton: false,
+                    playMuted: true,
+                  )
+                : AppImage(
+                    imageUrl: widget.backgroundImage,
+                    width: mediaSize.width,
+                    height: mediaSize.height,
+                    fit: BoxFit.cover,
+                  ),
+          ),
         ),
         // Top shadow overlay
         Positioned(

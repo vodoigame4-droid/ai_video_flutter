@@ -6,7 +6,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/utils/banner_preload_helper.dart';
@@ -175,54 +174,62 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       if (!_isOnboardingCompleted) {
         final urls = sl<RemoteConfigService>().getOnboardingUrls();
         if (urls.isNotEmpty) {
-          _preloadedUrls = urls;
           final isTest = Platform.environment.containsKey('FLUTTER_TEST');
           if (!isTest) {
-            final List<Future<dynamic>> preloadFutures = [];
-            for (final url in urls) {
-              if (url.startsWith('http')) {
-                if (_isVideoUrl(url)) {
-                  preloadFutures.add(() async {
-                    final stopwatch = Stopwatch()..start();
-                    LogUtils.d(
-                      'SplashBloc: Start preloading onboarding video: $url',
-                    );
-                    final path = await VideoCacheManager().getCachedOrDownload(
-                      url,
-                      waitForDownload: true,
-                    );
-                    stopwatch.stop();
-                    LogUtils.i(
-                      'SplashBloc: Preloaded onboarding video in ${stopwatch.elapsedMilliseconds}ms: $url -> $path',
-                    );
-                    return path;
-                  }());
-                } else {
-                  preloadFutures.add(() async {
-                    final stopwatch = Stopwatch()..start();
-                    LogUtils.d(
-                      'SplashBloc: Start preloading onboarding image: $url',
-                    );
-                    await _preloadImage(url);
-                    stopwatch.stop();
-                    LogUtils.i(
-                      'SplashBloc: Preloaded onboarding image in ${stopwatch.elapsedMilliseconds}ms: $url',
-                    );
-                  }());
+            Future<void> preloadAsset(String url) async {
+              if (!url.startsWith('http')) {
+                return;
+              }
+
+              // Animated WebP is rendered by WebView on onboarding. Flutter's
+              // image cache does not warm WebView's Chromium cache, so loading
+              // these files here only duplicates the network and memory cost.
+              if (_isRemoteWebp(url)) {
+                return;
+              }
+
+              if (_isVideoUrl(url)) {
+                final stopwatch = Stopwatch()..start();
+                LogUtils.d(
+                  'SplashBloc: Start preloading onboarding video: $url',
+                );
+                try {
+                  final path = await VideoCacheManager()
+                      .getCachedOrDownload(url, waitForDownload: true)
+                      .timeout(const Duration(seconds: 10));
+                  stopwatch.stop();
+                  LogUtils.i(
+                    'SplashBloc: Preloaded onboarding video in ${stopwatch.elapsedMilliseconds}ms: $url -> ${path ?? url}',
+                  );
+                } catch (e, stack) {
+                  stopwatch.stop();
+                  LogUtils.e(
+                    'SplashBloc: Failed to preload onboarding video after ${stopwatch.elapsedMilliseconds}ms: $url',
+                    error: e,
+                    stackTrace: stack,
+                  );
                 }
+              } else {
+                final stopwatch = Stopwatch()..start();
+                LogUtils.d(
+                  'SplashBloc: Start preloading onboarding image: $url',
+                );
+                await _preloadImage(url);
+                stopwatch.stop();
+                LogUtils.i(
+                  'SplashBloc: Preloaded onboarding image in ${stopwatch.elapsedMilliseconds}ms: $url',
+                );
               }
             }
-            if (preloadFutures.isNotEmpty) {
-              await Future.wait(preloadFutures).timeout(
-                const Duration(seconds: 15),
-                onTimeout: () {
-                  LogUtils.w(
-                    'SplashBloc: Onboarding assets preloading timed out at 15s',
-                  );
-                  return [];
-                },
-              );
+
+            if (urls.isNotEmpty) {
+              await Future.wait(urls.map(preloadAsset)).catchError((e) {
+                LogUtils.e('SplashBloc: Onboarding preload failed', error: e);
+                return [];
+              });
             }
+
+            _preloadedUrls = List<String>.from(urls);
           }
         }
       }
@@ -258,10 +265,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('350creditsdis'),
               BillingProduct.consumable('500credits'),
               BillingProduct.consumable('500creditsdis'),
+              BillingProduct.consumable('1000credits'),
               BillingProduct.consumable('1000creditsdis'),
               BillingProduct.consumable('5000credits'),
               BillingProduct.consumable('5000creditsdis'),
-              BillingProduct.subscription('buy_weakly'),
+              BillingProduct.subscription('buy_weekly'),
               BillingProduct.subscription('buy_annualy'),
               BillingProduct.subscription('buy_annualy_discount'),
             ]
@@ -274,6 +282,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('350creditsdis.andr'),
               BillingProduct.consumable('500credits.andr'),
               BillingProduct.consumable('500creditsdis.andr'),
+              BillingProduct.consumable('1000credits.andr'),
               BillingProduct.consumable('1000creditsdis.andr'),
               BillingProduct.consumable('5000credits.andr'),
               BillingProduct.consumable('5000creditsdis.andr'),
@@ -340,14 +349,14 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   bool _isVideoUrl(String url) {
-    final path = url.toLowerCase();
-    return path.endsWith('.mp4') ||
-        path.endsWith('.mkv') ||
-        path.endsWith('.mov') ||
-        path.endsWith('.avi') ||
-        path.endsWith('.webm') ||
-        path.endsWith('.3gp') ||
-        path.endsWith('.flv');
+    return BannerPreloadHelper.isVideoOrWebp(url);
+  }
+
+  bool _isRemoteWebp(String url) {
+    final uri = Uri.tryParse(url);
+    return url.toLowerCase().endsWith('.webp') &&
+        uri != null &&
+        (uri.scheme == 'http' || uri.scheme == 'https');
   }
 
   Future<void> _preloadImage(String url) async {
