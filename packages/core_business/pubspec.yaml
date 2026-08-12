@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  wiwi_havin_base_ads: ^2.0.0
+  wiwi_havin_base_ads: ^4.2.1
 
   network:
     path: ../network

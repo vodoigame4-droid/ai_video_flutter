@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core_business/core_business.dart';
 
 /// A premium, reusable image loader widget for the entire app.
 /// Uses CachedNetworkImage to handle caching, shows a shimmer effect while loading,
@@ -11,6 +13,7 @@ class AppImage extends StatelessWidget {
   final BoxFit fit;
   final double borderRadius;
   final Widget? errorWidget;
+  final bool useMemCacheResize;
 
   const AppImage({
     super.key,
@@ -20,17 +23,39 @@ class AppImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.borderRadius = 0.0,
     this.errorWidget,
+    this.useMemCacheResize = true,
   });
+
+  Widget _buildFallback(BuildContext context) {
+    return errorWidget ??
+        Container(
+          width: width,
+          height: height,
+          color: const Color(0xFF222222),
+          child: const Icon(
+            Icons.image_not_supported_outlined,
+            color: Colors.grey,
+            size: 24,
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final bool isNetworkImage = imageUrl.startsWith('http');
+    final bool isNetworkImage =
+        imageUrl.startsWith('http://') || imageUrl.startsWith('https://');
+    final bool isFileImage =
+        imageUrl.startsWith('/') || imageUrl.startsWith('file://');
 
     Widget imageWidget;
     if (isNetworkImage) {
       final double? pixelRatio = MediaQuery.maybeOf(context)?.devicePixelRatio;
-      final int? cacheWidth = (width != null && pixelRatio != null) ? (width! * pixelRatio).round() : null;
-      final int? cacheHeight = (height != null && pixelRatio != null) ? (height! * pixelRatio).round() : null;
+      final int? cacheWidth = (useMemCacheResize && width != null && pixelRatio != null)
+          ? (width! * pixelRatio).round()
+          : null;
+      final int? cacheHeight = (useMemCacheResize && height != null && pixelRatio != null)
+          ? (height! * pixelRatio).round()
+          : null;
 
       imageWidget = CachedNetworkImage(
         imageUrl: imageUrl,
@@ -39,42 +64,54 @@ class AppImage extends StatelessWidget {
         fit: fit,
         memCacheWidth: cacheWidth,
         memCacheHeight: cacheHeight,
+        errorListener: (error) {
+          LogUtils.w('AppImage: error loading image from network/cache: $error');
+        },
         placeholder: (context, url) => AppImageShimmer(
           width: width,
           height: height,
           borderRadius: borderRadius,
         ),
-        errorWidget: (context, url, error) =>
-            errorWidget ??
-            Container(
-              width: width,
-              height: height,
-              color: const Color(0xFF222222),
-              child: const Icon(
-                Icons.image_not_supported_outlined,
-                color: Colors.grey,
-                size: 24,
-              ),
-            ),
+        errorWidget: (context, url, error) {
+          LogUtils.w('AppImage: CachedNetworkImage errorWidget for $url: $error');
+          return _buildFallback(context);
+        },
       );
+    } else if (isFileImage) {
+      final String cleanPath = imageUrl.startsWith('file://')
+          ? imageUrl.replaceFirst('file://', '')
+          : imageUrl;
+      bool exists = false;
+      try {
+        exists = File(cleanPath).existsSync();
+      } catch (e) {
+        LogUtils.w('AppImage: File.existsSync error for $cleanPath: $e');
+      }
+
+      if (!exists) {
+        imageWidget = _buildFallback(context);
+      } else {
+        imageWidget = Image.file(
+          File(cleanPath),
+          width: width,
+          height: height,
+          fit: fit,
+          errorBuilder: (context, error, stackTrace) {
+            LogUtils.w('AppImage: File image load error for $cleanPath: $error');
+            return _buildFallback(context);
+          },
+        );
+      }
     } else {
       imageWidget = Image.asset(
         imageUrl,
         width: width,
         height: height,
         fit: fit,
-        errorBuilder: (context, error, stackTrace) =>
-            errorWidget ??
-            Container(
-              width: width,
-              height: height,
-              color: const Color(0xFF222222),
-              child: const Icon(
-                Icons.image_not_supported_outlined,
-                color: Colors.grey,
-                size: 24,
-              ),
-            ),
+        errorBuilder: (context, error, stackTrace) {
+          LogUtils.w('AppImage: Asset image load error for $imageUrl: $error');
+          return _buildFallback(context);
+        },
       );
     }
 
@@ -134,7 +171,9 @@ class _AppImageShimmerState extends State<AppImageShimmer>
           width: widget.width,
           height: widget.height,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(widget.borderRadius),
+            ),
             gradient: LinearGradient(
               colors: const [
                 Color(0xFF1E1E1E),
@@ -144,7 +183,9 @@ class _AppImageShimmerState extends State<AppImageShimmer>
               stops: const [0.1, 0.5, 0.9],
               begin: const Alignment(-1.0, -0.3),
               end: const Alignment(1.0, 0.3),
-              transform: _SlidingGradientTransform(slidePercent: _controller.value),
+              transform: _SlidingGradientTransform(
+                slidePercent: _controller.value,
+              ),
             ),
           ),
         );
@@ -160,6 +201,11 @@ class _SlidingGradientTransform extends GradientTransform {
 
   @override
   Matrix4? transform(Rect bounds, {TextDirection? textDirection}) {
-    return Matrix4.translationValues(bounds.width * (slidePercent - 0.5) * 2, 0.0, 0.0);
+    return Matrix4.translationValues(
+      bounds.width * (slidePercent - 0.5) * 2,
+      0.0,
+      0.0,
+    );
   }
 }
+

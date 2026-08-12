@@ -23,6 +23,10 @@ import 'package:screen_protector/screen_protector.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await ScreenProtector.preventScreenshotOn();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

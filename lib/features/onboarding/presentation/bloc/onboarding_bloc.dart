@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../core/injection/injection_container.dart';
@@ -14,11 +15,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       await event.when(
         init: (preloadedImages) async {
           final fallbackImages = [
-            'assets/images/ob_1.png',
-            'assets/images/ob_2.png',
-            'assets/images/ob_3.png',
-            'assets/images/ob_4.png',
-            'assets/images/ob_5.png',
+            'assets/images/ob_1.webp',
+            'assets/images/ob_2.webp',
+            'assets/images/ob_3.webp',
+            'assets/images/ob_4.webp',
+            'assets/images/ob_5.webp',
           ];
 
           if (preloadedImages != null && preloadedImages.isNotEmpty) {
@@ -80,7 +81,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
                   ),
                 );
               } else {
-                await completeOnboardingUseCase(NoParams());
+                unawaited(completeOnboardingUseCase(NoParams()));
                 emit(
                   OnboardingState.ready(
                     images: images,

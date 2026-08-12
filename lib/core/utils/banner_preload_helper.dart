@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_business/core_business.dart' hide VideoCacheManager;
 import 'video_cache_manager.dart';
-import 'log_utils.dart';
 
 /// A utility to fetch, analyze, and preload/cache the home banner during splash.
 /// This ensures the banner is shown instantly on home screen transition without loading delays or spinner loops.
@@ -72,33 +71,46 @@ class BannerPreloadHelper {
             final isTest = Platform.environment.containsKey('FLUTTER_TEST');
             if (bannerUrl.startsWith('http') && !isTest) {
               final mediaPreloadStopwatch = Stopwatch()..start();
-              if (isVideoOrWebp(bannerUrl)) {
-                LogUtils.d('$_tag: Preloading video/webp banner: $bannerUrl');
+              final isWebp = bannerUrl.toLowerCase().endsWith('.webp');
+              if (isWebp) {
+                LogUtils.d(
+                  '$_tag: Skip preloading webp banner as it is rendered by WebView: $bannerUrl',
+                );
+              } else if (isVideoOrWebp(bannerUrl)) {
+                LogUtils.d('$_tag: Preloading video banner: $bannerUrl');
                 try {
                   final localPath = await VideoCacheManager()
-                      .getCachedOrDownload(
-                        bannerUrl,
-                        waitForDownload: true,
-                      )
+                      .getCachedOrDownload(bannerUrl, waitForDownload: true)
                       .timeout(const Duration(seconds: 3));
                   mediaPreloadStopwatch.stop();
                   if (localPath != null && localPath.isNotEmpty) {
                     preloadedLocalPath = localPath;
-                    LogUtils.i('$_tag: Video/webp banner cached in ${mediaPreloadStopwatch.elapsedMilliseconds}ms at: $localPath');
+                    LogUtils.i(
+                      '$_tag: Video banner cached in ${mediaPreloadStopwatch.elapsedMilliseconds}ms at: $localPath',
+                    );
                   } else {
-                    LogUtils.w('$_tag: Cached/Downloaded banner path is empty after ${mediaPreloadStopwatch.elapsedMilliseconds}ms');
+                    LogUtils.w(
+                      '$_tag: Cached/Downloaded banner path is empty after ${mediaPreloadStopwatch.elapsedMilliseconds}ms',
+                    );
                   }
                 } on TimeoutException {
                   mediaPreloadStopwatch.stop();
-                  LogUtils.w('$_tag: Video preloading timed out at 3s. Continuing download in background.');
+                  LogUtils.w(
+                    '$_tag: Video preloading timed out at 3s. Continuing download in background.',
+                  );
                   // Trigger background download without blocking, so it keeps caching
-                  VideoCacheManager().getCachedOrDownload(bannerUrl, waitForDownload: false);
+                  VideoCacheManager().getCachedOrDownload(
+                    bannerUrl,
+                    waitForDownload: false,
+                  );
                 }
               } else {
                 LogUtils.d('$_tag: Preloading image banner: $bannerUrl');
                 await _preloadImage(bannerUrl);
                 mediaPreloadStopwatch.stop();
-                LogUtils.i('$_tag: Image banner preloaded in ${mediaPreloadStopwatch.elapsedMilliseconds}ms');
+                LogUtils.i(
+                  '$_tag: Image banner preloaded in ${mediaPreloadStopwatch.elapsedMilliseconds}ms',
+                );
               }
             }
           } else {

@@ -131,17 +131,22 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         'SplashBloc: getProfileUseCase completed in ${profileStopwatch.elapsedMilliseconds}ms. isVip: $_isVip',
       );
 
-      // Fetch and preload home banner
+      // Fetch and preload home banner in the background
       final bannerStopwatch = Stopwatch()..start();
       final sharedPreferences = sl<SharedPreferences>();
-      await BannerPreloadHelper.preloadBanner(
-        getBannersUseCase: getBannersUseCase,
-        sharedPreferences: sharedPreferences,
-      );
-      bannerStopwatch.stop();
-      LogUtils.i(
-        'SplashBloc: BannerPreloadHelper.preloadBanner completed in ${bannerStopwatch.elapsedMilliseconds}ms',
-      );
+      BannerPreloadHelper.preloadBanner(
+            getBannersUseCase: getBannersUseCase,
+            sharedPreferences: sharedPreferences,
+          )
+          .whenComplete(() {
+            bannerStopwatch.stop();
+            LogUtils.i(
+              'SplashBloc: BannerPreloadHelper.preloadBanner completed in ${bannerStopwatch.elapsedMilliseconds}ms',
+            );
+          })
+          .catchError((e) {
+            LogUtils.e('SplashBloc: Banner preload background failed: $e');
+          });
     } catch (e, stack) {
       LogUtils.e(
         'SplashBloc: Background login failed',
@@ -290,7 +295,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.subscription('buy_annualy.andr'),
               BillingProduct.subscription('buy_annualy_discount.andr'),
             ];
-      final billingConfig = BillingConfig(debugMode: false, products: products);
+      final billingConfig = BillingConfig(
+        debugMode: false,
+        products: products,
+        autoAcknowledgeSubscriptions: false,
+      );
 
       await HavinSdk.instance.init(billingConfig: billingConfig);
       sl<IapBloc>().add(const IapEvent.init());
@@ -316,9 +325,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       );
       return;
     }
-    await HavinBilling.instance.updateUserIdentity(
+    await HavinBilling.instance.setUserIdentity(
       BillingUserIdentity.sharedUuid(user.id),
-      refreshAfterUpdate: false,
     );
     LogUtils.i('SplashBloc: Billing identity updated after login');
   }

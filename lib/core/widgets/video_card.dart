@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -399,23 +400,25 @@ class _AnimatedImagePlayerState extends State<_AnimatedImagePlayer> {
   }
 
   void _updateListener() {
-    if (_imageStream == null) return;
+    try {
+      if (_imageStream == null) return;
 
-    if (widget.isPlayable) {
-      if (!_isListening) {
-        _imageStream!.addListener(_listener);
-        _isListening = true;
-      }
-    } else {
-      if (_imageInfo != null) {
-        _stopListening();
-      } else {
+      if (widget.isPlayable) {
         if (!_isListening) {
           _imageStream!.addListener(_listener);
           _isListening = true;
         }
+      } else {
+        if (_imageInfo != null) {
+          _stopListening();
+        } else {
+          if (!_isListening) {
+            _imageStream!.addListener(_listener);
+            _isListening = true;
+          }
+        }
       }
-    }
+    } catch (e) {}
   }
 
   void _handleImageFrame(ImageInfo info, bool synchronousCall) {

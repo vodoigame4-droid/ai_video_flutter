@@ -61,10 +61,19 @@ class _OnboardingViewState extends State<OnboardingView> {
   Future<void> _onOnboardingCompleted(BuildContext context) async {
     bool isVip = false;
     try {
-      final user = await sl<WatchProfileUseCase>()().first.timeout(const Duration(milliseconds: 500));
-      isVip = user.isVip;
+      final cachedUser = sl<AuthRepository>().cachedUser;
+      if (cachedUser != null) {
+        isVip = cachedUser.isVip;
+      } else {
+        final user = await sl<WatchProfileUseCase>()().first.timeout(
+          const Duration(milliseconds: 300),
+        );
+        isVip = user.isVip;
+      }
     } catch (e) {
-      LogUtils.w('OnboardingView: Failed to check VIP status, defaulting to false: $e');
+      LogUtils.w(
+        'OnboardingView: Failed to check VIP status, defaulting to false: $e',
+      );
     }
 
     if (context.mounted) {

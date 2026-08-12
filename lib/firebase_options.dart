@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDuJRyxMqT9PlLV1wruJ64vsD7aI2WzrBk',
-    appId: '1:92781845692:android:0fb9f12f96356aa2a084b9',
+    appId: '1:92781845692:android:b77a1a52c45ee12ba084b9',
     messagingSenderId: '92781845692',
     projectId: 'aivideo-tgv',
     storageBucket: 'aivideo-tgv.firebasestorage.app',
