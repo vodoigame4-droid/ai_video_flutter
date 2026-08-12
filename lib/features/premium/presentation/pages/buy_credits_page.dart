@@ -273,10 +273,17 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                     _____,
                   ) async {
                     await sl<GetProfileUseCase>()(NoParams());
+                    sl<HomeBloc>().add(const HomeEvent.refresh());
+                    if (!context.mounted) return;
                     if (message != 'already_vip') {
                       AppToast.showSuccess(
                         _translateSuccessMessage(context, message),
                       );
+                    }
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      DashboardPage.go(context);
                     }
                   },
               error:

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:ai_video_flutter/core/theme/app_colors.dart';
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../../core/theme/app_theme.dart';
 import '../../../../core/errors/backend_error_handler.dart';
+import '../../../../core/navigation/route_observer.dart';
 import 'package:core_business/core_business.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../templates/presentation/pages/templates_page.dart';
@@ -23,15 +25,43 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<HomeBloc>()..add(const HomeEvent.init()),
+    return BlocProvider.value(
+      value: sl<HomeBloc>()..add(const HomeEvent.init()),
       child: const HomeView(),
     );
   }
 }
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> with RouteAware {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final modalRoute = ModalRoute.of(context);
+    if (modalRoute is PageRoute) {
+      routeObserver.subscribe(this, modalRoute);
+    }
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    LogUtils.d('HomeView: Returned to Home screen, refreshing home data...');
+    if (mounted) {
+      context.read<HomeBloc>().add(const HomeEvent.refresh());
+    }
+  }
 
   String _getTranslatedCategory(BuildContext context, String category) {
     final t = Translations.of(context);
@@ -86,122 +116,138 @@ class HomeView extends StatelessWidget {
 
                       // Layer 2: Scrollable List (scrolls on top of the banner)
                       Positioned.fill(
-                        child: categoriesState.when(
-                          initial: () => ListView(
-                            padding: EdgeInsets.zero,
-                            children: [
-                              Container(height: 250),
-                              const HomeFeaturesGridWidget(),
-                            ],
-                          ),
-                          loading: () => ListView(
-                            padding: EdgeInsets.zero,
-                            children: [
-                              Container(height: 250),
-                              const HomeFeaturesGridWidget(),
-                              Container(
-                                color: AppColors.background,
-                                height: 200,
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
+                        child: RefreshIndicator(
+                          color: AppColors.primary,
+                          backgroundColor: AppColors.background,
+                          edgeOffset: 60.0,
+                          onRefresh: () async {
+                            final completer = Completer<void>();
+                            context.read<HomeBloc>().add(
+                              HomeEvent.refresh(completer: completer),
+                            );
+                            await completer.future;
+                          },
+                          child: categoriesState.when(
+                            initial: () => ListView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              children: [
+                                Container(height: 250),
+                                const HomeFeaturesGridWidget(),
+                              ],
+                            ),
+                            loading: () => ListView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              children: [
+                                Container(height: 250),
+                                const HomeFeaturesGridWidget(),
+                                Container(
+                                  color: AppColors.background,
+                                  height: 200,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          success: (categories) {
-                            final validCategories = categories
-                                .where((c) => (c.theme ?? []).isNotEmpty)
-                                .toList();
-                            final int categoryCount = validCategories.length;
-                            final int totalItems =
-                                2 +
-                                categoryCount +
-                                1; // Spacing + Features + Categories + Bottom Spacing
+                              ],
+                            ),
+                            success: (categories) {
+                              final validCategories = categories
+                                  .where((c) => (c.theme ?? []).isNotEmpty)
+                                  .toList();
+                              final int categoryCount = validCategories.length;
+                              final int totalItems =
+                                  2 +
+                                  categoryCount +
+                                  1; // Spacing + Features + Categories + Bottom Spacing
 
-                            return ListView.builder(
-                              padding: const EdgeInsets.only(bottom: 150),
-                              itemCount: totalItems,
-                              cacheExtent: 350,
-                              physics: const BouncingScrollPhysics(
-                                parent: AlwaysScrollableScrollPhysics(),
-                              ),
-                              itemBuilder: (context, index) {
-                                if (index == 0) {
-                                  return Container(height: 250);
-                                }
-                                if (index == 1) {
-                                  return const HomeFeaturesGridWidget();
-                                }
-                                if (index == totalItems - 1) {
+                              return ListView.builder(
+                                padding: const EdgeInsets.only(bottom: 150),
+                                itemCount: totalItems,
+                                cacheExtent: 350,
+                                physics: const BouncingScrollPhysics(
+                                  parent: AlwaysScrollableScrollPhysics(),
+                                ),
+                                itemBuilder: (context, index) {
+                                  if (index == 0) {
+                                    return Container(height: 250);
+                                  }
+                                  if (index == 1) {
+                                    return const HomeFeaturesGridWidget();
+                                  }
+                                  if (index == totalItems - 1) {
+                                    return Container(
+                                      color: AppColors.background,
+                                      height: 120,
+                                    );
+                                  }
+
+                                  final categoryIndex = index - 2;
+                                  final category = validCategories[categoryIndex];
+                                  final themes = category.theme ?? [];
+
+                                  // Random/Diverse select from the 5 SVG icons
+                                  final iconAsset = [
+                                    Assets.icons.icLayerYellow,
+                                    Assets.icons.icBlueMask,
+                                    Assets.icons.icPurpleBox,
+                                    Assets.icons.icAiYellow,
+                                    Assets.icons.icTrending,
+                                  ][categoryIndex % 5];
+
                                   return Container(
                                     color: AppColors.background,
-                                    height: 120,
+                                    padding: const EdgeInsets.only(bottom: 28),
+                                    child: HomeTemplatesSectionWidget(
+                                      key: ValueKey(category.id),
+                                      title: _getTranslatedCategory(
+                                        context,
+                                        category.name,
+                                      ),
+                                      iconAsset: iconAsset,
+                                      videosState: Resource.success(themes),
+                                      onSeeAllPressed: () => context.pushNamed(
+                                        TemplatesPage.name,
+                                        queryParameters: {
+                                          'category': category.name,
+                                        },
+                                      ),
+                                    ),
                                   );
-                                }
-
-                                final categoryIndex = index - 2;
-                                final category = validCategories[categoryIndex];
-                                final themes = category.theme ?? [];
-
-                                // Random/Diverse select from the 5 SVG icons
-                                final iconAsset = [
-                                  Assets.icons.icLayerYellow,
-                                  Assets.icons.icBlueMask,
-                                  Assets.icons.icPurpleBox,
-                                  Assets.icons.icAiYellow,
-                                  Assets.icons.icTrending,
-                                ][categoryIndex % 5];
-
-                                return Container(
+                                },
+                              );
+                            },
+                            empty: () => ListView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              children: [
+                                Container(height: 250),
+                                const HomeFeaturesGridWidget(),
+                              ],
+                            ),
+                            error: (failure) => ListView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              children: [
+                                Container(height: 250),
+                                const HomeFeaturesGridWidget(),
+                                Container(
                                   color: AppColors.background,
-                                  padding: const EdgeInsets.only(bottom: 28),
-                                  child: HomeTemplatesSectionWidget(
-                                    key: ValueKey(category.id),
-                                    title: _getTranslatedCategory(
-                                      context,
-                                      category.name,
-                                    ),
-                                    iconAsset: iconAsset,
-                                    videosState: Resource.success(themes),
-                                    onSeeAllPressed: () => context.pushNamed(
-                                      TemplatesPage.name,
-                                      queryParameters: {
-                                        'category': category.name,
-                                      },
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 40,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      BackendErrorHelper.getErrorMessage(
+                                        context,
+                                        failure.toErrorCodeOrMessage(),
+                                      ),
+                                      style: context.appTheme.errorTextStyle,
                                     ),
                                   ),
-                                );
-                              },
-                            );
-                          },
-                          empty: () => ListView(
-                            padding: EdgeInsets.zero,
-                            children: [
-                              Container(height: 250),
-                              const HomeFeaturesGridWidget(),
-                            ],
-                          ),
-                          error: (failure) => ListView(
-                            padding: EdgeInsets.zero,
-                            children: [
-                              Container(height: 250),
-                              const HomeFeaturesGridWidget(),
-                              Container(
-                                color: AppColors.background,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 40,
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    BackendErrorHelper.getErrorMessage(
-                                      context,
-                                      failure.toErrorCodeOrMessage(),
-                                    ),
-                                    style: context.appTheme.errorTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -252,3 +298,4 @@ class HomeView extends StatelessWidget {
     );
   }
 }
+

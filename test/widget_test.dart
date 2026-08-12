@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ai_video_flutter/core/services/remote_config_service.dart';
 import 'package:ai_video_flutter/core/navigation/app_router.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockMediaRepository extends Mock implements MediaRepository {}
 class MockFirebaseMessaging extends Mock implements FirebaseMessaging {}
@@ -22,14 +25,110 @@ class MockWatchProfileUseCase extends Mock implements WatchProfileUseCase {}
 class MockRemoteConfigService extends Mock implements RemoteConfigService {}
 class MockGetDailyLoginStatusUseCase extends Mock implements GetDailyLoginStatusUseCase {}
 class MockCheckInUseCase extends Mock implements CheckInUseCase {}
+class FakeWebViewController extends PlatformWebViewController {
+  FakeWebViewController()
+      : super.implementation(
+          const PlatformWebViewControllerCreationParams(),
+        );
+
+  @override
+  Future<void> setJavaScriptMode(JavaScriptMode javaScriptMode) async {}
+
+  @override
+  Future<void> loadRequest(LoadRequestParams params) async {}
+
+  @override
+  Future<void> loadHtmlString(String html, {String? baseUrl}) async {}
+
+  @override
+  Future<void> setBackgroundColor(Color color) async {}
+
+  @override
+  Future<void> setPlatformNavigationDelegate(PlatformNavigationDelegate handler) async {}
+}
+
+class FakeWebViewWidget extends PlatformWebViewWidget {
+  FakeWebViewWidget(PlatformWebViewController controller)
+      : super.implementation(
+          PlatformWebViewWidgetCreationParams(controller: controller),
+        );
+
+  @override
+  Widget build(BuildContext context) => const SizedBox();
+}
+
+class FakeNavigationDelegate extends PlatformNavigationDelegate {
+  FakeNavigationDelegate()
+      : super.implementation(
+          const PlatformNavigationDelegateCreationParams(),
+        );
+
+  @override
+  Future<void> setOnNavigationRequest(
+    FutureOr<NavigationDecision> Function(NavigationRequest request)
+        onNavigationRequest,
+  ) async {}
+
+  @override
+  Future<void> setOnPageStarted(
+    void Function(String url) onPageStarted,
+  ) async {}
+
+  @override
+  Future<void> setOnPageFinished(
+    void Function(String url) onPageFinished,
+  ) async {}
+
+  @override
+  Future<void> setOnWebResourceError(
+    void Function(WebResourceError error) onWebResourceError,
+  ) async {}
+}
+
+class MockWebViewPlatform extends WebViewPlatform with MockPlatformInterfaceMixin {
+  @override
+  PlatformWebViewController createPlatformWebViewController(
+    PlatformWebViewControllerCreationParams params,
+  ) {
+    return FakeWebViewController();
+  }
+
+  @override
+  PlatformWebViewWidget createPlatformWebViewWidget(
+    PlatformWebViewWidgetCreationParams params,
+  ) {
+    return FakeWebViewWidget(params.controller);
+  }
+
+  @override
+  PlatformNavigationDelegate createPlatformNavigationDelegate(
+    PlatformNavigationDelegateCreationParams params,
+  ) {
+    return FakeNavigationDelegate();
+  }
+}
+class FakePlatformWebViewControllerCreationParams extends Fake implements PlatformWebViewControllerCreationParams {}
+class FakePlatformWebViewWidgetCreationParams extends Fake implements PlatformWebViewWidgetCreationParams {}
+class FakeBuildContext extends Fake implements BuildContext {}
 
 void main() {
   // Disable Google Fonts HTTP fetching during tests
   GoogleFonts.config.allowRuntimeFetching = false;
   VisibilityDetectorController.instance.updateInterval = Duration.zero;
 
+  setUpAll(() {
+    registerFallbackValue(FakePlatformWebViewControllerCreationParams());
+    registerFallbackValue(FakePlatformWebViewWidgetCreationParams());
+    registerFallbackValue(JavaScriptMode.unrestricted);
+    registerFallbackValue(LoadRequestParams(uri: Uri.parse('https://example.com')));
+    registerFallbackValue(const Color(0x00000000));
+    registerFallbackValue(FakeBuildContext());
+  });
+
   setUp(() async {
     registerFallbackValue(NoParams());
+
+    WebViewPlatform.instance = MockWebViewPlatform();
 
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();

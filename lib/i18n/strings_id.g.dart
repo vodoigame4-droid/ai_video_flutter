@@ -671,8 +671,10 @@ class _Translations$permission$id extends Translations$permission$en {
 	@override String get microphone_desc => 'Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.';
 	@override String get notification_title => 'Izin Notifikasi';
 	@override String get notification_desc => 'Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.';
+	@override String get photos_rationale_desc => 'VidoVerse memerlukan izin mengakses Galeri Anda untuk menyimpan video yang dibuat ke perangkat Anda.';
 	@override String get settings => 'Pengaturan';
 	@override String get cancel => 'Batal';
+	@override String get allow => 'Izinkan';
 }
 
 // Path: onboarding.page1
@@ -1125,8 +1127,10 @@ extension on TranslationsId {
 			'permission.microphone_desc' => 'Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.',
 			'permission.notification_title' => 'Izin Notifikasi',
 			'permission.notification_desc' => 'Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.',
+			'permission.photos_rationale_desc' => 'VidoVerse memerlukan izin mengakses Galeri Anda untuk menyimpan video yang dibuat ke perangkat Anda.',
 			'permission.settings' => 'Pengaturan',
 			'permission.cancel' => 'Batal',
+			'permission.allow' => 'Izinkan',
 			_ => null,
 		};
 	}

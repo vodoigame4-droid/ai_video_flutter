@@ -667,12 +667,14 @@ class _Translations$permission$ar extends Translations$permission$en {
 	@override String get camera_desc => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.';
 	@override String get photos_title => 'إذن الصور';
 	@override String get photos_desc => 'مطلوب إذن الوصول إلى وحدة التخزين لحفظ الصور أو مقاطع الفيديو. يرجى تمكينه في الإعدادات.';
+	@override String get photos_rationale_desc => 'يحتاج VidoVerse إلى إذن للوصول إلى معرض الصور لحفظ مقاطع الفيديو المنشأة على جهازك.';
 	@override String get microphone_title => 'إذن الميكروفون';
 	@override String get microphone_desc => 'مطلوب إذن الميكروفون لتسجيل صوت الفيديو. يرجى تمكينه في الإعدادات.';
 	@override String get notification_title => 'إذن الإشعارات';
 	@override String get notification_desc => 'مطلوب إذن الإشعارات لتلقي تذكيرات تسجيل الدخول اليومي. يرجى تمكينه في الإعدادات.';
 	@override String get settings => 'الإعدادات';
 	@override String get cancel => 'إلغاء';
+	@override String get allow => 'سماح';
 }
 
 // Path: onboarding.page1
@@ -1121,12 +1123,14 @@ extension on TranslationsAr {
 			'permission.camera_desc' => 'مطلوب إذن الكاميرا. يرجى تمكينه في الإعدادات لاستخدام هذه الميزة.',
 			'permission.photos_title' => 'إذن الصور',
 			'permission.photos_desc' => 'مطلوب إذن الوصول إلى وحدة التخزين لحفظ الصور أو مقاطع الفيديو. يرجى تمكينه في الإعدادات.',
+			'permission.photos_rationale_desc' => 'يحتاج VidoVerse إلى إذن للوصول إلى معرض الصور لحفظ مقاطع الفيديو المنشأة على جهازك.',
 			'permission.microphone_title' => 'إذن الميكروفون',
 			'permission.microphone_desc' => 'مطلوب إذن الميكروفون لتسجيل صوت الفيديو. يرجى تمكينه في الإعدادات.',
 			'permission.notification_title' => 'إذن الإشعارات',
 			'permission.notification_desc' => 'مطلوب إذن الإشعارات لتلقي تذكيرات تسجيل الدخول اليومي. يرجى تمكينه في الإعدادات.',
 			'permission.settings' => 'الإعدادات',
 			'permission.cancel' => 'إلغاء',
+			'permission.allow' => 'سماح',
 			_ => null,
 		};
 	}

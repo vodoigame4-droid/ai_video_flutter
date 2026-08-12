@@ -160,16 +160,17 @@ class _IapViewState extends State<IapView> {
                     _____,
                   ) async {
                     await sl<GetProfileUseCase>()(NoParams());
+                    sl<HomeBloc>().add(const HomeEvent.refresh());
+                    if (!context.mounted) return;
                     if (message != 'already_vip') {
                       AppToast.showSuccess(
                         _translateSuccessMessage(context, message),
                       );
                     }
-                    if (widget.fromSplash) {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
                       DashboardPage.go(context);
-                    } else if (context.mounted &&
-                        Navigator.of(context).canPop()) {
-                      Navigator.of(context).pop(true);
                     }
                   },
               error:

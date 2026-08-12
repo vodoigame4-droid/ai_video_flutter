@@ -671,8 +671,10 @@ class _Translations$permission$es extends Translations$permission$en {
 	@override String get microphone_desc => 'Se requiere el permiso de micrófono para grabar el audio del video. Por favor, actívelo en la Configuración.';
 	@override String get notification_title => 'Permiso de Notificaciones';
 	@override String get notification_desc => 'Se requiere el permiso de notificaciones para recibir recordatorios diarios. Por favor, actívelo en la Configuración.';
+	@override String get photos_rationale_desc => 'VidoVerse necesita permiso para acceder a tu galería y guardar los videos generados en tu dispositivo.';
 	@override String get settings => 'Configuración';
 	@override String get cancel => 'Cancelar';
+	@override String get allow => 'Permitir';
 }
 
 // Path: onboarding.page1
@@ -1125,8 +1127,10 @@ extension on TranslationsEs {
 			'permission.microphone_desc' => 'Se requiere el permiso de micrófono para grabar el audio del video. Por favor, actívelo en la Configuración.',
 			'permission.notification_title' => 'Permiso de Notificaciones',
 			'permission.notification_desc' => 'Se requiere el permiso de notificaciones para recibir recordatorios diarios. Por favor, actívelo en la Configuración.',
+			'permission.photos_rationale_desc' => 'VidoVerse necesita permiso para acceder a tu galería y guardar los videos generados en tu dispositivo.',
 			'permission.settings' => 'Configuración',
 			'permission.cancel' => 'Cancelar',
+			'permission.allow' => 'Permitir',
 			_ => null,
 		};
 	}

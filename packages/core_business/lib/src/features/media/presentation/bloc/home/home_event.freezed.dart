@@ -55,11 +55,12 @@ extension HomeEventPatterns on HomeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _SelectCategory value)?  selectCategory,TResult Function( _ChangeLanguage value)?  changeLanguage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Init value)?  init,TResult Function( _Refresh value)?  refresh,TResult Function( _SelectCategory value)?  selectCategory,TResult Function( _ChangeLanguage value)?  changeLanguage,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init(_that);case _SelectCategory() when selectCategory != null:
+return init(_that);case _Refresh() when refresh != null:
+return refresh(_that);case _SelectCategory() when selectCategory != null:
 return selectCategory(_that);case _ChangeLanguage() when changeLanguage != null:
 return changeLanguage(_that);case _:
   return orElse();
@@ -79,11 +80,12 @@ return changeLanguage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _SelectCategory value)  selectCategory,required TResult Function( _ChangeLanguage value)  changeLanguage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Init value)  init,required TResult Function( _Refresh value)  refresh,required TResult Function( _SelectCategory value)  selectCategory,required TResult Function( _ChangeLanguage value)  changeLanguage,}){
 final _that = this;
 switch (_that) {
 case _Init():
-return init(_that);case _SelectCategory():
+return init(_that);case _Refresh():
+return refresh(_that);case _SelectCategory():
 return selectCategory(_that);case _ChangeLanguage():
 return changeLanguage(_that);case _:
   throw StateError('Unexpected subclass');
@@ -102,11 +104,12 @@ return changeLanguage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _SelectCategory value)?  selectCategory,TResult? Function( _ChangeLanguage value)?  changeLanguage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Init value)?  init,TResult? Function( _Refresh value)?  refresh,TResult? Function( _SelectCategory value)?  selectCategory,TResult? Function( _ChangeLanguage value)?  changeLanguage,}){
 final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init(_that);case _SelectCategory() when selectCategory != null:
+return init(_that);case _Refresh() when refresh != null:
+return refresh(_that);case _SelectCategory() when selectCategory != null:
 return selectCategory(_that);case _ChangeLanguage() when changeLanguage != null:
 return changeLanguage(_that);case _:
   return null;
@@ -125,10 +128,11 @@ return changeLanguage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( String category)?  selectCategory,TResult Function( String localeCode)?  changeLanguage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( Completer<void>? completer)?  refresh,TResult Function( String category)?  selectCategory,TResult Function( String localeCode)?  changeLanguage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _SelectCategory() when selectCategory != null:
+return init();case _Refresh() when refresh != null:
+return refresh(_that.completer);case _SelectCategory() when selectCategory != null:
 return selectCategory(_that.category);case _ChangeLanguage() when changeLanguage != null:
 return changeLanguage(_that.localeCode);case _:
   return orElse();
@@ -148,10 +152,11 @@ return changeLanguage(_that.localeCode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( String category)  selectCategory,required TResult Function( String localeCode)  changeLanguage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( Completer<void>? completer)  refresh,required TResult Function( String category)  selectCategory,required TResult Function( String localeCode)  changeLanguage,}) {final _that = this;
 switch (_that) {
 case _Init():
-return init();case _SelectCategory():
+return init();case _Refresh():
+return refresh(_that.completer);case _SelectCategory():
 return selectCategory(_that.category);case _ChangeLanguage():
 return changeLanguage(_that.localeCode);case _:
   throw StateError('Unexpected subclass');
@@ -170,10 +175,11 @@ return changeLanguage(_that.localeCode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( String category)?  selectCategory,TResult? Function( String localeCode)?  changeLanguage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( Completer<void>? completer)?  refresh,TResult? Function( String category)?  selectCategory,TResult? Function( String localeCode)?  changeLanguage,}) {final _that = this;
 switch (_that) {
 case _Init() when init != null:
-return init();case _SelectCategory() when selectCategory != null:
+return init();case _Refresh() when refresh != null:
+return refresh(_that.completer);case _SelectCategory() when selectCategory != null:
 return selectCategory(_that.category);case _ChangeLanguage() when changeLanguage != null:
 return changeLanguage(_that.localeCode);case _:
   return null;
@@ -214,6 +220,72 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _Refresh implements HomeEvent {
+  const _Refresh({this.completer});
+  
+
+ final  Completer<void>? completer;
+
+/// Create a copy of HomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RefreshCopyWith<_Refresh> get copyWith => __$RefreshCopyWithImpl<_Refresh>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Refresh&&(identical(other.completer, completer) || other.completer == completer));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,completer);
+
+@override
+String toString() {
+  return 'HomeEvent.refresh(completer: $completer)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RefreshCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+  factory _$RefreshCopyWith(_Refresh value, $Res Function(_Refresh) _then) = __$RefreshCopyWithImpl;
+@useResult
+$Res call({
+ Completer<void>? completer
+});
+
+
+
+
+}
+/// @nodoc
+class __$RefreshCopyWithImpl<$Res>
+    implements _$RefreshCopyWith<$Res> {
+  __$RefreshCopyWithImpl(this._self, this._then);
+
+  final _Refresh _self;
+  final $Res Function(_Refresh) _then;
+
+/// Create a copy of HomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? completer = freezed,}) {
+  return _then(_Refresh(
+completer: freezed == completer ? _self.completer : completer // ignore: cast_nullable_to_non_nullable
+as Completer<void>?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

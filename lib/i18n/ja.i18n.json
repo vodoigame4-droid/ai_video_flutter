@@ -442,7 +442,9 @@
     "microphone_desc": "動画の音声録音にはマイクの権限が必要です。設定で許可してください。",
     "notification_title": "通知の権限",
     "notification_desc": "デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。",
+    "photos_rationale_desc": "VidoVerseが作成した動画をデバイスに保存するには、ギャラリーへのアクセス許可が必要です。",
     "settings": "設定",
-    "cancel": "キャンセル"
+    "cancel": "キャンセル",
+    "allow": "許可する"
   }
 }

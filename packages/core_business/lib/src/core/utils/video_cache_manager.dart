@@ -30,7 +30,7 @@ class VideoCacheManager {
     try {
       final cacheDir = await getTemporaryDirectory();
       final extension = _getFileExtension(url);
-      final filename = '${url.hashCode}.$extension';
+      final filename = '${url.hashCode.abs()}.$extension';
       final localFile = File('${cacheDir.path}/video_cache/$filename');
 
       // 1. If file already exists locally and is not empty, return its path

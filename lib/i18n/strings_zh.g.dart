@@ -671,8 +671,10 @@ class _Translations$permission$zh extends Translations$permission$en {
 	@override String get microphone_desc => '需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。';
 	@override String get notification_title => '通知权限';
 	@override String get notification_desc => '需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。';
+	@override String get photos_rationale_desc => 'VidoVerse 需要访问相册的权限，以便将生成的视频保存到您的设备中。';
 	@override String get settings => '设置';
 	@override String get cancel => '取消';
+	@override String get allow => '允许';
 }
 
 // Path: onboarding.page1
@@ -1125,8 +1127,10 @@ extension on TranslationsZh {
 			'permission.microphone_desc' => '需要麦克风权限来录制视频声音。请在设置中启用以使用此功能。',
 			'permission.notification_title' => '通知权限',
 			'permission.notification_desc' => '需要通知权限来接收每日签到提醒。请在设置中启用以使用此功能。',
+			'permission.photos_rationale_desc' => 'VidoVerse 需要访问相册的权限，以便将生成的视频保存到您的设备中。',
 			'permission.settings' => '设置',
 			'permission.cancel' => '取消',
+			'permission.allow' => '允许',
 			_ => null,
 		};
 	}

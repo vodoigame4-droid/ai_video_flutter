@@ -33,10 +33,10 @@ dart run build_runner build --delete-conflicting-outputs && dart run slang
 flutter build apk --debug
 
 # Build file APK phát hành (Release)
-flutter build apk --release --build-name=1.0.1 --build-number=2
+flutter build apk --release --build-name=1.0.2 --build-number=4
 
 # Build file App Bundle để đưa lên Google Play Store
-flutter build appbundle --release --build-name=1.0.1 --build-number=2
+flutter build appbundle --release --build-name=1.0.2 --build-number=5
 ```
 
 ### iOS

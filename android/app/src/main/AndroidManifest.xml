@@ -2,6 +2,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     
     <application
@@ -9,7 +11,8 @@
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:hardwareAccelerated="true"
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true">
         
         <!-- Explicitly enable Impeller rendering engine for smooth UI frames on Android -->
         <meta-data

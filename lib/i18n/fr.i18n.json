@@ -442,7 +442,9 @@
     "microphone_desc": "L'autorisation du microphone est requise pour l'enregistrement audio des vidéos. Veuillez l'activer dans les Paramètres.",
     "notification_title": "Autorisation des Notifications",
     "notification_desc": "L'autorisation de notification est requise pour recevoir des rappels quotidiens. Veuillez l'activer dans les Paramètres.",
+    "photos_rationale_desc": "VidoVerse a besoin de la permission d'accéder à votre galerie pour enregistrer les vidéos générées sur votre appareil.",
     "settings": "Paramètres",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "allow": "Autoriser"
   }
 }

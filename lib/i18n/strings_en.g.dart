@@ -1426,6 +1426,9 @@ class Translations$permission$en {
 	/// en: 'Storage permission is required to save photos or videos. Please enable it in Settings.'
 	String get photos_desc => 'Storage permission is required to save photos or videos. Please enable it in Settings.';
 
+	/// en: 'VidoVerse needs permission to access your Gallery to save generated videos to your device.'
+	String get photos_rationale_desc => 'VidoVerse needs permission to access your Gallery to save generated videos to your device.';
+
 	/// en: 'Microphone Permission'
 	String get microphone_title => 'Microphone Permission';
 
@@ -1443,6 +1446,9 @@ class Translations$permission$en {
 
 	/// en: 'Cancel'
 	String get cancel => 'Cancel';
+
+	/// en: 'Allow'
+	String get allow => 'Allow';
 }
 
 // Path: onboarding.page1
@@ -1928,12 +1934,14 @@ extension on Translations {
 			'permission.camera_desc' => 'Camera permission is required. Please enable it in Settings to use this feature.',
 			'permission.photos_title' => 'Photos Permission',
 			'permission.photos_desc' => 'Storage permission is required to save photos or videos. Please enable it in Settings.',
+			'permission.photos_rationale_desc' => 'VidoVerse needs permission to access your Gallery to save generated videos to your device.',
 			'permission.microphone_title' => 'Microphone Permission',
 			'permission.microphone_desc' => 'Microphone permission is required for video sound recording. Please enable it in Settings.',
 			'permission.notification_title' => 'Notification Permission',
 			'permission.notification_desc' => 'Notification permission is required to receive daily check-in reminders. Please enable it in Settings.',
 			'permission.settings' => 'Settings',
 			'permission.cancel' => 'Cancel',
+			'permission.allow' => 'Allow',
 			_ => null,
 		};
 	}

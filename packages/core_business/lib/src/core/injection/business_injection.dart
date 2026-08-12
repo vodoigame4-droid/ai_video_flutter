@@ -205,9 +205,10 @@ void initBusinessDependencies(GetIt sl) {
   );
 
   // Blocs
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => HomeBloc(
       getHomeCategoriesUseCase: sl(),
+      getProfileUseCase: sl(),
     ),
   );
   sl.registerFactory(

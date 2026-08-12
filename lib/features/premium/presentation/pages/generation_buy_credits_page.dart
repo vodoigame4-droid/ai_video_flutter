@@ -15,6 +15,7 @@ import '../../../../core/widgets/smooth_video_player_widget.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 
 class GenerationBuyCreditsPage extends StatelessWidget {
   static const String path = '/generation-buy-credits';
@@ -322,10 +323,17 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                         _____,
                       ) async {
                         await sl<GetProfileUseCase>()(NoParams());
+                        sl<HomeBloc>().add(const HomeEvent.refresh());
+                        if (!context.mounted) return;
                         if (message != 'already_vip') {
                           AppToast.showSuccess(
                             translateSuccessMessage(context, message),
                           );
+                        }
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          DashboardPage.go(context);
                         }
                       },
                   error:

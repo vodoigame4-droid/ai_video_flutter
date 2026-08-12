@@ -684,12 +684,14 @@ class _Translations$permission$vi extends Translations$permission$en {
 	@override String get camera_desc => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.';
 	@override String get photos_title => 'Quyền truy cập Ảnh & Bộ nhớ';
 	@override String get photos_desc => 'Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.';
+	@override String get photos_rationale_desc => 'VidoVerse cần quyền truy cập Thư viện ảnh để lưu các video đã tạo vào thiết bị của bạn.';
 	@override String get microphone_title => 'Quyền truy cập Micro';
 	@override String get microphone_desc => 'Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.';
 	@override String get notification_title => 'Quyền gửi Thông báo';
 	@override String get notification_desc => 'Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.';
 	@override String get settings => 'Cài đặt';
 	@override String get cancel => 'Hủy';
+	@override String get allow => 'Cho phép';
 }
 
 // Path: onboarding.page1
@@ -1145,12 +1147,14 @@ extension on TranslationsVi {
 			'permission.camera_desc' => 'Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.',
 			'permission.photos_title' => 'Quyền truy cập Ảnh & Bộ nhớ',
 			'permission.photos_desc' => 'Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.',
+			'permission.photos_rationale_desc' => 'VidoVerse cần quyền truy cập Thư viện ảnh để lưu các video đã tạo vào thiết bị của bạn.',
 			'permission.microphone_title' => 'Quyền truy cập Micro',
 			'permission.microphone_desc' => 'Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.',
 			'permission.notification_title' => 'Quyền gửi Thông báo',
 			'permission.notification_desc' => 'Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.',
 			'permission.settings' => 'Cài đặt',
 			'permission.cancel' => 'Hủy',
+			'permission.allow' => 'Cho phép',
 			_ => null,
 		};
 	}

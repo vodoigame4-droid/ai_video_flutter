@@ -10,6 +10,14 @@ class DownloadVideoUseCase implements UseCase<void, String> {
   @override
   Future<Resource<void>> call(String url) async {
     try {
+      final hasAccess = await Gal.hasAccess(toAlbum: false);
+      if (!hasAccess) {
+        final granted = await Gal.requestAccess(toAlbum: false);
+        if (!granted) {
+          return const Resource.error(Failure.unknown('Permission denied to save video to gallery'));
+        }
+      }
+
       final cachedPath = await _cacheManager.getCachedOrDownload(url, waitForDownload: true);
       final filePath = cachedPath ?? url;
 
@@ -19,6 +27,8 @@ class DownloadVideoUseCase implements UseCase<void, String> {
 
       await Gal.putVideo(filePath);
       return const Resource.success(null);
+    } on GalException catch (e) {
+      return Resource.error(Failure.unknown('Gal error: ${e.type.name}'));
     } catch (e) {
       return Resource.error(Failure.unknown(e.toString()));
     }

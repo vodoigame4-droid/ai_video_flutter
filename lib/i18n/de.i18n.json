@@ -434,15 +434,17 @@
     "generating_page": "Vorschau der Generierungsseite"
   },
   "permission": {
-    "camera_title": "Kamerazugriff erforderlich",
-    "camera_desc": "Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.",
-    "photos_title": "Fotozugriff erforderlich",
-    "photos_desc": "Speicherberechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte in den Einstellungen aktivieren.",
-    "microphone_title": "Mikrofonzugriff erforderlich",
-    "microphone_desc": "Mikrofonberechtigung ist für die Video-Tonaufnahme erforderlich. Bitte in den Einstellungen aktivieren.",
-    "notification_title": "Benachrichtigungszugriff erforderlich",
-    "notification_desc": "Benachrichtigungsberechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte in den Einstellungen aktivieren.",
+    "camera_title": "Kamera-Berechtigung",
+    "camera_desc": "Kamera-Berechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.",
+    "photos_title": "Fotos-Berechtigung",
+    "photos_desc": "Speicher-Berechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte aktivieren Sie diese in den Einstellungen.",
+    "photos_rationale_desc": "VidoVerse benötigt Zugriff auf Ihre Galerie, um erstellte Videos auf Ihrem Gerät zu speichern.",
+    "microphone_title": "Mikrofon-Berechtigung",
+    "microphone_desc": "Mikrofon-Berechtigung ist für die Videoaufnahme erforderlich. Bitte aktivieren Sie diese in den Einstellungen.",
+    "notification_title": "Benachrichtigungs-Berechtigung",
+    "notification_desc": "Benachrichtigungs-Berechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte aktivieren Sie diese in den Einstellungen.",
     "settings": "Einstellungen",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "allow": "Zulassen"
   }
 }

@@ -447,11 +447,13 @@
     "camera_desc": "Quyền truy cập máy ảnh đã bị từ chối. Vui lòng bật trong Cài đặt để sử dụng tính năng này.",
     "photos_title": "Quyền truy cập Ảnh & Bộ nhớ",
     "photos_desc": "Quyền truy cập bộ nhớ là bắt buộc để lưu ảnh hoặc video. Vui lòng bật trong Cài đặt.",
+    "photos_rationale_desc": "VidoVerse cần quyền truy cập Thư viện ảnh để lưu các video đã tạo vào thiết bị của bạn.",
     "microphone_title": "Quyền truy cập Micro",
     "microphone_desc": "Quyền truy cập micro là bắt buộc để ghi âm âm thanh video. Vui lòng bật trong Cài đặt.",
     "notification_title": "Quyền gửi Thông báo",
     "notification_desc": "Quyền gửi thông báo là bắt buộc để nhận nhắc nhở điểm danh hàng ngày. Vui lòng bật trong Cài đặt.",
     "settings": "Cài đặt",
-    "cancel": "Hủy"
+    "cancel": "Hủy",
+    "allow": "Cho phép"
   }
 }

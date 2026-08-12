@@ -442,7 +442,9 @@
     "microphone_desc": "A permissão do microfone é necessária para gravar áudio nos vídeos. Ative-a nas Configurações.",
     "notification_title": "Permissão de Notificação",
     "notification_desc": "A permissão de notificação é necessária para receber lembretes diários. Ative-a nas Configurações.",
+    "photos_rationale_desc": "O VidoVerse precisa de permissão para acessar sua galeria e salvar os vídeos gerados no seu dispositivo.",
     "settings": "Configurações",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "allow": "Permitir"
   }
 }

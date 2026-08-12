@@ -671,8 +671,10 @@ class _Translations$permission$ko extends Translations$permission$en {
 	@override String get microphone_desc => '동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
 	@override String get notification_title => '알림 권한';
 	@override String get notification_desc => '일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.';
+	@override String get photos_rationale_desc => '생성된 비디오를 기기에 저장하려면 갤러리 접근 권한이 필요합니다.';
 	@override String get settings => '설정';
 	@override String get cancel => '취소';
+	@override String get allow => '허용';
 }
 
 // Path: onboarding.page1
@@ -1125,8 +1127,10 @@ extension on TranslationsKo {
 			'permission.microphone_desc' => '동영상 음성 녹음을 하려면 마이크 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
 			'permission.notification_title' => '알림 권한',
 			'permission.notification_desc' => '일일 출석 체크 알림을 받으려면 알림 권한이 필요합니다. 설정에서 권한을 허용해 주세요.',
+			'permission.photos_rationale_desc' => '생성된 비디오를 기기에 저장하려면 갤러리 접근 권한이 필요합니다.',
 			'permission.settings' => '설정',
 			'permission.cancel' => '취소',
+			'permission.allow' => '허용',
 			_ => null,
 		};
 	}

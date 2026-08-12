@@ -19,6 +19,7 @@ import '../widgets/subscription_package_card.dart';
 import '../widgets/buy_credit_now_button.dart';
 import 'generation_buy_credits_page.dart';
 import 'iap_page.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
 import '../../../../core/widgets/gradient_button.dart';
@@ -207,13 +208,17 @@ class _GenerationIapViewState extends State<GenerationIapView>
                     _____,
                   ) async {
                     await sl<GetProfileUseCase>()(NoParams());
+                    sl<HomeBloc>().add(const HomeEvent.refresh());
+                    if (!context.mounted) return;
                     if (message != 'already_vip') {
                       AppToast.showSuccess(
                         _translateSuccessMessage(context, message),
                       );
                     }
-                    if (context.mounted && Navigator.of(context).canPop()) {
+                    if (context.canPop()) {
                       context.pop();
+                    } else {
+                      DashboardPage.go(context);
                     }
                   },
               error:

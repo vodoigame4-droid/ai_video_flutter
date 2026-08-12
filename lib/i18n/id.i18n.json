@@ -442,7 +442,9 @@
     "microphone_desc": "Izin mikrofon diperlukan untuk merekam suara video. Silakan aktifkan di Pengaturan.",
     "notification_title": "Izin Notifikasi",
     "notification_desc": "Izin notifikasi diperlukan untuk menerima pengingat harian. Silakan aktifkan di Pengaturan.",
+    "photos_rationale_desc": "VidoVerse memerlukan izin mengakses Galeri Anda untuk menyimpan video yang dibuat ke perangkat Anda.",
     "settings": "Pengaturan",
-    "cancel": "Batal"
+    "cancel": "Batal",
+    "allow": "Izinkan"
   }
 }

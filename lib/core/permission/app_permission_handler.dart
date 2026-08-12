@@ -64,7 +64,7 @@ class AppPermissionHandler {
     );
   }
 
-  /// Checks and requests Photos/Storage permission.
+  /// Checks and requests Photos/Storage permission with pre-permission rationale dialog.
   static Future<bool> checkAndRequestPhotosPermission(BuildContext context) async {
     final t = context.t;
 
@@ -89,6 +89,17 @@ class AppPermissionHandler {
         return false;
       }
 
+      // 1. Show Pre-Permission Rationale Dialog first
+      if (context.mounted) {
+        final proceed = await _showRationaleDialog(
+          context,
+          title: t.permission.photos_title,
+          desc: t.permission.photos_rationale_desc,
+        );
+        if (!proceed) return false;
+      }
+
+      // 2. Request system permission
       LogUtils.d('AppPermissionHandler: Requesting iOS Photos permission...');
       final requestResult = await Permission.photos.request();
       LogUtils.i('AppPermissionHandler: Photos permission request result: $requestResult');
@@ -108,23 +119,32 @@ class AppPermissionHandler {
       }
       return false;
     } else if (Platform.isAndroid) {
-      final sdkVersion = await _getAndroidSdkVersion();
-      LogUtils.d('AppPermissionHandler: Android SDK version: $sdkVersion');
+      final hasAccess = await Gal.hasAccess(toAlbum: false);
+      LogUtils.d('AppPermissionHandler: Android Gal.hasAccess: $hasAccess');
+      if (hasAccess) return true;
 
-      if (sdkVersion >= 29) {
-        // Android 10+ (API 29+) uses MediaStore to save images/videos, which does not require WRITE_EXTERNAL_STORAGE.
-        // Thus, we consider permission as granted for saving purposes.
-        LogUtils.i('AppPermissionHandler: Android SDK >= 29, no storage permission required for saving.');
-        return true;
-      } else {
-        // Android < 10 (API < 29) requires WRITE_EXTERNAL_STORAGE.
-        return checkAndRequestPermission(
+      // 1. Show Pre-Permission Rationale Dialog first
+      if (context.mounted) {
+        final proceed = await _showRationaleDialog(
           context,
-          Permission.storage,
+          title: t.permission.photos_title,
+          desc: t.permission.photos_rationale_desc,
+        );
+        if (!proceed) return false;
+      }
+
+      // 2. Request system permission
+      LogUtils.d('AppPermissionHandler: Requesting Android Gal access...');
+      final granted = await Gal.requestAccess(toAlbum: false);
+      LogUtils.i('AppPermissionHandler: Android Gal request access result: $granted');
+      if (!granted && context.mounted) {
+        await _showSettingsDialog(
+          context,
           title: t.permission.photos_title,
           desc: t.permission.photos_desc,
         );
       }
+      return granted;
     }
     return true;
   }
@@ -163,13 +183,7 @@ class AppPermissionHandler {
       final status = await Permission.photos.status;
       return status.isGranted || status.isLimited;
     } else if (Platform.isAndroid) {
-      final sdkVersion = await _getAndroidSdkVersion();
-      if (sdkVersion >= 29) {
-        return true;
-      } else {
-        final status = await Permission.storage.status;
-        return status.isGranted;
-      }
+      return Gal.hasAccess(toAlbum: false);
     }
     return true;
   }
@@ -205,18 +219,23 @@ class AppPermissionHandler {
     );
   }
 
-  static Future<int> _getAndroidSdkVersion() async {
-    if (!Platform.isAndroid) return 0;
-    try {
-      final sdkString = Platform.operatingSystemVersion;
-      final match = RegExp(r'SDK\s+(\d+)').firstMatch(sdkString);
-      if (match != null) {
-        return int.parse(match.group(1)!);
-      }
-    } catch (e) {
-      LogUtils.e('AppPermissionHandler: Failed to parse Android SDK version', error: e);
-    }
-    return 0;
+  static Future<bool> _showRationaleDialog(
+    BuildContext context, {
+    required String title,
+    required String desc,
+  }) async {
+    final t = context.t;
+    bool confirmed = false;
+    await AppConfirmDialog.show<void>(
+      context: context,
+      title: title,
+      description: desc,
+      cancelLabel: t.permission.cancel,
+      confirmLabel: t.permission.allow,
+      onConfirm: () async {
+        confirmed = true;
+      },
+    );
+    return confirmed;
   }
-
 }

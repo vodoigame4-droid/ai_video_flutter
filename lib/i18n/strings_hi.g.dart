@@ -671,8 +671,10 @@ class _Translations$permission$hi extends Translations$permission$en {
 	@override String get microphone_desc => 'वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
 	@override String get notification_title => 'अधिसूचना अनुमति';
 	@override String get notification_desc => 'दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।';
+	@override String get photos_rationale_desc => 'VidoVerse को आपके डिवाइस में जेनरेट किए गए वीडियो को सहेजने के लिए आपकी गैलरी तक पहुंच की अनुमति चाहिए।';
 	@override String get settings => 'सेटिंग्स';
 	@override String get cancel => 'रद्द करें';
+	@override String get allow => 'अनुमति दें';
 }
 
 // Path: onboarding.page1
@@ -1125,8 +1127,10 @@ extension on TranslationsHi {
 			'permission.microphone_desc' => 'वीडियो ध्वनि रिकॉर्डिंग के लिए माइक्रोफ़ोन अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
 			'permission.notification_title' => 'अधिसूचना अनुमति',
 			'permission.notification_desc' => 'दैनिक चेक-इन अनुस्मारक प्राप्त करने के लिए अधिसूचना अनुमति आवश्यक है। कृपया इसे सेटिंग्स में सक्षम करें।',
+			'permission.photos_rationale_desc' => 'VidoVerse को आपके डिवाइस में जेनरेट किए गए वीडियो को सहेजने के लिए आपकी गैलरी तक पहुंच की अनुमति चाहिए।',
 			'permission.settings' => 'सेटिंग्स',
 			'permission.cancel' => 'रद्द करें',
+			'permission.allow' => 'अनुमति दें',
 			_ => null,
 		};
 	}

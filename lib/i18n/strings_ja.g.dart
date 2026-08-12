@@ -671,8 +671,10 @@ class _Translations$permission$ja extends Translations$permission$en {
 	@override String get microphone_desc => '動画の音声録音にはマイクの権限が必要です。設定で許可してください。';
 	@override String get notification_title => '通知の権限';
 	@override String get notification_desc => 'デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。';
+	@override String get photos_rationale_desc => 'VidoVerseが作成した動画をデバイスに保存するには、ギャラリーへのアクセス許可が必要です。';
 	@override String get settings => '設定';
 	@override String get cancel => 'キャンセル';
+	@override String get allow => '許可する';
 }
 
 // Path: onboarding.page1
@@ -1125,8 +1127,10 @@ extension on TranslationsJa {
 			'permission.microphone_desc' => '動画の音声録音にはマイクの権限が必要です。設定で許可してください。',
 			'permission.notification_title' => '通知の権限',
 			'permission.notification_desc' => 'デイリーチェックインのリマインダーを受け取るには通知の権限が必要です。設定で許可してください。',
+			'permission.photos_rationale_desc' => 'VidoVerseが作成した動画をデバイスに保存するには、ギャラリーへのアクセス許可が必要です。',
 			'permission.settings' => '設定',
 			'permission.cancel' => 'キャンセル',
+			'permission.allow' => '許可する',
 			_ => null,
 		};
 	}

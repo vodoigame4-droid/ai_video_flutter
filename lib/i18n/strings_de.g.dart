@@ -663,16 +663,18 @@ class _Translations$permission$de extends Translations$permission$en {
 	final TranslationsDe _root; // ignore: unused_field
 
 	// Translations
-	@override String get camera_title => 'Kamerazugriff erforderlich';
-	@override String get camera_desc => 'Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.';
-	@override String get photos_title => 'Fotozugriff erforderlich';
-	@override String get photos_desc => 'Speicherberechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte in den Einstellungen aktivieren.';
-	@override String get microphone_title => 'Mikrofonzugriff erforderlich';
-	@override String get microphone_desc => 'Mikrofonberechtigung ist für die Video-Tonaufnahme erforderlich. Bitte in den Einstellungen aktivieren.';
-	@override String get notification_title => 'Benachrichtigungszugriff erforderlich';
-	@override String get notification_desc => 'Benachrichtigungsberechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte in den Einstellungen aktivieren.';
+	@override String get camera_title => 'Kamera-Berechtigung';
+	@override String get camera_desc => 'Kamera-Berechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.';
+	@override String get photos_title => 'Fotos-Berechtigung';
+	@override String get photos_desc => 'Speicher-Berechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte aktivieren Sie diese in den Einstellungen.';
+	@override String get photos_rationale_desc => 'VidoVerse benötigt Zugriff auf Ihre Galerie, um erstellte Videos auf Ihrem Gerät zu speichern.';
+	@override String get microphone_title => 'Mikrofon-Berechtigung';
+	@override String get microphone_desc => 'Mikrofon-Berechtigung ist für die Videoaufnahme erforderlich. Bitte aktivieren Sie diese in den Einstellungen.';
+	@override String get notification_title => 'Benachrichtigungs-Berechtigung';
+	@override String get notification_desc => 'Benachrichtigungs-Berechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte aktivieren Sie diese in den Einstellungen.';
 	@override String get settings => 'Einstellungen';
 	@override String get cancel => 'Abbrechen';
+	@override String get allow => 'Zulassen';
 }
 
 // Path: onboarding.page1
@@ -1117,16 +1119,18 @@ extension on TranslationsDe {
 			'debug.discount' => 'Rabattseite',
 			'debug.paywall_video' => 'Paywall-Videoseite',
 			'debug.generating_page' => 'Vorschau der Generierungsseite',
-			'permission.camera_title' => 'Kamerazugriff erforderlich',
-			'permission.camera_desc' => 'Kameraberechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.',
-			'permission.photos_title' => 'Fotozugriff erforderlich',
-			'permission.photos_desc' => 'Speicherberechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte in den Einstellungen aktivieren.',
-			'permission.microphone_title' => 'Mikrofonzugriff erforderlich',
-			'permission.microphone_desc' => 'Mikrofonberechtigung ist für die Video-Tonaufnahme erforderlich. Bitte in den Einstellungen aktivieren.',
-			'permission.notification_title' => 'Benachrichtigungszugriff erforderlich',
-			'permission.notification_desc' => 'Benachrichtigungsberechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte in den Einstellungen aktivieren.',
+			'permission.camera_title' => 'Kamera-Berechtigung',
+			'permission.camera_desc' => 'Kamera-Berechtigung ist erforderlich. Bitte aktivieren Sie diese in den Einstellungen, um diese Funktion zu nutzen.',
+			'permission.photos_title' => 'Fotos-Berechtigung',
+			'permission.photos_desc' => 'Speicher-Berechtigung ist erforderlich, um Fotos oder Videos zu speichern. Bitte aktivieren Sie diese in den Einstellungen.',
+			'permission.photos_rationale_desc' => 'VidoVerse benötigt Zugriff auf Ihre Galerie, um erstellte Videos auf Ihrem Gerät zu speichern.',
+			'permission.microphone_title' => 'Mikrofon-Berechtigung',
+			'permission.microphone_desc' => 'Mikrofon-Berechtigung ist für die Videoaufnahme erforderlich. Bitte aktivieren Sie diese in den Einstellungen.',
+			'permission.notification_title' => 'Benachrichtigungs-Berechtigung',
+			'permission.notification_desc' => 'Benachrichtigungs-Berechtigung ist erforderlich, um tägliche Erinnerungen zu erhalten. Bitte aktivieren Sie diese in den Einstellungen.',
 			'permission.settings' => 'Einstellungen',
 			'permission.cancel' => 'Abbrechen',
+			'permission.allow' => 'Zulassen',
 			_ => null,
 		};
 	}
