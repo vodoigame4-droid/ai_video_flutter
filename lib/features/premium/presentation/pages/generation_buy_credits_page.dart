@@ -172,7 +172,7 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
 
         String getProductPrice(int credits) {
           final matchCredits = '${credits}credits';
-          if (true) {
+          if (isVip) {
             for (final p in discountProducts) {
               final id = p.id.toLowerCase();
               if (id == '${matchCredits}dis' ||
@@ -192,29 +192,71 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
                 return p.priceString;
               }
             }
+          } else {
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
+                return p.priceString;
+              }
+            }
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
+                return p.priceString;
+              }
+            }
           }
           return '...';
         }
 
         String getProductId(int credits) {
           final matchCredits = '${credits}credits';
-          for (final p in discountProducts) {
-            final id = p.id.toLowerCase();
-            if (id == '${matchCredits}dis' ||
-                id == '${matchCredits}dis.andr' ||
-                id.endsWith('${matchCredits}dis') ||
-                id.endsWith('${matchCredits}dis.andr') ||
-                id.contains('${credits}creditsdis')) {
-              return p.id;
+          if (isVip) {
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
+                return p.id;
+              }
             }
-          }
-          for (final p in regularProducts) {
-            final id = p.id.toLowerCase();
-            if (id == matchCredits ||
-                id == '$matchCredits.andr' ||
-                id.endsWith(matchCredits) ||
-                id.endsWith('$matchCredits.andr')) {
-              return p.id;
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
+                return p.id;
+              }
+            }
+          } else {
+            for (final p in regularProducts) {
+              final id = p.id.toLowerCase();
+              if (id == matchCredits ||
+                  id == '$matchCredits.andr' ||
+                  id.endsWith(matchCredits) ||
+                  id.endsWith('$matchCredits.andr')) {
+                return p.id;
+              }
+            }
+            for (final p in discountProducts) {
+              final id = p.id.toLowerCase();
+              if (id == '${matchCredits}dis' ||
+                  id == '${matchCredits}dis.andr' ||
+                  id.endsWith('${matchCredits}dis') ||
+                  id.endsWith('${matchCredits}dis.andr') ||
+                  id.contains('${credits}creditsdis')) {
+                return p.id;
+              }
             }
           }
           return Platform.isIOS ? matchCredits : '$matchCredits.andr';

@@ -167,7 +167,9 @@ class _IapViewState extends State<IapView> {
                         _translateSuccessMessage(context, message),
                       );
                     }
-                    if (context.canPop()) {
+                    if (widget.fromSplash) {
+                      DashboardPage.go(context);
+                    } else if (context.canPop()) {
                       context.pop();
                     } else {
                       DashboardPage.go(context);

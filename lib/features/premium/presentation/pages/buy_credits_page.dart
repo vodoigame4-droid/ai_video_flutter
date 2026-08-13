@@ -280,7 +280,9 @@ class _BuyCreditsViewState extends State<BuyCreditsView> {
                         _translateSuccessMessage(context, message),
                       );
                     }
-                    if (context.canPop()) {
+                    if (widget.fromSplash) {
+                      DashboardPage.go(context);
+                    } else if (context.canPop()) {
                       context.pop();
                     } else {
                       DashboardPage.go(context);
