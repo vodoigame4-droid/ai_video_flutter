@@ -36,7 +36,7 @@ flutter build apk --debug
 flutter build apk --release --build-name=1.0.2 --build-number=4
 
 # Build file App Bundle để đưa lên Google Play Store
-flutter build appbundle --release --build-name=1.0.2 --build-number=5
+flutter build appbundle --release --build-name=1.0.3 --build-number=7
 ```
 
 ### iOS
