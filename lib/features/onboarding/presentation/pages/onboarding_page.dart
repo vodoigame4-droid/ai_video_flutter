@@ -29,8 +29,9 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<OnboardingBloc>(
-      create: (context) => sl<OnboardingBloc>()
-        ..add(OnboardingEvent.init(preloadedImages: preloadedImages)),
+      create: (context) =>
+          sl<OnboardingBloc>()
+            ..add(OnboardingEvent.init(preloadedImages: preloadedImages)),
       child: const OnboardingView(),
     );
   }
@@ -82,9 +83,7 @@ class _OnboardingViewState extends State<OnboardingView> {
       } else {
         await context.pushNamed(
           IapPage.name,
-          queryParameters: {
-            'fromSplash': 'true',
-          },
+          queryParameters: {'fromSplash': 'true'},
         );
         if (context.mounted) {
           DashboardPage.go(context);
@@ -122,14 +121,13 @@ class _OnboardingViewState extends State<OnboardingView> {
             return state.when(
               initial: () => const SizedBox.shrink(),
               loading: () => const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
+                child: CircularProgressIndicator(color: Colors.white),
               ),
               ready: (images, index, isCompleted) {
                 return PageView.builder(
                   controller: _pageController,
                   itemCount: images.length,
+                  allowImplicitScrolling: true,
                   onPageChanged: (newIndex) {
                     context.read<OnboardingBloc>().add(
                       OnboardingEvent.pageChanged(newIndex),
