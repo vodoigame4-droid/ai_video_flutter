@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -163,7 +161,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _performOnboardingPreload() async {
     final overallStopwatch = Stopwatch()..start();
-    LogUtils.d('SplashBloc: Start onboarding preloading...');
+    LogUtils.d('SplashBloc: Start onboarding status check...');
     try {
       final statusStopwatch = Stopwatch()..start();
       final onboardingResult = await getOnboardingStatusUseCase(NoParams());
@@ -179,75 +177,19 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       if (!_isOnboardingCompleted) {
         final urls = sl<RemoteConfigService>().getOnboardingUrls();
         if (urls.isNotEmpty) {
-          final isTest = Platform.environment.containsKey('FLUTTER_TEST');
-          if (!isTest) {
-            Future<void> preloadAsset(String url) async {
-              if (!url.startsWith('http')) {
-                return;
-              }
-
-              // Animated WebP is rendered by WebView on onboarding. Flutter's
-              // image cache does not warm WebView's Chromium cache, so loading
-              // these files here only duplicates the network and memory cost.
-              if (_isRemoteWebp(url)) {
-                return;
-              }
-
-              if (_isVideoUrl(url)) {
-                final stopwatch = Stopwatch()..start();
-                LogUtils.d(
-                  'SplashBloc: Start preloading onboarding video: $url',
-                );
-                try {
-                  final path = await VideoCacheManager()
-                      .getCachedOrDownload(url, waitForDownload: true)
-                      .timeout(const Duration(seconds: 10));
-                  stopwatch.stop();
-                  LogUtils.i(
-                    'SplashBloc: Preloaded onboarding video in ${stopwatch.elapsedMilliseconds}ms: $url -> ${path ?? url}',
-                  );
-                } catch (e, stack) {
-                  stopwatch.stop();
-                  LogUtils.e(
-                    'SplashBloc: Failed to preload onboarding video after ${stopwatch.elapsedMilliseconds}ms: $url',
-                    error: e,
-                    stackTrace: stack,
-                  );
-                }
-              } else {
-                final stopwatch = Stopwatch()..start();
-                LogUtils.d(
-                  'SplashBloc: Start preloading onboarding image: $url',
-                );
-                await _preloadImage(url);
-                stopwatch.stop();
-                LogUtils.i(
-                  'SplashBloc: Preloaded onboarding image in ${stopwatch.elapsedMilliseconds}ms: $url',
-                );
-              }
-            }
-
-            if (urls.isNotEmpty) {
-              await Future.wait(urls.map(preloadAsset)).catchError((e) {
-                LogUtils.e('SplashBloc: Onboarding preload failed', error: e);
-                return [];
-              });
-            }
-
-            _preloadedUrls = List<String>.from(urls);
-          }
+          _preloadedUrls = List<String>.from(urls);
         }
       }
     } catch (e, stack) {
       LogUtils.e(
-        'SplashBloc: Onboarding preload failed',
+        'SplashBloc: Onboarding status check failed',
         error: e,
         stackTrace: stack,
       );
     } finally {
       overallStopwatch.stop();
       LogUtils.i(
-        'SplashBloc: Total onboarding preloading time: ${overallStopwatch.elapsedMilliseconds}ms',
+        'SplashBloc: Total onboarding status check duration: ${overallStopwatch.elapsedMilliseconds}ms',
       );
     }
   }
@@ -274,7 +216,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
               BillingProduct.consumable('1000creditsdis'),
               BillingProduct.consumable('5000credits'),
               BillingProduct.consumable('5000creditsdis'),
-              BillingProduct.subscription('buy_weekly'),
+              BillingProduct.subscription('buy_weakly'),
               BillingProduct.subscription('buy_annualy'),
               BillingProduct.subscription('buy_annualy_discount'),
             ]
@@ -353,38 +295,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         error: e,
         stackTrace: stack,
       );
-    }
-  }
-
-  bool _isVideoUrl(String url) {
-    return BannerPreloadHelper.isVideoOrWebp(url);
-  }
-
-  bool _isRemoteWebp(String url) {
-    final uri = Uri.tryParse(url);
-    return url.toLowerCase().endsWith('.webp') &&
-        uri != null &&
-        (uri.scheme == 'http' || uri.scheme == 'https');
-  }
-
-  Future<void> _preloadImage(String url) async {
-    try {
-      final provider = CachedNetworkImageProvider(url);
-      final ImageStream stream = provider.resolve(ImageConfiguration.empty);
-      final Completer<void> completer = Completer<void>();
-      final ImageStreamListener listener = ImageStreamListener(
-        (ImageInfo info, bool synchronousCall) {
-          if (!completer.isCompleted) completer.complete();
-        },
-        onError: (exception, stackTrace) {
-          if (!completer.isCompleted) completer.complete();
-        },
-      );
-      stream.addListener(listener);
-      await completer.future;
-      stream.removeListener(listener);
-    } catch (e) {
-      LogUtils.e('SplashBloc: Failed to preload image $url', error: e);
     }
   }
 }

@@ -75,6 +75,12 @@ class _IapViewState extends State<IapView> {
     super.initState();
     _showDiscount = widget.showDiscountInit;
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<IapBloc>().add(const IapEvent.init());
+      }
+    });
+
     final delaySeconds = sl<RemoteConfigService>().closeButtonDelaySeconds;
     if (delaySeconds > 0 && !widget.showDiscountInit) {
       Future.delayed(Duration(seconds: delaySeconds), () {
@@ -412,16 +418,16 @@ class _IapViewState extends State<IapView> {
 
               final weeklyPrice = weeklyProducts.isNotEmpty
                   ? weeklyProducts.first.priceString
-                  : '...';
+                  : t.premium.weekly_price;
               final yearlyPrice = yearlyProducts.isNotEmpty
                   ? yearlyProducts.first.priceString
-                  : '...';
+                  : t.premium.annually_price;
               final yearlyPricePerWeek = yearlyProducts.isNotEmpty
                   ? PriceUtils.formatPrice(
                       yearlyProducts.first.priceAmount / 52,
                       yearlyProducts.first.currencyCode,
                     )
-                  : '...';
+                  : t.premium.weekly_price;
 
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),

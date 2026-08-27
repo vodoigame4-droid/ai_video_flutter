@@ -127,13 +127,14 @@ class _OnboardingViewState extends State<OnboardingView> {
                 return PageView.builder(
                   controller: _pageController,
                   itemCount: images.length,
+                
                   allowImplicitScrolling: true,
                   onPageChanged: (newIndex) {
                     context.read<OnboardingBloc>().add(
                       OnboardingEvent.pageChanged(newIndex),
                     );
                   },
-                  itemBuilder: (context, pageIndex) {
+                                  itemBuilder: (context, pageIndex) {
                     void onButtonPressed() => context
                         .read<OnboardingBloc>()
                         .add(const OnboardingEvent.nextPage());

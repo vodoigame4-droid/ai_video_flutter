@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/glassmorphic_container.dart';
 import '../../../../core/widgets/gradient_button.dart';
-import '../../../../core/widgets/animated_webp_webview.dart';
+import '../../../../core/widgets/app_image.dart';
+import '../../../../core/widgets/animated_thumbnail.dart';
+import '../../../../core/widgets/smooth_video_player_widget.dart';
 
 class ObPageTemplate extends StatefulWidget {
   final String backgroundImage;
@@ -27,18 +29,54 @@ class ObPageTemplate extends StatefulWidget {
   State<ObPageTemplate> createState() => _ObPageTemplateState();
 }
 
-class _ObPageTemplateState extends State<ObPageTemplate> {
+class _ObPageTemplateState extends State<ObPageTemplate>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  bool _isVideoUrl(String url) {
+    final lower = url.toLowerCase();
+    return lower.contains('.mp4') ||
+        lower.contains('.mov') ||
+        lower.contains('.avi');
+  }
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    final isVideo = _isVideoUrl(widget.backgroundImage);
+
     return Stack(
       children: [
-        // Background image loaded dynamically via AnimatedWebpWebView
+        // Background media (MP4 Video or Animated WebP/Image)
         Positioned.fill(
           child: RepaintBoundary(
-            child: AnimatedWebpWebView(
-              key: ValueKey(widget.backgroundImage),
-              url: widget.backgroundImage,
-            ),
+            child: isVideo
+                ? SmoothVideoPlayerWidget(
+                    videoUrl: widget.backgroundImage,
+                    fit: BoxFit.cover,
+                    autoPlay: true,
+                    loop: true,
+                    showMuteButton: false,
+                    showPlayPauseButton: false,
+                    playMuted: true,
+                  )
+                : AnimatedThumbnail(
+                    visibilityKey: 'ob_page_${widget.backgroundImage}',
+                    imageUrl: widget.backgroundImage,
+                    visibleThreshold: 0.9,
+                    fit: BoxFit.cover,
+                    placeholderBuilder: (context) => AppImage(
+                      key: ValueKey(widget.backgroundImage),
+                      imageUrl: widget.backgroundImage,
+                      fit: BoxFit.cover,
+                    ),
+                    errorBuilder: (context, error) => AppImage(
+                      key: ValueKey(widget.backgroundImage),
+                      imageUrl: widget.backgroundImage,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
           ),
         ),
         // Top shadow overlay

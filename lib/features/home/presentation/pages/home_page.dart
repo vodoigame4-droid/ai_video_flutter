@@ -127,127 +127,117 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             );
                             await completer.future;
                           },
-                          child: categoriesState.when(
-                            initial: () => ListView(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              children: [
-                                Container(height: 250),
-                                const HomeFeaturesGridWidget(),
-                              ],
-                            ),
-                            loading: () => ListView(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              children: [
-                                Container(height: 250),
-                                const HomeFeaturesGridWidget(),
-                                Container(
-                                  color: AppColors.background,
-                                  height: 200,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
+                          child: CustomScrollView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            slivers: [
+                              // Top spacing for fixed banner
+                              const SliverToBoxAdapter(
+                                child: SizedBox(height: 250),
+                              ),
+                              // Features Grid
+                              const SliverToBoxAdapter(
+                                child: HomeFeaturesGridWidget(),
+                              ),
+                              // Categories or status states
+                              ...categoriesState.when(
+                                initial: () => [
+                                  const SliverToBoxAdapter(
+                                    child: SizedBox(height: 100),
                                   ),
-                                ),
-                              ],
-                            ),
-                            success: (categories) {
-                              final validCategories = categories
-                                  .where((c) => (c.theme ?? []).isNotEmpty)
-                                  .toList();
-                              final int categoryCount = validCategories.length;
-                              final int totalItems =
-                                  2 +
-                                  categoryCount +
-                                  1; // Spacing + Features + Categories + Bottom Spacing
-
-                              return ListView.builder(
-                                padding: const EdgeInsets.only(bottom: 150),
-                                itemCount: totalItems,
-                                cacheExtent: 350,
-                                physics: const BouncingScrollPhysics(
-                                  parent: AlwaysScrollableScrollPhysics(),
-                                ),
-                                itemBuilder: (context, index) {
-                                  if (index == 0) {
-                                    return Container(height: 250);
-                                  }
-                                  if (index == 1) {
-                                    return const HomeFeaturesGridWidget();
-                                  }
-                                  if (index == totalItems - 1) {
-                                    return Container(
+                                ],
+                                loading: () => [
+                                  SliverToBoxAdapter(
+                                    child: Container(
                                       color: AppColors.background,
-                                      height: 120,
-                                    );
-                                  }
-
-                                  final categoryIndex = index - 2;
-                                  final category = validCategories[categoryIndex];
-                                  final themes = category.theme ?? [];
-
-                                  // Random/Diverse select from the 5 SVG icons
-                                  final iconAsset = [
-                                    Assets.icons.icLayerYellow,
-                                    Assets.icons.icBlueMask,
-                                    Assets.icons.icPurpleBox,
-                                    Assets.icons.icAiYellow,
-                                    Assets.icons.icTrending,
-                                  ][categoryIndex % 5];
-
-                                  return Container(
-                                    color: AppColors.background,
-                                    padding: const EdgeInsets.only(bottom: 28),
-                                    child: HomeTemplatesSectionWidget(
-                                      key: ValueKey(category.id),
-                                      title: _getTranslatedCategory(
-                                        context,
-                                        category.name,
+                                      height: 200,
+                                      child: const Center(
+                                        child: CircularProgressIndicator(),
                                       ),
-                                      iconAsset: iconAsset,
-                                      videosState: Resource.success(themes),
-                                      onSeeAllPressed: () => context.pushNamed(
-                                        TemplatesPage.name,
-                                        queryParameters: {
-                                          'category': category.name,
+                                    ),
+                                  ),
+                                ],
+                                success: (categories) {
+                                  final validCategories = categories
+                                      .where((c) => (c.theme ?? []).isNotEmpty)
+                                      .toList();
+
+                                  return [
+                                    DecoratedSliver(
+                                      decoration: const BoxDecoration(
+                                        color: AppColors.background,
+                                      ),
+                                      sliver: SliverList.builder(
+                                        itemCount: validCategories.length,
+                                        itemBuilder: (context, index) {
+                                          final category =
+                                              validCategories[index];
+                                          final themes = category.theme ?? [];
+
+                                          final iconAsset = [
+                                            Assets.icons.icLayerYellow,
+                                            Assets.icons.icBlueMask,
+                                            Assets.icons.icPurpleBox,
+                                            Assets.icons.icAiYellow,
+                                            Assets.icons.icTrending,
+                                          ][index % 5];
+
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                              bottom: 28,
+                                            ),
+                                            child: HomeTemplatesSectionWidget(
+                                              key: ValueKey(category.id),
+                                              title: _getTranslatedCategory(
+                                                context,
+                                                category.name,
+                                              ),
+                                              iconAsset: iconAsset,
+                                              videosState: Resource.success(
+                                                themes,
+                                              ),
+                                              onSeeAllPressed: () =>
+                                                  context.pushNamed(
+                                                    TemplatesPage.name,
+                                                    queryParameters: {
+                                                      'category': category.name,
+                                                    },
+                                                  ),
+                                            ),
+                                          );
                                         },
                                       ),
                                     ),
-                                  );
+                                    const SliverToBoxAdapter(
+                                      child: SizedBox(height: 120),
+                                    ),
+                                  ];
                                 },
-                              );
-                            },
-                            empty: () => ListView(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              children: [
-                                Container(height: 250),
-                                const HomeFeaturesGridWidget(),
-                              ],
-                            ),
-                            error: (failure) => ListView(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              children: [
-                                Container(height: 250),
-                                const HomeFeaturesGridWidget(),
-                                Container(
-                                  color: AppColors.background,
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 40,
+                                empty: () => [
+                                  const SliverToBoxAdapter(
+                                    child: SizedBox(height: 100),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      BackendErrorHelper.getErrorMessage(
-                                        context,
-                                        failure.toErrorCodeOrMessage(),
+                                ],
+                                error: (failure) => [
+                                  SliverToBoxAdapter(
+                                    child: Container(
+                                      color: AppColors.background,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 40,
                                       ),
-                                      style: context.appTheme.errorTextStyle,
+                                      child: Center(
+                                        child: Text(
+                                          BackendErrorHelper.getErrorMessage(
+                                            context,
+                                            failure.toErrorCodeOrMessage(),
+                                          ),
+                                          style: context.appTheme.errorTextStyle,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),

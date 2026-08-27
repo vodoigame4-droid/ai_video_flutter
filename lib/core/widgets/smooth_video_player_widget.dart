@@ -9,7 +9,6 @@ import '../theme/app_colors.dart';
 import '../utils/video_cache_manager.dart';
 import '../utils/log_utils.dart';
 import 'app_image.dart';
-import 'animated_webp_webview.dart';
 
 class SmoothVideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
@@ -292,7 +291,12 @@ class _SmoothVideoPlayerWidgetState extends State<SmoothVideoPlayerWidget> {
         child: SizedBox(
           width: widget.width,
           height: widget.height,
-          child: AnimatedWebpWebView(url: widget.videoUrl),
+          child: AppImage(
+            imageUrl: widget.videoUrl,
+            width: widget.width,
+            height: widget.height,
+            fit: widget.fit,
+          ),
         ),
       );
     }

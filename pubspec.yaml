@@ -12,7 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  wiwi_havin_base_ads: ^4.2.1
+  wiwi_havin_base_ads: ^4.2.2
 
   network:
     path: ./packages/network
@@ -37,6 +37,7 @@ dependencies:
   media_kit_video: ^1.2.4
   media_kit_libs_video: ^1.0.4
   cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
   sqlite3_flutter_libs: ^0.5.0
   intl: ^0.20.2
   firebase_core: ^4.10.0

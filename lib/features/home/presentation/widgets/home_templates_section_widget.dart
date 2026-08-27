@@ -1,8 +1,7 @@
 import 'package:ai_video_flutter/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:go_router/go_router.dart';
-import 'package:core_business/core_business.dart' hide VideoCacheManager;
+import 'package:core_business/core_business.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/video_card.dart';
 import '../../../../core/extensions/animation_extensions.dart';
@@ -10,7 +9,6 @@ import '../../../../core/errors/backend_error_handler.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../../create_video/presentation/pages/create_from_template_page.dart';
 import '../../../../core/widgets/app_svg_icon.dart';
-import '../../../../core/utils/video_cache_manager.dart';
 
 /// A reusable widget to represent a section containing a category header (title, icon, "See All" button)
 /// and a horizontal list of template video cards supporting all state configurations (loading, error, success).
@@ -76,23 +74,6 @@ class HomeTemplatesSectionWidget extends StatelessWidget {
             child: Center(child: CircularProgressIndicator()),
           ),
           success: (videos) {
-            // Pre-cache first 5 template videos in the background
-            if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                for (final template in videos.take(5)) {
-                  final videoUrl = template.resultUrl.isNotEmpty
-                      ? template.resultUrl
-                      : template.sourceUrl;
-                  if (videoUrl.isNotEmpty) {
-                    VideoCacheManager().getCachedOrDownload(
-                      videoUrl,
-                      waitForDownload: false,
-                    );
-                  }
-                }
-              });
-            }
-
             return SizedBox(
               height: 236,
               child: ListView.separated(

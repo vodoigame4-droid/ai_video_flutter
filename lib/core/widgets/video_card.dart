@@ -1,15 +1,14 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import '../theme/app_theme.dart';
 import '../theme/app_colors.dart';
 import 'app_image.dart';
+import 'animated_thumbnail.dart';
 
-class VideoCard extends StatefulWidget {
+class VideoCard extends StatelessWidget {
   final String title;
   final String? imageUrl;
+  final String? thumbnailUrl;
   final String? viewsCount;
   final String? badgeType;
   final bool showPlayButton;
@@ -23,6 +22,7 @@ class VideoCard extends StatefulWidget {
     super.key,
     required this.title,
     this.imageUrl,
+    this.thumbnailUrl,
     this.viewsCount,
     this.badgeType,
     this.showPlayButton = true,
@@ -34,25 +34,14 @@ class VideoCard extends StatefulWidget {
   });
 
   @override
-  State<VideoCard> createState() => _VideoCardState();
-}
-
-class _VideoCardState extends State<VideoCard> {
-  bool _isPlayable = false;
-
-  @override
   Widget build(BuildContext context) {
-    final int hash = widget.title.hashCode;
+    final int hash = title.hashCode;
 
     final double? pixelRatio = MediaQuery.maybeOf(context)?.devicePixelRatio;
-    final int? cacheWidth = (widget.width != null && pixelRatio != null)
-        ? (widget.width! * pixelRatio).round()
-        : null;
-    final int? cacheHeight = (widget.height != null && pixelRatio != null)
-        ? (widget.height! * pixelRatio).round()
-        : null;
+    final int cacheWidth = (width != null && pixelRatio != null)
+        ? (width! * pixelRatio).round()
+        : 350;
 
-    // Fallback deterministic logic for Home page if parameters are omitted
     final bool isEven = hash % 2 == 0;
     final String defaultImageAsset = isEven
         ? 'assets/images/card_1.png'
@@ -60,31 +49,30 @@ class _VideoCardState extends State<VideoCard> {
 
     final bool isTest = Platform.environment.containsKey('FLUTTER_TEST');
     final bool isNetworkImage =
-        widget.imageUrl != null &&
-        widget.imageUrl!.startsWith('http') &&
+        imageUrl != null &&
+        imageUrl!.startsWith('http') &&
         !isTest;
 
     final String resolvedImageUrl =
         (isTest &&
-            widget.imageUrl != null &&
-            widget.imageUrl!.startsWith('http'))
+            imageUrl != null &&
+            imageUrl!.startsWith('http'))
         ? defaultImageAsset
-        : (widget.imageUrl ?? defaultImageAsset);
+        : (imageUrl ?? defaultImageAsset);
 
-    final bool resolvedIsHot = widget.badgeType != null
-        ? widget.badgeType == 'hot'
+    final bool resolvedIsHot = badgeType != null
+        ? badgeType == 'hot'
         : hash % 3 == 0;
 
-    final bool hasBadge = widget.badgeType != null
-        ? widget.badgeType!.isNotEmpty
-        : true; // Default to true if badgeType is null (for Home page fallback)
+    final bool hasBadge = badgeType != null
+        ? badgeType!.isNotEmpty
+        : true;
 
     final String resolvedBadgeText = resolvedIsHot ? 'Hot' : 'New';
 
     final String resolvedViews =
-        widget.viewsCount ?? '${((hash % 90) + 10) / 10}k';
+        viewsCount ?? '${((hash % 90) + 10) / 10}k';
 
-    // Styling configuration based on style type (Home vs Templates)
     final double cardRadius = isNetworkImage ? 10.0 : 16.0;
 
     final BorderRadius badgeBorderRadius = isNetworkImage
@@ -94,10 +82,8 @@ class _VideoCardState extends State<VideoCard> {
           )
         : const BorderRadius.all(Radius.circular(8));
 
-    // Gradients for badges
     final LinearGradient badgeGradient;
     if (isNetworkImage) {
-      // Figma Category List screen gradients
       badgeGradient = resolvedIsHot
           ? const LinearGradient(
               colors: [AppColors.badgeYellow, AppColors.badgeOrange],
@@ -110,7 +96,6 @@ class _VideoCardState extends State<VideoCard> {
               end: Alignment.centerRight,
             );
     } else {
-      // Home screen gradients
       badgeGradient = resolvedIsHot
           ? const LinearGradient(
               colors: [AppColors.badgePeach, AppColors.badgePink],
@@ -124,9 +109,11 @@ class _VideoCardState extends State<VideoCard> {
             );
     }
 
+    final String cardKey = key?.toString() ?? 'videocard_${title}_$imageUrl';
+
     final Widget cardWidget = Container(
-      width: widget.width,
-      height: widget.height,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
         borderRadius: BorderRadius.all(Radius.circular(cardRadius)),
@@ -149,23 +136,21 @@ class _VideoCardState extends State<VideoCard> {
         borderRadius: BorderRadius.all(Radius.circular(cardRadius)),
         child: Stack(
           children: [
-            // Network Image if available
+            // Layer 1 & 2: Animated Thumbnail (Static frame 0 PNG when < 90%, animated WebP when >= 90%)
             if (isNetworkImage)
               Positioned.fill(
-                child: _AnimatedImagePlayer(
-                  imageProvider: CachedNetworkImageProvider(
-                    widget.imageUrl!,
-                    maxWidth: cacheWidth,
-                    maxHeight: cacheHeight,
-                  ),
-                  isPlayable: _isPlayable,
+                child: AnimatedThumbnail(
+                  visibilityKey: cardKey,
+                  imageUrl: resolvedImageUrl,
+                  memCacheWidth: cacheWidth,
+                  visibleThreshold: 0.9,
                   fit: BoxFit.cover,
-                  placeholder: AppImageShimmer(
-                    width: widget.width,
-                    height: widget.height,
+                  placeholderBuilder: (context) => AppImageShimmer(
+                    width: width,
+                    height: height,
                     borderRadius: cardRadius,
                   ),
-                  errorWidget: Container(
+                  errorBuilder: (context, error) => Container(
                     color: Colors.white.withValues(alpha: 0.05),
                     child: const Icon(
                       Icons.image_not_supported_outlined,
@@ -222,7 +207,7 @@ class _VideoCardState extends State<VideoCard> {
               ),
 
             // Play indicator in the center
-            if (widget.showPlayButton)
+            if (showPlayButton)
               Center(
                 child: Container(
                   width: 44,
@@ -255,7 +240,7 @@ class _VideoCardState extends State<VideoCard> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      widget.title,
+                      title,
                       style: context.appTheme.bodyNormalBold.copyWith(
                         color: Colors.white,
                       ),
@@ -284,7 +269,7 @@ class _VideoCardState extends State<VideoCard> {
                             ),
                           ],
                         ),
-                        if (widget.showVolumeIcon)
+                        if (showVolumeIcon)
                           const Icon(
                             Icons.volume_up_rounded,
                             color: Colors.white,
@@ -303,7 +288,7 @@ class _VideoCardState extends State<VideoCard> {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  onTap: widget.onTap,
+                  onTap: onTap,
                 ),
               ),
             ),
@@ -312,167 +297,13 @@ class _VideoCardState extends State<VideoCard> {
       ),
     );
 
-    final Widget content = widget.heroTag != null
+    final Widget content = heroTag != null
         ? Hero(
-            tag: widget.heroTag!,
+            tag: heroTag!,
             child: Material(color: Colors.transparent, child: cardWidget),
           )
         : cardWidget;
 
-    return VisibilityDetector(
-      key: ValueKey('videocard_${widget.title}_${widget.imageUrl}'),
-      onVisibilityChanged: (visibilityInfo) {
-        final double visiblePercentage = visibilityInfo.visibleFraction * 100;
-        final bool shouldPlay = visiblePercentage >= 90;
-        if (_isPlayable != shouldPlay) {
-          if (mounted) {
-            setState(() {
-              _isPlayable = shouldPlay;
-            });
-          }
-        }
-      },
-      child: RepaintBoundary(child: content),
-    );
-  }
-}
-
-class _AnimatedImagePlayer extends StatefulWidget {
-  final ImageProvider imageProvider;
-  final bool isPlayable;
-  final BoxFit fit;
-  final Widget placeholder;
-  final Widget? errorWidget;
-
-  const _AnimatedImagePlayer({
-    required this.imageProvider,
-    required this.isPlayable,
-    required this.placeholder,
-    this.fit = BoxFit.cover,
-    this.errorWidget,
-  });
-
-  @override
-  State<_AnimatedImagePlayer> createState() => _AnimatedImagePlayerState();
-}
-
-class _AnimatedImagePlayerState extends State<_AnimatedImagePlayer> {
-  ImageStream? _imageStream;
-  ImageInfo? _imageInfo;
-  bool _isListening = false;
-  late final ImageStreamListener _listener;
-  Object? _exception;
-
-  @override
-  void initState() {
-    super.initState();
-    _listener = ImageStreamListener(
-      _handleImageFrame,
-      onError: _handleImageError,
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _resolveImage();
-  }
-
-  @override
-  void didUpdateWidget(_AnimatedImagePlayer oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.imageProvider != oldWidget.imageProvider) {
-      _resolveImage();
-    } else if (widget.isPlayable != oldWidget.isPlayable) {
-      _updateListener();
-    }
-  }
-
-  void _resolveImage() {
-    _stopListening();
-    _imageInfo = null;
-    _exception = null;
-    final ImageStream newStream = widget.imageProvider.resolve(
-      createLocalImageConfiguration(context),
-    );
-    _imageStream = newStream;
-    _updateListener();
-  }
-
-  void _updateListener() {
-    try {
-      if (_imageStream == null) return;
-
-      if (widget.isPlayable) {
-        if (!_isListening) {
-          _imageStream!.addListener(_listener);
-          _isListening = true;
-        }
-      } else {
-        if (_imageInfo != null) {
-          _stopListening();
-        } else {
-          if (!_isListening) {
-            _imageStream!.addListener(_listener);
-            _isListening = true;
-          }
-        }
-      }
-    } catch (e) {}
-  }
-
-  void _handleImageFrame(ImageInfo info, bool synchronousCall) {
-    if (mounted) {
-      setState(() {
-        _imageInfo = info;
-        _exception = null;
-      });
-      if (!widget.isPlayable) {
-        _stopListening();
-      }
-    }
-  }
-
-  void _handleImageError(dynamic exception, StackTrace? stackTrace) {
-    if (mounted) {
-      setState(() {
-        _exception = exception;
-      });
-    }
-  }
-
-  void _stopListening() {
-    if (_isListening && _imageStream != null) {
-      _imageStream!.removeListener(_listener);
-      _isListening = false;
-    }
-  }
-
-  @override
-  void dispose() {
-    _stopListening();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_exception != null) {
-      return widget.errorWidget ??
-          Container(
-            color: Colors.white.withValues(alpha: 0.05),
-            child: const Icon(
-              Icons.image_not_supported_outlined,
-              color: AppColors.grey,
-            ),
-          );
-    }
-    if (_imageInfo == null) {
-      return widget.placeholder;
-    }
-    return RawImage(
-      image: _imageInfo!.image,
-      scale: _imageInfo!.scale,
-      fit: widget.fit,
-    );
+    return RepaintBoundary(child: content);
   }
 }

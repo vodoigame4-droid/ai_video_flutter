@@ -56,6 +56,11 @@ class _GenerationBuyCreditsViewState extends State<GenerationBuyCreditsView>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        context.read<IapBloc>().add(const IapEvent.init());
+      }
+    });
     _revealController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),

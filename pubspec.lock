@@ -590,7 +590,7 @@ packages:
     source: hosted
     version: "9.1.1"
   flutter_cache_manager:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_cache_manager
       sha256: "400b6592f16a4409a7f2bb929a9a7e38c72cceb8ffb99ee57bbf2cb2cecf8386"
@@ -2284,10 +2284,10 @@ packages:
     dependency: "direct main"
     description:
       name: wiwi_havin_base_ads
-      sha256: b5df4ba00a7c9fb426276ea507ed73b4119be8dc30c84292faaca1409957925b
+      sha256: "8021cda4ef80edd8ba1ad9c9626805296b97d49b507c138f8a233e59e0c79948"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.1"
+    version: "4.2.2"
   xdg_directories:
     dependency: transitive
     description:

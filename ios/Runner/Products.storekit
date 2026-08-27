@@ -219,6 +219,56 @@
           "displayVersion" : 1,
           "familyShareable" : false,
           "groupNumber" : 1,
+          "internalID" : "buy_weakly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Weekly Premium Access",
+              "displayName" : "Weekly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "buy_weakly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly Premium",
+          "subscriptionGroupID" : "premium_subs",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayVersion" : 1,
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "weakly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Weekly Premium Access",
+              "displayName" : "Weekly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "weakly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly Premium",
+          "subscriptionGroupID" : "premium_subs",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayVersion" : 1,
+          "familyShareable" : false,
+          "groupNumber" : 1,
           "internalID" : "buy_annualy",
           "introductoryOffer" : null,
           "localizations" : [
