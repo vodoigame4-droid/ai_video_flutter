@@ -21,7 +21,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>((event, emit) async {
       await event.when(
         init: () async {
-          emit(const HomeState.loading());
+          final isReady = state.maybeMap(ready: (_) => true, orElse: () => false);
+          if (!isReady) {
+            emit(const HomeState.loading());
+          }
           LogUtils.d('HomeBloc: Init fetching home categories');
           await _fetchHomeData(emit, isRefresh: false);
         },

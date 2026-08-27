@@ -38,8 +38,20 @@
 		<string>This app requires access to your photo library to select and upload photos for AI video generation.</string>
 		<key>NSUserTrackingUsageDescription</key>
 		<string>This identifier will be used to deliver personalized ads to you, measure advertising effectiveness, and optimize our marketing campaigns. This helps us keep the app free and continuously improve your experience.</string>
+		<key>FirebaseAnalyticsCollectionEnabled</key>
+		<true/>
+		<key>FirebaseAutomaticScreenReportingEnabled</key>
+		<true/>
 		<key>SKAdNetworkItems</key>
 		<array>
+			<dict>
+				<key>SKAdNetworkIdentifier</key>
+				<string>v9wttpbfk9.skadnetwork</string>
+			</dict>
+			<dict>
+				<key>SKAdNetworkIdentifier</key>
+				<string>n38lu8286q.skadnetwork</string>
+			</dict>
 			<dict>
 				<key>SKAdNetworkIdentifier</key>
 				<string>cstr6suwn9.skadnetwork</string>

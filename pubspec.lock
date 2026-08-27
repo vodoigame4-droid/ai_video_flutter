@@ -2284,10 +2284,10 @@ packages:
     dependency: "direct main"
     description:
       name: wiwi_havin_base_ads
-      sha256: "8021cda4ef80edd8ba1ad9c9626805296b97d49b507c138f8a233e59e0c79948"
+      sha256: "39ec3364590bce3787278434f3d683f9e6c026ab98ef55163f872e433d6226a8"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.2"
+    version: "4.2.3"
   xdg_directories:
     dependency: transitive
     description:

@@ -284,9 +284,19 @@ class _GenerationIapViewState extends State<GenerationIapView>
             final weeklyPrice = weeklyProducts.isNotEmpty
                 ? weeklyProducts.first.priceString
                 : '...';
+
+            final weeklyOffer = weeklyProducts.isNotEmpty
+                ? weeklyProducts.first.initialPriceString
+                : '...';
+
             final yearlyPrice = yearlyProducts.isNotEmpty
                 ? yearlyProducts.first.priceString
                 : '...';
+
+            final yearlyOffer = yearlyProducts.isNotEmpty
+                ? yearlyProducts.first.initialPriceString
+                : '...';
+                
             final yearlyPricePerWeek = yearlyProducts.isNotEmpty
                 ? PriceUtils.formatPrice(
                     yearlyProducts.first.priceAmount / 52,
@@ -450,7 +460,7 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                         description: t.premium.weekly_desc(
                                           price: weeklyPrice,
                                         ),
-                                        price: weeklyPrice,
+                                        price: weeklyOffer,
                                         suffix: t.premium.weekly_suffix,
                                         tagText: t.premium.best_value,
                                         tagColors: [
@@ -476,14 +486,13 @@ class _GenerationIapViewState extends State<GenerationIapView>
                                         },
                                       ),
                                       const SizedBox(height: 10),
-
                                       // Annually Package
                                       SubscriptionPackageCard(
                                         title: t.premium.annually,
                                         description: t.premium.annually_desc(
                                           price: yearlyPricePerWeek,
                                         ),
-                                        price: yearlyPrice,
+                                        price: yearlyOffer,
                                         suffix: t.premium.annually_suffix,
                                         tagText: t.premium.save_80,
                                         tagColors: const [

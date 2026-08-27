@@ -12,9 +12,12 @@ import '../../domain/usecases/restore_subscription_ios_usecase.dart';
 import '../../data/models/iap_models.dart';
 import 'iap_event.dart';
 import 'iap_state.dart';
-import '../../../../core/usecases/usecase.dart';
-import '../../../auth/domain/usecases/get_profile_usecase.dart';
-import '../../../auth/domain/usecases/watch_profile_usecase.dart';
+import 'package:core_business/src/core/usecases/usecase.dart';
+import 'package:core_business/src/features/auth/domain/usecases/get_profile_usecase.dart';
+import 'package:core_business/src/features/auth/domain/usecases/watch_profile_usecase.dart';
+import 'package:get_it/get_it.dart';
+import 'package:core_business/src/features/media/presentation/bloc/home/home_bloc.dart';
+import 'package:core_business/src/features/media/presentation/bloc/home/home_event.dart';
 
 class IapBloc extends Bloc<IapEvent, IapState> {
   final VerifySubscriptionAndroidUseCase verifySubscriptionAndroidUseCase;
@@ -283,8 +286,9 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                   loading: () async {},
                   empty: () async {},
                   success: (_) async {
-                    LogUtils.d('IapBloc: Subscription Purchase Success, refreshing profile...');
+                    LogUtils.d('IapBloc: Subscription Purchase Success, refreshing profile & HomeBloc...');
                     await getProfileUseCase(NoParams());
+                    _refreshHomeBloc();
                     emit(
                       IapState.success(
                         message: isWeekly ? 'success_weekly' : 'success_yearly',
@@ -304,6 +308,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                     );
                     // Fallback to success for mockup mode
                     await getProfileUseCase(NoParams());
+                    _refreshHomeBloc();
                     emit(
                       IapState.success(
                         message: isWeekly ? 'success_weekly' : 'success_yearly',
@@ -317,6 +322,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                       ),
                     );
                   },
+
                 );
               },
               cancelled: () {
@@ -475,8 +481,9 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                   loading: () async {},
                   empty: () async {},
                   success: (_) async {
-                    LogUtils.d('IapBloc: Purchase Credits Success, refreshing profile...');
+                    LogUtils.d('IapBloc: Purchase Credits Success, refreshing profile & HomeBloc...');
                     await getProfileUseCase(NoParams());
+                    _refreshHomeBloc();
                     emit(
                       IapState.success(
                         message: 'success_credits_$credits',
@@ -496,6 +503,7 @@ class IapBloc extends Bloc<IapEvent, IapState> {
                     );
                     // Fallback to success for mockup
                     await getProfileUseCase(NoParams());
+                    _refreshHomeBloc();
                     emit(
                       IapState.success(
                         message: 'success_credits_$credits',
@@ -702,8 +710,9 @@ class IapBloc extends Bloc<IapEvent, IapState> {
               }
 
               if (anySuccess) {
-                LogUtils.d('IapBloc: Restore Purchase Success, refreshing profile...');
+                LogUtils.d('IapBloc: Restore Purchase Success, refreshing profile & HomeBloc...');
                 await getProfileUseCase(NoParams());
+                _refreshHomeBloc();
                 emit(
                   IapState.success(
                     message: 'restore_success',
@@ -761,5 +770,15 @@ class IapBloc extends Bloc<IapEvent, IapState> {
         },
       );
     });
+  }
+
+  void _refreshHomeBloc() {
+    try {
+      if (GetIt.instance.isRegistered<HomeBloc>()) {
+        GetIt.instance<HomeBloc>().add(const HomeEvent.refresh());
+      }
+    } catch (e) {
+      LogUtils.w('IapBloc: Failed to refresh HomeBloc: $e');
+    }
   }
 }

@@ -25,8 +25,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeBloc = sl<HomeBloc>();
+    final isInitial = homeBloc.state.maybeMap(initial: (_) => true, orElse: () => false);
+    if (isInitial) {
+      homeBloc.add(const HomeEvent.init());
+    }
     return BlocProvider.value(
-      value: sl<HomeBloc>()..add(const HomeEvent.init()),
+      value: homeBloc,
       child: const HomeView(),
     );
   }
@@ -59,7 +64,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
   void didPopNext() {
     LogUtils.d('HomeView: Returned to Home screen, refreshing home data...');
     if (mounted) {
-      context.read<HomeBloc>().add(const HomeEvent.refresh());
+      sl<HomeBloc>().add(const HomeEvent.refresh());
     }
   }
 

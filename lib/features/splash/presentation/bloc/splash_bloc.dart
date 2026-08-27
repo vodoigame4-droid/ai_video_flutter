@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:core_business/core_business.dart';
 import 'package:wiwi_havin_base_ads/wiwi_havin_base_ads.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/injection/injection_container.dart';
 import '../../../../core/services/remote_config_service.dart';
@@ -243,7 +244,21 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         autoAcknowledgeSubscriptions: false,
       );
 
-      await HavinSdk.instance.init(billingConfig: billingConfig);
+      await HavinSdk.instance.init(
+        billingConfig: billingConfig,
+        onVerifiedPurchase: (transactionId) async {
+          try {
+            await FirebaseAnalytics.instance.logTransaction(transactionId);
+
+          } catch (e, st) {
+            LogUtils.e(
+              'HavinSdk: Failed to log transactionId to FirebaseAnalytics',
+              error: e,
+              stackTrace: st,
+            );
+          }
+        },
+      );
       sl<IapBloc>().add(const IapEvent.init());
       overallStopwatch.stop();
       LogUtils.i(

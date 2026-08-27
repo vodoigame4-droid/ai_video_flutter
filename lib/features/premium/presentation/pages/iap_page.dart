@@ -419,6 +419,11 @@ class _IapViewState extends State<IapView> {
               final weeklyPrice = weeklyProducts.isNotEmpty
                   ? weeklyProducts.first.priceString
                   : t.premium.weekly_price;
+
+              final weeklyPriceOffer = weeklyProducts.isNotEmpty
+                  ? weeklyProducts.first.initialPriceString
+                  : t.premium.weekly_price;
+
               final yearlyPrice = yearlyProducts.isNotEmpty
                   ? yearlyProducts.first.priceString
                   : t.premium.annually_price;
@@ -545,7 +550,7 @@ class _IapViewState extends State<IapView> {
                                 description: t.premium.weekly_desc(
                                   price: weeklyPrice,
                                 ),
-                                price: weeklyPrice,
+                                price: weeklyPriceOffer,
                                 suffix: t.premium.weekly_suffix,
                                 tagText: t.premium.best_value,
                                 tagColors: const [
