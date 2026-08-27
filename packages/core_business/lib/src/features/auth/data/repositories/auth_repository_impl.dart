@@ -119,7 +119,20 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
+  Future<Resource<UserEntity>> updateReviewer() async {
+    try {
+      LogUtils.i('AuthRepositoryImpl: Calling updateReviewer (PUT /user/reviewer)');
+      await _remoteDataSource.updateReviewer();
+      return await getProfile();
+    } catch (e, stack) {
+      LogUtils.e('AuthRepositoryImpl: updateReviewer failed', error: e, stackTrace: stack);
+      return Resource.error(parseRepositoryErrorToFailure(e));
+    }
+  }
+
   Future<void> _saveTokens(String accessToken, String refreshToken) async {
+
     await _sharedPreferences.setString(StorageKeys.authAccessToken, accessToken);
     await _sharedPreferences.setString(StorageKeys.authRefreshToken, refreshToken);
   }

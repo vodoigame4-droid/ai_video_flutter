@@ -4,4 +4,7 @@ abstract class UseCase<T, Params> {
   Future<Resource<T>> call(Params params);
 }
 
-class NoParams {}
+class NoParams {
+  const NoParams();
+}
+

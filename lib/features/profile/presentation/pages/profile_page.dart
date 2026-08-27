@@ -5,6 +5,7 @@ import 'package:ai_video_flutter/features/premium/presentation/pages/generation_
 import '../../../../core/widgets/gradient_tab_indicator.dart';
 import 'package:ai_video_flutter/features/premium/presentation/pages/iap_page.dart';
 import '../../../../core/utils/credit_navigation_helper.dart';
+import '../../../../core/utils/app_toast.dart';
 import '../../../../core/services/remote_config_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,8 +50,44 @@ class _ProfileViewState extends State<ProfileView>
   late final TabController _tabController;
   Timer? _settingsHoldTimer;
   bool _isHoldTriggered = false;
+  int _profileTitleTapCount = 0;
+  DateTime? _lastProfileTitleTapTime;
+
+  void _onProfileTitleTapped() async {
+    final now = DateTime.now();
+    if (_lastProfileTitleTapTime != null &&
+        now.difference(_lastProfileTitleTapTime!).inMilliseconds > 2000) {
+      _profileTitleTapCount = 0;
+    }
+    _lastProfileTitleTapTime = now;
+    _profileTitleTapCount++;
+
+    if (_profileTitleTapCount >= 20) {
+      _profileTitleTapCount = 0;
+      try {
+        final result = await sl<UpdateReviewerUseCase>()(const NoParams());
+        if (mounted) {
+          context.read<ProfileBloc>().add(const ProfileEvent.init());
+          result.mapOrNull(
+            success: (_) => AppToast.showSuccess('Reviewer mode updated successfully'),
+            error: (e) => AppToast.showError(BackendErrorHelper.getErrorMessage(context, e.failure)),
+          );
+
+
+
+        }
+      } catch (e) {
+        if (mounted) {
+          AppToast.showError('Failed to update reviewer mode');
+        }
+      }
+    }
+
+
+  }
 
   @override
+
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
@@ -195,20 +232,25 @@ class _ProfileViewState extends State<ProfileView>
                               ),
 
                               // Page Title
-                              Text(
-                                t.profile.title,
-                                style:
-                                    context.textTheme.titleMedium?.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ) ??
-                                    const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                              GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: _onProfileTitleTapped,
+                                child: Text(
+                                  t.profile.title,
+                                  style:
+                                      context.textTheme.titleMedium?.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ) ??
+                                      const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
                               ),
+
 
                               // Credit Badge/Icon Button
                               if (sl<RemoteConfigService>().showIAP)

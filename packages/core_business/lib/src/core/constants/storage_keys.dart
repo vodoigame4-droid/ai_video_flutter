@@ -10,3 +10,5 @@ abstract class StorageKeys {
   static const String bannerHomeUrl = 'banner_home_url';
   static const String isPrivacyAccepted = 'is_privacy_accepted';
 }
+
+

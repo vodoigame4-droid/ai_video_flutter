@@ -30,4 +30,8 @@ abstract class AuthApiClient {
 
   @POST('/task/rate-app')
   Future<BaseResponse<void>> rateApp();
+
+  @PUT('/user/reviewer')
+  Future<BaseResponse<dynamic>> updateReviewer();
 }
+

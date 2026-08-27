@@ -33,6 +33,8 @@ export 'src/features/auth/domain/usecases/get_profile_usecase.dart';
 export 'src/features/auth/domain/usecases/auto_login_usecase.dart';
 export 'src/features/auth/domain/usecases/watch_profile_usecase.dart';
 export 'src/features/auth/domain/usecases/rate_app_usecase.dart';
+export 'src/features/auth/domain/usecases/update_reviewer_usecase.dart';
+
 export 'src/features/auth/presentation/bloc/credit_badge/credit_badge_bloc.dart';
 export 'src/features/auth/presentation/bloc/credit_badge/credit_badge_event.dart';
 export 'src/features/auth/presentation/bloc/credit_badge/credit_badge_state.dart';
