@@ -141,7 +141,9 @@
     "rateApp": "Calificar aplicación",
     "userCode": "Código de usuario",
     "copied": "¡Copiado al portapapeles!",
-    "termsOfUse": "Términos de uso"
+    "termsOfUse": "Términos de uso",
+    "reviewerSuccess": "¡Modo revisor actualizado con éxito!",
+    "reviewerFailure": "Error al actualizar el modo revisor. Inténtalo de nuevo."
   },
   "language": {
     "title": "Idioma",

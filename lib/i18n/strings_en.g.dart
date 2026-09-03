@@ -458,6 +458,12 @@ class Translations$settings$en {
 
 	/// en: 'Terms of Use'
 	String get termsOfUse => 'Terms of Use';
+
+	/// en: 'Reviewer mode updated successfully!'
+	String get reviewerSuccess => 'Reviewer mode updated successfully!';
+
+	/// en: 'Failed to update reviewer mode. Please try again.'
+	String get reviewerFailure => 'Failed to update reviewer mode. Please try again.';
 }
 
 // Path: language
@@ -1450,6 +1456,8 @@ extension on Translations {
 			'settings.userCode' => 'User Code',
 			'settings.copied' => 'Copied to clipboard!',
 			'settings.termsOfUse' => 'Terms of Use',
+			'settings.reviewerSuccess' => 'Reviewer mode updated successfully!',
+			'settings.reviewerFailure' => 'Failed to update reviewer mode. Please try again.',
 			'language.title' => 'Language',
 			'language.en' => 'English',
 			'language.ar' => 'Arabic',

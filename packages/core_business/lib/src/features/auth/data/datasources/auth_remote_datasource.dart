@@ -7,6 +7,7 @@ abstract class AuthRemoteDataSource {
   Future<LoginResponseModel> refresh(RefreshRequestModel request);
   Future<UserModel> getProfile();
   Future<UserModel> updateProfile(UpdateUserRequestModel request);
+  Future<void> updateReviewer();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -36,5 +37,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserModel> updateProfile(UpdateUserRequestModel request) async {
     final response = await _apiClient.updateProfile(request);
     return response.data;
+  }
+
+  @override
+  Future<void> updateReviewer() async {
+    await _apiClient.updateReviewer();
   }
 }

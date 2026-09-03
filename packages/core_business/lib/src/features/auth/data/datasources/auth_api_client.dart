@@ -27,4 +27,7 @@ abstract class AuthApiClient {
   Future<BaseResponse<UserModel>> updateProfile(
     @Body() UpdateUserRequestModel request,
   );
+
+  @PUT('/user/reviewer')
+  Future<dynamic> updateReviewer();
 }

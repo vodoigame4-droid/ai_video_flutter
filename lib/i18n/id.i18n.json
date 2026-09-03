@@ -141,7 +141,9 @@
     "rateApp": "Nilai Aplikasi",
     "userCode": "Kode Pengguna",
     "copied": "Disalin ke papan klip!",
-    "termsOfUse": "Ketentuan Penggunaan"
+    "termsOfUse": "Ketentuan Penggunaan",
+    "reviewerSuccess": "Mode peninjau berhasil diperbarui!",
+    "reviewerFailure": "Gagal memperbarui mode peninjau. Silakan coba lagi."
   },
   "language": {
     "title": "Bahasa",

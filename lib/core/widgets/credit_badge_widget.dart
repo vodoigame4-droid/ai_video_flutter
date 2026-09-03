@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:core_business/core_business.dart';
 import '../theme/app_theme.dart';
 import '../../i18n/strings.g.dart';
 import '../injection/injection_container.dart';
+import '../../features/premium/presentation/pages/discount_page.dart';
 
 class CreditBadgeWidget extends StatelessWidget {
   final VoidCallback? onTap;
@@ -38,7 +40,15 @@ class CreditBadgeWidget extends StatelessWidget {
           return Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: onTap,
+              onTap: () {
+                if (isPro) {
+                  context.push(DiscountPage.path);
+                } else if (onTap != null) {
+                  onTap!();
+                } else {
+                  context.push(DiscountPage.path);
+                }
+              },
               borderRadius: const BorderRadius.all(Radius.circular(100)),
               child: Ink(
                 padding: const EdgeInsets.only(left: 18, right: 8, top: 6, bottom: 6),
@@ -54,7 +64,7 @@ class CreditBadgeWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      isPro ? context.t.common.pro : creditsStr,
+                      creditsStr,
                       style: context.textTheme.bodyMedium?.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

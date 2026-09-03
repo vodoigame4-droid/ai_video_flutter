@@ -262,6 +262,8 @@ class _Translations$settings$id extends Translations$settings$en {
 	@override String get userCode => 'Kode Pengguna';
 	@override String get copied => 'Disalin ke papan klip!';
 	@override String get termsOfUse => 'Ketentuan Penggunaan';
+	@override String get reviewerSuccess => 'Mode peninjau berhasil diperbarui!';
+	@override String get reviewerFailure => 'Gagal memperbarui mode peninjau. Silakan coba lagi.';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsId {
 			'settings.userCode' => 'Kode Pengguna',
 			'settings.copied' => 'Disalin ke papan klip!',
 			'settings.termsOfUse' => 'Ketentuan Penggunaan',
+			'settings.reviewerSuccess' => 'Mode peninjau berhasil diperbarui!',
+			'settings.reviewerFailure' => 'Gagal memperbarui mode peninjau. Silakan coba lagi.',
 			'language.title' => 'Bahasa',
 			'language.en' => 'Inggris',
 			'language.ar' => 'Arab',

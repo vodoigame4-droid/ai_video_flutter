@@ -3,6 +3,7 @@ import 'package:network/network.dart';
 
 // Settings
 import '../../features/settings/presentation/bloc/settings_bloc.dart';
+import '../../features/settings/presentation/bloc/developer/developer_bloc.dart';
 import '../../features/settings/domain/usecases/get_settings_usecase.dart';
 import '../../features/settings/domain/usecases/save_settings_usecase.dart';
 import '../../features/settings/domain/usecases/get_onboarding_status_usecase.dart';
@@ -17,6 +18,7 @@ import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/get_profile_usecase.dart';
 import '../../features/auth/domain/usecases/auto_login_usecase.dart';
 import '../../features/auth/domain/usecases/watch_profile_usecase.dart';
+import '../../features/auth/domain/usecases/update_reviewer_usecase.dart';
 import '../../features/auth/presentation/bloc/credit_badge/credit_badge_bloc.dart';
 
 // Media
@@ -85,6 +87,11 @@ void initBusinessDependencies(GetIt sl) {
       saveSettingsUseCase: sl(),
     ),
   );
+  sl.registerFactory(
+    () => DeveloperBloc(
+      updateReviewerUseCase: sl(),
+    ),
+  );
 
   // Auth
   sl.registerLazySingleton(() => AuthApiClient(sl<ApiClient>().dio));
@@ -101,6 +108,7 @@ void initBusinessDependencies(GetIt sl) {
   sl.registerLazySingleton(() => LoginUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => GetProfileUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => WatchProfileUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateReviewerUseCase(authRepository: sl()));
   sl.registerLazySingleton(() => AutoLoginUseCase(
         authRepository: sl(),
         notificationRepository: sl(),

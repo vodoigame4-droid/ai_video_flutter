@@ -262,6 +262,8 @@ class _Translations$settings$pt extends Translations$settings$en {
 	@override String get userCode => 'Código do Usuário';
 	@override String get copied => 'Copiado para a área de transferência!';
 	@override String get termsOfUse => 'Termos de Uso';
+	@override String get reviewerSuccess => 'Modo revisor atualizado com sucesso!';
+	@override String get reviewerFailure => 'Falha ao atualizar o modo revisor. Tente novamente.';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsPt {
 			'settings.userCode' => 'Código do Usuário',
 			'settings.copied' => 'Copiado para a área de transferência!',
 			'settings.termsOfUse' => 'Termos de Uso',
+			'settings.reviewerSuccess' => 'Modo revisor atualizado com sucesso!',
+			'settings.reviewerFailure' => 'Falha ao atualizar o modo revisor. Tente novamente.',
 			'language.title' => 'Idioma',
 			'language.en' => 'Inglês',
 			'language.ar' => 'Árabe',

@@ -8,20 +8,58 @@ import 'package:core_business/core_business.dart';
 import 'package:ai_video_flutter/i18n/strings.g.dart';
 
 class MockSettingsBloc extends Mock implements SettingsBloc {}
+class MockDeveloperBloc extends Mock implements DeveloperBloc {}
+class MockWatchProfileUseCase extends Mock implements WatchProfileUseCase {}
 
 void main() {
   late MockSettingsBloc mockSettingsBloc;
+  late MockDeveloperBloc mockDeveloperBloc;
+  late MockWatchProfileUseCase mockWatchProfileUseCase;
 
   setUp(() async {
     mockSettingsBloc = MockSettingsBloc();
+    mockDeveloperBloc = MockDeveloperBloc();
+    mockWatchProfileUseCase = MockWatchProfileUseCase();
+
     when(() => mockSettingsBloc.state).thenReturn(
       const SettingsState.ready(currentLanguageCode: 'en'),
     );
     when(() => mockSettingsBloc.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockSettingsBloc.close()).thenAnswer((_) async {});
-    
+
+    when(() => mockDeveloperBloc.state).thenReturn(
+      const DeveloperState.initial(),
+    );
+    when(() => mockDeveloperBloc.stream).thenAnswer((_) => const Stream.empty());
+    when(() => mockDeveloperBloc.close()).thenAnswer((_) async {});
+
+    when(() => mockWatchProfileUseCase.call()).thenAnswer(
+      (_) => Stream.value(
+        UserEntity(
+          id: 'test-user-id',
+          deviceId: 'device-id',
+          name: 'Test',
+          email: 'test@example.com',
+          avatarUrl: '',
+          inviteCode: 'EDFO1R0Y2XLBJ1I2',
+          status: 'ACTIVE',
+          credits: 300,
+          extraCredits: 0,
+          subscribeCredits: 0,
+          isRated: true,
+          isVip: false,
+          freeSuggestions: 0,
+          activeSubId: null,
+          refUsersCount: 0,
+          createdAt: DateTime.now(),
+        ),
+      ),
+    );
+
     await sl.reset();
     sl.registerFactory<SettingsBloc>(() => mockSettingsBloc);
+    sl.registerFactory<DeveloperBloc>(() => mockDeveloperBloc);
+    sl.registerLazySingleton<WatchProfileUseCase>(() => mockWatchProfileUseCase);
   });
 
   testWidgets('SettingsPage renders all items correctly', (WidgetTester tester) async {

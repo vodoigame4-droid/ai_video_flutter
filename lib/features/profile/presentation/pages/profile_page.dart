@@ -12,6 +12,8 @@ import '../../../premium/presentation/pages/paywall_video_page.dart';
 import '../../../create_video/presentation/pages/result_page.dart';
 import '../../../dashboard/presentation/bloc/dashboard_bloc.dart';
 import '../../../dashboard/presentation/bloc/dashboard_state.dart';
+import '../../../../core/utils/app_toast.dart';
+import '../../../../core/widgets/credit_badge_widget.dart';
 import '../widgets/my_video_item_widget.dart';
 import '../widgets/delete_confirm_dialog.dart';
 import '../widgets/premium_banner_widget.dart';
@@ -26,8 +28,15 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<ProfileBloc>()..add(const ProfileEvent.init()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<ProfileBloc>()..add(const ProfileEvent.init()),
+        ),
+        BlocProvider(
+          create: (context) => sl<DeveloperBloc>(),
+        ),
+      ],
       child: const ProfileView(),
     );
   }
@@ -116,6 +125,19 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                 );
               },
             ),
+            BlocListener<DeveloperBloc, DeveloperState>(
+              listener: (context, devState) {
+                devState.maybeWhen(
+                  reviewerSuccess: () {
+                    AppToast.showSuccess(t.settings.reviewerSuccess);
+                  },
+                  reviewerFailure: (message) {
+                    AppToast.showError(t.settings.reviewerFailure);
+                  },
+                  orElse: () {},
+                );
+              },
+            ),
           ],
           child: BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, state) {
@@ -155,67 +177,73 @@ class _ProfileViewState extends State<ProfileView> with SingleTickerProviderStat
                               ),
                             ),
 
-                            // Page Title
-                            Text(
-                              t.profile.title,
-                              style:
-                                  context.textTheme.titleMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  ) ??
-                                  const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            // Page Title (Secret 20-Tap for Reviewer Mode)
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                context.read<DeveloperBloc>().add(const DeveloperEvent.tap());
+                              },
+                              child: Text(
+                                t.profile.title,
+                                style:
+                                    context.textTheme.titleMedium?.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ) ??
+                                    const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
                             ),
 
-                            // Credit Badge/Icon Button
-                            Material(
-                              color: Colors.transparent,
-                              shape: const CircleBorder(),
-                              child: InkWell(
-                                onTap: () {
-                                  final videosList = videosState.maybeWhen(
-                                    success: (list) => list,
-                                    orElse: () => const [],
-                                  );
-                                  final videoUrl = videosList.isNotEmpty
-                                      ? videosList.first.videoUrl
-                                      : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                                  context.push('${PaywallVideoPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
-                                },
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                child: Image.asset(
-                                  'assets/icons/ic_credit_icon.png',
-                                  width: 36,
-                                  height: 36,
-                                ),
-                              ),
+                            // Credit Badge Widget
+                            CreditBadgeWidget(
+                              onTap: () {
+                                final videosList = videosState.maybeWhen(
+                                  success: (list) => list,
+                                  orElse: () => const [],
+                                );
+                                final videoUrl = videosList.isNotEmpty
+                                    ? videosList.first.videoUrl
+                                    : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
+                                context.push('${PaywallVideoPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
+                              },
                             ),
                           ],
                         ),
 
                         const SizedBox(height: 24),
 
-                        // Premium Upgrade Banner
-                        PremiumBannerWidget(
-                          onTap: () {
-                            final videosList = videosState.maybeWhen(
-                              success: (list) => list,
-                              orElse: () => const [],
+                        // Premium Upgrade Banner (hidden if already VIP)
+                        StreamBuilder<UserEntity>(
+                          stream: sl<WatchProfileUseCase>()(),
+                          builder: (context, snapshot) {
+                            final isVip = snapshot.data?.isVip ?? false;
+                            if (isVip) return const SizedBox.shrink();
+
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                PremiumBannerWidget(
+                                  onTap: () {
+                                    final videosList = videosState.maybeWhen(
+                                      success: (list) => list,
+                                      orElse: () => const [],
+                                    );
+                                    final videoUrl = videosList.isNotEmpty
+                                        ? videosList.first.videoUrl
+                                        : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
+                                    context.push('${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
+                                  },
+                                ),
+                                const SizedBox(height: 16),
+                              ],
                             );
-                            final videoUrl = videosList.isNotEmpty
-                                ? videosList.first.videoUrl
-                                : (likedTemplates.isNotEmpty ? likedTemplates.first.sourceUrl : '');
-                            context.push('${IapPage.path}?videoUrl=${Uri.encodeComponent(videoUrl)}');
                           },
                         ),
-
-                        const SizedBox(height: 16),
 
                         // TabBar selection: My Video and Liked
                         TabBar(

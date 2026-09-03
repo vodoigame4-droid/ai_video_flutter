@@ -141,7 +141,9 @@
     "rateApp": "Rate App",
     "userCode": "User Code",
     "copied": "Copied to clipboard!",
-    "termsOfUse": "Terms of Use"
+    "termsOfUse": "Terms of Use",
+    "reviewerSuccess": "Reviewer mode updated successfully!",
+    "reviewerFailure": "Failed to update reviewer mode. Please try again."
   },
   "language": {
     "title": "Language",

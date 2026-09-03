@@ -141,7 +141,9 @@
     "rateApp": "App bewerten",
     "userCode": "Benutzercode",
     "copied": "In die Zwischenablage kopiert!",
-    "termsOfUse": "Nutzungsbedingungen"
+    "termsOfUse": "Nutzungsbedingungen",
+    "reviewerSuccess": "Prüfermodus erfolgreich aktualisiert!",
+    "reviewerFailure": "Fehler beim Aktualisieren des Prüfermodus. Bitte versuchen Sie es erneut."
   },
   "language": {
     "title": "Sprache",
