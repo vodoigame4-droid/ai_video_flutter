@@ -262,6 +262,8 @@ class _Translations$settings$zh extends Translations$settings$en {
 	@override String get userCode => '用户代码';
 	@override String get copied => '已复制到剪贴板！';
 	@override String get termsOfUse => '使用条款';
+	@override String get reviewerSuccess => '审核员模式更新成功！';
+	@override String get reviewerFailure => '审核员模式更新失败，请重试。';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsZh {
 			'settings.userCode' => '用户代码',
 			'settings.copied' => '已复制到剪贴板！',
 			'settings.termsOfUse' => '使用条款',
+			'settings.reviewerSuccess' => '审核员模式更新成功！',
+			'settings.reviewerFailure' => '审核员模式更新失败，请重试。',
 			'language.title' => '语言',
 			'language.en' => '英语',
 			'language.ar' => '阿拉伯语',

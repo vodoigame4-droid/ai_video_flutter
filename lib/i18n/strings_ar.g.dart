@@ -262,6 +262,8 @@ class _Translations$settings$ar extends Translations$settings$en {
 	@override String get userCode => 'رمز المستخدم';
 	@override String get copied => 'تم النسخ إلى الحافظة!';
 	@override String get termsOfUse => 'شروط الاستخدام';
+	@override String get reviewerSuccess => 'تم تحديث وضع المراجع بنجاح!';
+	@override String get reviewerFailure => 'فشل تحديث وضع المراجع. يرجى المحاولة مرة أخرى.';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsAr {
 			'settings.userCode' => 'رمز المستخدم',
 			'settings.copied' => 'تم النسخ إلى الحافظة!',
 			'settings.termsOfUse' => 'شروط الاستخدام',
+			'settings.reviewerSuccess' => 'تم تحديث وضع المراجع بنجاح!',
+			'settings.reviewerFailure' => 'فشل تحديث وضع المراجع. يرجى المحاولة مرة أخرى.',
 			'language.title' => 'اللغة',
 			'language.en' => 'الإنجليزية',
 			'language.ar' => 'العربية',

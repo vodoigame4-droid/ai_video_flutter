@@ -10,6 +10,7 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../profile/presentation/widgets/premium_banner_widget.dart';
 import '../../../premium/presentation/pages/iap_page.dart';
 import '../../../premium/presentation/pages/buy_credits_page.dart';
+import '../../../premium/presentation/pages/discount_page.dart';
 import 'package:core_business/core_business.dart';
 import 'language_page.dart';
 
@@ -21,8 +22,15 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<SettingsBloc>()..add(const SettingsEvent.init()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<SettingsBloc>()..add(const SettingsEvent.init()),
+        ),
+        BlocProvider(
+          create: (context) => sl<DeveloperBloc>(),
+        ),
+      ],
       child: const SettingsView(),
     );
   }
@@ -31,57 +39,74 @@ class SettingsPage extends StatelessWidget {
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final t = context.t;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
+    return BlocListener<DeveloperBloc, DeveloperState>(
+      listener: (context, devState) {
+        devState.maybeWhen(
+          reviewerSuccess: () {
+            AppToast.showSuccess(t.settings.reviewerSuccess);
+          },
+          reviewerFailure: (message) {
+            AppToast.showError(t.settings.reviewerFailure);
+          },
+          orElse: () {},
+        );
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
 
-              // Header Row matching LanguagePage exactly
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Back Button
-                  Material(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    shape: const CircleBorder(),
-                    child: InkWell(
-                      onTap: () => context.pop(),
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
-                      child: const SizedBox(
-                        width: 36,
-                        height: 36,
-                        child: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                          size: 18,
+                // Header Row matching LanguagePage exactly
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Back Button
+                    Material(
+                      color: Colors.white.withValues(alpha: 0.1),
+                      shape: const CircleBorder(),
+                      child: InkWell(
+                        onTap: () => context.pop(),
+                        borderRadius: const BorderRadius.all(Radius.circular(100)),
+                        child: const SizedBox(
+                          width: 36,
+                          height: 36,
+                          child: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: Colors.white,
+                            size: 18,
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  // Title (matching size 24, font-semibold from Figma)
-                  Text(
-                    t.settings.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
+                    // Title (Secret 20-Tap for Reviewer Mode)
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        context.read<DeveloperBloc>().add(const DeveloperEvent.tap());
+                      },
+                      child: Text(
+                        t.settings.title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
-                  ),
 
-                  // Spacer to balance
-                  const SizedBox(width: 36),
-                ],
-              ),
+                    // Spacer to balance
+                    const SizedBox(width: 36),
+                  ],
+                ),
 
               const SizedBox(height: 30),
 
@@ -101,109 +126,125 @@ class SettingsView extends StatelessWidget {
                         );
                         final localeName = _getLocaleName(t, currentLocale);
 
-                        return ListView(
-                          physics: const BouncingScrollPhysics(),
-                          children: [
-                            // 1. Premium Upgrade Banner
-                            PremiumBannerWidget(
-                              onTap: () => context.push(IapPage.path),
-                            ),
-                            const SizedBox(height: 12),
+                        return StreamBuilder<UserEntity>(
+                          stream: sl<WatchProfileUseCase>()(),
+                          builder: (context, userSnapshot) {
+                            final user = userSnapshot.data;
+                            final isVip = user?.isVip ?? false;
+                            final credits = user?.credits.toString() ?? '0';
+                            final inviteCode = (user != null && user.inviteCode.isNotEmpty)
+                                ? user.inviteCode
+                                : (user?.id ?? '');
 
-                            // 2. My Credits
-                            _buildSettingsItem(
-                              icon: Image.asset(
-                                Assets.icons.icStarVip.path,
-                                width: 22,
-                                height: 22,
-                              ),
-                              title: t.settings.myCredits,
-                              trailingText: '300',
-                              onTap: () => context.push(BuyCreditsPage.path),
-                            ),
-
-                            // 3. Language
-                            _buildSettingsItem(
-                              icon: Icons.language_rounded,
-                              title: t.settings.language,
-                              trailingText: localeName,
-                              onTap: () => context.push(LanguagePage.path),
-                            ),
-
-                            // 4. Contact Us
-                            _buildSettingsItem(
-                              icon: Icons.mail_outline_rounded,
-                              title: t.settings.contactUs,
-                              onTap: () {
-                                AppToast.showSuccess(t.settings.contactUs);
-                              },
-                            ),
-
-                            // 5. Rate App
-                            _buildSettingsItem(
-                              icon: Icons.star_outline_rounded,
-                              title: t.settings.rateApp,
-                              onTap: () {
-                                AppToast.showSuccess(t.settings.rateApp);
-                              },
-                            ),
-
-                            // 6. Terms of Use
-                            _buildSettingsItem(
-                              icon: Icons.description_outlined,
-                              title: t.settings.termsOfUse,
-                              onTap: () {
-                                AppToast.showSuccess(t.settings.termsOfUse);
-                              },
-                            ),
-
-                            // 7. Privacy Policy
-                            _buildSettingsItem(
-                              icon: Icons.security_outlined,
-                              title: t.settings.privacyPolicy,
-                              onTap: () {
-                                AppToast.showSuccess(t.settings.privacyPolicy);
-                              },
-                            ),
-
-                            // 8. User Code
-                            _buildSettingsItem(
-                              icon: Icons.qr_code_rounded,
-                              title: t.settings.userCode,
-                              showChevron: false,
-                              trailingWidget: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text(
-                                    'EDFO1R0Y2XLBJ1I2',
-                                    style: TextStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            return ListView(
+                              physics: const BouncingScrollPhysics(),
+                              children: [
+                                // 1. Premium Upgrade Banner (hidden if already VIP)
+                                if (!isVip) ...[
+                                  PremiumBannerWidget(
+                                    onTap: () => context.push(IapPage.path),
                                   ),
-                                  const SizedBox(width: 8),
-                                  Icon(
-                                    Icons.copy_rounded,
-                                    color: AppColors.primary.withValues(alpha: 0.8),
-                                    size: 18,
-                                  ),
+                                  const SizedBox(height: 12),
                                 ],
-                              ),
-                              onTap: () {
-                                Clipboard.setData(
-                                  const ClipboardData(
-                                    text: 'EDFO1R0Y2XLBJ1I2',
+
+                                // 2. My Credits
+                                _buildSettingsItem(
+                                  icon: Image.asset(
+                                    Assets.icons.icStarVip.path,
+                                    width: 22,
+                                    height: 22,
                                   ),
-                                ).then((_) {
-                                  if (context.mounted) {
-                                    AppToast.showSuccess(t.settings.copied);
-                                  }
-                                });
-                              },
-                            ),
-                            const SizedBox(height: 24),
-                          ],
+                                  title: t.settings.myCredits,
+                                  trailingText: credits,
+                                  onTap: () => context.push(BuyCreditsPage.path),
+                                ),
+
+                                // 3. Language
+                                _buildSettingsItem(
+                                  icon: Icons.language_rounded,
+                                  title: t.settings.language,
+                                  trailingText: localeName,
+                                  onTap: () => context.push(LanguagePage.path),
+                                ),
+
+                                // 4. Contact Us
+                                _buildSettingsItem(
+                                  icon: Icons.mail_outline_rounded,
+                                  title: t.settings.contactUs,
+                                  onTap: () {
+                                    AppToast.showSuccess(t.settings.contactUs);
+                                  },
+                                ),
+
+                                // 5. Rate App
+                                _buildSettingsItem(
+                                  icon: Icons.star_outline_rounded,
+                                  title: t.settings.rateApp,
+                                  onTap: () {
+                                    AppToast.showSuccess(t.settings.rateApp);
+                                  },
+                                ),
+
+                                // 6. Terms of Use
+                                _buildSettingsItem(
+                                  icon: Icons.description_outlined,
+                                  title: t.settings.termsOfUse,
+                                  onTap: () {
+                                    AppToast.showSuccess(t.settings.termsOfUse);
+                                  },
+                                ),
+
+                                // 7. Privacy Policy
+                                _buildSettingsItem(
+                                  icon: Icons.security_outlined,
+                                  title: t.settings.privacyPolicy,
+                                  onTap: () {
+                                    AppToast.showSuccess(t.settings.privacyPolicy);
+                                  },
+                                ),
+
+                                // 8. User Code
+                                _buildSettingsItem(
+                                  icon: Icons.qr_code_rounded,
+                                  title: t.settings.userCode,
+                                  showChevron: false,
+                                  trailingWidget: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        inviteCode.isNotEmpty ? inviteCode : '---',
+                                        style: const TextStyle(
+                                          color: AppColors.primary,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      if (inviteCode.isNotEmpty) ...[
+                                        const SizedBox(width: 8),
+                                        Icon(
+                                          Icons.copy_rounded,
+                                          color: AppColors.primary.withValues(alpha: 0.8),
+                                          size: 18,
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                  onTap: inviteCode.isNotEmpty
+                                      ? () {
+                                          Clipboard.setData(
+                                            ClipboardData(text: inviteCode),
+                                          ).then((_) {
+                                            if (context.mounted) {
+                                              AppToast.showSuccess(t.settings.copied);
+                                            }
+                                          });
+                                        }
+                                      : null,
+                                ),
+                                const SizedBox(height: 24),
+                              ],
+                            );
+                          },
                         );
                       },
                     );
@@ -214,8 +255,9 @@ class SettingsView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   String _getLocaleName(Translations t, AppLocale locale) {
     switch (locale) {

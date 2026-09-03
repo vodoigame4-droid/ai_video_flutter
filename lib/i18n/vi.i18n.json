@@ -141,7 +141,9 @@
     "rateApp": "Đánh giá ứng dụng",
     "userCode": "Mã người dùng",
     "copied": "Đã sao chép vào bộ nhớ tạm!",
-    "termsOfUse": "Điều khoản sử dụng"
+    "termsOfUse": "Điều khoản sử dụng",
+    "reviewerSuccess": "Cập nhật chế độ kiểm duyệt thành công!",
+    "reviewerFailure": "Cập nhật chế độ kiểm duyệt thất bại. Vui lòng thử lại."
   },
   "language": {
     "title": "Ngôn ngữ",

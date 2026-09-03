@@ -262,6 +262,8 @@ class _Translations$settings$fr extends Translations$settings$en {
 	@override String get userCode => 'Code d\'utilisateur';
 	@override String get copied => 'Copié dans le presse-papiers !';
 	@override String get termsOfUse => 'Conditions d\'utilisation';
+	@override String get reviewerSuccess => 'Mode réviseur mis à jour avec succès !';
+	@override String get reviewerFailure => 'Échec de la mise à jour du mode réviseur. Veuillez réessayer.';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsFr {
 			'settings.userCode' => 'Code d\'utilisateur',
 			'settings.copied' => 'Copié dans le presse-papiers !',
 			'settings.termsOfUse' => 'Conditions d\'utilisation',
+			'settings.reviewerSuccess' => 'Mode réviseur mis à jour avec succès !',
+			'settings.reviewerFailure' => 'Échec de la mise à jour du mode réviseur. Veuillez réessayer.',
 			'language.title' => 'Langue',
 			'language.en' => 'Anglais',
 			'language.ar' => 'Arabe',

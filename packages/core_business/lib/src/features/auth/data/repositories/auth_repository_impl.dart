@@ -100,6 +100,19 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
+  Future<Resource<void>> updateReviewer() async {
+    try {
+      await _remoteDataSource.updateReviewer();
+      // Fetch fresh profile from backend to update cached user, credits & emit to stream
+      await getProfile();
+      return const Resource.success(null);
+    } catch (e, stack) {
+      LogUtils.e('AuthRepositoryImpl: updateReviewer failed', error: e, stackTrace: stack);
+      return Resource.error(parseRepositoryErrorToFailure(e));
+    }
+  }
+
   Future<void> _saveTokens(String accessToken, String refreshToken) async {
     await _sharedPreferences.setString(StorageKeys.authAccessToken, accessToken);
     await _sharedPreferences.setString(StorageKeys.authRefreshToken, refreshToken);

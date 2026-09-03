@@ -262,6 +262,8 @@ class _Translations$settings$ja extends Translations$settings$en {
 	@override String get userCode => 'ユーザーコード';
 	@override String get copied => 'クリップボードにコピーされました！';
 	@override String get termsOfUse => '利用規約';
+	@override String get reviewerSuccess => 'レビューアーモードが正常に更新されました！';
+	@override String get reviewerFailure => 'レビューアーモードの更新に失敗しました。もう一度お試しください。';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsJa {
 			'settings.userCode' => 'ユーザーコード',
 			'settings.copied' => 'クリップボードにコピーされました！',
 			'settings.termsOfUse' => '利用規約',
+			'settings.reviewerSuccess' => 'レビューアーモードが正常に更新されました！',
+			'settings.reviewerFailure' => 'レビューアーモードの更新に失敗しました。もう一度お試しください。',
 			'language.title' => '言語',
 			'language.en' => '英語',
 			'language.ar' => 'アラビア語',

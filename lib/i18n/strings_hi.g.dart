@@ -262,6 +262,8 @@ class _Translations$settings$hi extends Translations$settings$en {
 	@override String get userCode => 'उपयोगकर्ता कोड';
 	@override String get copied => 'क्लिपबोर्ड पर कॉपी किया गया!';
 	@override String get termsOfUse => 'उपयोग की शर्तें';
+	@override String get reviewerSuccess => 'समीक्षक मोड सफलतापूर्वक अपडेट किया गया!';
+	@override String get reviewerFailure => 'समीक्षक मोड अपडेट करने में विफल। कृपया पुनः प्रयास करें।';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsHi {
 			'settings.userCode' => 'उपयोगकर्ता कोड',
 			'settings.copied' => 'क्लिपबोर्ड पर कॉपी किया गया!',
 			'settings.termsOfUse' => 'उपयोग की शर्तें',
+			'settings.reviewerSuccess' => 'समीक्षक मोड सफलतापूर्वक अपडेट किया गया!',
+			'settings.reviewerFailure' => 'समीक्षक मोड अपडेट करने में विफल। कृपया पुनः प्रयास करें।',
 			'language.title' => 'भाषा',
 			'language.en' => 'अंग्रेज़ी',
 			'language.ar' => 'अरबी',

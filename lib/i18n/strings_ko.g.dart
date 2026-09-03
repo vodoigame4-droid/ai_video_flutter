@@ -262,6 +262,8 @@ class _Translations$settings$ko extends Translations$settings$en {
 	@override String get userCode => '사용자 코드';
 	@override String get copied => '클립보드에 복사되었습니다!';
 	@override String get termsOfUse => '이용 약관';
+	@override String get reviewerSuccess => '검토자 모드가 성공적으로 업데이트되었습니다!';
+	@override String get reviewerFailure => '검토자 모드 업데이트에 실패했습니다. 다시 시도해 주세요.';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsKo {
 			'settings.userCode' => '사용자 코드',
 			'settings.copied' => '클립보드에 복사되었습니다!',
 			'settings.termsOfUse' => '이용 약관',
+			'settings.reviewerSuccess' => '검토자 모드가 성공적으로 업데이트되었습니다!',
+			'settings.reviewerFailure' => '검토자 모드 업데이트에 실패했습니다. 다시 시도해 주세요.',
 			'language.title' => '언어',
 			'language.en' => '영어',
 			'language.ar' => '아랍어',

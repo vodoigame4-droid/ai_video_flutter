@@ -141,7 +141,9 @@
     "rateApp": "评分应用",
     "userCode": "用户代码",
     "copied": "已复制到剪贴板！",
-    "termsOfUse": "使用条款"
+    "termsOfUse": "使用条款",
+    "reviewerSuccess": "审核员模式更新成功！",
+    "reviewerFailure": "审核员模式更新失败，请重试。"
   },
   "language": {
     "title": "语言",

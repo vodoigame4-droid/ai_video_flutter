@@ -263,6 +263,8 @@ class _Translations$settings$vi extends Translations$settings$en {
 	@override String get userCode => 'Mã người dùng';
 	@override String get copied => 'Đã sao chép vào bộ nhớ tạm!';
 	@override String get termsOfUse => 'Điều khoản sử dụng';
+	@override String get reviewerSuccess => 'Cập nhật chế độ kiểm duyệt thành công!';
+	@override String get reviewerFailure => 'Cập nhật chế độ kiểm duyệt thất bại. Vui lòng thử lại.';
 }
 
 // Path: language
@@ -777,6 +779,8 @@ extension on TranslationsVi {
 			'settings.userCode' => 'Mã người dùng',
 			'settings.copied' => 'Đã sao chép vào bộ nhớ tạm!',
 			'settings.termsOfUse' => 'Điều khoản sử dụng',
+			'settings.reviewerSuccess' => 'Cập nhật chế độ kiểm duyệt thành công!',
+			'settings.reviewerFailure' => 'Cập nhật chế độ kiểm duyệt thất bại. Vui lòng thử lại.',
 			'language.title' => 'Ngôn ngữ',
 			'language.en' => 'Tiếng Anh',
 			'language.ar' => 'Tiếng Ả Rập',

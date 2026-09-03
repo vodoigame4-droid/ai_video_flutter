@@ -262,6 +262,8 @@ class _Translations$settings$de extends Translations$settings$en {
 	@override String get userCode => 'Benutzercode';
 	@override String get copied => 'In die Zwischenablage kopiert!';
 	@override String get termsOfUse => 'Nutzungsbedingungen';
+	@override String get reviewerSuccess => 'Prüfermodus erfolgreich aktualisiert!';
+	@override String get reviewerFailure => 'Fehler beim Aktualisieren des Prüfermodus. Bitte versuchen Sie es erneut.';
 }
 
 // Path: language
@@ -762,6 +764,8 @@ extension on TranslationsDe {
 			'settings.userCode' => 'Benutzercode',
 			'settings.copied' => 'In die Zwischenablage kopiert!',
 			'settings.termsOfUse' => 'Nutzungsbedingungen',
+			'settings.reviewerSuccess' => 'Prüfermodus erfolgreich aktualisiert!',
+			'settings.reviewerFailure' => 'Fehler beim Aktualisieren des Prüfermodus. Bitte versuchen Sie es erneut.',
 			'language.title' => 'Sprache',
 			'language.en' => 'Englisch',
 			'language.ar' => 'Arabisch',
