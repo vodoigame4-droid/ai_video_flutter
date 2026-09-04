@@ -39,9 +39,49 @@ void main() async {
   }
 
   FlutterError.onError = (errorDetails) {
+    final exceptionStr = errorDetails.exceptionAsString();
+    final stackStr = errorDetails.stack?.toString() ?? '';
+    final isImageStreamError = (exceptionStr.contains('Null check operator used on a null value') ||
+            exceptionStr.contains('MultiImageStreamCompleter') ||
+            exceptionStr.contains('MultiFrameImageStreamCompleter') ||
+            exceptionStr.contains('ImageStreamCompleter')) &&
+        (stackStr.contains('MultiImageStreamCompleter') ||
+            stackStr.contains('multi_image_stream_completer') ||
+            stackStr.contains('MultiFrameImageStreamCompleter') ||
+            stackStr.contains('image_stream') ||
+            stackStr.contains('_handleAppFrame'));
+
+    if (isImageStreamError) {
+      LogUtils.w(
+        'Handled transient image stream error without fatal crash: ${errorDetails.exception}',
+      );
+      FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+      return;
+    }
+
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
   PlatformDispatcher.instance.onError = (error, stack) {
+    final errorStr = error.toString();
+    final stackStr = stack.toString();
+    final isImageStreamError = (errorStr.contains('Null check operator used on a null value') ||
+            errorStr.contains('MultiImageStreamCompleter') ||
+            errorStr.contains('MultiFrameImageStreamCompleter') ||
+            errorStr.contains('ImageStreamCompleter')) &&
+        (stackStr.contains('MultiImageStreamCompleter') ||
+            stackStr.contains('multi_image_stream_completer') ||
+            stackStr.contains('MultiFrameImageStreamCompleter') ||
+            stackStr.contains('image_stream') ||
+            stackStr.contains('_handleAppFrame'));
+
+    if (isImageStreamError) {
+      LogUtils.w(
+        'Handled transient platform image stream error without fatal crash: $error',
+      );
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: false);
+      return true;
+    }
+
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };

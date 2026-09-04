@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core_business/core_business.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -89,7 +90,8 @@ class _AnimatedThumbnailState extends State<AnimatedThumbnail> {
         _staticFrameCache[url] = byteData.buffer.asUint8List();
         if (mounted) setState(() {});
       }
-    } catch (_) {
+    } catch (e) {
+      LogUtils.w('AnimatedThumbnail: Failed to extract static frame for $url: $e');
       if (mounted) setState(() => _hasError = true);
     } finally {
       _extractingUrls.remove(url);
@@ -108,10 +110,16 @@ class _AnimatedThumbnailState extends State<AnimatedThumbnail> {
   Widget _buildAnimated() {
     if (widget.imageUrl.startsWith('http')) {
       return CachedNetworkImage(
+        key: ValueKey('cached_anim_${widget.imageUrl}'),
         imageUrl: widget.imageUrl,
         fit: widget.fit,
         fadeInDuration: const Duration(milliseconds: 150),
         memCacheWidth: widget.memCacheWidth,
+        errorListener: (error) {
+          LogUtils.w(
+            'AnimatedThumbnail: Error loading image ${widget.imageUrl}: $error',
+          );
+        },
         placeholder: (context, url) => _buildStatic(),
         errorWidget: (context, url, error) =>
             widget.errorBuilder(context, error),
@@ -123,6 +131,8 @@ class _AnimatedThumbnailState extends State<AnimatedThumbnail> {
           file,
           fit: widget.fit,
           gaplessPlayback: true,
+          errorBuilder: (context, error, stackTrace) =>
+              widget.errorBuilder(context, error),
         );
       }
       return _buildStatic();
