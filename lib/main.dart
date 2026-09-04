@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'i18n/strings.g.dart';
 import 'package:core_business/core_business.dart';
 import 'package:screen_protector/screen_protector.dart';
+import 'package:app_redirect/app_redirect.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -148,11 +149,14 @@ class MyApp extends StatelessWidget {
               ],
               routerConfig: appRouter,
               builder: (context, child) {
-                return ConnectivityListenerWrapper(
-                  child: PaymentListenerWrapper(
-                    child: NotificationListenerWrapper(
-                      child: GlobalPurchaseOverlay(
-                        child: child ?? const SizedBox.shrink(),
+                return AppRedirectGate(
+                  enableRealtime: true,
+                  child: ConnectivityListenerWrapper(
+                    child: PaymentListenerWrapper(
+                      child: NotificationListenerWrapper(
+                        child: GlobalPurchaseOverlay(
+                          child: child ?? const SizedBox.shrink(),
+                        ),
                       ),
                     ),
                   ),
